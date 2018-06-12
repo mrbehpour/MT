@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lltitle1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="50dp">
+
+        <ir.saa.android.mt.components.TextViewFont
+            android:id="@+id/tvTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="گروه یک"
+            android:textColor="@color/accent"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:customFont="@string/font_default" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="50dp"
+        android:paddingLeft="20dp">
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/sw1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="vertical">
+            <ir.saa.android.mt.components.TextViewFont
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="هشدار ها و صدا ها"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:customFont="@string/font_default" />
+            <ir.saa.android.mt.components.TextViewFont
+                android:id="@+id/tvDesc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="با خاموش کردن سوییچ صدای اپلیکیشن قطع می شود"
+                android:textColor="@color/grey_500"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:customFont="@string/font_menu" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="50dp"
+        android:paddingLeft="20dp">
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/sw2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right">
+            <ir.saa.android.mt.components.TextViewFont
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="وضعیت چراغ"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:customFont="@string/font_default" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_200"/>
+
+    <LinearLayout
+        android:id="@+id/lltitle2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="50dp">
+
+        <ir.saa.android.mt.components.TextViewFont
+            android:id="@+id/tvTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="گروه دو"
+            android:textColor="@color/accent"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:customFont="@string/font_default" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="50dp"
+        android:paddingLeft="20dp">
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/sw3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right">
+            <ir.saa.android.mt.components.TextViewFont
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="لرزش دستگاه"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:customFont="@string/font_default" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="50dp"
+        android:paddingLeft="20dp">
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/sw4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right">
+            <ir.saa.android.mt.components.TextViewFont
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="وضعیت صفحه نمایش"
+                android:textColor="@color/grey_900"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:customFont="@string/font_default" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_200"/>
+
+
+</LinearLayout>

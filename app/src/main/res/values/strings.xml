@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MT</string>
+
+    <string name="font_menu">fonts/B_Koodak_Bold.ttf</string>
+    <string name="font_home">fonts/B_Koodak_Bold.ttf</string>
+    <string name="font_default">fonts/B_Yekan.ttf</string>
+
+    <!--Drawer Menu-->
+    <string name="menuItem1">گزینه یک</string>
+    <string name="menuItem2">گزینه دو</string>
+    <string name="menuItem3">گزینه سه</string>
+    <string name="menuItem4">گزینه چهار</string>
+    <string name="menuItem5">تنظیمات</string>
+    <string name="menuItem6">خروج</string>
+
+</resources>

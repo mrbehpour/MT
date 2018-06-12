@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="48dp"
+	android:background="?attr/selectableItemBackground"
+	android:clickable="true"
+	android:gravity="center"
+	android:orientation="horizontal">
+
+	<ir.saa.android.mt.components.TextViewFont
+		android:id="@+id/title"
+		app:customFont="@string/font_menu"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:layout_marginLeft="16dp"
+		android:layout_marginRight="16dp"
+		android:textColor="#000000"
+		android:textSize="@dimen/nav_item_font_size"
+		android:gravity="center_vertical|right"
+		android:text=""/>
+
+	<ImageView
+		android:id="@+id/imgIcon"
+		android:layout_width="24dp"
+		android:layout_height="24dp"
+		android:layout_marginLeft="16dp"
+		android:layout_marginRight="16dp"
+		android:src="@android:drawable/ic_delete"
+		android:tint="@color/grey_800" />
+
+</LinearLayout>
