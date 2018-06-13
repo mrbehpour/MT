@@ -45,7 +45,7 @@ public class NavigationDrawerItem {
     private static int[] getImages() {
 
         return new int[]{
-                R.drawable.speedometer,
+                R.drawable.account_box,
                 R.drawable.altimeter,
                 R.drawable.video_input_hdmi,
                 R.drawable.finance,

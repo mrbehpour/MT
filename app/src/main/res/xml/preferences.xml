@@ -4,3 +4,4 @@
             <EditTextPreference android:key="pref_ws_address" android:title="آدرس ارتباطی وب سرویس" android:dialogMessage="لطفا آدرس ارتباطی وب سرویس را وارد کنید" android:dialogTitle="آدرس ارتباطی وب سرویس" android:defaultValue="ws_default_address" android:positiveButtonText="ثبت" android:negativeButtonText="انصراف"/>
         </PreferenceCategory>
     </PreferenceScreen>
+
