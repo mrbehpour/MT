@@ -31,7 +31,7 @@
     <color name="blue_800">#1565C0</color>
     <color name="blue_900">#0D47A1</color>
 
-    <!--blue color theme-->
+    <!--green color theme-->
 
     <color name="green_50">#E8F5E9</color>
     <color name="green_100">#C8E6C9</color>
@@ -48,7 +48,7 @@
     <color name="green_A300">#00E676</color>
     <color name="green_A400">#00C853</color>
 
-    <!--blue color theme-->
+    <!--red color theme-->
 
     <color name="red_50">#FFEBEE</color>
     <color name="red_100">#FFCDD2</color>
