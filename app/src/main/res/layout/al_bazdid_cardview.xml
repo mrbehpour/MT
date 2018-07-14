@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="vertical">
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginRight="8dp"
+        android:text="نام مشترک" />
+
+    <!-- Shomare Badane Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal">
+        <!-- Shomare Badane -->
+        <TextView
+            android:id="@+id/tvShomareBadane"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:text="0" />
+        <!-- Shomare Badane Lable -->
+        <TextView
+            android:id="@+id/tvLableShomareBadane"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="8dp"
+            android:text="شماره بدنه: " />
+    </LinearLayout>
+
+    <!-- Address Layout-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal">
+        <!-- Address -->
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:textAlignment="textStart"
+            android:layout_marginLeft="8dp"
+            android:text="تهران" />
+        <!-- Address Lable -->
+        <TextView
+            android:id="@+id/tvLableAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="8dp"
+            android:text="آدرس: " />
+    </LinearLayout>
+
+</LinearLayout>

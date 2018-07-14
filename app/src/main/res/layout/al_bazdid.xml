@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <!-- Search Button -->
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSearch"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            style="@style/btnStyle1"
+            android:text="جستجو"/>
+
+        <!-- Search Text -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <EditText android:id="@+id/edtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="عبارت مورد نظر"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- Search Icon -->
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="24dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/account_search"/>
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="8dp"/>
+
+
+
+</LinearLayout>
