@@ -23,7 +23,7 @@ public interface RelUserDao {
     LiveData<RelUser> getUserById(int UserID);
 
     @Insert(onConflict = IGNORE)
-    void insert1Reluser(RelUser relUser);
+    void insertReluser(RelUser relUser);
 
     @Update
     void updateRelUser(RelUser relUser);
