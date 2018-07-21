@@ -11,7 +11,7 @@ import android.content.Context;
 import ir.saa.android.mt.model.daos.RelUserDao;
 import ir.saa.android.mt.model.entities.RelUser;
 
-@Database(entities =(RelUser.class},version = 1)
+@Database(entities ={RelUser.class},version = 1)
 public abstract class MTDatabase extends RoomDatabase {
 
     private static MTDatabase INSTANCE;
