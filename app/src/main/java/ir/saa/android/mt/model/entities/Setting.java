@@ -5,6 +5,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Company.class,parentColumns = "FldID",childColumns = "company_id"),
                        @ForeignKey(entity = Region.class,parentColumns = "RegionID",childColumns = "region_id"),
@@ -15,6 +16,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Setting {
 
     @PrimaryKey
+    @NonNull
     public Integer SettingID ;
 
     @ColumnInfo(name = "company_id")

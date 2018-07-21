@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 
 @Entity(foreignKeys = {@ForeignKey(entity = ClientType.class,parentColumns = "FldID",childColumns = "clienttype_id"),
@@ -11,6 +12,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Client  {
 
     @PrimaryKey
+    @NonNull
     public Long ClientID ;
 
     public Long SubScript ;

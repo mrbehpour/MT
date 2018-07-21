@@ -4,7 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
-
+import android.support.annotation.NonNull;
 
 
 @Entity(foreignKeys = {@ForeignKey(entity = AnswerGroup.class,parentColumns = "AnswerGroupID",childColumns = "answergroup_id"),
@@ -13,6 +13,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Remark  {
 
     @PrimaryKey
+    @NonNull
     public Integer RemarkID;
 
 

@@ -4,7 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
-
+import android.support.annotation.NonNull;
 
 
 @Entity(foreignKeys = {@ForeignKey(entity = RemarkGroup.class ,parentColumns = "FldID",childColumns = "remarkgroup_id"),
@@ -12,6 +12,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class GroupingFormat  {
 
     @PrimaryKey
+    @NonNull
     public Integer GroupingFormatID;
 
     @ColumnInfo(name="remarkgroup_id")
