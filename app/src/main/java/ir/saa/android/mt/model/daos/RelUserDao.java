@@ -17,10 +17,10 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 public interface RelUserDao {
 
     @Query("select * from RelUser")
-    LiveData<List<RelUser>> loadAllUsers();
+    LiveData<List<RelUser>> getUsers();
 
     @Query("select * from RelUser where UserID = :UserID ")
-    LiveData<RelUser> loadUserById(int UserID);
+    LiveData<RelUser> getUserById(int UserID);
 
     @Insert(onConflict = IGNORE)
     void insertReluser(RelUser relUser);
@@ -29,7 +29,7 @@ public interface RelUserDao {
     void updateRelUser(RelUser relUser);
 
     @Query("select * from RelUser where UserID = :UserID and HandheldPass= :Password ")
-    LiveData<RelUser> loadUserByUserAndPassword(int UserID,String Password);
+    LiveData<RelUser> getUserByUserAndPassword(int UserID,String Password);
 
     @Query("DELETE FROM RelUser")
     void deleteAll();
