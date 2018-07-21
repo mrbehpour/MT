@@ -18,20 +18,14 @@ public class MasterGroupDetail {
 
     public String ChoiceValue ;
 
-   // public RealmList<ir.saa.android.mt.database.contracts.Client> Client ;
 
-   // public InspectionCourse InspectionCourse ;
-
-   // public Integer InspectionCourseID ;
 
 
 
     @ColumnInfo(name = "mastergroupinf_id")
     public Integer MasterGroupInfID ;
 
-    //private MasterGroupInfo MasterGroupInfo ;
 
-    //private RealmList<RelMasterGroupPolomp> RelMasterGroupPolomp ;
 
 
 }

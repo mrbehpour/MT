@@ -16,10 +16,6 @@ public class Polomp  {
 
     public String KeyName;
 
-    //public RealmList<ir.saa.android.mt.database.contracts.PolompDtl> PolompDtl;
-
-
-
     public String PolompName;
 
     public Boolean IsEditable;
@@ -28,7 +24,6 @@ public class Polomp  {
 
     public Integer Order;
 
-   // public RealmList<RelMasterGroupPolomp> RelMasterGroupPolomp;
 
 
 

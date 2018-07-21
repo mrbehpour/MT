@@ -9,6 +9,9 @@ import android.support.annotation.NonNull;
 
 public class AgentAccessList  {
 
+    @PrimaryKey
+    @NonNull
+    public Integer AccessID ;
 
     public String AgentAccessName ;
 
@@ -16,9 +19,7 @@ public class AgentAccessList  {
 
     public Boolean PosID ;
 
-    @PrimaryKey
-    @NonNull
-    public Integer AccessID ;
+
 
 
 }

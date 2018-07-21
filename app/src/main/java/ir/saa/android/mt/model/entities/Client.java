@@ -8,7 +8,9 @@ import android.support.annotation.NonNull;
 
 
 @Entity(foreignKeys = {@ForeignKey(entity = ClientType.class,parentColumns = "FldID",childColumns = "clienttype_id"),
-                        @ForeignKey(entity = TariffType.class,parentColumns = "FldID",childColumns = "tarifftype_id")})
+                       @ForeignKey(entity = TariffType.class,parentColumns = "FldID",childColumns = "tarifftype_id"),
+                       @ForeignKey(entity = MasterGroupDetail.class,parentColumns = "MasterGroupDtlID",childColumns = "mastergroupdtl_id")
+})
 public class Client  {
 
     @PrimaryKey
@@ -41,6 +43,7 @@ public class Client  {
 
     public Long MeterNumActive ;
 
+    @ColumnInfo(name = "mastergroupdtl_id")
     public Integer MasterGroupDtlID ;
 
     public String CustId ;
@@ -100,25 +103,5 @@ public class Client  {
     public Integer UseAvrA ;
 
     public Integer UseAvrR ;
-
-
-    //public ir.saa.android.mt.database.contracts.MasterGroupDetail MasterGroupDetail ;
-
-    //public RealmList<InspectionInfo> InspectionInfo ;
-
-    //public RealmList<PolompInfo> PolompInfo ;
-
-   // public RealmList<RelClientSource> RelClientSource ;
-
-   // public RealmList<TariffInfo> TariffInfo ;
-
-   /// public RealmList<TestInfo> TestInfo ;
-
-   // public RealmList<MeterChange> MeterChangeInfo ;
-
-    //public TariffType TariffType ;
-
-   // public ClientType ClientType ;
-
 
 }

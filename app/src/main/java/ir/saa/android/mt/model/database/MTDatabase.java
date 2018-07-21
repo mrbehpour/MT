@@ -8,15 +8,37 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import ir.saa.android.mt.model.daos.AccessAgentAndroidDao;
+import ir.saa.android.mt.model.daos.AgentAccessListDao;
+import ir.saa.android.mt.model.daos.AnswerGroupDao;
+import ir.saa.android.mt.model.daos.AnswerGroupDtlDao;
+import ir.saa.android.mt.model.daos.CityDao;
 import ir.saa.android.mt.model.daos.RelUserDao;
+import ir.saa.android.mt.model.entities.AccessAgentAndroid;
+import ir.saa.android.mt.model.entities.AgentAccessList;
+import ir.saa.android.mt.model.entities.AnswerGroup;
+import ir.saa.android.mt.model.entities.AnswerGroupDtl;
+import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.RelUser;
 
-@Database(entities ={RelUser.class},version = 1)
+@Database(entities ={RelUser.class, AccessAgentAndroid.class,
+                     AgentAccessList.class, AnswerGroup.class,
+                     AnswerGroupDtl.class, City.class},version = 1)
 public abstract class MTDatabase extends RoomDatabase {
 
     private static MTDatabase INSTANCE;
 
     public abstract RelUserDao userModel();
+
+    public abstract AccessAgentAndroidDao accessAgentAndroidModel();
+
+    public abstract AgentAccessListDao agentAccessListModel();
+
+    public abstract AnswerGroupDao answerGroupModel();
+
+    public abstract AnswerGroupDtlDao answerGroupDtlDao();
+
+    public abstract CityDao cityModel();
 
     public static MTDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {

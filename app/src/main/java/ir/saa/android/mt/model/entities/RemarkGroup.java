@@ -22,7 +22,7 @@ public class RemarkGroup  {
 
     private String KeyName;
 
-    //private RealmList<ir.saa.android.mt.database.contracts.GroupingFormat> GroupingFormat;
+
 
 
 }

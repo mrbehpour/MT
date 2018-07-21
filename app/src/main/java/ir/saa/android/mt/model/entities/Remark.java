@@ -24,9 +24,6 @@ public class Remark  {
 
     public String Description;
 
-    //public GroupingFormat GroupingFormat;
-
-    //public RealmList<InspectionDtl> InspectionDtl;
 
     public  Boolean IsEditable;
 
