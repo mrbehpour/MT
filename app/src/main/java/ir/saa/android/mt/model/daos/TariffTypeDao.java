@@ -11,6 +11,6 @@ import ir.saa.android.mt.model.entities.TariffType;
 @Dao
 public interface TariffTypeDao {
 
-    @Query("select * from TariffTyp")
+    @Query("select * from TariffType")
     LiveData<List<TariffType>> getTariffTypes();
 }
