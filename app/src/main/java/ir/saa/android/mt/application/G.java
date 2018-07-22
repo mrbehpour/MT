@@ -11,7 +11,7 @@ import java.util.Stack;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.enums.FragmentsEnum;
-import ir.saa.android.mt.fragments.HomeFragment;
+import ir.saa.android.mt.uicontrollers.fragments.HomeFragment;
 import ir.saa.android.mt.setting.SettingFragment;
 
 public class G extends Application {
