@@ -13,17 +13,35 @@ import ir.saa.android.mt.model.daos.AgentAccessListDao;
 import ir.saa.android.mt.model.daos.AnswerGroupDao;
 import ir.saa.android.mt.model.daos.AnswerGroupDtlDao;
 import ir.saa.android.mt.model.daos.CityDao;
+import ir.saa.android.mt.model.daos.ClientDao;
+import ir.saa.android.mt.model.daos.ClientTypeDao;
+import ir.saa.android.mt.model.daos.CompanyDao;
+import ir.saa.android.mt.model.daos.MasterGroupDetailDao;
+import ir.saa.android.mt.model.daos.MasterGroupInfoDao;
+import ir.saa.android.mt.model.daos.RegionDao;
 import ir.saa.android.mt.model.daos.RelUserDao;
+import ir.saa.android.mt.model.daos.TariffTypeDao;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
 import ir.saa.android.mt.model.entities.AnswerGroup;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.City;
+import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientType;
+import ir.saa.android.mt.model.entities.Company;
+import ir.saa.android.mt.model.entities.MasterGroupDetail;
+import ir.saa.android.mt.model.entities.MasterGroupInfo;
+import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.model.entities.RelUser;
+import ir.saa.android.mt.model.entities.TariffType;
 
 @Database(entities ={RelUser.class, AccessAgentAndroid.class,
                      AgentAccessList.class, AnswerGroup.class,
-                     AnswerGroupDtl.class, City.class},version = 1)
+                     AnswerGroupDtl.class, City.class,
+                     Client.class, ClientType.class,
+                     Company.class, Region.class,
+                     TariffType.class,MasterGroupDetail.class,
+                     MasterGroupInfo.class},version = 1)
 public abstract class MTDatabase extends RoomDatabase {
 
     private static MTDatabase INSTANCE;
@@ -36,9 +54,23 @@ public abstract class MTDatabase extends RoomDatabase {
 
     public abstract AnswerGroupDao answerGroupModel();
 
-    public abstract AnswerGroupDtlDao answerGroupDtlDao();
+    public abstract AnswerGroupDtlDao answerGroupDtlModel();
 
     public abstract CityDao cityModel();
+
+    public abstract ClientDao clientModel();
+
+    public abstract ClientTypeDao clientTypeModel ();
+
+    public abstract CompanyDao companyModel();
+
+    public abstract RegionDao regionModel();
+
+    public abstract TariffTypeDao tariffTypeModel();
+
+    public abstract MasterGroupDetailDao masterGroupDetailModel();
+
+    public abstract MasterGroupInfoDao masterGroupInfoModel();
 
     public static MTDatabase getInMemoryDatabase(Context context) {
         if (INSTANCE == null) {

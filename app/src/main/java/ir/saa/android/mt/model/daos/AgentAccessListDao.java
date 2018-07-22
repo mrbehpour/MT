@@ -16,7 +16,7 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 @Dao
 public interface AgentAccessListDao {
     @Query("select * from AgentAccessList")
-    LiveData<List<AgentAccessListDao>> getAgentAccessList();
+    LiveData<List<AgentAccessList>> getAgentAccessList();
 
 
     @Insert(onConflict = IGNORE)
@@ -36,7 +36,7 @@ public interface AgentAccessListDao {
     LiveData<AgentAccessList> getAgentAccessListById(Integer accessId);
 
     @Query("delete from AgentAccessList where AccessID= :accessId")
-    void deleteById(Insert accessId);
+    void deleteById(Integer accessId);
 
 
 }

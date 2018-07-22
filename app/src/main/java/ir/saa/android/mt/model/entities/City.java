@@ -12,12 +12,12 @@ public class City  {
 
     @PrimaryKey
     @NonNull
-    private int CityCode;
+    public int CityCode;
 
-    private String CityName;
+    public String CityName;
 
     @ColumnInfo(name = "region_id")
-    private int RegionID ;
+    public int RegionID ;
 
 
 }
