@@ -15,26 +15,16 @@
             android:id="@+id/btnSearch"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            style="@style/btnStyle1"
             android:text="جستجو"/>
 
-        <!-- Search Text -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="0dp"
+        <SearchView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-            <EditText android:id="@+id/edtSearch"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="عبارت مورد نظر"/>
-        </android.support.design.widget.TextInputLayout>
+            android:gravity="right"
+            android:textAlignment="gravity"
+        />
 
-        <!-- Search Icon -->
-        <ImageView
-            android:id="@+id/imgSearch"
-            android:layout_width="24dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/account_search"/>
+
     </LinearLayout>
 
 

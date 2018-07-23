@@ -11,18 +11,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="colorButtonNormal">@color/colorAccent</item>
-        <item name="colorControlHighlight">@color/grey_50</item>
-        <item name="colorControlActivated">@color/red_500</item>
-
-
-    </style>
-
-    <style name="btnStyle1" parent="Widget.AppCompat.Button.Colored" >
-        <item name="android:radius" >38dp</item>
-        <item name="android:innerRadius">30dp</item>
-
-
+        <item name="colorButtonNormal">#4f4c5d</item>
+        <item name="colorControlHighlight">#ff8a00</item>
+        <item name="colorControlActivated">#a9a5bf</item>
     </style>
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
@@ -31,7 +22,7 @@
     </style>
 
     <style name="PopupTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:textColorPrimary">#222222</item>
+        <item name="android:textColorPrimary">#d2cfe0</item>
         <item name="android:background">#eeeeee</item>
     </style>
 

@@ -64,4 +64,6 @@ dependencies {
     annotationProcessor 'android.arch.lifecycle:compiler:' + rootProject.archLifecycleVersion
     annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
 
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+
 }

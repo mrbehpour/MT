@@ -1,75 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ms_black">
+    android:orientation="vertical"
+    android:background="#575465">
 
-    <VideoView
-    android:id="@+id/vvLogin"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentEnd="true"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"/>
+    //empty top layout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+    </LinearLayout>
 
-    <!-- App Icon -->
-    <ImageView
-        android:id="@+id/imgIcon"
-        android:layout_width="137dp"
-        android:layout_height="140dp"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="72dp"
-        android:src="@drawable/mt_icon" />
+    //icon layout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
+            <!-- App Icon -->
+            <pl.droidsonroids.gif.GifTextView
+                android:id="@+id/imgIcon"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:background="@drawable/mt_gificon" />
+    </LinearLayout>
 
-    <!-- Name Spinner -->
+    //Down layout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <!-- Name Spinner -->
         <Spinner
-        android:id="@+id/spnUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="240dp"/>
-
-    <!-- Password Label -->
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
-        <EditText android:id="@+id/edtPassword"
+            android:id="@+id/spnUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="@color/ms_white"
-            android:textAlignment="textEnd"
-            android:hint="رمز ورود"/>
-    </android.support.design.widget.TextInputLayout>
+            android:background="#575465"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"/>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="360dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:padding="12dp"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        style="@style/btnStyle1"
-        android:text="ورود"/>
+        <!-- Password Label -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColorHint="#d2cfe0">
+            <EditText android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/textViewColor"
+                android:textAlignment="center"
+                android:hint="رمز ورود"/>
+        </android.support.design.widget.TextInputLayout>
 
-    <TextView android:id="@+id/tvHelp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="430dp"
-        android:text="نمی توانید وارد شوید؟"
-        android:textColor="@color/ms_white"
-        android:gravity="center"
-        android:textSize="16sp"/>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:textColor="#d2cfe0"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="ورود"/>
 
-</RelativeLayout>
+        <TextView android:id="@+id/tvHelp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="نمی توانید وارد شوید؟"
+            android:textColor="@color/textViewColorDark"
+            android:gravity="center"
+            android:textSize="16sp"/>
+
+        <TextView android:id="@+id/tvSanjesh"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="Sanjesh Afzar Asia Co LTD."
+            android:textColor="@color/textViewColorDark"
+            android:gravity="center|bottom"
+            android:textSize="9sp"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

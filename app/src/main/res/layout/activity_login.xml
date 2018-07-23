@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="72dp"
-        android:src="@drawable/mt_icon" />
+        android:src="@drawable/mt_gificon" />
 
     <!-- Name Spinner -->
     <Spinner
@@ -60,7 +60,6 @@
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:textSize="18sp"
-        style="@style/btnStyle1"
         android:text="ورود"/>
 
     <TextView android:id="@+id/tvHelp"
