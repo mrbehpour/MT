@@ -10,17 +10,17 @@ public class RemarkGroup  {
 
     @PrimaryKey
     @NonNull
-    private Integer FldID;
+    public Integer FldID;
 
-    private String FldDes;
+    public String FldDes;
 
-    private String FldName;
+    public String FldName;
 
-    private Boolean HHGrouping;
+    public Boolean HHGrouping;
 
-    private Boolean IsFixed;
+    public Boolean IsFixed;
 
-    private String KeyName;
+    public String KeyName;
 
 
 

@@ -8,7 +8,8 @@ import android.support.annotation.NonNull;
 
 
 @Entity(foreignKeys = {@ForeignKey(entity = RemarkGroup.class ,parentColumns = "FldID",childColumns = "remarkgroup_id"),
-                       @ForeignKey(entity = MasterGroupDetail.class,parentColumns = "MasterGroupDtlID",childColumns = "mastergroupdetail_id")})
+                       @ForeignKey(entity = MasterGroupDetail.class,parentColumns = "MasterGroupDtlID",childColumns = "mastergroupdetail_id"),
+                        @ForeignKey(entity = Remark.class,parentColumns = "RemarkID",childColumns = "remark_id")})
 public class GroupingFormat  {
 
     @PrimaryKey
@@ -18,6 +19,7 @@ public class GroupingFormat  {
     @ColumnInfo(name="remarkgroup_id")
     public Integer RemarkGroupID;
 
+    @ColumnInfo(name = "remark_id")
     public Integer RemarkID;
 
     public  Integer RemarkOrder;

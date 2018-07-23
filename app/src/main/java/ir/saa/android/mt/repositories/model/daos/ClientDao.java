@@ -11,6 +11,8 @@ import java.util.List;
 
 import ir.saa.android.mt.repositories.model.entities.Client;
 
+import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
+
 @Dao
 public interface ClientDao {
     @Query("select * from Client")
@@ -19,7 +21,7 @@ public interface ClientDao {
     @Update
     void updateClient(Client client);
 
-    @Insert
+    @Insert(onConflict = IGNORE)
     void insertClient(Client client);
 
     @Delete

@@ -11,13 +11,15 @@ import java.util.List;
 
 import ir.saa.android.mt.repositories.model.entities.City;
 
+import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
+
 @Dao
 public interface CityDao {
 
     @Query("select * from City")
     LiveData<List<City>> getCities();
 
-    @Insert
+    @Insert(onConflict = IGNORE)
     void insertCity(City city);
 
     @Update

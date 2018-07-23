@@ -12,6 +12,8 @@ import java.util.List;
 
 import ir.saa.android.mt.repositories.model.entities.ClientType;
 
+import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
+
 @Dao
 public interface ClientTypeDao {
 
@@ -22,7 +24,7 @@ public interface ClientTypeDao {
     @Update
     void updateClientType(ClientType clientType);
 
-    @Insert
+    @Insert(onConflict = IGNORE)
     void insertClientType(ClientType clientType);
 
     @Delete

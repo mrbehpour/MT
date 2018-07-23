@@ -11,6 +11,8 @@ import java.util.List;
 
 import ir.saa.android.mt.repositories.model.entities.Company;
 
+import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
+
 @Dao
 public interface CompanyDao {
 
@@ -20,7 +22,7 @@ public interface CompanyDao {
     @Update
     void updateCompany(Company company);
 
-    @Insert
+    @Insert(onConflict = IGNORE)
     void insertCompany(Company company);
 
     @Delete
@@ -31,5 +33,8 @@ public interface CompanyDao {
 
     @Query("Delete from Company where FldID= :Id")
     void deleteCompanyById(Integer Id);
+
+    @Query("Delete from Company")
+    void deleteAll();
 
 }
