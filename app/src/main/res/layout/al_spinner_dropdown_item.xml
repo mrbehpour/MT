@@ -7,6 +7,6 @@
     android:layout_height="36dp"
     android:ellipsize="marquee"
     android:drawableRight="@drawable/account"
-    android:drawableTint="@color/textViewColor"
+    android:drawableTint="@color/grey_800"
     android:textAlignment="inherit"
     android:layout_marginBottom="8dp"/>

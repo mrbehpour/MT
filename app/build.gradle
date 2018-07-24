@@ -39,7 +39,9 @@ dependencies {
     implementation 'com.github.kenumir:MaterialSettings:v.1.2.2'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
+    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 
     def lifecycle_version = "1.1.1"
     // ViewModel and LiveData
@@ -64,6 +66,6 @@ dependencies {
     annotationProcessor 'android.arch.lifecycle:compiler:' + rootProject.archLifecycleVersion
     annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
 
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 
 }

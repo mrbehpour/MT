@@ -13,6 +13,7 @@
         <!-- Name -->
         <TextView
             android:id="@+id/tvName"
+            android:layout_marginRight="16dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="محمدرضا جلیلی نیا"
@@ -34,6 +35,7 @@
         <!-- Shomare Badane -->
         <TextView
             android:id="@+id/tvShomareBadane"
+            android:layout_marginRight="16dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -56,6 +58,7 @@
         <!-- Address -->
         <TextView
             android:id="@+id/tvAddress"
+            android:layout_marginRight="16dp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

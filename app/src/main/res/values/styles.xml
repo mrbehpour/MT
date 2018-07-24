@@ -11,7 +11,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="colorButtonNormal">#4f4c5d</item>
+        <item name="colorButtonNormal">@color/green_A400</item>
         <item name="colorControlHighlight">#ff8a00</item>
         <item name="colorControlActivated">#a9a5bf</item>
     </style>
