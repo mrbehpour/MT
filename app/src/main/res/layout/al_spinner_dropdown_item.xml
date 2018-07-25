@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
-    style="?android:attr/spinnerItemStyle"
+    android:fontFamily="@font/byekan"
     android:singleLine="true"
     android:layout_width="match_parent"
-    android:layout_height="36dp"
+    android:layout_height="35dp"
     android:ellipsize="marquee"
+    android:paddingRight="8dp"
+    android:gravity="right|center_vertical"
     android:drawableRight="@drawable/account"
-    android:drawableTint="@color/grey_800"
-    android:textAlignment="inherit"
-    android:layout_marginBottom="8dp"/>
+    android:textSize="16sp"
+    android:drawableTint="@color/grey_400"/>
+
+
+    <!--style="?android:attr/spinnerItemStyle"-->
