@@ -81,4 +81,13 @@ public class ReluserRepo  {
         relUserDao.deleteAll();
     }
 
+    public LiveData<RelUser> getUserByUserAndPassword(int userId,String passWord){
+        return  relUserDao.getUserByUserAndPassword(userId,passWord);
+    }
+
+    public LiveData<RelUser> getUserById(int userId){
+        return  relUserDao.getUserById(userId);
+    }
+
+
 }
