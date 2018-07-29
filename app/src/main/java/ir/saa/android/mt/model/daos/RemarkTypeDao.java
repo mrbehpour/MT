@@ -31,6 +31,9 @@ public interface RemarkTypeDao {
     @Insert(onConflict = IGNORE)
     void insertRemarkType(RemarkType remarkType);
 
+    @Insert(onConflict = IGNORE)
+    List<Integer> insertRemarkTypes(List<RemarkType> remarkTypes);
+
     @Update
     void updateRemarkType(RemarkType remarkType);
 

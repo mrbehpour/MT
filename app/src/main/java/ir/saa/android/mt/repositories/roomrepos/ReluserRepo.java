@@ -22,7 +22,7 @@ public class ReluserRepo  {
         relUsers = relUserDao.getUsers();
     }
 
-    LiveData<List<RelUser>> getUsers() {
+    public LiveData<List<RelUser>> getUsers() {
         return relUsers;
     }
 

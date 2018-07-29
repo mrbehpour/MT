@@ -37,6 +37,9 @@ public interface RegionDao {
     @Insert(onConflict =IGNORE)
     void insertRegion(Region region);
 
+    @Insert(onConflict =IGNORE)
+    List<Integer> insertRegions(List<Region> regions);
+
     @Update
     void updateRegion(Region region);
 }

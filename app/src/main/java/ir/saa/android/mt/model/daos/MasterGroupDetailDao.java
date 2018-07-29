@@ -22,6 +22,9 @@ public interface MasterGroupDetailDao {
     @Insert(onConflict = IGNORE)
     void insertMasterGroupDetail(MasterGroupDetail masterGroupDetail);
 
+    @Insert(onConflict = IGNORE)
+    List<Integer> insertMasterGroupDetails(List<MasterGroupDetail> masterGroupDetails);
+
     @Update
     void updateMasterGroupDetail(MasterGroupDetail masterGroupDetail);
 

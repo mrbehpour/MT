@@ -25,6 +25,9 @@ public interface AccessAgentAndroidDao {
     @Insert(onConflict = IGNORE)
     void insertAccessAgentAndroid(AccessAgentAndroid accessAgentAndroid);
 
+    @Insert(onConflict = IGNORE)
+    List<Long> insertAccessAgentAndroids(List<AccessAgentAndroid> accessAgentAndroids);
+
     @Update
     void updateAccessAgentAndroid(AccessAgentAndroid accessAgentAndroid);
 
@@ -32,7 +35,7 @@ public interface AccessAgentAndroidDao {
     void deleteAll();
 
     @Query("select * from AccessAgentAndroid where user_id= :userid")
-    LiveData<AccessAgentAndroid> getAccessAgentAndroidByUserid(int userid);
+    LiveData<List<AccessAgentAndroid>> getAccessAgentAndroidByUserid(int userid);
 
     @Query("select * from AccessAgentAndroid where ID = :id")
     LiveData<AccessAgentAndroid> getAccessAgentAndroidById(int id);

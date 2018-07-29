@@ -22,6 +22,9 @@ public interface AgentAccessListDao {
     @Insert(onConflict = IGNORE)
     void insertAgentAccessList(AgentAccessList agentAccessList);
 
+    @Insert(onConflict = IGNORE)
+    List<Integer> insertAgentAccessLists(List<AgentAccessList> agentAccessLists);
+
     @Delete
     void deleteAgentAccessList(AgentAccessList agentAccessList);
 

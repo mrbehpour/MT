@@ -31,6 +31,8 @@ public interface PolompDao {
     @Insert(onConflict = IGNORE)
     void insertPolomp(Polomp polomp);
 
+    @Insert(onConflict = IGNORE)
+    List<Integer> insertPolomps(List<Polomp> polomps);
     @Delete
     void deletePolomp(Polomp polomp);
 

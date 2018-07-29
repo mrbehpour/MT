@@ -31,6 +31,9 @@ public interface RemarkGroupDao {
     @Insert(onConflict = IGNORE)
     void insertRemarkGroup(RemarkGroup remarkGroup);
 
+
+    @Insert(onConflict = IGNORE)
+    List<Integer> insertRemarkGroups(List<RemarkGroup> remarkGroup);
     @Update
     void updateRemarkGroup(RemarkGroup remarkGroup);
 

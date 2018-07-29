@@ -41,7 +41,7 @@ public interface RelUserDao {
     void deleteUser(RelUser relUser);
 
     @Insert(onConflict = IGNORE)
-    void insertOrReplaceUsers(RelUser... users);
+    List<Integer> insertOrReplaceUsers(List<RelUser> users);
 
 
 }

@@ -22,6 +22,10 @@ public interface AnswerGroupDtlDao {
     @Insert(onConflict = IGNORE)
     void insertAnswerGroupdtl(AnswerGroupDtl answerGroupDtl);
 
+    @Insert(onConflict = IGNORE)
+    List<Integer> insertAnswerGroupdtls(List<AnswerGroupDtl> answerGroupDtls);
+
+
     @Update
     void updateAnswerGroupDtl(AnswerGroupDtl answerGroupDtl);
 

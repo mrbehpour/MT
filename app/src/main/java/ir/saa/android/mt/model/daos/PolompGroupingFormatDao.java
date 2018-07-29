@@ -43,6 +43,8 @@ public interface PolompGroupingFormatDao {
     @Insert(onConflict = IGNORE)
     void insertPolompGroupingFormat(PolompGroupingFormat polompGroupingFormat);
 
+    @Insert(onConflict = IGNORE)
+    List<Integer> insertPolompGroupingFormats(List<PolompGroupingFormat> polompGroupingFormats);
     @Update
     void updatePolompGroupingFormat(PolompGroupingFormat polompGroupingFormat);
 

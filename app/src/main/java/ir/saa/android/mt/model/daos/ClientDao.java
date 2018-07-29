@@ -24,6 +24,9 @@ public interface ClientDao {
     @Insert(onConflict = IGNORE)
     void insertClient(Client client);
 
+    @Insert(onConflict = IGNORE)
+    List<Long> insertClients(List<Client> clients);
+
     @Delete
     void deleteClient(Client client);
 
