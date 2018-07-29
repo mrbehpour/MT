@@ -3,8 +3,8 @@ package ir.saa.android.mt.repositories.retrofit;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import ir.saa.android.mt.repositories.model.entities.City;
-import ir.saa.android.mt.repositories.model.entities.RelUser;
+import ir.saa.android.mt.model.entities.City;
+import ir.saa.android.mt.model.entities.RelUser;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

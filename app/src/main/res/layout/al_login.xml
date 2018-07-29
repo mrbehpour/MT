@@ -23,11 +23,11 @@
         android:orientation="vertical">
         <!-- App Icon -->
         <!--<pl.droidsonroids.gif.GifTextView-->
-        <ImageView
-            android:id="@+id/imgIcon"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/login_logo" />
+        <!--<ImageView-->
+            <!--android:id="@+id/imgIcon"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:background="@drawable/login_logo" />-->
     </LinearLayout>
 
     //Down layout
