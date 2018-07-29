@@ -22,11 +22,12 @@
         android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical">
         <!-- App Icon -->
-        <!--<ImageView-->
-            <!--android:id="@+id/imgIcon"-->
-            <!--android:layout_width="120dp"-->
-            <!--android:layout_height="120dp"-->
-            <!--android:background="@drawable/login_logo" />-->
+        <!--<pl.droidsonroids.gif.GifTextView-->
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/login_logo" />
     </LinearLayout>
 
     //Down layout
@@ -39,32 +40,30 @@
         <!-- Name Spinner -->
         <Spinner
             android:id="@+id/spnUserName"
-            android:fontFamily="@font/byekan"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="45dp"
             android:background="@drawable/custom_rectangle"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_gravity="center"
             />
 
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
             android:fontFamily="@font/byekan"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:textColorHint="#d2cfe0">
+            android:layout_gravity="center"
+            android:textColorHint="@color/grey_1000">
             <EditText android:id="@+id/edtPassword"
                 android:fontFamily="@font/byekan"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:inputType="textPassword"
+                android:textColor="@color/grey_900"
                 android:textAlignment="center"
                 android:background="@drawable/custom_rectangle"
                 android:drawableRight="@drawable/key"
-                android:drawableTint="@color/grey_800"
+                android:drawableTint="@color/grey_500"
                 android:paddingRight="12dp"
                 />
         </android.support.design.widget.TextInputLayout>
@@ -72,22 +71,21 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnLogin"
             android:fontFamily="@font/byekan"
-            android:layout_width="match_parent"
+            android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_gravity="center"
             android:textColor="#ffffff"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:text="ورود"/>
 
         <TextView android:id="@+id/tvHelp"
             android:fontFamily="@font/byekan"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:text="نمی توانید وارد شوید؟"
-            android:textColor="@color/grey_600"
+            android:textColor="@color/grey_500"
             android:gravity="center"
             android:textSize="14sp"/>
 
@@ -97,19 +95,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:text="Sanjesh Afzar Asia Co LTD."
+            android:textColor="@color/grey_400"
             android:gravity="center|bottom"
             android:textSize="11sp"/>
 
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
 
 </LinearLayout>
