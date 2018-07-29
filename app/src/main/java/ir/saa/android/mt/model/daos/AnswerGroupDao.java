@@ -22,6 +22,9 @@ public interface AnswerGroupDao {
     @Insert(onConflict = IGNORE)
     void insertAnswerGroup(AnswerGroup answerGroup);
 
+    @Insert(onConflict = IGNORE)
+    List<Long> insertAnswerGroups(List<AnswerGroup> answerGroupList);
+
     @Update
     void updateAnswerGroup(AnswerGroup answerGroup);
 
