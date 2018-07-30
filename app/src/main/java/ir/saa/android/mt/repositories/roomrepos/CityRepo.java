@@ -59,7 +59,7 @@ public class CityRepo  {
         return null;
     }
 
-    public List<Integer> insertCities(List<City> cities){
+    public List<Long> insertCities(List<City> cities){
         return cityDao.insertCities(cities);
     }
 }

@@ -60,7 +60,7 @@ public class GroupingFormatRepo  {
     }
 
 
-    public List<Integer> insertGroupingFormats(List<GroupingFormat> groupingFormats) {
+    public List<Long> insertGroupingFormats(List<GroupingFormat> groupingFormats) {
         return groupingFormatDao.insertGroupingFormats(groupingFormats);
     }
 

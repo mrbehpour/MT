@@ -53,7 +53,7 @@ public class RemarkGroupRepo  {
         remarkGroupDao.updateRemarkGroup(remarkGroup);
     }
 
-    public List<Integer> insertremarkGroups(List<RemarkGroup> remarkGroups){
+    public List<Long> insertremarkGroups(List<RemarkGroup> remarkGroups){
         return remarkGroupDao.insertRemarkGroups(remarkGroups);
     }
 }

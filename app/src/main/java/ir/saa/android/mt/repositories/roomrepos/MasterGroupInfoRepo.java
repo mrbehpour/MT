@@ -41,7 +41,7 @@ public class MasterGroupInfoRepo {
     }
 
 
-    public List<Integer> insertMasterGroupInfos(List<MasterGroupInfo> masterGroupInfos) {
+    public List<Long> insertMasterGroupInfos(List<MasterGroupInfo> masterGroupInfos) {
         return masterGroupInfoDao.insertMasterGroupInfos(masterGroupInfos);
     }
 

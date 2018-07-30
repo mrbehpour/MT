@@ -42,7 +42,7 @@ public interface GroupingFormatDao {
     void insertGroupingFormat(GroupingFormat groupingFormat);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertGroupingFormats(List<GroupingFormat> groupingFormats);
+    List<Long> insertGroupingFormats(List<GroupingFormat> groupingFormats);
 
     @Update
     void updateGroupingFormat(GroupingFormat groupingFormat);

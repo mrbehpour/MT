@@ -33,7 +33,7 @@ public interface TariffTypeDao {
     void insertTariffType(TariffType tariffType);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertTariffTypes(List<TariffType> tariffTypes);
+    List<Long> insertTariffTypes(List<TariffType> tariffTypes);
 
     @Update
     void updateTariffType(TariffType tariffType);

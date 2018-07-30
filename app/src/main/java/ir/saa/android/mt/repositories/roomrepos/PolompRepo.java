@@ -45,7 +45,7 @@ public class PolompRepo  {
     }
 
 
-    public List<Integer> insertPolomps(List<Polomp> polomps) {
+    public List<Long> insertPolomps(List<Polomp> polomps) {
         return polompDao.insertPolomps(polomps);
     }
 

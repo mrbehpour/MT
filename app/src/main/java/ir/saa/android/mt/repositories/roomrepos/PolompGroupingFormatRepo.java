@@ -65,7 +65,7 @@ public class PolompGroupingFormatRepo  {
     }
 
 
-    public List<Integer> insertPolompGroupingFormats(List<PolompGroupingFormat> polompGroupingFormats) {
+    public List<Long> insertPolompGroupingFormats(List<PolompGroupingFormat> polompGroupingFormats) {
         return polompGroupingFormatDao.insertPolompGroupingFormats(polompGroupingFormats);
     }
 

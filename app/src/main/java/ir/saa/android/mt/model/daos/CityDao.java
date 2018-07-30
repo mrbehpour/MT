@@ -23,7 +23,7 @@ public interface CityDao {
     void insertCity(City city);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertCities(List<City> cities);
+    List<Long> insertCities(List<City> cities);
 
     @Update
     void updateCity(City city);

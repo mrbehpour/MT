@@ -17,10 +17,14 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 public interface AnswerGroupDao {
 
     @Query("select * from AnswerGroup")
-    LiveData<List<AnswerGroup>> getAAnswerGroups();
+    LiveData<List<AnswerGroup>> getALLAnswerGroups();
 
     @Insert(onConflict = IGNORE)
     void insertAnswerGroup(AnswerGroup answerGroup);
+
+    @Insert(onConflict = IGNORE)
+    List<Long> insertAnswerGroups(List<AnswerGroup> answerGroup);
+
 
     @Update
     void updateAnswerGroup(AnswerGroup answerGroup);

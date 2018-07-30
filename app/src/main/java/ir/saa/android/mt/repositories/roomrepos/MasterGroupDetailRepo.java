@@ -31,7 +31,7 @@ public class MasterGroupDetailRepo  {
     }
 
 
-    public List<Integer> insertMasterGroupDetails(List<MasterGroupDetail> masterGroupDetails) {
+    public List<Long> insertMasterGroupDetails(List<MasterGroupDetail> masterGroupDetails) {
         return masterGroupDetailDao.insertMasterGroupDetails(masterGroupDetails);
     }
 

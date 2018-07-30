@@ -32,7 +32,7 @@ public interface PolompGroupDao {
     void insertPolompGroup(PolompGroup polompGroup);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertPolompGroups(List<PolompGroup> polompGroups);
+    List<Long> insertPolompGroups(List<PolompGroup> polompGroups);
 
     @Update
     void updatePolompGroup(PolompGroup polompGroup);

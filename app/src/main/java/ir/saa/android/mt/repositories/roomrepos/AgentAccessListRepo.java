@@ -30,7 +30,7 @@ public class AgentAccessListRepo {
     public void deleteAllAgentAccessList(){
         agentAccessListDao.deleteAll();
     }
-    public List<Integer> insertAgentAccessLists(List<AgentAccessList> agentAccessLists){
+    public List<Long> insertAgentAccessLists(List<AgentAccessList> agentAccessLists){
         return agentAccessListDao.insertAgentAccessLists(agentAccessLists);
     }
 

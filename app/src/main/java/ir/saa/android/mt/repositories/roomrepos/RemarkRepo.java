@@ -60,7 +60,7 @@ public class RemarkRepo  {
     }
 
 
-    public List<Integer> insertRemarks(List<Remark> remarks) {
+    public List<Long> insertRemarks(List<Remark> remarks) {
         return remarkDao.insertRemarks(remarks);
     }
 

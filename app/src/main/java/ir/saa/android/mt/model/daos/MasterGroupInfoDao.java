@@ -30,7 +30,7 @@ public interface MasterGroupInfoDao {
 
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertMasterGroupInfos(List<MasterGroupInfo> masterGroupInfos);
+    List<Long> insertMasterGroupInfos(List<MasterGroupInfo> masterGroupInfos);
 
     @Query("select * from MasterGroupInfo where MasterGroupID= :Id")
     LiveData<MasterGroupInfo> getMasterGroupInfoById(int Id);

@@ -55,7 +55,7 @@ public class RegionRepo  {
     }
 
 
-    public List<Integer> insertRegions(List<Region> regions) {
+    public List<Long> insertRegions(List<Region> regions) {
         return regionDao.insertRegions(regions);
     }
 

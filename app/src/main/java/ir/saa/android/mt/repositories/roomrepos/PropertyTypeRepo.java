@@ -51,7 +51,7 @@ public class PropertyTypeRepo  {
     }
 
 
-    public List<Integer> insertPropertyTypes(List<PropertyType> propertyTypes) {
+    public List<Long> insertPropertyTypes(List<PropertyType> propertyTypes) {
         return propertyTypeDao.insertPropertyTypes(propertyTypes);
     }
 

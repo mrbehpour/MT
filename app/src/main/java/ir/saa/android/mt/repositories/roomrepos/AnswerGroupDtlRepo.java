@@ -32,7 +32,7 @@ public class AnswerGroupDtlRepo   {
     }
 
 
-    public List<Integer> insertAnswerGroupdtls(List<AnswerGroupDtl> answerGroupDtls) {
+    public List<Long> insertAnswerGroupdtls(List<AnswerGroupDtl> answerGroupDtls) {
         return answerGroupDtlDao.insertAnswerGroupdtls(answerGroupDtls);
     }
 

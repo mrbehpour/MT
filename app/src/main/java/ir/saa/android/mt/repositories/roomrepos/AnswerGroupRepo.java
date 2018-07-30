@@ -12,23 +12,23 @@ import ir.saa.android.mt.model.entities.AnswerGroup;
 public class AnswerGroupRepo {
 
     private AnswerGroupDao answerGroupDao;
-    private LiveData<List<AnswerGroup>> answerGroups;
+    private LiveData<List<AnswerGroup>> AnswerGroups;
 
     AnswerGroupRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         answerGroupDao=db.answerGroupModel();
-        answerGroups=answerGroupDao.getAllAnswerGroups();
+        AnswerGroups=answerGroupDao.getALLAnswerGroups();
 
     }
 
     public LiveData<List<AnswerGroup>> getAnswerGroups(){
-        return answerGroups;
+        return AnswerGroups;
     }
     public LiveData<AnswerGroup> getAnswerGroup(int Id){
         return answerGroupDao.getAnswerGroupById(Id);
     }
 
-    public List<Integer> insertAnswerGroups(List<AnswerGroup> answerGroups){
+    public List<Long> insertAnswerGroups(List<AnswerGroup> answerGroups){
         return answerGroupDao.insertAnswerGroups(answerGroups);
     }
 

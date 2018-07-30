@@ -56,7 +56,7 @@ public class RemarkTypeRepo  {
         remarkTypeDao.deleteRemarkType(remarkType);
     }
 
-    public List<Integer> insertRemarkTypes(List<RemarkType> remarkTypes){
+    public List<Long> insertRemarkTypes(List<RemarkType> remarkTypes){
         return  remarkTypeDao.insertRemarkTypes(remarkTypes);
     }
 }

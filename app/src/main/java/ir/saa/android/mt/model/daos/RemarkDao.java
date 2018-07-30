@@ -42,7 +42,7 @@ public interface RemarkDao {
     void insertRemark(Remark remark);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertRemarks(List<Remark> remarks);
+    List<Long> insertRemarks(List<Remark> remarks);
 
     @Update
     void updateRemark(Remark remark);

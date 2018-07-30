@@ -45,7 +45,7 @@ public class TariffTypeRepo  {
     }
 
 
-    public List<Integer> insertTariffTypes(List<TariffType> tariffTypes) {
+    public List<Long> insertTariffTypes(List<TariffType> tariffTypes) {
         return tariffTypeDao.insertTariffTypes(tariffTypes);
     }
 

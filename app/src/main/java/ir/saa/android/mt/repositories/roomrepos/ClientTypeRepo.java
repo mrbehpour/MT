@@ -35,7 +35,7 @@ public class ClientTypeRepo  {
     }
 
 
-    public List<Byte> insertClientTypes(List<ClientType> clientTypes) {
+    public List<Long> insertClientTypes(List<ClientType> clientTypes) {
         return clientTypeDao.insertClientTypes(clientTypes);
     }
 

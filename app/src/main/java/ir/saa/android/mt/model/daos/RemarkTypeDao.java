@@ -32,7 +32,7 @@ public interface RemarkTypeDao {
     void insertRemarkType(RemarkType remarkType);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertRemarkTypes(List<RemarkType> remarkTypes);
+    List<Long> insertRemarkTypes(List<RemarkType> remarkTypes);
 
     @Update
     void updateRemarkType(RemarkType remarkType);

@@ -55,7 +55,7 @@ public class CompanyRepo {
         companyDao.deleteAll();
     }
 
-    public List<Integer> insertCompanies(List<Company> companies){
+    public List<Long> insertCompanies(List<Company> companies){
         return companyDao.insertCompanies(companies);
     }
 }

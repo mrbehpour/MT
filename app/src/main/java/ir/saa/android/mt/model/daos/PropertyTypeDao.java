@@ -34,7 +34,7 @@ public interface PropertyTypeDao {
     void insertPropertyType(PropertyType propertyType);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertPropertyTypes(List<PropertyType> propertyTypes);
+    List<Long> insertPropertyTypes(List<PropertyType> propertyTypes);
 
     @Update
     void updatePropertyType(PropertyType propertyType);

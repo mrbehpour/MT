@@ -26,7 +26,7 @@ public interface CompanyDao {
     void insertCompany(Company company);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertCompanies(List<Company> companies);
+    List<Long> insertCompanies(List<Company> companies);
 
     @Delete
     void deleteCompany(Company company);

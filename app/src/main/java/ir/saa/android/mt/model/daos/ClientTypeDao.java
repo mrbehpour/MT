@@ -28,7 +28,7 @@ public interface ClientTypeDao {
     void insertClientType(ClientType clientType);
 
     @Insert(onConflict = IGNORE)
-    List<Byte> insertClientTypes(List<ClientType> clientTypes);
+    List<Long> insertClientTypes(List<ClientType> clientTypes);
 
     @Delete
     void deleteClientType(ClientType clientType);
