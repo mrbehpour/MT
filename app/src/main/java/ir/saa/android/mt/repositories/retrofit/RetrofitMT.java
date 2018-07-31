@@ -16,7 +16,7 @@ public class RetrofitMT {
 
     private RetrofitMT() {
         retrofit = new Retrofit.Builder()
-            .baseUrl("http://192.168.3.176:645/services/AndroidServices.svc/json")
+            .baseUrl("http://192.168.3.176:645/services/AndroidServices.svc/json/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build();

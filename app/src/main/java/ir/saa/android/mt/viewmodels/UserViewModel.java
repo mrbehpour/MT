@@ -8,10 +8,9 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import ir.saa.android.mt.repositories.model.database.MTDatabase;
-import ir.saa.android.mt.repositories.model.entities.RelUser;
+import ir.saa.android.mt.model.database.MTDatabase;
+import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 
 public class UserViewModel extends AndroidViewModel {
@@ -20,7 +19,7 @@ public class UserViewModel extends AndroidViewModel {
     public UserViewModel(@NonNull Application application) {
         super(application);
         if(mtDatabase==null)
-            mtDatabase = MTDatabase.getInMemoryDatabase(getApplication().getApplicationContext());
+            mtDatabase = MTDatabase.getDatabase(getApplication().getApplicationContext());
             List<RelUser> lst = mtDatabase.userModel().getUsers().getValue();
 
 

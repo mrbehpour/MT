@@ -10,7 +10,7 @@ import android.os.Bundle;
 import java.util.List;
 
 import ir.saa.android.mt.R;
-import ir.saa.android.mt.databinding.ActivityTestBinding;
+//import ir.saa.android.mt.databinding.ActivityTestBinding;
 import ir.saa.android.mt.pojos.Pojo1;
 import ir.saa.android.mt.viewmodels.TestViewModal;
 
@@ -19,9 +19,9 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        TestViewModal testViewModal = ViewModelProviders.of(this).get(TestViewModal.class);
-        ActivityTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_test);// ActivityTestBinding.inflate(getLayoutInflater());
-        binding.setViewmodel(testViewModal);
+//        TestViewModal testViewModal = ViewModelProviders.of(this).get(TestViewModal.class);
+//        ActivityTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_test);// ActivityTestBinding.inflate(getLayoutInflater());
+//        binding.setViewmodel(testViewModal);
 
         //binding.tvCounter.setText(testViewModal.getSomeString());
 //        testViewModal.getPojos1().observe(this, pojo1s -> {
