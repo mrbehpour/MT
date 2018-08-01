@@ -1,90 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="68dp"
-    android:layout_marginTop="6dp"
+    android:layout_height="60dp"
+    android:layout_marginTop="10dp"
     android:orientation="vertical">
 
-    <!-- Name Layout -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:orientation="horizontal">
-        <!-- Name -->
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_marginRight="16dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="محمدرضا جلیلی نیا"
-            android:layout_weight="1"/>
-        <!-- Name Lable -->
-        <TextView
-            android:id="@+id/tvLableName"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
-            android:text="نام مشترک: " />
-    </LinearLayout>
 
-    <!-- Shomare Badane Layout -->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="62dp"
         android:orientation="horizontal">
-        <!-- Shomare Badane -->
-        <TextView
-            android:id="@+id/tvShomareBadane"
-            android:layout_marginRight="16dp"
+
+        <!-- Info Layout -->
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="62dp"
             android:layout_weight="1"
-            android:textAlignment="textEnd"
-            android:text="12356987841" />
-        <!-- Shomare Badane Lable -->
-        <TextView
-            android:id="@+id/tvLableShomareBadane"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Name Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="17dp"
+                android:orientation="horizontal">
+                <!-- Name -->
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="محمدرضا جلیلی نیا"
+                    android:layout_weight="1"/>
+                <!-- Name Lable -->
+                <TextView
+                    android:id="@+id/tvLableName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:layout_marginRight="8dp"
+                    android:textColor="@color/grey_900"
+                    android:text="نام مشترک: " />
+            </LinearLayout>
+
+            <!-- Shomare Badane Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="17dp"
+                android:orientation="horizontal">
+                <!-- Shomare Badane -->
+                <TextView
+                    android:id="@+id/tvShomareBadane"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_500"
+                    android:text="12356987841" />
+                <!-- Shomare Badane Lable -->
+                <TextView
+                    android:id="@+id/tvLableShomareBadane"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_500"
+                    android:text="شماره بدنه: " />
+            </LinearLayout>
+
+            <!-- Address Layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="17dp"
+                android:orientation="horizontal">
+                <!-- Address -->
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="12sp"
+                    android:textColor="@color/grey_500"
+                    android:text="تهران، میدان ونک، خ گاندی، خ 16، پلاک 8، طبقه 3" />
+                <!-- Address Lable -->
+                <TextView
+                    android:id="@+id/tvLableAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="12sp"
+                    android:textColor="@color/grey_500"
+                    android:text="آدرس: " />
+            </LinearLayout>
+
+            //space
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:orientation="vertical">
+            </LinearLayout>
+            //line
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#aaa"
+                android:layout_marginRight="8dp"
+                android:orientation="vertical">
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Icon Layout -->
+        <LinearLayout
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="2dp"
             android:layout_marginRight="8dp"
-            android:text="شماره بدنه: " />
+            android:background="@drawable/bazdid_user"
+            android:orientation="horizontal">
+        </LinearLayout>
+
     </LinearLayout>
 
-    <!-- Address Layout-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:orientation="horizontal">
-        <!-- Address -->
-        <TextView
-            android:id="@+id/tvAddress"
-            android:layout_marginRight="16dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textAlignment="textStart"
-            android:layout_marginLeft="8dp"
-            android:text="تهران، میدان ونک، خ گاندی، خ 16، پلاک 8، طبقه 3" />
-        <!-- Address Lable -->
-        <TextView
-            android:id="@+id/tvLableAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
-            android:text="آدرس: " />
-    </LinearLayout>
-
-    //space
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:orientation="vertical">
-    </LinearLayout>
-    //line
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#aaa"
-        android:orientation="vertical">
-    </LinearLayout>
 </LinearLayout>
