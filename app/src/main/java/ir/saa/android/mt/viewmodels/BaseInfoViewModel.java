@@ -2,7 +2,10 @@ package ir.saa.android.mt.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
@@ -60,6 +63,10 @@ public class BaseInfoViewModel extends AndroidViewModel {
     RemarkTypeRepo remarkTypeRepo = null;
     TariffTypeRepo tariffTypeRepo = null;
 
+    //---------------------------------------
+
+    public MutableLiveData<Integer> UsersProgressPercent = null ;
+
     public BaseInfoViewModel(@NonNull Application application) {
         super(application);
         if(retrofitMT==null)
@@ -107,9 +114,15 @@ public class BaseInfoViewModel extends AndroidViewModel {
         if(tariffTypeRepo==null)
             tariffTypeRepo = new TariffTypeRepo(application);
 
+        //---------------------------------------------
+        if(UsersProgressPercent == null)
+            UsersProgressPercent.setValue(0);
+
+
+
         //getAnswerGroupsFromServer();
         //getCitiesFromServer();
-        getUserFromServer();
+        //getUserFromServer();
     }
 
 //    public void getAnswerGroupsFromServer(){
@@ -161,6 +174,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     public void onSuccess(List<RelUser> userList) {
                         if(reluserRepo.getUsers().getValue().size()>0)
                             reluserRepo.deleteAll();
+
                         List<Long> insertedIdList = reluserRepo.insertUsers(userList);
                         Toast.makeText(getApplication().getApplicationContext(),"insertCount : "+insertedIdList.size(),Toast.LENGTH_SHORT).show();
                     }

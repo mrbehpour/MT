@@ -45,7 +45,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             public void onClick(View v) {
                 //Toast.makeText(context, holder.title.getText().toString(), Toast.LENGTH_SHORT).show();
                 if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem1))==0){
-
+                    G.startFragment(FragmentsEnum.BazdidFragment,false);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem2))==0){
 
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem3))==0){
