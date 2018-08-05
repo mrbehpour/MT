@@ -1,6 +1,6 @@
 package ir.saa.android.mt.adapters.bazdid;
 
-public class BazdidItem {
+public class ClientItem {
     public Long Id;
     public String Name;
     public String Address;

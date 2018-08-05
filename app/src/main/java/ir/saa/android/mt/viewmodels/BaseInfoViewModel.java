@@ -65,7 +65,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
     //---------------------------------------
 
-    public MutableLiveData<Integer> UsersProgressPercent = null ;
+    public MutableLiveData<Integer> UsersProgressPercentLiveData = null ;
 
     public BaseInfoViewModel(@NonNull Application application) {
         super(application);
@@ -115,8 +115,8 @@ public class BaseInfoViewModel extends AndroidViewModel {
             tariffTypeRepo = new TariffTypeRepo(application);
 
         //---------------------------------------------
-        if(UsersProgressPercent == null)
-            UsersProgressPercent.setValue(0);
+        if(UsersProgressPercentLiveData == null)
+            UsersProgressPercentLiveData.setValue(0);
 
 
 
@@ -174,7 +174,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     public void onSuccess(List<RelUser> userList) {
                         if(reluserRepo.getUsers().getValue().size()>0)
                             reluserRepo.deleteAll();
-
+                        //UsersProgressPercentLiveData.postValue(getPercent(x,y));
                         List<Long> insertedIdList = reluserRepo.insertUsers(userList);
                         Toast.makeText(getApplication().getApplicationContext(),"insertCount : "+insertedIdList.size(),Toast.LENGTH_SHORT).show();
                     }
@@ -184,6 +184,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
                         Toast.makeText(getApplication().getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+    private int getPrecent(int progress,int totalCount){
+        return (progress * 100)/totalCount;
     }
 
 }

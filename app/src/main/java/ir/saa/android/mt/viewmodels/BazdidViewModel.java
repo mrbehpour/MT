@@ -1,8 +1,19 @@
 package ir.saa.android.mt.viewmodels;
 
-/**
- * Created by h.eskandari on 8/5/2018.
- */
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
+import android.support.annotation.NonNull;
 
-public class BazdidViewModel {
+import java.util.List;
+
+import ir.saa.android.mt.adapters.bazdid.ClientItem;
+
+public class BazdidViewModel extends AndroidViewModel {
+    public LiveData<List<ClientItem>> ClientItemsLiveData;
+    public BazdidViewModel(@NonNull Application application) {
+        super(application);
+    }
+
+
 }

@@ -37,7 +37,7 @@ public class BaseInfoFragment extends Fragment
         baseInfoViewModel = ViewModelProviders.of(this).get(BaseInfoViewModel.class);
         baseInfoViewModel.getUserFromServer();
 
-        baseInfoViewModel.UsersProgressPercent.observe(this, new Observer<Integer>() {
+        baseInfoViewModel.UsersProgressPercentLiveData.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
 
