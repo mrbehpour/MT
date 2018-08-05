@@ -3,11 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/grey_200">
 
+    <!-- Search Layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:orientation="horizontal">
 
         <!-- Search Button -->
@@ -15,19 +17,32 @@
             android:id="@+id/btnSearch"
             android:layout_width="80dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginBottom="4dp"
+            android:textAlignment="center"
+            android:fontFamily="@font/byekan"
             android:text="جستجو"/>
 
         <SearchView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
             android:gravity="right"
-            android:textAlignment="gravity"
-        />
-
-
+            android:textAlignment="gravity"/>
     </LinearLayout>
 
+    <!-- Space Line Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ddd"
+        android:orientation="horizontal">
+    </LinearLayout>
 
+    <!-- Search Layout -->
     <android.support.v7.widget.RecyclerView
         tools:listitem="@layout/al_bazdid_cardview"
         android:layout_width="match_parent"

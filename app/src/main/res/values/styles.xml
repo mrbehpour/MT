@@ -12,13 +12,13 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="colorButtonNormal">@color/orange_500</item>
-        <item name="colorControlHighlight">@color/orange_300</item>
+        <item name="colorControlHighlight">@color/orange_100</item>
         <item name="colorControlActivated">@color/grey_500</item>
     </style>
 
     <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:textColorPrimary">#ffffff</item>
-        <item name="android:textColorSecondary">#eeeeee</item>
+        <item name="android:textColorPrimary">#ff0000</item>
+        <item name="android:textColorSecondary">#00ff00</item>
     </style>
 
     <style name="PopupTheme" parent="ThemeOverlay.AppCompat.Light">
