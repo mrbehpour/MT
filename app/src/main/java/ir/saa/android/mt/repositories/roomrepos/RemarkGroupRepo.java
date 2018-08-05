@@ -14,7 +14,7 @@ public class RemarkGroupRepo  {
     private RemarkGroupDao remarkGroupDao;
     private LiveData<List<RemarkGroup>> RemarkGrous;
 
-    RemarkGroupRepo(Application application){
+    public RemarkGroupRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         remarkGroupDao=db.remarkGroupModel();
         RemarkGrous=remarkGroupDao.getRemarkGroups();

@@ -14,7 +14,7 @@ public class ClientTypeRepo  {
     private ClientTypeDao clientTypeDao;
     private LiveData<List<ClientType>> ClientTypes;
 
-    ClientTypeRepo(Application application){
+    public ClientTypeRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         clientTypeDao=db.clientTypeModel();
         ClientTypes=clientTypeDao.getClientTypes();

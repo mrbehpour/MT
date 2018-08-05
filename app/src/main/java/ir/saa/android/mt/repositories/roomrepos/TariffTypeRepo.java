@@ -14,7 +14,7 @@ public class TariffTypeRepo  {
     private TariffTypeDao tariffTypeDao;
     private LiveData<List<TariffType>> TariffTypes;
 
-    TariffTypeRepo(Application application){
+    public TariffTypeRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         tariffTypeDao=db.tariffTypeModel();
         TariffTypes=tariffTypeDao.getTariffTypes();

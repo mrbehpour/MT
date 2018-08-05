@@ -13,7 +13,7 @@ public class AgentAccessListRepo {
     private AgentAccessListDao agentAccessListDao;
     private LiveData<List<AgentAccessList>> agentAccessLists;
 
-    AgentAccessListRepo(Application application){
+    public AgentAccessListRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         agentAccessListDao=db.agentAccessListModel();
         agentAccessLists=agentAccessListDao.getAgentAccessList();

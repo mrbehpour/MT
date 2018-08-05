@@ -17,29 +17,12 @@
         <activity android:name=".uicontrollers.activities.MainActivity">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
-
                 <!--<category android:name="android.intent.category.DEFAULT" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <!-- <activity -->
-        <!-- android:name=".UiActivity"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
-        <activity android:name=".setting.ActivitySettings" />
+        <activity android:name=".uicontrollers.activities.SettingActivity" />
         <activity android:name=".Main2Activity">
-             <!--<intent-filter>-->
-             <!--<action android:name="android.intent.action.MAIN" />-->
-             <!--<category android:name="android.intent.category.DEFAULT" />-->
-             <!--<category android:name="android.intent.category.LAUNCHER" />-->
-             <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".uicontrollers.activities.TestActivity">
-
              <!--<intent-filter>-->
              <!--<action android:name="android.intent.action.MAIN" />-->
              <!--<category android:name="android.intent.category.DEFAULT" />-->

@@ -1,6 +1,9 @@
 package ir.saa.android.mt.repositories.roomrepos;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.databinding.BindingAdapter;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -16,7 +19,7 @@ import ir.saa.android.mt.model.entities.RelUser;
 public class ReluserRepo  {
     private RelUserDao relUserDao;
     private LiveData<List<RelUser>> relUsers;
-    ReluserRepo(Application application) {
+    public ReluserRepo(Application application) {
         MTDatabase db = MTDatabase.getDatabase(application);
         relUserDao = db.userModel();
         relUsers = relUserDao.getUsers();
@@ -81,7 +84,7 @@ public class ReluserRepo  {
         relUserDao.deleteAll();
     }
 
-    public LiveData<RelUser> getUserByUserAndPassword(int userId,String passWord){
+    public RelUser getUserByUserAndPassword(int userId,String passWord){
         return  relUserDao.getUserByUserAndPassword(userId,passWord);
     }
 

@@ -14,7 +14,7 @@ public class RemarkRepo  {
     private RemarkDao remarkDao;
     private LiveData<List<Remark>> Remarks;
 
-    RemarkRepo(Application application){
+    public RemarkRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         remarkDao=db.remarkModel();
         Remarks=remarkDao.getRemarks();

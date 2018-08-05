@@ -16,7 +16,7 @@ public class AnswerGroupDtlRepo   {
     private AnswerGroupDtlDao answerGroupDtlDao;
     private LiveData<List<AnswerGroupDtl>> AnswerGroupDtls;
 
-    AnswerGroupDtlRepo(Application application){
+    public AnswerGroupDtlRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         answerGroupDtlDao=db.answerGroupDtlModel();
         AnswerGroupDtls=answerGroupDtlDao.getAnswerGroupDtls();

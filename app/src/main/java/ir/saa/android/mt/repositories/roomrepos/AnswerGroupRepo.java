@@ -14,7 +14,7 @@ public class AnswerGroupRepo {
     private AnswerGroupDao answerGroupDao;
     private LiveData<List<AnswerGroup>> AnswerGroups;
 
-    AnswerGroupRepo(Application application){
+    public AnswerGroupRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         answerGroupDao=db.answerGroupModel();
         AnswerGroups=answerGroupDao.getALLAnswerGroups();

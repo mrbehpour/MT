@@ -6,11 +6,12 @@
     <string name="font_default">fonts/B_Yekan.ttf</string>
 
     <!--Drawer Menu-->
-    <string name="menuItem1">گزینه یک</string>
-    <string name="menuItem2">گزینه دو</string>
-    <string name="menuItem3">گزینه سه</string>
-    <string name="menuItem4">گزینه چهار</string>
-    <string name="menuItem5">تنظیمات</string>
-    <string name="menuItem6">خروج</string>
+    <string name="menuItem1">بازدید</string>
+    <string name="menuItem2">گزارشات</string>
+    <string name="menuItem3">ارتباط با ماژول</string>
+    <string name="menuItem4">تنظیمات</string>
+    <string name="menuItem5">دریافت اطلاعات پایه</string>
+    <string name="menuItem6">ارسال</string>
+    <string name="menuItem7">خروج</string>
 
 </resources>

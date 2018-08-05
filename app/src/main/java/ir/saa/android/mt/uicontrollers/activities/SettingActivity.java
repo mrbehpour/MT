@@ -1,4 +1,4 @@
-package ir.saa.android.mt.setting;
+package ir.saa.android.mt.uicontrollers.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.support.v7.widget.SwitchCompat;
 
 import ir.saa.android.mt.R;
 
-public class ActivitySettings extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

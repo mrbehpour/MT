@@ -14,7 +14,7 @@ public class RegionRepo  {
     private RegionDao regionDao;
     private LiveData<List<Region>> Regions;
 
-    RegionRepo(Application application){
+    public RegionRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         regionDao=db.regionModel();
         Regions=regionDao.getRegions();

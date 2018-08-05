@@ -16,7 +16,7 @@ public class RemarkTypeRepo  {
     private RemarkTypeDao remarkTypeDao;
     private LiveData<List<RemarkType>> RemarkTypes;
 
-    RemarkTypeRepo(Application application){
+    public RemarkTypeRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         remarkTypeDao=db.remarkTypeModel();
         RemarkTypes=remarkTypeDao.getRemarkTypes();

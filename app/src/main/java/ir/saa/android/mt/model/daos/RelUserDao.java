@@ -31,8 +31,8 @@ public interface RelUserDao {
     @Update
     int updateRelUser(RelUser relUser);
 
-    @Query("select * from RelUser where UserID = :UserID and HandheldPass= :Password ")
-    LiveData<RelUser> getUserByUserAndPassword(int UserID,String Password);
+    @Query("select * from RelUser where UserID = :UserID and HandheldPass = :Password ")
+    RelUser getUserByUserAndPassword(int UserID,String Password);
 
     @Query("DELETE FROM RelUser")
     void deleteAll();

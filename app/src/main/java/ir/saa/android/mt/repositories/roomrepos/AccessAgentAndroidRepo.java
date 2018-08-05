@@ -13,7 +13,7 @@ public class AccessAgentAndroidRepo {
     private AccessAgentAndroidDao accessAgentAndroidDao;
     private LiveData<List<AccessAgentAndroid>> AccessAgentAndroids;
 
-    AccessAgentAndroidRepo(Application application){
+    public AccessAgentAndroidRepo(Application application){
         MTDatabase db = MTDatabase.getDatabase(application);
         accessAgentAndroidDao=db.accessAgentAndroidModel();
         AccessAgentAndroids=accessAgentAndroidDao.getAccessAgentAndroids();

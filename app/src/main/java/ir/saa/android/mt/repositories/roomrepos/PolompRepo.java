@@ -14,7 +14,7 @@ public class PolompRepo  {
     private PolompDao polompDao;
     private LiveData<List<Polomp>> Polomps;
 
-    PolompRepo(Application application){
+    public PolompRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         polompDao=db.polompModel();
         Polomps=polompDao.getPolomps();

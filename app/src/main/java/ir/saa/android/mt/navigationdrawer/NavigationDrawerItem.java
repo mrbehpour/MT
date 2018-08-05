@@ -45,11 +45,12 @@ public class NavigationDrawerItem {
     private static int[] getImages() {
 
         return new int[]{
-                R.drawable.account_box,
-                R.drawable.altimeter,
-                R.drawable.video_input_hdmi,
+                R.drawable.account_search,
                 R.drawable.finance,
+                R.drawable.cast_connected,
                 R.drawable.settings,
+                R.drawable.file_download_outline,
+                R.drawable.briefcase_upload,
                 R.drawable.exit_to_app
         };
     }
@@ -62,6 +63,7 @@ public class NavigationDrawerItem {
                 G.context.getResources().getString(R.string.menuItem4),
                 G.context.getResources().getString(R.string.menuItem5),
                 G.context.getResources().getString(R.string.menuItem6),
+                G.context.getResources().getString(R.string.menuItem7),
         };
     }
 }
