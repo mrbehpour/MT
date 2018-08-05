@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvSomareBadane"
             android:fontFamily="@font/byekan"
@@ -48,7 +47,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvNoeKontor"
             android:fontFamily="@font/byekan"
@@ -88,7 +86,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvAmperazh"
             android:fontFamily="@font/byekan"
@@ -128,7 +125,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvNoeTarefe"
             android:fontFamily="@font/byekan"
@@ -168,7 +164,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvEshterak"
             android:fontFamily="@font/byekan"
@@ -208,7 +203,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvShenasae"
             android:fontFamily="@font/byekan"
@@ -248,7 +242,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvParvandeh"
             android:fontFamily="@font/byekan"
@@ -288,7 +281,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvRamz"
             android:fontFamily="@font/byekan"
@@ -328,7 +320,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvNoeVoltazh"
             android:fontFamily="@font/byekan"
@@ -368,7 +359,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvGhodrateGharardad"
             android:fontFamily="@font/byekan"
@@ -408,7 +398,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvDimandMojaz"
             android:fontFamily="@font/byekan"
@@ -448,7 +437,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvMotazaseteMasraf"
             android:fontFamily="@font/byekan"
@@ -488,7 +476,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvMasrafeDoreAkhar"
             android:fontFamily="@font/byekan"
@@ -528,7 +515,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvKWDoreAkhar"
             android:fontFamily="@font/byekan"
@@ -568,7 +554,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvZaribeKontor"
             android:fontFamily="@font/byekan"
@@ -608,7 +593,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvTedadArghamActive"
             android:fontFamily="@font/byekan"
@@ -648,7 +632,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvTedadArghamReactive"
             android:fontFamily="@font/byekan"
@@ -688,7 +671,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvSerialReactive"
             android:fontFamily="@font/byekan"
@@ -728,7 +710,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvTarikhEnsheab"
             android:fontFamily="@font/byekan"
@@ -768,7 +749,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvTelephone"
             android:fontFamily="@font/byekan"
@@ -808,7 +788,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvCodePosti"
             android:fontFamily="@font/byekan"
@@ -848,7 +827,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="match_parent"
         android:orientation="horizontal">
         <TextView android:id="@+id/tvCodeTarefe"
             android:fontFamily="@font/byekan"
@@ -881,17 +859,5 @@
         android:layout_marginRight="16dp"
         android:orientation="horizontal">
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </LinearLayout>
