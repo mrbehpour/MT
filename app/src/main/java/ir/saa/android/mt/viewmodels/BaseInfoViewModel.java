@@ -11,10 +11,14 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.RelUser;
+import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.repositories.roomrepos.AccessAgentAndroidRepo;
 import ir.saa.android.mt.repositories.roomrepos.AgentAccessListRepo;
@@ -36,6 +40,7 @@ import ir.saa.android.mt.repositories.roomrepos.ReluserRepo;
 import ir.saa.android.mt.repositories.roomrepos.RemarkGroupRepo;
 import ir.saa.android.mt.repositories.roomrepos.RemarkRepo;
 import ir.saa.android.mt.repositories.roomrepos.RemarkTypeRepo;
+import ir.saa.android.mt.repositories.roomrepos.SettingRepo;
 import ir.saa.android.mt.repositories.roomrepos.TariffTypeRepo;
 
 public class BaseInfoViewModel extends AndroidViewModel {
@@ -62,10 +67,13 @@ public class BaseInfoViewModel extends AndroidViewModel {
     RemarkRepo remarkRepo = null;
     RemarkTypeRepo remarkTypeRepo = null;
     TariffTypeRepo tariffTypeRepo = null;
+    SettingRepo settingRepo=null;
 
     //---------------------------------------
 
     public MutableLiveData<Integer> UsersProgressPercentLiveData = null ;
+    public MutableLiveData<Integer> settingProgressPercentLiveData=null;
+    public MutableLiveData<Integer> clientProgressPercentLiveData=null;
 
     public BaseInfoViewModel(@NonNull Application application) {
         super(application);
@@ -113,10 +121,18 @@ public class BaseInfoViewModel extends AndroidViewModel {
             remarkTypeRepo = new RemarkTypeRepo(application);
         if(tariffTypeRepo==null)
             tariffTypeRepo = new TariffTypeRepo(application);
+        if(settingRepo==null)
+            settingRepo=new SettingRepo(application);
 
         //---------------------------------------------
         if(UsersProgressPercentLiveData == null)
             UsersProgressPercentLiveData.setValue(0);
+
+        if(settingProgressPercentLiveData==null)
+            settingProgressPercentLiveData.setValue(0);
+
+        if(clientProgressPercentLiveData==null)
+            clientProgressPercentLiveData.setValue(0);
 
 
 
@@ -172,11 +188,15 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 .subscribeWith(new DisposableSingleObserver<List<RelUser>>() {
                     @Override
                     public void onSuccess(List<RelUser> userList) {
-                        if(reluserRepo.getUsers().getValue().size()>0)
-                            reluserRepo.deleteAll();
+//                        if(reluserRepo.getUsers().getValue().size()>0)
+//                            reluserRepo.deleteAll();
                         //UsersProgressPercentLiveData.postValue(getPercent(x,y));
                         //List<Long> insertedIdList = reluserRepo.insertUsers(userList);
                         //Toast.makeText(getApplication().getApplicationContext(),"insertCount : "+insertedIdList.size(),Toast.LENGTH_SHORT).show();
+                        for(Integer i=0;i<userList.size();i++){
+                            reluserRepo.insertUser(userList.get(i));
+                            UsersProgressPercentLiveData.postValue(getPrecent(i,userList.size()));
+                        }
                     }
 
                     @Override
@@ -185,6 +205,51 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     }
                 });
     }
+
+    public void getSettingFromServer(){
+        retrofitMT.getMtApi().GetSettings()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeWith(new DisposableSingleObserver<List<Setting>>() {
+            @Override
+            public void onSuccess(List<Setting> settings) {
+                if(settingRepo.getSettings().getValue().size()>0){
+                    settingRepo.deleteAll();
+                }
+                for(Integer i=0;i<settings.size();i++){
+                    settingRepo.insertSetting(settings.get(i));
+                    settingProgressPercentLiveData.postValue(getPrecent(i,settings.size()));
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(getApplication().getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        })
+        ;
+    }
+
+    public void getClientFromServer(GetClientInput getClientInput){
+        retrofitMT.getMtApi().GetClients(getClientInput)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<List<Client>>() {
+                    @Override
+                    public void onSuccess(List<Client> clients) {
+                        for(Integer i=0;i<clients.size();i++){
+                            clientRepo.insertClient(clients.get(i));
+                            clientProgressPercentLiveData.postValue(getPrecent(i,clients.size()));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getApplication().getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     private int getPrecent(int progress,int totalCount){
         return (progress * 100)/totalCount;
     }

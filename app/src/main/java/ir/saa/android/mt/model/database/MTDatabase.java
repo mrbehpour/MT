@@ -25,6 +25,7 @@ import ir.saa.android.mt.model.daos.RelUserDao;
 import ir.saa.android.mt.model.daos.RemarkDao;
 import ir.saa.android.mt.model.daos.RemarkGroupDao;
 import ir.saa.android.mt.model.daos.RemarkTypeDao;
+import ir.saa.android.mt.model.daos.SettingDao;
 import ir.saa.android.mt.model.daos.TariffTypeDao;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
@@ -46,6 +47,7 @@ import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroup;
 import ir.saa.android.mt.model.entities.RemarkType;
+import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.model.entities.TariffType;
 
 @Database(entities ={RelUser.class, AccessAgentAndroid.class,
@@ -58,7 +60,7 @@ import ir.saa.android.mt.model.entities.TariffType;
                      Remark.class,PropertyType.class,
                      RemarkType.class, RemarkGroup.class,
                      Polomp.class, PolompGroup.class,
-                     PolompGroupingFormat.class},version = 1)
+                     PolompGroupingFormat.class,Setting.class},version = 1)
 public abstract class MTDatabase extends RoomDatabase {
 
     private static MTDatabase INSTANCE;
@@ -104,6 +106,8 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract PolompGroupDao polompGroupModel();
 
     public abstract PolompGroupingFormatDao polompGroupingFormatModel();
+
+    public abstract SettingDao settingModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {

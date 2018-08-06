@@ -88,6 +88,10 @@ public class ReluserRepo  {
         return  relUserDao.getUserByUserAndPassword(userId,passWord);
     }
 
+  public  void insertUser(RelUser relUser){
+        relUserDao.insertReluser(relUser);
+    }
+
     public LiveData<RelUser> getUserById(int userId){
         return  relUserDao.getUserById(userId);
     }
