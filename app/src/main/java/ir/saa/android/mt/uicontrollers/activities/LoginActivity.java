@@ -1,8 +1,11 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableInt;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.annotation.Nullable;
@@ -17,6 +20,7 @@ import android.widget.VideoView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Observable;
 import java.util.Observer;
 
 import ir.saa.android.mt.R;

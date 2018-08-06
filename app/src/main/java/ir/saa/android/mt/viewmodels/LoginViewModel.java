@@ -3,34 +3,26 @@ package ir.saa.android.mt.viewmodels;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
-import ir.saa.android.mt.model.database.MTDatabase;
-import ir.saa.android.mt.model.entities.AnswerGroup;
-import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.repositories.roomrepos.ReluserRepo;
 
 public class LoginViewModel extends AndroidViewModel {
     ReluserRepo reluserRepo = null;
-    LiveData<List<RelUser>> reluserList = null;
     RetrofitMT retrofitMT=null;
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
         if(reluserRepo==null)
             reluserRepo = new ReluserRepo(application);
-        reluserList = reluserRepo.getUsers();
         if(retrofitMT==null)
             retrofitMT= RetrofitMT.getInstance();
         //getAnswerGroupsFromServer();
@@ -38,7 +30,7 @@ public class LoginViewModel extends AndroidViewModel {
         getUserFromServer();
     }
 
-    public LiveData<List<RelUser>> getUsers() {  return reluserList;  }
+    public LiveData<List<RelUser>> getUsers() {  return reluserRepo.getUsers();  }
 
     public RelUser getUserByUserIdAndPassword(int userId,String password){
         return reluserRepo.getUserByUserAndPassword(userId,password);

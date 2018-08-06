@@ -175,8 +175,8 @@ public class BaseInfoViewModel extends AndroidViewModel {
                         if(reluserRepo.getUsers().getValue().size()>0)
                             reluserRepo.deleteAll();
                         //UsersProgressPercentLiveData.postValue(getPercent(x,y));
-                        List<Long> insertedIdList = reluserRepo.insertUsers(userList);
-                        Toast.makeText(getApplication().getApplicationContext(),"insertCount : "+insertedIdList.size(),Toast.LENGTH_SHORT).show();
+                        //List<Long> insertedIdList = reluserRepo.insertUsers(userList);
+                        //Toast.makeText(getApplication().getApplicationContext(),"insertCount : "+insertedIdList.size(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

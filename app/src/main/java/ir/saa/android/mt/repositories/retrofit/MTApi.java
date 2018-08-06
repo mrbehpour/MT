@@ -6,6 +6,8 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 import ir.saa.android.mt.model.entities.AnswerGroup;
 import ir.saa.android.mt.model.entities.City;
+import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.GroupingFormat;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.Polomp;
@@ -18,7 +20,9 @@ import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroup;
 import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.model.entities.TariffInfo;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -69,4 +73,7 @@ public interface MTApi {
 
     @GET("GetSettings")
     Single<List<Setting>> GetSettings();
+
+    @POST("GetClients")
+    Single<List<Client>> GetClients(@Body GetClientInput getClientInput);
 }

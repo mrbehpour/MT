@@ -7,4 +7,5 @@ public class ClientItem {
     public String UniqueFieldTitle;
     public String UniqueFieldValue;
     public Integer Pic;
+
 }

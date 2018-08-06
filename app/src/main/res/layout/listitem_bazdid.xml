@@ -54,7 +54,7 @@
                 android:orientation="horizontal">
                 <!-- Shomare Badane -->
                 <TextView
-                    android:id="@+id/tvShomareBadane"
+                    android:id="@+id/tvUniqueValue"
                     android:layout_marginRight="4dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -66,7 +66,7 @@
                     android:text="12356987841" />
                 <!-- Shomare Badane Lable -->
                 <TextView
-                    android:id="@+id/tvLableShomareBadane"
+                    android:id="@+id/tvUniqueTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/byekan"
@@ -123,6 +123,7 @@
 
         <!-- Icon Layout -->
         <LinearLayout
+            android:id="@+id/imgBazdidMoshtarak"
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:layout_marginTop="2dp"
