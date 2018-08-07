@@ -66,4 +66,5 @@ dependencies {
     annotationProcessor 'android.arch.lifecycle:compiler:' + rootProject.archLifecycleVersion
     annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
 
+    compile 'com.daimajia.numberprogressbar:library:1.4@aar'
 }
