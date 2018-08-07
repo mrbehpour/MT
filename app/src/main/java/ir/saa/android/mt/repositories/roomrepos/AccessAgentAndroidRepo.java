@@ -3,6 +3,7 @@ package ir.saa.android.mt.repositories.roomrepos;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
+import java.security.PublicKey;
 import java.util.List;
 
 import ir.saa.android.mt.model.daos.AccessAgentAndroidDao;
@@ -24,6 +25,9 @@ public class AccessAgentAndroidRepo {
         return AccessAgentAndroids;
     }
 
+    public void insertAccessAgentAndroid(AccessAgentAndroid accessAgentAndroid){
+        accessAgentAndroidDao.insertAccessAgentAndroid(accessAgentAndroid);
+    }
 
     public List<Long> insertAccessAgentAndroids(List<AccessAgentAndroid> accessAgentAndroids){
         return accessAgentAndroidDao.insertAccessAgentAndroids(accessAgentAndroids);

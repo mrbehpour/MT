@@ -6,18 +6,45 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
+import android.media.MediaCodec;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Scheduler;
+import io.reactivex.Single;
+import io.reactivex.SingleEmitter;
+import io.reactivex.SingleObserver;
+import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.model.entities.AccessAgentAndroid;
+import ir.saa.android.mt.model.entities.AgentAccessList;
+import ir.saa.android.mt.model.entities.AnswerGroup;
+import ir.saa.android.mt.model.entities.AnswerGroupDtl;
+import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.GetClientInput;
+import ir.saa.android.mt.model.entities.GroupingFormat;
+import ir.saa.android.mt.model.entities.MasterGroupDetail;
+import ir.saa.android.mt.model.entities.Polomp;
+import ir.saa.android.mt.model.entities.PolompGroup;
+import ir.saa.android.mt.model.entities.PolompGroupingFormat;
+import ir.saa.android.mt.model.entities.PropertyType;
+import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.model.entities.RelUser;
+import ir.saa.android.mt.model.entities.Remark;
+import ir.saa.android.mt.model.entities.RemarkGroup;
 import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.repositories.roomrepos.AccessAgentAndroidRepo;
@@ -42,6 +69,9 @@ import ir.saa.android.mt.repositories.roomrepos.RemarkRepo;
 import ir.saa.android.mt.repositories.roomrepos.RemarkTypeRepo;
 import ir.saa.android.mt.repositories.roomrepos.SettingRepo;
 import ir.saa.android.mt.repositories.roomrepos.TariffTypeRepo;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BaseInfoViewModel extends AndroidViewModel {
     RetrofitMT retrofitMT=null;
@@ -74,6 +104,8 @@ public class BaseInfoViewModel extends AndroidViewModel {
     public MutableLiveData<Integer> UsersProgressPercentLiveData = null ;
     public MutableLiveData<Integer> settingProgressPercentLiveData=null;
     public MutableLiveData<Integer> clientProgressPercentLiveData=null;
+    public MutableLiveData<Integer> baseinfoProgressPercentLiveData=null;
+
 
     public BaseInfoViewModel(@NonNull Application application) {
         super(application);
@@ -134,6 +166,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
         if(clientProgressPercentLiveData==null)
             clientProgressPercentLiveData.setValue(0);
 
+        if(baseinfoProgressPercentLiveData==null)
+            baseinfoProgressPercentLiveData.setValue(0);
+
 
 
         //getAnswerGroupsFromServer();
@@ -182,21 +217,56 @@ public class BaseInfoViewModel extends AndroidViewModel {
 //    }
 
     public void getUserFromServer(){
-        retrofitMT.getMtApi().GetAgentList()
-                .subscribeOn(Schedulers.io())
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                List<RelUser> relUsers=null;
+                List<AgentAccessList> agentAccessLists=null;
+                List<AccessAgentAndroid> accessAgentAndroids=null;
+
+                relUsers=retrofitMT.getMtApi().GetAgentList().blockingGet();
+                List<Integer> agentIdList=null ;
+
+                for(Integer i=0;i<relUsers.size();i++){
+                    agentIdList.add(relUsers.get(i).UserID);
+                }
+                accessAgentAndroids=retrofitMT.getMtApi().GetAgentAccessByUserIdList(agentIdList).blockingGet();
+                agentAccessLists=retrofitMT.getMtApi().GetAgentAccessList().blockingGet();
+
+                Integer totalCount=relUsers.size()+agentAccessLists.size()+accessAgentAndroids.size();
+                Integer startProgress=0;
+                for(Integer i=0;i<relUsers.size();i++){
+                    reluserRepo.insertUser(relUsers.get(i));
+                    UsersProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=relUsers.size();
+
+                for(Integer i=0;i<accessAgentAndroids.size();i++){
+                    accessAgentAndroidRepo.insertAccessAgentAndroid(accessAgentAndroids.get(i));
+                    UsersProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=relUsers.size()+accessAgentAndroids.size();
+
+                for(Integer i=0;i<agentAccessLists.size();i++){
+                    agentAccessListRepo.insertAgentAccessList(agentAccessLists.get(i));
+                    UsersProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+
+
+
+
+            }
+        }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<List<RelUser>>() {
+                .subscribeWith(new CompletableObserver() {
                     @Override
-                    public void onSuccess(List<RelUser> userList) {
-//                        if(reluserRepo.getUsers().getValue().size()>0)
-//                            reluserRepo.deleteAll();
-                        //UsersProgressPercentLiveData.postValue(getPercent(x,y));
-                        //List<Long> insertedIdList = reluserRepo.insertUsers(userList);
-                        //Toast.makeText(getApplication().getApplicationContext(),"insertCount : "+insertedIdList.size(),Toast.LENGTH_SHORT).show();
-                        for(Integer i=0;i<userList.size();i++){
-                            reluserRepo.insertUser(userList.get(i));
-                            UsersProgressPercentLiveData.postValue(getPrecent(i,userList.size()));
-                        }
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Toast.makeText(getApplication().getApplicationContext(),"Completed",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -247,7 +317,149 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     public void onError(Throwable e) {
                         Toast.makeText(getApplication().getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
+
                 });
+
+    }
+
+    public void getBaseInfoFromServer(){
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                List<AnswerGroup> answerGroups=null;
+                List<AnswerGroupDtl> answerGroupDtls=null;
+                List<PropertyType> propertyTypes=null;
+                List<Region>  regions=null;
+                List<City> cities=null;
+                List<Remark> remarks=null;
+                List<GroupingFormat> groupingFormats=null;
+                List<RemarkGroup> remarkGroups=null;
+                List<MasterGroupDetail> masterGroupDetails=null;
+                List<Polomp> polomps=null;
+                List<PolompGroup> polompGroups=null;
+                List<PolompGroupingFormat> polompGroupingFormats=null;
+
+                answerGroups=retrofitMT.getMtApi().GetAnswerGroups().blockingGet();
+                for(Integer i=0;i<answerGroups.size();i++){
+                    for(Integer j=0;j<answerGroups.get(i).answerGroupDtls.size();j++){
+                        answerGroupDtls.add(answerGroups.get(i).answerGroupDtls.get(j));
+                    }
+                }
+                propertyTypes=retrofitMT.getMtApi().GetPropertyTypies().blockingGet();
+                regions=retrofitMT.getMtApi().GetRegions().blockingGet();
+                cities=retrofitMT.getMtApi().GetCities().blockingGet();
+                for (Integer i=0;i<retrofitMT.getMtApi().GetClientsTariff().blockingGet().size();i++){
+                    answerGroupDtls.add(retrofitMT.getMtApi().GetClientsTariff().blockingGet().get(i));
+                }
+                remarks=retrofitMT.getMtApi().GetRemarks().blockingGet();
+                groupingFormats=retrofitMT.getMtApi().GetGroupingFormat().blockingGet();
+                remarkGroups=retrofitMT.getMtApi().GetRemarkGroup().blockingGet();
+                masterGroupDetails=retrofitMT.getMtApi().GetMasterGroupDtl().blockingGet();
+                polomps=retrofitMT.getMtApi().GetPolomps().blockingGet();
+                polompGroups=retrofitMT.getMtApi().GetPolompGroup().blockingGet();
+                polompGroupingFormats=retrofitMT.getMtApi().GetPolompGroupingFormat().blockingGet();
+
+                Integer totalCount=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+
+                        regions.size()+cities.size()+remarks.size()+groupingFormats.size()+
+                        remarkGroups.size()+masterGroupDetails.size()+polomps.size()+polompGroups.size()+
+                        polompGroupingFormats.size();
+                Integer startProgress=0;
+                for (Integer i=0;i<answerGroups.size();i++){
+                    answerGroupRepo.insertAnswerGroup(answerGroups.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size();
+                for (Integer i=0;i<answerGroupDtls.size();i++){
+                    answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size();
+                for (Integer i=0;i<propertyTypes.size();i++){
+                    propertyTypeRepo.insertPropertyType(propertyTypes.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size();
+                for (Integer i=0;i<regions.size();i++){
+                    regionRepo.insertRegion(regions.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size();
+                for (Integer i=0;i<cities.size();i++){
+                    cityRepo.insertCity(cities.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size()+
+                        cities.size();
+                for (Integer i=0;i<remarks.size();i++){
+                    remarkRepo.insertRemark(remarks.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size()+
+                        cities.size()+remarks.size();
+                for (Integer i=0;i<remarkGroups.size();i++){
+                    remarkGroupRepo.insertRemarkGroup(remarkGroups.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size()+
+                        cities.size()+remarks.size()+remarkGroups.size();
+                for (Integer i=0;i<groupingFormats.size();i++){
+                    groupingFormatRepo.insertGroupingFormat(groupingFormats.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size()+
+                        cities.size()+remarks.size()+remarkGroups.size()+groupingFormats.size();
+
+                for (Integer i=0;i<masterGroupDetails.size();i++){
+                    masterGroupDetailRepo.insertMasterGroupDetail(masterGroupDetails.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size()+
+                        cities.size()+remarks.size()+remarkGroups.size()+groupingFormats.size()+masterGroupDetails.size()+
+                        masterGroupDetails.size();
+
+                for (Integer i=0;i<polomps.size();i++){
+                    polompRepo.insertPolomp(polomps.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size()+
+                        cities.size()+remarks.size()+remarkGroups.size()+groupingFormats.size()+masterGroupDetails.size()+
+                        masterGroupDetails.size()+polomps.size();
+
+                for (Integer i=0;i<polompGroups.size();i++){
+                    polompGroupRepo.insertPolompGroup(polompGroups.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+                startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size()+
+                        cities.size()+remarks.size()+remarkGroups.size()+groupingFormats.size()+masterGroupDetails.size()+
+                        masterGroupDetails.size()+polomps.size()+polompGroupingFormats.size();
+
+                for (Integer i=0;i<polompGroupingFormats.size();i++){
+                    polompGroupingFormatRepo.insertPolompGroupingFormat(polompGroupingFormats.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+i,totalCount));
+                }
+
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        //Toast.makeText(getApplication().getApplicationContext(),d.,Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Toast.makeText(getApplication().getApplicationContext(),"Completed",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getApplication().getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
     }
 
     private int getPrecent(int progress,int totalCount){
