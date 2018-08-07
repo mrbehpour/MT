@@ -4,7 +4,10 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Single;
+import ir.saa.android.mt.model.entities.AccessAgentAndroid;
+import ir.saa.android.mt.model.entities.AgentAccessList;
 import ir.saa.android.mt.model.entities.AnswerGroup;
+import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.GetClientInput;
@@ -42,7 +45,7 @@ public interface MTApi {
     Single<List<AnswerGroup>> GetAnswerGroups();
 
     @GET("GetClientsTariff")
-    Single<List<TariffInfo>> GetClientsTariff();
+    Single<List<AnswerGroupDtl>> GetClientsTariff();
 
     @GET("GetGroupingFormat")
     Single<List<GroupingFormat>> GetGroupingFormat();
@@ -74,7 +77,12 @@ public interface MTApi {
     @GET("GetSettings")
     Single<List<Setting>> GetSettings();
 
+    @GET("GetAgentAccessList")
+    Single<List<AgentAccessList>> GetAgentAccessList();
+
     @POST("GetClients")
     Single<List<Client>> GetClients(@Body GetClientInput getClientInput);
 
+    @POST("GetAgentAccessByUserIdList")
+    Single<List<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body List<Integer> agentIdList);
 }

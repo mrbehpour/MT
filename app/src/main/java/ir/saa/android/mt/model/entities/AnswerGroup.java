@@ -2,7 +2,12 @@ package ir.saa.android.mt.model.entities;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+
+import java.util.List;
+
+import ir.saa.android.mt.model.converters.AnswerGroupDtlConverter;
 
 @Entity
 public class AnswerGroup {
@@ -22,5 +27,8 @@ public class AnswerGroup {
 
 
     public Boolean EditDtl ;
+
+    @TypeConverters(AnswerGroupDtlConverter.class)
+    public List<AnswerGroupDtl> answerGroupDtls;
 
 }
