@@ -3,12 +3,8 @@ package ir.saa.android.mt.repositories.retrofit;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import io.reactivex.Observer;
 import io.reactivex.Single;
-import ir.saa.android.mt.model.entities.AccessAgentAndroid;
-import ir.saa.android.mt.model.entities.AgentAccessList;
 import ir.saa.android.mt.model.entities.AnswerGroup;
-import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.GetClientInput;
@@ -24,7 +20,6 @@ import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroup;
 import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.model.entities.TariffInfo;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -46,11 +41,8 @@ public interface MTApi {
     @GET("GetAnswerGroups")
     Single<List<AnswerGroup>> GetAnswerGroups();
 
-    @GET("GetAnswerGroups")
-    Single<List<AnswerGroup>> GetAnswerGroups1(Callback<AnswerGroup> callback);
-
     @GET("GetClientsTariff")
-    Single<List<AnswerGroupDtl>> GetClientsTariff();
+    Single<List<TariffInfo>> GetClientsTariff();
 
     @GET("GetGroupingFormat")
     Single<List<GroupingFormat>> GetGroupingFormat();
@@ -82,12 +74,6 @@ public interface MTApi {
     @GET("GetSettings")
     Single<List<Setting>> GetSettings();
 
-    @GET("GetAgentAccessList")
-    Single<List<AgentAccessList>> GetAgentAccessList();
-
     @POST("GetClients")
     Single<List<Client>> GetClients(@Body GetClientInput getClientInput);
-
-    @POST("GetAgentAccessByUserIdList")
-    Single<List<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body List<Integer> agentIdList);
 }
