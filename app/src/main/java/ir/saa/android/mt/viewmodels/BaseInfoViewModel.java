@@ -101,10 +101,10 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
     //---------------------------------------
 
-    public MutableLiveData<Integer> UsersProgressPercentLiveData = null ;
-    public MutableLiveData<Integer> settingProgressPercentLiveData=null;
-    public MutableLiveData<Integer> clientProgressPercentLiveData=null;
-    public MutableLiveData<Integer> baseinfoProgressPercentLiveData=null;
+    public MutableLiveData<Integer> UsersProgressPercentLiveData = new MutableLiveData<>() ;
+    public MutableLiveData<Integer> settingProgressPercentLiveData=new MutableLiveData<>() ;
+    public MutableLiveData<Integer> clientProgressPercentLiveData=new MutableLiveData<>() ;
+    public MutableLiveData<Integer> baseinfoProgressPercentLiveData=new MutableLiveData<>() ;
 
 
     public BaseInfoViewModel(@NonNull Application application) {

@@ -60,7 +60,7 @@ import ir.saa.android.mt.model.entities.TariffType;
                      Remark.class,PropertyType.class,
                      RemarkType.class, RemarkGroup.class,
                      Polomp.class, PolompGroup.class,
-                     PolompGroupingFormat.class,Setting.class},version = 1)
+                     PolompGroupingFormat.class,Setting.class},version = 3)
 public abstract class MTDatabase extends RoomDatabase {
 
     private static MTDatabase INSTANCE;
@@ -115,6 +115,7 @@ public abstract class MTDatabase extends RoomDatabase {
                 INSTANCE =
                         Room.databaseBuilder(context.getApplicationContext(), MTDatabase.class, "mt_db")
                                 .allowMainThreadQueries()
+                                .fallbackToDestructiveMigration()
                                 .build();
             }
         }

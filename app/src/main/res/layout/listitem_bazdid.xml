@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
     android:orientation="vertical">
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="62dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <!-- Info Layout -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="62dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
             android:orientation="vertical">
 
             <!-- Name Layout -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="17dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- Name -->
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_marginRight="4dp"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="محمدرضا جلیلی نیا"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:text="-"
                     android:layout_weight="1"/>
                 <!-- Name Lable -->
                 <TextView
@@ -50,7 +53,7 @@
             <!-- Shomare Badane Layout -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="17dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- Shomare Badane -->
                 <TextView
@@ -59,11 +62,12 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_500"
-                    android:text="12356987841" />
+                    android:text="-" />
                 <!-- Shomare Badane Lable -->
                 <TextView
                     android:id="@+id/tvUniqueTitle"
@@ -78,21 +82,21 @@
             <!-- Address Layout-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="17dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- Address -->
                 <TextView
                     android:id="@+id/tvAddress"
                     android:layout_marginRight="4dp"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textAlignment="textStart"
-                    android:layout_marginLeft="8dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
                     android:fontFamily="@font/byekan"
                     android:textSize="12sp"
                     android:textColor="@color/grey_500"
-                    android:text="تهران، میدان ونک، خ گاندی، خ 16، پلاک 8، طبقه 3" />
+                    android:text="-" />
                 <!-- Address Lable -->
                 <TextView
                     android:id="@+id/tvLableAddress"
@@ -105,32 +109,29 @@
             </LinearLayout>
 
             //space
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:orientation="vertical">
-            </LinearLayout>
+                android:orientation="vertical"></LinearLayout>
             //line
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#aaa"
-                android:layout_marginRight="8dp"
-                android:orientation="vertical">
+                android:background="#aaa">
             </LinearLayout>
 
         </LinearLayout>
 
         <!-- Icon Layout -->
-        <LinearLayout
+        <ImageView
             android:id="@+id/imgBazdidMoshtarak"
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:layout_marginTop="2dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/bazdid_user"
-            android:orientation="horizontal">
-        </LinearLayout>
+            android:src="@drawable/bazdid_user">
+        </ImageView>
 
     </LinearLayout>
 
