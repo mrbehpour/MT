@@ -15,7 +15,10 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:orientation="horizontal"
+        android:id="@+id/cvPayeh"
         app:cardElevation="2dp"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
         app:cardCornerRadius="4dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,7 +75,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/daryaft_payeh"
+                android:src="@drawable/daryaft_payeh"
                 android:orientation="horizontal">
             </ImageView>
 
@@ -92,6 +95,9 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:orientation="horizontal"
+        android:id="@+id/cvTanzimat"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
         app:cardElevation="2dp"
         app:cardCornerRadius="4dp">
         <LinearLayout
@@ -149,8 +155,9 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/daryaft_tanzimat"
+                android:src="@drawable/daryaft_tanzimat"
                 android:orientation="horizontal">
+
             </ImageView>
 
         </LinearLayout>
@@ -167,7 +174,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
+        android:id="@+id/cvKarbaran"
         android:orientation="horizontal"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
         app:cardElevation="2dp"
         app:cardCornerRadius="4dp">
         <LinearLayout
@@ -225,7 +235,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/daryaft_karbaran"
+                android:src="@drawable/daryaft_karbaran"
                 android:orientation="horizontal">
             </ImageView>
 
@@ -244,7 +254,10 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
+        android:id="@+id/cvMoshtarakin"
         android:orientation="horizontal"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground"
         app:cardElevation="2dp"
         app:cardCornerRadius="4dp">
 
@@ -303,7 +316,7 @@
                 android:layout_height="40dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/daryaft_moshtarakin"
+                android:src="@drawable/daryaft_moshtarakin"
                 android:orientation="horizontal"></ImageView>
 
         </LinearLayout>

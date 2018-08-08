@@ -1,7 +1,9 @@
 package ir.saa.android.mt.navigationdrawer;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,9 @@ import java.util.List;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.MyViewHolder> {
 
@@ -53,6 +58,11 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem4))==0){
                     G.startFragment(FragmentsEnum.SettingFragment,false);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem5))==0){
+                    Intent intent=new Intent(G.context,DaryaftActivity.class);
+                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                    G.context.startActivity(intent);
+//                    Activity activity=new DaryaftActivity();
+//                    activity.startActivity(intent);
 
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem6))==0){
 

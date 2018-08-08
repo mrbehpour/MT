@@ -28,7 +28,7 @@ public class AnswerGroup {
 
     public Boolean EditDtl ;
 
-    @TypeConverters(AnswerGroupDtlConverter.class)
+
     public List<AnswerGroupDtl> answerGroupDtls;
 
 }
