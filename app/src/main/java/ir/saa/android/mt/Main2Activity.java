@@ -12,7 +12,7 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.al_moshtarak);
+        setContentView(R.layout.al_test_kontor);
 
 //        //Login
 //        // you need to have a list of data that you want the spinner to display
