@@ -1,5 +1,6 @@
 package ir.saa.android.mt.repositories.retrofit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Flowable;
@@ -84,5 +85,5 @@ public interface MTApi {
     Single<List<Client>> GetClients(@Body GetClientInput getClientInput);
 
     @POST("GetAgentAccessByUserIdList")
-    Single<List<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body List<Integer> agentIdList);
+    Single<List<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body ArrayList<Integer> agentIdList);
 }
