@@ -38,7 +38,7 @@ public class DaryaftActivity extends AppCompatActivity   {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.al_daryaft);
+        setContentView(R.layout.activity_baseinfo);
 
         baseInfoViewModel=ViewModelProviders.of(this).get(BaseInfoViewModel.class);
         pbDaryaftEtelatPayeh =  findViewById(R.id.pbDaryaftEtelatPayeh);
