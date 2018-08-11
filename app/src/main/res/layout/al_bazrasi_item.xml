@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/grey_200">
-
-    <!-- Soal Layout -->
     <android.support.v7.widget.CardView
+        android:id="@+id/cvSoal"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginBottom="4dp"
         android:orientation="horizontal"
+        android:clickable="true"
         app:cardElevation="2dp"
         app:cardCornerRadius="4dp">
+
         <!-- Soal -->
         <TextView
             android:id="@+id/tvSoal"
@@ -32,31 +33,7 @@
             android:textAlignment="gravity"
             android:textDirection="rtl"
             android:textColor="@color/grey_900"
-            android:text="سوال درباره ثبت مانع؟" />
-
+            android:text="سوال بازرسی" />
     </android.support.v7.widget.CardView>
 
-    <!-- Javab Layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rvJavab"
-        tools:listitem="@layout/al_test_mane_item"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"/>
-
-    <!-- Taeed Button -->
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnTaeed"
-        android:fontFamily="@font/byekan"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        android:text="تأیید"/>
 </LinearLayout>

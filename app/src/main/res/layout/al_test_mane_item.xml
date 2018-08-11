@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:layout_gravity="center"
-    android:background="@drawable/all_radius"
+    android:background="@drawable/shape_radius"
     android:orientation="vertical">
 
     <TextView
@@ -21,7 +21,4 @@
         android:textAlignment="gravity"
         android:textColor="@color/grey_600"
         android:text="5" />
-
-
-
 </LinearLayout>

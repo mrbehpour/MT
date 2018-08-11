@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey_200">
+
+    <!-- Bluetooth -->
+    <Switch
+        android:id="@+id/swBluetooth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/byekan"
+        android:textDirection="rtl"
+        android:layoutDirection="rtl"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/grey_800"
+        android:text="بلوتوث" />
+
+    <!-- Spacer -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/grey_300"/>
+
+    <!-- Spinner Lable -->
+    <TextView
+        android:id="@+id/tvLablePaired"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/byekan"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/grey_600"
+        android:text="دستگاه های pair شده:"/>
+
+    <!-- Spinner Paired -->
+    <Spinner
+        android:id="@+id/spnPaired"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/custom_rectangle"
+        android:layout_gravity="right"
+        />
+
+    <!-- Buzzer -->
+    <Switch
+        android:id="@+id/swBuzzer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/byekan"
+        android:textDirection="rtl"
+        android:layoutDirection="rtl"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/grey_800"
+        android:text="Buzzer" />
+
+    <!-- LED -->
+    <Switch
+        android:id="@+id/swLED"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/byekan"
+        android:textDirection="rtl"
+        android:layoutDirection="rtl"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/grey_800"
+        android:text="LED" />
+
+    <!-- Reset Button -->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnReset"
+        android:fontFamily="@font/byekan"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:text="ریست"/>
+
+
+
+
+
+
+
+</LinearLayout>

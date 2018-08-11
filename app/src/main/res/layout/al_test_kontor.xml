@@ -25,7 +25,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:background="@drawable/left_radius">
+                android:background="@drawable/shape_left_radius">
                 <TextView
                     android:id="@+id/tvReactive"
                     android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:background="@drawable/right_radius">
+                android:background="@drawable/shape_right_radius">
                 <TextView
                     android:id="@+id/tvActive"
                     android:layout_width="match_parent"
@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:background="@drawable/left_radius">
+                android:background="@drawable/shape_left_radius">
                 <TextView
                     android:id="@+id/tv3Faz"
                     android:layout_width="match_parent"
@@ -93,7 +93,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:background="@drawable/right_radius">
+                android:background="@drawable/shape_right_radius">
                 <TextView
                     android:id="@+id/tv1Faz"
                     android:layout_width="match_parent"
@@ -123,7 +123,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:background="@drawable/left_radius">
+                android:background="@drawable/shape_left_radius">
                 <TextView
                     android:id="@+id/tvTest2"
                     android:layout_width="match_parent"
@@ -142,7 +142,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:clickable="true"
-                android:background="@drawable/right_radius">
+                android:background="@drawable/shape_right_radius">
                 <TextView
                     android:id="@+id/tvTest1"
                     android:layout_width="match_parent"
@@ -166,7 +166,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
-        android:background="@drawable/all_radius"
+        android:background="@drawable/shape_radius"
         android:orientation="vertical">
 
         <!-- Zarib CT -->
