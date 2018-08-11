@@ -2,28 +2,15 @@ package ir.saa.android.mt.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
-import android.media.MediaCodec;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Scheduler;
-import io.reactivex.Single;
-import io.reactivex.SingleEmitter;
-import io.reactivex.SingleObserver;
-import io.reactivex.SingleOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -70,9 +57,6 @@ import ir.saa.android.mt.repositories.roomrepos.RemarkRepo;
 import ir.saa.android.mt.repositories.roomrepos.RemarkTypeRepo;
 import ir.saa.android.mt.repositories.roomrepos.SettingRepo;
 import ir.saa.android.mt.repositories.roomrepos.TariffTypeRepo;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class BaseInfoViewModel extends AndroidViewModel {
     RetrofitMT retrofitMT=null;
@@ -304,13 +288,13 @@ public class BaseInfoViewModel extends AndroidViewModel {
     public void getClientFromServer(GetClientInput getClientInput){
         retrofitMT.getMtApi().GetClients(getClientInput)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                //.observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<List<Client>>() {
                     @Override
                     public void onSuccess(List<Client> clients) {
                         for(Integer i=0;i<clients.size();i++){
                             clientRepo.insertClient(clients.get(i));
-                            clientProgressPercentLiveData.postValue(getPrecent(i,clients.size()));
+                            clientProgressPercentLiveData.postValue(getPrecent(i+1,clients.size()));
                         }
                     }
 
@@ -327,8 +311,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
         Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {
-                List<AnswerGroup> answerGroups=null;
-                List<AnswerGroupDtl> answerGroupDtls=null;
+                List<ir.saa.android.mt.model.converters.AnswerGroup> answerGroups=null;
+
+                List<ir.saa.android.mt.model.converters.AnswerGroupDtl> answerGroupDtls=new ArrayList<>();
                 List<PropertyType> propertyTypes=null;
                 List<Region>  regions=null;
                 List<City> cities=null;
@@ -341,21 +326,22 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 List<PolompGroupingFormat> polompGroupingFormats=null;
 
                 answerGroups=retrofitMT.getMtApi().GetAnswerGroups().blockingGet();
-                for(Integer i=0;i<answerGroups.size();i++){
-                    if(answerGroups.get(i).answerGroupDtls!=null){
-                        for(Integer j=0;j<answerGroups.get(i).answerGroupDtls.size();j++){
-                            answerGroupDtls.add(answerGroups.get(i).answerGroupDtls.get(j));
-                        }
-                    }
 
-                }
+//                for(Integer i=0;i<answerGroups.size();i++){
+//                    if(answerGroups.get(i)!=null){
+//                        for(Integer j=0;j<answerGroups.get(i).size();j++){
+//                            answerGroupDtls.add(answerGroups.get(i).answerGroupDtls.get(j));
+//                        }
+//                    }
+//
+//                }
                 propertyTypes=retrofitMT.getMtApi().GetPropertyTypies().blockingGet();
                 regions=retrofitMT.getMtApi().GetRegions().blockingGet();
                 cities=retrofitMT.getMtApi().GetCities().blockingGet();
                 List<AnswerGroupDtl> ClientTarif=null;
                 ClientTarif=retrofitMT.getMtApi().GetClientsTariff().blockingGet();
                 for (Integer i=0;i<ClientTarif.size();i++){
-                    answerGroupDtls.add(ClientTarif.get(i));
+                    //answerGroupDtls.add(ClientTarif.get(i));
                 }
                 remarks=retrofitMT.getMtApi().GetRemarks().blockingGet();
                 groupingFormats=retrofitMT.getMtApi().GetGroupingFormat().blockingGet();
@@ -371,12 +357,12 @@ public class BaseInfoViewModel extends AndroidViewModel {
                         polompGroupingFormats.size();
                 Integer startProgress=0;
                 for (Integer i=0;i<answerGroups.size();i++){
-                    answerGroupRepo.insertAnswerGroup(answerGroups.get(i));
+                    //answerGroupRepo.insertAnswerGroup(answerGroups.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+(i+1),totalCount));
                 }
                 startProgress=answerGroups.size();
                 for (Integer i=0;i<answerGroupDtls.size();i++){
-                    answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));
+                    //answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress+(i+1),totalCount));
                 }
                 startProgress=answerGroups.size()+answerGroupDtls.size();
@@ -437,7 +423,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 }
                 startProgress=answerGroups.size()+answerGroupDtls.size()+propertyTypes.size()+regions.size()+
                         cities.size()+remarks.size()+remarkGroups.size()+groupingFormats.size()+masterGroupDetails.size()+
-                        masterGroupDetails.size()+polomps.size()+polompGroupingFormats.size();
+                        masterGroupDetails.size()+polomps.size()+polompGroups.size();
 
                 for (Integer i=0;i<polompGroupingFormats.size();i++){
                     polompGroupingFormatRepo.insertPolompGroupingFormat(polompGroupingFormats.get(i));

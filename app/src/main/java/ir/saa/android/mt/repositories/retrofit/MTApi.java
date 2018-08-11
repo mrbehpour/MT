@@ -3,7 +3,6 @@ package ir.saa.android.mt.repositories.retrofit;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Flowable;
 import io.reactivex.Single;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
@@ -23,11 +22,9 @@ import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroup;
 import ir.saa.android.mt.model.entities.Setting;
-import ir.saa.android.mt.model.entities.TariffInfo;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 /**
  * Created by h.eskandari on 7/22/2018.
@@ -43,7 +40,7 @@ public interface MTApi {
     Single<List<City>> GetCities();
 
     @GET("GetAnswerGroups")
-    Single<List<AnswerGroup>> GetAnswerGroups();
+    Single<List<ir.saa.android.mt.model.converters.AnswerGroup>> GetAnswerGroups();
 
     @GET("GetClientsTariff")
     Single<List<AnswerGroupDtl>> GetClientsTariff();

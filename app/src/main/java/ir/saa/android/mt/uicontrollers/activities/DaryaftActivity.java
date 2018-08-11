@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.daimajia.numberprogressbar.*;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
 public class DaryaftActivity extends AppCompatActivity   {
@@ -122,6 +123,28 @@ public class DaryaftActivity extends AppCompatActivity   {
                 }
             }
         });
+
+        cvMoshtarkin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GetClientInput getClientInput = new GetClientInput();
+                getClientInput.handHeldSerial = "3103103103";
+                getClientInput.agentId = 1079;
+                getClientInput.regionId = 50;
+                baseInfoViewModel.getClientFromServer(getClientInput);
+            }
+        });
+       baseInfoViewModel.clientProgressPercentLiveData.observe(this, new Observer<Integer>() {
+           @Override
+           public void onChanged(@Nullable Integer integer) {
+               pbMoshtarakin.setProgress(integer);
+               if(integer==100){
+                   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                       ivMoshtarakin.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
+                   }
+               }
+           }
+       });
     }
 
 
