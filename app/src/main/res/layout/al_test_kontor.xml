@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:background="@color/grey_200">
 
     <!-- Top Layout -->
@@ -166,7 +167,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
-        android:background="@drawable/shape_radius"
         android:orientation="vertical">
 
         <!-- Zarib CT -->

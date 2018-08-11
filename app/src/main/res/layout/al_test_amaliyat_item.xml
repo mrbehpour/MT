@@ -5,7 +5,11 @@
     android:layout_marginTop="4dp"
     android:layout_gravity="center"
     android:background="@drawable/shape_radius"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingRight="16dp"
+    android:paddingLeft="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/tvKhata"
@@ -13,10 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:fontFamily="@font/byekan"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:textSize="14sp"
         android:gravity="left"
         android:textAlignment="gravity"
@@ -29,10 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/byekan"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
         android:textSize="14sp"
         android:gravity="right"
         android:textAlignment="gravity"
