@@ -28,7 +28,7 @@ public class Remark  {
     public String Description;
 
 
-    public  Boolean IsEditable;
+    public  Integer IsEditable;
 
     public  String KeyName;
 
