@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
 
 public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHolder> {
 
+    private List<ClientItem> clientItemListOrginal ;
     private List<ClientItem> mDataList ;
     private LayoutInflater inflater;
     private Context context;
@@ -21,7 +23,10 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
     public BazdidAdapter(Context context, List<ClientItem> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        this.mDataList = data;
+        mDataList = new ArrayList<>();
+        clientItemListOrginal = new ArrayList<>();
+        mDataList.addAll(data);
+        clientItemListOrginal.addAll(data);
     }
 
     @Override
@@ -35,7 +40,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
     public void onBindViewHolder(final BazdidAdapter.MyViewHolder holder, int position) {
         ClientItem current = mDataList.get(position);
 
-        holder.imgBazdidMoshtarak.setImageResource(current.Pic);
+        //holder.imgBazdidMoshtarak.setImageResource(current.Pic);
         holder.tvName.setText(current.Name);
         holder.tvUniqueTitle.setText(current.UniqueFieldTitle);
         holder.tvUniqueValue.setText(current.UniqueFieldValue);
@@ -47,6 +52,32 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         return mDataList.size();
     }
 
+    public void clearDataSet(){
+        mDataList.clear();
+    }
+
+    public void addAll(List<ClientItem> clientItems){
+        mDataList.clear();
+        clientItemListOrginal.clear();
+        mDataList.addAll(clientItems);
+        clientItemListOrginal.addAll(clientItems);
+    }
+
+    public void filter(String query) {
+        mDataList.clear();
+        if(query.isEmpty()){
+            mDataList.addAll(clientItemListOrginal);
+        } else{
+            query = query.toLowerCase();
+            for(ClientItem item: clientItemListOrginal){
+                if(item.Name.toLowerCase().contains(query) || item.Address.toLowerCase().contains(query) || item.UniqueFieldValue.toLowerCase().contains(query)){
+                    mDataList.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
         TextView tvUniqueTitle;
@@ -56,11 +87,11 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            tvUniqueTitle = (TextView) itemView.findViewById(R.id.tvUniqueTitle);
-            tvUniqueValue = (TextView) itemView.findViewById(R.id.tvUniqueValue);
-            tvAddress = (TextView) itemView.findViewById(R.id.tvAddress);
-            imgBazdidMoshtarak = (ImageView) itemView.findViewById(R.id.imgBazdidMoshtarak);
+            tvName = itemView.findViewById(R.id.tvName);
+            tvUniqueTitle = itemView.findViewById(R.id.tvUniqueTitle);
+            tvUniqueValue = itemView.findViewById(R.id.tvUniqueValue);
+            tvAddress = itemView.findViewById(R.id.tvAddress);
+            imgBazdidMoshtarak = itemView.findViewById(R.id.imgBazdidMoshtarak);
         }
     }
 }

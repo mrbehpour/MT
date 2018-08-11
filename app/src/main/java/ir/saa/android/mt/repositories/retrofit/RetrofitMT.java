@@ -2,6 +2,9 @@ package ir.saa.android.mt.repositories.retrofit;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -15,11 +18,17 @@ public class RetrofitMT {
     private MTApi mtApi;
 
     private RetrofitMT() {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(120, TimeUnit.SECONDS)
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .build();
+
         retrofit = new Retrofit.Builder()
-            .baseUrl("http://192.168.3.176:645/services/AndroidServices.svc/json/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build();
+                .baseUrl("http://192.168.3.176:645/services/AndroidServices.svc/json/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
+                .build();
             mtApi = retrofit.create(MTApi.class);
     }
 

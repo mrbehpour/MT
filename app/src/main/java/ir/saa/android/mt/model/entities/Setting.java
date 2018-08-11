@@ -7,13 +7,12 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity
+
 //        (foreignKeys = {@ForeignKey(entity = Company.class,parentColumns = "FldID",childColumns = "company_id"),
 //                       @ForeignKey(entity = Region.class,parentColumns = "RegionID",childColumns = "region_id"),
 //                       @ForeignKey(entity = PropertyType.class,parentColumns = "PropertyTypeID",childColumns = "propertytype_id"),
 //                       @ForeignKey(entity = AnswerGroup.class,parentColumns = "AnswerGroupID",childColumns = "answergroup_id") })
-
-
+@Entity
 public class Setting {
 
     @PrimaryKey

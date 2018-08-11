@@ -9,22 +9,23 @@
     <!-- Search Layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <!-- Search Button -->
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnSearch"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginBottom="4dp"
-            android:textAlignment="center"
-            android:fontFamily="@font/byekan"
-            android:text="جستجو"/>
+        <!--<android.support.v7.widget.AppCompatButton-->
+            <!--android:id="@+id/btnSearch"-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:layout_marginLeft="4dp"-->
+            <!--android:layout_marginBottom="4dp"-->
+            <!--android:textAlignment="center"-->
+            <!--android:fontFamily="@font/byekan"-->
+            <!--android:text="جستجو"/>-->
 
-        <SearchView
+        <android.support.v7.widget.SearchView
+            android:id="@+id/svBazdidMoshtarakin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="4dp"
@@ -45,9 +46,11 @@
 
     <!-- Search Layout -->
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvBazdidMoshtarakin"
         tools:listitem="@layout/listitem_bazdid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        />
 </LinearLayout>

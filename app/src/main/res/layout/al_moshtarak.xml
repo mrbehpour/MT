@@ -28,7 +28,7 @@
             android:orientation="horizontal">
             <!-- Name Lable -->
             <TextView
-                android:id="@+id/tvLableNameMoshtarak"
+                android:id="@+id/tvLableNameMoshtarek"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/byekan"

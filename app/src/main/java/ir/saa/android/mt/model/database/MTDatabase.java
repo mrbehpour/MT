@@ -3,8 +3,10 @@ package ir.saa.android.mt.model.database;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
+import ir.saa.android.mt.model.converters.AnswerGroupDtlConverter;
 import ir.saa.android.mt.model.daos.AccessAgentAndroidDao;
 import ir.saa.android.mt.model.daos.AgentAccessListDao;
 import ir.saa.android.mt.model.daos.AnswerGroupDao;
@@ -49,7 +51,7 @@ import ir.saa.android.mt.model.entities.RemarkGroup;
 import ir.saa.android.mt.model.entities.RemarkType;
 import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.model.entities.TariffType;
-
+@TypeConverters(AnswerGroupDtlConverter.class)
 @Database(entities ={RelUser.class, AccessAgentAndroid.class,
                      AgentAccessList.class, AnswerGroup.class,
                      AnswerGroupDtl.class, City.class,
@@ -60,7 +62,7 @@ import ir.saa.android.mt.model.entities.TariffType;
                      Remark.class,PropertyType.class,
                      RemarkType.class, RemarkGroup.class,
                      Polomp.class, PolompGroup.class,
-                     PolompGroupingFormat.class,Setting.class},version = 1)
+                     PolompGroupingFormat.class,Setting.class},version = 3)
 public abstract class MTDatabase extends RoomDatabase {
 
     private static MTDatabase INSTANCE;
@@ -115,6 +117,7 @@ public abstract class MTDatabase extends RoomDatabase {
                 INSTANCE =
                         Room.databaseBuilder(context.getApplicationContext(), MTDatabase.class, "mt_db")
                                 .allowMainThreadQueries()
+                                .fallbackToDestructiveMigration()
                                 .build();
             }
         }

@@ -17,7 +17,7 @@ public class AgentAccessList  {
 
     public Boolean IsVisible ;
 
-    public Boolean PosID ;
+    public Integer PosID ;
 
 
 
