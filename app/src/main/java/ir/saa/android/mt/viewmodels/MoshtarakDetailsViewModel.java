@@ -19,7 +19,7 @@ public class MoshtarakDetailsViewModel extends AndroidViewModel {
             clientRepo = new ClientRepo(application);
     }
 
-    public LiveData<Client> getDetailsClient(Integer idClient){
+    public LiveData<Client> getDetailsClient(Long idClient){
        return clientRepo.getClientById(idClient);
     }
 }

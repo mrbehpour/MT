@@ -19,7 +19,7 @@ import ir.saa.android.mt.viewmodels.MoshtarakDetailsViewModel;
 public class MoshtarakDetailsTabFragment extends Fragment
 {
 
-    private Integer ID = 1511753;
+    private Long ID = null;
     MoshtarakDetailsViewModel moshtarakDetailsViewModel;
 
     public MoshtarakDetailsTabFragment() {
@@ -34,6 +34,9 @@ public class MoshtarakDetailsTabFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(ID==null){
+            ID=1511753L;
+        }
         moshtarakDetailsViewModel =ViewModelProviders.of(getActivity()).get(MoshtarakDetailsViewModel.class);
     }
 
