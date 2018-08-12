@@ -75,8 +75,17 @@ public class MoshtarakDetailsTabFragment extends Fragment
             @Override
             public void onChanged(@Nullable Client client) {
                 if(client!=null) {
+                    String MeterTypeName="";
+                    switch (client.Faz){
+                        case 1:
+                            MeterTypeName="تکفاز";
+                            break;
+                        case 3:
+                            MeterTypeName="سه فاز";
+                            break;
+                    }
                     tvShomareBadane.setText(client.MeterNumActive==null?"":client.MeterNumActive.toString());
-                    tvNoeKontor.setText(client.Faz==null?"":client.Faz.toString());
+                    tvNoeKontor.setText(MeterTypeName);
                     tvAmperazh.setText(client.Amp==null?"": client.Amp.toString());
                     tvNoeTarefe.setText(client.TariffTypeID==null?"": client.TariffTypeID.toString());
                     tvEshterak.setText(client.SubScript==null?"":client.SubScript.toString());
