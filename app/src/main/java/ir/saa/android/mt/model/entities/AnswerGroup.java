@@ -12,7 +12,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import ir.saa.android.mt.model.converters.AnswerGroupDtlConverter;
+import ir.saa.android.mt.model.converters.AnswerGroupDtlConverters;
+
 
 @Entity
 public class AnswerGroup {
@@ -33,5 +34,7 @@ public class AnswerGroup {
 
     public Boolean EditDtl ;
 
+
+    public List<AnswerGroupDtl> AnswerGroupDtl;
 }
 

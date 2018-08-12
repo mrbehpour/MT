@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.*;
 
@@ -34,12 +35,21 @@ public class DaryaftActivity extends AppCompatActivity   {
     ImageView ivDaryaftEtelatPayeh;
     ImageView ivKarbaran;
     ImageView ivMoshtarakin;
+    Boolean isDownloadBaseInfo;
+    Boolean isDownloadUser;
+    Boolean isDownloadSetting;
+    Boolean isDownloadClient;
 
     BaseInfoViewModel baseInfoViewModel = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baseinfo);
+
+        isDownloadBaseInfo=false;
+        isDownloadUser=false;
+        isDownloadSetting=false;
+        isDownloadClient=false;
 
         baseInfoViewModel=ViewModelProviders.of(this).get(BaseInfoViewModel.class);
         pbDaryaftEtelatPayeh =  findViewById(R.id.pbDaryaftEtelatPayeh);
@@ -68,7 +78,12 @@ public class DaryaftActivity extends AppCompatActivity   {
         cvTanzimat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                baseInfoViewModel.getSettingFromServer();
+                if(isDownloadSetting==false){
+                    isDownloadSetting=true;
+                    baseInfoViewModel.getSettingFromServer();
+
+                }
+
 
 
             }
@@ -78,6 +93,7 @@ public class DaryaftActivity extends AppCompatActivity   {
             public void onChanged(@Nullable Integer integer){
                 pbTanzimat.setProgress(integer);
                 if(integer==100){
+                    isDownloadSetting=false;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         ivTanzimat.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
                     }
@@ -89,7 +105,11 @@ public class DaryaftActivity extends AppCompatActivity   {
         cvKarbaran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                baseInfoViewModel.getUserFromServer();
+                if(isDownloadUser==false){
+                    isDownloadUser=true;
+                    baseInfoViewModel.getUserFromServer();
+                }
+
             }
         });
 
@@ -98,6 +118,7 @@ public class DaryaftActivity extends AppCompatActivity   {
             public void onChanged(@Nullable Integer integer) {
                 pbKarbaran.setProgress(integer);
                 if(integer==100){
+                    isDownloadUser=false;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         ivKarbaran.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
                     }
@@ -108,7 +129,11 @@ public class DaryaftActivity extends AppCompatActivity   {
         cvPayeh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                baseInfoViewModel.getBaseInfoFromServer();
+                if(isDownloadBaseInfo==false){
+                    isDownloadBaseInfo=true;
+                    baseInfoViewModel.getBaseInfoFromServer();
+                }
+
             }
         });
 
@@ -117,6 +142,7 @@ public class DaryaftActivity extends AppCompatActivity   {
             public void onChanged(@Nullable Integer integer) {
                 pbDaryaftEtelatPayeh.setProgress(integer);
                 if(integer==100){
+                    isDownloadBaseInfo=false;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         ivDaryaftEtelatPayeh.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
                     }
@@ -127,11 +153,14 @@ public class DaryaftActivity extends AppCompatActivity   {
         cvMoshtarkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GetClientInput getClientInput = new GetClientInput();
-                getClientInput.handHeldSerial = "3103103103";
-                getClientInput.agentId = 1079;
-                getClientInput.regionId = 50;
-                baseInfoViewModel.getClientFromServer(getClientInput);
+                if(isDownloadClient==false) {
+                    isDownloadClient=true;
+                    GetClientInput getClientInput = new GetClientInput();
+                    getClientInput.handHeldSerial = "3103103103";
+                    getClientInput.agentId = 1079;
+                    getClientInput.regionId = 50;
+                    baseInfoViewModel.getClientFromServer(getClientInput);
+                }
             }
         });
        baseInfoViewModel.clientProgressPercentLiveData.observe(this, new Observer<Integer>() {
@@ -139,6 +168,7 @@ public class DaryaftActivity extends AppCompatActivity   {
            public void onChanged(@Nullable Integer integer) {
                pbMoshtarakin.setProgress(integer);
                if(integer==100){
+                   isDownloadClient=false;
                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                        ivMoshtarakin.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
                    }
@@ -147,5 +177,14 @@ public class DaryaftActivity extends AppCompatActivity   {
        });
     }
 
+    @Override
+    public void onBackPressed() {
+        if(isDownloadBaseInfo ||  isDownloadClient || isDownloadSetting || isDownloadUser){
+            Toast.makeText(DaryaftActivity.this,R.string.backMessage,Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+
+        super.onBackPressed();
+    }
 }

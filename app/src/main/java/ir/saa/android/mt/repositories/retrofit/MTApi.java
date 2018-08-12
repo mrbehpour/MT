@@ -40,7 +40,7 @@ public interface MTApi {
     Single<List<City>> GetCities();
 
     @GET("GetAnswerGroups")
-    Single<List<ir.saa.android.mt.model.converters.AnswerGroup>> GetAnswerGroups();
+    Single<List<AnswerGroup>> GetAnswerGroups();
 
     @GET("GetClientsTariff")
     Single<List<AnswerGroupDtl>> GetClientsTariff();

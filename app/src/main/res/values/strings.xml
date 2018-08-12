@@ -14,4 +14,7 @@
     <string name="menuItem6">ارسال</string>
     <string name="menuItem7">خروج</string>
 
+    <!--،Toast Masseage -->
+    <string name="backMessage">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
+
 </resources>
