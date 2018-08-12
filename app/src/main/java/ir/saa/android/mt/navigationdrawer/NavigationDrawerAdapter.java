@@ -52,7 +52,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                 if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem1))==0){
                     G.startFragment(FragmentsEnum.BazdidFragment,false);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem2))==0){
-
+                    G.startFragment(FragmentsEnum.MoshtarakFragment,false);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem3))==0){
 
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem4))==0){
