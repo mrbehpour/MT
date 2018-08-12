@@ -2,6 +2,9 @@ package ir.saa.android.mt.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -36,7 +39,7 @@ public class G extends Application {
         fragmentNumStack = new Stack<>();
     }
 
-    public static void startFragment(int targetFragmentNum,boolean backward) {
+    public static void startFragment(int targetFragmentNum, boolean backward, Bundle bundle) {
         //for singleton issue
         if(currentFragmentNum != null && currentFragmentNum == targetFragmentNum) {
             //close navigation drawer if is open
@@ -50,22 +53,29 @@ public class G extends Application {
                 fragmentNumStack.add(currentFragmentNum);
         }
         //check target and go to it
+        Fragment targetFragment=null;
         switch (targetFragmentNum) {
             case FragmentsEnum.HomeFragment:
-                G.fragmentManager.beginTransaction().replace(R.id.frame_container, new HomeFragment()).commit();
+                targetFragment=new HomeFragment();
                 setActionbarTitleText("");
                 break;
             case FragmentsEnum.SettingFragment:
-                G.fragmentManager.beginTransaction().replace(R.id.frame_container, new SettingFragment()).commit();
+                targetFragment=new SettingFragment();
                 setActionbarTitleText("تنظیمات");
                 break;
             case FragmentsEnum.BazdidFragment:
-                G.fragmentManager.beginTransaction().replace(R.id.frame_container, new BazdidFragment()).commit();
+                targetFragment=new BazdidFragment();
                 setActionbarTitleText("بازدید");
                 break;
             case FragmentsEnum.MoshtarakFragment:
-                G.fragmentManager.beginTransaction().replace(R.id.frame_container, new MoshtarakFragment()).commit();
+                targetFragment=new MoshtarakFragment();
                 break;
+        }
+        if(targetFragment!=null){
+            if(bundle!=null){
+                targetFragment.setArguments(bundle);
+            }
+            G.fragmentManager.beginTransaction().replace(R.id.frame_container, targetFragment).commit();
         }
         //update current fragment number
         currentFragmentNum = targetFragmentNum;

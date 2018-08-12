@@ -1,6 +1,7 @@
 package ir.saa.android.mt.adapters.bazdid;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 
 public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHolder> {
@@ -45,7 +47,9 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
 
         holder.listItemBazdidRoot.setOnClickListener(v->{
             G.setActionbarTitleText(current.Name);
-            G.startFragment(FragmentsEnum.MoshtarakFragment,false);
+            Bundle bundle = new Bundle();
+            bundle.putLong(BundleKeysEnum.ClientID,current.Id);
+            G.startFragment(FragmentsEnum.MoshtarakFragment,false,bundle);
         });
         //holder.imgBazdidMoshtarak.setImageResource(current.Pic);
         holder.tvName.setText(current.Name);

@@ -50,13 +50,13 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             public void onClick(View v) {
                 //Toast.makeText(context, holder.title.getText().toString(), Toast.LENGTH_SHORT).show();
                 if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem1))==0){
-                    G.startFragment(FragmentsEnum.BazdidFragment,false);
+                    G.startFragment(FragmentsEnum.BazdidFragment,false,null);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem2))==0){
-                    G.startFragment(FragmentsEnum.MoshtarakFragment,false);
+                    G.startFragment(FragmentsEnum.MoshtarakFragment,false,null);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem3))==0){
 
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem4))==0){
-                    G.startFragment(FragmentsEnum.SettingFragment,false);
+                    G.startFragment(FragmentsEnum.SettingFragment,false,null);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem5))==0){
                     Intent intent=new Intent(G.context,DaryaftActivity.class);
                     intent.addFlags(FLAG_ACTIVITY_NEW_TASK);

@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity{
         //Initialize Actionbar For This Activity
         G.actionBar = getSupportActionBar();
 
-        G.startFragment(FragmentsEnum.HomeFragment,false);
+        G.startFragment(FragmentsEnum.HomeFragment,false,null);
     }
 
     private void setUpActionBar() {
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         if(G.fragmentNumStack.size()>0){
-            G.startFragment(G.fragmentNumStack.pop(),true);
+            G.startFragment(G.fragmentNumStack.pop(),true,null);
         }else{
             if (doubleBackToExitPressedOnce) {
                 MainActivity.this.finish();
