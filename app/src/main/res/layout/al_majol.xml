@@ -15,9 +15,10 @@
         android:fontFamily="@font/byekan"
         android:textDirection="rtl"
         android:layoutDirection="rtl"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
         android:textColor="@color/grey_800"
         android:text="بلوتوث" />
 
@@ -26,8 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:background="@color/grey_300"/>
 
     <!-- Spinner Lable -->
@@ -37,9 +36,10 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/byekan"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="50dp"
         android:textColor="@color/grey_600"
+        android:textSize="16sp"
         android:text="دستگاه های pair شده:"/>
 
     <!-- Spinner Paired -->
@@ -48,8 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/custom_rectangle"
         android:layout_gravity="right"
         />
@@ -64,9 +64,10 @@
         android:fontFamily="@font/byekan"
         android:textDirection="rtl"
         android:layoutDirection="rtl"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
+
         android:textColor="@color/grey_800"
         android:text="Buzzer" />
 
@@ -80,8 +81,8 @@
         android:fontFamily="@font/byekan"
         android:textDirection="rtl"
         android:layoutDirection="rtl"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/grey_800"
         android:text="LED" />
