@@ -106,6 +106,7 @@ public class MoshtarakDetailsTabFragment extends Fragment
                         tvZaribeKontor.setText(client.Zarib==null?"":client.Zarib.toString());
                         tvTedadArghamActive.setText(client.NumDigitContor==null?"":client.NumDigitContor.toString());
                         tvTedadArghamReactive.setText("");
+                        tvSerialReactive.setText("");
                         tvTarikhEnsheab.setText(client.InsDateContor==null?"":String.format("%s/%s/%s",client.InsDateContor.toString().substring(0,4),client.InsDateContor.toString().substring(4,6),client.InsDateContor.toString().substring(6,8)) );
                         tvTelephone.setText(client.Tel==null?"":client.Tel.toString());
                         tvCodePosti.setText(client.PostalCode==null?"":client.PostalCode.toString());
