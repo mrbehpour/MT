@@ -13,6 +13,7 @@
         android:layout_height="50dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:background="?attr/selectableItemBackground"
         android:paddingRight="50dp"
         android:paddingLeft="20dp">
         <android.support.v7.widget.SwitchCompat
