@@ -63,15 +63,39 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"/>
 
-    <!-- End Test Button -->
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnTaeed"
-        android:fontFamily="@font/byekan"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:layout_gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        android:text="پایان تست"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!-- End Test Button -->
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnTaeed"
+            android:fontFamily="@font/byekan"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:text="تایید و مشاهده نتایج"/>
+        <!-- End Test Button -->
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnStart"
+            android:fontFamily="@font/byekan"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="0.5"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:text="شروع"/>
+    </LinearLayout>
 </LinearLayout>
