@@ -87,7 +87,7 @@
         android:textColor="@color/grey_800"
         android:text="LED" />
 
-    <!-- Reset Button -->
+    <!-- Reset Button    -->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnReset"
         android:fontFamily="@font/byekan"
