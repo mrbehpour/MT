@@ -154,7 +154,6 @@
                 android:textStyle="bold"
                 app:customFont="@string/font_default" />
         </LinearLayout>
-
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ll4"
