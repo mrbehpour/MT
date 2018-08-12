@@ -19,7 +19,7 @@ import ir.saa.android.mt.viewmodels.MoshtarakDetailsViewModel;
 public class MoshtarakDetailsTabFragment extends Fragment
 {
 
-    private Integer ID = 1;
+    private Integer ID = 1511753;
     MoshtarakDetailsViewModel moshtarakDetailsViewModel;
 
     public MoshtarakDetailsTabFragment() {
@@ -74,8 +74,30 @@ public class MoshtarakDetailsTabFragment extends Fragment
         moshtarakDetailsViewModel.getDetailsClient(ID).observe(this, new Observer<Client>() {
             @Override
             public void onChanged(@Nullable Client client) {
-                tvShomareBadane.setText(client.MeterNumActive.toString());
-                tvNoeKontor.setText(client.Faz);
+                if(client!=null) {
+                    tvShomareBadane.setText(client.MeterNumActive==null?"":client.MeterNumActive.toString());
+                    tvNoeKontor.setText(client.Faz==null?"":client.Faz.toString());
+                    tvAmperazh.setText(client.Amp==null?"": client.Amp.toString());
+                    tvNoeTarefe.setText(client.TariffTypeID==null?"": client.TariffTypeID.toString());
+                    tvEshterak.setText(client.SubScript==null?"":client.SubScript.toString());
+                    tvShenasae.setText(client.CustId==null?"":client.CustId.toString());
+                    tvParvandeh.setText(client.FileID==null?"":client.FileID.toString());
+                    tvRamz.setText(client.ClientPass==null?"":client.ClientPass.toString());
+                    tvNoeVoltazh.setText(client.KindVolt==null?"":client.KindVolt.toString());
+                    tvGhodrateGharardad.setText(client.NumContract==null?"":client.NumContract.toString());
+                    tvDimandMojaz.setText(client.Demand==null?"":client.Demand.toString());
+                    tvMotavseteMasraf.setText(client.UseAvrA==null?"":client.UseAvrA.toString());
+                    tvMasrafeDoreAkhar.setText("");
+                    tvKWDoreAkhar.setText("");
+                    tvZaribeKontor.setText(client.Zarib==null?"":client.Zarib.toString());
+                    tvTedadArghamActive.setText(client.NumDigitContor==null?"":client.NumDigitContor.toString());
+                    tvTedadArghamReactive.setText("");
+                    tvTarikhEnsheab.setText(client.InsDateContor==null?"":client.InsDateContor.toString());
+                    tvTelephone.setText(client.Tel==null?"":client.Tel.toString());
+                    tvCodePosti.setText(client.PostalCode==null?"":client.PostalCode.toString());
+                    tvCodeTarefe.setText(client.TariffTypeID==null?"":client.TariffTypeID.toString());
+                }
+
             }
         });
 
