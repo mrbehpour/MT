@@ -3,11 +3,13 @@ package ir.saa.android.mt.uicontrollers.activities;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import ir.saa.android.mt.R;
@@ -25,13 +27,9 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Initialize Toolbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-//        getSupportActionBar().setSubtitle("Please call me something else :)");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Initialize Actionbar For This Activity
+        setUpActionBar();
         //Initialize NavigationDrawer For This Activity
         setUpDrawer();
         //Initialize FragmentManager For This Activity
@@ -40,6 +38,23 @@ public class MainActivity extends AppCompatActivity{
         G.actionBar = getSupportActionBar();
 
         G.startFragment(FragmentsEnum.HomeFragment,false);
+    }
+
+    private void setUpActionBar() {
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.LEFT);
+        //Initialize Toolbar
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+
+        LinearLayout actionBarLayout = (LinearLayout)getLayoutInflater().inflate(R.layout.actionbar_custom_layout, null);
+        getSupportActionBar().setCustomView(actionBarLayout,params);
+
+        G.actionBar = getSupportActionBar();
     }
 
     private void setUpDrawer() {

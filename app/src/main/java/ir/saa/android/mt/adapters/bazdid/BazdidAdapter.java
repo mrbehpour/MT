@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.FragmentsEnum;
 
 public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHolder> {
 
@@ -40,6 +43,10 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
     public void onBindViewHolder(final BazdidAdapter.MyViewHolder holder, int position) {
         ClientItem current = mDataList.get(position);
 
+        holder.listItemBazdidRoot.setOnClickListener(v->{
+            G.setActionbarTitleText(current.Name);
+            G.startFragment(FragmentsEnum.MoshtarakFragment,false);
+        });
         //holder.imgBazdidMoshtarak.setImageResource(current.Pic);
         holder.tvName.setText(current.Name);
         holder.tvUniqueTitle.setText(current.UniqueFieldTitle);
@@ -79,6 +86,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
+        LinearLayout listItemBazdidRoot;
         TextView tvName;
         TextView tvUniqueTitle;
         TextView tvUniqueValue;
@@ -87,6 +95,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
 
         public MyViewHolder(View itemView) {
             super(itemView);
+            listItemBazdidRoot = itemView.findViewById(R.id.listItemBazdidRoot);
             tvName = itemView.findViewById(R.id.tvName);
             tvUniqueTitle = itemView.findViewById(R.id.tvUniqueTitle);
             tvUniqueValue = itemView.findViewById(R.id.tvUniqueValue);
