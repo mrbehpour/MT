@@ -18,11 +18,12 @@ import android.widget.TextView;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.BundleKeysEnum;
 
 public class MoshtarakFragment extends Fragment
 {
     TabsPagerAdapter mAdapter;
-
+    public Long ClientID = null;
     public MoshtarakFragment() {
         // Required empty public constructor
     }
@@ -36,6 +37,12 @@ public class MoshtarakFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_moshtarak, container, false);
+        if(ClientID==null){
+            Bundle bundle = this.getArguments();
+            if (bundle != null) {
+                ClientID = bundle.getLong(BundleKeysEnum.ClientID);
+            }
+        }
         return rootView;
     }
 
@@ -45,7 +52,7 @@ public class MoshtarakFragment extends Fragment
         // Initilization
         ViewPager viewPager = rootView.findViewById(R.id.pager);
         //viewPager.setOffscreenPageLimit(3);
-        mAdapter = new TabsPagerAdapter(getActivity().getSupportFragmentManager());
+        mAdapter = new TabsPagerAdapter(getActivity().getSupportFragmentManager(),ClientID);
         viewPager.setAdapter(mAdapter);
 
         Typeface tfByekan = ResourcesCompat.getFont(getActivity(), R.font.byekan);
@@ -64,9 +71,10 @@ public class MoshtarakFragment extends Fragment
     public static class TabsPagerAdapter extends FragmentStatePagerAdapter {
         final int PAGE_COUNT = 2;
         private String tabtitles[] = new String[] { "عملیات", "جزییات" };
-
-        public TabsPagerAdapter(FragmentManager fragmentManager) {
+        Long ClientID = null;
+        public TabsPagerAdapter(FragmentManager fragmentManager,Long clientID) {
             super(fragmentManager);
+            ClientID = clientID;
         }
 
         @Override
@@ -80,7 +88,11 @@ public class MoshtarakFragment extends Fragment
                 case 0:
                     return new MoshtarakOperationsTabFragment();
                 case 1:
-                    return new MoshtarakDetailsTabFragment();
+                    Fragment moshtarakDetailsTabFragment =  new MoshtarakDetailsTabFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putLong(BundleKeysEnum.ClientID,ClientID);
+                    moshtarakDetailsTabFragment.setArguments(bundle);
+                    return moshtarakDetailsTabFragment;
                 default:
                     return new MoshtarakOperationsTabFragment();
             }

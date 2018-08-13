@@ -8,6 +8,7 @@ import java.util.List;
 import ir.saa.android.mt.model.daos.ClientDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientWithTarif;
 
 public class ClientRepo {
 
@@ -47,6 +48,10 @@ public class ClientRepo {
 
     public LiveData<Client> getClientById(long clientId) {
         return clientDao.getClientById(clientId);
+    }
+
+    public LiveData<ClientWithTarif> getClientWithTarif(long clientId) {
+        return clientDao.getClientWithTarif(clientId);
     }
 
 

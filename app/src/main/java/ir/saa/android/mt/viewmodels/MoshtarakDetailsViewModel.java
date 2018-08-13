@@ -5,7 +5,12 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
+import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientWithTarif;
+
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
 
 
@@ -17,9 +22,13 @@ public class MoshtarakDetailsViewModel extends AndroidViewModel {
 
         if(clientRepo==null)
             clientRepo = new ClientRepo(application);
+
     }
 
-    public LiveData<Client> getDetailsClient(Long idClient){
-       return clientRepo.getClientById(idClient);
+    public LiveData<ClientWithTarif> getDetailsClientWithTariff(Long idClient){
+
+       return clientRepo.getClientWithTarif(idClient);
     }
+
+
 }

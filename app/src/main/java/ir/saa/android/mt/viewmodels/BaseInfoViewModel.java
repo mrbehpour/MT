@@ -373,7 +373,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     }
                     startProgress = answerGroups.size();
                     for (Integer i = 0; i < answerGroupDtls.size(); i++) {
-                        //answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));
+                        answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));
                         baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                     }
                     startProgress = answerGroups.size() + answerGroupDtls.size();
