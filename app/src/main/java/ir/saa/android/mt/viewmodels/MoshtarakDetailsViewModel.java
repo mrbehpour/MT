@@ -10,7 +10,7 @@ import java.util.List;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientWithTarif;
-import ir.saa.android.mt.repositories.roomrepos.AnswerGroupDtlRepo;
+
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
 
 

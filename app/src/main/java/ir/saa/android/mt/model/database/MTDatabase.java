@@ -17,6 +17,8 @@ import ir.saa.android.mt.model.daos.ClientDao;
 import ir.saa.android.mt.model.daos.ClientTypeDao;
 import ir.saa.android.mt.model.daos.CompanyDao;
 import ir.saa.android.mt.model.daos.GroupingFormatDao;
+import ir.saa.android.mt.model.daos.InspectionDtlDao;
+import ir.saa.android.mt.model.daos.InspectionInfoDao;
 import ir.saa.android.mt.model.daos.MasterGroupDetailDao;
 import ir.saa.android.mt.model.daos.MasterGroupInfoDao;
 import ir.saa.android.mt.model.daos.PolompDao;
@@ -39,6 +41,8 @@ import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientType;
 import ir.saa.android.mt.model.entities.Company;
 import ir.saa.android.mt.model.entities.GroupingFormat;
+import ir.saa.android.mt.model.entities.InspectionDtl;
+import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.MasterGroupInfo;
 import ir.saa.android.mt.model.entities.Polomp;
@@ -64,7 +68,8 @@ import ir.saa.android.mt.model.entities.TariffType;
                      Remark.class,PropertyType.class,
                      RemarkType.class, RemarkGroup.class,
                      Polomp.class, PolompGroup.class,
-                     PolompGroupingFormat.class,Setting.class},version = 4)
+                     PolompGroupingFormat.class,Setting.class,
+                     InspectionInfo.class,InspectionDtl.class},version = 4)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -113,6 +118,10 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract PolompGroupingFormatDao polompGroupingFormatModel();
 
     public abstract SettingDao settingModel();
+
+    public abstract InspectionInfoDao inspectionInfoModel();
+
+    public abstract InspectionDtlDao inspectionDtlModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
