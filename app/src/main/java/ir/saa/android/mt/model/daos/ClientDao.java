@@ -10,6 +10,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientWithTarif;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 
@@ -17,6 +18,59 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 public interface ClientDao {
     @Query("select * from Client")
     LiveData<List<Client>> getClients();
+
+    @Query("Select " +
+            "Client.ClientID," +
+            "Client.tarifftype_id," +
+            "Client.Active1," +
+            "Client.Active2," +
+            "Client.Active3," +
+            "Client.ActiveT1," +
+            "Client.ActiveTariffCount," +
+            "Client.Address," +
+            "Client.Amp," +
+            "Client.ChngDateContor," +
+            "Client.ClientCity," +
+            "Client.ClientPass," +
+            "Client.ClientRow," +
+            "Client.clienttype_id," +
+            "Client.CustId," +
+            "Client.Demand," +
+            "Client.DurationType," +
+            "Client.Faz," +
+            "Client.FileID," +
+            "Client.IDInst," +
+            "Client.Status," +
+            "Client.SubScript," +
+            "Client.clienttype_id," +
+            "Client.ClientRow," +
+            "Client.ClientPass," +
+            "Client.Name," +
+            "Client.NumContract," +
+            "Client.NumDigitContor," +
+            "Client.InsDateContor," +
+            "Client.KindVolt," +
+            "Client.Tel," +
+            "Client.PostalCode," +
+            "Client.Name," +
+            "Client.UseAvrR," +
+            "Client.Mamoor," +
+            "Client.LastReadDate," +
+            "Client.MeterNumActive," +
+            "Client.MxmeterCode," +
+            "Client.MxMeterZarib," +
+            "Client.MxValue," +
+            "Client.Pelak," +
+            "Client.PosType," +
+            "Client.RegionID," +
+            "Client.RoozKar," +
+            "Client.mastergroupdtl_id," +
+            "Client.RoozKar," +
+            "AnswerGroupDtlName as TariffTypeName " +
+            "from Client " +
+            "INNER JOIN AnswerGroupDtl on Client.tarifftype_id=AnswerGroupDtl.Description "+
+             "where ClientID= :clientId"   )
+    LiveData<ClientWithTarif> getClientWithTarif(Long clientId);
 
     @Update
     void updateClient(Client client);

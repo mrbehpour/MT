@@ -1,5 +1,7 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
+import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,14 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientWithTarif;
 import ir.saa.android.mt.viewmodels.MoshtarakDetailsViewModel;
 
 public class MoshtarakDetailsTabFragment extends Fragment
 {
 
+    private  Integer idanswer = 0;
     private Long clientID = null;
     MoshtarakDetailsViewModel moshtarakDetailsViewModel;
 
@@ -74,11 +81,10 @@ public class MoshtarakDetailsTabFragment extends Fragment
         TextView tvCodePosti=view.findViewById(R.id.tvCodePosti);
         TextView tvCodeTarefe=view.findViewById(R.id.tvCodeTarefe);
 
-
         if(clientID!=null)
-            moshtarakDetailsViewModel.getDetailsClient(clientID).observe(this, new Observer<Client>() {
+            moshtarakDetailsViewModel.getDetailsClientWithTariff(clientID).observe(this, new Observer<ClientWithTarif>() {
                 @Override
-                public void onChanged(@Nullable Client client) {
+                public void onChanged(@Nullable ClientWithTarif client) {
                     if(client!=null) {
                         String MeterTypeName="";
                         switch (client.Faz){
@@ -92,7 +98,7 @@ public class MoshtarakDetailsTabFragment extends Fragment
                         tvShomareBadane.setText(client.MeterNumActive==null?"":client.MeterNumActive.toString());
                         tvNoeKontor.setText(MeterTypeName);
                         tvAmperazh.setText(client.Amp==null?"": client.Amp.toString());
-                        tvNoeTarefe.setText(client.TariffTypeID==null?"": client.TariffTypeID.toString());
+                        tvNoeTarefe.setText(client.TariffTypeID==null?"": client.AnswerGroupDtlName.toString());
                         tvEshterak.setText(client.SubScript==null?"":client.SubScript.toString());
                         tvShenasae.setText(client.CustId==null?"":client.CustId.toString());
                         tvParvandeh.setText(client.FileID==null?"":client.FileID.toString());
