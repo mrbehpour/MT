@@ -31,7 +31,7 @@ public interface InspectionInfoDao {
     void insertInspectionInfo(InspectionInfo inspectionInfo);
 
     @Insert(onConflict = IGNORE)
-    List<Integer> insertInspectionInfos(List<InspectionInfo> inspectionInfos);
+    List<Long> insertInspectionInfos(List<InspectionInfo> inspectionInfos);
 
     @Update
     void updateInspectionInfo(InspectionInfo inspectionInfo);

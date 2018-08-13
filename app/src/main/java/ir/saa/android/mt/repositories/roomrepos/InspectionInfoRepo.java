@@ -46,7 +46,7 @@ public class InspectionInfoRepo  {
     }
 
 
-    public List<Integer> insertInspectionInfos(List<InspectionInfo> inspectionInfos) {
+    public List<Long> insertInspectionInfos(List<InspectionInfo> inspectionInfos) {
         return inspectionInfoDao.insertInspectionInfos(inspectionInfos);
     }
 

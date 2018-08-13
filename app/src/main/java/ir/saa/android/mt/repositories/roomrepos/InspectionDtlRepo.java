@@ -50,7 +50,7 @@ public class InspectionDtlRepo implements InspectionDtlDao {
     }
 
 
-    public List<Integer> insertInspectionDtls(List<InspectionDtl> inspectionDtls) {
+    public List<Long> insertInspectionDtls(List<InspectionDtl> inspectionDtls) {
         return inspectionDtlDao.insertInspectionDtls(inspectionDtls);
     }
 
