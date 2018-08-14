@@ -90,24 +90,24 @@ public class LoginViewModel extends AndroidViewModel {
 //                });
 //    }
 
-    public void getUserFromServer(){
-        retrofitMT.getMtApi().GetAgentList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<List<RelUser>>() {
-                    @Override
-                    public void onSuccess(List<RelUser> userList) {
-                        if(reluserRepo.getUsers().getValue().size()>0)
-                            reluserRepo.deleteAll();
-                        List<Long> insertedIdList = reluserRepo.insertUsers(userList);
-                        Toast.makeText(getApplication().getApplicationContext(),"insertCount : "+insertedIdList.size(),Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(getApplication().getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
+//    public void getUserFromServer(){
+//        retrofitMT.getMtApi().GetAgentList()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(new DisposableSingleObserver<List<RelUser>>() {
+//                    @Override
+//                    public void onSuccess(List<RelUser> userList) {
+//                        if(reluserRepo.getUsers().getValue().size()>0)
+//                            reluserRepo.deleteAll();
+//                        List<Long> insertedIdList = reluserRepo.insertUsers(userList);
+//                        Toast.makeText(getApplication().getApplicationContext(),"insertCount : "+insertedIdList.size(),Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Toast.makeText(getApplication().getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//    }
 
 }
