@@ -2,8 +2,11 @@ package ir.saa.android.mt.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import java.util.List;
@@ -27,14 +30,24 @@ public class LoginViewModel extends AndroidViewModel {
             retrofitMT= RetrofitMT.getInstance();
         //getAnswerGroupsFromServer();
         //getCitiesFromServer();
-        getUserFromServer();
+        //getUserFromServer();
+        if(reluserRepo.getUsers().getValue().size()==0){
+            RelUser relUser=new RelUser();
+            relUser.FirstName="Admin";
+            relUser.LastName="Admin";
+            relUser.HandheldPass="1234";
+            reluserRepo.insertUser(relUser);
+        }
     }
 
     public LiveData<List<RelUser>> getUsers() {  return reluserRepo.getUsers();  }
 
+
     public RelUser getUserByUserIdAndPassword(int userId,String password){
         return reluserRepo.getUserByUserAndPassword(userId,password);
     }
+
+
 
 
 //    public void getAnswerGroupsFromServer(){
