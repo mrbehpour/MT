@@ -4,6 +4,7 @@ import android.arch.persistence.db.SupportSQLiteQuery;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.Transaction;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.database.Cursor;
@@ -41,6 +42,7 @@ import ir.saa.android.mt.model.daos.SettingDao;
 import ir.saa.android.mt.model.daos.TariffDtlDao;
 import ir.saa.android.mt.model.daos.TariffInfoDao;
 import ir.saa.android.mt.model.daos.TariffTypeDao;
+import ir.saa.android.mt.model.daos.TestInfoDao;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
 import ir.saa.android.mt.model.entities.AnswerGroup;
@@ -72,6 +74,7 @@ import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.model.entities.TariffDtl;
 import ir.saa.android.mt.model.entities.TariffInfo;
 import ir.saa.android.mt.model.entities.TariffType;
+import ir.saa.android.mt.model.entities.TestInfo;
 
 
 @Database(entities ={RelUser.class, AccessAgentAndroid.class,
@@ -87,9 +90,9 @@ import ir.saa.android.mt.model.entities.TariffType;
                      PolompGroupingFormat.class,Setting.class,
                      InspectionInfo.class,InspectionDtl.class,
                      MeterChangeInfo.class,MeterChangeDtl.class,
-                    PolompInfo.class,GPSInfo.class,
-                    PolompDtl.class,TariffInfo.class,
-        TariffDtl.class},version = 4)
+                     PolompInfo.class,GPSInfo.class,
+                     PolompDtl.class,TariffInfo.class,
+                     TariffDtl.class,TestInfo.class},version = 4)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -155,7 +158,9 @@ public abstract class MTDatabase extends RoomDatabase {
 
     public abstract TariffDtlDao tariffDtlModel();
 
-  public abstract GPSInfoDao gpsInfoModel();
+    public abstract GPSInfoDao gpsInfoModel();
+
+    public abstract TestInfoDao testInfoModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
