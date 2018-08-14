@@ -270,7 +270,6 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
             retrofitMT.getMtApi().GetSettings()
             .subscribeOn(Schedulers.io())
-                    //.observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(new DisposableSingleObserver<List<Setting>>() {
                         @Override
                         public void onSuccess(List<Setting> settings) {

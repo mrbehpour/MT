@@ -2,6 +2,7 @@ package ir.saa.android.mt.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
@@ -32,11 +33,31 @@ public class G extends Application {
     public static Integer currentFragmentNum = null;
     public static Stack<Integer> fragmentNumStack;
 
+    private static SharedPreferences pref;
+    private static SharedPreferences.Editor prefEditor;
+
     @Override
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
         fragmentNumStack = new Stack<>();
+        pref = getSharedPreferences("MTPrefs", Context.MODE_PRIVATE);
+        prefEditor = pref.edit();
+    }
+
+    public static void removePref(String prefName){
+        prefEditor.remove(prefName);
+        prefEditor.commit();
+    }
+    public static void setPref(String prefName,String prefValue){
+        prefEditor.putString(prefName, prefValue);
+        prefEditor.commit();
+    }
+    public static String getPref(String prefName,String defultValue){
+        return pref.getString(prefName,defultValue);
+    }
+    public static String getPref(String prefName){
+        return pref.getString(prefName,null);
     }
 
     public static void startFragment(int targetFragmentNum, boolean backward, Bundle bundle) {

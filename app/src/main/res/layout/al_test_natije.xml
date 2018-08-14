@@ -489,7 +489,7 @@
                     android:background="@color/grey_200"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="ظاهری (S)" />
+                    android:text="توان ظاهری (S)" />
 
                 <!-- R Column -->
                 <TextView
