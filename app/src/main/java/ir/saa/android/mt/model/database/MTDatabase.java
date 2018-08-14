@@ -38,6 +38,7 @@ import ir.saa.android.mt.model.daos.RemarkDao;
 import ir.saa.android.mt.model.daos.RemarkGroupDao;
 import ir.saa.android.mt.model.daos.RemarkTypeDao;
 import ir.saa.android.mt.model.daos.SettingDao;
+import ir.saa.android.mt.model.daos.TariffInfoDao;
 import ir.saa.android.mt.model.daos.TariffTypeDao;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
@@ -67,6 +68,7 @@ import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroup;
 import ir.saa.android.mt.model.entities.RemarkType;
 import ir.saa.android.mt.model.entities.Setting;
+import ir.saa.android.mt.model.entities.TariffInfo;
 import ir.saa.android.mt.model.entities.TariffType;
 
 
@@ -84,7 +86,7 @@ import ir.saa.android.mt.model.entities.TariffType;
                      InspectionInfo.class,InspectionDtl.class,
                      MeterChangeInfo.class,MeterChangeDtl.class,
                     PolompInfo.class,GPSInfo.class,
-        PolompDtl.class},version = 4)
+                    PolompDtl.class,TariffInfo.class},version = 4)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -145,6 +147,8 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract PolompInfoDao polompInfoModel();
 
     public abstract PolompDtlDao polompDtlModel();
+
+    public abstract TariffInfoDao tariffInfoModel();
 
   public abstract GPSInfoDao gpsInfoModel();
 
