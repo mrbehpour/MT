@@ -26,6 +26,7 @@ import ir.saa.android.mt.model.daos.MeterChangeInfoDao;
 import ir.saa.android.mt.model.daos.PolompDao;
 import ir.saa.android.mt.model.daos.PolompGroupDao;
 import ir.saa.android.mt.model.daos.PolompGroupingFormatDao;
+import ir.saa.android.mt.model.daos.PolompInfoDao;
 import ir.saa.android.mt.model.daos.PropertyTypeDao;
 import ir.saa.android.mt.model.daos.RegionDao;
 import ir.saa.android.mt.model.daos.RelUserDao;
@@ -52,6 +53,7 @@ import ir.saa.android.mt.model.entities.MeterChangeInfo;
 import ir.saa.android.mt.model.entities.Polomp;
 import ir.saa.android.mt.model.entities.PolompGroup;
 import ir.saa.android.mt.model.entities.PolompGroupingFormat;
+import ir.saa.android.mt.model.entities.PolompInfo;
 import ir.saa.android.mt.model.entities.PropertyType;
 import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.model.entities.RelUser;
@@ -74,7 +76,8 @@ import ir.saa.android.mt.model.entities.TariffType;
                      Polomp.class, PolompGroup.class,
                      PolompGroupingFormat.class,Setting.class,
                      InspectionInfo.class,InspectionDtl.class,
-                     MeterChangeInfo.class,MeterChangeDtl.class},version = 4)
+                     MeterChangeInfo.class,MeterChangeDtl.class,
+        PolompInfo.class},version = 4)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -131,6 +134,8 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract MeterChangeInfoDao meterChangeInfoModel();
 
     public abstract MeterChangeDtlDao meterChangeDtlModel();
+
+    public abstract PolompInfoDao polompInfoModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
