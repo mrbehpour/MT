@@ -42,6 +42,7 @@ import ir.saa.android.mt.model.daos.SettingDao;
 import ir.saa.android.mt.model.daos.TariffDtlDao;
 import ir.saa.android.mt.model.daos.TariffInfoDao;
 import ir.saa.android.mt.model.daos.TariffTypeDao;
+import ir.saa.android.mt.model.daos.TestDtlDao;
 import ir.saa.android.mt.model.daos.TestInfoDao;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
@@ -74,6 +75,7 @@ import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.model.entities.TariffDtl;
 import ir.saa.android.mt.model.entities.TariffInfo;
 import ir.saa.android.mt.model.entities.TariffType;
+import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
 
 
@@ -92,7 +94,7 @@ import ir.saa.android.mt.model.entities.TestInfo;
                      MeterChangeInfo.class,MeterChangeDtl.class,
                      PolompInfo.class,GPSInfo.class,
                      PolompDtl.class,TariffInfo.class,
-                     TariffDtl.class,TestInfo.class},version = 4)
+                     TariffDtl.class,TestInfo.class,TestDtl.class},version = 4)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -161,6 +163,8 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract GPSInfoDao gpsInfoModel();
 
     public abstract TestInfoDao testInfoModel();
+
+    public abstract TestDtlDao testDtlModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
