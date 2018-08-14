@@ -1,10 +1,12 @@
 package ir.saa.android.mt.model.database;
 
+import android.arch.persistence.db.SupportSQLiteQuery;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+import android.database.Cursor;
 
 
 import ir.saa.android.mt.model.converters.AnswerGroupDtlConverters;
@@ -16,6 +18,7 @@ import ir.saa.android.mt.model.daos.CityDao;
 import ir.saa.android.mt.model.daos.ClientDao;
 import ir.saa.android.mt.model.daos.ClientTypeDao;
 import ir.saa.android.mt.model.daos.CompanyDao;
+import ir.saa.android.mt.model.daos.GPSInfoDao;
 import ir.saa.android.mt.model.daos.GroupingFormatDao;
 import ir.saa.android.mt.model.daos.InspectionDtlDao;
 import ir.saa.android.mt.model.daos.InspectionInfoDao;
@@ -43,6 +46,7 @@ import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientType;
 import ir.saa.android.mt.model.entities.Company;
+import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.GroupingFormat;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
@@ -77,7 +81,7 @@ import ir.saa.android.mt.model.entities.TariffType;
                      PolompGroupingFormat.class,Setting.class,
                      InspectionInfo.class,InspectionDtl.class,
                      MeterChangeInfo.class,MeterChangeDtl.class,
-        PolompInfo.class},version = 4)
+                    PolompInfo.class,GPSInfo.class},version = 4)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -136,6 +140,8 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract MeterChangeDtlDao meterChangeDtlModel();
 
     public abstract PolompInfoDao polompInfoModel();
+
+  public abstract GPSInfoDao gpsInfoModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
