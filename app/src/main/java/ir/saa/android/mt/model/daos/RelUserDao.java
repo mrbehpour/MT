@@ -19,6 +19,9 @@ public interface RelUserDao {
     @Query("select * from RelUser")
     LiveData<List<RelUser>> getUsers();
 
+    @Query("select * from RelUser")
+    List<RelUser> getUsersWithoutLiveData();
+
     @Query("select * from RelUser where UserID = :UserID ")
     LiveData<RelUser> getUserById(int UserID);
 

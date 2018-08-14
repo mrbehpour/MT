@@ -31,7 +31,14 @@ public class LoginViewModel extends AndroidViewModel {
         //getAnswerGroupsFromServer();
         //getCitiesFromServer();
         //getUserFromServer();
-        if(reluserRepo.getUsers().getValue().size()==0){
+
+        initializerUser();
+    }
+
+    private void initializerUser(){
+        List<RelUser> relUsers=null;
+        relUsers=reluserRepo.getUsersWithOutLiveData();
+        if(relUsers.size()==0){
             RelUser relUser=new RelUser();
             relUser.FirstName="Admin";
             relUser.LastName="Admin";
@@ -39,7 +46,6 @@ public class LoginViewModel extends AndroidViewModel {
             reluserRepo.insertUser(relUser);
         }
     }
-
     public LiveData<List<RelUser>> getUsers() {  return reluserRepo.getUsers();  }
 
 

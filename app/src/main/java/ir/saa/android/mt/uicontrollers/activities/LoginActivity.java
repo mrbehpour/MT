@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        //loginViewModel.initializerUser();
         spinner = findViewById(R.id.spnUserName);
         edtPassword = findViewById(R.id.edtPassword);
         spinnerArray =  new ArrayList<>();

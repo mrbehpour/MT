@@ -29,6 +29,10 @@ public class ReluserRepo  {
         return relUsers;
     }
 
+    public List<RelUser> getUsersWithOutLiveData() {
+        return relUserDao.getUsersWithoutLiveData();
+    }
+
     public List<Long> insertUsers(List<RelUser> relUserList){
         return relUserDao.insertRelusers(relUserList);
     }

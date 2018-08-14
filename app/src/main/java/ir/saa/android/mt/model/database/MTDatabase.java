@@ -94,7 +94,7 @@ import ir.saa.android.mt.model.entities.TestInfo;
                      MeterChangeInfo.class,MeterChangeDtl.class,
                      PolompInfo.class,GPSInfo.class,
                      PolompDtl.class,TariffInfo.class,
-                     TariffDtl.class,TestInfo.class,TestDtl.class},version = 4)
+                     TariffDtl.class,TestInfo.class,TestDtl.class},version = 5)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
