@@ -17,6 +17,7 @@ import android.widget.TextView;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.repositories.metertester.EnergiesState;
+import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.TestEnergyViewModel;
 
 public class TestEnergyFragment extends Fragment
@@ -39,6 +40,10 @@ public class TestEnergyFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_test_energy, container, false);
         testEnergyViewModel = ViewModelProviders.of(this).get(TestEnergyViewModel.class);
+
+        TestContorParams tcp=new TestContorParams(true,true,1,5,100,200,10);
+        testEnergyViewModel.setTestContorParams(tcp);
+
         LinearLayout llLeft = rootView.findViewById(R.id.llLeft);
         LinearLayout llCenter = rootView.findViewById(R.id.llCenter);
         LinearLayout llRight = rootView.findViewById(R.id.llRight);

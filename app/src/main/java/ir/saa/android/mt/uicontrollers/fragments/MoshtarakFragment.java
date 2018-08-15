@@ -89,9 +89,11 @@ public class MoshtarakFragment extends Fragment
                     return new MoshtarakOperationsTabFragment();
                 case 1:
                     Fragment moshtarakDetailsTabFragment =  new MoshtarakDetailsTabFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putLong(BundleKeysEnum.ClientID,ClientID);
-                    moshtarakDetailsTabFragment.setArguments(bundle);
+                    if(ClientID!=null) {
+                        Bundle bundle = new Bundle();
+                        bundle.putLong(BundleKeysEnum.ClientID, ClientID);
+                        moshtarakDetailsTabFragment.setArguments(bundle);
+                    }
                     return moshtarakDetailsTabFragment;
                 default:
                     return new MoshtarakOperationsTabFragment();
