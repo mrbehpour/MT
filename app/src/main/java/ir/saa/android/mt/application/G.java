@@ -21,6 +21,9 @@ import ir.saa.android.mt.uicontrollers.fragments.BazdidFragment;
 import ir.saa.android.mt.uicontrollers.fragments.HomeFragment;
 import ir.saa.android.mt.uicontrollers.fragments.MoshtarakFragment;
 import ir.saa.android.mt.uicontrollers.fragments.SettingFragment;
+import ir.saa.android.mt.uicontrollers.fragments.TestContorFragment;
+import ir.saa.android.mt.uicontrollers.fragments.TestEnergyFragment;
+import ir.saa.android.mt.uicontrollers.fragments.TestFragment;
 
 public class G extends Application {
 
@@ -90,6 +93,12 @@ public class G extends Application {
                 break;
             case FragmentsEnum.MoshtarakFragment:
                 targetFragment=new MoshtarakFragment();
+                break;
+            case FragmentsEnum.TestFragment:
+                targetFragment=new TestContorFragment();
+                break;
+            case FragmentsEnum.TestEnergyFragment:
+                targetFragment=new TestEnergyFragment();
                 break;
         }
         if(targetFragment!=null){

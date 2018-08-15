@@ -9,4 +9,6 @@ public class FragmentsEnum {
     public static final int SettingFragment = 2;
     public static final int BazdidFragment = 3;
     public static final int MoshtarakFragment = 4;
+    public static final int TestFragment = 5;
+    public static final int TestEnergyFragment = 6;
 }
