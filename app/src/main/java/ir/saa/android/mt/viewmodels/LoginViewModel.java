@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
@@ -14,16 +15,23 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
+import ir.saa.android.mt.repositories.roomrepos.RegionRepo;
 import ir.saa.android.mt.repositories.roomrepos.ReluserRepo;
+import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 
 public class LoginViewModel extends AndroidViewModel {
     ReluserRepo reluserRepo = null;
+    RegionRepo regionRepo=null;
     RetrofitMT retrofitMT=null;
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
+
+        if(regionRepo==null)
+            regionRepo=new RegionRepo(application);
         if(reluserRepo==null)
             reluserRepo = new ReluserRepo(application);
         if(retrofitMT==null)
@@ -37,7 +45,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     private void initializerUser(){
         List<RelUser> relUsers=null;
-        relUsers=reluserRepo.getUsersWithOutLiveData();
+        relUsers=reluserRepo.getUsers();
         if(relUsers.size()==0){
             RelUser relUser=new RelUser();
             relUser.FirstName="Admin";
@@ -46,14 +54,37 @@ public class LoginViewModel extends AndroidViewModel {
             reluserRepo.insertUser(relUser);
         }
     }
-    public LiveData<List<RelUser>> getUsers() {  return reluserRepo.getUsers();  }
+    public LiveData<List<RelUser>> getUsers() {  return reluserRepo.getUsersLiveData();  }
 
 
-    public RelUser getUserByUserIdAndPassword(int userId,String password){
-        return reluserRepo.getUserByUserAndPassword(userId,password);
+    public boolean IsLoginValid(int userId,String password){
+//       RelUser user = loginViewModel.getUserByUserIdAndPassword(spinnerMap.get(spinner.getSelectedItemPosition()),edtPassword.getText().toString());
+        RelUser user = reluserRepo.getUserByUserAndPassword(userId,password);
+        if(user!=null) {
+            G.setPref("UserName" ,user.FirstName+" "+user.LastName );
+            if(user.RegionID!=null){
+                G.setPref("RegionName",getRegionNameById(user.RegionID));
+            }
+            else{
+                G.setPref("RegionName","ندارد");
+            }
+
+            if(user.RoleID!=null)
+                G.setPref("RoleId",user.RoleID.toString());
+            else
+                G.setPref("RoleId","-1");
+
+            G.setPref("UserID", (Integer.toString(user.UserID)));
+
+            return true;
+        }
+        else
+            return false;
     }
 
-
+        private String getRegionNameById(Short Id){
+            return regionRepo.getRegionById(Id).RegionName;
+        }
 
 
 //    public void getAnswerGroupsFromServer(){

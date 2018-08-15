@@ -16,5 +16,5 @@
 
     <!--،Toast Masseage -->
     <string name="backMessage">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
-
+    <string name="CaptionRegion">منطقه : </string>
 </resources>

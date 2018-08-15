@@ -24,6 +24,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.viewmodels.LoginViewModel;
 
@@ -52,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         adapterInit();
 
         findViewById(R.id.btnLogin).setOnClickListener(v->{
-             RelUser user = loginViewModel.getUserByUserIdAndPassword(spinnerMap.get(spinner.getSelectedItemPosition()),edtPassword.getText().toString());
-             if(user!=null) {
+            boolean isLoginValid=loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()),edtPassword.getText().toString());
+             if(isLoginValid) {
                  Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                  startActivity(intent);
                  finish();

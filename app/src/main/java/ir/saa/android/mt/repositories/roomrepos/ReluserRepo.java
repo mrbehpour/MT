@@ -25,11 +25,11 @@ public class ReluserRepo  {
         relUsers = relUserDao.getUsers();
     }
 
-    public LiveData<List<RelUser>> getUsers() {
+    public LiveData<List<RelUser>> getUsersLiveData() {
         return relUsers;
     }
 
-    public List<RelUser> getUsersWithOutLiveData() {
+    public List<RelUser> getUsers() {
         return relUserDao.getUsersWithoutLiveData();
     }
 

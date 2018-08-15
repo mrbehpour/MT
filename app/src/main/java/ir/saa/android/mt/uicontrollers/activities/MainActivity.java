@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
 //import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity{
         G.actionBar = getSupportActionBar();
 
         G.startFragment(FragmentsEnum.HomeFragment,false,null);
+
+
     }
 
     private void setUpActionBar() {
@@ -62,6 +65,22 @@ public class MainActivity extends AppCompatActivity{
         G.mDrawerLayout = findViewById(R.id.drawer_layout);
         drawerFragment.setUpDrawer(R.id.nav_drwr_fragment, G.mDrawerLayout, toolbar);
         G.fragmentDrawer = findViewById(R.id.nav_drwr_fragment);
+        TextViewFont   tvfName= G.fragmentDrawer.findViewById(R.id.tvfName);
+        TextViewFont   tvfRegion= G.fragmentDrawer.findViewById(R.id.tvfRegion);
+        if(G.getPref("UserName")!=null){
+            tvfName.setText(G.getPref("UserName"));
+        }
+        tvfRegion.setText("");
+        if(G.getPref("RegionName")!=null){
+            String RegionName=getText(R.string.CaptionRegion)+" "+G.getPref("RegionName");
+            tvfRegion.setText(RegionName);
+        }
+        else{
+            String RegionName=R.string.CaptionRegion+" ";
+            tvfRegion.setText(RegionName);
+        }
+
+
         // set llMenu's width to 90% of screen's width
         int width = (getResources().getDisplayMetrics().widthPixels * 90)/100;
         DrawerLayout.LayoutParams params = (DrawerLayout.LayoutParams) G.fragmentDrawer.getLayoutParams();

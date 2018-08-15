@@ -30,10 +30,14 @@ public class RegionRepo  {
     }
 
 
-    public LiveData<Region> getRegionById(int Id) {
-        return regionDao.getRegionById(Id);
+    public LiveData<Region> getRegionByIdLiveData(int Id) {
+        return regionDao.getRegionByIdLiveData(Id);
     }
 
+
+    public Region getRegionById(int Id) {
+        return regionDao.getRegionById(Id);
+    }
 
     public LiveData<List<Region>> getRegionByCompanyId(int Id) {
         return regionDao.getRegionByCompanyId(Id);

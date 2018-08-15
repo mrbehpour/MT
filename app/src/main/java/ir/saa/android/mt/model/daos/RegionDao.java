@@ -23,7 +23,10 @@ public interface RegionDao {
     void deleteAll();
 
     @Query("select * from Region where RegionID= :Id")
-    LiveData<Region> getRegionById(int Id);
+   Region getRegionById(int Id);
+
+    @Query("select * from Region where RegionID= :Id")
+    LiveData<Region> getRegionByIdLiveData(int Id);
 
     @Query("select * from Region where company_Id= :Id")
     LiveData<List<Region>> getRegionByCompanyId(int Id);

@@ -218,7 +218,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     }
                     accessAgentAndroids = retrofitMT.getMtApi().GetAgentAccessByUserIdList(agentIdList).blockingGet();
                     agentAccessLists = retrofitMT.getMtApi().GetAgentAccessList().blockingGet();
-                    if(reluserRepo.getUsersWithOutLiveData().size()>0)
+                    if(reluserRepo.getUsers().size()>0)
                     {
                         reluserRepo.deleteAll();
                     }
