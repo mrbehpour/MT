@@ -1,18 +1,16 @@
 package ir.saa.android.mt.repositories.metertester;
 
-import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
+import ir.saa.android.mt.application.Converters;
 import ir.saa.android.mt.repositories.modbus.IModbusCallback;
 import ir.saa.android.mt.repositories.modbus.ITransferLayer;
-import ir.saa.android.mt.repositories.modbus.ITransferLayerCallback;
 import ir.saa.android.mt.repositories.modbus.ModBus;
+import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 
 public class MT {
 
@@ -78,13 +76,18 @@ public class MT {
         imtCallback = callback;
     }
 
-
     private void fillRegisterInfoList(){
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.ElecParams_ALL,0,81));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.ElecParams_PA,0,27));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.ElecParams_PB,27,27));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.ElecParams_PC,54,27));
-        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Command,224,1));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PA,4,6));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PB,31,6));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PC,58,6));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Init_Params,220,6));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Command,228,1));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Result,222,28));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Paulse_Counter,867,1));
     }
 
     private RegisterInfo findRegisterInfo(RegisterInfo.regNames regName){
@@ -100,11 +103,6 @@ public class MT {
     public void setTransferLayer(ITransferLayer tl){
         modBus.setTransferLayer(tl);
     }
-
-//    public void ReadCounter(){
-//        totalReciveData="";
-//        transferLayer.writeStringToDevice(ComStr, false);
-//    }
 
     public ElectericalParams ReadElectericalParams(Phase p) throws Exception{
         totalReciveData="";
@@ -154,12 +152,21 @@ public class MT {
 
         EnergiesState energiesStates;
         totalReciveData="";
-        RegisterInfo ri = findRegisterInfo(RegisterInfo.regNames.ElecParams_ALL);
+        RegisterInfo ri;
         try {
-            String result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght);
-            energiesStates=new EnergiesState(splitEnrgyActive(result.substring(0,54)),splitEnrgyReActive(result.substring(0,54)),
-                                             splitEnrgyActive(result.substring(54,108)),splitEnrgyReActive(result.substring(54,108)),
-                                             splitEnrgyActive(result.substring(108,162)),splitEnrgyReActive(result.substring(108,162)));
+            String[] result=new String[3];
+            ri = findRegisterInfo(RegisterInfo.regNames.Enegies_PA);
+            result[0] = splitRawDate(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+
+            ri = findRegisterInfo(RegisterInfo.regNames.Enegies_PB);
+            result[1] = splitRawDate(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+
+            ri = findRegisterInfo(RegisterInfo.regNames.Enegies_PC);
+            result[2] = splitRawDate(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            Log.d("response",result[0]+" , "+result[1]+" , "+result[2]);
+            energiesStates=new EnergiesState(checkEnergyState(result[0].substring(0,8)),checkEnergyState(result[0].substring(8,16)),
+                                             checkEnergyState(result[1].substring(0,8)),checkEnergyState(result[1].substring(8,16)),
+                                             checkEnergyState(result[2].substring(0,8)),checkEnergyState(result[2].substring(8,16)));
 
         } catch (Exception ex) {
             imtCallback.onConnectionError(ex.getMessage());
@@ -169,6 +176,42 @@ public class MT {
         return energiesStates;
     }
 
+    public int ReadPaulseCounter() throws Exception {
+
+        String result="";
+        totalReciveData="";
+        RegisterInfo ri;
+        try {
+            ri = findRegisterInfo(RegisterInfo.regNames.Paulse_Counter);
+            result = splitRawDate(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            //result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght);
+            Log.d("response paulse",result);
+        } catch (Exception ex) {
+            imtCallback.onConnectionError(ex.getMessage());
+            throw new Exception(ex);
+        }
+        //TODO-parsing
+//        return Integer.parseInt(result);
+        return Integer.parseInt(result,16);
+    }
+
+    public TestResult ReadTestResult(int resultRound) throws Exception {
+
+        String result="";
+        totalReciveData="";
+        RegisterInfo ri;
+        try {
+            ri = findRegisterInfo(RegisterInfo.regNames.Test_Result);
+            resultRound=resultRound%20;
+            result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress+((resultRound-1)*28), ri.registerLenght);
+            Log.d("response test res",result);
+        } catch (Exception ex) {
+            imtCallback.onConnectionError(ex.getMessage());
+            throw new Exception(ex);
+        }
+        //TODO-parsing
+        return splitTestResult(result);
+    }
 
     public String SendTestCommand(TestCommands st){
         totalReciveData="";
@@ -193,10 +236,41 @@ public class MT {
         return result;
     }
 
-//    public void SendACK(){
-//        totalReciveData="";
-//        transferLayer.writeStringToDevice(AckStr,false);
-//    }
+    public String SendTestContorParams(TestContorParams tcp) {
+        String result = "";
+        RegisterInfo ri = findRegisterInfo(RegisterInfo.regNames.Test_Init_Params);
+        byte[] tmp;
+        byte[] data = Converters.ConvertInt4ByteArray(tcp.ContorConst);
+
+        tmp = Converters.ConvertInt2ByteArray(tcp.SensorRatio,false);
+        data = Converters.ConcatenateTwoArray(data,tmp);
+
+        tmp = Converters.ConvertInt2ByteArray(tcp.CTCoeff,false);
+        data = Converters.ConcatenateTwoArray(data,tmp);
+
+        tmp = Converters.ConvertInt2ByteArray(1,false);
+        data = Converters.ConcatenateTwoArray(data,tmp);
+
+        tmp = Converters.ConvertInt2ByteArray(tcp.Active?1:2,false);
+        data = Converters.ConcatenateTwoArray(data,tmp);
+
+        tmp = Converters.ConvertInt2ByteArray(tcp.SinglePhase?1:2,false);
+        data = Converters.ConcatenateTwoArray(data,tmp);
+
+        tmp = Converters.ConvertInt2ByteArray(1,false);
+        data = Converters.ConcatenateTwoArray(data,tmp);
+
+        try {
+            result = modBus.writeMultipleRegister(SLAVE_ID, ri.registerAddress,data);
+        }catch (Exception ex){
+            imtCallback.onConnectionError(ex.getMessage());
+        }
+        return result;
+    }
+
+    private String splitRawDate(String responseStr){
+        return responseStr.substring(6,responseStr.length()-4);
+    }
 
     //parse data
     private ElectericalParams splitElectericalParams(String responseStr){
@@ -215,14 +289,33 @@ public class MT {
         return ep;
     }
 
-    private double splitEnrgyActive(String responseStr){
-        return Double.parseDouble (responseStr.substring(22, 30));
+    private TestResult splitTestResult(String responseStr){
+        TestResult tr=new TestResult();
+        if(responseStr.trim().length()>0) {
+            tr.MeterEnergy_Period1_A = calPower(responseStr.substring(6, 14));
+            tr.MeterEnergy_Period1_B = calPower(responseStr.substring(14, 22));
+            tr.MeterEnergy_Period1_C = calPower(responseStr.substring(22, 30));
+            tr.Time_Period1 = responseStr.substring(30, 38);
+            tr.AIRMS_Period1 = responseStr.substring(38, 46);
+            tr.BIRMS_Period1 = responseStr.substring(46, 58);
+            tr.CIRMS_Period1 = responseStr.substring(58, 66);
+            tr.NIRMS_Period1 = responseStr.substring(66, 74);
+            tr.AVRMS_Period1 = responseStr.substring(74, 82);
+            tr.BVRMS_Period1 = responseStr.substring(82, 90);
+            tr.CVRMS_Period1 = responseStr.substring(90, 98);
+            tr.ANGLE0_Period1 = responseStr.substring(98, 102);
+            tr.ANGLE1_Period1 = responseStr.substring(102, 106);
+            tr.ANGLE2_Period1 = responseStr.substring(106, 110);
+            tr.Period_Period1_A = responseStr.substring(110, 114);
+            tr.Period_Period1_B = responseStr.substring(114, 118);
+            tr.Period_Period1_C = responseStr.substring(118, 122);
+        }
+        return tr;
     }
 
-    private double splitEnrgyReActive(String responseStr){
-        return Double.parseDouble (responseStr.substring(30, 38));
+    private boolean checkEnergyState(String responseStr){
+        return responseStr.substring(0,2).equals("00")?true:false;
     }
-
 
     private String calVoltage(String responseStr){
         String result = "";
@@ -240,7 +333,6 @@ public class MT {
         double d=Integer.parseInt(responseStr,16)/(double)3840;
         return String.format("%.2f", d);
     }
-
 
     private String calAngle(String responseStr){
         int ang=Integer.parseInt(responseStr,16);
@@ -263,29 +355,6 @@ public class MT {
         }
 
         return v;
-    }
-
-    private String showByteArray(byte[] dataArr){
-        String dataStr="";
-        for(byte b:dataArr) {
-            dataStr += String.format("%s ",String.valueOf(b));
-        }
-
-        return  dataStr;
-    }
-
-    private int byteArrayToInt(byte[] byteArr) {
-        return ByteBuffer.wrap(byteArr).getInt();
-    }
-
-    private String ArrayByte2Hex(byte[] selArray){
-        final StringBuilder builder=new StringBuilder();
-        for(byte b : selArray){
-            builder.append(String.format("%02x" , b));
-        }
-
-        return builder.toString().toUpperCase();
-
     }
 
 }

@@ -20,6 +20,12 @@ public class RegisterInfo {
         ElecParams_PA,
         ElecParams_PB,
         ElecParams_PC,
-        Test_Command
+        Enegies_PA,
+        Enegies_PB,
+        Enegies_PC,
+        Test_Command,
+        Test_Init_Params,
+        Test_Result,
+        Paulse_Counter,
     }
 }

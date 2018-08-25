@@ -3,6 +3,7 @@ package ir.saa.android.mt.uicontrollers.fragments;
 import android.annotation.TargetApi;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +24,8 @@ import ir.saa.android.mt.viewmodels.TestEnergyViewModel;
 public class TestEnergyFragment extends Fragment
 {
     TestEnergyViewModel testEnergyViewModel = null;
+    TestContorParams testContorParams;
+
     public TestEnergyFragment() {
     }
 
@@ -41,8 +44,8 @@ public class TestEnergyFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_test_energy, container, false);
         testEnergyViewModel = ViewModelProviders.of(this).get(TestEnergyViewModel.class);
 
-        TestContorParams tcp=new TestContorParams(true,true,1,5,100,200,10);
-        testEnergyViewModel.setTestContorParams(tcp);
+        Bundle args = getArguments();
+        testContorParams = (TestContorParams)args.getSerializable("testContorParams");
 
         LinearLayout llLeft = rootView.findViewById(R.id.llLeft);
         LinearLayout llCenter = rootView.findViewById(R.id.llCenter);
@@ -79,6 +82,7 @@ public class TestEnergyFragment extends Fragment
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                testEnergyViewModel.setTestContorParams(testContorParams);
                 testEnergyViewModel.confirmEnergies();
             }
         });
@@ -88,8 +92,9 @@ public class TestEnergyFragment extends Fragment
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
         super.onViewCreated(view, savedInstanceState);
     }
+
+
 
 }

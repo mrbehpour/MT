@@ -17,6 +17,7 @@ import java.util.Stack;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.uicontrollers.fragments.AmaliyatFragment;
 import ir.saa.android.mt.uicontrollers.fragments.BazdidFragment;
 import ir.saa.android.mt.uicontrollers.fragments.HomeFragment;
 import ir.saa.android.mt.uicontrollers.fragments.MoshtarakFragment;
@@ -93,14 +94,22 @@ public class G extends Application {
                 break;
             case FragmentsEnum.MoshtarakFragment:
                 targetFragment=new MoshtarakFragment();
+                setActionbarTitleText("مشترکین");
                 break;
             case FragmentsEnum.TestFragment:
                 targetFragment=new TestContorFragment();
+                setActionbarTitleText("تست کنتور");
                 break;
             case FragmentsEnum.TestEnergyFragment:
                 targetFragment=new TestEnergyFragment();
+                setActionbarTitleText("اتصال کلمپ ها");
+                break;
+            case FragmentsEnum.AmaliyatFragment:
+                targetFragment=new AmaliyatFragment();
+                setActionbarTitleText("نتایج تست");
                 break;
         }
+
         if(targetFragment!=null){
             if(bundle!=null){
                 targetFragment.setArguments(bundle);

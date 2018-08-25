@@ -10,5 +10,4 @@ public class ElectericalParams {
     public String AWATT;
     public String AVAR;
     public String AVA;
-
 }

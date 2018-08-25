@@ -1,5 +1,12 @@
 package ir.saa.android.mt.repositories.modbus;
 
+import android.util.Log;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import ir.saa.android.mt.application.Converters;
+
 public class ModBus {
 
     private static ModBus _instance;
@@ -11,16 +18,24 @@ public class ModBus {
             return _instance;
         }
     }
-    private ModBus(){ }
+    private ModBus(){
+        //timerStart(5000);
+    }
 
     private final byte READ_HOLDING_REGISTER_FC =0x03;
     private final byte READ_INPUT_REGISTER_FC =0x04;
     private final byte WRITE_SINGLE_REGISTER_FC=0x06;
-    private final byte WRITE_MULTIPLE_REGISTER_FC =0x04;
+    private final byte WRITE_MULTIPLE_REGISTER_FC =0x10;
+
+    private byte Last_Register_FC =0x00;
+    private String Last_Send_Command="";
 
     ITransferLayer transferLayer;
     String totalReciveData="";
+
     Boolean isModbusRunningKey = true;
+    Boolean getResponse = true;
+
     IModbusCallback modbusCallback;
 
     private int[] table = {
@@ -64,7 +79,6 @@ public class ModBus {
             @Override
             public void onConnected() {
                 modbusCallback.onConnected();
-                isModbusRunningKey=true;
             }
 
             @Override
@@ -85,10 +99,11 @@ public class ModBus {
 
             @Override
             public void onRecieveData(byte[] responseArray) {
-                totalReciveData += ArrayByte2Hex(responseArray);
+                totalReciveData += Converters.ArrayByte2Hex(responseArray);
             }
         });
     }
+
     public void setModbusCallback(IModbusCallback callback){
         modbusCallback = callback;
     }
@@ -96,55 +111,52 @@ public class ModBus {
     //-------check response-------
     private boolean checkResponseStr(String responseStr){
         boolean res=false;
-        if(responseStr.length()>12){
-            if(responseStr.substring(2,4).equals("04") &&  Integer.parseInt(responseStr.substring(4, 6),16)*2+10==responseStr.length()) {
-                res=true;
-            }
-        }
 
+        switch (Last_Register_FC) {
+            case READ_INPUT_REGISTER_FC:
+                if (responseStr.length() > 12) {
+                    if (responseStr.substring(2, 4).equals("04") && Integer.parseInt(responseStr.substring(4, 6), 16) * 2 + 10 == responseStr.length()) {
+                        res = true;
+                    }
+                }
+                break;
+
+            case WRITE_SINGLE_REGISTER_FC:
+                if (Last_Send_Command.equals(responseStr)) {
+                    res = true;
+                }
+                break;
+
+            case WRITE_MULTIPLE_REGISTER_FC:
+                if(responseStr.length()>=12 && Last_Send_Command.substring(0,12).equals(responseStr.substring(0,12))) {
+                    res = true;
+                }
+                break;
+        }
+        if(res) getResponse=true;
         return  res;
     }
-
     //-----------------------
 
-    //Calc CRC
+    //-----------Calc CRC------------
     private byte[] ModRTU_CRC_Int(byte[] buf) {
         int crc = 0xFFFF;
         for (byte b : buf) {
             crc = (crc >>> 8) ^ table[(crc ^ b) & 0xff];
         }
 
-        return convertInt2ByteArray(crc,true);
+        return Converters.ConvertInt2ByteArray(crc,true);
     }
-    //-----------Converters----------
-    private byte[] convertInt2ByteArray(int num,boolean doReverce) {
-        byte[] data = new byte[2];
-        if(doReverce){
-            data[0] = (byte) (num & 0xFF);
-            data[1] = (byte) ((num >> 8) & 0xFF);
-        }
-        else {
-            data[1] = (byte) (num & 0xFF);
-            data[0] = (byte) ((num >> 8) & 0xFF);
-        }
-        return  data;
-    }
-    private String ArrayByte2Hex(byte[] selArray){
-        final StringBuilder builder=new StringBuilder();
-        for(byte b : selArray){
-            builder.append(String.format("%02x" , b));
-        }
+    //--------------------------------
 
-        return builder.toString().toUpperCase();
-
-    }
-
-    //--------Main Methods------------
-
+    //--------Main Methods-----------
     public synchronized String readHoldingRegister() throws Exception {
         String result ="";
         if(transferLayer.isConnected()) {
             byte[] dataArray = new byte[1];
+
+            totalReciveData="";
+            Last_Register_FC = READ_INPUT_REGISTER_FC;
 
             transferLayer.writeByteArrayToDevice(dataArray);
 
@@ -165,15 +177,23 @@ public class ModBus {
     public synchronized String readInputRegister(byte slaveID, int startAddress, int QR) throws Exception {
         String result ="";
         if(transferLayer.isConnected()) {
-            byte[] ADR_Byte = convertInt2ByteArray(startAddress, false);
-            byte[] QR_Byte = convertInt2ByteArray(QR, false);
+            byte[] ADR_Byte = Converters.ConvertInt2ByteArray(startAddress, false);
+            byte[] QR_Byte = Converters.ConvertInt2ByteArray(QR, false);
 
             byte[] tempArray = new byte[]{slaveID, READ_INPUT_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], QR_Byte[0], QR_Byte[1]};
             byte[] CRC_Byte = ModRTU_CRC_Int(tempArray);
-            byte[] dataArray = new byte[]{slaveID, READ_INPUT_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], QR_Byte[0], QR_Byte[1], CRC_Byte[0], CRC_Byte[1]};
+//            byte[] dataArray = new byte[]{slaveID, READ_INPUT_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], QR_Byte[0], QR_Byte[1], CRC_Byte[0], CRC_Byte[1]};
+            byte[] dataArray = Converters.ConcatenateTwoArray(tempArray,CRC_Byte);
 
-            totalReciveData = "";
+            totalReciveData="";
+            Last_Register_FC = READ_INPUT_REGISTER_FC;
+            Last_Send_Command = Converters.ArrayByte2Hex(dataArray);
+
             transferLayer.writeByteArrayToDevice(dataArray);
+            Log.d("response read input",Last_Send_Command);
+            getResponse=false;
+            isModbusRunningKey=true;
+
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
                     result = totalReciveData;
@@ -191,15 +211,19 @@ public class ModBus {
     public synchronized String writeSingleRegister(byte slaveID, int writeAddress, int value) throws Exception {
         String result ="";
         if(transferLayer.isConnected()) {
-            byte[] ADR_Byte = convertInt2ByteArray(writeAddress, false);
-            byte[] VAL_Byte = convertInt2ByteArray(value, false);
+            byte[] ADR_Byte = Converters.ConvertInt2ByteArray(writeAddress, false);
+            byte[] VAL_Byte = Converters.ConvertInt2ByteArray(value, false);
 
             byte[] tempArray = new byte[]{slaveID, WRITE_SINGLE_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], VAL_Byte[0], VAL_Byte[1]};
             byte[] CRC_Byte = ModRTU_CRC_Int(tempArray);
             byte[] dataArray = new byte[]{slaveID, WRITE_SINGLE_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], VAL_Byte[0], VAL_Byte[1], CRC_Byte[0], CRC_Byte[1]};
 
-            totalReciveData = "";
+            totalReciveData="";
+            Last_Register_FC = WRITE_SINGLE_REGISTER_FC;
+            Last_Send_Command = Converters.ArrayByte2Hex(dataArray);
             transferLayer.writeByteArrayToDevice(dataArray);
+            Log.d("response write single",Last_Send_Command);
+
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
                     result = totalReciveData;
@@ -214,12 +238,28 @@ public class ModBus {
         return result;
     }
 
-    public synchronized String writeMultipleRegister() throws Exception {
+    public synchronized String writeMultipleRegister(byte slaveID, int writeAddress, byte[] VAL_Byte) throws Exception {
         String result ="";
         if(transferLayer.isConnected()) {
-            byte[] dataArray = new byte[1];
+            byte[] ADR_Byte = Converters.ConvertInt2ByteArray(writeAddress, false);
+            byte[] QR_Byte = Converters.ConvertInt2ByteArray(VAL_Byte.length/2, false);
+            byte[] LEN_Byte = Converters.ConvertInt2ByteArray(VAL_Byte.length, false);
 
+            byte[] tempArray = new byte[]{slaveID, WRITE_MULTIPLE_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], QR_Byte[0], QR_Byte[1], LEN_Byte[1]};
+            byte[] dataArray = Converters.ConcatenateTwoArray(tempArray,VAL_Byte);
+            byte[] CRC_Byte = ModRTU_CRC_Int(dataArray);
+            dataArray = Converters.ConcatenateTwoArray(dataArray,CRC_Byte);
+//            byte[] dataArray = new byte[]{slaveID, WRITE_MULTIPLE_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], LEN_Byte[0], LEN_Byte[1], VAL_Byte[0], VAL_Byte[1], CRC_Byte[0], CRC_Byte[1]};
+
+            totalReciveData="";
+            Last_Register_FC = WRITE_MULTIPLE_REGISTER_FC;
+            Last_Send_Command = Converters.ArrayByte2Hex(dataArray);
             transferLayer.writeByteArrayToDevice(dataArray);
+            Log.d("response write multi",Last_Send_Command);
+
+            getResponse=false;
+            isModbusRunningKey=true;
+
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
                     result = totalReciveData;
@@ -233,8 +273,49 @@ public class ModBus {
         }
         return result;
     }
+    //--------------------------------
+
+    //--------Methods-----------
+    //--------------------------
+
+    //---------Timeout Checker-------
+    private Timer timer;
+
+    TimerTask timerTask = new TimerTask() {
+
+        @Override
+        public void run() {
+            //writeLog("Write_Data readtype","" + readtype.toString());
+            if(isModbusRunningKey){//
+                if(!getResponse){
+                    isModbusRunningKey=false;
+                    Log.d("response","Time Out.");
+                }
+            }
+        }
+    };
+
+    private void timerStart(long prd) {
+        if(timer != null) {
+            return;
+        }
+        timer = new Timer();
+        timer.scheduleAtFixedRate(timerTask, prd, prd);
+    }
+
+    private void timerStop() {
+
+        if(timer!=null){
+            timer.cancel();
+            timer = null;
+        }
+    }
+    //-------------------------------
 
     public void Dispose(){
         isModbusRunningKey = false;
     }
+
+
+
 }

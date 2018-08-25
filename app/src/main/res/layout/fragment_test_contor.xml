@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -26,45 +28,18 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="16dp">
-                <!-- Reactive -->
-                <LinearLayout
-                    android:id="@+id/llReactive"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:background="@drawable/shape_left_radius">
-                    <TextView
-                        android:id="@+id/tvReactive"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textAlignment="gravity"
-                        android:textColor="@color/grey_900"
-                        android:text="راکتیو" />
-                    </LinearLayout>
-                <!-- Active -->
-                <LinearLayout
-                    android:id="@+id/llAeactive"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:background="@drawable/shape_right_radius">
-                    <TextView
-                        android:id="@+id/tvActive"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textAlignment="gravity"
-                        android:textColor="@color/grey_900"
-                        android:text="اکتیو" />
-                </LinearLayout>
 
+                <com.github.angads25.toggle.LabeledSwitch
+                    android:id="@+id/switchTestType"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:textSize="22sp"
+                    app:on="true"
+                    app:textOn="اکتیو"
+                    app:textOff="راکتیو"
+                    app:colorOn="#f16f13"
+                    app:colorBorder="#f16f13"/>
 
             </LinearLayout>
 
@@ -75,45 +50,18 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="8dp">
-                <!-- 3Faz -->
-                <LinearLayout
-                    android:id="@+id/ll3Faz"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:background="@drawable/shape_left_radius">
-                    <TextView
-                        android:id="@+id/tv3Faz"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textAlignment="gravity"
-                        android:textColor="@color/grey_900"
-                        android:text="سه فاز" />
-                </LinearLayout>
-                <!-- 1Faz -->
-                <LinearLayout
-                    android:id="@+id/ll1Faz"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:background="@drawable/shape_right_radius">
-                    <TextView
-                        android:id="@+id/tv1Faz"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textAlignment="gravity"
-                        android:textColor="@color/grey_900"
-                        android:text="تکفاز" />
-                </LinearLayout>
 
+                <com.github.angads25.toggle.LabeledSwitch
+                    android:id="@+id/switchPhase"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:textSize="22sp"
+                    app:on="true"
+                    app:textOn="تک فاز"
+                    app:textOff="سه فاز"
+                    app:colorOn="#f16f13"
+                    app:colorBorder="#f16f13"/>
 
             </LinearLayout>
 
@@ -124,45 +72,18 @@
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
                 android:layout_marginTop="8dp">
-                <!-- Test2 -->
-                <LinearLayout
-                    android:id="@+id/llTest2"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:background="@drawable/shape_left_radius">
-                    <TextView
-                        android:id="@+id/tvTest2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textAlignment="gravity"
-                        android:textColor="@color/grey_900"
-                        android:text="تست 2" />
-                </LinearLayout>
-                <!-- Test1 -->
-                <LinearLayout
-                    android:id="@+id/llTest1"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:clickable="true"
-                    android:background="@drawable/shape_right_radius">
-                    <TextView
-                        android:id="@+id/tvTest1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:textAlignment="gravity"
-                        android:textColor="@color/grey_900"
-                        android:text="تست 1" />
-                </LinearLayout>
 
+                <com.github.angads25.toggle.LabeledSwitch
+                    android:id="@+id/switchTestNum"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:textSize="22sp"
+                    app:on="true"
+                    app:textOn="تست اول"
+                    app:textOff="تست دوم"
+                    app:colorOn="#f16f13"
+                    app:colorBorder="#f16f13"/>
 
             </LinearLayout>
 
@@ -188,10 +109,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/grey_900"
-                    android:gravity="right"
-                    android:textAlignment="gravity"/>
+                    android:gravity="center"
+                    android:textAlignment="gravity"
+                    android:inputType="number"
+                    android:maxLength="3"/>
             </android.support.design.widget.TextInputLayout>
 
 
@@ -207,10 +130,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/grey_900"
-                    android:gravity="right"
-                    android:textAlignment="gravity"/>
+                    android:gravity="center"
+                    android:textAlignment="gravity"
+                    android:inputType="number"
+                    android:maxLength="5"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- Nesbat Kontor -->
@@ -225,10 +150,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/grey_900"
-                    android:gravity="right"
-                    android:textAlignment="gravity"/>
+                    android:gravity="center"
+                    android:textAlignment="gravity"
+                    android:inputType="number"
+                    android:maxLength="3"/>
             </android.support.design.widget.TextInputLayout>
 
             <!-- Tedad Dor -->
@@ -243,10 +170,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/grey_900"
-                    android:gravity="right"
-                    android:textAlignment="gravity"/>
+                    android:gravity="center"
+                    android:textAlignment="gravity"
+                    android:inputType="number"
+                    android:maxLength="3" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Sabte -99% -->
