@@ -37,10 +37,7 @@ public class TestEnergyViewModel extends AndroidViewModel {
         metertester.setTransferLayer(bluetooth);
         metertester.setMTCallback(new IMTCallback() {
             @Override
-            public void onConnected() {
-
-                Log.d("response","onConnected");
-            }
+            public void onConnected() { Log.d("response","onConnected");}
 
             @Override
             public void onDisConnected() {
@@ -65,29 +62,28 @@ public class TestEnergyViewModel extends AndroidViewModel {
 
     }
 
-    TimerTask timerCheckTask = new TimerTask() {
-
-        @Override
-        public void run() {
-            readEnergiesStateFromMeter();
-        }
-
-    };
-
-
     private void timerCheckStart(long prd) {
         if(timerCheck != null) {
             return;
         }
 
         timerCheck = new Timer();
-        timerCheck.scheduleAtFixedRate(timerCheckTask, 0, prd);
+        TimerTask timerCheckTask = new TimerTask() {
+
+            @Override
+            public void run() {
+                readEnergiesStateFromMeter();
+            }
+
+        };
+        timerCheck.schedule(timerCheckTask, 0, prd);
 
     }
 
     private void timerCheckStop() {
         if(timerCheck!=null){
             timerCheck.cancel();
+            timerCheck.purge();
             timerCheck=null;
         }
     }
@@ -117,15 +113,25 @@ public class TestEnergyViewModel extends AndroidViewModel {
     }
 
     public void confirmEnergies(){
-        if((energiesStateMutableLiveData.getValue().energy1AState && energiesStateMutableLiveData.getValue().energy2AState && energiesStateMutableLiveData.getValue().energy3AState) ||
-                (!energiesStateMutableLiveData.getValue().energy1AState && !energiesStateMutableLiveData.getValue().energy3AState && !energiesStateMutableLiveData.getValue().energy3AState)   ){
-            //go to next fragment
-            timerCheckStop();
-            writeTestContorParams();
-            G.startFragment(FragmentsEnum.AmaliyatFragment,false,null);
+        try{
+            if ((energiesStateMutableLiveData.getValue().energy1AState && energiesStateMutableLiveData.getValue().energy2AState && energiesStateMutableLiveData.getValue().energy3AState) ||
+                    (!energiesStateMutableLiveData.getValue().energy1AState && !energiesStateMutableLiveData.getValue().energy3AState && !energiesStateMutableLiveData.getValue().energy3AState)) {
+                //go to next fragment
+                timerCheckStop();
+                writeTestContorParams();
+                G.startFragment(FragmentsEnum.AmaliyatFragment, false, null);
+            } else {
+                Toast.makeText(G.context, "جهت کلمپ ها یکسان نیست", Toast.LENGTH_SHORT).show();
+            }
         }
-        else{
-            Toast.makeText(G.context,"جهت کلمپ ها یکسان نیست",Toast.LENGTH_SHORT).show();
+        catch (Exception ex){
+
         }
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        timerCheckStop();
     }
 }

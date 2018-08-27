@@ -33,7 +33,7 @@ public class MoshtarakOperationsTabFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_moshtarak_operation, container, false);
         Button btnTest=rootView.findViewById(R.id.btnTest);
         btnTest.setOnClickListener(view -> {
-            G.startFragment(FragmentsEnum.TestFragment,false,null);
+            G.startFragment(FragmentsEnum.TestContorFragment,false,null);
         });
         return rootView;
     }

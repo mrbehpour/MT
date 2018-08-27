@@ -37,6 +37,7 @@ public class TestEnergyFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Override
@@ -44,8 +45,14 @@ public class TestEnergyFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_test_energy, container, false);
         testEnergyViewModel = ViewModelProviders.of(this).get(TestEnergyViewModel.class);
 
+
+
         Bundle args = getArguments();
-        testContorParams = (TestContorParams)args.getSerializable("testContorParams");
+        if (args != null) {
+            //Restore the fragment's state here
+            testContorParams = (TestContorParams)args.getSerializable("testContorParams");
+        }
+
 
         LinearLayout llLeft = rootView.findViewById(R.id.llLeft);
         LinearLayout llCenter = rootView.findViewById(R.id.llCenter);
@@ -93,6 +100,34 @@ public class TestEnergyFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("testContorParams", testContorParams);
+
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+
+        if(savedInstanceState!=null) {
+            // Retrieve the user email value from bundle.
+            testContorParams = (TestContorParams)savedInstanceState.getSerializable("testContorParams");
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
 

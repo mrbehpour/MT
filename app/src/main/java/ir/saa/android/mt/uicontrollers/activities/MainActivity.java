@@ -17,6 +17,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
+import ir.saa.android.mt.uicontrollers.fragments.TestEnergyFragment;
 //import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
 
 
@@ -119,7 +120,13 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         if(G.fragmentNumStack.size()>0){
-            G.startFragment(G.fragmentNumStack.pop(),true,null);
+            Integer targetFragmentNum = G.fragmentNumStack.pop();
+            if(targetFragmentNum==FragmentsEnum.TestContorFragment) {
+                Bundle bundle1 = ((TestEnergyFragment)G.fragmentManager.findFragmentById(R.id.frame_container)).getArguments();
+                G.startFragment(targetFragmentNum, true, bundle1);
+            }else{
+                G.startFragment(targetFragmentNum, true, null);
+            }
         }else{
             if (doubleBackToExitPressedOnce) {
                 MainActivity.this.finish();

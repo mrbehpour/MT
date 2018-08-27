@@ -292,23 +292,23 @@ public class MT {
     private TestResult splitTestResult(String responseStr){
         TestResult tr=new TestResult();
         if(responseStr.trim().length()>0) {
-            tr.MeterEnergy_Period1_A = calPower(responseStr.substring(6, 14));
-            tr.MeterEnergy_Period1_B = calPower(responseStr.substring(14, 22));
-            tr.MeterEnergy_Period1_C = calPower(responseStr.substring(22, 30));
+            tr.MeterEnergy_Period1_A = String.valueOf(twosComplement(responseStr.substring(6, 14)));
+            tr.MeterEnergy_Period1_B = String.valueOf(twosComplement(responseStr.substring(14, 22)));
+            tr.MeterEnergy_Period1_C = String.valueOf(twosComplement(responseStr.substring(22, 30)));
             tr.Time_Period1 = responseStr.substring(30, 38);
-            tr.AIRMS_Period1 = responseStr.substring(38, 46);
-            tr.BIRMS_Period1 = responseStr.substring(46, 58);
-            tr.CIRMS_Period1 = responseStr.substring(58, 66);
-            tr.NIRMS_Period1 = responseStr.substring(66, 74);
-            tr.AVRMS_Period1 = responseStr.substring(74, 82);
-            tr.BVRMS_Period1 = responseStr.substring(82, 90);
-            tr.CVRMS_Period1 = responseStr.substring(90, 98);
-            tr.ANGLE0_Period1 = responseStr.substring(98, 102);
-            tr.ANGLE1_Period1 = responseStr.substring(102, 106);
-            tr.ANGLE2_Period1 = responseStr.substring(106, 110);
-            tr.Period_Period1_A = responseStr.substring(110, 114);
-            tr.Period_Period1_B = responseStr.substring(114, 118);
-            tr.Period_Period1_C = responseStr.substring(118, 122);
+            tr.AIRMS_Period1 = calAmp(responseStr.substring(38, 46));
+            tr.BIRMS_Period1 = calAmp(responseStr.substring(46, 54));
+            tr.CIRMS_Period1 = calAmp( responseStr.substring(54, 62));
+            tr.NIRMS_Period1 = calAmp(responseStr.substring(62, 70));
+            tr.AVRMS_Period1 = calVoltage(responseStr.substring(70, 78));
+            tr.BVRMS_Period1 = calVoltage(responseStr.substring(78, 86));
+            tr.CVRMS_Period1 = calVoltage(responseStr.substring(86, 94));
+            tr.ANGLE0_Period1 = responseStr.substring(94, 98);
+            tr.ANGLE1_Period1 = responseStr.substring(98, 102);
+            tr.ANGLE2_Period1 = responseStr.substring(102, 106);
+            tr.Period_Period1_A = responseStr.substring(106, 110);
+            tr.Period_Period1_B = responseStr.substring(110, 114);
+            tr.Period_Period1_C = responseStr.substring(114, 118);
         }
         return tr;
     }

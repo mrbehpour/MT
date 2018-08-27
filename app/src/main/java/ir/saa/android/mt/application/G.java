@@ -96,7 +96,7 @@ public class G extends Application {
                 targetFragment=new MoshtarakFragment();
                 setActionbarTitleText("مشترکین");
                 break;
-            case FragmentsEnum.TestFragment:
+            case FragmentsEnum.TestContorFragment:
                 targetFragment=new TestContorFragment();
                 setActionbarTitleText("تست کنتور");
                 break;
@@ -114,7 +114,7 @@ public class G extends Application {
             if(bundle!=null){
                 targetFragment.setArguments(bundle);
             }
-            G.fragmentManager.beginTransaction().replace(R.id.frame_container, targetFragment).commit();
+            G.fragmentManager.beginTransaction().replace(R.id.frame_container, targetFragment).disallowAddToBackStack().commit();
         }
         //update current fragment number
         currentFragmentNum = targetFragmentNum;
