@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:id="@+id/listItemTestResultRoot">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Info Layout -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
+
+            <!-- ErrPerc Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvErrPerc"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:text="-"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:id="@+id/tvLableErrPerc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="درصد خطا: " />
+            </LinearLayout>
+
+            <!-- PF Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Shomare Badane -->
+                <TextView
+                    android:id="@+id/tvPF"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAlignment="gravity"
+                    android:gravity="right"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_500"
+                    android:text="-" />
+                <!-- Shomare Badane Lable -->
+                <TextView
+                    android:id="@+id/tvLablePF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_500"
+                    android:text="ضریب توان: " />
+            </LinearLayout>
+
+            //space
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:orientation="vertical"></LinearLayout>
+            //line
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#aaa">
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
