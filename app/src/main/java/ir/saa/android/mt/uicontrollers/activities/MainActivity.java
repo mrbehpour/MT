@@ -121,12 +121,7 @@ public class MainActivity extends AppCompatActivity{
     public void onBackPressed() {
         if(G.fragmentNumStack.size()>0){
             Integer targetFragmentNum = G.fragmentNumStack.pop();
-            if(targetFragmentNum==FragmentsEnum.TestContorFragment) {
-                Bundle bundle1 = ((TestEnergyFragment)G.fragmentManager.findFragmentById(R.id.frame_container)).getArguments();
-                G.startFragment(targetFragmentNum, true, bundle1);
-            }else{
-                G.startFragment(targetFragmentNum, true, null);
-            }
+            G.startFragment(targetFragmentNum, true, null);
         }else{
             if (doubleBackToExitPressedOnce) {
                 MainActivity.this.finish();
