@@ -49,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, R.layout.al_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(R.layout.al_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setAdapter(adapter);
-        spinner.setAdapter(adapter);
 
         adapterInit();
 
