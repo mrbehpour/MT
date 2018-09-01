@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.al_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setAdapter(adapter);
+        spinner.setAdapter(adapter);
 
         adapterInit();
 
