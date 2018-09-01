@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Info Layout -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical">
+
+            <!-- Row 1 Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Empty -->
+                <TextView
+                    android:id="@+id/tvEmpty"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.36"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text=""/>
+
+                <!-- Zamane Test -->
+                <TextView
+                    android:id="@+id/tvZamaneTest"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.32"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="زمان تست"/>
+
+                <!-- Darsad Khata -->
+                <TextView
+                    android:id="@+id/tvDarsadKhata"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.32"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="درصد خطا"/>
+            </LinearLayout>
+
+            <!-- Row 2 Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+                <!-- Zarib Tavan C -->
+                <TextView
+                    android:id="@+id/tvZaribTavanC"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.36"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="ضریب توان C"/>
+
+                <!--  Zarib Tavan B -->
+                <TextView
+                    android:id="@+id/tvZaribTavanB"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.32"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="ضریب توان B"/>
+
+                <!--  Zarib Tavan A -->
+                <TextView
+                    android:id="@+id/tvZaribTavanA"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.32"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="ضریب توان A"/>
+            </LinearLayout>
+
+            <!-- Row 3 Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+                <!-- Voltage Faze C -->
+                <TextView
+                    android:id="@+id/tvVoltageFazeC"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.36"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="ولتاژ فاز C"/>
+
+                <!-- Voltage Faze B -->
+                <TextView
+                    android:id="@+id/tvVoltageFazeB"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.32"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="ولتاژ فاز B"/>
+
+                <!-- Voltage Faze A -->
+                <TextView
+                    android:id="@+id/tvVoltageFazeA"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.32"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="ولتاژ فاز A"/>
+            </LinearLayout>
+
+            <!-- Row 4 Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+                <!-- Jaryane Faze C -->
+                <TextView
+                    android:id="@+id/tvJaryaneFazeC"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.36"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="جریان فاز C"/>
+
+                <!-- Jaryane Faze B -->
+                <TextView
+                    android:id="@+id/tvJaryaneFazeB"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.32"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="جریان فاز B"/>
+
+                <!-- Jaryane Faze A -->
+                <TextView
+                    android:id="@+id/tvJaryaneFazeA"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.32"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:text="جریان فاز A"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Number Layout -->
+        <TextView
+            android:id="@+id/tvNumber"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:fontFamily="@font/byekan"
+            android:textSize="30sp"
+            android:textColor="@color/grey_600"
+            android:gravity="center_vertical|center_horizontal"
+            android:textAlignment="gravity"
+            android:text="1"/>
+
+    </LinearLayout>
+
+    <!-- Line Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="70dp"
+        android:background="@color/grey_300"
+        android:orientation="horizontal"/>
+</LinearLayout>
