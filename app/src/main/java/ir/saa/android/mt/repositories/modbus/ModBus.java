@@ -19,7 +19,7 @@ public class ModBus {
         }
     }
     private ModBus(){
-        //timerStart(5000);
+        timerStart(2500);
     }
 
     private final byte READ_HOLDING_REGISTER_FC =0x03;
@@ -34,7 +34,7 @@ public class ModBus {
     String totalReciveData="";
 
     Boolean isModbusRunningKey = true;
-    Boolean getResponse = true;
+    Boolean waitForResponse = false;
 
     IModbusCallback modbusCallback;
 
@@ -116,6 +116,7 @@ public class ModBus {
             case READ_INPUT_REGISTER_FC:
                 if (responseStr.length() > 12) {
                     if (responseStr.substring(2, 4).equals("04") && Integer.parseInt(responseStr.substring(4, 6), 16) * 2 + 10 == responseStr.length()) {
+//                        if( Converters.hexString2ByteArray(responseStr.substring(0,responseStr.length()-4)).equals(ModRTU_CRC_Int()))
                         res = true;
                     }
                 }
@@ -133,7 +134,7 @@ public class ModBus {
                 }
                 break;
         }
-        if(res) getResponse=true;
+        waitForResponse = !res;
         return  res;
     }
     //-----------------------
@@ -159,6 +160,9 @@ public class ModBus {
             Last_Register_FC = READ_INPUT_REGISTER_FC;
 
             transferLayer.writeByteArrayToDevice(dataArray);
+
+            waitForResponse=true;
+            isModbusRunningKey=true;
 
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
@@ -191,11 +195,13 @@ public class ModBus {
 
             transferLayer.writeByteArrayToDevice(dataArray);
             Log.d("response read input",Last_Send_Command);
-            getResponse=false;
+
+            waitForResponse=true;
             isModbusRunningKey=true;
 
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
+                    Log.d("response ans_input",totalReciveData);
                     result = totalReciveData;
                     break;
                 }
@@ -222,7 +228,10 @@ public class ModBus {
             Last_Register_FC = WRITE_SINGLE_REGISTER_FC;
             Last_Send_Command = Converters.ArrayByte2Hex(dataArray);
             transferLayer.writeByteArrayToDevice(dataArray);
-            Log.d("response write single",Last_Send_Command);
+            Log.d("response write multi",Last_Send_Command);
+
+            waitForResponse=true;
+            isModbusRunningKey=true;
 
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
@@ -257,7 +266,7 @@ public class ModBus {
             transferLayer.writeByteArrayToDevice(dataArray);
             Log.d("response write multi",Last_Send_Command);
 
-            getResponse=false;
+            waitForResponse=true;
             isModbusRunningKey=true;
 
             while (isModbusRunningKey) {
@@ -285,9 +294,8 @@ public class ModBus {
 
         @Override
         public void run() {
-            //writeLog("Write_Data readtype","" + readtype.toString());
             if(isModbusRunningKey){//
-                if(!getResponse){
+                if(waitForResponse){
                     isModbusRunningKey=false;
                     Log.d("response","Time Out.");
                 }

@@ -16,20 +16,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import ir.saa.android.mt.R;
-import ir.saa.android.mt.adapters.bazdid.BazdidAdapter;
-import ir.saa.android.mt.adapters.bazdid.ClientItem;
 import ir.saa.android.mt.adapters.testresult.TestItem;
 import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
-import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.model.entities.Client;
-import ir.saa.android.mt.repositories.metertester.EnergiesState;
 import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
-import ir.saa.android.mt.viewmodels.TestEnergyViewModel;
 
 public class AmaliyatFragment extends Fragment {
 

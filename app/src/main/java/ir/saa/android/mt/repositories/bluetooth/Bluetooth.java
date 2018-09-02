@@ -144,13 +144,12 @@ public class Bluetooth implements ITransferLayer {
 
                     @Override
                     public void onSuccess(Boolean isFirstTime) {
-                        if(isConnected() && isFirstTime) {
-                            initInputOutput();
-                            listenForRecieve();
+                        if(isConnected()) {
+                            if(isFirstTime) {
+                                initInputOutput();
+                                listenForRecieve();
+                            }
                             bluetoothListener.onConnected();
-                        }
-                        else{
-                            bluetoothListener.onConnectionError(bt_err_connectionAlreadyOK);
                         }
                     }
 
@@ -215,6 +214,7 @@ public class Bluetooth implements ITransferLayer {
             throw new btException(bt_err_deviceNotPaired, new Throwable(String.valueOf(btException.class)));
         }
     }
+
     public List<String> getPairedDevice(){
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -231,6 +231,7 @@ public class Bluetooth implements ITransferLayer {
 
         return  pairedDevice;
     }
+
     boolean connect(){
         try {
             mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);

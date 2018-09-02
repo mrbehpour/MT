@@ -11,13 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
-import ir.saa.android.mt.viewmodels.BazdidViewModel;
 import ir.saa.android.mt.viewmodels.ModuleViewModel;
 
 public class ModuleFragment extends Fragment

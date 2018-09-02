@@ -1,6 +1,11 @@
 package ir.saa.android.mt.repositories.metertester;
 
 public class TestResult {
+    public int RoundNum;
+    public double ErrPerc;
+    public double PF_A;
+    public double PF_B;
+    public double PF_C;
     public String MeterEnergy_Period1_A;
     public String MeterEnergy_Period1_B;
     public String MeterEnergy_Period1_C;

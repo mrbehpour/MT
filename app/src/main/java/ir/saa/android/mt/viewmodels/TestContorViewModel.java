@@ -5,16 +5,10 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
-
-import java.io.Serializable;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
-import ir.saa.android.mt.repositories.metertester.EnergiesState;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
@@ -24,14 +18,18 @@ public class TestContorViewModel extends AndroidViewModel {
     MT metertester;
     TestContorParams testContorParams;
 
+    public MutableLiveData<Boolean> connectionStateMutableLiveData;
+
     public TestContorViewModel(@NonNull Application application) {
         super(application);
         metertester = MT.getInstance();
+        connectionStateMutableLiveData = new MutableLiveData<>();
         bluetooth = Bluetooth.getInstance();
         metertester.setTransferLayer(bluetooth);
         metertester.setMTCallback(new IMTCallback() {
             @Override
             public void onConnected() {
+                connectionStateMutableLiveData.postValue(true);
                 Log.d("response","onConnected");
             }
 
@@ -42,6 +40,7 @@ public class TestContorViewModel extends AndroidViewModel {
 
             @Override
             public void onConnectionError(String errMsg) {
+                connectionStateMutableLiveData.postValue(false);
                 Log.d("response","onConnectionError : "+errMsg);
             }
 
@@ -50,7 +49,12 @@ public class TestContorViewModel extends AndroidViewModel {
                 Log.d("response","onReportStatus : "+statusMsg);
             }
         });
+    }
 
+    public void initTranseferLayer(){
+        String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
+        if(BluetoothDeviceName.equals("")) connectionStateMutableLiveData.postValue(false);
+        bluetooth.init(BluetoothDeviceName);
     }
 
 }

@@ -2,25 +2,16 @@ package ir.saa.android.mt.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableSingleObserver;
-import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.repositories.roomrepos.RegionRepo;
 import ir.saa.android.mt.repositories.roomrepos.ReluserRepo;
-import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 
 public class LoginViewModel extends AndroidViewModel {
     ReluserRepo reluserRepo = null;
@@ -45,12 +36,13 @@ public class LoginViewModel extends AndroidViewModel {
 
     private void initializerUser(){
         List<RelUser> relUsers=null;
+
         relUsers=reluserRepo.getUsers();
         if(relUsers.size()==0){
             RelUser relUser=new RelUser();
-            relUser.FirstName="Admin";
-            relUser.LastName="Admin";
-            relUser.HandheldPass="1234";
+            relUser.FirstName="مدیر سیستم";
+            relUser.LastName="";
+            relUser.HandheldPass="1";
             reluserRepo.insertUser(relUser);
         }
     }

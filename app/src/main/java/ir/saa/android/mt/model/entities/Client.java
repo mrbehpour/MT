@@ -19,7 +19,7 @@ public class Client  {
     public Long ClientID ;
 
     public Long SubScript ;
-            
+
     public Integer RegionID ;
 
     public Integer ClientCity ;
@@ -66,6 +66,8 @@ public class Client  {
     public Integer NumContract ;
 
     public Integer Zarib ;
+
+    public Integer SeneId;
 
     public Integer MxmeterCode ;
 

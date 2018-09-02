@@ -1,9 +1,11 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
-import android.app.Application;
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,15 +18,14 @@ import android.widget.Toast;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
-import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 import ir.saa.android.mt.viewmodels.TestContorViewModel;
-import ir.saa.android.mt.viewmodels.TestEnergyViewModel;
 
 public class TestContorFragment extends Fragment
 {
-    BaseInfoViewModel baseInfoViewModel = null;
     TestContorViewModel testContorViewModel;
 
     TextView edtCTCoeff;
@@ -32,7 +33,12 @@ public class TestContorFragment extends Fragment
     TextView edtContorCoff;
     TextView edtRoundNum;
 
+    AlertDialog ad;
+    Bluetooth bluetooth;
+    Bundle bundle;
+
     public TestContorFragment() {
+        bluetooth = Bluetooth.getInstance();
     }
 
     @Override
@@ -48,7 +54,7 @@ public class TestContorFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_test_contor, container, false);
-        testContorViewModel=ViewModelProviders.of(this).get(TestContorViewModel.class);
+        testContorViewModel= ViewModelProviders.of(this).get(TestContorViewModel.class);
 
         edtCTCoeff = rootView.findViewById(R.id.edtZaribCT);
         edtContorConst = rootView.findViewById(R.id.edtSabeteKontor);
@@ -75,15 +81,53 @@ public class TestContorFragment extends Fragment
 //                    Integer.parseInt(String.valueOf(edtRoundNum.getText()))
                         1);
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("testContorParams", testContorParams);
+                bundle = new Bundle();
+                bundle.putSerializable(BundleKeysEnum.TestContorParams, testContorParams);
 
-                G.startFragment(FragmentsEnum.TestEnergyFragment, false, bundle);
+                if(G.bundleHashMap.containsKey(BundleKeysEnum.TestContorParams)) G.bundleHashMap.remove(BundleKeysEnum.TestContorParams);
+                G.bundleHashMap.put(BundleKeysEnum.TestContorParams,bundle);
+
+                testContorViewModel.initTranseferLayer();
+
+                connectToModuleDialog();
             }
         });
 
+        testContorViewModel.connectionStateMutableLiveData.observe(this, new Observer<Boolean>() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onChanged(@Nullable Boolean b) {
+                        if(b){
+                            G.startFragment(FragmentsEnum.TestEnergyFragment, false, bundle);
+                        }
+                        else{
+                            Toast.makeText(G.context,"ضریب سی تی را لطفا وارد کنید",Toast.LENGTH_LONG).show();
+                        }
+                        HideProgressDialog();
+                    }
+                }
+        );
+
         return rootView;
     }
+
+    private void connectToModuleDialog(){
+        ad = new AlertDialog.Builder(this.getContext()).create();
+        ad.setCancelable(false);
+        ad.setTitle("اتصال به دستگاه تست کنتور");
+        ad.setMessage("لطفا منتظر بمانید تا اتصال برقرار شود...");
+        new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        };
+        ad.show();
+    }
+
+    public void HideProgressDialog(){
+        ad.dismiss();
+    }
+
 
     private boolean validateParams(){
         boolean res=true;

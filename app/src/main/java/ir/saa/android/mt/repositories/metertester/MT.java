@@ -1,8 +1,8 @@
 package ir.saa.android.mt.repositories.metertester;
 
+
 import android.util.Log;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +19,9 @@ public class MT {
     String totalReciveData="";
     List<RegisterInfo> registerInfoList = new ArrayList<>();
     private final static byte SLAVE_ID=1;
+    private final static double correctFactor=47.59552;
+    private final static int PowerFreq=50;
+
 //    String ComStr= new String(new char[]{'/','?','!',(char)0x0D,(char)0x0A});
 //    String AckStr= new String(new char[]{(char)0x06,'0','5','0',(char)0x0D,(char)0x0A});
 
@@ -195,22 +198,71 @@ public class MT {
         return Integer.parseInt(result,16);
     }
 
-    public TestResult ReadTestResult(int resultRound) throws Exception {
+    public TestResult ReadTestResult(int resultRound, TestContorParams testContorParams) throws Exception {
 
         String result="";
         totalReciveData="";
         RegisterInfo ri;
+        TestResult testResult;
+        int deviceResultNum=0;
+
         try {
             ri = findRegisterInfo(RegisterInfo.regNames.Test_Result);
-            resultRound=resultRound%20;
-            result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress+((resultRound-1)*28), ri.registerLenght);
+            deviceResultNum=resultRound % 20;
+            if(deviceResultNum==0) deviceResultNum=20;
+//            Log.d("response round num",resultRound+"");
+            result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress+((deviceResultNum-1)*28), ri.registerLenght);
             Log.d("response test res",result);
         } catch (Exception ex) {
             imtCallback.onConnectionError(ex.getMessage());
             throw new Exception(ex);
         }
         //TODO-parsing
-        return splitTestResult(result);
+        testResult = splitTestResult(result);
+        testResult.RoundNum = resultRound;
+        testResult.ErrPerc = calErrorPercent(testResult,testContorParams);
+        testResult.PF_A = calPowerFactor(testResult, Phase.PhaseA);
+        testResult.PF_B = calPowerFactor(testResult, Phase.PhaseB);
+        testResult.PF_C = calPowerFactor(testResult, Phase.PhaseC);
+
+        return testResult;
+    }
+
+    private double calErrorPercent(TestResult testResult, TestContorParams testContorParams){
+        double ErrPerc=0;
+
+        double ph = Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_A)) +
+                Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_B)) +
+                Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_C));
+
+        ErrPerc = ph * correctFactor;
+        double k = (3600000 * testContorParams.SensorRatio) / testContorParams.ContorConst;
+
+        if((k - ErrPerc)>=ErrPerc || ErrPerc==0) {
+            ErrPerc = 99.99;
+        }
+        else{
+            ErrPerc = ((k - ErrPerc) / ErrPerc) * 100;
+        }
+
+        return ErrPerc;
+    }
+
+    private double calPowerFactor(TestResult testResult, Phase phase){
+        double pf=0;
+        switch(phase){
+            case PhaseA:
+                pf = Double.parseDouble(testResult.ANGLE0_Period1);
+                break;
+            case PhaseB:
+                pf = Double.parseDouble(testResult.ANGLE1_Period1);
+                break;
+            case PhaseC:
+                pf = Double.parseDouble(testResult.ANGLE2_Period1);
+                break;
+        }
+        double pf_final = Math.cos((((pf*360*PowerFreq)/256000)*Math.PI)/180);
+        return pf_final;
     }
 
     public String SendTestCommand(TestCommands st){
@@ -303,9 +355,9 @@ public class MT {
             tr.AVRMS_Period1 = calVoltage(responseStr.substring(70, 78));
             tr.BVRMS_Period1 = calVoltage(responseStr.substring(78, 86));
             tr.CVRMS_Period1 = calVoltage(responseStr.substring(86, 94));
-            tr.ANGLE0_Period1 = responseStr.substring(94, 98);
-            tr.ANGLE1_Period1 = responseStr.substring(98, 102);
-            tr.ANGLE2_Period1 = responseStr.substring(102, 106);
+            tr.ANGLE0_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(94, 98),16));
+            tr.ANGLE1_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(98, 102),16));
+            tr.ANGLE2_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(102, 106),16));
             tr.Period_Period1_A = responseStr.substring(106, 110);
             tr.Period_Period1_B = responseStr.substring(110, 114);
             tr.Period_Period1_C = responseStr.substring(114, 118);

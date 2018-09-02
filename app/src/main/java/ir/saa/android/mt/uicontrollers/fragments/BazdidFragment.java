@@ -76,7 +76,7 @@ public class BazdidFragment extends Fragment
             public void onChanged(@Nullable List<Client> clients) {
                 clientItems.clear();
                 for(Client client:clients){
-                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,"اشتراک : ",client.CustId, R.drawable.account));
+                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,"اشتراک : ",client.CustId, R.drawable.account,client.SeneId));
                 }
 
                 adapter.clearDataSet();

@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.Stack;
 
 import ir.saa.android.mt.R;
@@ -44,6 +45,7 @@ public class G extends Application {
 
     private static SharedPreferences pref;
     private static SharedPreferences.Editor prefEditor;
+    public static HashMap<String,Bundle> bundleHashMap=new HashMap<>();
 
     @Override
     public void onCreate() {
