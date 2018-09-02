@@ -26,6 +26,8 @@ public class BazrasiViewModel extends AndroidViewModel {
            remarkRepo=new RemarkRepo(application);
        }
 
+       
+
        if(remarkRepo.getRemarks().getValue()!=null){
            List<RemarkItem> remarkInit=new ArrayList<>();
            for (Remark remark:remarkRepo.getRemarks().getValue()) {
