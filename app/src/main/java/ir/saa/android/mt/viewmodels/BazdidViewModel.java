@@ -24,9 +24,21 @@ public class BazdidViewModel extends AndroidViewModel {
         if(clientRepo==null)
             clientRepo = new ClientRepo(application);
 
+        Client client=new Client();
+        client.Active1=1;
+        client.Active2=2;
+        client.Name="مهدی کاظمی";
+        client.SubScript=Long.valueOf(102030);
+        client.ClientID=Long.valueOf(102030);
+        client.Address="زنجان";
+        client.MeterNumActive= Long.valueOf(203040);
+        clientRepo.insertClient(client);
+
+
     }
 
     public LiveData<List<Client>> getClientsLiveData(){
+
         return clientRepo.getClients();
     }
 
