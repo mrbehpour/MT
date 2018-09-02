@@ -14,8 +14,10 @@ import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.GroupingFormat;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.Polomp;
+import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompGroup;
 import ir.saa.android.mt.model.entities.PolompGroupingFormat;
+import ir.saa.android.mt.model.entities.PolompType;
 import ir.saa.android.mt.model.entities.PropertyType;
 import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.model.entities.RelUser;
@@ -59,6 +61,12 @@ public interface MTApi {
 
     @GET("GetPolomps")
     Single<List<Polomp>> GetPolomps();
+
+    @GET("GetPolompColor")
+    Single<List<PolompColor>> GetPolompColor();
+
+    @GET("GetPolompType")
+    Single<List<PolompType>> GetPolompType();
 
     @GET("GetPropertyTypies")
     Single<List<PropertyType>> GetPropertyTypies();

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:id="@+id/listItempolompRoot">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Info Layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:orientation="vertical">
+
+            <!-- Name Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Name -->
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_900"
+                    android:textAlignment="gravity"
+                    android:gravity="center"
+
+                    android:text="-"
+                    android:layout_weight="1"/>
+                <!-- Name Lable -->
+
+            </LinearLayout>
+
+
+
+
+
+
+            //space
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:orientation="vertical"></LinearLayout>
+            //line
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#aaa">
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Icon Layout -->
+        <TextView
+            android:id="@+id/tvId"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/byekan"
+            android:textSize="12sp"
+            android:textColor="@color/grey_500"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:text="کد پلمپ :" />
+        <TextView
+            android:id="@+id/tvClientId"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:fontFamily="@font/byekan"
+            android:textSize="1sp"
+            android:textColor="@color/grey_500"
+            android:gravity="center"
+            android:visibility="invisible"
+             />
+
+    </LinearLayout>
+
+</LinearLayout>

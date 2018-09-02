@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.Timer;
 import java.util.UUID;
@@ -213,7 +215,22 @@ public class Bluetooth implements ITransferLayer {
             throw new btException(bt_err_deviceNotPaired, new Throwable(String.valueOf(btException.class)));
         }
     }
+    public List<String> getPairedDevice(){
+        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
+        List<String> pairedDevice = new ArrayList<>();
+
+        Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+        if(pairedDevices.size() > 0)
+        {
+            for(BluetoothDevice device : pairedDevices)
+            {
+                pairedDevice.add(device.getName().trim());
+            }
+        }
+
+        return  pairedDevice;
+    }
     boolean connect(){
         try {
             mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);

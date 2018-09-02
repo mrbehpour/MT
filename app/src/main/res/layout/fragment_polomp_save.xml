@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey_200">
+    <!-- Main Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <!-- Ghadim Layout -->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+                <!-- Shomare Polomp Ghadim -->
+                <android.support.design.widget.TextInputLayout
+                    android:fontFamily="@font/byekan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="right"
+                    android:textColorHint="@color/grey_1000">
+                    <EditText android:id="@+id/edtGhadimShomarePolomp"
+                        android:fontFamily="@font/byekan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grey_900"
+                        android:gravity="right"
+                        android:textAlignment="gravity"
+                        android:hint="شماره پلمپ قدیم"
+                        android:background="@drawable/custom_rectangle"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Model Polomp Ghadim -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+                    <Spinner
+                        android:id="@+id/spnModelPolompGhadim"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/custom_rectangle"
+                        android:layout_gravity="center_vertical"
+                        />
+                    <TextView android:id="@+id/tvModelPolompGhadim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="مدل پلمپ قدیم:"
+                        android:textColor="@color/grey_1000"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="18sp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center_vertical"/>
+
+                </LinearLayout>
+
+                <!-- Rang Polomp Ghadim -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+                    <Spinner
+                        android:id="@+id/spnRangPolompGhadim"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/custom_rectangle"
+                        android:layout_gravity="center_vertical"
+                        />
+                    <TextView android:id="@+id/tvRangPolompGhadim"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="رنگ پلمپ قدیم:"
+                        android:textColor="@color/grey_1000"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="18sp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center_vertical"/>
+                </LinearLayout>
+
+                <!-- Nadarad Ghadim -->
+                <CheckBox
+                    android:id="@+id/cbGhadimNadarad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="18sp"
+                    android:textDirection="rtl"
+                    android:textAlignment="gravity"
+                    android:gravity="right|center_vertical"
+                    android:layoutDirection="rtl"
+                    android:text="ندارد" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <!-- Jadid Layout -->
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="4dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+                <!-- Shomare Polomp Jadid -->
+                <android.support.design.widget.TextInputLayout
+                    android:fontFamily="@font/byekan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_gravity="right"
+                    android:textColorHint="@color/grey_1000">
+                    <EditText android:id="@+id/edtJadidShomarePolomp"
+                        android:fontFamily="@font/byekan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/grey_900"
+                        android:gravity="right"
+                        android:textAlignment="gravity"
+                        android:hint="شماره پلمپ جدید"
+                        android:background="@drawable/custom_rectangle"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <!-- Model Polomp Jadid -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+                    <Spinner
+                        android:id="@+id/spnModelPolompJadid"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/custom_rectangle"
+                        android:layout_gravity="center_vertical"
+                        />
+                    <TextView android:id="@+id/tvModelPolompJadid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="مدل پلمپ جدید:"
+                        android:textColor="@color/grey_1000"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="18sp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center_vertical"/>
+                </LinearLayout>
+
+                <!-- Rang Polomp Jadid -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+                    <Spinner
+                        android:id="@+id/spnRangPolompJadid"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/custom_rectangle"
+                        android:layout_gravity="center_vertical"
+                        />
+                    <TextView android:id="@+id/tvRangPolompJadid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="رنگ پلمپ جدید:"
+                        android:textColor="@color/grey_1000"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="18sp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center_vertical"/>
+                </LinearLayout>
+
+                <!-- Nadarad Jadid -->
+                <CheckBox
+                    android:id="@+id/cbJadidNadarad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="18sp"
+                    android:textDirection="rtl"
+                    android:textAlignment="gravity"
+                    android:gravity="right|center_vertical"
+                    android:layoutDirection="rtl"
+                    android:text="ندارد" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <!-- Save Button -->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnSave"
+        android:fontFamily="@font/byekan"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:text="ذخیره"/>
+</LinearLayout>

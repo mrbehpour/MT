@@ -15,12 +15,16 @@ import android.widget.TextView;
 import java.util.Stack;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.components.ClientInfo;
 import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.fragments.AmaliyatFragment;
 import ir.saa.android.mt.uicontrollers.fragments.BazdidFragment;
+import ir.saa.android.mt.uicontrollers.fragments.BazrasiFragment;
 import ir.saa.android.mt.uicontrollers.fragments.HomeFragment;
 import ir.saa.android.mt.uicontrollers.fragments.MoshtarakFragment;
+import ir.saa.android.mt.uicontrollers.fragments.PolompFragment;
+import ir.saa.android.mt.uicontrollers.fragments.PolompFragmentSave;
 import ir.saa.android.mt.uicontrollers.fragments.SettingFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestContorFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestEnergyFragment;
@@ -33,6 +37,7 @@ public class G extends Application {
     public static ActionBar actionBar;
     public static DrawerLayout mDrawerLayout;
     public static View fragmentDrawer;
+    public static ClientInfo clientInfo;
 
     public static Integer currentFragmentNum = null;
     public static Stack<Integer> fragmentNumStack;
@@ -107,6 +112,15 @@ public class G extends Application {
             case FragmentsEnum.AmaliyatFragment:
                 targetFragment=new AmaliyatFragment();
                 setActionbarTitleText("نتایج تست");
+                break;
+            case FragmentsEnum.PolompFragment:
+                targetFragment=new PolompFragment();
+                break;
+            case FragmentsEnum.PolompFragmentSave:
+                targetFragment=new PolompFragmentSave();
+                break;
+            case FragmentsEnum.BazrasiFragment:
+                targetFragment=new BazrasiFragment();
                 break;
         }
 

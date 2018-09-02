@@ -1,11 +1,10 @@
-package ir.saa.android.mt.repositories.roomrepos;
+package ir.saa.android.mt.model.daos;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-import ir.saa.android.mt.model.daos.PolompInfoDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.PolompInfo;
 

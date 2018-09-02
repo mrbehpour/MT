@@ -49,6 +49,8 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
             G.setActionbarTitleText(current.Name);
             Bundle bundle = new Bundle();
             bundle.putLong(BundleKeysEnum.ClientID,current.Id);
+            G.clientInfo.ClientId=current.Id;
+            G.clientInfo.SendId=current.SendId;
             G.startFragment(FragmentsEnum.MoshtarakFragment,false,bundle);
         });
         //holder.imgBazdidMoshtarak.setImageResource(current.Pic);

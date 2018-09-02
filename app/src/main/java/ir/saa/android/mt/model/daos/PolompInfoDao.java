@@ -35,7 +35,7 @@ public interface PolompInfoDao {
     List<Long> insertPolompInfos(List<PolompInfo> polompInfos);
 
     @Insert(onConflict = IGNORE)
-    void insertPolompInfo(PolompInfo polompInfo);
+    Long insertPolompInfo(PolompInfo polompInfo);
 
     @Update
     void updatePolompInfo(PolompInfo polompInfo);

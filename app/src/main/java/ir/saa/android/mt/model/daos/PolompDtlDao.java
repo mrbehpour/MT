@@ -9,6 +9,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.PolompDtl;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
@@ -38,9 +39,14 @@ public interface PolompDtlDao {
     List<Long> insertPolompDtls(List<PolompDtl> polompDtls);
 
     @Insert(onConflict = IGNORE)
-    void insertPolompDtl(PolompDtl polompDtl);
+    Long insertPolompDtl(PolompDtl polompDtl);
 
     @Update
     void updatePolompDtl(PolompDtl polompDtl);
+
+    @Query("select * from PolompInfo" +
+            " inner join PolompDtl on PolompInfo.PolompInfoID=PolompDtl.PolompDtlID " +
+            "Where PolompInfo.ClientID=:clientId and PolompDtl.PolompID=:polompId")
+    LiveData<PolompAllInfo> getPolompAllInfo(Long clientId, Integer polompId);
 
 }

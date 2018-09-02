@@ -20,6 +20,7 @@ public class ModuleViewModel extends AndroidViewModel {
     }
 
     public List<String> getPairedDevice(){
+        //return  null;
         return bluetooth.getPairedDevice();
     }
 }

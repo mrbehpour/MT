@@ -1,16 +1,21 @@
 package ir.saa.android.mt.model.entities;
 
+public class PolompAllInfo {
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+    public Integer PolompInfoID ;
 
-import io.reactivex.annotations.NonNull;
+    public Integer AgentID ;
 
-@Entity
-public class PolompDtl  {
+    public Integer ChangeDate ;
 
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
+    public Integer ChangeTime ;
+
+    public Long ClientID ;
+
+    public Integer SendID ;
+
+    public Integer BlockID ;
+
     public Integer PolompDtlID ;
 
     public Integer CurrentColorID ;
@@ -18,8 +23,6 @@ public class PolompDtl  {
     public String CurrentPolomp ;
 
     public Integer PolompID ;
-
-    public Long PolompInfoID ;
 
     public Integer PreviousColorID ;
 

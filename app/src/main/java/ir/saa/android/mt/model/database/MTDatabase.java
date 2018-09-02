@@ -27,11 +27,13 @@ import ir.saa.android.mt.model.daos.MasterGroupDetailDao;
 import ir.saa.android.mt.model.daos.MasterGroupInfoDao;
 import ir.saa.android.mt.model.daos.MeterChangeDtlDao;
 import ir.saa.android.mt.model.daos.MeterChangeInfoDao;
+import ir.saa.android.mt.model.daos.PolompColorDao;
 import ir.saa.android.mt.model.daos.PolompDao;
 import ir.saa.android.mt.model.daos.PolompDtlDao;
 import ir.saa.android.mt.model.daos.PolompGroupDao;
 import ir.saa.android.mt.model.daos.PolompGroupingFormatDao;
 import ir.saa.android.mt.model.daos.PolompInfoDao;
+import ir.saa.android.mt.model.daos.PolompTypeDao;
 import ir.saa.android.mt.model.daos.PropertyTypeDao;
 import ir.saa.android.mt.model.daos.RegionDao;
 import ir.saa.android.mt.model.daos.RelUserDao;
@@ -61,10 +63,12 @@ import ir.saa.android.mt.model.entities.MasterGroupInfo;
 import ir.saa.android.mt.model.entities.MeterChangeDtl;
 import ir.saa.android.mt.model.entities.MeterChangeInfo;
 import ir.saa.android.mt.model.entities.Polomp;
+import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompDtl;
 import ir.saa.android.mt.model.entities.PolompGroup;
 import ir.saa.android.mt.model.entities.PolompGroupingFormat;
 import ir.saa.android.mt.model.entities.PolompInfo;
+import ir.saa.android.mt.model.entities.PolompType;
 import ir.saa.android.mt.model.entities.PropertyType;
 import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.model.entities.RelUser;
@@ -80,21 +84,22 @@ import ir.saa.android.mt.model.entities.TestInfo;
 
 
 @Database(entities ={RelUser.class, AccessAgentAndroid.class,
-                     AgentAccessList.class, AnswerGroup.class,
-                     AnswerGroupDtl.class, City.class,
-                     Client.class, ClientType.class,
-                     Company.class, Region.class,
-                     TariffType.class,MasterGroupDetail.class,
-                     MasterGroupInfo.class, GroupingFormat.class,
-                     Remark.class,PropertyType.class,
-                     RemarkType.class, RemarkGroup.class,
-                     Polomp.class, PolompGroup.class,
-                     PolompGroupingFormat.class,Setting.class,
-                     InspectionInfo.class,InspectionDtl.class,
-                     MeterChangeInfo.class,MeterChangeDtl.class,
-                     PolompInfo.class,GPSInfo.class,
-                     PolompDtl.class,TariffInfo.class,
-                     TariffDtl.class,TestInfo.class,TestDtl.class},version = 5)
+        AgentAccessList.class, AnswerGroup.class,
+        AnswerGroupDtl.class, City.class,
+        Client.class, ClientType.class,
+        Company.class, Region.class,
+        TariffType.class,MasterGroupDetail.class,
+        MasterGroupInfo.class, GroupingFormat.class,
+        Remark.class,PropertyType.class,
+        RemarkType.class, RemarkGroup.class,
+        Polomp.class, PolompGroup.class,
+        PolompGroupingFormat.class,Setting.class,
+        InspectionInfo.class,InspectionDtl.class,
+        MeterChangeInfo.class,MeterChangeDtl.class,
+        PolompInfo.class,GPSInfo.class,
+        PolompDtl.class,TariffInfo.class,
+        TariffDtl.class,TestInfo.class,TestDtl.class,
+        PolompColor.class, PolompType.class},version = 9)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -165,6 +170,10 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract TestInfoDao testInfoModel();
 
     public abstract TestDtlDao testDtlModel();
+
+    public abstract PolompTypeDao polompTypeModel();
+
+    public abstract PolompColorDao polompColorModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
