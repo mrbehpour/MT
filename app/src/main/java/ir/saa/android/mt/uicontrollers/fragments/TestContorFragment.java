@@ -100,8 +100,10 @@ public class TestContorFragment extends Fragment
                         if(b){
                             G.startFragment(FragmentsEnum.TestEnergyFragment, false, bundle);
                         }
-                        else{
-                            Toast.makeText(G.context,"ضریب سی تی را لطفا وارد کنید",Toast.LENGTH_LONG).show();
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                         HideProgressDialog();
                     }
