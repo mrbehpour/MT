@@ -4,16 +4,22 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazrasi.BazrasiAdapter;
+import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.MyCheckList;
+import ir.saa.android.mt.components.MyCheckListItem;
+import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 
 public class BazrasiFragment extends Fragment {
@@ -38,6 +44,22 @@ public class BazrasiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_bazrasi, container, false);
+
+        AppCompatButton btnsave=rootView.findViewById(R.id.btnSave);
+
+        btnsave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyCheckList myCheckList=new MyCheckList(G.context,new MyCheckListItem("",""),new MyCheckListItem("",""));
+                myCheckList.addCheckItem(new MyCheckListItem("Hassan",1));
+                myCheckList.addCheckItem(new MyCheckListItem("Hamid",2));
+                myCheckList.addCheckItem(new MyCheckListItem("Hadi",3));
+                myCheckList.addCheckItem(new MyCheckListItem("Hessam",4));
+                myCheckList.setCheckListOrientation(LinearLayout.HORIZONTAL)
+                        .setSelectionMode(MyCheckListMode.SingleSelection)
+                        .setCheckItemsHeight(100);
+            }
+        });
 
         return rootView;
     }
