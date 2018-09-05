@@ -73,7 +73,7 @@ public class BazrasiFragment extends Fragment {
                         }).show();
             }
         });
-
+        setUpRecyclerView(rootView);
         return rootView;
     }
 
@@ -81,10 +81,10 @@ public class BazrasiFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvSoal);
 
-        adapter = new BazrasiAdapter(getActivity(), bazrasiViewModel.RemarkItemLiveData.getValue()==null?new ArrayList<>(): bazrasiViewModel.RemarkItemLiveData.getValue());
+        adapter = new BazrasiAdapter(getActivity(), bazrasiViewModel.getRemarks().getValue()==null?new ArrayList<>(): bazrasiViewModel.getRemarks().getValue());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bazrasiViewModel.RemarkItemLiveData.observe(this, remarkItems -> {
+        bazrasiViewModel.getRemarks().observe(this, remarkItems -> {
             adapter.clearDataSet();
             adapter.addAll(remarkItems);
             adapter.notifyDataSetChanged();
