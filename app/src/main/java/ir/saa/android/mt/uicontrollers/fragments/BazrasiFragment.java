@@ -20,6 +20,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyCheckList;
 import ir.saa.android.mt.components.MyCheckListItem;
 import ir.saa.android.mt.components.MyCheckListMode;
+import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 
 public class BazrasiFragment extends Fragment {
@@ -50,14 +51,26 @@ public class BazrasiFragment extends Fragment {
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyCheckList myCheckList=new MyCheckList(G.context,new MyCheckListItem("",""),new MyCheckListItem("",""));
-                myCheckList.addCheckItem(new MyCheckListItem("Hassan",1));
-                myCheckList.addCheckItem(new MyCheckListItem("Hamid",2));
-                myCheckList.addCheckItem(new MyCheckListItem("Hadi",3));
-                myCheckList.addCheckItem(new MyCheckListItem("Hessam",4));
-                myCheckList.setCheckListOrientation(LinearLayout.HORIZONTAL)
+                MyDialog dialog;
+                dialog = new MyDialog(getActivity());
+                dialog.clearAllPanel();
+                MyCheckList myCheckList=new MyCheckList(G.context,new MyCheckListItem("Iman",0),new MyCheckListItem("Ehsan",1));
+                myCheckList.addCheckItem(new MyCheckListItem("Hassan",2));
+                myCheckList.addCheckItem(new MyCheckListItem("Hamid",3));
+                myCheckList.addCheckItem(new MyCheckListItem("Hadi",4));
+                myCheckList.addCheckItem(new MyCheckListItem("Hessam",5));
+                myCheckList.setCheckListOrientation(LinearLayout.VERTICAL)
                         .setSelectionMode(MyCheckListMode.SingleSelection)
-                        .setCheckItemsHeight(100);
+                        .setCheckItemsHeight(30);
+                dialog.setTitle("سلام")
+                        .setRightTitle(String.format("%d/%d",1,4))
+                        .addContentView(myCheckList)
+                        .setLeftImageTitle(G.context.getResources().getDrawable(R.drawable.account),new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        }).show();
             }
         });
 
