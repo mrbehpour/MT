@@ -8,4 +8,5 @@
     <dimen name="menu_item_left_font_size">18sp</dimen>
     <dimen name="button_font_size">16sp</dimen>
     <dimen name="nav_item_font_size">16sp</dimen>
+    <dimen name="login_radius">4dp</dimen>
 </resources>
