@@ -8,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.repositories.metertester.TestResult;
 
 public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.MyViewHolder> {
@@ -50,18 +52,25 @@ public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.My
 //            G.startFragment(FragmentsEnum.MoshtarakFragment,false,bundle);
         });
 
-        holder.tvRoundNum.setText(String.valueOf(current.RoundNum));
-        holder.tvErrPerc.setText(String.format("%s: %s","درصد خطا",String.format("%.2f", current.ErrPerc)));
-        holder.tvTestTime.setText(String.format("%s: %s %s  ","زمان تست" , String.valueOf(Integer.parseInt(current.Time_Period1)*100),"میلی ثانیه"));
-        holder.tvPF_A.setText( String.format("%.2f", current.PF_A));
-        holder.tvPF_B.setText( String.format("%.2f", current.PF_B));
-        holder.tvPF_C.setText( String.format("%.2f", current.PF_C));
-        holder.tvI_A.setText(String.valueOf(current.AIRMS_Period1));
-        holder.tvI_B.setText(String.valueOf(current.BIRMS_Period1));
-        holder.tvI_C.setText(String.valueOf(current.CIRMS_Period1));
-        holder.tvV_A.setText(String.valueOf(current.AVRMS_Period1));
-        holder.tvV_B.setText(String.valueOf(current.BVRMS_Period1));
-        holder.tvV_C.setText(String.valueOf(current.CVRMS_Period1));
+
+        try {
+            holder.tvRoundNum.setText(String.valueOf(current.RoundNum));
+            holder.tvErrPerc.setText(String.format("%s: %s", "درصد خطا", String.format("%.2f", current.ErrPerc)));
+            holder.tvTestTime.setText(String.format("%s: %s %s  ", "زمان تست", String.valueOf(Integer.parseInt(current.Time_Period1) * 100), "میلی ثانیه"));
+            holder.tvPF_A.setText(String.format("%.2f", current.PF_A));
+            holder.tvPF_B.setText(String.format("%.2f", current.PF_B));
+            holder.tvPF_C.setText(String.format("%.2f", current.PF_C));
+            holder.tvI_A.setText(String.valueOf(current.AIRMS_Period1));
+            holder.tvI_B.setText(String.valueOf(current.BIRMS_Period1));
+            holder.tvI_C.setText(String.valueOf(current.CIRMS_Period1));
+            holder.tvV_A.setText(String.valueOf(current.AVRMS_Period1));
+            holder.tvV_B.setText(String.valueOf(current.BVRMS_Period1));
+            holder.tvV_C.setText(String.valueOf(current.CVRMS_Period1));
+        }
+        catch (Exception ex){
+            Toast.makeText(G.context,ex.getMessage(),Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override

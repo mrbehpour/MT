@@ -15,13 +15,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.testresult.TestItem;
 import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.repositories.metertester.TestResult;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
@@ -80,7 +83,12 @@ public class AmaliyatFragment extends Fragment {
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onChanged(@Nullable List<TestResult> testResultList) {
-                        setUpRecyclerView(rootView,testResultList);
+                        if(testResultList!=null) {
+                            setUpRecyclerView(rootView, testResultList);
+                        }
+                        else{
+                            Toast.makeText(G.context,"هیچ نتیجه تستی وجود ندارد.",Toast.LENGTH_SHORT ).show();
+                        }
                     }
                 }
         );
@@ -94,10 +102,12 @@ public class AmaliyatFragment extends Fragment {
 
                 amaliyatViewModel.setTestContorParams(testContorParams);
                 amaliyatViewModel.startTest();
+                //btnStartTest.setEnabled(false);
             }
         });
 
         Button btnTaeed = rootView.findViewById(R.id.btnTaeed);
+        //btnTaeed.setEnabled(false);
         btnTaeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

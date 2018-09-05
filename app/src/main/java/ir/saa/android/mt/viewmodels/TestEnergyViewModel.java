@@ -14,6 +14,7 @@ import java.util.TimerTask;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.metertester.EnergiesState;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
@@ -48,7 +49,6 @@ public class TestEnergyViewModel extends AndroidViewModel {
 
         };
         timerCheck.schedule(timerCheckTask, 0, prd);
-
     }
 
     private void timerCheckStop() {

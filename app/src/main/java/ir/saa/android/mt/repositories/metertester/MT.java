@@ -21,7 +21,7 @@ public class MT {
     private final static byte SLAVE_ID=1;
     private final static double correctFactor=47.59552;
     private final static int PowerFreq=50;
-
+    public final static int maxRoundTest=250;
 //    String ComStr= new String(new char[]{'/','?','!',(char)0x0D,(char)0x0A});
 //    String AckStr= new String(new char[]{(char)0x06,'0','5','0',(char)0x0D,(char)0x0A});
 
@@ -159,13 +159,13 @@ public class MT {
         try {
             String[] result=new String[3];
             ri = findRegisterInfo(RegisterInfo.regNames.Enegies_PA);
-            result[0] = splitRawDate(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            result[0] = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
 
             ri = findRegisterInfo(RegisterInfo.regNames.Enegies_PB);
-            result[1] = splitRawDate(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            result[1] = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
 
             ri = findRegisterInfo(RegisterInfo.regNames.Enegies_PC);
-            result[2] = splitRawDate(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            result[2] = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
             Log.d("response",result[0]+" , "+result[1]+" , "+result[2]);
             energiesStates=new EnergiesState(checkEnergyState(result[0].substring(0,8)),checkEnergyState(result[0].substring(8,16)),
                                              checkEnergyState(result[1].substring(0,8)),checkEnergyState(result[1].substring(8,16)),
@@ -186,7 +186,7 @@ public class MT {
         RegisterInfo ri;
         try {
             ri = findRegisterInfo(RegisterInfo.regNames.Paulse_Counter);
-            result = splitRawDate(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
             //result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght);
             Log.d("response paulse",result);
         } catch (Exception ex) {
@@ -288,125 +288,152 @@ public class MT {
         return result;
     }
 
-    public String SendTestContorParams(TestContorParams tcp) {
-        String result = "";
-        RegisterInfo ri = findRegisterInfo(RegisterInfo.regNames.Test_Init_Params);
-        byte[] tmp;
-        byte[] data = Converters.ConvertInt4ByteArray(tcp.ContorConst);
+    public TestCommands ReadTestCommand() {
+            totalReciveData = "";
+            String result = "";
+            TestCommands testCommands = TestCommands.DisableTest;
+            RegisterInfo ri = findRegisterInfo(RegisterInfo.regNames.Test_Command);
 
-        tmp = Converters.ConvertInt2ByteArray(tcp.SensorRatio,false);
-        data = Converters.ConcatenateTwoArray(data,tmp);
+            try {
+                result =  splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        tmp = Converters.ConvertInt2ByteArray(tcp.CTCoeff,false);
-        data = Converters.ConcatenateTwoArray(data,tmp);
+            switch (result) {
+                case "0000":
+                    testCommands = TestCommands.DisableTest;
+                    break;
+                case "0001":
+                    testCommands = TestCommands.StartTest;
+                    break;
+                case "0002":
+                    testCommands = TestCommands.FinishTest;
+                    break;
+            }
 
-        tmp = Converters.ConvertInt2ByteArray(1,false);
-        data = Converters.ConcatenateTwoArray(data,tmp);
-
-        tmp = Converters.ConvertInt2ByteArray(tcp.Active?1:2,false);
-        data = Converters.ConcatenateTwoArray(data,tmp);
-
-        tmp = Converters.ConvertInt2ByteArray(tcp.SinglePhase?1:2,false);
-        data = Converters.ConcatenateTwoArray(data,tmp);
-
-        tmp = Converters.ConvertInt2ByteArray(1,false);
-        data = Converters.ConcatenateTwoArray(data,tmp);
-
-        try {
-            result = modBus.writeMultipleRegister(SLAVE_ID, ri.registerAddress,data);
-        }catch (Exception ex){
-            imtCallback.onConnectionError(ex.getMessage());
-        }
-        return result;
-    }
-
-    private String splitRawDate(String responseStr){
-        return responseStr.substring(6,responseStr.length()-4);
-    }
-
-    //parse data
-    private ElectericalParams splitElectericalParams(String responseStr){
-        ElectericalParams ep=new ElectericalParams();
-        if(responseStr.trim().length()>0) {
-            ep.AVRMS = calVoltage(responseStr.substring(6, 14));
-            ep.AIRMS = calAmp(responseStr.substring(14, 22));
-            ep.AWATTHR = calPower(responseStr.substring(22, 30));
-            ep.AVARHR = calPower(responseStr.substring(30, 38));
-            ep.AVAHR = calPower(responseStr.substring(38, 46));
-            ep.ANGLE0 = calAngle(responseStr.substring(46, 50));
-            ep.AWATT = calPower(responseStr.substring(74, 82));
-            ep.AVAR = calPower(responseStr.substring(82, 90));
-            ep.AVA = calPower(responseStr.substring(90, 98));
-        }
-        return ep;
-    }
-
-    private TestResult splitTestResult(String responseStr){
-        TestResult tr=new TestResult();
-        if(responseStr.trim().length()>0) {
-            tr.MeterEnergy_Period1_A = String.valueOf(twosComplement(responseStr.substring(6, 14)));
-            tr.MeterEnergy_Period1_B = String.valueOf(twosComplement(responseStr.substring(14, 22)));
-            tr.MeterEnergy_Period1_C = String.valueOf(twosComplement(responseStr.substring(22, 30)));
-            tr.Time_Period1 = responseStr.substring(30, 38);
-            tr.AIRMS_Period1 = calAmp(responseStr.substring(38, 46));
-            tr.BIRMS_Period1 = calAmp(responseStr.substring(46, 54));
-            tr.CIRMS_Period1 = calAmp( responseStr.substring(54, 62));
-            tr.NIRMS_Period1 = calAmp(responseStr.substring(62, 70));
-            tr.AVRMS_Period1 = calVoltage(responseStr.substring(70, 78));
-            tr.BVRMS_Period1 = calVoltage(responseStr.substring(78, 86));
-            tr.CVRMS_Period1 = calVoltage(responseStr.substring(86, 94));
-            tr.ANGLE0_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(94, 98),16));
-            tr.ANGLE1_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(98, 102),16));
-            tr.ANGLE2_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(102, 106),16));
-            tr.Period_Period1_A = responseStr.substring(106, 110);
-            tr.Period_Period1_B = responseStr.substring(110, 114);
-            tr.Period_Period1_C = responseStr.substring(114, 118);
-        }
-        return tr;
-    }
-
-    private boolean checkEnergyState(String responseStr){
-        return responseStr.substring(0,2).equals("00")?true:false;
-    }
-
-    private String calVoltage(String responseStr){
-        String result = "";
-        try {
-            double d = Integer.parseInt(responseStr, 16) / (double) 11536;
-            result = String.format("%.2f", d);
-        }catch (Exception ex){
-            imtCallback.onConnectionError(ex.getMessage());
-        }
-        return result;
-
-    }
-
-    private String calAmp(String responseStr){
-        double d=Integer.parseInt(responseStr,16)/(double)3840;
-        return String.format("%.2f", d);
-    }
-
-    private String calAngle(String responseStr){
-        int ang=Integer.parseInt(responseStr,16);
-        double pf=Math.cos(ang*360*50/(double)256);
-        return String.valueOf(pf);
-    }
-
-    private String calPower(String responseStr){
-
-        double d=twosComplement(responseStr)/(double)5288;
-        return String.format("%.2f", d);
-    }
-
-    private int twosComplement(String responseStr){
-        int v;
-        v = Integer.parseInt(responseStr.substring(2,responseStr.length()),16);
-
-        if(responseStr.substring(0,2).equals("FF")){
-            v = 16777215-v+1;
+            return testCommands;
         }
 
-        return v;
-    }
+        public String SendTestContorParams (TestContorParams tcp){
+            String result = "";
+            RegisterInfo ri = findRegisterInfo(RegisterInfo.regNames.Test_Init_Params);
+            byte[] tmp;
+            byte[] data = Converters.ConvertInt4ByteArray(tcp.ContorConst);
 
-}
+            tmp = Converters.ConvertInt2ByteArray(tcp.SensorRatio, false);
+            data = Converters.ConcatenateTwoArray(data, tmp);
+
+            tmp = Converters.ConvertInt2ByteArray(tcp.CTCoeff, false);
+            data = Converters.ConcatenateTwoArray(data, tmp);
+
+            tmp = Converters.ConvertInt2ByteArray(1, false);
+            data = Converters.ConcatenateTwoArray(data, tmp);
+
+            tmp = Converters.ConvertInt2ByteArray(tcp.Active ? 1 : 2, false);
+            data = Converters.ConcatenateTwoArray(data, tmp);
+
+            tmp = Converters.ConvertInt2ByteArray(tcp.SinglePhase ? 1 : 2, false);
+            data = Converters.ConcatenateTwoArray(data, tmp);
+
+            tmp = Converters.ConvertInt2ByteArray(1, false);
+            data = Converters.ConcatenateTwoArray(data, tmp);
+
+            try {
+                result = modBus.writeMultipleRegister(SLAVE_ID, ri.registerAddress, data);
+            } catch (Exception ex) {
+                imtCallback.onConnectionError(ex.getMessage());
+            }
+            return result;
+        }
+
+        private String splitRawData(String responseStr){
+            return responseStr.substring(6,responseStr.length()-4);
+        }
+
+        //parse data
+        private ElectericalParams splitElectericalParams (String responseStr){
+            ElectericalParams ep = new ElectericalParams();
+            if (responseStr.trim().length() > 0) {
+                ep.AVRMS = calVoltage(responseStr.substring(6, 14));
+                ep.AIRMS = calAmp(responseStr.substring(14, 22));
+                ep.AWATTHR = calPower(responseStr.substring(22, 30));
+                ep.AVARHR = calPower(responseStr.substring(30, 38));
+                ep.AVAHR = calPower(responseStr.substring(38, 46));
+                ep.ANGLE0 = calAngle(responseStr.substring(46, 50));
+                ep.AWATT = calPower(responseStr.substring(74, 82));
+                ep.AVAR = calPower(responseStr.substring(82, 90));
+                ep.AVA = calPower(responseStr.substring(90, 98));
+            }
+            return ep;
+        }
+
+        private TestResult splitTestResult (String responseStr){
+            TestResult tr = new TestResult();
+            if (responseStr.trim().length() > 0) {
+                tr.MeterEnergy_Period1_A = String.valueOf(twosComplement(responseStr.substring(6, 14)));
+                tr.MeterEnergy_Period1_B = String.valueOf(twosComplement(responseStr.substring(14, 22)));
+                tr.MeterEnergy_Period1_C = String.valueOf(twosComplement(responseStr.substring(22, 30)));
+                tr.Time_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(30, 38), 16));
+                tr.AIRMS_Period1 = calAmp(responseStr.substring(38, 46));
+                tr.BIRMS_Period1 = calAmp(responseStr.substring(46, 54));
+                tr.CIRMS_Period1 = calAmp(responseStr.substring(54, 62));
+                tr.NIRMS_Period1 = calAmp(responseStr.substring(62, 70));
+                tr.AVRMS_Period1 = calVoltage(responseStr.substring(70, 78));
+                tr.BVRMS_Period1 = calVoltage(responseStr.substring(78, 86));
+                tr.CVRMS_Period1 = calVoltage(responseStr.substring(86, 94));
+                tr.ANGLE0_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(94, 98), 16));
+                tr.ANGLE1_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(98, 102), 16));
+                tr.ANGLE2_Period1 = String.valueOf(Integer.valueOf(responseStr.substring(102, 106), 16));
+                tr.Period_Period1_A = responseStr.substring(106, 110);
+                tr.Period_Period1_B = responseStr.substring(110, 114);
+                tr.Period_Period1_C = responseStr.substring(114, 118);
+            }
+            return tr;
+        }
+
+        private boolean checkEnergyState (String responseStr){
+            return responseStr.substring(0, 2).equals("00") ? true : false;
+        }
+
+        private String calVoltage (String responseStr){
+            String result = "";
+            try {
+                double d = Integer.parseInt(responseStr, 16) / (double) 11536;
+                result = String.format("%.2f", d);
+            } catch (Exception ex) {
+                imtCallback.onConnectionError(ex.getMessage());
+            }
+            return result;
+
+        }
+
+        private String calAmp (String responseStr){
+            double d = Integer.parseInt(responseStr, 16) / (double) 3840;
+            return String.format("%.2f", d);
+        }
+
+        private String calAngle (String responseStr){
+            int ang = Integer.parseInt(responseStr, 16);
+            double pf = Math.cos(ang * 360 * 50 / (double) 256);
+            return String.valueOf(pf);
+        }
+
+        private String calPower (String responseStr){
+
+            double d = twosComplement(responseStr) / (double) 5288;
+            return String.format("%.2f", d);
+        }
+
+        private int twosComplement (String responseStr){
+            int v;
+            v = Integer.parseInt(responseStr.substring(2, responseStr.length()), 16);
+
+            if (responseStr.substring(0, 2).equals("FF")) {
+                v = 16777215 - v + 1;
+            }
+
+            return v;
+        }
+
+    }
