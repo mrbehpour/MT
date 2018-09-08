@@ -311,7 +311,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            //Toast.makeText(G.context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(G.context, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     });
