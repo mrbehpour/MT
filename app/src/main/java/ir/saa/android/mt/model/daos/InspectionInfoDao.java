@@ -28,7 +28,7 @@ public interface InspectionInfoDao {
     void deleteInspectionInfoById(Integer Id);
 
     @Insert(onConflict = IGNORE)
-    void insertInspectionInfo(InspectionInfo inspectionInfo);
+    Long insertInspectionInfo(InspectionInfo inspectionInfo);
 
     @Insert(onConflict = IGNORE)
     List<Long> insertInspectionInfos(List<InspectionInfo> inspectionInfos);

@@ -295,7 +295,10 @@ public class BaseInfoViewModel extends AndroidViewModel {
     }
 
     public void getClientFromServer(GetClientInput getClientInput){
-
+            if(clientRepo.getClients().size()>0)
+            {
+                clientRepo.deleteAll();
+            }
             retrofitMT.getMtApi().GetClients(getClientInput)
                     .subscribeOn(Schedulers.io())
                     //.observeOn(AndroidSchedulers.mainThread())

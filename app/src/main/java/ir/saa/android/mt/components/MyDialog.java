@@ -164,7 +164,7 @@ public class MyDialog {
 		btn.setTypeface(tf);
 		btn.setTextSize(20);
 		btn.setTextColor(Color.WHITE);
-		btn.setBackgroundDrawable(_context.getResources().getDrawable(R.drawable.login_button));
+		//btn.setBackgroundDrawable(_context.getResources().getDrawable(R.drawable.login_button));
 		LayoutParams btnLp = new LayoutParams();
 		btnLp.width = LayoutParams.MATCH_PARENT;
 		btnLp.height = LayoutParams.MATCH_PARENT;

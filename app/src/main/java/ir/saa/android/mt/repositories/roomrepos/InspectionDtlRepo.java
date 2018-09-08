@@ -55,8 +55,8 @@ public class InspectionDtlRepo implements InspectionDtlDao {
     }
 
 
-    public void insertInspectionDtl(InspectionDtl inspectionDtl) {
-        inspectionDtlDao.insertInspectionDtl(inspectionDtl);
+    public Long insertInspectionDtl(InspectionDtl inspectionDtl) {
+        return inspectionDtlDao.insertInspectionDtl(inspectionDtl);
     }
 
 

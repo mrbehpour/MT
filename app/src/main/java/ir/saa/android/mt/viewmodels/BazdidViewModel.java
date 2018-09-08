@@ -39,7 +39,7 @@ public class BazdidViewModel extends AndroidViewModel {
 
     public LiveData<List<Client>> getClientsLiveData(){
 
-        return clientRepo.getClients();
+        return clientRepo.getClientsLiveData();
     }
 
 

@@ -51,26 +51,7 @@ public class BazrasiFragment extends Fragment {
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyDialog dialog;
-                dialog = new MyDialog(getActivity());
-                dialog.clearAllPanel();
-                MyCheckList myCheckList=new MyCheckList(G.context,new MyCheckListItem("Iman",0),new MyCheckListItem("Ehsan",1));
-                myCheckList.addCheckItem(new MyCheckListItem("Hassan",2));
-                myCheckList.addCheckItem(new MyCheckListItem("Hamid",3));
-                myCheckList.addCheckItem(new MyCheckListItem("Hadi",4));
-                myCheckList.addCheckItem(new MyCheckListItem("Hessam",5));
-                myCheckList.setCheckListOrientation(LinearLayout.VERTICAL)
-                        .setSelectionMode(MyCheckListMode.SingleSelection)
-                        .setCheckItemsHeight(30);
-                dialog.setTitle("سلام")
-                        .setRightTitle(String.format("%d/%d",1,4))
-                        .addContentView(myCheckList)
-                        .setLeftImageTitle(G.context.getResources().getDrawable(R.drawable.account),new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
 
-                            }
-                        }).show();
             }
         });
         setUpRecyclerView(rootView);
@@ -81,10 +62,10 @@ public class BazrasiFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvSoal);
 
-        adapter = new BazrasiAdapter(getActivity(), bazrasiViewModel.getRemarks().getValue()==null?new ArrayList<>(): bazrasiViewModel.getRemarks().getValue());
+        adapter = new BazrasiAdapter(getActivity(), bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue()==null?new ArrayList<>(): bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        bazrasiViewModel.getRemarks().observe(this, remarkItems -> {
+        bazrasiViewModel.getRemarks(G.clientInfo.GroupId).observe(this, remarkItems -> {
             adapter.clearDataSet();
             adapter.addAll(remarkItems);
             adapter.notifyDataSetChanged();

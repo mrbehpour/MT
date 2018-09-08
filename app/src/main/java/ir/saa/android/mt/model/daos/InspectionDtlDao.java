@@ -37,7 +37,7 @@ public interface InspectionDtlDao {
     List<Long> insertInspectionDtls(List<InspectionDtl> inspectionDtls);
 
     @Insert(onConflict = IGNORE)
-    void insertInspectionDtl(InspectionDtl inspectionDtl);
+    Long insertInspectionDtl(InspectionDtl inspectionDtl);
 
     @Update
     void updateInspectionDtl(InspectionDtl inspectionDtl);

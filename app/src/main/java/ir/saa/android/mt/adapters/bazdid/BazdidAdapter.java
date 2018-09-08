@@ -51,6 +51,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
             bundle.putLong(BundleKeysEnum.ClientID,current.Id);
             G.clientInfo.ClientId=current.Id;
             G.clientInfo.SendId=current.SendId;
+            G.clientInfo.GroupId=current.GroupId;
             G.startFragment(FragmentsEnum.MoshtarakFragment,false,bundle);
         });
         //holder.imgBazdidMoshtarak.setImageResource(current.Pic);
