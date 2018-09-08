@@ -242,8 +242,8 @@ public class PolompFragmentSave extends Fragment {
     private void PolompSave(){
         polompInfo=new PolompInfo();
         polompInfo.AgentID= Integer.valueOf (G.getPref("UserID"));
-        polompInfo.ChangeDate= Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
-        polompInfo.ChangeTime=Integer.valueOf (Tarikh.getTimeWithoutColon());
+        polompInfo.ChangeDate = Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
+        polompInfo.ChangeTime = Integer.valueOf (Tarikh.getTimeWithoutColon());
         polompInfo.ClientID=polompParams.ClientId;
         polompInfo.SendID= G.clientInfo.SendId;
 

@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,10 @@ import ir.saa.android.mt.components.MyCheckList;
 import ir.saa.android.mt.components.MyCheckListItem;
 import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.components.MyDialog;
+import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
+import ir.saa.android.mt.model.entities.InspectionDtl;
+import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 
 public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHolder> {
@@ -38,6 +42,9 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     private LayoutInflater inflater;
     private Context context;
     private FragmentActivity activity;
+    BazrasiViewModel bazrasiViewModel=null;
+    ArrayList<Object> objects=new ArrayList<>();
+    MyCheckList myCheckList;
 
     public BazrasiAdapter(Context context, List<RemarkItem> data){
         this.context = context;
@@ -46,6 +53,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
         remarkItemListOrginal = new ArrayList<>();
         mDataList.addAll(data);
         remarkItemListOrginal.addAll(data);
+        this.bazrasiViewModel= ViewModelProviders.of((AppCompatActivity)context).get(BazrasiViewModel.class);
     }
 
     @Override
@@ -58,7 +66,8 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
             RemarkItem current=mDataList.get(position);
-            BazrasiViewModel bazrasiViewModel= ViewModelProviders.of((AppCompatActivity)context).get(BazrasiViewModel.class);
+
+
             holder.listitemRemarkRoot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -70,17 +79,19 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
 
 
                                 dialog.clearAllPanel();
-                                MyCheckList myCheckList=
+                                 myCheckList=
                                         new MyCheckList(G.context
                                                 ,new MyCheckListItem(answerGroupDtls.get(0).AnswerGroupDtlName,answerGroupDtls.get(0).AnswerGroupDtlID),
                                                 new MyCheckListItem(answerGroupDtls.get(1).AnswerGroupDtlName,answerGroupDtls.get(1).AnswerGroupDtlID));
                                 for (Integer i=2;i<answerGroupDtls.size();i++) {
                                     myCheckList.addCheckItem(new MyCheckListItem(answerGroupDtls.get(i).AnswerGroupDtlName,
                                             answerGroupDtls.get(i).AnswerGroupDtlID));
+
                                 }
                                 myCheckList.setCheckListOrientation(LinearLayout.VERTICAL)
                                         .setSelectionMode(MyCheckListMode.SingleSelection)
                                         .setCheckItemsHeight(40);
+                                myCheckList.setSelectionByValue(current.remarkValue);
                                 dialog.addButton("انصراف", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -91,6 +102,11 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                     @Override
                                     public void onClick(View view) {
                                         holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
+
+                                        objects=myCheckList.getSelectedItemsValues();
+
+                                        saveBazrasi(current,objects.get(0));
+
                                         dialog.dismiss();
 
 
@@ -135,6 +151,28 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     }
     public void clearDataSet(){
         mDataList.clear();
+    }
+
+    private void saveBazrasi(RemarkItem currentItem,Object objectValue){
+        InspectionInfo inspectionInfo=new InspectionInfo();
+        inspectionInfo.AgentID=Integer.valueOf (G.getPref("UserID"));
+        inspectionInfo.ClientID=G.clientInfo.ClientId;
+        inspectionInfo.InspectionDate=Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
+        inspectionInfo.InspectionTime=Integer.valueOf (Tarikh.getTimeWithoutColon());
+        inspectionInfo.RemarkID=currentItem.Id;
+        Long inspectionInfoId =bazrasiViewModel.insertInspectionInfo(inspectionInfo);
+        InspectionDtl inspectionDtl=new InspectionDtl();
+        inspectionDtl.RemarkID=currentItem.Id;
+        inspectionDtl.InspectionInfoID=Integer.valueOf(inspectionInfoId.toString());
+        inspectionDtl.RemarkValue=String.valueOf(objectValue);
+        inspectionDtl.ReadTypeID=1;
+        Long inspectionDtlId =bazrasiViewModel.insertInspectionDtl(inspectionDtl);
+        if(inspectionDtlId!=null){
+            Toast.makeText((AppCompatActivity)context,"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
