@@ -62,8 +62,8 @@ public class InspectionDtlRepo implements InspectionDtlDao {
     }
 
 
-    public void updateInspectionDtl(InspectionDtl inspectionDtl) {
-        inspectionDtlDao.updateInspectionDtl(inspectionDtl);
+    public int updateInspectionDtl(InspectionDtl inspectionDtl) {
+       return inspectionDtlDao.updateInspectionDtl(inspectionDtl);
     }
 
     public InspectionAllInfo getInspectionAllInfo(Long clientId, Integer remarkId){

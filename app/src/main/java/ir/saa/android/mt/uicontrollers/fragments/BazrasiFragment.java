@@ -65,7 +65,7 @@ public class BazrasiFragment extends Fragment {
         adapter = new BazrasiAdapter(getActivity(), bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue()==null?new ArrayList<>(): bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        
+
         bazrasiViewModel.getRemarks(G.clientInfo.GroupId).observe(this, remarkItems -> {
             adapter.clearDataSet();
             adapter.addAll(remarkItems);

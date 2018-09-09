@@ -34,7 +34,7 @@ public interface InspectionInfoDao {
     List<Long> insertInspectionInfos(List<InspectionInfo> inspectionInfos);
 
     @Update
-    void updateInspectionInfo(InspectionInfo inspectionInfo);
+    int updateInspectionInfo(InspectionInfo inspectionInfo);
 
     @Delete
     void deleteInspectionInfo(InspectionInfo inspectionInfo);

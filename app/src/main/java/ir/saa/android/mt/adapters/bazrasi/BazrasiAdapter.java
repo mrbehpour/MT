@@ -31,6 +31,7 @@ import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
+import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
@@ -46,6 +47,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     ArrayList<Object> objects=new ArrayList<>();
     MyCheckList myCheckList;
 
+
     public BazrasiAdapter(Context context, List<RemarkItem> data){
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -59,6 +61,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.listitem_bazrasi, parent, false);
+
         BazrasiAdapter.MyViewHolder holder = new BazrasiAdapter.MyViewHolder(view);
         return holder;
     }
@@ -66,12 +69,18 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
             RemarkItem current=mDataList.get(position);
-
-
+            holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
+            if(current.remarkValue!="-1"){
+                holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
+            }
             holder.listitemRemarkRoot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                      final  MyDialog dialog=new MyDialog(context) ;
+                    InspectionAllInfo inspectionAllInfo=bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId,current.Id);
+                    if(inspectionAllInfo!=null){
+                        current.remarkValue=inspectionAllInfo.RemarkValue;
+                    }
                     if(current.answerGroupId!=null){
                         bazrasiViewModel.getAnswerGroupDtls(current.answerGroupId).observe((AppCompatActivity) context, new Observer<List<AnswerGroupDtl>>() {
                             @Override
@@ -88,10 +97,11 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                             answerGroupDtls.get(i).AnswerGroupDtlID));
 
                                 }
+
                                 myCheckList.setCheckListOrientation(LinearLayout.VERTICAL)
                                         .setSelectionMode(MyCheckListMode.SingleSelection)
                                         .setCheckItemsHeight(40);
-                                myCheckList.setSelectionByValue(current.remarkValue);
+                                myCheckList.setSelectionByValue(Integer.valueOf(current.remarkValue));
                                 dialog.addButton("انصراف", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -124,6 +134,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                         })
 
                                         .show();
+
                             }
                         });
                     }
@@ -154,22 +165,47 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     }
 
     private void saveBazrasi(RemarkItem currentItem,Object objectValue){
-        InspectionInfo inspectionInfo=new InspectionInfo();
-        inspectionInfo.AgentID=Integer.valueOf (G.getPref("UserID"));
-        inspectionInfo.ClientID=G.clientInfo.ClientId;
-        inspectionInfo.InspectionDate=Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
-        inspectionInfo.InspectionTime=Integer.valueOf (Tarikh.getTimeWithoutColon());
-        inspectionInfo.RemarkID=currentItem.Id;
-        Long inspectionInfoId =bazrasiViewModel.insertInspectionInfo(inspectionInfo);
-        InspectionDtl inspectionDtl=new InspectionDtl();
-        inspectionDtl.RemarkID=currentItem.Id;
-        inspectionDtl.InspectionInfoID=Integer.valueOf(inspectionInfoId.toString());
-        inspectionDtl.RemarkValue=String.valueOf(objectValue);
-        inspectionDtl.ReadTypeID=1;
-        Long inspectionDtlId =bazrasiViewModel.insertInspectionDtl(inspectionDtl);
-        if(inspectionDtlId!=null){
-            Toast.makeText((AppCompatActivity)context,"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+        InspectionAllInfo inspectionAllInfo=bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId,currentItem.Id);
+        if(inspectionAllInfo==null){
+            InspectionInfo inspectionInfo=new InspectionInfo();
+            inspectionInfo.AgentID=Integer.valueOf (G.getPref("UserID"));
+            inspectionInfo.ClientID=G.clientInfo.ClientId;
+            inspectionInfo.InspectionDate=Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
+            inspectionInfo.InspectionTime=Integer.valueOf (Tarikh.getTimeWithoutColon());
+            inspectionInfo.RemarkID=currentItem.Id;
+            Long inspectionInfoId =bazrasiViewModel.insertInspectionInfo(inspectionInfo);
+            InspectionDtl inspectionDtl=new InspectionDtl();
+            inspectionDtl.RemarkID=currentItem.Id;
+            inspectionDtl.InspectionInfoID=Integer.valueOf(inspectionInfoId.toString());
+            inspectionDtl.RemarkValue=String.valueOf(objectValue);
+            inspectionDtl.ReadTypeID=1;
+            Long inspectionDtlId =bazrasiViewModel.insertInspectionDtl(inspectionDtl);
+            if(inspectionDtlId!=null){
+                Toast.makeText((AppCompatActivity)context,"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+            }
+        }else{
+
+            InspectionInfo inspectionInfo=new InspectionInfo();
+            inspectionInfo.AgentID=inspectionAllInfo.AgentID;
+            inspectionInfo.ClientID=inspectionAllInfo.ClientID;
+            inspectionInfo.InspectionDate=inspectionAllInfo.InspectionDate;
+            inspectionInfo.InspectionTime=inspectionAllInfo.InspectionTime;
+            inspectionInfo.RemarkID=inspectionAllInfo.RemarkID;
+            inspectionInfo.InspectionInfoID=inspectionAllInfo.InspectionInfoID;
+            int inspectionInfoId =bazrasiViewModel.updateInspectionInfo(inspectionInfo);
+            InspectionDtl inspectionDtl=new InspectionDtl();
+            inspectionDtl.RemarkID=inspectionAllInfo.RemarkID;
+            inspectionDtl.InspectionInfoID=inspectionAllInfo.InspectionInfoID;
+            inspectionDtl.RemarkValue=String.valueOf(objectValue);
+            inspectionDtl.ReadTypeID=1;
+            inspectionDtl.InspectionDtlID=inspectionAllInfo.InspectionDtlID;
+
+            int inspectionDtlId =bazrasiViewModel.updateInspectionDtl(inspectionDtl);
+            if(inspectionDtlId!=0){
+                Toast.makeText((AppCompatActivity)context,"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+            }
         }
+
 
 
 

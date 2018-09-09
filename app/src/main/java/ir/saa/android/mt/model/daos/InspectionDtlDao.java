@@ -42,7 +42,7 @@ public interface InspectionDtlDao {
     Long insertInspectionDtl(InspectionDtl inspectionDtl);
 
     @Update
-    void updateInspectionDtl(InspectionDtl inspectionDtl);
+    int updateInspectionDtl(InspectionDtl inspectionDtl);
 
     @Query("Select * from InspectionInfo " +
             "inner join InspectionDtl on " +

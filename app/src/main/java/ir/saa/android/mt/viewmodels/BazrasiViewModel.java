@@ -49,7 +49,8 @@ public class BazrasiViewModel extends AndroidViewModel {
            inspectionDtlRepo=new InspectionDtlRepo(application);
        }
 
-
+//       inspectionInfoRepo.deleteAll();
+//       inspectionDtlRepo.deleteAll();;
        }
 
        public LiveData<List<RemarkItem>> getRemarks(Integer Id){
@@ -96,4 +97,16 @@ public class BazrasiViewModel extends AndroidViewModel {
 
             return inspectionDtlRepo.insertInspectionDtl(inspectionDtl);
        }
+
+       public int updateInspectionDtl(InspectionDtl inspectionDtl){
+        return  inspectionDtlRepo.updateInspectionDtl(inspectionDtl);
+       }
+       public int updateInspectionInfo(InspectionInfo inspectionInfo){
+        return  inspectionInfoRepo.updateInspectionInfo(inspectionInfo);
+       }
+       public InspectionAllInfo getInspectionAllInfo(Long clientId,Integer remarkID){
+        return inspectionDtlRepo.getInspectionAllInfo(clientId,remarkID);
+       }
+
+
 }

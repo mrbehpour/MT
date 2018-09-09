@@ -51,8 +51,8 @@ public class InspectionInfoRepo  {
     }
 
 
-    public void updateInspectionInfo(InspectionInfo inspectionInfo) {
-        inspectionInfoDao.updateInspectionInfo(inspectionInfo);
+    public int updateInspectionInfo(InspectionInfo inspectionInfo) {
+       return inspectionInfoDao.updateInspectionInfo(inspectionInfo);
     }
 
 
