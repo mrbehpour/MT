@@ -10,6 +10,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import ir.saa.android.mt.model.entities.Remark;
+import ir.saa.android.mt.model.entities.RemarkGroupingFormat;
 import retrofit2.http.DELETE;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
@@ -23,13 +24,13 @@ public interface RemarkDao {
     @Query("select * from Remark where RemarkID= :Id")
     LiveData<Remark> getRemarkById(int Id);
 
-    @Query("select *  from Remark where propertytype_id= :Id")
+    @Query("select *  from Remark where PropertyTypeID= :Id")
     LiveData<List<Remark>> getRemarkByPropertyId(int Id);
 
-    @Query("select * from Remark where answergroup_id= :Id")
+    @Query("select * from Remark where AnswerGroupID= :Id")
     LiveData<List<Remark>> getRemarkByAnswerGroupId(int Id);
 
-    @Query("select * from Remark where remarktype_id= :Id")
+    @Query("select * from Remark where RemarkTypeID= :Id")
     LiveData<List<Remark>> getRemarkByRemarkTypeId(int Id);
 
     @Query("Delete From Remark")
@@ -49,6 +50,12 @@ public interface RemarkDao {
 
     @Delete
     void deleteRemark(Remark remark);
+
+    @Query("Select * from Remark" +
+            " inner join GroupingFormat on" +
+            " Remark.RemarkID=GroupingFormat.remark_id" +
+            " Where GroupingFormat.mastergroupdetail_id=:Id and Remark.RemarkTypeID=:remarkTypeId")
+    LiveData<List<RemarkGroupingFormat>> getRemarkGroupingFormat(Integer Id,Integer remarkTypeId);
 
 
 

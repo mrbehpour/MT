@@ -295,7 +295,10 @@ public class BaseInfoViewModel extends AndroidViewModel {
     }
 
     public void getClientFromServer(GetClientInput getClientInput){
-
+            if(clientRepo.getClients().size()>0)
+            {
+                clientRepo.deleteAll();
+            }
             retrofitMT.getMtApi().GetClients(getClientInput)
                     .subscribeOn(Schedulers.io())
                     //.observeOn(AndroidSchedulers.mainThread())
@@ -311,7 +314,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            //Toast.makeText(G.context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(G.context, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     });

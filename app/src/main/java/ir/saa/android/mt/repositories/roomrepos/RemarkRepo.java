@@ -8,6 +8,7 @@ import java.util.List;
 import ir.saa.android.mt.model.daos.RemarkDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.Remark;
+import ir.saa.android.mt.model.entities.RemarkGroupingFormat;
 
 public class RemarkRepo  {
 
@@ -73,5 +74,9 @@ public class RemarkRepo  {
 
     public void deleteRemark(Remark remark) {
         remarkDao.deleteRemark(remark);
+    }
+
+    public LiveData<List<RemarkGroupingFormat>> getRemarkGroupingFormat(Integer Id,Integer remarkTypeId){
+        return remarkDao.getRemarkGroupingFormat(Id,remarkTypeId);
     }
 }

@@ -41,8 +41,8 @@ public class InspectionInfoRepo  {
     }
 
 
-    public void insertInspectionInfo(InspectionInfo inspectionInfo) {
-        inspectionInfoDao.insertInspectionInfo(inspectionInfo);
+    public Long insertInspectionInfo(InspectionInfo inspectionInfo) {
+        return inspectionInfoDao.insertInspectionInfo(inspectionInfo);
     }
 
 
@@ -51,8 +51,8 @@ public class InspectionInfoRepo  {
     }
 
 
-    public void updateInspectionInfo(InspectionInfo inspectionInfo) {
-        inspectionInfoDao.updateInspectionInfo(inspectionInfo);
+    public int updateInspectionInfo(InspectionInfo inspectionInfo) {
+       return inspectionInfoDao.updateInspectionInfo(inspectionInfo);
     }
 
 

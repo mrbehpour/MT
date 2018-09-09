@@ -18,13 +18,17 @@ public class ClientRepo {
     public ClientRepo(Application application){
         MTDatabase db=MTDatabase.getDatabase(application);
         clientDao=db.clientModel();
-        Clients=clientDao.getClients();
+        Clients=clientDao.getClientsLiveData();
     }
 
-    public LiveData<List<Client>> getClients() {
+    public LiveData<List<Client>> getClientsLiveData() {
         return Clients;
     }
 
+
+    public List<Client> getClients() {
+        return clientDao.getClients();
+    }
 
     public void updateClient(Client client) {
         clientDao.updateClient(client);

@@ -9,7 +9,7 @@ import io.reactivex.annotations.NonNull;
 @Entity
 public class InspectionInfo  {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     public Integer InspectionInfoID;
 
