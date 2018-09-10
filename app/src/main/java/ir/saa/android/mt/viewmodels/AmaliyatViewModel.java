@@ -160,9 +160,9 @@ public class AmaliyatViewModel extends AndroidViewModel {
     }
 
     public void startTest() {
-        String startTestStatus =  metertester.ReadTestCommand();
-        Log.d("response test status",  startTestStatus);
-        if(startTestStatus.equals("0000")) {
+        MT.TestCommands startTestStatus =  metertester.ReadTestCommand();
+//        Log.d("response test status",  startTestStatus);
+        if(startTestStatus.equals(MT.TestCommands.StartTest)) {
             metertester.SendTestCommand(MT.TestCommands.StartTest);
             lastPaulseCounter = 0;
             myPaulseCounter = 0;
