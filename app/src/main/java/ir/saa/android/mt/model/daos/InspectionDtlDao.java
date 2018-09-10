@@ -9,7 +9,9 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
+import ir.saa.android.mt.model.entities.InspectionInfo;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 
@@ -37,8 +39,14 @@ public interface InspectionDtlDao {
     List<Long> insertInspectionDtls(List<InspectionDtl> inspectionDtls);
 
     @Insert(onConflict = IGNORE)
-    void insertInspectionDtl(InspectionDtl inspectionDtl);
+    Long insertInspectionDtl(InspectionDtl inspectionDtl);
 
     @Update
-    void updateInspectionDtl(InspectionDtl inspectionDtl);
+    int updateInspectionDtl(InspectionDtl inspectionDtl);
+
+    @Query("Select * from InspectionInfo " +
+            "inner join InspectionDtl on " +
+            "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
+            "Where InspectionInfo.ClientID=:clientId and InspectionInfo.RemarkID=:remarkId")
+    InspectionAllInfo getInspectionAllInfo(Long clientId,Integer remarkId);
 }

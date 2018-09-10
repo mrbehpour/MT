@@ -8,8 +8,10 @@ public class ClientItem {
     public String UniqueFieldValue;
     public Integer Pic;
     public Integer SendId;
+    public Integer GroupId;
 
-    public ClientItem(Long id,String name,String address,String uniqueFieldTitle,String uniqueFieldValue,Integer pic,Integer SendId){
+    public ClientItem(Long id,String name,String address,String uniqueFieldTitle,String uniqueFieldValue,Integer pic,Integer SendId,
+                      Integer groupID){
         this.Id = id;
         this.Name = name;
         this.Address = address;
@@ -17,5 +19,6 @@ public class ClientItem {
         this.UniqueFieldValue = uniqueFieldValue;
         this.Pic = pic;
         this.SendId=SendId;
+        this.GroupId=groupID;
     }
 }

@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.*;
@@ -23,10 +24,10 @@ import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
 public class DaryaftActivity extends AppCompatActivity   {
 
-    CardView cvMoshtarkin;
-    CardView cvTanzimat;
-    CardView cvPayeh;
-    CardView cvKarbaran;
+    LinearLayout llMoshtarkin;
+    LinearLayout llTanzimat;
+    LinearLayout llPayeh;
+    LinearLayout llKarbaran;
     NumberProgressBar pbDaryaftEtelatPayeh;
     NumberProgressBar pbKarbaran;
     NumberProgressBar pbMoshtarakin;
@@ -65,17 +66,17 @@ public class DaryaftActivity extends AppCompatActivity   {
         pbTanzimat.setMax(100);
 
 
-        cvTanzimat=(CardView)findViewById(R.id.cvTanzimat);
-        cvMoshtarkin=(CardView)findViewById(R.id.cvMoshtarakin);
-        cvPayeh=(CardView)findViewById(R.id.cvPayeh);
-        cvKarbaran=(CardView)findViewById(R.id.cvKarbaran);
+        llTanzimat=(LinearLayout)findViewById(R.id.llTanzimat);
+        llMoshtarkin=(LinearLayout)findViewById(R.id.llMoshtarakin);
+        llPayeh=(LinearLayout)findViewById(R.id.llPayeh);
+        llKarbaran=(LinearLayout)findViewById(R.id.llKarbaran);
 
         ivTanzimat=(ImageView)findViewById(R.id.ivTanzimat);
         ivMoshtarakin=(ImageView)findViewById(R.id.ivMoshtarakin);
         ivKarbaran=(ImageView)findViewById(R.id.ivKarbaran);
         ivDaryaftEtelatPayeh=(ImageView)findViewById(R.id.ivPayeh);
 
-        cvTanzimat.setOnClickListener(new View.OnClickListener() {
+        llTanzimat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isDownloadSetting==false){
@@ -102,7 +103,7 @@ public class DaryaftActivity extends AppCompatActivity   {
             }
         });
 
-        cvKarbaran.setOnClickListener(new View.OnClickListener() {
+        llKarbaran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isDownloadUser==false){
@@ -126,7 +127,7 @@ public class DaryaftActivity extends AppCompatActivity   {
             }
         });
 
-        cvPayeh.setOnClickListener(new View.OnClickListener() {
+        llPayeh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isDownloadBaseInfo==false){
@@ -136,7 +137,12 @@ public class DaryaftActivity extends AppCompatActivity   {
 
             }
         });
-
+        baseInfoViewModel.messageErrorLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+            }
+        });
         baseInfoViewModel.baseinfoProgressPercentLiveData.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
@@ -150,7 +156,7 @@ public class DaryaftActivity extends AppCompatActivity   {
             }
         });
 
-        cvMoshtarkin.setOnClickListener(new View.OnClickListener() {
+        llMoshtarkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(isDownloadClient==false) {
@@ -163,18 +169,18 @@ public class DaryaftActivity extends AppCompatActivity   {
                 }
             }
         });
-       baseInfoViewModel.clientProgressPercentLiveData.observe(this, new Observer<Integer>() {
-           @Override
-           public void onChanged(@Nullable Integer integer) {
-               pbMoshtarakin.setProgress(integer);
-               if(integer==100){
-                   isDownloadClient=false;
-                   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                       ivMoshtarakin.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
-                   }
-               }
-           }
-       });
+        baseInfoViewModel.clientProgressPercentLiveData.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer integer) {
+                pbMoshtarakin.setProgress(integer);
+                if(integer==100){
+                    isDownloadClient=false;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        ivMoshtarakin.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
+                    }
+                }
+            }
+        });
     }
 
     @Override

@@ -17,7 +17,10 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 @Dao
 public interface ClientDao {
     @Query("select * from Client")
-    LiveData<List<Client>> getClients();
+    LiveData<List<Client>> getClientsLiveData();
+
+    @Query("select * from Client")
+    List<Client> getClients();
 
     @Query("Select " +
             "Client.ClientID," +

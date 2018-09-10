@@ -20,7 +20,7 @@ public class Remark  {
     public Integer RemarkID;
 
 
-    @ColumnInfo(name = "answergroup_id")
+
     public  Integer AnswerGroupID;
 
     public Integer BillingCode;
@@ -36,7 +36,7 @@ public class Remark  {
 
     public Integer Precision;
 
-    @ColumnInfo(name = "propertytype_id")
+
     public Integer PropertyTypeID;
 
     //public RealmList<RelRemarkUnit> RelRemarkUnit;
@@ -47,7 +47,7 @@ public class Remark  {
 
     public Boolean IsDeleted;
 
-    @ColumnInfo(name = "remarktype_id")
+
     public  Integer RemarkTypeID;
 
 
