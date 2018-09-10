@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="نسبت کنتور"
+                android:hint="نسبت سنسور"
                 android:layout_gravity="center">
                 <EditText android:id="@+id/edtNesbatKontor"
                     android:layout_width="match_parent"

@@ -25,7 +25,7 @@ public class RetrofitMT {
                 .readTimeout(120, TimeUnit.SECONDS)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .build();
-
+//http://192.168.3.176:645/services/AndroidServices.svc/json/"
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://89.43.6.254:808/services/AndroidServices.svc/json/")
                 .addConverterFactory(GsonConverterFactory.create())

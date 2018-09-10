@@ -3,7 +3,9 @@ package ir.saa.android.mt.viewmodels;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -91,6 +93,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
     public MutableLiveData<Integer> settingProgressPercentLiveData=new MutableLiveData<>();
     public MutableLiveData<Integer> clientProgressPercentLiveData=new MutableLiveData<>();
     public MutableLiveData<Integer> baseinfoProgressPercentLiveData=new MutableLiveData<>();
+    public MutableLiveData<String> messageErrorLiveData=new MutableLiveData<>();
 
 
     public BaseInfoViewModel(@NonNull Application application) {
@@ -154,6 +157,8 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
         if(baseinfoProgressPercentLiveData==null)
             baseinfoProgressPercentLiveData.setValue(0);
+        if(messageErrorLiveData==null)
+            messageErrorLiveData.setValue("");
 
 
 
@@ -260,7 +265,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            //Toast.makeText(getApplication().getApplicationContext(), "خطا در ارتباط با سرور"+"\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -286,8 +291,8 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            Toast.makeText(G.context, e.getMessage(), Toast.LENGTH_SHORT).show();
 
+                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
                         }
                     })
             ;
@@ -295,10 +300,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
     }
 
     public void getClientFromServer(GetClientInput getClientInput){
-            if(clientRepo.getClients().size()>0)
-            {
-                clientRepo.deleteAll();
-            }
+
             retrofitMT.getMtApi().GetClients(getClientInput)
                     .subscribeOn(Schedulers.io())
                     //.observeOn(AndroidSchedulers.mainThread())
@@ -314,7 +316,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            Toast.makeText(G.context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
                         }
 
                     });
@@ -465,6 +467,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                         @Override
                         public void onError(Throwable e) {
                            // Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
                         }
                     });
 

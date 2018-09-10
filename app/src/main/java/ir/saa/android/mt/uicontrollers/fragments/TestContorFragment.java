@@ -34,11 +34,9 @@ public class TestContorFragment extends Fragment
     TextView edtRoundNum;
 
     AlertDialog ad;
-    Bluetooth bluetooth;
     Bundle bundle;
 
     public TestContorFragment() {
-        bluetooth = Bluetooth.getInstance();
     }
 
     @Override
@@ -100,8 +98,10 @@ public class TestContorFragment extends Fragment
                         if(b){
                             G.startFragment(FragmentsEnum.TestEnergyFragment, false, bundle);
                         }
-                        else{
-                            Toast.makeText(G.context,"ضریب سی تی را لطفا وارد کنید",Toast.LENGTH_LONG).show();
+                        try {
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                         HideProgressDialog();
                     }
@@ -113,7 +113,7 @@ public class TestContorFragment extends Fragment
 
     private void connectToModuleDialog(){
         ad = new AlertDialog.Builder(this.getContext()).create();
-        ad.setCancelable(false);
+        ad.setCancelable(true);
         ad.setTitle("اتصال به دستگاه تست کنتور");
         ad.setMessage("لطفا منتظر بمانید تا اتصال برقرار شود...");
         new DialogInterface.OnClickListener() {
@@ -125,7 +125,7 @@ public class TestContorFragment extends Fragment
     }
 
     public void HideProgressDialog(){
-        ad.dismiss();
+        if(ad!=null) ad.dismiss();
     }
 
 

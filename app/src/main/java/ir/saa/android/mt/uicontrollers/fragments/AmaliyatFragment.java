@@ -15,21 +15,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.testresult.TestItem;
 import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
+import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.repositories.metertester.TestResult;
+import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
 
 public class AmaliyatFragment extends Fragment {
 
     AmaliyatViewModel amaliyatViewModel = null;
+    TestContorParams testContorParams;
     TestResultAdapter adapter;
-    List<TestItem> testItems;
     TextView tvRoundNum;
     TextView tvErrPerc;
+    RecyclerView recyclerView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -45,6 +53,11 @@ public class AmaliyatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fargment_amaliyat, container, false);
         amaliyatViewModel = ViewModelProviders.of(this).get(AmaliyatViewModel.class);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            testContorParams = (TestContorParams)args.getSerializable(BundleKeysEnum.TestContorParams);
+        }
 
         tvErrPerc = rootView.findViewById(R.id.tvErrPerc);
         amaliyatViewModel.testResultMutableLiveData.observe(this, new Observer<String>() {
@@ -66,15 +79,35 @@ public class AmaliyatFragment extends Fragment {
                 }
         );
 
+        amaliyatViewModel.testResultListMutableLiveData.observe(this, new Observer<List<TestResult>>() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onChanged(@Nullable List<TestResult> testResultList) {
+                        if(testResultList!=null) {
+                            setUpRecyclerView(rootView, testResultList);
+                        }
+                        else{
+                            Toast.makeText(G.context,"هیچ نتیجه تستی وجود ندارد.",Toast.LENGTH_SHORT ).show();
+                        }
+                    }
+                }
+        );
+
         Button btnStartTest = rootView.findViewById(R.id.btnStart);
         btnStartTest.setOnClickListener(new View.OnClickListener() {
-        @Override
+            @Override
             public void onClick(View view) {
+                List<TestResult> testResults=new ArrayList<>();
+                setUpRecyclerView(rootView,testResults);
+
+                amaliyatViewModel.setTestContorParams(testContorParams);
                 amaliyatViewModel.startTest();
+                //btnStartTest.setEnabled(false);
             }
         });
 
         Button btnTaeed = rootView.findViewById(R.id.btnTaeed);
+        //btnTaeed.setEnabled(false);
         btnTaeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,19 +118,15 @@ public class AmaliyatFragment extends Fragment {
         return rootView;
     }
 
-    private void setUpRecyclerView(View view) {
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvKhata);
-        adapter = new TestResultAdapter(getActivity(), testItems);
+    private void setUpRecyclerView(View view,List<TestResult> testResultList) {
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvKhata);
+
+        adapter = new TestResultAdapter(getActivity(), testResultList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        testItems.clear();
-//        for(TestItem ti:testItems){
-//            clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,"اشتراک : ",client.CustId, R.drawable.account));
-//        }
-
         adapter.clearDataSet();
-        adapter.addAll(testItems);
+        adapter.addAll(testResultList);
         adapter.notifyDataSetChanged();
     }
 

@@ -94,6 +94,8 @@ public class TestEnergyFragment extends Fragment
                 testEnergyViewModel.setTestContorParams(testContorParams);
                 testEnergyViewModel.confirmEnergies();
             }
+
+
         });
 
         return rootView;

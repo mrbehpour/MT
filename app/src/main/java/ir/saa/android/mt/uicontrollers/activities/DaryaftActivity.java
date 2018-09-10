@@ -137,7 +137,12 @@ public class DaryaftActivity extends AppCompatActivity   {
 
             }
         });
-
+        baseInfoViewModel.messageErrorLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+            }
+        });
         baseInfoViewModel.baseinfoProgressPercentLiveData.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {

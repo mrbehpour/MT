@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
@@ -41,6 +42,7 @@ public class TestContorViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
                 connectionStateMutableLiveData.postValue(false);
+                Toast.makeText(G.context, String.format("%s:\n%s","خطا در اتصال به دستگاه",errMsg), Toast.LENGTH_SHORT).show();
                 Log.d("response","onConnectionError : "+errMsg);
             }
 
@@ -54,7 +56,12 @@ public class TestContorViewModel extends AndroidViewModel {
     public void initTranseferLayer(){
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
         if(BluetoothDeviceName.equals("")) connectionStateMutableLiveData.postValue(false);
+        bluetooth.disconnnect();
         bluetooth.init(BluetoothDeviceName);
     }
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+    }
 }
