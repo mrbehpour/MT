@@ -11,6 +11,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 
 
 import ir.saa.android.mt.application.G;
+
+import static android.content.Context.WINDOW_SERVICE;
 
 public class MyCheckList extends LinearLayout {
 
@@ -38,7 +41,7 @@ public class MyCheckList extends LinearLayout {
 	private boolean _IsReadOnly = false;
 	private ScrollView _scrollView;
 	private LinearLayout _llMain;
-	private int _verticalItemCount = 4;
+	private int _verticalItemCount = 10;
 
 	public MyCheckList(Context context,MyCheckListItem myCheckListItem1,MyCheckListItem myCheckListItem2) {
 		super(context);
@@ -189,6 +192,8 @@ public class MyCheckList extends LinearLayout {
 //		return this;
 //	}
 	public MyCheckList setCheckItemsHeight(int height){
+
+
 		_checkItemheight = height;
 		final int childCount = _llMain.getChildCount();
 		for (int i = 0; i < childCount; i++) {

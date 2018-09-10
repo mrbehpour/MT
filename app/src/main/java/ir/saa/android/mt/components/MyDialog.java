@@ -172,7 +172,7 @@ public class MyDialog {
 		btn.setLayoutParams(btnLp);
 
 		LinearLayout ll = new LinearLayout(_context);
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0,70);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0,LayoutParams.MATCH_PARENT);
 		lp.weight = 1f;
 		lp.setMargins(0, 0, 5, 0);
 		ll.setLayoutParams(lp);
