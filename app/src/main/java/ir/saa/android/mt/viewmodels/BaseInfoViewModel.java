@@ -29,8 +29,10 @@ import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.GroupingFormat;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.Polomp;
+import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompGroup;
 import ir.saa.android.mt.model.entities.PolompGroupingFormat;
+import ir.saa.android.mt.model.entities.PolompType;
 import ir.saa.android.mt.model.entities.PropertyType;
 import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.model.entities.RelUser;
@@ -49,9 +51,11 @@ import ir.saa.android.mt.repositories.roomrepos.CompanyRepo;
 import ir.saa.android.mt.repositories.roomrepos.GroupingFormatRepo;
 import ir.saa.android.mt.repositories.roomrepos.MasterGroupDetailRepo;
 import ir.saa.android.mt.repositories.roomrepos.MasterGroupInfoRepo;
+import ir.saa.android.mt.repositories.roomrepos.PolompColorRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompGroupRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompGroupingFormatRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompRepo;
+import ir.saa.android.mt.repositories.roomrepos.PolompTypeRepo;
 import ir.saa.android.mt.repositories.roomrepos.PropertyTypeRepo;
 import ir.saa.android.mt.repositories.roomrepos.RegionRepo;
 import ir.saa.android.mt.repositories.roomrepos.ReluserRepo;
@@ -86,6 +90,8 @@ public class BaseInfoViewModel extends AndroidViewModel {
     RemarkTypeRepo remarkTypeRepo = null;
     TariffTypeRepo tariffTypeRepo = null;
     SettingRepo settingRepo=null;
+    PolompTypeRepo polompTypeRepo=null;
+    PolompColorRepo polompColorRepo=null;
 
     //---------------------------------------
 
@@ -144,6 +150,11 @@ public class BaseInfoViewModel extends AndroidViewModel {
             tariffTypeRepo = new TariffTypeRepo(application);
         if(settingRepo==null)
             settingRepo=new SettingRepo(application);
+        if(polompColorRepo==null)
+            polompColorRepo=new PolompColorRepo(application);
+        if(polompTypeRepo==null)
+            polompTypeRepo=new PolompTypeRepo(application);
+
 
         //---------------------------------------------
         if(UsersProgressPercentLiveData == null)
@@ -265,7 +276,8 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
                         }
                     });
 
@@ -328,24 +340,26 @@ public class BaseInfoViewModel extends AndroidViewModel {
     public void getBaseInfoFromServer(){
 
 
-            Completable.fromAction(new Action() {
-                @Override
-                public void run() throws Exception {
-                    List<AnswerGroup> answerGroups = null;
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                List<AnswerGroup> answerGroups = null;
 
-                    List<AnswerGroupDtl> answerGroupDtls = new ArrayList<>();
-                    List<PropertyType> propertyTypes = null;
-                    List<Region> regions = null;
-                    List<City> cities = null;
-                    List<Remark> remarks = null;
-                    List<GroupingFormat> groupingFormats = null;
-                    List<RemarkGroup> remarkGroups = null;
-                    List<MasterGroupDetail> masterGroupDetails = null;
-                    List<Polomp> polomps = null;
-                    List<PolompGroup> polompGroups = null;
-                    List<PolompGroupingFormat> polompGroupingFormats = null;
+                List<AnswerGroupDtl> answerGroupDtls = new ArrayList<>();
+                List<PropertyType> propertyTypes = null;
+                List<Region> regions = null;
+                List<City> cities = null;
+                List<Remark> remarks = null;
+                List<GroupingFormat> groupingFormats = null;
+                List<RemarkGroup> remarkGroups = null;
+                List<MasterGroupDetail> masterGroupDetails = null;
+                List<Polomp> polomps = null;
+                List<PolompGroup> polompGroups = null;
+                List<PolompGroupingFormat> polompGroupingFormats = null;
+                List<PolompColor> polompColors=null;
+                List<PolompType> polompTypes=null;
 
-                    answerGroups = retrofitMT.getMtApi().GetAnswerGroups().blockingGet();
+                answerGroups = retrofitMT.getMtApi().GetAnswerGroups().blockingGet();
 
                 for(Integer i=0;i<answerGroups.size();i++){
                     if(answerGroups.get(i)!=null){
@@ -355,103 +369,123 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     }
 
                 }
-                    propertyTypes = retrofitMT.getMtApi().GetPropertyTypies().blockingGet();
-                    regions = retrofitMT.getMtApi().GetRegions().blockingGet();
-                    cities = retrofitMT.getMtApi().GetCities().blockingGet();
-                    List<AnswerGroupDtl> ClientTarif = null;
-                    ClientTarif = retrofitMT.getMtApi().GetClientsTariff().blockingGet();
-                    for (Integer i = 0; i < ClientTarif.size(); i++) {
-                        answerGroupDtls.add(ClientTarif.get(i));
-                    }
-                    remarks = retrofitMT.getMtApi().GetRemarks().blockingGet();
-                    groupingFormats = retrofitMT.getMtApi().GetGroupingFormat().blockingGet();
-                    remarkGroups = retrofitMT.getMtApi().GetRemarkGroup().blockingGet();
-                    masterGroupDetails = retrofitMT.getMtApi().GetMasterGroupDtl().blockingGet();
-                    polomps = retrofitMT.getMtApi().GetPolomps().blockingGet();
-                    polompGroups = retrofitMT.getMtApi().GetPolompGroup().blockingGet();
-                    polompGroupingFormats = retrofitMT.getMtApi().GetPolompGroupingFormat().blockingGet();
-
-                    Integer totalCount = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() +
-                            regions.size() + cities.size() + remarks.size() + groupingFormats.size() +
-                            remarkGroups.size() + masterGroupDetails.size() + polomps.size() + polompGroups.size() +
-                            polompGroupingFormats.size();
-                    Integer startProgress = 0;
-                    for (Integer i = 0; i < answerGroups.size(); i++) {
-                        //answerGroupRepo.insertAnswerGroup(answerGroups.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size();
-                    for (Integer i = 0; i < answerGroupDtls.size(); i++) {
-                        answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size();
-                    for (Integer i = 0; i < propertyTypes.size(); i++) {
-                        propertyTypeRepo.insertPropertyType(propertyTypes.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size();
-                    for (Integer i = 0; i < regions.size(); i++) {
-                        regionRepo.insertRegion(regions.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size();
-                    for (Integer i = 0; i < cities.size(); i++) {
-                        cityRepo.insertCity(cities.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                            cities.size();
-                    for (Integer i = 0; i < remarks.size(); i++) {
-                        remarkRepo.insertRemark(remarks.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                            cities.size() + remarks.size();
-                    for (Integer i = 0; i < remarkGroups.size(); i++) {
-                        remarkGroupRepo.insertRemarkGroup(remarkGroups.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                            cities.size() + remarks.size() + remarkGroups.size();
-                    for (Integer i = 0; i < groupingFormats.size(); i++) {
-                        groupingFormatRepo.insertGroupingFormat(groupingFormats.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                            cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size();
-
-                    for (Integer i = 0; i < masterGroupDetails.size(); i++) {
-                        masterGroupDetailRepo.insertMasterGroupDetail(masterGroupDetails.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                            cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
-                            masterGroupDetails.size();
-
-                    for (Integer i = 0; i < polomps.size(); i++) {
-                        polompRepo.insertPolomp(polomps.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                            cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
-                            masterGroupDetails.size() + polomps.size();
-
-                    for (Integer i = 0; i < polompGroups.size(); i++) {
-                        polompGroupRepo.insertPolompGroup(polompGroups.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                            cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
-                            masterGroupDetails.size() + polomps.size() + polompGroups.size();
-
-                    for (Integer i = 0; i < polompGroupingFormats.size(); i++) {
-                        polompGroupingFormatRepo.insertPolompGroupingFormat(polompGroupingFormats.get(i));
-                        baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-
+                propertyTypes = retrofitMT.getMtApi().GetPropertyTypies().blockingGet();
+                regions = retrofitMT.getMtApi().GetRegions().blockingGet();
+                cities = retrofitMT.getMtApi().GetCities().blockingGet();
+                List<AnswerGroupDtl> ClientTarif = null;
+                ClientTarif = retrofitMT.getMtApi().GetClientsTariff().blockingGet();
+                for (Integer i = 0; i < ClientTarif.size(); i++) {
+                    answerGroupDtls.add(ClientTarif.get(i));
                 }
-            }).subscribeOn(Schedulers.io())
+                remarks = retrofitMT.getMtApi().GetRemarks().blockingGet();
+                groupingFormats = retrofitMT.getMtApi().GetGroupingFormat().blockingGet();
+                remarkGroups = retrofitMT.getMtApi().GetRemarkGroup().blockingGet();
+                masterGroupDetails = retrofitMT.getMtApi().GetMasterGroupDtl().blockingGet();
+                polomps = retrofitMT.getMtApi().GetPolomps().blockingGet();
+                polompGroups = retrofitMT.getMtApi().GetPolompGroup().blockingGet();
+                polompGroupingFormats = retrofitMT.getMtApi().GetPolompGroupingFormat().blockingGet();
+                polompColors=retrofitMT.getMtApi().GetPolompColor().blockingGet();
+                polompTypes=retrofitMT.getMtApi().GetPolompType().blockingGet();
+
+                Integer totalCount = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() +
+                        regions.size() + cities.size() + remarks.size() + groupingFormats.size() +
+                        remarkGroups.size() + masterGroupDetails.size() + polomps.size() + polompGroups.size() +
+                        polompGroupingFormats.size()+polompColors.size()+polompTypes.size();
+                Integer startProgress = 0;
+                for (Integer i = 0; i < answerGroups.size(); i++) {
+                    //answerGroupRepo.insertAnswerGroup(answerGroups.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size();
+                for (Integer i = 0; i < answerGroupDtls.size(); i++) {
+                    answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size();
+                for (Integer i = 0; i < propertyTypes.size(); i++) {
+                    propertyTypeRepo.insertPropertyType(propertyTypes.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size();
+                for (Integer i = 0; i < regions.size(); i++) {
+                    regionRepo.insertRegion(regions.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size();
+                for (Integer i = 0; i < cities.size(); i++) {
+                    cityRepo.insertCity(cities.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size();
+                for (Integer i = 0; i < remarks.size(); i++) {
+                    remarkRepo.insertRemark(remarks.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size() + remarks.size();
+                for (Integer i = 0; i < remarkGroups.size(); i++) {
+                    remarkGroupRepo.insertRemarkGroup(remarkGroups.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size() + remarks.size() + remarkGroups.size();
+                for (Integer i = 0; i < groupingFormats.size(); i++) {
+                    groupingFormatRepo.insertGroupingFormat(groupingFormats.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size();
+
+                for (Integer i = 0; i < masterGroupDetails.size(); i++) {
+                    masterGroupDetailRepo.insertMasterGroupDetail(masterGroupDetails.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
+                        masterGroupDetails.size();
+
+                for (Integer i = 0; i < polomps.size(); i++) {
+                    polompRepo.insertPolomp(polomps.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
+                        masterGroupDetails.size() + polomps.size();
+
+                for (Integer i = 0; i < polompGroups.size(); i++) {
+                    polompGroupRepo.insertPolompGroup(polompGroups.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
+                        masterGroupDetails.size() + polomps.size() + polompGroups.size();
+
+                for (Integer i = 0; i < polompGroupingFormats.size(); i++) {
+                    polompGroupingFormatRepo.insertPolompGroupingFormat(polompGroupingFormats.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
+                        masterGroupDetails.size() + polomps.size() + polompGroups.size()+polompGroupingFormats.size();
+
+                for(Integer i = 0; i < polompColors.size(); i++){
+                    polompColorRepo.insertPolompColor(polompColors.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
+                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
+                        masterGroupDetails.size() + polomps.size() + polompGroups.size()+polompGroupingFormats.size()+
+                        polompColors.size();
+
+                for(Integer i = 0; i < polompTypes.size(); i++){
+                    polompTypeRepo.insertPolompType(polompTypes.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+
+
+            }
+        }).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(new CompletableObserver() {
                         @Override

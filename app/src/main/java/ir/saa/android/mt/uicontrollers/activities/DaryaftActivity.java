@@ -140,7 +140,12 @@ public class DaryaftActivity extends AppCompatActivity   {
         baseInfoViewModel.messageErrorLiveData.observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
+                isDownloadBaseInfo=false;
+                isDownloadClient=false;
+                isDownloadSetting=false;
+                isDownloadUser=false;
                 Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+
             }
         });
         baseInfoViewModel.baseinfoProgressPercentLiveData.observe(this, new Observer<Integer>() {
