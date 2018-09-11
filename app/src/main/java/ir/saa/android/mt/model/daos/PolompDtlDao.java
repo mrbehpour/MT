@@ -45,8 +45,13 @@ public interface PolompDtlDao {
     void updatePolompDtl(PolompDtl polompDtl);
 
     @Query("select * from PolompInfo" +
-            " inner join PolompDtl on PolompInfo.PolompInfoID=PolompDtl.PolompDtlID " +
+            " inner join PolompDtl on PolompInfo.PolompInfoID=PolompDtl.PolompInfoID " +
             "Where PolompInfo.ClientID=:clientId and PolompDtl.PolompID=:polompId")
-    LiveData<PolompAllInfo> getPolompAllInfo(Long clientId, Integer polompId);
+    LiveData<PolompAllInfo> getPolompAllInfoLiveData(Long clientId, Integer polompId);
+
+    @Query("select * from PolompInfo" +
+            " inner join PolompDtl on PolompInfo.PolompInfoID=PolompDtl.PolompInfoID " +
+            "Where PolompInfo.ClientID=:clientId and PolompDtl.PolompID=:polompId")
+    PolompAllInfo getPolompAllInfo(Long clientId, Integer polompId);
 
 }

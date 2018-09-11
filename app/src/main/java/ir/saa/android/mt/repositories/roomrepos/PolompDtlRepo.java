@@ -65,7 +65,11 @@ public class PolompDtlRepo  {
         polompDtlDao.updatePolompDtl(polompDtl);
     }
 
-    public LiveData<PolompAllInfo> getPolompAllInfo(Long clientId, Integer polompId){
+    public LiveData<PolompAllInfo> getPolompAllInfoLiveData(Long clientId, Integer polompId){
+        return polompDtlDao.getPolompAllInfoLiveData(clientId,polompId);
+    }
+
+    public PolompAllInfo getPolompAllInfo(Long clientId, Integer polompId){
         return polompDtlDao.getPolompAllInfo(clientId,polompId);
     }
 }

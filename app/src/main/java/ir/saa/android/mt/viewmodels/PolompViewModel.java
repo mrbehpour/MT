@@ -4,7 +4,9 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +97,21 @@ public class PolompViewModel extends AndroidViewModel {
         return polompDtlRepo.insertPolompDtl(polompDtl);
     }
 
-    public LiveData<PolompAllInfo> getPolompData(PolompParams polompParams){
+    public LiveData<PolompAllInfo> getPolompDataLiveData(PolompParams polompParams){
+        return polompDtlRepo.getPolompAllInfoLiveData(polompParams.ClientId,polompParams.PolompId);
+    }
+
+    public PolompAllInfo getPolompData(PolompParams polompParams){
         return polompDtlRepo.getPolompAllInfo(polompParams.ClientId,polompParams.PolompId);
+    }
+
+    public void deleteAllPolomp(Integer polompInfoID,Integer polompDtlId){
+        polompInfoRepo.deletePolompInfoById(polompInfoID);
+        polompDtlRepo.deletePolompDtl(polompDtlId);
+    }
+
+    public void updatePolompDtl(PolompDtl polompDtl){
+        polompDtlRepo.updatePolompDtl(polompDtl);
     }
 
 

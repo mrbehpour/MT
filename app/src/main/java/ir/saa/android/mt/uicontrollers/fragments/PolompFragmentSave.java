@@ -1,5 +1,6 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +24,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompDtl;
 import ir.saa.android.mt.model.entities.PolompInfo;
@@ -40,6 +42,9 @@ public class PolompFragmentSave extends Fragment {
     Spinner spnRangPolompJadid;
     Spinner spnModelPolompGhadim;
     Spinner spnRangPolompGhadim;
+
+    Boolean chkNadaradJadid;
+    Boolean chkNadradGhadim;
 
     EditText etPolompJadid;
     EditText etPolompGhadim;
@@ -83,7 +88,8 @@ public class PolompFragmentSave extends Fragment {
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_polomp_save, container, false);
-
+        chkNadaradJadid=false;
+        chkNadradGhadim=false;
         if(polompParams==null){
             Bundle bundle = this.getArguments();
             if (bundle != null) {
@@ -100,10 +106,17 @@ public class PolompFragmentSave extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
+
+                   chkNadradGhadim=true;
                     spnModelPolompGhadim.setEnabled(false);
                     spnRangPolompGhadim.setEnabled(false);
                     etPolompGhadim.setEnabled(false);
+
+                    spnModelPolompGhadim.setSelection(0);
+                    spnRangPolompGhadim.setSelection(0);
+                    etPolompGhadim.setText("");
                 }else{
+                    chkNadradGhadim=false;
                     spnModelPolompGhadim.setEnabled(true);
                     spnRangPolompGhadim.setEnabled(true);
                     etPolompGhadim.setEnabled(true);
@@ -120,10 +133,17 @@ public class PolompFragmentSave extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
+                   chkNadaradJadid=true;
+
                     spnModelPolompJadid.setEnabled(false);
                     spnRangPolompJadid.setEnabled(false);
                     etPolompJadid.setEnabled(false);
+
+                    spnModelPolompJadid.setSelection(0);
+                    spnRangPolompJadid.setSelection(0);
+                    etPolompJadid.setText("");
                 }else{
+                    chkNadaradJadid=false;
                     spnModelPolompJadid.setEnabled(true);
                     spnRangPolompJadid.setEnabled(true);
                     etPolompJadid.setEnabled(true);
@@ -162,12 +182,18 @@ public class PolompFragmentSave extends Fragment {
             spinnerArrayColorJadid.clear();
             spinnerMapColorJadid.clear();
 
+            spinnerArrayColorGhadim.add("");
+            spinnerMapColorGhadim.put(0,0);
+            spinnerArrayColorJadid.add("");
+            spinnerMapColorJadid.put(0,0);
+            spinnerMapColor.put(0,0);
+
             for(int i=0;i<polompColors.size();i++){
                 spinnerArrayColorGhadim.add(polompColors.get(i).FldName);
-                spinnerMapColorGhadim.put(i,polompColors.get(i).FldID);
+                spinnerMapColorGhadim.put(i+1,polompColors.get(i).FldID);
                 spinnerArrayColorJadid.add(polompColors.get(i).FldName);
-                spinnerMapColorJadid.put(i,polompColors.get(i).FldID);
-                spinnerMapColor.put(polompColors.get(i).FldID,i);
+                spinnerMapColorJadid.put(i+1,polompColors.get(i).FldID);
+                spinnerMapColor.put(polompColors.get(i).FldID,i+1);
             }
             adapterColorJadid.notifyDataSetChanged();
             adapterColorGhadim.notifyDataSetChanged();
@@ -178,12 +204,18 @@ public class PolompFragmentSave extends Fragment {
             spinnerArrayModelJadid.clear();
             spinnerMapModelJadid.clear();
 
+            spinnerArrayModelGhadim.add("");
+            spinnerMapModelGhadim.put(0,0);
+            spinnerArrayModelJadid.add("");
+            spinnerMapModelJadid.put(0,0);
+            spinnerMapModel.put(0,0);
+
             for(int i=0;i<polompTypes.size();i++){
                 spinnerArrayModelGhadim.add(polompTypes.get(i).PolompTypeName);
-                spinnerMapModelGhadim.put(i,polompTypes.get(i).PolompTypeID);
+                spinnerMapModelGhadim.put(i+1,polompTypes.get(i).PolompTypeID);
                 spinnerArrayModelJadid.add(polompTypes.get(i).PolompTypeName);
-                spinnerMapModelJadid.put(i,polompTypes.get(i).PolompTypeID);
-                spinnerMapModel.put(polompTypes.get(i).PolompTypeID,i);
+                spinnerMapModelJadid.put(i+1,polompTypes.get(i).PolompTypeID);
+                spinnerMapModel.put(polompTypes.get(i).PolompTypeID,i+1);
             }
             adapterModelJadid.notifyDataSetChanged();
             adapterModelGhadim.notifyDataSetChanged();
@@ -192,10 +224,24 @@ public class PolompFragmentSave extends Fragment {
         etPolompJadid=rootView.findViewById(R.id.edtJadidShomarePolomp);
         etPolompGhadim=rootView.findViewById(R.id.edtGhadimShomarePolomp);
         if(polompParams!=null){
-            polompViewModel.getPolompData(polompParams).observe(getActivity(),polompAllInfo -> {
+            polompViewModel.getPolompDataLiveData(polompParams).observe(getActivity(),polompAllInfo -> {
                 if(polompAllInfo!=null) {
-                    etPolompGhadim.setText(polompAllInfo.PreviousPolomp);
-                    etPolompJadid.setText(polompAllInfo.CurrentPolomp);
+                    if(polompAllInfo.PreviousPolomp!=null ){
+                        if(!polompAllInfo.PreviousPolomp.equals("-1")){
+                            etPolompGhadim.setText(polompAllInfo.PreviousPolomp);
+                        }else {
+                            etPolompGhadim.setText("");
+                        }
+
+                    }
+                    if(polompAllInfo.CurrentPolomp!=null ){
+                        if(!polompAllInfo.CurrentPolomp.equals("-1")){
+                            etPolompJadid.setText(polompAllInfo.CurrentPolomp);
+                        }else {
+                            etPolompJadid.setText("");
+                        }
+
+                    }
                     if(polompAllInfo.CurrentColorID!=null)
                         spnRangPolompJadid.setSelection(spinnerMapColor.get(polompAllInfo.CurrentColorID));
                     if(polompAllInfo.PreviousColorID!=null)
@@ -204,6 +250,12 @@ public class PolompFragmentSave extends Fragment {
                         spnModelPolompJadid.setSelection(spinnerMapModel.get(polompAllInfo.PolompTypeID));
                     if(polompAllInfo.PreviousPolompTypeID!=null)
                         spnModelPolompGhadim.setSelection(spinnerMapModel.get(polompAllInfo.PreviousPolompTypeID));
+                    if(polompAllInfo.PreviousPolomp==null || polompAllInfo.PreviousPolomp.equals("-1")){
+                        cbGhadimNadard.setChecked(true);
+                    }
+                    if(polompAllInfo.CurrentPolomp==null || polompAllInfo.CurrentPolomp.equals("-1")){
+                        cbJadidNadard.setChecked(true);
+                    }
                 }
             });
         }
@@ -225,6 +277,12 @@ public class PolompFragmentSave extends Fragment {
         spinnerArrayColorGhadim.clear();
         spinnerArrayModelJadid.clear();
         spinnerArrayModelGhadim.clear();
+
+        spinnerArrayColorJadid.add("");
+        spinnerArrayColorGhadim.add("");
+        spinnerArrayModelJadid.add("");
+        spinnerArrayModelGhadim.add("");
+
         if(polompViewModel.getPolompColor().getValue()!=null) {
             for (PolompColor polompColor : polompViewModel.getPolompColor().getValue()) {
                 spinnerArrayColorJadid.add(polompColor.FldName);
@@ -240,27 +298,100 @@ public class PolompFragmentSave extends Fragment {
     }
 
     private void PolompSave(){
-        polompInfo=new PolompInfo();
-        polompInfo.AgentID= Integer.valueOf (G.getPref("UserID"));
-        polompInfo.ChangeDate = Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
-        polompInfo.ChangeTime = Integer.valueOf (Tarikh.getTimeWithoutColon());
-        polompInfo.ClientID=polompParams.ClientId;
-        polompInfo.SendID= G.clientInfo.SendId;
+          PolompAllInfo polompAllInfo=polompViewModel.getPolompData(polompParams);
+        if(polompAllInfo==null){
 
-        Long  polompInfoId= polompViewModel.insertPolompInfo(polompInfo);
-        polompDtl=new PolompDtl();
-        polompDtl.PolompInfoID=polompInfoId;
-        polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
-        polompDtl.CurrentPolomp=etPolompJadid.getText().toString();
-        polompDtl.PolompID=polompParams.PolompId;
-        polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-        polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
-        polompDtl.PreviousPolomp=etPolompGhadim.getText().toString();
-        polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
-        Long polompDtlId=polompViewModel.insertPolompDtl(polompDtl);
-        if(polompDtlId!=null){
+            polompInfo=new PolompInfo();
+            polompInfo.AgentID= Integer.valueOf (G.getPref("UserID"));
+            polompInfo.ChangeDate = Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
+            polompInfo.ChangeTime = Integer.valueOf (Tarikh.getTimeWithoutColon());
+            polompInfo.ClientID=polompParams.ClientId;
+            polompInfo.SendID= G.clientInfo.SendId;
+
+
+            polompDtl=new PolompDtl();
+
+            polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+            polompDtl.CurrentPolomp=etPolompJadid.getText().toString().equals("")?"-1":etPolompJadid.getText().toString();
+            polompDtl.PolompID=polompParams.PolompId;
+            polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+            polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+            polompDtl.PreviousPolomp=etPolompGhadim.getText().toString().equals("")?"-1":etPolompGhadim.getText().toString();
+            polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+            if((chkNadradGhadim==false && chkNadaradJadid==false) && (polompDtl.PreviousPolompTypeID==0 &&
+                    polompDtl.PreviousPolomp.equals("-1") && polompDtl.PreviousColorID==0 && polompDtl.CurrentPolomp.equals("-1")
+                    && polompDtl.CurrentColorID==0 && polompDtl.PolompTypeID==0)) {
+                return;
+            }
+            if(chkNadradGhadim==false && polompDtl.PreviousPolompTypeID==0 &&
+                    polompDtl.PreviousPolomp.equals("-1") && polompDtl.PreviousColorID==0){
+                polompDtl.PreviousPolomp="";
+            }
+            if(chkNadaradJadid==false && polompDtl.CurrentPolomp.equals("-1")
+                    && polompDtl.CurrentColorID==0 && polompDtl.PolompTypeID==0){
+                polompDtl.CurrentPolomp="";
+            }
+            Long  polompInfoId= polompViewModel.insertPolompInfo(polompInfo);
+            polompDtl.PolompInfoID=polompInfoId;
+            Long polompDtlId=polompViewModel.insertPolompDtl(polompDtl);
+            if(polompDtlId!=null){
+                Toast.makeText(getActivity(),"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            polompDtl=new PolompDtl();
+
+            if(chkNadaradJadid==true) {
+
+                polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
+                polompDtl.PolompInfoID=Long.valueOf(polompAllInfo.PolompInfoID);
+                polompDtl.CurrentColorID=null;
+                polompDtl.CurrentPolomp=null;
+                polompDtl.PolompID=polompParams.PolompId;
+                polompDtl.PolompTypeID=null;
+                polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+                polompDtl.PreviousPolomp=etPolompGhadim.getText().toString().equals("")?"-1":etPolompGhadim.getText().toString();
+                polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+
+            }
+             if(chkNadradGhadim==true){
+                 polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
+                 polompDtl.PolompInfoID=Long.valueOf(polompAllInfo.PolompInfoID);
+                 polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+                 polompDtl.CurrentPolomp=etPolompJadid.getText().toString().equals("")?"-1":etPolompJadid.getText().toString();
+                 polompDtl.PolompID=polompParams.PolompId;
+                 polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+                 polompDtl.PreviousColorID=null;
+                 polompDtl.PreviousPolomp=null;
+                 polompDtl.PreviousPolompTypeID=null;
+
+            }
+
+
+           if(chkNadradGhadim==false && chkNadaradJadid==false){
+               polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
+               polompDtl.PolompInfoID=Long.valueOf( polompAllInfo.PolompInfoID);
+               polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+               polompDtl.CurrentPolomp=etPolompJadid.getText().toString().equals("")?"-1":etPolompJadid.getText().toString();
+               polompDtl.PolompID=polompParams.PolompId;
+               polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+               polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+               polompDtl.PreviousPolomp=etPolompGhadim.getText().toString().equals("")?"-1":etPolompGhadim.getText().toString();
+               polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+               if(chkNadradGhadim==false && polompDtl.PreviousPolompTypeID==0 &&
+                       polompDtl.PreviousPolomp.equals("-1") && polompDtl.PreviousColorID==0){
+                   polompDtl.PreviousPolomp="";
+               }
+               if(chkNadaradJadid==false && polompDtl.CurrentPolomp.equals("-1")
+                       && polompDtl.CurrentColorID==0 && polompDtl.PolompTypeID==0){
+                   polompDtl.CurrentPolomp="";
+               }
+           }
+            polompViewModel.updatePolompDtl(polompDtl);
             Toast.makeText(getActivity(),"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+
+
         }
+
 
 
     }
