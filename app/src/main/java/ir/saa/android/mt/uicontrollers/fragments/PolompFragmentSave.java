@@ -364,6 +364,7 @@ public class PolompFragmentSave extends Fragment {
                  polompDtl.PreviousPolomp=null;
                  polompDtl.PreviousPolompTypeID=null;
 
+
             }
 
 
@@ -377,15 +378,16 @@ public class PolompFragmentSave extends Fragment {
                polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
                polompDtl.PreviousPolomp=etPolompGhadim.getText().toString().equals("")?"-1":etPolompGhadim.getText().toString();
                polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
-               if(chkNadradGhadim==false && polompDtl.PreviousPolompTypeID==0 &&
-                       polompDtl.PreviousPolomp.equals("-1") && polompDtl.PreviousColorID==0){
-                   polompDtl.PreviousPolomp="";
-               }
-               if(chkNadaradJadid==false && polompDtl.CurrentPolomp.equals("-1")
-                       && polompDtl.CurrentColorID==0 && polompDtl.PolompTypeID==0){
-                   polompDtl.CurrentPolomp="";
-               }
+
            }
+            if(chkNadradGhadim==false && polompDtl.PreviousPolompTypeID==0 &&
+                    polompDtl.PreviousPolomp.equals("-1") && polompDtl.PreviousColorID==0){
+                polompDtl.PreviousPolomp="";
+            }
+            if(chkNadaradJadid==false && polompDtl.CurrentPolomp.equals("-1")
+                    && polompDtl.CurrentColorID==0 && polompDtl.PolompTypeID==0){
+                polompDtl.CurrentPolomp="";
+            }
             polompViewModel.updatePolompDtl(polompDtl);
             Toast.makeText(getActivity(),"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
 
