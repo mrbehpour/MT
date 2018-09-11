@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import ir.saa.android.mt.adapters.testresult.TestItem;
 import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.metertester.TestResult;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
@@ -54,17 +56,52 @@ public class AmaliyatFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fargment_amaliyat, container, false);
         amaliyatViewModel = ViewModelProviders.of(this).get(AmaliyatViewModel.class);
 
+        Button btnStartTest = rootView.findViewById(R.id.btnStartTest);
+        Button btnFinishTest = rootView.findViewById(R.id.btnFinishTest);
+        Button btnSaveResult = rootView.findViewById(R.id.btnSaveTestResult);
+
         Bundle args = getArguments();
         if (args != null) {
             testContorParams = (TestContorParams)args.getSerializable(BundleKeysEnum.TestContorParams);
         }
 
         tvErrPerc = rootView.findViewById(R.id.tvErrPerc);
+        amaliyatViewModel.checkTestStatus();
+
         amaliyatViewModel.testResultMutableLiveData.observe(this, new Observer<String>() {
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onChanged(@Nullable String testResult) {
                         tvErrPerc.setText(testResult);
+                    }
+                }
+        );
+
+        amaliyatViewModel.testStatusMutableLiveData.observe(this, new Observer<MT.TestCommands>() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onChanged(@Nullable MT.TestCommands testCommands) {
+                        switch(testCommands){
+                            case StartTest:
+                                btnStartTest.setVisibility(View.GONE);
+                                btnFinishTest.setVisibility(View.VISIBLE);
+                                btnSaveResult.setVisibility(View.GONE);
+                                tvErrPerc.setText("");
+                                tvRoundNum.setText("");
+                                break;
+
+                            case FinishTest:
+                                btnStartTest.setVisibility(View.VISIBLE);
+                                btnFinishTest.setVisibility(View.GONE);
+                                btnSaveResult.setVisibility(View.VISIBLE);
+                                break;
+
+                            case DisableTest:
+                                btnStartTest.setVisibility(View.VISIBLE);
+                                btnFinishTest.setVisibility(View.GONE);
+                                btnSaveResult.setVisibility(View.GONE);
+                                break;
+                        }
                     }
                 }
         );
@@ -93,7 +130,7 @@ public class AmaliyatFragment extends Fragment {
                 }
         );
 
-        Button btnStartTest = rootView.findViewById(R.id.btnStart);
+
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,9 +143,7 @@ public class AmaliyatFragment extends Fragment {
             }
         });
 
-        Button btnTaeed = rootView.findViewById(R.id.btnTaeed);
-        //btnTaeed.setEnabled(false);
-        btnTaeed.setOnClickListener(new View.OnClickListener() {
+        btnFinishTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 amaliyatViewModel.finishTest();

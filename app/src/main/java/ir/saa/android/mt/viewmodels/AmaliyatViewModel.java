@@ -48,6 +48,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     public MutableLiveData<String> testResultMutableLiveData;
     public MutableLiveData<Integer> testRoundNumMutableLiveData;
     public MutableLiveData<List<TestResult>> testResultListMutableLiveData;
+    public MutableLiveData<MT.TestCommands> testStatusMutableLiveData;
 
     public AmaliyatViewModel(@NonNull Application application) {
         super(application);
@@ -80,6 +81,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
         testResultMutableLiveData = new MutableLiveData<>();
         testRoundNumMutableLiveData = new MutableLiveData<>();
         testResultListMutableLiveData = new MutableLiveData<>();
+        testStatusMutableLiveData = new MutableLiveData<>();
     }
 
     public void setTestContorParams(TestContorParams testContorParams){
@@ -136,11 +138,20 @@ public class AmaliyatViewModel extends AndroidViewModel {
 
             if(paulseCounter>0) {
                 if(lastPaulseCounter<paulseCounter) {
-                    testResult = metertester.ReadTestResult(paulseCounter,testContorParams);
-                    testResultList.add(testResult);
+
+                    for (int pl_cnt = lastPaulseCounter + 1; pl_cnt <= paulseCounter; pl_cnt++) {
+                        testResult = metertester.ReadTestResult(pl_cnt, testContorParams);
+                        testResultList.add(testResult);
+                        Log.d("response miss round", pl_cnt + "");
+                    }
+//                    testResult = metertester.ReadTestResult(paulseCounter, testContorParams);
+//                    testResultList.add(testResult);
+
 
                     if (!setTimer) {
-                        timerCheckStart(Integer.parseInt(testResult.Time_Period1) * 100);
+                        int readInterval=Integer.parseInt(testResult.Time_Period1);
+                        if(readInterval==0) readInterval=1;
+                        timerCheckStart(readInterval * 100);
                         timerSetIntervalStop();
                         handler.removeCallbacksAndMessages(null);
                         setTimer = true;
@@ -159,27 +170,34 @@ public class AmaliyatViewModel extends AndroidViewModel {
         }
     }
 
-    public void startTest() {
+    public void checkTestStatus(){
+        boolean result=false;
         MT.TestCommands startTestStatus =  metertester.ReadTestCommand();
-//        Log.d("response test status",  startTestStatus);
-        if(startTestStatus.equals(MT.TestCommands.StartTest)) {
-            metertester.SendTestCommand(MT.TestCommands.StartTest);
-            lastPaulseCounter = 0;
-            myPaulseCounter = 0;
-            ErrPercAvr = 0;
-            setTimer = false;
-            testResultList = new ArrayList<>();
+        if(!startTestStatus.equals(MT.TestCommands.StartTest)) {
+            result=true;
+        }
 
-            timerSetIntervalStart(250);
-        }
-        else{
-            //Log.d("response test status",  startTestStatus);
-        }
+        testStatusMutableLiveData.postValue(startTestStatus);
+    }
+
+    public void startTest() {
+        testStatusMutableLiveData.postValue(MT.TestCommands.StartTest);
+
+        metertester.SendTestCommand(MT.TestCommands.StartTest);
+        lastPaulseCounter = 0;
+        myPaulseCounter = 0;
+        ErrPercAvr = 0;
+        setTimer = false;
+        testResultList = new ArrayList<>();
+
+        timerSetIntervalStart(250);
     }
 
     public void finishTest(){
+        testStatusMutableLiveData.postValue(MT.TestCommands.FinishTest);
+
         timerSetIntervalStop();
-        handler.removeCallbacksAndMessages(null);
+        if(handler!=null) handler.removeCallbacksAndMessages(null);
         metertester.SendTestCommand(MT.TestCommands.FinishTest);
         timerCheckStop();
         showResult();
@@ -226,7 +244,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
         timerSetIntervalStop();
-        handler.removeCallbacksAndMessages(null);
+        if(handler!=null) handler.removeCallbacksAndMessages(null);
     }
 
 }

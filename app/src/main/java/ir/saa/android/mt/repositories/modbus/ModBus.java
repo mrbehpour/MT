@@ -122,6 +122,15 @@ public class ModBus {
                 }
                 break;
 
+            case READ_HOLDING_REGISTER_FC:
+                if (responseStr.length() > 12) {
+                    if (responseStr.substring(2, 4).equals("03") && Integer.parseInt(responseStr.substring(4, 6), 16) * 2 + 10 == responseStr.length()) {
+//                        if( Converters.hexString2ByteArray(responseStr.substring(0,responseStr.length()-4)).equals(ModRTU_CRC_Int()))
+                        res = true;
+                    }
+                }
+                break;
+
             case WRITE_SINGLE_REGISTER_FC:
                 if (Last_Send_Command.equals(responseStr)) {
                     res = true;
@@ -151,21 +160,31 @@ public class ModBus {
     //--------------------------------
 
     //--------Main Methods-----------
-    public synchronized String readHoldingRegister() throws Exception {
+    public synchronized String readHoldingRegister(byte slaveID, int startAddress, int QR) throws Exception {
+
         String result ="";
         if(transferLayer.isConnected()) {
-            byte[] dataArray = new byte[1];
+            byte[] ADR_Byte = Converters.ConvertInt2ByteArray(startAddress, false);
+            byte[] QR_Byte = Converters.ConvertInt2ByteArray(QR, false);
+
+            byte[] tempArray = new byte[]{slaveID, READ_HOLDING_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], QR_Byte[0], QR_Byte[1]};
+            byte[] CRC_Byte = ModRTU_CRC_Int(tempArray);
+//            byte[] dataArray = new byte[]{slaveID, READ_INPUT_REGISTER_FC, ADR_Byte[0], ADR_Byte[1], QR_Byte[0], QR_Byte[1], CRC_Byte[0], CRC_Byte[1]};
+            byte[] dataArray = Converters.ConcatenateTwoArray(tempArray,CRC_Byte);
 
             totalReciveData="";
-            Last_Register_FC = READ_INPUT_REGISTER_FC;
+            Last_Register_FC = READ_HOLDING_REGISTER_FC;
+            Last_Send_Command = Converters.ArrayByte2Hex(dataArray);
 
             transferLayer.writeByteArrayToDevice(dataArray);
+            Log.d("response read holding",Last_Send_Command);
 
             waitForResponse=true;
             isModbusRunningKey=true;
 
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
+                    Log.d("response ans_holding",totalReciveData);
                     result = totalReciveData;
                     break;
                 }

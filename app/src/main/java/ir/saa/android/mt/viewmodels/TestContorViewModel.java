@@ -55,6 +55,7 @@ public class TestContorViewModel extends AndroidViewModel {
 
     public void initTranseferLayer(){
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
+        if(BluetoothDeviceName==null) BluetoothDeviceName="";
         if(BluetoothDeviceName.equals("")) connectionStateMutableLiveData.postValue(false);
         bluetooth.disconnnect();
         bluetooth.init(BluetoothDeviceName);

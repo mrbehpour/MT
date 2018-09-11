@@ -120,34 +120,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <!-- End Test Button -->
+        <!-- Save Test Button -->
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnTaeed"
+            android:id="@+id/btnSaveTestResult"
             android:fontFamily="@font/byekan"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:layout_weight="0.5"
-            android:layout_marginLeft="16dp"
+            android:layout_weight="0.33"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_gravity="center"
             android:textColor="#ffffff"
             android:textSize="16sp"
-            android:text="تایید و مشاهده نتایج"/>
+            android:text="ذخیره نتایج"/>
+
         <!-- End Test Button -->
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnStart"
+            android:id="@+id/btnFinishTest"
             android:fontFamily="@font/byekan"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:layout_weight="0.5"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="8dp"
+            android:layout_weight="0.33"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:layout_gravity="center"
             android:textColor="#ffffff"
             android:textSize="16sp"
-            android:text="شروع"/>
+            android:text="پایان و مشاهده نتایج"/>
+
+        <!-- End Test Button -->
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnStartTest"
+            android:fontFamily="@font/byekan"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="0.33"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:text="شروع تست"/>
     </LinearLayout>
 </LinearLayout>
