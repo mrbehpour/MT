@@ -110,7 +110,7 @@ public class G extends Application {
                 break;
             case FragmentsEnum.TestContorFragment:
                 targetFragment=new TestContorFragment();
-                setActionbarTitleText("تست کنتور");
+                setActionbarTitleText("تست کنـتور");
                 break;
             case FragmentsEnum.TestEnergyFragment:
                 targetFragment=new TestEnergyFragment();
