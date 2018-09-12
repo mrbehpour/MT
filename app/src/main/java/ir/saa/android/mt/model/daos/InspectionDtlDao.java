@@ -49,4 +49,10 @@ public interface InspectionDtlDao {
             "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
             "Where InspectionInfo.ClientID=:clientId and InspectionInfo.RemarkID=:remarkId")
     InspectionAllInfo getInspectionAllInfo(Long clientId,Integer remarkId);
+
+    @Query("Select * from InspectionInfo " +
+            "inner join InspectionDtl on " +
+            "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
+            "Where InspectionInfo.ClientID=:clientId and InspectionInfo.SendID=:sendId")
+    List<InspectionAllInfo> getInspectionAllInfoWithSendId(Long clientId,Integer sendId);
 }

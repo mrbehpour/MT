@@ -69,4 +69,8 @@ public class InspectionDtlRepo implements InspectionDtlDao {
     public InspectionAllInfo getInspectionAllInfo(Long clientId, Integer remarkId){
             return inspectionDtlDao.getInspectionAllInfo( clientId ,remarkId);
     }
+
+    public List<InspectionAllInfo> getInspectionAllInfoWithSendId(Long ClientId,Integer SendId){
+        return inspectionDtlDao.getInspectionAllInfoWithSendId(ClientId,SendId);
+    }
 }

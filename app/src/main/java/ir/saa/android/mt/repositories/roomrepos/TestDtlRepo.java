@@ -7,6 +7,7 @@ import java.util.List;
 
 import ir.saa.android.mt.model.daos.TestDtlDao;
 import ir.saa.android.mt.model.database.MTDatabase;
+import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 
 public class TestDtlRepo implements TestDtlDao {
@@ -63,5 +64,9 @@ public class TestDtlRepo implements TestDtlDao {
     public void updateTestDtl(TestDtl testDtl) {
         testDtlDao.updateTestDtl(testDtl);
 
+    }
+
+    public List<TestAllInfo> getTestAllInfoWithSendId(Long ClientId,Integer SendId){
+        return testDtlDao.getTestAllInfoWithSendId(ClientId,SendId);
     }
 }

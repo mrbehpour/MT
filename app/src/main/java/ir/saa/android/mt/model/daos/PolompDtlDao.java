@@ -54,4 +54,10 @@ public interface PolompDtlDao {
             "Where PolompInfo.ClientID=:clientId and PolompDtl.PolompID=:polompId")
     PolompAllInfo getPolompAllInfo(Long clientId, Integer polompId);
 
+
+    @Query("select * from PolompInfo" +
+            " inner join PolompDtl on PolompInfo.PolompInfoID=PolompDtl.PolompInfoID " +
+            "Where PolompInfo.ClientID=:clientId and PolompInfo.SendID=:SendId")
+    List<PolompAllInfo> getPolompAllInfoWithSendId(Long clientId, Integer SendId);
+
 }
