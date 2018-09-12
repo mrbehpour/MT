@@ -71,6 +71,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     G.context.startActivity(intent);
 
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem7))==0){
+                    System.exit(0);
 
                 }
             }

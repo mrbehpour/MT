@@ -22,7 +22,7 @@
         android:layout_height="300dp"
         android:background="@color/grey_200"
         android:layout_centerInParent="true"
-        app:mainColor="@color/orange_400"
+        app:mainColor="@color/colorPrimary"
         app:secondaryColor="@color/grey_600"
         app:textColor="@color/grey_1000"/>
     <!--</LinearLayout>-->

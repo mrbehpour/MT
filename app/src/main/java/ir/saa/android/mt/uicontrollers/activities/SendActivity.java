@@ -24,14 +24,15 @@ public class SendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send);
         sendViewModel= ViewModelProviders.of(this).get(SendViewModel.class);
         progerssSend=(AnimatedCircleLoadingView)findViewById(R.id.circle_loading_view);
-        progerssSend.startDeterminate();
+
         btnSend=(AppCompatButton)findViewById(R.id.btnStartUploading);
+        btnSend.setEnabled(true);
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-
+                progerssSend.startDeterminate();
+                btnSend.setEnabled(false);
 
                 sendViewModel.sendData();
             }
@@ -44,6 +45,7 @@ public class SendActivity extends AppCompatActivity {
                 progerssSend.setPercent(integer);
                 if(integer==100){
                     progerssSend.stopOk();
+
                 }
 
 
