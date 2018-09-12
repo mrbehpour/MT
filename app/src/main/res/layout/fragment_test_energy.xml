@@ -84,7 +84,7 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:fontFamily="@font/byekan"
-        android:text="شروع تست"
+        android:text="تایید"
         android:textColor="#ffffff"
         android:textSize="16sp" />
 

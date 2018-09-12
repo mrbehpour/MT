@@ -231,7 +231,6 @@ public class AmaliyatViewModel extends AndroidViewModel {
         timer.schedule(task, 0, prd);
     }
 
-
     private void timerSetIntervalStop() {
         if(timer!=null){
             timer.cancel();

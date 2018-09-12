@@ -30,7 +30,7 @@ public class TestContorFragment extends Fragment
 
     TextView edtCTCoeff;
     TextView edtContorConst;
-    TextView edtContorCoff;
+    TextView edtSensorRatio;
     TextView edtRoundNum;
 
     AlertDialog ad;
@@ -56,16 +56,13 @@ public class TestContorFragment extends Fragment
 
         edtCTCoeff = rootView.findViewById(R.id.edtZaribCT);
         edtContorConst = rootView.findViewById(R.id.edtSabeteKontor);
-        edtContorCoff = rootView.findViewById(R.id.edtNesbatKontor);
+        edtSensorRatio = rootView.findViewById(R.id.edtNesbatKontor);
         edtRoundNum = rootView.findViewById(R.id.edtTedadDor);
         com.github.angads25.toggle.LabeledSwitch switchTestType = rootView.findViewById(R.id.switchTestType);
         com.github.angads25.toggle.LabeledSwitch switchPhase = rootView.findViewById(R.id.switchPhase);
         com.github.angads25.toggle.LabeledSwitch switchTestNum = rootView.findViewById(R.id.switchTestNum);
 
-        edtCTCoeff.setText("1");
-        edtContorConst.setText("2000");
-        edtContorCoff.setText("1");
-        edtRoundNum.setText("1");
+        setDefaultValue();
 
         Button btnTaeed=rootView.findViewById(R.id.btnTaeed);
         btnTaeed.setOnClickListener(view -> {
@@ -75,7 +72,7 @@ public class TestContorFragment extends Fragment
                         switchTestNum.isOn(),
                         Integer.parseInt(String.valueOf(edtCTCoeff.getText())),
                         Integer.parseInt(String.valueOf(edtContorConst.getText())),
-                        Integer.parseInt(String.valueOf(edtContorCoff.getText())),
+                        Integer.parseInt(String.valueOf(edtSensorRatio.getText())),
 //                    Integer.parseInt(String.valueOf(edtRoundNum.getText()))
                         1);
 
@@ -111,6 +108,26 @@ public class TestContorFragment extends Fragment
         return rootView;
     }
 
+    private void setDefaultValue(){
+        TestContorParams testContorParams;
+        if(G.bundleHashMap.containsKey(BundleKeysEnum.TestContorParams)) {
+            Bundle b = G.bundleHashMap.get(BundleKeysEnum.TestContorParams);
+            testContorParams = (TestContorParams)b.getSerializable(BundleKeysEnum.TestContorParams);
+
+            edtCTCoeff.setText(String.valueOf(testContorParams.CTCoeff));
+            edtContorConst.setText(String.valueOf(testContorParams.ContorConst));
+            edtSensorRatio.setText(String.valueOf(testContorParams.SensorRatio));
+            edtRoundNum.setText(String.valueOf(testContorParams.RoundNum));
+        }
+        else {
+            edtCTCoeff.setText("1");
+            edtContorConst.setText("2000");
+            edtSensorRatio.setText("1");
+            edtRoundNum.setText("1");
+        }
+
+    }
+
     private void connectToModuleDialog(){
         ad = new AlertDialog.Builder(this.getContext()).create();
         ad.setCancelable(true);
@@ -142,7 +159,7 @@ public class TestContorFragment extends Fragment
             res=false;
         }
 
-        if(edtContorCoff.getText().toString().equals("")){
+        if(edtSensorRatio.getText().toString().equals("")){
             Toast.makeText(G.context,"ضریب کنتور را لطفا وارد کنید",Toast.LENGTH_SHORT).show();
             res=false;
         }

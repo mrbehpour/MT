@@ -36,6 +36,7 @@ public class AmaliyatFragment extends Fragment {
 
     AmaliyatViewModel amaliyatViewModel = null;
     TestContorParams testContorParams;
+    List<TestResult> lastTestResultList;
     TestResultAdapter adapter;
     TextView tvRoundNum;
     TextView tvErrPerc;
@@ -120,10 +121,13 @@ public class AmaliyatFragment extends Fragment {
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onChanged(@Nullable List<TestResult> testResultList) {
-                        if(testResultList!=null) {
+                        if(testResultList!=null && testResultList.size()>0) {
                             setUpRecyclerView(rootView, testResultList);
+                            lastTestResultList=testResultList;
+                            btnSaveResult.setVisibility(View.VISIBLE);
                         }
                         else{
+                            btnSaveResult.setVisibility(View.GONE);
                             Toast.makeText(G.context,"هیچ نتیجه تستی وجود ندارد.",Toast.LENGTH_SHORT ).show();
                         }
                     }
@@ -147,6 +151,13 @@ public class AmaliyatFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 amaliyatViewModel.finishTest();
+            }
+        });
+
+        btnSaveResult.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
