@@ -19,7 +19,8 @@ public class MT {
     String totalReciveData="";
     List<RegisterInfo> registerInfoList = new ArrayList<>();
     private final static byte SLAVE_ID=1;
-    private final static double correctFactor=47.59552;
+//    private final static double correctFactor=47.59552;
+    private final static double correctFactor=48.64864864864865;
     private final static int PowerFreq=50;
     public final static int maxRoundTest=250;
 //    String ComStr= new String(new char[]{'/','?','!',(char)0x0D,(char)0x0A});

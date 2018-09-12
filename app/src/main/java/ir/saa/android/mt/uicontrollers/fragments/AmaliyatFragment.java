@@ -157,7 +157,7 @@ public class AmaliyatFragment extends Fragment {
         btnSaveResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(G.context,"نتایج تست با موفقیت ذخیره شد.",Toast.LENGTH_SHORT ).show();
             }
         });
 
