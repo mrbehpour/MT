@@ -9,6 +9,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
@@ -41,4 +42,9 @@ public interface TestDtlDao {
 
     @Update
     void updateTestDtl(TestDtl testDtl);
+
+    @Query("Select * from TestInfo " +
+            "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
+            "where TestInfo.ClientID=:ClientId and TestInfo.SendID=:SendId")
+    List<TestAllInfo> getTestAllInfoWithSendId(Long ClientId,Integer SendId);
 }

@@ -67,7 +67,7 @@ public class Client  {
 
     public Integer Zarib ;
 
-    public Integer SeneId;
+    public Integer SendId;
 
     public Integer MxmeterCode ;
 

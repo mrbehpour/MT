@@ -10,6 +10,7 @@ import ir.saa.android.mt.model.entities.AnswerGroup;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientAllInfo;
 import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.GroupingFormat;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
@@ -19,6 +20,7 @@ import ir.saa.android.mt.model.entities.PolompGroup;
 import ir.saa.android.mt.model.entities.PolompGroupingFormat;
 import ir.saa.android.mt.model.entities.PolompType;
 import ir.saa.android.mt.model.entities.PropertyType;
+import ir.saa.android.mt.model.entities.RecordeSummary;
 import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.model.entities.Remark;
@@ -91,4 +93,7 @@ public interface MTApi {
 
     @POST("GetAgentAccessByUserIdList")
     Single<List<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body ArrayList<Integer> agentIdList);
+
+    @POST("SaveClientAllInfoAndroid")
+    Single<List<RecordeSummary>> SaveClientAllInfoAndroid(@Body List<ClientAllInfo> clientAllInfo);
 }

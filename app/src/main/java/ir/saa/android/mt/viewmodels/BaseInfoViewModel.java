@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +64,6 @@ import ir.saa.android.mt.repositories.roomrepos.RemarkRepo;
 import ir.saa.android.mt.repositories.roomrepos.RemarkTypeRepo;
 import ir.saa.android.mt.repositories.roomrepos.SettingRepo;
 import ir.saa.android.mt.repositories.roomrepos.TariffTypeRepo;
-import retrofit2.HttpException;
 
 public class BaseInfoViewModel extends AndroidViewModel {
     RetrofitMT retrofitMT=null;
@@ -330,15 +328,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
-                            Throwable error=(SocketException)e;
-                            String errorMessage=error.getMessage();
-                            if(errorMessage.contains("recvfrom failed: ECONNRESET (Connection reset by peer)")){
-                                messageErrorLiveData.postValue("مشترکی برای دریافت وجود ندارد");
-                            }else{
-                                messageErrorLiveData.postValue("دریافت با مشکل مواجه شد ارتباط قطع می باشد");
-                            }
-
-
+                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
                         }
 
                     });

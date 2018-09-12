@@ -72,4 +72,8 @@ public class PolompDtlRepo  {
     public PolompAllInfo getPolompAllInfo(Long clientId, Integer polompId){
         return polompDtlDao.getPolompAllInfo(clientId,polompId);
     }
+
+    public  List<PolompAllInfo> getPolompAllInfoWithSendId(Long ClientId,Integer SendId){
+        return polompDtlDao.getPolompAllInfoWithSendId(ClientId,SendId);
+    }
 }

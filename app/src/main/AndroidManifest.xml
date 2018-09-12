@@ -39,6 +39,8 @@
         </activity>
         <activity android:name=".uicontrollers.activities.DaryaftActivity">
         </activity>
+        <activity android:name=".uicontrollers.activities.SendActivity">
+        </activity>
     </application>
 
 </manifest>
