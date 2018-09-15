@@ -35,4 +35,8 @@ public class PolompAllInfo {
     public Integer PolompTypeID ;
 
     public Integer PreviousPolompTypeID ;
+
+    public Integer StateOld;
+
+    public Integer StateNew;
 }

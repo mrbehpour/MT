@@ -45,6 +45,8 @@ public class PolompFragmentSave extends Fragment {
 
     Boolean chkNadaradJadid;
     Boolean chkNadradGhadim;
+    Boolean chkNewNakhana;
+    Boolean chkOldNakhana;
 
     EditText etPolompJadid;
     EditText etPolompGhadim;
@@ -52,6 +54,9 @@ public class PolompFragmentSave extends Fragment {
 
     CheckBox cbGhadimNadard;
     CheckBox cbJadidNadard;
+    CheckBox cbNewNakhana;
+    CheckBox cbOldNakhana;
+
 
     List<String> spinnerArrayModelJadid;
     List<String> spinnerArrayModelGhadim;
@@ -90,6 +95,8 @@ public class PolompFragmentSave extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_polomp_save, container, false);
         chkNadaradJadid=false;
         chkNadradGhadim=false;
+        chkNewNakhana=false;
+        chkOldNakhana=false;
         if(polompParams==null){
             Bundle bundle = this.getArguments();
             if (bundle != null) {
@@ -101,6 +108,41 @@ public class PolompFragmentSave extends Fragment {
         spnRangPolompGhadim=rootView.findViewById(R.id.spnRangPolompGhadim);
         spnRangPolompJadid=rootView.findViewById(R.id.spnRangPolompJadid);
 
+        cbNewNakhana=rootView.findViewById(R.id.cbJadidNakhana);
+        cbNewNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    etPolompJadid.setEnabled(false);
+                    chkNewNakhana=true;
+                    cbJadidNadard.setEnabled(false);
+
+                }else{
+                    chkNewNakhana=false;
+                    etPolompJadid.setEnabled(true);
+                    cbJadidNadard.setEnabled(true);
+
+                }
+            }
+        });
+        cbOldNakhana=rootView.findViewById(R.id.cbGhadimNakhana);
+        cbOldNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    etPolompGhadim.setEnabled(false);
+                    chkOldNakhana=true;
+                    cbGhadimNadard.setEnabled(false);
+                }else{
+                    chkOldNakhana=false;
+                    etPolompGhadim.setEnabled(true);
+                    cbGhadimNadard.setEnabled(true);
+
+                }
+
+            }
+        });
+
         cbGhadimNadard=rootView.findViewById(R.id.cbGhadimNadarad);
         cbGhadimNadard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -111,11 +153,12 @@ public class PolompFragmentSave extends Fragment {
                     spnModelPolompGhadim.setEnabled(false);
                     spnRangPolompGhadim.setEnabled(false);
                     etPolompGhadim.setEnabled(false);
-
+                    cbOldNakhana.setEnabled(false);
                     spnModelPolompGhadim.setSelection(0);
                     spnRangPolompGhadim.setSelection(0);
                     etPolompGhadim.setText("");
                 }else{
+                    cbOldNakhana.setEnabled(true);
                     chkNadradGhadim=false;
                     spnModelPolompGhadim.setEnabled(true);
                     spnRangPolompGhadim.setEnabled(true);
@@ -138,11 +181,12 @@ public class PolompFragmentSave extends Fragment {
                     spnModelPolompJadid.setEnabled(false);
                     spnRangPolompJadid.setEnabled(false);
                     etPolompJadid.setEnabled(false);
-
+                    cbNewNakhana.setEnabled(false);
                     spnModelPolompJadid.setSelection(0);
                     spnRangPolompJadid.setSelection(0);
                     etPolompJadid.setText("");
                 }else{
+                    cbNewNakhana.setEnabled(true);
                     chkNadaradJadid=false;
                     spnModelPolompJadid.setEnabled(true);
                     spnRangPolompJadid.setEnabled(true);
@@ -227,20 +271,10 @@ public class PolompFragmentSave extends Fragment {
             polompViewModel.getPolompDataLiveData(polompParams).observe(getActivity(),polompAllInfo -> {
                  if(polompAllInfo!=null) {
                     if(polompAllInfo.PreviousPolomp!=null ){
-                        if(!polompAllInfo.PreviousPolomp.equals("-1")){
-                            etPolompGhadim.setText(polompAllInfo.PreviousPolomp);
-                        }else {
-                            etPolompGhadim.setText("");
+                        etPolompGhadim.setText("");
                         }
-
-                    }
                     if(polompAllInfo.CurrentPolomp!=null ){
-                        if(!polompAllInfo.CurrentPolomp.equals("-1")){
-                            etPolompJadid.setText(polompAllInfo.CurrentPolomp);
-                        }else {
-                            etPolompJadid.setText("");
-                        }
-
+                        etPolompJadid.setText("");
                     }
                     if(polompAllInfo.CurrentColorID!=null)
                         spnRangPolompJadid.setSelection(spinnerMapColor.get(polompAllInfo.CurrentColorID));
@@ -250,17 +284,27 @@ public class PolompFragmentSave extends Fragment {
                         spnModelPolompJadid.setSelection(spinnerMapModel.get(polompAllInfo.PolompTypeID));
                     if(polompAllInfo.PreviousPolompTypeID!=null)
                         spnModelPolompGhadim.setSelection(spinnerMapModel.get(polompAllInfo.PreviousPolompTypeID));
-                    if((polompAllInfo.PreviousPolomp==null || polompAllInfo.PreviousPolomp.equals("-1")) &&
-                            (polompAllInfo.PreviousPolompTypeID==null && polompAllInfo.PreviousColorID==null )){
-
-                            cbGhadimNadard.setChecked(true);
-
-
+                    if(polompAllInfo.StateOld==0){
+                        cbOldNakhana.setChecked(false);
+                        cbGhadimNadard.setChecked(false);
                     }
-                    if(polompAllInfo.CurrentPolomp==null || polompAllInfo.CurrentPolomp.equals("-1") &&
-                            (polompAllInfo.CurrentColorID==null && polompAllInfo.PolompTypeID==null )){
-                        cbJadidNadard.setChecked(true);
+                    if(polompAllInfo.StateNew==0){
+                        cbNewNakhana.setChecked(false);
+                        cbJadidNadard.setChecked(false);
                     }
+                    if(polompAllInfo.StateOld==1){
+                        cbGhadimNadard.setChecked(true);
+                    }
+                     if(polompAllInfo.StateOld==2){
+                         cbOldNakhana.setChecked(true);
+                     }
+                     if(polompAllInfo.StateNew==1){
+                         cbJadidNadard.setChecked(true);
+                     }
+                     if(polompAllInfo.StateNew==2){
+                         cbNewNakhana.setChecked(true);
+                     }
+
                 }
             });
         }
@@ -315,6 +359,20 @@ public class PolompFragmentSave extends Fragment {
 
 
             polompDtl=new PolompDtl();
+            polompDtl.StateNew=0;
+            polompDtl.StateOld=0;
+            if(chkNadaradJadid==true){
+                polompDtl.StateNew=1;
+            }
+            if(chkNadradGhadim==true){
+                polompDtl.StateOld=1;
+            }
+            if(chkNewNakhana==true){
+                polompDtl.StateNew=2;
+            }
+            if(chkOldNakhana==true){
+                polompDtl.StateOld=2;
+            }
 
             polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
             polompDtl.CurrentPolomp=etPolompJadid.getText().toString().equals("")?"-1":etPolompJadid.getText().toString();
@@ -323,19 +381,7 @@ public class PolompFragmentSave extends Fragment {
             polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
             polompDtl.PreviousPolomp=etPolompGhadim.getText().toString().equals("")?"-1":etPolompGhadim.getText().toString();
             polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
-            if((chkNadradGhadim==false && chkNadaradJadid==false) && (polompDtl.PreviousPolompTypeID==0 &&
-                    polompDtl.PreviousPolomp.equals("-1") && polompDtl.PreviousColorID==0 && polompDtl.CurrentPolomp.equals("-1")
-                    && polompDtl.CurrentColorID==0 && polompDtl.PolompTypeID==0)) {
-                return;
-            }
-            if(chkNadradGhadim==false && polompDtl.PreviousPolompTypeID==0 &&
-                    polompDtl.PreviousPolomp.equals("-1") && polompDtl.PreviousColorID==0){
-                polompDtl.PreviousPolomp="";
-            }
-            if(chkNadaradJadid==false && polompDtl.CurrentPolomp.equals("-1")
-                    && polompDtl.CurrentColorID==0 && polompDtl.PolompTypeID==0){
-                polompDtl.CurrentPolomp="";
-            }
+
             Long  polompInfoId= polompViewModel.insertPolompInfo(polompInfo);
             polompDtl.PolompInfoID=polompInfoId;
             Long polompDtlId=polompViewModel.insertPolompDtl(polompDtl);
@@ -345,54 +391,32 @@ public class PolompFragmentSave extends Fragment {
         }else{
             polompDtl=new PolompDtl();
 
-            if(chkNadaradJadid==true) {
-
-                polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
-                polompDtl.PolompInfoID=Long.valueOf(polompAllInfo.PolompInfoID);
-                polompDtl.CurrentColorID=null;
-                polompDtl.CurrentPolomp=null;
-                polompDtl.PolompID=polompParams.PolompId;
-                polompDtl.PolompTypeID=null;
-                polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
-                polompDtl.PreviousPolomp=etPolompGhadim.getText().toString().equals("")?"-1":etPolompGhadim.getText().toString();
-                polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
-
+            polompDtl.StateNew=0;
+            polompDtl.StateOld=0;
+            if(chkNadaradJadid==true){
+                polompDtl.StateNew=1;
             }
-             if(chkNadradGhadim==true){
-                 polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
-                 polompDtl.PolompInfoID=Long.valueOf(polompAllInfo.PolompInfoID);
-                 polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
-                 polompDtl.CurrentPolomp=etPolompJadid.getText().toString().equals("")?"-1":etPolompJadid.getText().toString();
-                 polompDtl.PolompID=polompParams.PolompId;
-                 polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-                 polompDtl.PreviousColorID=null;
-                 polompDtl.PreviousPolomp=null;
-                 polompDtl.PreviousPolompTypeID=null;
-
-
+            if(chkNadradGhadim==true){
+                polompDtl.StateOld=1;
+            }
+            if(chkNewNakhana==true){
+                polompDtl.StateNew=2;
+            }
+            if(chkOldNakhana==true){
+                polompDtl.StateOld=2;
             }
 
 
-           if(chkNadradGhadim==false && chkNadaradJadid==false){
-               polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
-               polompDtl.PolompInfoID=Long.valueOf( polompAllInfo.PolompInfoID);
-               polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
-               polompDtl.CurrentPolomp=etPolompJadid.getText().toString().equals("")?"-1":etPolompJadid.getText().toString();
-               polompDtl.PolompID=polompParams.PolompId;
-               polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-               polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
-               polompDtl.PreviousPolomp=etPolompGhadim.getText().toString().equals("")?"-1":etPolompGhadim.getText().toString();
-               polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+            polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
+            polompDtl.PolompInfoID=Long.valueOf( polompAllInfo.PolompInfoID);
+            polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+            polompDtl.CurrentPolomp=etPolompJadid.getText().toString().equals("")?"-1":etPolompJadid.getText().toString();
+            polompDtl.PolompID=polompParams.PolompId;
+            polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+            polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+            polompDtl.PreviousPolomp=etPolompGhadim.getText().toString().equals("")?"-1":etPolompGhadim.getText().toString();
+            polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
 
-           }
-            if(chkNadradGhadim==false && polompDtl.PreviousPolompTypeID==0 &&
-                    polompDtl.PreviousPolomp.equals("-1") && polompDtl.PreviousColorID==0){
-                polompDtl.PreviousPolomp="";
-            }
-            if(chkNadaradJadid==false && polompDtl.CurrentPolomp.equals("-1")
-                    && polompDtl.CurrentColorID==0 && polompDtl.PolompTypeID==0){
-                polompDtl.CurrentPolomp="";
-            }
             polompViewModel.updatePolompDtl(polompDtl);
             Toast.makeText(getActivity(),"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
 
