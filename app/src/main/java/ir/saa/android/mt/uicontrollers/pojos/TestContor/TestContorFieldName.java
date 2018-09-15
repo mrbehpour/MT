@@ -23,7 +23,7 @@ public class TestContorFieldName {
         hashMapCode.put("AVRMS_Period1",1);
         hashMapCode.put("BVRMS_Period1",2);
         hashMapCode.put("CVRMS_Period1",3);
-        hashMapCode.put("ContorConst",21);
+        hashMapCode.put("Period_Period1_A",20);
 
 
 
