@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.Client;
@@ -55,6 +56,8 @@ public class MoshtarakDetailsTabFragment extends Fragment
             Bundle bundle = this.getArguments();
             if (bundle != null) {
                 clientID = bundle.getLong(BundleKeysEnum.ClientID);
+            }else{
+                clientID= G.clientInfo.ClientId;
             }
         }
 

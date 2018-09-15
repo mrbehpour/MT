@@ -33,10 +33,14 @@ public class MoshtarakOperationsTabFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_moshtarak_operation, container, false);
+
         if(clientID==null){
             Bundle bundle = this.getArguments();
             if (bundle != null) {
                 clientID = bundle.getLong(BundleKeysEnum.ClientID);
+            }else{
+                clientID=G.clientInfo.ClientId;
+
             }
         }
         Button btnTest=rootView.findViewById(R.id.btnTest);
@@ -65,6 +69,7 @@ public class MoshtarakOperationsTabFragment extends Fragment
                 G.startFragment(FragmentsEnum.BazrasiFragment,false,null);
             }
         });
+        G.setActionbarTitleText(G.clientInfo.ClientName);
         return rootView;
     }
 

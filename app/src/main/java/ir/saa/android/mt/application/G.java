@@ -102,7 +102,7 @@ public class G extends Application {
                 break;
             case FragmentsEnum.MoshtarakFragment:
                 targetFragment=new MoshtarakFragment();
-                setActionbarTitleText("مشترکین");
+                //setActionbarTitleText("مشترکین");
                 break;
             case FragmentsEnum.ModuleFragment:
                 targetFragment=new ModuleFragment();

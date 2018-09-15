@@ -5,5 +5,6 @@ public class ClientInfo {
     public static   Integer SendId;
     public static  Integer GroupId;
     public static Integer FollowUpCode;
+    public  static  String ClientName;
 
 }
