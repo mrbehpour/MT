@@ -11,7 +11,8 @@
 	<TextView
 		android:id="@+id/tvActionbarTitle"
 		android:fontFamily="@font/byekan"
-		android:layout_width="match_parent"
+		android:layout_width="0dp"
+		android:layout_weight="0.6"
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="16dp"
 		android:layout_marginRight="8dp"
@@ -21,7 +22,8 @@
 		android:textStyle="bold"
 		android:text=""/>
 	<ImageView
-		android:layout_width="20dp"
+		android:layout_width="0dp"
+		android:layout_weight="0.2"
 		android:layout_height="20dp"
 		android:src="@drawable/router_wireless"
 		android:tint="@color/grey_50"
