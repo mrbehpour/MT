@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -347,6 +348,7 @@ public class PolompFragmentSave extends Fragment {
     }
 
     private void PolompSave(){
+
 
         if(spnRangPolompJadid.getSelectedItemPosition()==0 && etPolompJadid.getText().toString().equals("") &&
                 spnRangPolompJadid.getSelectedItemPosition()==0 && spnRangPolompGhadim.getSelectedItemPosition()==0 &&

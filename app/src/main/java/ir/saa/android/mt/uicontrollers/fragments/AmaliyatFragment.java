@@ -18,6 +18,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,9 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.testresult.TestItem;
 import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.metertester.TestResult;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
@@ -41,6 +44,7 @@ public class AmaliyatFragment extends Fragment {
     TextView tvRoundNum;
     TextView tvErrPerc;
     RecyclerView recyclerView;
+    private Boolean active;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -157,11 +161,26 @@ public class AmaliyatFragment extends Fragment {
         btnSaveResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveTestResult();
                 Toast.makeText(G.context,"نتایج تست با موفقیت ذخیره شد.",Toast.LENGTH_SHORT ).show();
             }
         });
 
         return rootView;
+    }
+    private void saveTestResult(){
+        TestInfo testInfo=new TestInfo();
+        testInfo.AgentID= Integer.valueOf (G.getPref("UserID"));
+        testInfo.TestDate=Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
+        testInfo.TestTime=Integer.valueOf (Tarikh.getTimeWithoutColon());
+        testInfo.SendID=G.clientInfo.SendId;
+        testInfo.ClientID=G.clientInfo.ClientId;
+        testInfo.ContorTypeID=testContorParams.SinglePhase==true?1:3;
+        testInfo.TestCount=testContorParams.FisrtTest==true?1:2;
+        testInfo.TestTypeID=testContorParams.Active==true?1:2;
+
+        //testContorParams
+
     }
 
     private void setUpRecyclerView(View view,List<TestResult> testResultList) {
