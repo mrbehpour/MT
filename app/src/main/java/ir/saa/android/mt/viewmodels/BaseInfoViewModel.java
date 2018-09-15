@@ -8,6 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -328,6 +331,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                         @Override
                         public void onError(Throwable e) {
+
                             messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
                         }
 
