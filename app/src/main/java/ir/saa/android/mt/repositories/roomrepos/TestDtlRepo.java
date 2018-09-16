@@ -56,8 +56,8 @@ public class TestDtlRepo implements TestDtlDao {
     }
 
 
-    public void insertTestDtl(TestDtl testDtl) {
-        testDtlDao.insertTestDtl(testDtl);
+    public Long insertTestDtl(TestDtl testDtl) {
+        return testDtlDao.insertTestDtl(testDtl);
     }
 
 

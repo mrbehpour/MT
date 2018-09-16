@@ -25,10 +25,14 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.model.entities.TestDtl;
+import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.metertester.TestResult;
+import ir.saa.android.mt.repositories.roomrepos.TestDtlRepo;
+import ir.saa.android.mt.repositories.roomrepos.TestInfoRepo;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 
 public class AmaliyatViewModel extends AndroidViewModel {
@@ -43,6 +47,8 @@ public class AmaliyatViewModel extends AndroidViewModel {
     List<TestResult> testResultList;
     Timer timer;
     Handler handler=null;
+    TestInfoRepo testInfoRepo;
+    TestDtlRepo testDtlRepo;
 
 //    public MutableLiveData<Boolean> setTimerMutableLiveData;
     public MutableLiveData<String> testResultMutableLiveData;
@@ -77,6 +83,12 @@ public class AmaliyatViewModel extends AndroidViewModel {
                 Log.d("response","onReportStatus : "+statusMsg);
             }
         });
+        if(testInfoRepo==null){
+            testInfoRepo=new TestInfoRepo(application);
+        }
+        if(testDtlRepo==null){
+            testDtlRepo=new TestDtlRepo(application);
+        }
 
         testResultMutableLiveData = new MutableLiveData<>();
         testRoundNumMutableLiveData = new MutableLiveData<>();
@@ -237,6 +249,14 @@ public class AmaliyatViewModel extends AndroidViewModel {
             timer.purge();
             timer=null;
         }
+    }
+
+    public Long insertTestDtl(TestDtl testDtl){
+        return testDtlRepo.insertTestDtl(testDtl);
+    }
+
+    public Long insertTestInfo(TestInfo testInfo){
+        return testInfoRepo.insertTestInfo(testInfo);
     }
 
     @Override

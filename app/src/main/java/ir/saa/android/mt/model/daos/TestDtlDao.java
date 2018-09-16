@@ -38,7 +38,7 @@ public interface TestDtlDao {
     List<Long> insertTestDtls(List<TestDtl> testDtls);
 
     @Insert(onConflict = IGNORE)
-    void insertTestDtl(TestDtl testDtl);
+    Long insertTestDtl(TestDtl testDtl);
 
     @Update
     void updateTestDtl(TestDtl testDtl);

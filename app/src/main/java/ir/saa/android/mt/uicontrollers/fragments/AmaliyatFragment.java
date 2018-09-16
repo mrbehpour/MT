@@ -29,9 +29,11 @@ import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.metertester.TestResult;
+import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorFieldName;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
 
@@ -161,14 +163,20 @@ public class AmaliyatFragment extends Fragment {
         btnSaveResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveTestResult();
+
+                try {
+                    saveTestResult();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
                 Toast.makeText(G.context,"نتایج تست با موفقیت ذخیره شد.",Toast.LENGTH_SHORT ).show();
             }
         });
 
         return rootView;
     }
-    private void saveTestResult(){
+    private void saveTestResult() throws IllegalAccessException {
         TestInfo testInfo=new TestInfo();
         testInfo.AgentID= Integer.valueOf (G.getPref("UserID"));
         testInfo.TestDate=Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
@@ -178,8 +186,29 @@ public class AmaliyatFragment extends Fragment {
         testInfo.ContorTypeID=testContorParams.SinglePhase==true?1:3;
         testInfo.TestCount=testContorParams.FisrtTest==true?1:2;
         testInfo.TestTypeID=testContorParams.Active==true?1:2;
+        Long testInfoId=amaliyatViewModel.insertTestInfo(testInfo);
+        TestDtl testDtl=new TestDtl();
+        testDtl.TestInfoID=Integer.valueOf( testInfoId.toString());
+        TestContorFieldName testContorFieldName=new TestContorFieldName();
+        Field[] fieldsTestcontorParam=TestContorParams.class.getFields();
+        testDtl.ReadTypeID=1;
+        testDtl.TestID=testContorFieldName.getTestId("testContorParams_RoundNum");
+        testDtl.TestValue= String.valueOf(testContorParams.RoundNum);
+        amaliyatViewModel.insertTestDtl(testDtl);
+        Field[] fieldstestDtl=TestResult.class.getFields();
+        for(TestResult testResult:lastTestResultList){
+            TestDtl testDetail=new TestDtl();
+            for (Field field:fieldstestDtl) {
+                testDetail.ReadTypeID=1;
+                testDetail.TestInfoID=Integer.valueOf( testInfoId.toString());
+                testDetail.TestID=testContorFieldName.getTestId(field.getName());
+                Object value=field.get(testResult);
+                testDetail.TestValue=value.toString();
+            }
+            amaliyatViewModel.insertTestDtl(testDetail);
+        }
 
-        //testContorParams
+
 
     }
 

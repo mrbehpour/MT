@@ -50,8 +50,8 @@ public class TestInfoRepo  {
     }
 
 
-    public void insertTestInfo(TestInfo testInfo) {
-        testInfoDao.insertTestInfo(testInfo);
+    public Long insertTestInfo(TestInfo testInfo) {
+        return testInfoDao.insertTestInfo(testInfo);
     }
 
 
