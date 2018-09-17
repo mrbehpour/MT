@@ -9,7 +9,7 @@ import io.reactivex.annotations.NonNull;
 @Entity
 public class PolompInfo {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     public Integer PolompInfoID ;
 

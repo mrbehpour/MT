@@ -35,7 +35,7 @@ public interface TestInfoDao {
     List<Long> insertTestInfos(List<TestInfo> testInfos);
 
     @Insert(onConflict = IGNORE)
-    void insertTestInfo(TestInfo testInfo);
+    Long insertTestInfo(TestInfo testInfo);
 
     @Update
     void updateTestInfo(TestInfo testInfo);

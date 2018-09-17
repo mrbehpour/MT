@@ -8,7 +8,7 @@ import io.reactivex.annotations.NonNull;
 @Entity
 public class TestDtl {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     public Integer TestDtlID ;
 
