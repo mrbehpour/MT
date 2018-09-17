@@ -163,22 +163,23 @@ public class AmaliyatFragment extends Fragment {
         btnSaveResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MT meterTest=MT.getInstance();
+                TestResult testResult= meterTest.prepareTestResultForSave(lastTestResultList);
 
                 try {
-                    saveTestResult();
+                    saveTestResult(testResult);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
 
-                MT meterTest=MT.getInstance();
-                TestResult testResult= meterTest.prepareTestResultForSave(lastTestResultList);
+
                 Toast.makeText(G.context,"نتایج تست با موفقیت ذخیره شد.",Toast.LENGTH_SHORT ).show();
             }
         });
 
         return rootView;
     }
-    private void saveTestResult() throws IllegalAccessException {
+    private void saveTestResult(TestResult testResult) throws IllegalAccessException {
         TestInfo testInfo=new TestInfo();
         testInfo.AgentID= Integer.valueOf (G.getPref("UserID"));
         testInfo.TestDate=Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
@@ -198,7 +199,7 @@ public class AmaliyatFragment extends Fragment {
         testDtl.TestValue= String.valueOf(testContorParams.RoundNum);
         amaliyatViewModel.insertTestDtl(testDtl);
         Field[] fieldstestDtl=TestResult.class.getFields();
-        for(TestResult testResult:lastTestResultList){
+
             TestDtl testDetail=new TestDtl();
             for (Field field:fieldstestDtl) {
                 testDetail.ReadTypeID=1;
@@ -208,7 +209,7 @@ public class AmaliyatFragment extends Fragment {
                 testDetail.TestValue=value.toString();
             }
             amaliyatViewModel.insertTestDtl(testDetail);
-        }
+        
 
 
 
