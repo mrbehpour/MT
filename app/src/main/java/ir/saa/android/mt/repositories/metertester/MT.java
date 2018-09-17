@@ -393,6 +393,25 @@ public class MT {
         return tr;
     }
 
+    public TestResult prepareTestResultForSave(List<TestResult> testResults){
+
+        TestResult testResult = testResults.get(testResults.size()-1);
+
+        testResult.Pow_A=Double.valueOf(testResult.PF_A)*Double.valueOf(testResult.AVRMS_Period1)*Double.valueOf(testResult.AIRMS_Period1);
+        testResult.Pow_B=Double.valueOf(testResult.PF_B)*Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
+        testResult.Pow_C=Double.valueOf(testResult.PF_C)*Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
+
+        testResult.Pow_A=Double.valueOf(testResult.PF_A)*Double.valueOf(testResult.AVRMS_Period1)*Double.valueOf(testResult.AIRMS_Period1);
+        testResult.Pow_B=Double.valueOf(testResult.PF_B)*Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
+        testResult.Pow_C=Double.valueOf(testResult.PF_C)*Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
+
+        testResult.Pow_A=Double.valueOf(testResult.PF_A)*Double.valueOf(testResult.AVRMS_Period1)*Double.valueOf(testResult.AIRMS_Period1);
+        testResult.Pow_B=Double.valueOf(testResult.PF_B)*Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
+        testResult.Pow_C=Double.valueOf(testResult.PF_C)*Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
+
+        return testResult;
+    }
+
     private boolean checkEnergyState (String responseStr){
         return responseStr.substring(0, 2).equals("00") ? true : false;
     }

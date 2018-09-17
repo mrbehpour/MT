@@ -23,4 +23,7 @@ public class TestResult {
     public String Period_Period1_A;
     public String Period_Period1_B;
     public String Period_Period1_C;
+    public double Pow_A;
+    public double Pow_B;
+    public double Pow_C;
 }
