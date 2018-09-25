@@ -15,7 +15,7 @@ public class MeterChangeDtlRepo  {
     private LiveData<List<MeterChangeDtl>> meterChangeDtls;
 
     public MeterChangeDtlRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         meterChangeDtlDao=db.meterChangeDtlModel();
         meterChangeDtls=meterChangeDtlDao.getMeterChangeDtl();
     }

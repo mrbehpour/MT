@@ -15,7 +15,7 @@ public class CompanyRepo {
     private LiveData<List<Company>> Companies;
 
     public CompanyRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         companyDao=db.companyModel();
         Companies=companyDao.getCompanies();
 

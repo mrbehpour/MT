@@ -15,7 +15,7 @@ public class MeterChangeInfoRepo implements MeterChangeInfoDao {
     private LiveData<List<MeterChangeInfo>> meterChangeInfos;
 
     public MeterChangeInfoRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         meterChangeInfoDao=db.meterChangeInfoModel();
         meterChangeInfos=meterChangeInfoDao.getMeterChangeInfos();
     }

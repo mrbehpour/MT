@@ -15,7 +15,7 @@ public class GroupingFormatRepo  {
     private LiveData<List<GroupingFormat>> GroupingFormats;
 
     public GroupingFormatRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         groupingFormatDao=db.groupingFormatModel();
         GroupingFormats=groupingFormatDao.getGroupingFormats();
     }

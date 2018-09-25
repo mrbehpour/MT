@@ -5,11 +5,8 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-import ir.saa.android.mt.R;
-import ir.saa.android.mt.model.daos.RemarkDao;
 import ir.saa.android.mt.model.daos.RemarkTypeDao;
 import ir.saa.android.mt.model.database.MTDatabase;
-import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkType;
 
 public class RemarkTypeRepo  {
@@ -17,7 +14,7 @@ public class RemarkTypeRepo  {
     private LiveData<List<RemarkType>> RemarkTypes;
 
     public RemarkTypeRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         remarkTypeDao=db.remarkTypeModel();
         RemarkTypes=remarkTypeDao.getRemarkTypes();
     }

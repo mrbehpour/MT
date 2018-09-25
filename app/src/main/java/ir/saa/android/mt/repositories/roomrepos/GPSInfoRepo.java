@@ -15,7 +15,7 @@ public class GPSInfoRepo  {
     private LiveData<List<GPSInfo>> gPSInfos;
 
     public GPSInfoRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         gpsInfoDao=db.gpsInfoModel();
         gPSInfos=gpsInfoDao.getGPSInfos();
     }

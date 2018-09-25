@@ -16,7 +16,7 @@ public class RemarkRepo  {
     private LiveData<List<Remark>> Remarks;
 
     public RemarkRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         remarkDao=db.remarkModel();
         Remarks=remarkDao.getRemarks();
     }
@@ -76,7 +76,7 @@ public class RemarkRepo  {
         remarkDao.deleteRemark(remark);
     }
 
-    public LiveData<List<RemarkGroupingFormat>> getRemarkGroupingFormat(Integer Id,Integer remarkTypeId){
+    public LiveData<List<RemarkGroupingFormat>> getRemarkGroupingFormat(Integer Id, Integer remarkTypeId){
         return remarkDao.getRemarkGroupingFormat(Id,remarkTypeId);
     }
 }

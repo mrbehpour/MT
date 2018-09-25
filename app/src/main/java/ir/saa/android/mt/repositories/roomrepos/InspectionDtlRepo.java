@@ -9,15 +9,14 @@ import ir.saa.android.mt.model.daos.InspectionDtlDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
-import ir.saa.android.mt.model.entities.InspectionInfo;
 
-public class InspectionDtlRepo implements InspectionDtlDao {
+public class InspectionDtlRepo  {
 
     private InspectionDtlDao inspectionDtlDao;
     private LiveData<List<InspectionDtl>> inspectionDtls;
 
     public InspectionDtlRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         inspectionDtlDao=db.inspectionDtlModel();
         inspectionDtls=inspectionDtlDao.getInspectionDtls();
     }
@@ -70,7 +69,11 @@ public class InspectionDtlRepo implements InspectionDtlDao {
             return inspectionDtlDao.getInspectionAllInfo( clientId ,remarkId);
     }
 
-    public List<InspectionAllInfo> getInspectionAllInfoWithSendId(Long ClientId,Integer SendId){
+    public List<InspectionAllInfo> getInspectionAllInfoWithSendId(Long ClientId, Integer SendId){
         return inspectionDtlDao.getInspectionAllInfoWithSendId(ClientId,SendId);
+    }
+
+    public List<InspectionAllInfo> getInspectionAllInfoWithClientId(Long ClientId){
+        return inspectionDtlDao.getInspectionAllInfoWithClientId(ClientId);
     }
 }

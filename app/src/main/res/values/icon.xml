@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="icon_Test">&#xf058;</string>
+    <string name="icon_polomp">&#xf023;</string>
+    <string name="icon_Bazrasi">&#xf022;</string>
+    <string name="tp_text_icon">"fontawesome-webfont"</string>
+    <color name="icon_off">#2d2d2d</color>
+    <color name="icon_on">#99be06</color>
+</resources>

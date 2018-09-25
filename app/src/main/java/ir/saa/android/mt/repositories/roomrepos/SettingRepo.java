@@ -6,10 +6,8 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import ir.saa.android.mt.model.daos.SettingDao;
-import ir.saa.android.mt.model.daos.TariffTypeDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.Setting;
-import ir.saa.android.mt.model.entities.TariffType;
 
 public class SettingRepo  {
 
@@ -17,7 +15,7 @@ public class SettingRepo  {
     private LiveData<List<Setting>> Settings;
 
     public SettingRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         settingDao=db.settingModel();
         Settings=settingDao.getSettings();
     }

@@ -14,7 +14,7 @@ public class AgentAccessListRepo {
     private LiveData<List<AgentAccessList>> agentAccessLists;
 
     public AgentAccessListRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         agentAccessListDao=db.agentAccessListModel();
         agentAccessLists=agentAccessListDao.getAgentAccessList();
     }

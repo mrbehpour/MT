@@ -5,10 +5,8 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
-import ir.saa.android.mt.model.daos.AnswerGroupDao;
 import ir.saa.android.mt.model.daos.AnswerGroupDtlDao;
 import ir.saa.android.mt.model.database.MTDatabase;
-import ir.saa.android.mt.model.entities.AnswerGroup;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 
 public class AnswerGroupDtlRepo   {
@@ -17,7 +15,7 @@ public class AnswerGroupDtlRepo   {
     private LiveData<List<AnswerGroupDtl>> AnswerGroupDtls;
 
     public AnswerGroupDtlRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         answerGroupDtlDao=db.answerGroupDtlModel();
         AnswerGroupDtls=answerGroupDtlDao.getAnswerGroupDtls();
     }

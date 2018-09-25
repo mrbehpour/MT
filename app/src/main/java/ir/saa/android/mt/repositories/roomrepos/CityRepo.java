@@ -15,7 +15,7 @@ public class CityRepo  {
     private LiveData<List<City>> Cities;
 
     public CityRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         cityDao=db.cityModel();
         Cities=cityDao.getCities();
     }

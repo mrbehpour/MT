@@ -15,7 +15,7 @@ public class InspectionInfoRepo  {
     private LiveData<List<InspectionInfo>> inspectionInfos;
 
     public InspectionInfoRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         inspectionInfoDao=db.inspectionInfoModel();
         inspectionInfos=inspectionInfoDao.getInspectionInfos();
     }

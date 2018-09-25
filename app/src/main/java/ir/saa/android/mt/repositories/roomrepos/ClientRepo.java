@@ -16,7 +16,7 @@ public class ClientRepo {
     private LiveData<List<Client>> Clients;
 
     public ClientRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         clientDao=db.clientModel();
         Clients=clientDao.getClientsLiveData();
     }

@@ -15,7 +15,7 @@ public class TestInfoRepo  {
     private LiveData<List<TestInfo>> testInfos;
 
     public TestInfoRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         testInfoDao=db.testInfoModel();
         testInfos=testInfoDao.getTestInfos();
     }

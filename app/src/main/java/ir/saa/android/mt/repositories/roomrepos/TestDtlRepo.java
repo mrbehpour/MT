@@ -16,7 +16,7 @@ public class TestDtlRepo implements TestDtlDao {
     private LiveData<List<TestDtl>> testDtls;
 
     public TestDtlRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         testDtlDao=db.testDtlModel();
         testDtls=testDtlDao.getTestDtls();
     }
@@ -66,7 +66,11 @@ public class TestDtlRepo implements TestDtlDao {
 
     }
 
-    public List<TestAllInfo> getTestAllInfoWithSendId(Long ClientId,Integer SendId){
+    public List<TestAllInfo> getTestAllInfoWithSendId(Long ClientId, Integer SendId){
         return testDtlDao.getTestAllInfoWithSendId(ClientId,SendId);
+    }
+
+    public List<TestAllInfo> getTestAllInfoWithClientId(Long ClientId){
+        return testDtlDao.getTestAllInfoWithClientId(ClientId);
     }
 }

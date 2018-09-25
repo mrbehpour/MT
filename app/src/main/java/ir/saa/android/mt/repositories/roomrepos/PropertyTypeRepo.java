@@ -15,7 +15,7 @@ public class PropertyTypeRepo  {
     private LiveData<List<PropertyType>> PropertyTypes;
 
     public PropertyTypeRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         propertyTypeDao=db.propertyTypeModel();
         PropertyTypes=propertyTypeDao.getPropertyTypes();
     }

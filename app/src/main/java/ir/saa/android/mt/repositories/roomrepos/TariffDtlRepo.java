@@ -15,7 +15,7 @@ public class TariffDtlRepo  {
     private LiveData<List<TariffDtl>> tariffDtls;
 
     public TariffDtlRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         tariffDtlDao=db.tariffDtlModel();
         tariffDtls=tariffDtlDao.getTariffDtls();
     }

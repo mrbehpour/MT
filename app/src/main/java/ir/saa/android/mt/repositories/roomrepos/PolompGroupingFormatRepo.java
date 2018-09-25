@@ -15,7 +15,7 @@ public class PolompGroupingFormatRepo  {
     private LiveData<List<PolompGroupingFormat>> PolompGroupingFormats;
 
     public PolompGroupingFormatRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         polompGroupingFormatDao=db.polompGroupingFormatModel();
         PolompGroupingFormats=polompGroupingFormatDao.getPolompGroupingFormats();
     }

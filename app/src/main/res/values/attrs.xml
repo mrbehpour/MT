@@ -3,4 +3,5 @@
     <declare-styleable name="CustomFont">
         <attr name="customFont" format="string"/>
     </declare-styleable>
+
 </resources>

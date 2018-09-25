@@ -2,7 +2,6 @@ package ir.saa.android.mt.repositories.roomrepos;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.mtp.MtpConstants;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class MasterGroupInfoRepo {
     private LiveData<List<MasterGroupInfo>> MasterGroupInfos;
 
     public MasterGroupInfoRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         masterGroupInfoDao=db.masterGroupInfoModel();
         MasterGroupInfos =masterGroupInfoDao.getMasterGroupInfos();
     }

@@ -16,7 +16,7 @@ public class MasterGroupDetailRepo  {
     private LiveData<List<MasterGroupDetail>> MasterGroupDetails;
 
     public MasterGroupDetailRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         masterGroupDetailDao=db.masterGroupDetailModel();
         MasterGroupDetails=masterGroupDetailDao.getMasterGroupDetails();
     }

@@ -1,18 +1,15 @@
 package ir.saa.android.mt.repositories.roomrepos;
+
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.databinding.BindingAdapter;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
 
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
-import  ir.saa.android.mt.model.daos.*;
+import ir.saa.android.mt.model.daos.RelUserDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.RelUser;
 
@@ -88,7 +85,7 @@ public class ReluserRepo  {
         relUserDao.deleteAll();
     }
 
-    public RelUser getUserByUserAndPassword(int userId,String passWord){
+    public RelUser getUserByUserAndPassword(int userId, String passWord){
         return  relUserDao.getUserByUserAndPassword(userId,passWord);
     }
 

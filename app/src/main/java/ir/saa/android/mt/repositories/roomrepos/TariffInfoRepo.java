@@ -15,7 +15,7 @@ public class TariffInfoRepo  {
     private LiveData<List<TariffInfo>> tariffInfos;
 
     public TariffInfoRepo(Application application){
-        MTDatabase db=MTDatabase.getDatabase(application);
+        MTDatabase db= MTDatabase.getDatabase(application);
         tariffInfoDao=db.tariffInfoModel();
         tariffInfos=tariffInfoDao.getTariffInfos();
     }
