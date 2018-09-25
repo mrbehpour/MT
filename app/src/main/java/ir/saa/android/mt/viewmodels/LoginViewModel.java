@@ -44,6 +44,7 @@ public class LoginViewModel extends AndroidViewModel {
             relUser.LastName="";
             relUser.HandheldPass="1";
             reluserRepo.insertUser(relUser);
+            //111111
         }
     }
     public LiveData<List<RelUser>> getUsers() {  return reluserRepo.getUsersLiveData();  }
