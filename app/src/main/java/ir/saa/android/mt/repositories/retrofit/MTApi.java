@@ -38,61 +38,61 @@ public interface MTApi {
     //public final static String WEB_SERVICE_BASE_URL = "http://192.168.3.176:645/services/AndroidServices.svc/json";
 
     @GET("GetAgentList")
-    Single<List<RelUser>> GetAgentList();
+    Single<DataClass<RelUser>> GetAgentList();
 
     @GET("GetCities")
-    Single<List<City>> GetCities();
+    Single<DataClass<City>> GetCities();
 
     @GET("GetAnswerGroups")
-    Single<List<AnswerGroup>> GetAnswerGroups();
+    Single<DataClass<AnswerGroup>> GetAnswerGroups();
 
     @GET("GetClientsTariff")
-    Single<List<AnswerGroupDtl>> GetClientsTariff();
+    Single<DataClass<AnswerGroupDtl>> GetClientsTariff();
 
     @GET("GetGroupingFormat")
-    Single<List<GroupingFormat>> GetGroupingFormat();
+    Single<DataClass<GroupingFormat>> GetGroupingFormat();
 
     @GET("GetMasterGroupDtl")
-    Single<List<MasterGroupDetail>> GetMasterGroupDtl();
+    Single<DataClass<MasterGroupDetail>> GetMasterGroupDtl();
 
     @GET("GetPolompGroup")
-    Single<List<PolompGroup>> GetPolompGroup();
+    Single<DataClass<PolompGroup>> GetPolompGroup();
 
     @GET("GetPolompGroupingFormat")
-    Single<List<PolompGroupingFormat>> GetPolompGroupingFormat();
+    Single<DataClass<PolompGroupingFormat>> GetPolompGroupingFormat();
 
     @GET("GetPolomps")
-    Single<List<Polomp>> GetPolomps();
+    Single<DataClass<Polomp>> GetPolomps();
 
     @GET("GetPolompColor")
-    Single<List<PolompColor>> GetPolompColor();
+    Single<DataClass<PolompColor>> GetPolompColor();
 
     @GET("GetPolompType")
-    Single<List<PolompType>> GetPolompType();
+    Single<DataClass<PolompType>> GetPolompType();
 
     @GET("GetPropertyTypies")
-    Single<List<PropertyType>> GetPropertyTypies();
+    Single<DataClass<PropertyType>> GetPropertyTypies();
 
     @GET("GetRegions")
-    Single<List<Region>> GetRegions();
+    Single<DataClass<Region>> GetRegions();
 
     @GET("GetRemarkGroup")
-    Single<List<RemarkGroup>> GetRemarkGroup();
+    Single<DataClass<RemarkGroup>> GetRemarkGroup();
 
     @GET("GetRemarks")
-    Single<List<Remark>> GetRemarks();
+    Single<DataClass<Remark>> GetRemarks();
 
     @GET("GetSettings")
-    Single<List<Setting>> GetSettings();
+    Single<DataClass<Setting>> GetSettings();
 
     @GET("GetAgentAccessList")
-    Single<List<AgentAccessList>> GetAgentAccessList();
+    Single<DataClass<AgentAccessList>> GetAgentAccessList();
 
     @POST("GetClients")
-    Single<List<Client>> GetClients(@Body GetClientInput getClientInput);
+    Single<DataClass<Client>> GetClients(@Body GetClientInput getClientInput);
 
     @POST("GetAgentAccessByUserIdList")
-    Single<List<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body ArrayList<Integer> agentIdList);
+    Single<DataClass<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body ArrayList<Integer> agentIdList);
 
     @POST("SaveClientAllInfoAndroid")
     Single<List<RecordeSummary>> SaveClientAllInfoAndroid(@Body List<ClientAllInfo> clientAllInfo);
