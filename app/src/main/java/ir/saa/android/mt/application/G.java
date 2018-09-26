@@ -22,6 +22,7 @@ import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.fragments.AmaliyatFragment;
 import ir.saa.android.mt.uicontrollers.fragments.BazdidFragment;
 import ir.saa.android.mt.uicontrollers.fragments.BazrasiFragment;
+import ir.saa.android.mt.uicontrollers.fragments.DisplayTestFragment;
 import ir.saa.android.mt.uicontrollers.fragments.HomeFragment;
 import ir.saa.android.mt.uicontrollers.fragments.ModuleFragment;
 import ir.saa.android.mt.uicontrollers.fragments.MoshtarakFragment;
@@ -110,6 +111,10 @@ public class G extends Application {
                 break;
             case FragmentsEnum.TestContorFragment:
                 targetFragment=new TestContorFragment();
+                setActionbarTitleText("تست کنـتور");
+                break;
+            case FragmentsEnum.DisplayTestFragment:
+                targetFragment=new DisplayTestFragment();
                 setActionbarTitleText("تست کنـتور");
                 break;
             case FragmentsEnum.TestEnergyFragment:

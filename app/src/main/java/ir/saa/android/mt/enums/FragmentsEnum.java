@@ -17,4 +17,5 @@ public class FragmentsEnum {
     public static final int PolompFragmentSave =10;
     public static final int ModuleFragment = 11;
     public static final int BazrasiFragment=12;
+    public static final  int DisplayTestFragment=13;
 }
