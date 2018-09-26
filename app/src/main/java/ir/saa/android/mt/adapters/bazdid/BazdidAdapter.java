@@ -1,7 +1,11 @@
 package ir.saa.android.mt.adapters.bazdid;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +19,11 @@ import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.uicontrollers.pojos.FontManager.FontManager;
+import ir.saa.android.mt.viewmodels.BazdidViewModel;
 
 public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHolder> {
 
@@ -24,6 +31,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
     private List<ClientItem> mDataList ;
     private LayoutInflater inflater;
     private Context context;
+    BazdidViewModel bazdidViewModel;
 
     public BazdidAdapter(Context context, List<ClientItem> data) {
         this.context = context;
@@ -32,6 +40,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         clientItemListOrginal = new ArrayList<>();
         mDataList.addAll(data);
         clientItemListOrginal.addAll(data);
+        this.bazdidViewModel= ViewModelProviders.of((AppCompatActivity)context).get(BazdidViewModel.class);
     }
 
     @Override
@@ -62,7 +71,31 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         holder.tvUniqueTitle.setText(current.UniqueFieldTitle);
         holder.tvUniqueValue.setText(current.UniqueFieldValue);
         holder.tvAddress.setText(current.Address);
+
+
+        if(current.isPolommp){
+
+            holder.tvfIconPolomp.setTextColor(ContextCompat.getColor(context, R.color.icon_on));
+        }else {
+            holder.tvfIconPolomp.setTextColor(ContextCompat.getColor(context, R.color.icon_off));
+        }
+
+        if(current.isTest){
+            holder.tvfIconTest.setTextColor(ContextCompat.getColor(context, R.color.icon_on));
+        }else {
+                    holder.tvfIconTest.setTextColor(ContextCompat.getColor(context, R.color.icon_off));
+                }
+        if(current.isBazrasi){
+
+           holder.tvfIconBazrasi.setTextColor(ContextCompat.getColor(context, R.color.icon_on));
+        }else {
+                    holder.tvfIconBazrasi.setTextColor(ContextCompat.getColor(context, R.color.icon_off));
+        }
+
+
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -101,6 +134,9 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         TextView tvUniqueTitle;
         TextView tvUniqueValue;
         TextView tvAddress;
+        TextViewFont tvfIconTest;
+        TextViewFont tvfIconBazrasi;
+        TextViewFont tvfIconPolomp;
         ImageView imgBazdidMoshtarak;
 
         public MyViewHolder(View itemView) {
@@ -111,6 +147,14 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
             tvUniqueValue = itemView.findViewById(R.id.tvUniqueValue);
             tvAddress = itemView.findViewById(R.id.tvAddress);
             imgBazdidMoshtarak = itemView.findViewById(R.id.imgBazdidMoshtarak);
+            tvfIconTest=itemView.findViewById(R.id.iconTest);
+            tvfIconBazrasi=itemView.findViewById(R.id.iconBazrasi);
+            tvfIconPolomp=itemView.findViewById(R.id.iconPolomp);
+
+            Typeface iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
+            FontManager.markAsIconContainer(tvfIconTest,iconFont);
+            FontManager.markAsIconContainer(tvfIconBazrasi,iconFont);
+            FontManager.markAsIconContainer(tvfIconPolomp,iconFont);
         }
     }
 }
