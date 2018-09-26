@@ -42,6 +42,7 @@ import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroup;
 import ir.saa.android.mt.model.entities.Setting;
+import ir.saa.android.mt.repositories.retrofit.DataClass;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.repositories.roomrepos.AccessAgentAndroidRepo;
 import ir.saa.android.mt.repositories.roomrepos.AgentAccessListRepo;
@@ -223,119 +224,142 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
     public void getUserFromServer(){
 
-            Completable.fromAction(new Action() {
-                @Override
-                public void run() throws Exception {
-                    List<RelUser> relUsers = null;
-                    List<AgentAccessList> agentAccessLists = null;
-                    List<AccessAgentAndroid> accessAgentAndroids = null;
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                DataClass<RelUser> relUsers = null;
+                DataClass<AgentAccessList> agentAccessLists = null;
+                DataClass<AccessAgentAndroid> accessAgentAndroids = null;
 
-                    relUsers = retrofitMT.getMtApi().GetAgentList().blockingGet();
-                    ArrayList<Integer> agentIdList = new ArrayList<>();
-
-                    for (Integer i = 0; i < relUsers.size(); i++) {
-                        agentIdList.add(relUsers.get(i).UserID);
+                relUsers = retrofitMT.getMtApi().GetAgentList().blockingGet();
+                ArrayList<Integer> agentIdList = new ArrayList<>();
+                if(relUsers.Success) {
+                    for (Integer i = 0; i < relUsers.Data.size(); i++) {
+                        agentIdList.add(relUsers.Data.get(i).UserID);
                     }
-                    accessAgentAndroids = retrofitMT.getMtApi().GetAgentAccessByUserIdList(agentIdList).blockingGet();
-                    agentAccessLists = retrofitMT.getMtApi().GetAgentAccessList().blockingGet();
-                    if(reluserRepo.getUsers().size()>0)
-                    {
-                        reluserRepo.deleteAll();
-                    }
-
-                    Integer totalCount = relUsers.size() + agentAccessLists.size() + accessAgentAndroids.size();
-                    Integer startProgress = 0;
-                    for (Integer i = 0; i < relUsers.size(); i++) {
-                        reluserRepo.insertUser(relUsers.get(i));
-                        UsersProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = relUsers.size();
-
-                    for (Integer i = 0; i < accessAgentAndroids.size(); i++) {
-                        accessAgentAndroidRepo.insertAccessAgentAndroid(accessAgentAndroids.get(i));
-                        UsersProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-                    startProgress = relUsers.size() + accessAgentAndroids.size();
-
-                    for (Integer i = 0; i < agentAccessLists.size(); i++) {
-                        agentAccessListRepo.insertAgentAccessList(agentAccessLists.get(i));
-                        UsersProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                    }
-
-
+                }else{
+                    messageErrorLiveData.postValue(relUsers.Message);
+                    return;
                 }
-            }).subscribeOn(Schedulers.io())
-                    //.observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new CompletableObserver() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
 
-                        }
+                accessAgentAndroids = retrofitMT.getMtApi().GetAgentAccessByUserIdList(agentIdList).blockingGet();
+                if(!accessAgentAndroids.Success){
+                    messageErrorLiveData.postValue(accessAgentAndroids.Message);
+                    return;
+                }
+                agentAccessLists = retrofitMT.getMtApi().GetAgentAccessList().blockingGet();
+                if(!agentAccessLists.Success){
+                    messageErrorLiveData.postValue(agentAccessLists.Message);
+                    return;
+                }
+                if(reluserRepo.getUsers().size()>0)
+                {
+                    reluserRepo.deleteAll();
+                }
 
-                        @Override
-                        public void onComplete() {
-                            //Toast.makeText(getApplication().getApplicationContext(), "اطلاعات مامورین با موفقیت دریافت شد", Toast.LENGTH_SHORT).show();
-                        }
+                Integer totalCount = relUsers.Data.size() + agentAccessLists.Data.size() + accessAgentAndroids.Data.size();
+                Integer startProgress = 0;
+                for (Integer i = 0; i < relUsers.Data.size(); i++) {
+                    reluserRepo.insertUser(relUsers.Data.get(i));
+                    UsersProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = relUsers.Data.size();
 
-                        @Override
-                        public void onError(Throwable e) {
-                            //Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
-                        }
-                    });
+                for (Integer i = 0; i < accessAgentAndroids.Data.size(); i++) {
+                    accessAgentAndroidRepo.insertAccessAgentAndroid(accessAgentAndroids.Data.get(i));
+                    UsersProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = relUsers.Data.size() + accessAgentAndroids.Data.size();
+
+                for (Integer i = 0; i < agentAccessLists.Data.size(); i++) {
+                    agentAccessListRepo.insertAgentAccessList(agentAccessLists.Data.get(i));
+                    UsersProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+
+
+            }
+        }).subscribeOn(Schedulers.io())
+                //.observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        //Toast.makeText(getApplication().getApplicationContext(), "اطلاعات مامورین با موفقیت دریافت شد", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
+                    }
+                });
 
     }
 
     public void getSettingFromServer(){
 
 
-            retrofitMT.getMtApi().GetSettings()
-            .subscribeOn(Schedulers.io())
-                    .subscribeWith(new DisposableSingleObserver<List<Setting>>() {
-                        @Override
-                        public void onSuccess(List<Setting> settings) {
+        retrofitMT.getMtApi().GetSettings()
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableSingleObserver<DataClass<Setting>>() {
+                    @Override
+                    public void onSuccess(DataClass<Setting> settings) {
 //                if(settingRepo.getSettings().getValue().size()>0){
 //                    settingRepo.deleteAll();
 //                }
-                            for (Integer i = 0; i < settings.size(); i++) {
-                                settingRepo.insertSetting(settings.get(i));
-                                settingProgressPercentLiveData.postValue(getPrecent(i + 1, settings.size()));
+                        if(settings.Success) {
+                            for (Integer i = 0; i < settings.Data.size(); i++) {
+                                settingRepo.insertSetting(settings.Data.get(i));
+                                settingProgressPercentLiveData.postValue(getPrecent(i + 1, settings.Data.size()));
                             }
-                            //ast.makeText(getApplication().getApplicationContext(), "تنظیمات با موفقیت دریافت شد", Toast.LENGTH_SHORT).show();
+                        }else{
+                            messageErrorLiveData.postValue(settings.Message);
                         }
 
-                        @Override
-                        public void onError(Throwable e) {
 
-                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
-                        }
-                    })
-            ;
+                        //ast.makeText(getApplication().getApplicationContext(), "تنظیمات با موفقیت دریافت شد", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
+                    }
+                })
+        ;
 
     }
 
     public void getClientFromServer(GetClientInput getClientInput){
 
-            retrofitMT.getMtApi().GetClients(getClientInput)
-                    .subscribeOn(Schedulers.io())
-                    //.observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new DisposableSingleObserver<List<Client>>() {
-                        @Override
-                        public void onSuccess(List<Client> clients) {
-                            for (Integer i = 0; i < clients.size(); i++) {
-                                clientRepo.insertClient(clients.get(i));
-                                clientProgressPercentLiveData.postValue(getPrecent(i + 1, clients.size()));
+        retrofitMT.getMtApi().GetClients(getClientInput)
+                .subscribeOn(Schedulers.io())
+                //.observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<DataClass<Client>>() {
+                    @Override
+                    public void onSuccess(DataClass<Client> clients) {
+                        if(clients.Success) {
+                            for (Integer i = 0; i < clients.Data.size(); i++) {
+                                clientRepo.insertClient(clients.Data.get(i));
+                                clientProgressPercentLiveData.postValue(getPrecent(i + 1, clients.Data.size()));
                             }
-                           // Toast.makeText(getApplication().getApplicationContext(), "اطلاعات مشترکین با موفقیت دریافت شد", Toast.LENGTH_SHORT).show();
+                        }else {
+                            messageErrorLiveData.postValue(clients.Message);
                         }
+                        // Toast.makeText(getApplication().getApplicationContext(), "اطلاعات مشترکین با موفقیت دریافت شد", Toast.LENGTH_SHORT).show();
+                    }
 
-                        @Override
-                        public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 
-                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
-                        }
+                        messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
+                    }
 
-                    });
+                });
 
 
     }
@@ -347,167 +371,213 @@ public class BaseInfoViewModel extends AndroidViewModel {
         Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {
-                List<AnswerGroup> answerGroups = null;
+                DataClass<AnswerGroup> answerGroups = new DataClass<AnswerGroup>();
 
-                List<AnswerGroupDtl> answerGroupDtls = new ArrayList<>();
-                List<PropertyType> propertyTypes = null;
-                List<Region> regions = null;
-                List<City> cities = null;
-                List<Remark> remarks = null;
-                List<GroupingFormat> groupingFormats = null;
-                List<RemarkGroup> remarkGroups = null;
-                List<MasterGroupDetail> masterGroupDetails = null;
-                List<Polomp> polomps = null;
-                List<PolompGroup> polompGroups = null;
-                List<PolompGroupingFormat> polompGroupingFormats = null;
-                List<PolompColor> polompColors=null;
-                List<PolompType> polompTypes=null;
+                List<AnswerGroupDtl> answerGroupDtls = null;
+                answerGroupDtls=new ArrayList<>();
+                DataClass<PropertyType> propertyTypes = null;
+                DataClass<Region> regions = null;
+                DataClass<City> cities = null;
+                DataClass<Remark> remarks = null;
+                DataClass<GroupingFormat> groupingFormats = null;
+                DataClass<RemarkGroup> remarkGroups = null;
+                DataClass<MasterGroupDetail> masterGroupDetails = null;
+                DataClass<Polomp> polomps = null;
+                DataClass<PolompGroup> polompGroups = null;
+                DataClass<PolompGroupingFormat> polompGroupingFormats = null;
+                DataClass<PolompColor> polompColors=null;
+                DataClass<PolompType> polompTypes=null;
 
                 answerGroups = retrofitMT.getMtApi().GetAnswerGroups().blockingGet();
-
-                for(Integer i=0;i<answerGroups.size();i++){
-                    if(answerGroups.get(i)!=null){
-                        for(Integer j=0;j<answerGroups.get(i).AnswerGroupDtl.size();j++){
-                            answerGroupDtls.add(answerGroups.get(i).AnswerGroupDtl.get(j));
+                if(answerGroups.Success) {
+                    for (Integer i = 0; i < answerGroups.Data.size(); i++) {
+                        if (answerGroups.Data.get(i) != null) {
+                            for (Integer j = 0; j < answerGroups.Data.get(i).AnswerGroupDtl.size(); j++) {
+                                answerGroupDtls.add(answerGroups.Data.get(i).AnswerGroupDtl.get(j));
+                            }
                         }
-                    }
 
+                    }
                 }
                 propertyTypes = retrofitMT.getMtApi().GetPropertyTypies().blockingGet();
+                if(!propertyTypes.Success){
+                    messageErrorLiveData.postValue(propertyTypes.Message);
+
+                }
                 regions = retrofitMT.getMtApi().GetRegions().blockingGet();
+                if(!regions.Success){
+                    messageErrorLiveData.postValue(regions.Message);
+
+                }
                 cities = retrofitMT.getMtApi().GetCities().blockingGet();
-                List<AnswerGroupDtl> ClientTarif = null;
+                if(!cities.Success){
+                    messageErrorLiveData.postValue(cities.Message);
+
+                }
+                DataClass<AnswerGroupDtl> ClientTarif = null;
                 ClientTarif = retrofitMT.getMtApi().GetClientsTariff().blockingGet();
-                for (Integer i = 0; i < ClientTarif.size(); i++) {
-                    answerGroupDtls.add(ClientTarif.get(i));
+                if(ClientTarif.Success) {
+                    for (Integer i = 0; i < ClientTarif.Data.size(); i++) {
+                        answerGroupDtls.add(ClientTarif.Data.get(i));
+                    }
+                }
+                else {
+                    messageErrorLiveData.postValue(ClientTarif.Message);
+
                 }
                 remarks = retrofitMT.getMtApi().GetRemarks().blockingGet();
+                if(!remarks.Success){
+                    messageErrorLiveData.postValue(remarks.Message);
+                }
                 groupingFormats = retrofitMT.getMtApi().GetGroupingFormat().blockingGet();
+                if(!groupingFormats.Success){
+                    messageErrorLiveData.postValue(groupingFormats.Message);
+                }
                 remarkGroups = retrofitMT.getMtApi().GetRemarkGroup().blockingGet();
+                if(!remarkGroups.Success){
+                    messageErrorLiveData.postValue(remarkGroups.Message);
+                }
                 masterGroupDetails = retrofitMT.getMtApi().GetMasterGroupDtl().blockingGet();
+                if(!masterGroupDetails.Success){
+                    messageErrorLiveData.postValue(masterGroupDetails.Message);
+                }
                 polomps = retrofitMT.getMtApi().GetPolomps().blockingGet();
+                if(!polomps.Success){
+                    messageErrorLiveData.postValue(polomps.Message);
+                }
                 polompGroups = retrofitMT.getMtApi().GetPolompGroup().blockingGet();
+                if(!polompGroups.Success){
+                    messageErrorLiveData.postValue(polompGroups.Message);
+                }
                 polompGroupingFormats = retrofitMT.getMtApi().GetPolompGroupingFormat().blockingGet();
+                if(!polompGroupingFormats.Success){
+                    messageErrorLiveData.postValue(polompGroupingFormats.Message);
+                }
                 polompColors=retrofitMT.getMtApi().GetPolompColor().blockingGet();
+                if(!polompColors.Success){
+                    messageErrorLiveData.postValue(polompColors.Message);
+                }
                 polompTypes=retrofitMT.getMtApi().GetPolompType().blockingGet();
+                if(!polompTypes.Success){
+                    messageErrorLiveData.postValue(polompTypes.Message);
+                }
 
-                Integer totalCount = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() +
-                        regions.size() + cities.size() + remarks.size() + groupingFormats.size() +
-                        remarkGroups.size() + masterGroupDetails.size() + polomps.size() + polompGroups.size() +
-                        polompGroupingFormats.size()+polompColors.size()+polompTypes.size();
+                Integer totalCount = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() +
+                        regions.Data.size() + cities.Data.size() + remarks.Data.size() + groupingFormats.Data.size() +
+                        remarkGroups.Data.size() + masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size() +
+                        polompGroupingFormats.Data.size()+polompColors.Data.size()+polompTypes.Data.size();
                 Integer startProgress = 0;
-                for (Integer i = 0; i < answerGroups.size(); i++) {
-                    //answerGroupRepo.insertAnswerGroup(answerGroups.get(i));
+                for (Integer i = 0; i < answerGroups.Data.size(); i++) {
+                    answerGroupRepo.insertAnswerGroup(answerGroups.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size();
+                startProgress = answerGroups.Data.size();
                 for (Integer i = 0; i < answerGroupDtls.size(); i++) {
                     answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size();
-                for (Integer i = 0; i < propertyTypes.size(); i++) {
-                    propertyTypeRepo.insertPropertyType(propertyTypes.get(i));
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size();
+                for (Integer i = 0; i < propertyTypes.Data.size(); i++) {
+                    propertyTypeRepo.insertPropertyType(propertyTypes.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size();
-                for (Integer i = 0; i < regions.size(); i++) {
-                    regionRepo.insertRegion(regions.get(i));
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size();
+                for (Integer i = 0; i < regions.Data.size(); i++) {
+                    regionRepo.insertRegion(regions.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size();
-                for (Integer i = 0; i < cities.size(); i++) {
-                    cityRepo.insertCity(cities.get(i));
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size();
+                for (Integer i = 0; i < cities.Data.size(); i++) {
+                    cityRepo.insertCity(cities.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size();
-                for (Integer i = 0; i < remarks.size(); i++) {
-                    remarkRepo.insertRemark(remarks.get(i));
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size();
+                for (Integer i = 0; i < remarks.Data.size(); i++) {
+                    remarkRepo.insertRemark(remarks.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size() + remarks.size();
-                for (Integer i = 0; i < remarkGroups.size(); i++) {
-                    remarkGroupRepo.insertRemarkGroup(remarkGroups.get(i));
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size() + remarks.Data.size();
+                for (Integer i = 0; i < remarkGroups.Data.size(); i++) {
+                    remarkGroupRepo.insertRemarkGroup(remarkGroups.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size() + remarks.size() + remarkGroups.size();
-                for (Integer i = 0; i < groupingFormats.size(); i++) {
-                    groupingFormatRepo.insertGroupingFormat(groupingFormats.get(i));
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size();
+                for (Integer i = 0; i < groupingFormats.Data.size(); i++) {
+                    groupingFormatRepo.insertGroupingFormat(groupingFormats.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size();
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size();
 
-                for (Integer i = 0; i < masterGroupDetails.size(); i++) {
-                    masterGroupDetailRepo.insertMasterGroupDetail(masterGroupDetails.get(i));
+                for (Integer i = 0; i < masterGroupDetails.Data.size(); i++) {
+                    masterGroupDetailRepo.insertMasterGroupDetail(masterGroupDetails.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
-                        masterGroupDetails.size();
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
+                        masterGroupDetails.Data.size();
 
-                for (Integer i = 0; i < polomps.size(); i++) {
-                    polompRepo.insertPolomp(polomps.get(i));
+                for (Integer i = 0; i < polomps.Data.size(); i++) {
+                    polompRepo.insertPolomp(polomps.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
-                        masterGroupDetails.size() + polomps.size();
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
+                        masterGroupDetails.Data.size() + polomps.Data.size();
 
-                for (Integer i = 0; i < polompGroups.size(); i++) {
-                    polompGroupRepo.insertPolompGroup(polompGroups.get(i));
+                for (Integer i = 0; i < polompGroups.Data.size(); i++) {
+                    polompGroupRepo.insertPolompGroup(polompGroups.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
-                        masterGroupDetails.size() + polomps.size() + polompGroups.size();
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
+                        masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size();
 
-                for (Integer i = 0; i < polompGroupingFormats.size(); i++) {
-                    polompGroupingFormatRepo.insertPolompGroupingFormat(polompGroupingFormats.get(i));
+                for (Integer i = 0; i < polompGroupingFormats.Data.size(); i++) {
+                    polompGroupingFormatRepo.insertPolompGroupingFormat(polompGroupingFormats.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
-                        masterGroupDetails.size() + polomps.size() + polompGroups.size()+polompGroupingFormats.size();
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
+                        masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size()+polompGroupingFormats.Data.size();
 
-                for(Integer i = 0; i < polompColors.size(); i++){
-                    polompColorRepo.insertPolompColor(polompColors.get(i));
+                for(Integer i = 0; i < polompColors.Data.size(); i++){
+                    polompColorRepo.insertPolompColor(polompColors.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.size() + answerGroupDtls.size() + propertyTypes.size() + regions.size() +
-                        cities.size() + remarks.size() + remarkGroups.size() + groupingFormats.size() + masterGroupDetails.size() +
-                        masterGroupDetails.size() + polomps.size() + polompGroups.size()+polompGroupingFormats.size()+
-                        polompColors.size();
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
+                        masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size()+polompGroupingFormats.Data.size()+
+                        polompColors.Data.size();
 
-                for(Integer i = 0; i < polompTypes.size(); i++){
-                    polompTypeRepo.insertPolompType(polompTypes.get(i));
+                for(Integer i = 0; i < polompTypes.Data.size(); i++){
+                    polompTypeRepo.insertPolompType(polompTypes.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
 
 
             }
         }).subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(new CompletableObserver() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-                            //Toast.makeText(getApplication().getApplicationContext(),d.,Toast.LENGTH_SHORT).show();
-                        }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        //Toast.makeText(getApplication().getApplicationContext(),d.,Toast.LENGTH_SHORT).show();
+                    }
 
-                        @Override
-                        public void onComplete() {
-                           // Toast.makeText(getApplication().getApplicationContext(), "اطلاعات پایه با موفقیت دریافت شد", Toast.LENGTH_SHORT).show();
-                        }
+                    @Override
+                    public void onComplete() {
+                        // Toast.makeText(getApplication().getApplicationContext(), "اطلاعات پایه با موفقیت دریافت شد", Toast.LENGTH_SHORT).show();
+                    }
 
-                        @Override
-                        public void onError(Throwable e) {
-                           // Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                            messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
-                        }
-                    });
+                    @Override
+                    public void onError(Throwable e) {
+                        // Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
+                    }
+                });
 
 
 

@@ -47,4 +47,9 @@ public interface TestDtlDao {
             "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
             "where TestInfo.ClientID=:ClientId and TestInfo.SendID=:SendId")
     List<TestAllInfo> getTestAllInfoWithSendId(Long ClientId,Integer SendId);
+
+    @Query("Select * from TestInfo " +
+            "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
+            "where TestInfo.ClientID=:ClientId")
+    List<TestAllInfo> getTestAllInfoWithClientId(Long ClientId);
 }

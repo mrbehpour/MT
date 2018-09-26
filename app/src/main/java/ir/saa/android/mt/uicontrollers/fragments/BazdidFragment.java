@@ -31,6 +31,9 @@ public class BazdidFragment extends Fragment
     BazdidViewModel bazdidViewModel;
     BazdidAdapter adapter;
     List<ClientItem> clientItems;
+    Boolean isTest=false;
+    Boolean isPolomp=false;
+    Boolean isBazrasi=false;
 
     public BazdidFragment() {
     }
@@ -76,7 +79,11 @@ public class BazdidFragment extends Fragment
             public void onChanged(@Nullable List<Client> clients) {
                 clientItems.clear();
                 for(Client client:clients){
-                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,"اشتراک : ",client.CustId, R.drawable.account,client.SendId,client.MasterGroupDtlID));
+                    isBazrasi=bazdidViewModel.getInspectionValue(client.ClientID);
+                    isPolomp=bazdidViewModel.getPolompValue(client.ClientID);
+                    isTest=bazdidViewModel.getTestValue(client.ClientID);
+                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,"اشتراک : ",client.CustId, R.drawable.account,client.SendId
+                            ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi ));
                 }
 
                 adapter.clearDataSet();

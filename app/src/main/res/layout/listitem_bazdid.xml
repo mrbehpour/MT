@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -107,16 +110,58 @@
                     android:textSize="12sp"
                     android:textColor="@color/grey_500"
                     android:text="آدرس: " />
-            </LinearLayout>
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:orientation="vertical">
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ir.saa.android.mt.components.TextViewFont
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/iconTest"
+                    android:textSize="20dp"
+                    android:text="@string/icon_Test"
+                    android:textColor="@color/icon_off"
+                    />
+                <ir.saa.android.mt.components.TextViewFont
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/iconBazrasi"
+                    android:text="@string/icon_Bazrasi"
+                    android:textColor="@color/icon_off"
+                    android:textSize="20dp"
+                    />
+                <ir.saa.android.mt.components.TextViewFont
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/iconPolomp"
+                    android:text="@string/icon_polomp"
+                    android:textColor="@color/icon_off"
+                    android:textSize="20dp"
+                    />
+            </LinearLayout>
             //space
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical">
+
+            </LinearLayout>
             //line
             <LinearLayout
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#aaa">
@@ -133,6 +178,8 @@
             android:layout_marginRight="16dp"
             android:src="@drawable/bazdid_user">
         </ImageView>
+
+
 
     </LinearLayout>
 
