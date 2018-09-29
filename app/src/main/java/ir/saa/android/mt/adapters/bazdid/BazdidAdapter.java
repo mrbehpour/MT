@@ -64,7 +64,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
             G.clientInfo.FollowUpCode=1;
             G.clientInfo.ClientName=current.Name;
             G.setActionbarTitleText(current.Name);
-            G.startFragment(FragmentsEnum.MoshtarakFragment,false,bundle);
+            G.startFragment(FragmentsEnum.DisplayTestFragment,false,bundle);
         });
         //holder.imgBazdidMoshtarak.setImageResource(current.Pic);
         holder.tvName.setText(current.Name);
@@ -151,10 +151,10 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
             tvfIconBazrasi=itemView.findViewById(R.id.iconBazrasi);
             tvfIconPolomp=itemView.findViewById(R.id.iconPolomp);
 
-            Typeface iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
-            FontManager.markAsIconContainer(tvfIconTest,iconFont);
-            FontManager.markAsIconContainer(tvfIconBazrasi,iconFont);
-            FontManager.markAsIconContainer(tvfIconPolomp,iconFont);
+//            Typeface iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
+//            FontManager.markAsIconContainer(tvfIconTest,iconFont);
+//            FontManager.markAsIconContainer(tvfIconBazrasi,iconFont);
+//            FontManager.markAsIconContainer(tvfIconPolomp,iconFont);
         }
     }
 }
