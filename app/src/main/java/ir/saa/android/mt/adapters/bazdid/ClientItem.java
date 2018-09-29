@@ -10,7 +10,7 @@ public class ClientItem {
     public Integer SendId;
     public Boolean isTest;
     public Boolean isBazrasi;
-    public  Boolean isPolommp;
+    public Boolean isPolommp;
     public Integer GroupId;
 
     public ClientItem(Long id,String name,String address,String uniqueFieldTitle,String uniqueFieldValue,Integer pic,Integer SendId,

@@ -26,4 +26,10 @@ public class TestResult {
     public double Pow_A;
     public double Pow_B;
     public double Pow_C;
+    public double Q_A;
+    public double Q_B;
+    public double Q_C;
+    public double S_A;
+    public double S_B;
+    public double S_C;
 }

@@ -401,13 +401,13 @@ public class MT {
         testResult.Pow_B=Double.valueOf(testResult.PF_B)*Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
         testResult.Pow_C=Double.valueOf(testResult.PF_C)*Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
 
-        testResult.Pow_A=Double.valueOf(testResult.PF_A)*Double.valueOf(testResult.AVRMS_Period1)*Double.valueOf(testResult.AIRMS_Period1);
-        testResult.Pow_B=Double.valueOf(testResult.PF_B)*Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
-        testResult.Pow_C=Double.valueOf(testResult.PF_C)*Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
+        testResult.Q_A=Math.pow(Double.valueOf(testResult.PF_A),-1)*Double.valueOf(testResult.AVRMS_Period1)*Double.valueOf(testResult.AIRMS_Period1);
+        testResult.Q_B=Math.pow(Double.valueOf(testResult.PF_B),-1)*Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
+        testResult.Q_C=Math.pow(Double.valueOf(testResult.PF_C),-1)*Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
 
-        testResult.Pow_A=Double.valueOf(testResult.PF_A)*Double.valueOf(testResult.AVRMS_Period1)*Double.valueOf(testResult.AIRMS_Period1);
-        testResult.Pow_B=Double.valueOf(testResult.PF_B)*Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
-        testResult.Pow_C=Double.valueOf(testResult.PF_C)*Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
+        testResult.S_A=Double.valueOf(testResult.AVRMS_Period1)*Double.valueOf(testResult.AIRMS_Period1);
+        testResult.S_B=Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
+        testResult.S_C=Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
 
         return testResult;
     }
