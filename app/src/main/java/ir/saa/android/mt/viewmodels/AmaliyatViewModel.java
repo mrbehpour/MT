@@ -25,6 +25,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
@@ -257,6 +258,13 @@ public class AmaliyatViewModel extends AndroidViewModel {
 
     public Long insertTestInfo(TestInfo testInfo){
         return testInfoRepo.insertTestInfo(testInfo);
+    }
+
+    public List<TestAllInfo> getTestAllInfos(Long clientId,Integer sendId){
+        return testDtlRepo.getTestAllInfoWithSendId(clientId,sendId);
+    }
+    public TestAllInfo getTestAllInfo(Long clientId,Integer sendId,Integer testId){
+        return testDtlRepo.getTestAllInfoWithTestId(clientId,sendId,testId);
     }
 
     @Override

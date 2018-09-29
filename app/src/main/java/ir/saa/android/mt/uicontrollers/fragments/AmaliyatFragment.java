@@ -29,6 +29,7 @@ import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.metertester.MT;
@@ -166,12 +167,7 @@ public class AmaliyatFragment extends Fragment {
                 MT meterTest=MT.getInstance();
                 TestResult testResult= meterTest.prepareTestResultForSave(lastTestResultList);
 
-                try {
-                    saveTestResult(testResult);
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-
+                saveTestResult(testResult);
 
                 Toast.makeText(G.context,"نتایج تست با موفقیت ذخیره شد.",Toast.LENGTH_SHORT ).show();
             }
@@ -179,36 +175,99 @@ public class AmaliyatFragment extends Fragment {
 
         return rootView;
     }
-    private void saveTestResult(TestResult testResult) throws IllegalAccessException {
-        TestInfo testInfo=new TestInfo();
-        testInfo.AgentID= Integer.valueOf (G.getPref("UserID"));
-        testInfo.TestDate=Integer.valueOf (Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0,8));
-        testInfo.TestTime=Integer.valueOf (Tarikh.getTimeWithoutColon());
-        testInfo.SendID=G.clientInfo.SendId;
-        testInfo.ClientID=G.clientInfo.ClientId;
-        testInfo.ContorTypeID=testContorParams.SinglePhase==true?1:3;
-        testInfo.TestCount=testContorParams.FisrtTest==true?1:2;
-        testInfo.TestTypeID=testContorParams.Active==true?1:2;
-        Long testInfoId=amaliyatViewModel.insertTestInfo(testInfo);
-        TestDtl testDtl=new TestDtl();
-        testDtl.TestInfoID=Integer.valueOf( testInfoId.toString());
-        TestContorFieldName testContorFieldName=new TestContorFieldName();
-        Field[] fieldsTestcontorParam=TestContorParams.class.getFields();
-        testDtl.ReadTypeID=1;
-        testDtl.TestID=testContorFieldName.getTestId("testContorParams_RoundNum");
-        testDtl.TestValue= String.valueOf(testContorParams.RoundNum);
-        amaliyatViewModel.insertTestDtl(testDtl);
-        Field[] fieldstestDtl=TestResult.class.getFields();
+    private void saveTestResult(TestResult testResult) {
+        List<TestAllInfo> testAllInfos=amaliyatViewModel.getTestAllInfos(G.clientInfo.ClientId,G.clientInfo.SendId);
+        if(testAllInfos.size()==0) {
+            TestInfo testInfo = new TestInfo();
+            testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+            testInfo.TestDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
+            testInfo.TestTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
+            testInfo.SendID = G.clientInfo.SendId;
+            testInfo.ClientID = G.clientInfo.ClientId;
+            testInfo.ContorTypeID = testContorParams.SinglePhase == true ? 1 : 3;
+            testInfo.TestCount = testContorParams.FisrtTest == true ? 1 : 2;
+            testInfo.TestTypeID = testContorParams.Active == true ? 1 : 2;
+            Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+            TestDtl testDtl = new TestDtl();
+            testDtl.TestInfoID = Integer.valueOf(testInfoId.toString());
+            TestContorFieldName testContorFieldName = new TestContorFieldName();
+            Field[] fieldsTestcontorParam = TestContorParams.class.getFields();
+            testDtl.ReadTypeID = 1;
+            testDtl.TestID = testContorFieldName.getTestId("testContorParams_RoundNum");
+            testDtl.TestValue = String.valueOf(testContorParams.RoundNum);
+            amaliyatViewModel.insertTestDtl(testDtl);
+            Field[] fieldstestDtl = TestResult.class.getFields();
 
-            TestDtl testDetail=new TestDtl();
-            for (Field field:fieldstestDtl) {
-                testDetail.ReadTypeID=1;
-                testDetail.TestInfoID=Integer.valueOf( testInfoId.toString());
-                testDetail.TestID=testContorFieldName.getTestId(field.getName());
-                Object value=field.get(testResult);
-                testDetail.TestValue=value.toString();
+            TestDtl testDetail = new TestDtl();
+            for (Field field : fieldstestDtl) {
+                testDetail.ReadTypeID = 1;
+                testDetail.TestInfoID = Integer.valueOf(testInfoId.toString());
+                testDetail.TestID = testContorFieldName.getTestId(field.getName());
+
+                Object value = null;
+
+               try {
+                   value = field.get(testResult);
+               } catch (IllegalAccessException e) {
+                   e.printStackTrace();
+               }
+
+
+                if(value!=null) {
+                    testDetail.TestValue = value.toString();
+                }
+                amaliyatViewModel.insertTestDtl(testDetail);
             }
-            amaliyatViewModel.insertTestDtl(testDetail);
+
+        }else{
+            TestInfo testInfo = new TestInfo();
+            testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+            testInfo.TestDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
+            testInfo.TestTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
+            testInfo.SendID = G.clientInfo.SendId;
+            testInfo.ClientID = G.clientInfo.ClientId;
+            testInfo.ContorTypeID = testContorParams.SinglePhase == true ? 1 : 3;
+            testInfo.TestCount = testContorParams.FisrtTest == true ? 1 : 2;
+            testInfo.TestTypeID = testContorParams.Active == true ? 1 : 2;
+
+            TestDtl testDtl = new TestDtl();
+
+            TestContorFieldName testContorFieldName = new TestContorFieldName();
+            Field[] fieldsTestcontorParam = TestContorParams.class.getFields();
+            testDtl.ReadTypeID = 1;
+            testDtl.TestID = testContorFieldName.getTestId("testContorParams_RoundNum");
+            testDtl.TestValue = String.valueOf(testContorParams.RoundNum);
+            TestAllInfo testAllInfo= amaliyatViewModel.getTestAllInfo(G.clientInfo.ClientId,G.clientInfo.SendId,testDtl.TestID);
+            Long testInfoId = Long.valueOf(testAllInfo.TestInfoID);
+            testDtl.TestInfoID = Integer.valueOf(testInfoId.toString());
+            amaliyatViewModel.insertTestDtl(testDtl);
+            Field[] fieldstestDtl = TestResult.class.getFields();
+
+            TestDtl testDetail = new TestDtl();
+            for (Field field : fieldstestDtl) {
+                testDetail.ReadTypeID = 1;
+
+                testDetail.TestID = testContorFieldName.getTestId(field.getName());
+                testAllInfo= amaliyatViewModel.getTestAllInfo(G.clientInfo.ClientId,G.clientInfo.SendId,testDtl.TestID);
+                testDtl.TestInfoID = Integer.valueOf(testInfoId.toString());
+
+                Object value = null;
+
+               try {
+                   value = field.get(testResult);
+               } catch (IllegalAccessException e) {
+                   e.printStackTrace();
+               }
+
+
+
+                if(value!=null) {
+                    testDetail.TestValue = value.toString();
+                }
+                amaliyatViewModel.insertTestDtl(testDetail);
+            }
+
+        }
         
 
 

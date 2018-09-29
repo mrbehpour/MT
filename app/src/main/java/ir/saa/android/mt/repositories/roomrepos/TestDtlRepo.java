@@ -73,4 +73,8 @@ public class TestDtlRepo implements TestDtlDao {
     public List<TestAllInfo> getTestAllInfoWithClientId(Long ClientId){
         return testDtlDao.getTestAllInfoWithClientId(ClientId);
     }
+
+    public TestAllInfo  getTestAllInfoWithTestId(Long ClientId,Integer sendId,Integer testId){
+        return testDtlDao.getTestAllInfoWithTestId(ClientId,sendId,testId);
+    }
 }

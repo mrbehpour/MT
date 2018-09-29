@@ -99,7 +99,7 @@ import ir.saa.android.mt.model.entities.TestInfo;
         PolompInfo.class,GPSInfo.class,
         PolompDtl.class,TariffInfo.class,
         TariffDtl.class,TestInfo.class,TestDtl.class,
-        PolompColor.class, PolompType.class},version = 14)
+        PolompColor.class, PolompType.class},version = 15)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
