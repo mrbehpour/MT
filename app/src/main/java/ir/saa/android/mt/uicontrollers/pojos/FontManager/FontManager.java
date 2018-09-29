@@ -9,7 +9,7 @@ import android.widget.TextView;
 public class FontManager {
 
     public static final String ROOT = "fonts/",
-                FONTAWESOME = ROOT + "fontawesome-webfont.ttf";
+                FONTAWESOME = ROOT + "fw.ttf";
 
     public static Typeface getTypeface(Context context, String font) {
             return Typeface.createFromAsset(context.getAssets(), font);
