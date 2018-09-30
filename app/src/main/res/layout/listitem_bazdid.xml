@@ -131,6 +131,7 @@
                     android:textSize="20dp"
                     android:text="@string/icon_Test"
                     android:textColor="@color/icon_off"
+                    app:fontFamily="@font/fw"
                     />
                 <ir.saa.android.mt.components.TextViewFont
                     android:layout_width="0dp"
@@ -138,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/iconBazrasi"
                     android:text="@string/icon_Bazrasi"
+                    app:fontFamily="@font/fw"
                     android:textColor="@color/icon_off"
                     android:textSize="20dp"
                     />
@@ -147,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/iconPolomp"
                     android:text="@string/icon_polomp"
+                    app:fontFamily="@font/fw"
                     android:textColor="@color/icon_off"
                     android:textSize="20dp"
                     />

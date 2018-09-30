@@ -3,6 +3,7 @@ package ir.saa.android.mt.viewmodels;
 import android.annotation.TargetApi;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.os.Build;
@@ -23,8 +24,10 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.adapters.testdisplay.TestResultItemDisplay;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
@@ -33,6 +36,7 @@ import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.metertester.TestResult;
 import ir.saa.android.mt.repositories.roomrepos.TestDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.TestInfoRepo;
+import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorFieldName;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 
 public class AmaliyatViewModel extends AndroidViewModel {
@@ -257,6 +261,131 @@ public class AmaliyatViewModel extends AndroidViewModel {
 
     public Long insertTestInfo(TestInfo testInfo){
         return testInfoRepo.insertTestInfo(testInfo);
+    }
+
+    public List<TestAllInfo> getTestAllInfos(Long clientId,Integer sendId){
+        return testDtlRepo.getTestAllInfoWithSendId(clientId,sendId);
+    }
+    public TestAllInfo getTestAllInfo(Long clientId,Integer sendId,Integer testId){
+        return testDtlRepo.getTestAllInfoWithTestId(clientId,sendId,testId);
+    }
+    public LiveData<List<TestResultItemDisplay>> getTestAllInfoWithClientIDLiveData(Long ClientId,Integer sendId){
+        TestResultItemDisplay testResultItemDisplay=null;
+        int RoundNum= 0;
+        double ErrPerc=0;
+        double PF_A=0;
+        double PF_B=0;
+        double PF_C=0;
+        String MeterEnergy_Period1_A="";
+        String MeterEnergy_Period1_B="";
+        String MeterEnergy_Period1_C="";
+        String Time_Period1="";
+        String AIRMS_Period1="";
+        String BIRMS_Period1="";
+        String CIRMS_Period1="";
+        String NIRMS_Period1="";
+        String AVRMS_Period1="";
+        String BVRMS_Period1="";
+        String CVRMS_Period1="";
+        String ANGLE0_Period1="";
+        String ANGLE1_Period1="";
+        String ANGLE2_Period1="";
+        String Period_Period1_A="";
+        String Period_Period1_B="";
+        String Period_Period1_C="";
+        double Pow_A=0;
+        double Pow_B=0;
+        double Pow_C=0;
+        Boolean Active=true;
+        Boolean SinglePhase=true;
+        Boolean FisrtTest=true;
+        int CTCoeff=0;
+        int ContorConst=0;
+        int SensorRatio=0;
+        int RoundNumForTest=0;
+        TestContorFieldName testContorFieldName=new TestContorFieldName();
+        MutableLiveData<List<TestResultItemDisplay>> listMutableLiveData=new MutableLiveData<>();
+        List<TestResultItemDisplay> listMutableLiveDataTemp=new ArrayList<>();
+        List<TestInfo> testInfos=testInfoRepo.getTestInfoWithClientId(ClientId,sendId);
+        for (TestInfo testInfo:testInfos) {
+            List<TestDtl> testDtls=testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID);
+            for (TestDtl testDtl:testDtls) {
+
+
+            if(testDtl.TestID!=null) {
+                switch (testContorFieldName.getTestFieldName(testDtl.TestID)) {
+                    case "ContorConst":
+                        ContorConst = Integer.valueOf(testDtl.TestValue);
+                        break;
+                    case "CTCoeff":
+                        CTCoeff = Integer.valueOf(testDtl.TestValue);
+                        break;
+                    case "SensorRatio":
+                        SensorRatio = Integer.valueOf(testDtl.TestValue);
+                        break;
+                    case "testContorParams_RoundNum":
+                        RoundNumForTest = Integer.valueOf(testDtl.TestValue);
+                        break;
+                    case "ErrPerc":
+                        ErrPerc = Double.valueOf(testDtl.TestValue);
+                        break;
+                    case "PF_A":
+                        PF_A = Double.valueOf(testDtl.TestValue);
+                        break;
+                    case "PF_B":
+                        PF_B = Double.valueOf(testDtl.TestValue);
+                        break;
+                    case "PF_C":
+                        PF_C = Double.valueOf(testDtl.TestValue);
+                        break;
+                    case "RoundNum":
+                        RoundNum = Integer.valueOf(testDtl.TestValue);
+                        break;
+                    case "AIRMS_Period1":
+                        AIRMS_Period1 = testDtl.TestValue;
+                        break;
+                    case "BIRMS_Period1":
+                        BIRMS_Period1 = testDtl.TestValue;
+                        break;
+                    case "CIRMS_Period1":
+                        CIRMS_Period1 = testDtl.TestValue;
+                        break;
+                    case "NIRMS_Period1":
+                        NIRMS_Period1 = testDtl.TestValue;
+                        break;
+                    case "AVRMS_Period1":
+                        AVRMS_Period1 = testDtl.TestValue;
+                        break;
+                    case "BVRMS_Period1":
+                        BVRMS_Period1 = testDtl.TestValue;
+                        break;
+                    case "CVRMS_Period1":
+                        CVRMS_Period1 = testDtl.TestValue;
+                        break;
+                    case "Period_Period1_A":
+                        Period_Period1_A = testDtl.TestValue;
+                        break;
+                }
+            }
+
+
+
+            }
+            Active = testInfo.TestTypeID == 1 ? true : false;
+            SinglePhase = testInfo.ContorTypeID == 1 ? true : false;
+            FisrtTest = testInfo.TestCount == 1 ? true : false;
+
+            testResultItemDisplay = new TestResultItemDisplay(RoundNum, ErrPerc, PF_A, PF_B, PF_C, MeterEnergy_Period1_A, MeterEnergy_Period1_B,
+                    MeterEnergy_Period1_C, Time_Period1, AIRMS_Period1, BIRMS_Period1, CIRMS_Period1, NIRMS_Period1,
+                    AVRMS_Period1, BVRMS_Period1, CVRMS_Period1, ANGLE0_Period1, ANGLE1_Period1, ANGLE2_Period1,
+                    Period_Period1_A, Period_Period1_B, Period_Period1_C, Pow_A, Pow_B, Pow_C, Active,
+                    SinglePhase, FisrtTest, CTCoeff, ContorConst, SensorRatio, RoundNumForTest);
+            listMutableLiveDataTemp.add(testResultItemDisplay);
+
+
+        }
+        listMutableLiveData.postValue(listMutableLiveDataTemp);
+        return listMutableLiveData;
     }
 
     @Override
