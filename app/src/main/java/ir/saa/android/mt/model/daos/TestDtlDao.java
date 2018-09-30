@@ -23,7 +23,7 @@ public interface TestDtlDao {
     LiveData<TestDtl> getTestDtlById(Integer Id);
 
     @Query("Select * from TestDtl where TestInfoID=:Id")
-    LiveData<List<TestDtl>> getTestDtlByTestInfoId(Integer Id);
+    List<TestDtl> getTestDtlByTestInfoId(Integer Id);
 
     @Query("Delete From TestDtl")
     void deleteAll();
@@ -57,4 +57,9 @@ public interface TestDtlDao {
             "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
             "where TestInfo.ClientID=:ClientId and TestInfo.SendID=:sendId and TestDtl.TestID=:testId")
     TestAllInfo getTestAllInfoWithTestId(Long ClientId,Integer sendId,Integer testId);
+
+    @Query("Select * from TestInfo " +
+            "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
+            "where TestInfo.ClientID=:ClientId")
+    List<TestAllInfo> getTestAllInfoWithClientIDForListItem(Long ClientId);
 }

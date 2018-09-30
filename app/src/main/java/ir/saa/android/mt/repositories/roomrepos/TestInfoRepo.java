@@ -55,6 +55,10 @@ public class TestInfoRepo  {
     }
 
 
+    public List<TestInfo> getTestInfoWithClientId(Long clientId,Integer SendId){
+        return testInfoDao.getTestInfoByClientId(clientId,SendId);
+    }
+
     public void updateTestInfo(TestInfo testInfo) {
         testInfoDao.updateTestInfo(testInfo);
     }

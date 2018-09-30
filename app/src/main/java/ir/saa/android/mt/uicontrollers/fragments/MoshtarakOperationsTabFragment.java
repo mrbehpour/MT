@@ -48,7 +48,7 @@ public class MoshtarakOperationsTabFragment extends Fragment
         Button btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
         btnTest.setOnClickListener(view -> {
             //G.startFragment(FragmentsEnum.TestContorFragment,false,null);
-            G.startFragment(FragmentsEnum.TestContorFragment,false,null);
+            G.startFragment(FragmentsEnum.DisplayTestFragment,false,null);
         });
         btnPolomp.setOnClickListener(new View.OnClickListener() {
             @Override

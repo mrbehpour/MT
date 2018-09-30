@@ -10,7 +10,7 @@ import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 
-public class TestDtlRepo implements TestDtlDao {
+public class TestDtlRepo  {
 
     private TestDtlDao testDtlDao;
     private LiveData<List<TestDtl>> testDtls;
@@ -31,7 +31,7 @@ public class TestDtlRepo implements TestDtlDao {
     }
 
 
-    public LiveData<List<TestDtl>> getTestDtlByTestInfoId(Integer Id) {
+    public List<TestDtl> getTestDtlByTestInfoId(Integer Id) {
         return testDtlDao.getTestDtlByTestInfoId(Id);
     }
 
@@ -76,5 +76,8 @@ public class TestDtlRepo implements TestDtlDao {
 
     public TestAllInfo  getTestAllInfoWithTestId(Long ClientId,Integer sendId,Integer testId){
         return testDtlDao.getTestAllInfoWithTestId(ClientId,sendId,testId);
+    }
+    public List<TestAllInfo> getTestAllInfoWithClientIDLiveData(Long ClientId){
+        return testDtlDao.getTestAllInfoWithClientIDForListItem(ClientId);
     }
 }

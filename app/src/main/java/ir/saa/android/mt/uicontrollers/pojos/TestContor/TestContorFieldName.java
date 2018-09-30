@@ -10,23 +10,7 @@ public class TestContorFieldName {
     public void TestContorFieldName(){
 
 
-        hashMapName.put(21,"ContorConst");
-        hashMapName.put(23,"CTCoeff");
-        hashMapName.put(22,"SensorRatio");
-        hashMapName.put(24,"testContorParams_RoundNum");
-        hashMapName.put(41,"ErrPerc");
-        hashMapName.put(13,"PF_A");
-        hashMapName.put(14,"PF_B");
-        hashMapName.put(15,"PF_C");
-        hashMapName.put(29,"RoundNum");
-        hashMapName.put(4,"AIRMS_Period1");
-        hashMapName.put(5,"BIRMS_Period1");
-        hashMapName.put(6,"CIRMS_Period1");
-        hashMapName.put(43,"NIRMS_Period1");
-        hashMapName.put(1,"AVRMS_Period1");
-        hashMapName.put(2,"BVRMS_Period1");
-        hashMapName.put(3,"CVRMS_Period1");
-        hashMapName.put(20,"Period_Period1_A");
+
         }
 
         public Integer getTestId(String fieldName){
@@ -49,6 +33,28 @@ public class TestContorFieldName {
             hashMapCode.put("Period_Period1_A",20);
 
             return hashMapCode.get(fieldName);
+        }
+
+        public String getTestFieldName(Integer testId){
+            hashMapName.put(21,"ContorConst");
+            hashMapName.put(23,"CTCoeff");
+            hashMapName.put(22,"SensorRatio");
+            hashMapName.put(24,"testContorParams_RoundNum");
+            hashMapName.put(41,"ErrPerc");
+            hashMapName.put(13,"PF_A");
+            hashMapName.put(14,"PF_B");
+            hashMapName.put(15,"PF_C");
+            hashMapName.put(29,"RoundNum");
+            hashMapName.put(4,"AIRMS_Period1");
+            hashMapName.put(5,"BIRMS_Period1");
+            hashMapName.put(6,"CIRMS_Period1");
+            hashMapName.put(43,"NIRMS_Period1");
+            hashMapName.put(1,"AVRMS_Period1");
+            hashMapName.put(2,"BVRMS_Period1");
+            hashMapName.put(3,"CVRMS_Period1");
+            hashMapName.put(20,"Period_Period1_A");
+
+            return hashMapName.get(testId);
         }
 
 
