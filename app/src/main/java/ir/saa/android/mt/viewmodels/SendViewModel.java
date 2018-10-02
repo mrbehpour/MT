@@ -5,25 +5,35 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
-import io.reactivex.Scheduler;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientAllInfo;
+import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
+import ir.saa.android.mt.model.entities.MeterChangeDtl;
+import ir.saa.android.mt.model.entities.MeterChangeInfo;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.PolompDtl;
 import ir.saa.android.mt.model.entities.PolompInfo;
 import ir.saa.android.mt.model.entities.RecordeSummary;
+import ir.saa.android.mt.model.entities.TariffDtl;
+import ir.saa.android.mt.model.entities.TariffInfo;
+import ir.saa.android.mt.model.entities.TestDtl;
+import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
@@ -79,7 +89,7 @@ public class SendViewModel extends AndroidViewModel {
     }
 
     public void sendData(){
-        ArrayList<ClientAllInfo> clientAllInfos=new ArrayList<>();
+        ArrayList<ClientAllInfo> clientinfolList =new ArrayList<>();
         Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {
@@ -87,14 +97,29 @@ public class SendViewModel extends AndroidViewModel {
                 clientList=clientRepo.getClients();
 
                 for (Integer i=0;i<clientList.size();i++){
-                    ClientAllInfo clientAllInfo=new ClientAllInfo();
-                    clientAllInfo.Client=clientList.get(i);
+
+                    ClientAllInfo ClientAllInfo=new ClientAllInfo();
+                    ClientAllInfo.TestDtlsList=new ArrayList<List<TestDtl>>() ;
+                    ClientAllInfo.RecordStringInfo="";
+                    ClientAllInfo.TestInfos=new ArrayList<TestInfo>();
+                    ClientAllInfo.InspectionDtls=new ArrayList<InspectionDtl>();
+                    ClientAllInfo.InspectionInfo=new InspectionInfo();
+                    ClientAllInfo.PolompInfo=new PolompInfo();
+                    ClientAllInfo.PolompDtls=new ArrayList<PolompDtl>();
+                    ClientAllInfo.MeterChangeInfo=new MeterChangeInfo();
+                    ClientAllInfo.MeterChangeDtls=new ArrayList<MeterChangeDtl>();
+                    ClientAllInfo.TariffInfo=new TariffInfo();
+                    ClientAllInfo.TariffDtls=new ArrayList<TariffDtl>();
+                    ClientAllInfo.GpsInfo=new GPSInfo();
+                    ClientAllInfo.Client=clientList.get(i);
+                    ClientAllInfo.Id=i;
                     //-----Inspection Send
                     List<InspectionAllInfo> inspectionAllInfos=inspectionDtlRepo.getInspectionAllInfoWithSendId(clientList.get(i).ClientID
                             ,clientList.get(i).SendId);
-                    InspectionInfo inspectionInfo=new InspectionInfo();
+
 
                     if(inspectionAllInfos.size()!=0) {
+                        InspectionInfo inspectionInfo=new InspectionInfo();
                         inspectionInfo.InspectionInfoID=inspectionAllInfos.get(0).InspectionInfoID;
                         inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
                         inspectionInfo.InspectionTime=inspectionAllInfos.get(0).InspectionTime;
@@ -103,7 +128,7 @@ public class SendViewModel extends AndroidViewModel {
                         inspectionInfo.ClientID=inspectionAllInfos.get(0).ClientID;
                         inspectionInfo.AgentID=inspectionAllInfos.get(0).AgentID;
                         inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
-                        clientAllInfo.InspectionInfo =inspectionInfo;
+                        ClientAllInfo.InspectionInfo =inspectionInfo;
                         for (InspectionAllInfo inspectionAllInfo:inspectionAllInfos) {
                             InspectionDtl inspectionDtl=new InspectionDtl();
                             inspectionDtl.InspectionDtlID=inspectionAllInfo.InspectionDtlID;
@@ -111,8 +136,8 @@ public class SendViewModel extends AndroidViewModel {
                             inspectionDtl.ReadTypeID=inspectionAllInfo.ReadTypeID;
                             inspectionDtl.RemarkValue=inspectionAllInfo.RemarkValue;
                             inspectionDtl.RemarkID=inspectionAllInfo.RemarkID;
-                            clientAllInfo.InspectionDtls=new ArrayList<>();
-                            clientAllInfo.InspectionDtls.add(inspectionDtl);
+                            ClientAllInfo.InspectionDtls=new ArrayList<>();
+                            ClientAllInfo.InspectionDtls.add(inspectionDtl);
 
                         }
                     }
@@ -129,7 +154,7 @@ public class SendViewModel extends AndroidViewModel {
                         polompInfo.ChangeTime=polompAllInfos.get(0).ChangeTime;
                         polompInfo.ChangeDate=polompAllInfos.get(0).ChangeDate;
                         polompInfo.PolompInfoID=polompAllInfos.get(0).PolompInfoID;
-                        clientAllInfo.PolompInfo=polompInfo;
+                        ClientAllInfo.PolompInfo=polompInfo;
                         for (PolompAllInfo polompAllInfo:polompAllInfos) {
                             PolompDtl polompDtl=new PolompDtl();
                             polompDtl.CurrentPolomp=polompAllInfo.CurrentPolomp;
@@ -143,15 +168,34 @@ public class SendViewModel extends AndroidViewModel {
                             polompDtl.PreviousPolomp=polompAllInfo.PreviousPolomp;
                             polompDtl.ReadTypeID=polompAllInfo.ReadTypeID;
                             polompDtl.IsDuplicated=false;
-                            clientAllInfo.PolompDtls=new ArrayList<>();
-                            clientAllInfo.PolompDtls.add(polompDtl);
+                            ClientAllInfo.PolompDtls=new ArrayList<>();
+                            ClientAllInfo.PolompDtls.add(polompDtl);
                         }
+
                     }
-                    clientAllInfos.add(clientAllInfo);
+                    //------------Test
+                    List<TestInfo> testInfos=testInfoRepo.getTestInfoWithClientId(clientList.get(i).ClientID,clientList.get(i).SendId);
+                    for (TestInfo testInfo:testInfos) {
+                        ClientAllInfo.TestInfos=new ArrayList<>();
+                        ClientAllInfo.TestInfos.add(testInfo);
+                        List<TestDtl> testDtls=new ArrayList<>();
+                        for (TestDtl testDtl:testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID)){
+                            testDtls.add(testDtl);
+                        }
+                        ClientAllInfo.TestDtlsList=new ArrayList<>();
+                        ClientAllInfo.TestDtlsList.add(testDtls);
+                    }
+                    if(testInfos.size()!=0 || inspectionAllInfos.size()!=0 || polompAllInfos.size()!=0){
+                        clientinfolList.add(ClientAllInfo);
+
+                    }
+
                     sendAllDataProgress.postValue(getPrecent(i+1,clientList.size()));
+
                 }
-                if(clientAllInfos.size()!=0){
-                    retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientAllInfos)
+                
+                if(clientinfolList.size()!=0){
+                    retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientinfolList)
                             .subscribeOn(Schedulers.io())
                             .subscribeWith(new SingleObserver<List<RecordeSummary>>() {
                                 @Override
@@ -162,11 +206,14 @@ public class SendViewModel extends AndroidViewModel {
                                 @Override
                                 public void onSuccess(List<RecordeSummary> recordeSummaries) {
                                     String s=recordeSummaries.get(0).Description;
+                                    sendAllDataProgress.postValue(100);
                                 }
 
                                 @Override
                                 public void onError(Throwable e) {
+
                                     String error=e.getMessage();
+                                    sendAllDataProgress.postValue(-1);
                                 }
                             });
                 }

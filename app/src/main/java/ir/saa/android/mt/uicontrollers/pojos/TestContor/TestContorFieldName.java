@@ -30,8 +30,12 @@ public class TestContorFieldName {
             hashMapCode.put("AVRMS_Period1",1);
             hashMapCode.put("BVRMS_Period1",2);
             hashMapCode.put("CVRMS_Period1",3);
-            hashMapCode.put("Period_Period1_A",20);
-
+            hashMapCode.put("Q_A",10);
+            hashMapCode.put("Q_B",11);
+            hashMapCode.put("Q_C",12);
+            hashMapCode.put("S_A",16);
+            hashMapCode.put("S_B",17);
+            hashMapCode.put("S_C",18);
             return hashMapCode.get(fieldName);
         }
 
@@ -53,7 +57,12 @@ public class TestContorFieldName {
             hashMapName.put(2,"BVRMS_Period1");
             hashMapName.put(3,"CVRMS_Period1");
             hashMapName.put(20,"Period_Period1_A");
-
+            hashMapName.put(10,"Q_A");
+            hashMapName.put(11,"Q_B");
+            hashMapName.put(12,"Q_C");
+            hashMapName.put(16,"S_A");
+            hashMapName.put(17,"S_B");
+            hashMapName.put(18,"S_C");
             return hashMapName.get(testId);
         }
 

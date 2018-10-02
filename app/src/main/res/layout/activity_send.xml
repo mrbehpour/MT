@@ -24,6 +24,7 @@
         android:layout_centerInParent="true"
         app:mainColor="@color/colorPrimary"
         app:secondaryColor="@color/grey_600"
+
         app:textColor="@color/grey_1000"/>
     <!--</LinearLayout>-->
 

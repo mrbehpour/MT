@@ -33,12 +33,19 @@ public class TestResultItemDisplay {
     public int ContorConst;
     public int SensorRatio;
     public int RoundNumForTest;
+    public double Q_A;
+    public double Q_B;
+    public double Q_C;
+    public double S_A;
+    public double S_B;
+    public double S_C;
 
     public TestResultItemDisplay(int RoundNum, double ErrPerc, double PF_A, double PF_B, double PF_C, String MeterEnergy_Period1_A,String MeterEnergy_Period1_B,
                                  String MeterEnergy_Period1_C,String Time_Period1,String AIRMS_Period1, String BIRMS_Period1,String CIRMS_Period1, String NIRMS_Period1,
                                  String AVRMS_Period1,String BVRMS_Period1,String CVRMS_Period1,String ANGLE0_Period1,String ANGLE1_Period1, String ANGLE2_Period1,
                                  String Period_Period1_A,String Period_Period1_B,String Period_Period1_C,double Pow_A,double Pow_B,double Pow_C,Boolean Active,
-                                 Boolean SinglePhase,Boolean FisrtTest,int CTCoeff, int ContorConst, int SensorRatio, int RoundNumForTest){
+                                 Boolean SinglePhase,Boolean FisrtTest,int CTCoeff, int ContorConst, int SensorRatio, int RoundNumForTest,Double Q_A,Double Q_B,Double Q_C,
+                                 Double S_A,Double S_B,Double S_C){
 
 
         this.RoundNum=RoundNum;
@@ -73,6 +80,12 @@ public class TestResultItemDisplay {
         this.ContorConst=ContorConst;
         this.SensorRatio=SensorRatio;
         this.RoundNumForTest=RoundNumForTest;
+        this.Q_A=Q_A;
+        this.Q_B=Q_B;
+        this.Q_C=Q_C;
+        this.S_A=S_A;
+        this.S_B=S_B;
+        this.S_C=S_C;
 
     }
 

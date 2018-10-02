@@ -8,11 +8,11 @@ public class ClientAllInfo {
 
     //public string Guid ;
 
+    public AddedClient AddedClient ;
+
     public String RecordStringInfo ;
 
     public Client Client ;
-
-    //public AddedClient AddedClient ;
 
     public InspectionInfo InspectionInfo ;
 

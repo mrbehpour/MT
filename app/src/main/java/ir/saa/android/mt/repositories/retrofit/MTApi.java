@@ -95,5 +95,5 @@ public interface MTApi {
     Single<DataClass<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body ArrayList<Integer> agentIdList);
 
     @POST("SaveClientAllInfoAndroid")
-    Single<List<RecordeSummary>> SaveClientAllInfoAndroid(@Body List<ClientAllInfo> clientAllInfo);
+    Single<List<RecordeSummary>> SaveClientAllInfoAndroid(@Body List<ClientAllInfo> clientinfolList);
 }

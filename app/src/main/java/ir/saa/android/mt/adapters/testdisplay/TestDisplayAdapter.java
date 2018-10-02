@@ -54,6 +54,14 @@ public class TestDisplayAdapter extends RecyclerView.Adapter<TestDisplayAdapter.
         holder.tvRowP_S.setText(String.valueOf(current.Pow_B));
         holder.tvRowP_T.setText(String.valueOf(current.Pow_C));
 
+        holder.tvRowQ_R.setText(String.valueOf(current.Q_A));
+        holder.tvRowQ_S.setText(String.valueOf(current.Q_B));
+        holder.tvRowQ_T.setText(String.valueOf(current.Q_C));
+
+        holder.tvRowS_R.setText(String.valueOf(current.S_A));
+        holder.tvRowS_S.setText(String.valueOf(current.S_B));
+        holder.tvRowS_T.setText(String.valueOf(current.S_C));
+
         holder.tvRowPF_R.setText(String.valueOf(current.PF_A));
         holder.tvRowPF_S.setText(String.valueOf(current.PF_B));
         holder.tvRowPF_T.setText(String.valueOf(current.PF_C));

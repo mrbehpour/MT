@@ -303,6 +303,12 @@ public class AmaliyatViewModel extends AndroidViewModel {
         int ContorConst=0;
         int SensorRatio=0;
         int RoundNumForTest=0;
+        double Q_A=0;
+        double Q_B=0;
+        double Q_C=0;
+        double S_A=0;
+        double S_B=0;
+        double S_C=0;
         TestContorFieldName testContorFieldName=new TestContorFieldName();
         MutableLiveData<List<TestResultItemDisplay>> listMutableLiveData=new MutableLiveData<>();
         List<TestResultItemDisplay> listMutableLiveDataTemp=new ArrayList<>();
@@ -327,16 +333,17 @@ public class AmaliyatViewModel extends AndroidViewModel {
                         RoundNumForTest = Integer.valueOf(testDtl.TestValue);
                         break;
                     case "ErrPerc":
-                        ErrPerc = Double.valueOf(testDtl.TestValue);
+                        ErrPerc = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+
                         break;
                     case "PF_A":
-                        PF_A = Double.valueOf(testDtl.TestValue);
+                        PF_A = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "PF_B":
-                        PF_B = Double.valueOf(testDtl.TestValue);
+                        PF_B = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "PF_C":
-                        PF_C = Double.valueOf(testDtl.TestValue);
+                        PF_C = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "RoundNum":
                         RoundNum = Integer.valueOf(testDtl.TestValue);
@@ -345,25 +352,43 @@ public class AmaliyatViewModel extends AndroidViewModel {
                         AIRMS_Period1 = testDtl.TestValue;
                         break;
                     case "BIRMS_Period1":
-                        BIRMS_Period1 = testDtl.TestValue;
+                        BIRMS_Period1 =testDtl.TestValue;
                         break;
-                    case "CIRMS_Period1":
+                    case "Q_A":
                         CIRMS_Period1 = testDtl.TestValue;
                         break;
-                    case "NIRMS_Period1":
+                    case "Q_B":
                         NIRMS_Period1 = testDtl.TestValue;
                         break;
-                    case "AVRMS_Period1":
+                    case "Q_C":
                         AVRMS_Period1 = testDtl.TestValue;
                         break;
-                    case "BVRMS_Period1":
+                    case "S_A":
                         BVRMS_Period1 = testDtl.TestValue;
                         break;
-                    case "CVRMS_Period1":
+                    case "S_B":
                         CVRMS_Period1 = testDtl.TestValue;
                         break;
-                    case "Period_Period1_A":
+                    case "S_C":
                         Period_Period1_A = testDtl.TestValue;
+                        break;
+                    case "CIRMS_Period1":
+                        CIRMS_Period1 = testDtl.TestValue;;
+                        break;
+                    case "NIRMS_Period1":
+                        NIRMS_Period1 = testDtl.TestValue;;
+                        break;
+                    case "AVRMS_Period1":
+                        AVRMS_Period1 = testDtl.TestValue;;
+                        break;
+                    case "BVRMS_Period1":
+                        BVRMS_Period1 = testDtl.TestValue;;
+                        break;
+                    case "CVRMS_Period1":
+                        CVRMS_Period1 = testDtl.TestValue;;
+                        break;
+                    case "Period_Period1_A":
+                        Period_Period1_A = testDtl.TestValue;;
                         break;
                 }
             }
@@ -379,7 +404,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
                     MeterEnergy_Period1_C, Time_Period1, AIRMS_Period1, BIRMS_Period1, CIRMS_Period1, NIRMS_Period1,
                     AVRMS_Period1, BVRMS_Period1, CVRMS_Period1, ANGLE0_Period1, ANGLE1_Period1, ANGLE2_Period1,
                     Period_Period1_A, Period_Period1_B, Period_Period1_C, Pow_A, Pow_B, Pow_C, Active,
-                    SinglePhase, FisrtTest, CTCoeff, ContorConst, SensorRatio, RoundNumForTest);
+                    SinglePhase, FisrtTest, CTCoeff, ContorConst, SensorRatio, RoundNumForTest,Q_A,Q_B,Q_C,S_A,S_B,S_C);
             listMutableLiveDataTemp.add(testResultItemDisplay);
 
 

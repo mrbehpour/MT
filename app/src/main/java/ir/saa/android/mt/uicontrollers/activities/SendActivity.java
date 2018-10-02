@@ -31,6 +31,7 @@ public class SendActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 progerssSend.startDeterminate();
                 btnSend.setEnabled(false);
 
@@ -43,10 +44,16 @@ public class SendActivity extends AppCompatActivity {
             public void onChanged(@Nullable Integer integer) {
 
                 progerssSend.setPercent(integer);
-                if(integer==100){
+                if(integer==-1){
+                    progerssSend.resetLoading();
+                    progerssSend.stopFailure();
+                }
+                else if(integer==100){
                     progerssSend.stopOk();
 
                 }
+
+
 
 
             }
