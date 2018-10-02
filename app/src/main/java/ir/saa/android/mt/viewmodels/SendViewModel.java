@@ -5,6 +5,10 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +22,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.model.entities.AddedClient;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientAllInfo;
 import ir.saa.android.mt.model.entities.GPSInfo;
@@ -99,6 +104,7 @@ public class SendViewModel extends AndroidViewModel {
                 for (Integer i=0;i<clientList.size();i++){
 
                     ClientAllInfo ClientAllInfo=new ClientAllInfo();
+                    ClientAllInfo.AddedClient=new AddedClient();
                     ClientAllInfo.TestDtlsList=new ArrayList<List<TestDtl>>() ;
                     ClientAllInfo.RecordStringInfo="";
                     ClientAllInfo.TestInfos=new ArrayList<TestInfo>();
@@ -110,6 +116,7 @@ public class SendViewModel extends AndroidViewModel {
                     ClientAllInfo.MeterChangeDtls=new ArrayList<MeterChangeDtl>();
                     ClientAllInfo.TariffInfo=new TariffInfo();
                     ClientAllInfo.TariffDtls=new ArrayList<TariffDtl>();
+
                     ClientAllInfo.GpsInfo=new GPSInfo();
                     ClientAllInfo.Client=clientList.get(i);
                     ClientAllInfo.Id=i;
@@ -173,7 +180,7 @@ public class SendViewModel extends AndroidViewModel {
                         }
 
                     }
-                    //------------Test
+//                    //------------Test
                     List<TestInfo> testInfos=testInfoRepo.getTestInfoWithClientId(clientList.get(i).ClientID,clientList.get(i).SendId);
                     for (TestInfo testInfo:testInfos) {
                         ClientAllInfo.TestInfos=new ArrayList<>();
@@ -195,6 +202,8 @@ public class SendViewModel extends AndroidViewModel {
                 }
                 
                 if(clientinfolList.size()!=0){
+                    Gson gson = new GsonBuilder().create();
+                    JsonArray myCustomArray = gson.toJsonTree(clientinfolList).getAsJsonArray();
                     retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientinfolList)
                             .subscribeOn(Schedulers.io())
                             .subscribeWith(new SingleObserver<List<RecordeSummary>>() {
