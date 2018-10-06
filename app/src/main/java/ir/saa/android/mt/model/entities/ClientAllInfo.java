@@ -7,6 +7,9 @@ public class ClientAllInfo {
     public int Id ;
 
     //public string Guid ;
+    public Integer SendId;
+
+    //public Integer
 
     public AddedClient AddedClient ;
 

@@ -12,13 +12,13 @@ public class MeterChangeInfo {
     @NonNull
     public int MChangeInfoID ;
 
-    public Integer AgentID ;
+    public int AgentID ;
 
-    public Integer ChangeDate ;
+    public int ChangeDate ;
 
     public short ChangeTime ;
 
     public long ClientID ;
 
-    public Integer SendID ;
+    public int SendID ;
 }

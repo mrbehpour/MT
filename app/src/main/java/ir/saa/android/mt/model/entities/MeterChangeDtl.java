@@ -10,15 +10,15 @@ public class MeterChangeDtl {
 
     @PrimaryKey
     @NonNull
-    public Integer MChangeDtlID ;
+    public int MChangeDtlID ;
 
     public String CurrentValue ;
 
-    public Integer MChangeInfoID ;
+    public int MChangeInfoID ;
 
-    public Integer MeterChangeID ;
+    public int MeterChangeID ;
 
-    public String PreviousValue ;
+    public int PreviousValue ;
 
-    public Integer ReadTypeID ;
+    public int ReadTypeID ;
 }

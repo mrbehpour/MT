@@ -11,20 +11,20 @@ public class InspectionInfo  {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public Integer InspectionInfoID;
+    public int InspectionInfoID;
 
-    public Integer AgentID;
+    public int AgentID;
 
-    public Long ClientID;
+    public long ClientID;
 
-    public Integer InspectionDate;
+    public int InspectionDate;
 
-    public Integer InspectionTime;
+    public int InspectionTime;
 
-    public Integer SendID;
+    public int SendID;
 
-    public Integer BlockID;
+    public int BlockID;
 
-    public Integer RemarkID;
+    public int RemarkID;
 
 }

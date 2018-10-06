@@ -15,22 +15,22 @@ public class TestInfo  {
 
     public Integer AgentID ;
 
-    public Long ClientID ;
+    public long ClientID ;
 
     public Integer ContorTypeID ;
 
     public String Des ;
 
-    public Integer SendID ;
+    public int SendID ;
 
-    public Integer TestCount ;
+    public int TestCount ;
 
-    public Integer TestDate ;
+    public int TestDate ;
 
-    public Integer TestTime ;
+    public int TestTime ;
 
-    public Integer TestTypeID ;
+    public int TestTypeID ;
 
-    public Integer BlockID ;
+    public int BlockID ;
 
 }

@@ -256,6 +256,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     }
 
     public Long insertTestDtl(TestDtl testDtl){
+
         return testDtlRepo.insertTestDtl(testDtl);
     }
 
@@ -318,7 +319,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
             for (TestDtl testDtl:testDtls) {
 
 
-            if(testDtl.TestID!=null) {
+            if(testDtl.TestID!=0) {
                 switch (testContorFieldName.getTestFieldName(testDtl.TestID)) {
                     case "ContorConst":
                         ContorConst = Integer.valueOf(testDtl.TestValue);

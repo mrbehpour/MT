@@ -11,26 +11,26 @@ public class InspectionDtl {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public Integer InspectionDtlID;
+    public int InspectionDtlID;
 
-    public Integer InspectionInfoID;
+    public int InspectionInfoID;
 
-    public Integer ReadTypeID;
+    public int ReadTypeID;
 
-    public Integer RemarkID;
+    public int RemarkID;
 
-    public Boolean Status;
+    public boolean Status;
 
-    public Boolean HasCost;
+    public boolean HasCost;
 
-    public Boolean CostConfirmation;
+    public boolean CostConfirmation;
 
     public int InspectionDtlFaultID;
 
     public String RemarkValue;
 
-    public Integer AddedCount;
+    public int AddedCount;
 
-    public Integer RemovedCount;
+    public int RemovedCount;
 
 }

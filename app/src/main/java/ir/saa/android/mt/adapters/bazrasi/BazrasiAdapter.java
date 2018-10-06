@@ -181,6 +181,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                 InspectionInfo inspectionInfo = new InspectionInfo();
                 inspectionInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
                 inspectionInfo.ClientID = G.clientInfo.ClientId;
+                inspectionInfo.SendID=G.clientInfo.SendId;
                 inspectionInfo.InspectionDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
                 inspectionInfo.InspectionTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
                 inspectionInfo.RemarkID = currentItem.Id;

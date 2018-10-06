@@ -199,9 +199,12 @@ public class AmaliyatFragment extends Fragment {
 
             TestDtl testDetail = new TestDtl();
             for (Field field : fieldstestDtl) {
+                Integer testID = testContorFieldName.getTestId(field.getName());
+                if(testID!=null) {
                 testDetail.ReadTypeID = 1;
                 testDetail.TestInfoID = Integer.valueOf(testInfoId.toString());
-                testDetail.TestID = testContorFieldName.getTestId(field.getName());
+
+                   testDetail.TestID = testID;
 
                 Object value = null;
 
@@ -216,6 +219,7 @@ public class AmaliyatFragment extends Fragment {
                     testDetail.TestValue = value.toString();
                 }
                 amaliyatViewModel.insertTestDtl(testDetail);
+                }
             }
 
 

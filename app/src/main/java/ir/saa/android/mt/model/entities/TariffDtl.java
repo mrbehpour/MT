@@ -10,13 +10,13 @@ public class TariffDtl {
 
     @PrimaryKey
     @NonNull
-    public Integer TariffDtlID ;
+    public int TariffDtlID ;
 
-    public Integer ReadTypeID ;
+    public int ReadTypeID ;
 
-    public Integer TariffID ;
+    public int TariffID ;
 
-    public Integer TariffInfoID ;
+    public int TariffInfoID ;
 
     public String TariffValue ;
 }

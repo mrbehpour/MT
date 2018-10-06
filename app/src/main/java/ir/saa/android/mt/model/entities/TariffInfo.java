@@ -11,20 +11,20 @@ public class TariffInfo  {
 
     @PrimaryKey
     @NonNull
-    public Integer TariffInfoID ;
+    public int TariffInfoID ;
 
-    public Integer AgentID ;
+    public int AgentID ;
 
-    public Long ClientID ;
+    public long ClientID ;
 
     public String DigitString ;
 
-    public Integer SendID ;
+    public int SendID ;
 
-    public Integer TariffDate ;
+    public int TariffDate ;
 
-    public Integer TariffTime ;
+    public int TariffTime ;
 
-    public Integer BlockID ;
+    public int BlockID ;
 
 }

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView;
 
@@ -39,6 +40,12 @@ public class SendActivity extends AppCompatActivity {
             }
         });
 
+        sendViewModel.messageErrorLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+            }
+        });
         sendViewModel.sendAllDataProgress.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {

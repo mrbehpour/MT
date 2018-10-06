@@ -10,19 +10,19 @@ public class GPSInfo {
 
     @PrimaryKey
     @NonNull
-    public Integer GPSInfoID ;
+    public int GPSInfoID ;
 
-    public Long ClientID ;
+    public long ClientID ;
 
-    public Integer SendID ;
+    public int SendID ;
 
-    public Integer RecieveID ;
+    public int RecieveID ;
 
-    public Integer GPSDate ;
+    public int GPSDate ;
 
-    public Integer GPSTime ;
+    public int GPSTime ;
 
-    public Long FollowUpCode ;
+    public long FollowUpCode ;
 
     public String Long ;
 

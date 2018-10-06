@@ -11,29 +11,29 @@ public class PolompDtl  {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public Integer PolompDtlID ;
+    public int PolompDtlID ;
 
-    public Integer CurrentColorID ;
+    public int CurrentColorID ;
 
     public String CurrentPolomp ;
 
-    public Integer PolompID ;
+    public int PolompID ;
 
-    public Long PolompInfoID ;
+    public long PolompInfoID ;
 
-    public Integer PreviousColorID ;
+    public int PreviousColorID ;
 
     public String PreviousPolomp ;
 
     public byte ReadTypeID ;
 
-    public Boolean IsDuplicated ;
+    public boolean IsDuplicated ;
 
-    public Integer PolompTypeID ;
+    public int PolompTypeID ;
 
-    public Integer PreviousPolompTypeID ;
+    public int PreviousPolompTypeID ;
 
-    public Integer StateOld;
+    public int StateOld;
 
-    public Integer StateNew;
+    public int StateNew;
 }

@@ -62,7 +62,7 @@ public class DisplayTestFragment extends Fragment {
 
     public static class TabsPagerAdapter extends FragmentStatePagerAdapter {
         final int PAGE_COUNT = 2;
-        private String tabtitles[] = new String[] { "تست", "نمایش تست" };
+        private String tabtitles[] = new String[] { "تست", "نمایش سابقه تست" };
 
         public TabsPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);

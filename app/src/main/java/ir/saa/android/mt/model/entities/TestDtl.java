@@ -12,9 +12,9 @@ public class TestDtl {
     @NonNull
     public Integer TestDtlID ;
 
-    public Integer ReadTypeID ;
+    public int ReadTypeID ;
 
-    public Integer TestID ;
+    public int TestID ;
 
     public Integer TestInfoID ;
 

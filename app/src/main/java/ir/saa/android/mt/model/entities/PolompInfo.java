@@ -11,18 +11,18 @@ public class PolompInfo {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public Integer PolompInfoID ;
+    public int PolompInfoID ;
 
-    public Integer AgentID ;
+    public int AgentID ;
 
-    public Integer ChangeDate ;
+    public int ChangeDate ;
 
-    public Integer ChangeTime ;
+    public int ChangeTime ;
 
-    public Long ClientID ;
+    public long ClientID ;
 
-    public Integer SendID ;
+    public int SendID ;
 
-    public Integer BlockID ;
+    public int BlockID ;
 
 }

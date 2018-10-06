@@ -23,7 +23,7 @@ public class AddedClient {
                         public String HandheldModel;
                         public String HeaderInfo ;
                         public String InsertDate;
-                        public Boolean IsInFile ;
+                        public boolean IsInFile ;
                         public Integer LineNumber ;
                         public Integer MatchDate;
                         public String MatchType;

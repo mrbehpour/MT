@@ -16,95 +16,95 @@ public class Client  {
 
     @PrimaryKey
     @NonNull
-    public Long ClientID ;
+    public long ClientID ;
 
-    public Long SubScript ;
+    public long SubScript ;
 
-    public Integer RegionID ;
+    public int RegionID ;
 
-    public Integer ClientCity ;
+    public int ClientCity ;
 
-    public Integer ClientRow ;
+    public int ClientRow ;
 
-    public Integer Mamoor ;
+    public int Mamoor ;
 
-    public Integer RoozKar ;
+    public int RoozKar ;
 
     @ColumnInfo(name = "tarifftype_id")
-    public Integer TariffTypeID ;
+    public int TariffTypeID ;
 
     @ColumnInfo(name = "clienttype_id")
-    public Integer ClientTypeID ;
+    public int ClientTypeID ;
 
-    public Long FileID ;
+    public long FileID ;
 
-    public Long ClientPass ;
+    public long ClientPass ;
 
-    public Integer Amp ;
+    public long Amp ;
 
-    public Long MeterNumActive ;
+    public long MeterNumActive ;
 
     @ColumnInfo(name = "mastergroupdtl_id")
-    public Integer MasterGroupDtlID ;
+    public int MasterGroupDtlID ;
 
     public String CustId ;
 
-    public Integer Faz ;
+    public int Faz ;
 
     public String Name ;
 
     public String Address ;
 
-    public Long Tel ;
+    public long Tel ;
 
-    public Long PostalCode ;
+    public long PostalCode ;
 
     public String Pelak ;
 
-    public Integer Demand ;
+    public int Demand ;
 
-    public Integer NumContract ;
+    public int NumContract ;
 
-    public Integer Zarib ;
+    public int Zarib ;
 
-    public Integer SendId;
+    public int SendId;
 
-    public Integer MxmeterCode ;
+    public int MxmeterCode ;
 
-    public Integer MxMeterZarib ;
+    public int MxMeterZarib ;
 
-    public Integer PosType ;
+    public int PosType ;
 
-    public Integer DurationType ;
+    public int DurationType ;
 
-    public Integer ActiveTariffCount ;
+    public int ActiveTariffCount ;
 
     public byte Status ;
 
-    public Integer InsDateContor ;
+    public int InsDateContor ;
 
-    public Integer ChngDateContor ;
+    public int ChngDateContor ;
 
-    public Integer NumDigitContor ;
+    public int NumDigitContor ;
 
-    public Integer KindVolt ;
+    public int KindVolt ;
 
-    public Integer IDInst ;
+    public int IDInst ;
 
-    public Integer LastReadDate ;
+    public int LastReadDate ;
 
-    public Integer Active1 ;
+    public int Active1 ;
 
-    public Integer Active2 ;
+    public int Active2 ;
 
-    public Integer Active3 ;
+    public int Active3 ;
 
-    public Integer ActiveT1 ;
+    public int ActiveT1 ;
 
-    public Integer MxValue ;
+    public int MxValue ;
 
-    public Integer UseAvrA ;
+    public int UseAvrA ;
 
-    public Integer UseAvrR ;
+    public int UseAvrR ;
 
 }

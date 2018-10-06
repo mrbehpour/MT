@@ -22,6 +22,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.AddedClient;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientAllInfo;
@@ -59,6 +60,7 @@ public class SendViewModel extends AndroidViewModel {
     TestInfoRepo testInfoRepo=null;
     ClientRepo clientRepo=null;
    public MutableLiveData<Integer> sendAllDataProgress=new MutableLiveData<>();
+    public MutableLiveData<String> messageErrorLiveData=new MutableLiveData<>();
 
     public SendViewModel(@NonNull Application application) {
         super(application);
@@ -91,6 +93,8 @@ public class SendViewModel extends AndroidViewModel {
         if(sendAllDataProgress==null){
             sendAllDataProgress.setValue(0);
         }
+        if(messageErrorLiveData==null)
+            messageErrorLiveData.setValue("");
     }
 
     public void sendData(){
@@ -104,22 +108,23 @@ public class SendViewModel extends AndroidViewModel {
                 for (Integer i=0;i<clientList.size();i++){
 
                     ClientAllInfo ClientAllInfo=new ClientAllInfo();
-                    ClientAllInfo.AddedClient=new AddedClient();
-                    ClientAllInfo.TestDtlsList=new ArrayList<List<TestDtl>>() ;
-                    ClientAllInfo.RecordStringInfo="";
-                    ClientAllInfo.TestInfos=new ArrayList<TestInfo>();
-                    ClientAllInfo.InspectionDtls=new ArrayList<InspectionDtl>();
-                    ClientAllInfo.InspectionInfo=new InspectionInfo();
-                    ClientAllInfo.PolompInfo=new PolompInfo();
-                    ClientAllInfo.PolompDtls=new ArrayList<PolompDtl>();
-                    ClientAllInfo.MeterChangeInfo=new MeterChangeInfo();
-                    ClientAllInfo.MeterChangeDtls=new ArrayList<MeterChangeDtl>();
-                    ClientAllInfo.TariffInfo=new TariffInfo();
-                    ClientAllInfo.TariffDtls=new ArrayList<TariffDtl>();
-
-                    ClientAllInfo.GpsInfo=new GPSInfo();
+//                    ClientAllInfo.AddedClient=new AddedClient();
+//                    ClientAllInfo.TestDtlsList=new ArrayList<List<TestDtl>>() ;
+//                    ClientAllInfo.RecordStringInfo="";
+//                    ClientAllInfo.TestInfos=new ArrayList<TestInfo>();
+//                    ClientAllInfo.InspectionDtls=new ArrayList<InspectionDtl>();
+//                    ClientAllInfo.InspectionInfo=new InspectionInfo();
+//                    ClientAllInfo.PolompInfo=new PolompInfo();
+//                    ClientAllInfo.PolompDtls=new ArrayList<PolompDtl>();
+//                    ClientAllInfo.MeterChangeInfo=new MeterChangeInfo();
+//                    ClientAllInfo.MeterChangeDtls=new ArrayList<MeterChangeDtl>();
+//                    ClientAllInfo.TariffInfo=new TariffInfo();
+//                    ClientAllInfo.TariffDtls=new ArrayList<TariffDtl>();
+//
+//                    ClientAllInfo.GpsInfo=new GPSInfo();
                     ClientAllInfo.Client=clientList.get(i);
                     ClientAllInfo.Id=i;
+                    ClientAllInfo.SendId= clientList.get(i).SendId;
                     //-----Inspection Send
                     List<InspectionAllInfo> inspectionAllInfos=inspectionDtlRepo.getInspectionAllInfoWithSendId(clientList.get(i).ClientID
                             ,clientList.get(i).SendId);
@@ -127,7 +132,7 @@ public class SendViewModel extends AndroidViewModel {
 
                     if(inspectionAllInfos.size()!=0) {
                         InspectionInfo inspectionInfo=new InspectionInfo();
-                        inspectionInfo.InspectionInfoID=inspectionAllInfos.get(0).InspectionInfoID;
+                        //inspectionInfo.InspectionInfoID=inspectionAllInfos.get(0).InspectionInfoID;
                         inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
                         inspectionInfo.InspectionTime=inspectionAllInfos.get(0).InspectionTime;
                         inspectionInfo.InspectionDate=inspectionAllInfos.get(0).InspectionDate;
@@ -138,8 +143,8 @@ public class SendViewModel extends AndroidViewModel {
                         ClientAllInfo.InspectionInfo =inspectionInfo;
                         for (InspectionAllInfo inspectionAllInfo:inspectionAllInfos) {
                             InspectionDtl inspectionDtl=new InspectionDtl();
-                            inspectionDtl.InspectionDtlID=inspectionAllInfo.InspectionDtlID;
-                            inspectionDtl.InspectionInfoID=inspectionAllInfo.InspectionInfoID;
+                            //inspectionDtl.InspectionDtlID=inspectionAllInfo.InspectionDtlID;
+                            //inspectionDtl.InspectionInfoID=inspectionAllInfo.InspectionInfoID;
                             inspectionDtl.ReadTypeID=inspectionAllInfo.ReadTypeID;
                             inspectionDtl.RemarkValue=inspectionAllInfo.RemarkValue;
                             inspectionDtl.RemarkID=inspectionAllInfo.RemarkID;
@@ -160,7 +165,7 @@ public class SendViewModel extends AndroidViewModel {
                         polompInfo.AgentID=polompAllInfos.get(0).AgentID;
                         polompInfo.ChangeTime=polompAllInfos.get(0).ChangeTime;
                         polompInfo.ChangeDate=polompAllInfos.get(0).ChangeDate;
-                        polompInfo.PolompInfoID=polompAllInfos.get(0).PolompInfoID;
+                        //polompInfo.PolompInfoID=polompAllInfos.get(0).PolompInfoID;
                         ClientAllInfo.PolompInfo=polompInfo;
                         for (PolompAllInfo polompAllInfo:polompAllInfos) {
                             PolompDtl polompDtl=new PolompDtl();
@@ -169,8 +174,8 @@ public class SendViewModel extends AndroidViewModel {
                             polompDtl.PreviousColorID=polompAllInfo.PreviousColorID;
                             polompDtl.PreviousPolompTypeID=polompAllInfo.PreviousPolompTypeID;
                             polompDtl.CurrentColorID=polompAllInfo.CurrentColorID;
-                            polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
-                            polompDtl.PolompInfoID=Long.valueOf(polompAllInfo.PolompInfoID);
+                           // polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
+                           // polompDtl.PolompInfoID=Long.valueOf(polompAllInfo.PolompInfoID);
                             polompDtl.PolompID=polompAllInfo.PolompID;
                             polompDtl.PreviousPolomp=polompAllInfo.PreviousPolomp;
                             polompDtl.ReadTypeID=polompAllInfo.ReadTypeID;
@@ -184,11 +189,15 @@ public class SendViewModel extends AndroidViewModel {
                     List<TestInfo> testInfos=testInfoRepo.getTestInfoWithClientId(clientList.get(i).ClientID,clientList.get(i).SendId);
                     for (TestInfo testInfo:testInfos) {
                         ClientAllInfo.TestInfos=new ArrayList<>();
-                        ClientAllInfo.TestInfos.add(testInfo);
+
                         List<TestDtl> testDtls=new ArrayList<>();
                         for (TestDtl testDtl:testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID)){
+                            testDtl.TestInfoID=null;
+                            testDtl.TestDtlID = null;
                             testDtls.add(testDtl);
                         }
+                        testInfo.TestInfoID=null;
+                        ClientAllInfo.TestInfos.add(testInfo);
                         ClientAllInfo.TestDtlsList=new ArrayList<>();
                         ClientAllInfo.TestDtlsList.add(testDtls);
                     }
@@ -197,13 +206,12 @@ public class SendViewModel extends AndroidViewModel {
 
                     }
 
-                    sendAllDataProgress.postValue(getPrecent(i+1,clientList.size()));
+                    sendAllDataProgress.postValue(getPrecent(i+1,clientList.size())-1);
 
                 }
                 
                 if(clientinfolList.size()!=0){
-                    Gson gson = new GsonBuilder().create();
-                    JsonArray myCustomArray = gson.toJsonTree(clientinfolList).getAsJsonArray();
+
                     retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientinfolList)
                             .subscribeOn(Schedulers.io())
                             .subscribeWith(new SingleObserver<List<RecordeSummary>>() {
@@ -216,6 +224,11 @@ public class SendViewModel extends AndroidViewModel {
                                 public void onSuccess(List<RecordeSummary> recordeSummaries) {
                                     String s=recordeSummaries.get(0).Description;
                                     sendAllDataProgress.postValue(100);
+                                    if(recordeSummaries.get(0).Result){
+                                        messageErrorLiveData.postValue("عملیات با موفقیت ارسال شد");
+                                    }else {
+                                        messageErrorLiveData.postValue(recordeSummaries.get(0).Description);
+                                    }
                                 }
 
                                 @Override
@@ -223,6 +236,7 @@ public class SendViewModel extends AndroidViewModel {
 
                                     String error=e.getMessage();
                                     sendAllDataProgress.postValue(-1);
+                                    messageErrorLiveData.postValue(e.getMessage());
                                 }
                             });
                 }
