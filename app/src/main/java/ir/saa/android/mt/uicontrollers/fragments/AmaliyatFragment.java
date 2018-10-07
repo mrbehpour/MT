@@ -182,6 +182,7 @@ public class AmaliyatFragment extends Fragment {
             testInfo.TestDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
             testInfo.TestTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
             testInfo.SendID = G.clientInfo.SendId;
+            testInfo.FollowUpCode=G.clientInfo.FollowUpCode;
             testInfo.ClientID = G.clientInfo.ClientId;
             testInfo.ContorTypeID = testContorParams.SinglePhase == true ? 1 : 3;
             testInfo.TestCount = testContorParams.FisrtTest == true ? 1 : 2;

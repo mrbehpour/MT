@@ -83,7 +83,7 @@ public class BazdidFragment extends Fragment
                     isPolomp=bazdidViewModel.getPolompValue(client.ClientID);
                     isTest=bazdidViewModel.getTestValue(client.ClientID);
                     clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,"اشتراک : ",client.CustId, R.drawable.account,client.SendId
-                            ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi ));
+                            ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,client.FollowUpCode ));
                 }
 
                 adapter.clearDataSet();

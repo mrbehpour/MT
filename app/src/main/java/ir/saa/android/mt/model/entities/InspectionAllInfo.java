@@ -34,4 +34,6 @@ public class InspectionAllInfo {
     public Integer AddedCount;
 
     public Integer RemovedCount;
+
+    public Long FollowUpCode;
 }

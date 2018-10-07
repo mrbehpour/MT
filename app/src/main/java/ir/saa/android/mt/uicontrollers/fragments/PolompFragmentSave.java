@@ -367,7 +367,7 @@ public class PolompFragmentSave extends Fragment {
             polompInfo.ChangeTime = Integer.valueOf (Tarikh.getTimeWithoutColon());
             polompInfo.ClientID=polompParams.ClientId;
             polompInfo.SendID= G.clientInfo.SendId;
-
+            polompInfo.FollowUpCode=G.clientInfo.FollowUpCode;
 
             polompDtl=new PolompDtl();
             polompDtl.StateNew=0;

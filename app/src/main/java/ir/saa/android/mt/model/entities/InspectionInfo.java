@@ -27,4 +27,6 @@ public class InspectionInfo  {
 
     public int RemarkID;
 
+    public Long FollowUpCode;
+
 }

@@ -107,4 +107,6 @@ public class Client  {
 
     public int UseAvrR ;
 
+    public Long FollowUpCode;
+
 }

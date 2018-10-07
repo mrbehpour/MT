@@ -33,4 +33,6 @@ public class TestInfo  {
 
     public int BlockID ;
 
+    public Long FollowUpCode;
+
 }
