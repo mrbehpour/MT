@@ -50,6 +50,7 @@ public class LoginViewModel extends AndroidViewModel {
     public LiveData<List<RelUser>> getUsers() {  return reluserRepo.getUsersLiveData();  }
 
 
+
     public boolean IsLoginValid(int userId,String password){
 //       RelUser user = loginViewModel.getUserByUserIdAndPassword(spinnerMap.get(spinner.getSelectedItemPosition()),edtPassword.getText().toString());
         RelUser user = reluserRepo.getUserByUserAndPassword(userId,password);
@@ -57,9 +58,11 @@ public class LoginViewModel extends AndroidViewModel {
             G.setPref("UserName" ,user.FirstName+" "+user.LastName );
             if(user.RegionID!=null){
                 G.setPref("RegionName",getRegionNameById(user.RegionID));
+                G.setPref("RegionID", String.valueOf(user.RegionID));
             }
             else{
                 G.setPref("RegionName","ندارد");
+                G.setPref("RegionID", "-1");
             }
 
             if(user.RoleID!=null)

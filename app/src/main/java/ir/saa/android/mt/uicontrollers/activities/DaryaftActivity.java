@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.daimajia.numberprogressbar.*;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
@@ -167,9 +168,10 @@ public class DaryaftActivity extends AppCompatActivity   {
                 if(isDownloadClient==false) {
                     isDownloadClient=true;
                     GetClientInput getClientInput = new GetClientInput();
-                    getClientInput.handHeldSerial = "3103103103";
-                    getClientInput.agentId = 1079;
-                    getClientInput.regionId = 50;
+                    getClientInput.handHeldSerial = G.getPref("DeviceId");
+                    getClientInput.agentId = Integer.valueOf(G.getPref("UserID"));
+
+                    getClientInput.regionId = Integer.valueOf(G.getPref("RegionID"));
                     baseInfoViewModel.getClientFromServer(getClientInput);
                 }
             }
