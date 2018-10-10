@@ -56,16 +56,17 @@ public class BazdidViewModel extends AndroidViewModel {
             isPolomp=false;
         }
 
-        Client client=new Client();
-        client.Active1=1;
-        client.Active2=2;
-        client.Name="مهدی کاظمی";
-        client.SubScript=Long.valueOf(102030);
-        client.ClientID=Long.valueOf(102030);
-        client.Address="زنجان";
-        client.SendId=326;
-        client.MeterNumActive= Long.valueOf(203040);
-        clientRepo.insertClient(client);
+//        Client client=new Client();
+//        client.Active1=1;
+//        client.Active2=2;
+//        client.Name="مهدی کاظمی";
+//        client.SubScript=Long.valueOf(102030);
+//        client.ClientID=Long.valueOf(102030);
+//        client.Address="زنجان";
+//        client.SendId=326;
+//        client.MeterNumActive= Long.valueOf(203040);
+//        clientRepo.insertClient(client);
+        //clientRepo.deleteAll();
 
 
     }
