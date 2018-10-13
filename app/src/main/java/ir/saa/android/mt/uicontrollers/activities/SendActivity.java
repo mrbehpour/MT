@@ -51,7 +51,7 @@ public class SendActivity extends AppCompatActivity {
             public void onChanged(@Nullable Integer integer) {
 
                 progerssSend.setPercent(integer);
-                if(integer!=100){
+                if(integer==-1){
                     progerssSend.resetLoading();
                     progerssSend.stopFailure();
                 }
