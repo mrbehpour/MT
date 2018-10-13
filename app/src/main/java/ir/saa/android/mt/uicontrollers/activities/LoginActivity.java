@@ -103,4 +103,21 @@ public class LoginActivity extends AppCompatActivity {
         }
         return deviceUniqueIdentifier;
     }
+Boolean doubleBackToExitPressedOnce = false;
+     @Override
+    public void onBackPressed() {
+        if(G.fragmentNumStack.size()>0){
+            Integer targetFragmentNum = G.fragmentNumStack.pop();
+            G.startFragment(targetFragmentNum, true, null);
+        }else{
+            if (doubleBackToExitPressedOnce) {
+                LoginActivity.this.finish();
+                System.exit(0);
+                return;
+            }
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(G.context,"برای خروج دوبار کلیک کنید", Toast.LENGTH_SHORT).show();
+            new android.os.Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 1500);
+        }
+    }
 }
