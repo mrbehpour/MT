@@ -104,6 +104,7 @@ public class PolompFragmentSave extends Fragment {
                 polompParams = (PolompParams) bundle.getSerializable(BundleKeysEnum.ClassPolompParams);
             }
         }
+        
         spnModelPolompGhadim=rootView.findViewById(R.id.spnModelPolompGhadim);
         spnModelPolompJadid=rootView.findViewById(R.id.spnModelPolompJadid);
         spnRangPolompGhadim=rootView.findViewById(R.id.spnRangPolompGhadim);

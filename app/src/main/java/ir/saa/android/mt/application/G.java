@@ -127,11 +127,11 @@ public class G extends Application {
                 break;
             case FragmentsEnum.PolompFragment:
                 targetFragment=new PolompFragment();
-                setActionbarTitleText("پلمب");
+                setActionbarTitleText("پلمپ");
                 break;
             case FragmentsEnum.PolompFragmentSave:
                 targetFragment=new PolompFragmentSave();
-                setActionbarTitleText("ذخیره نایج پلمب");
+                setActionbarTitleText("ذخیره نتایج پلمپ");
                 break;
             case FragmentsEnum.BazrasiFragment:
                 targetFragment=new BazrasiFragment();

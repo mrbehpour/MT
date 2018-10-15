@@ -55,7 +55,7 @@ public class PolompAdapter extends RecyclerView.Adapter<PolompAdapter.MyViewHold
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         PolompItem current = mDataList.get(position);
-        PolompParams polompParams=new PolompParams(current.Id,current.ClientId);
+        PolompParams polompParams=new PolompParams(current.Id,current.ClientId,current.Name);
 
 
         holder.listitemPolompRoot.setBackgroundColor(Color.parseColor("#FDFDFD"));
@@ -70,7 +70,7 @@ public class PolompAdapter extends RecyclerView.Adapter<PolompAdapter.MyViewHold
             @Override
             public void onClick(View view) {
                 if(current.ClientId!=null){
-                    PolompParams polompParams=new PolompParams(current.Id, current.ClientId);
+                    PolompParams polompParams=new PolompParams(current.Id, current.ClientId,current.Name);
                     Bundle bundle=new Bundle();
                     bundle.putSerializable(BundleKeysEnum.ClassPolompParams,polompParams);
                     G.startFragment(FragmentsEnum.PolompFragmentSave,false,bundle);
