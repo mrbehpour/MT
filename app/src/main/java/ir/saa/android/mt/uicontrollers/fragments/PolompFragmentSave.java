@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
@@ -57,6 +59,9 @@ public class PolompFragmentSave extends Fragment {
     CheckBox cbJadidNadard;
     CheckBox cbNewNakhana;
     CheckBox cbOldNakhana;
+
+    TextView tvModelPolompGhadim;
+    TextView tvRangPolompGhadim;
 
 
     List<String> spinnerArrayModelJadid;
@@ -127,6 +132,8 @@ public class PolompFragmentSave extends Fragment {
                 }
             }
         });
+        tvModelPolompGhadim=rootView.findViewById(R.id.tvModelPolompGhadim);
+        tvRangPolompGhadim=rootView.findViewById(R.id.tvRangPolompGhadim);
         cbOldNakhana=rootView.findViewById(R.id.cbGhadimNakhana);
         cbOldNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -145,12 +152,15 @@ public class PolompFragmentSave extends Fragment {
             }
         });
 
+
         cbGhadimNadard=rootView.findViewById(R.id.cbGhadimNadarad);
         cbGhadimNadard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-
+                    tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.ms_gray));
+                    tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.ms_gray)  );
+                    etPolompGhadim.setHintTextColor(getResources().getColor(R.color.ms_gray)  );
                    chkNadradGhadim=true;
                     spnModelPolompGhadim.setEnabled(false);
                     spnRangPolompGhadim.setEnabled(false);
@@ -160,11 +170,14 @@ public class PolompFragmentSave extends Fragment {
                     spnRangPolompGhadim.setSelection(0);
                     etPolompGhadim.setText("");
                 }else{
+                    tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.icon_off));
+                    tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.icon_off)  );
                     cbOldNakhana.setEnabled(true);
                     chkNadradGhadim=false;
                     spnModelPolompGhadim.setEnabled(true);
                     spnRangPolompGhadim.setEnabled(true);
                     etPolompGhadim.setEnabled(true);
+                    etPolompGhadim.setTextColor(getResources().getColor(R.color.icon_off)  );
 
                 }
 
