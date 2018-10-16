@@ -469,7 +469,7 @@ public class PolompFragmentSave extends Fragment {
 
 
         }
-
+            //Bastan Form Sabt polomp
             G.startFragment(G.fragmentNumStack.pop(), true, null);
 
 
