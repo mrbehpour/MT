@@ -28,6 +28,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompDtl;
@@ -468,7 +469,7 @@ public class PolompFragmentSave extends Fragment {
 
 
         }
-
+        G.startFragment(FragmentsEnum.PolompFragment,true,null);
 
 
     }
