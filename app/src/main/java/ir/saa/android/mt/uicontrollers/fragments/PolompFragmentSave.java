@@ -469,7 +469,9 @@ public class PolompFragmentSave extends Fragment {
 
 
         }
-        G.startFragment(FragmentsEnum.PolompFragment,true,null);
+
+            G.startFragment(G.fragmentNumStack.pop(), true, null);
+
 
 
     }
@@ -489,5 +491,6 @@ public class PolompFragmentSave extends Fragment {
     public void onResume() {
         super.onResume();
     }
+
 
 }
