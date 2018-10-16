@@ -31,10 +31,13 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/tilGhadim"
                     android:layout_gravity="right"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/byekan"
-                    android:textColorHint="@color/grey_1000">
+                    android:textColorHint="@color/grey_1000"
+
+                    >
 
                     <EditText
                         android:id="@+id/edtGhadimShomarePolomp"
@@ -45,7 +48,10 @@
                         android:gravity="right"
                         android:hint="شماره پلمپ قدیم"
                         android:textAlignment="gravity"
-                        android:textColor="@color/grey_900" />
+
+                        android:textColor="@color/grey_900"
+
+                        />
                 </android.support.design.widget.TextInputLayout>
 
                 <!-- Model Polomp Ghadim -->
@@ -166,6 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginTop="4dp"
+                    android:id="@+id/tilNew"
                     android:fontFamily="@font/byekan"
                     android:textColorHint="@color/grey_1000">
 

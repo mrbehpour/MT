@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.CardView;
@@ -62,6 +63,11 @@ public class PolompFragmentSave extends Fragment {
 
     TextView tvModelPolompGhadim;
     TextView tvRangPolompGhadim;
+    TextInputLayout tilGhadim;
+
+    TextView tvModelPolompJadid;
+    TextView tvRangPolompJadid;
+    TextInputLayout tilNew;
 
 
     List<String> spinnerArrayModelJadid;
@@ -120,11 +126,13 @@ public class PolompFragmentSave extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
+                    tilNew.setHintEnabled(false);
                     etPolompJadid.setEnabled(false);
                     chkNewNakhana=true;
                     cbJadidNadard.setEnabled(false);
 
                 }else{
+                    tilNew.setHintEnabled(true);
                     chkNewNakhana=false;
                     etPolompJadid.setEnabled(true);
                     cbJadidNadard.setEnabled(true);
@@ -132,17 +140,18 @@ public class PolompFragmentSave extends Fragment {
                 }
             }
         });
-        tvModelPolompGhadim=rootView.findViewById(R.id.tvModelPolompGhadim);
-        tvRangPolompGhadim=rootView.findViewById(R.id.tvRangPolompGhadim);
+
         cbOldNakhana=rootView.findViewById(R.id.cbGhadimNakhana);
         cbOldNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
+                    tilGhadim.setHintEnabled(false);
                     etPolompGhadim.setEnabled(false);
                     chkOldNakhana=true;
                     cbGhadimNadard.setEnabled(false);
                 }else{
+                    tilGhadim.setHintEnabled(true);
                     chkOldNakhana=false;
                     etPolompGhadim.setEnabled(true);
                     cbGhadimNadard.setEnabled(true);
@@ -151,16 +160,18 @@ public class PolompFragmentSave extends Fragment {
 
             }
         });
-
-
+        tvModelPolompGhadim=rootView.findViewById(R.id.tvModelPolompGhadim);
+        tvRangPolompGhadim=rootView.findViewById(R.id.tvRangPolompGhadim);
+        tilGhadim=rootView.findViewById(R.id.tilGhadim);
         cbGhadimNadard=rootView.findViewById(R.id.cbGhadimNadarad);
         cbGhadimNadard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.ms_gray));
-                    tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.ms_gray)  );
-                    etPolompGhadim.setHintTextColor(getResources().getColor(R.color.ms_gray)  );
+                    tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.grey_500));
+                    tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.grey_500)  );
+
+                    tilGhadim.setHintEnabled(false);
                    chkNadradGhadim=true;
                     spnModelPolompGhadim.setEnabled(false);
                     spnRangPolompGhadim.setEnabled(false);
@@ -177,6 +188,7 @@ public class PolompFragmentSave extends Fragment {
                     spnModelPolompGhadim.setEnabled(true);
                     spnRangPolompGhadim.setEnabled(true);
                     etPolompGhadim.setEnabled(true);
+                    tilGhadim.setHintEnabled(true);
                     etPolompGhadim.setTextColor(getResources().getColor(R.color.icon_off)  );
 
                 }
@@ -184,7 +196,9 @@ public class PolompFragmentSave extends Fragment {
             }
         });
 
-
+        tvModelPolompJadid=rootView.findViewById(R.id.tvModelPolompJadid);
+        tvRangPolompJadid=rootView.findViewById(R.id.tvRangPolompJadid);
+        tilNew=rootView.findViewById(R.id.tilNew);
 
         cbJadidNadard=rootView.findViewById(R.id.cbJadidNadarad);
         cbJadidNadard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -192,7 +206,10 @@ public class PolompFragmentSave extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                    chkNadaradJadid=true;
+                    tvRangPolompJadid.setTextColor(getResources().getColor(R.color.grey_500));
+                    tvModelPolompJadid.setTextColor(getResources().getColor(R.color.grey_500)  );
 
+                    tilNew.setHintEnabled(false);
                     spnModelPolompJadid.setEnabled(false);
                     spnRangPolompJadid.setEnabled(false);
                     etPolompJadid.setEnabled(false);
@@ -201,6 +218,10 @@ public class PolompFragmentSave extends Fragment {
                     spnRangPolompJadid.setSelection(0);
                     etPolompJadid.setText("");
                 }else{
+                    tvRangPolompJadid.setTextColor(getResources().getColor(R.color.icon_off));
+                    tvModelPolompJadid.setTextColor(getResources().getColor(R.color.icon_off)  );
+
+                    tilNew.setHintEnabled(true);
                     cbNewNakhana.setEnabled(true);
                     chkNadaradJadid=false;
                     spnModelPolompJadid.setEnabled(true);
