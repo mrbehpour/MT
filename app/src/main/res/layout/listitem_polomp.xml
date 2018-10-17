@@ -50,7 +50,6 @@
 
 
             //space
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
@@ -61,10 +60,11 @@
                 android:layout_height="1dp"
                 android:background="#aaa">
             </LinearLayout>
-
         </LinearLayout>
 
-        <!-- Icon Layout -->
+
+
+        <!-- hidden texts, they are used in app, don't delete them! -->
         <TextView
             android:id="@+id/tvId"
             android:layout_width="1dp"
@@ -85,7 +85,6 @@
             android:gravity="center"
             android:visibility="invisible"
              />
-
     </LinearLayout>
 
 </LinearLayout>
