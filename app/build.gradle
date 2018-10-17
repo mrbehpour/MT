@@ -73,4 +73,7 @@ dependencies {
 
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 
+    // to use gif in project
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
+
 }
