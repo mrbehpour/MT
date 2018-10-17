@@ -150,17 +150,31 @@ public class TestContorFragment extends Fragment
         boolean res=true;
 
         if(edtCTCoeff.getText().toString().equals("")){
-            Toast.makeText(G.context,"ضریب سی تی را لطفا وارد کنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,"لطفا ضریب کنتور را وارد کنید",Toast.LENGTH_SHORT).show();
             res=false;
         }
 
         if(edtContorConst.getText().toString().equals("")){
-            Toast.makeText(G.context,"ثابت کنتور را لطفا وارد کنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,"لطفا ثابت کنتور را وارد کنید",Toast.LENGTH_SHORT).show();
             res=false;
         }
 
         if(edtSensorRatio.getText().toString().equals("")){
-            Toast.makeText(G.context,"ضریب کنتور را لطفا وارد کنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,"لطفا نسبت سنسور را وارد کنید",Toast.LENGTH_SHORT).show();
+            res=false;
+        }
+        if(edtCTCoeff.getText().toString().equals("0")){
+            Toast.makeText(G.context,"لطفا ضریب کنتور را صفر وارد نکنید",Toast.LENGTH_SHORT).show();
+            res=false;
+        }
+
+        if(edtContorConst.getText().toString().equals("0")){
+            Toast.makeText(G.context,"لطفا ثابت کنتور را صفر وارد نکنید",Toast.LENGTH_SHORT).show();
+            res=false;
+        }
+
+        if(edtSensorRatio.getText().toString().equals("0")){
+            Toast.makeText(G.context,"لطفا نسبت سنسور را صفر وارد نکنید",Toast.LENGTH_SHORT).show();
             res=false;
         }
 

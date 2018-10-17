@@ -6,12 +6,12 @@ public class PolompParams implements Serializable {
 
     public Integer PolompId;
     public Long ClientId;
-    public String PolompName;
 
-    public PolompParams(Integer polompId, Long clientId,String polompName){
+
+    public PolompParams(Integer polompId, Long clientId){
         this.ClientId=clientId;
         this.PolompId=polompId;
-        this.PolompName=polompName;
+
     }
 
 }

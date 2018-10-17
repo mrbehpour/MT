@@ -17,6 +17,8 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
+import ir.saa.android.mt.uicontrollers.activities.LoginActivity;
+import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -74,8 +76,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem7))==0){
                     System.exit(0);
-
-
                 }
             }
         });

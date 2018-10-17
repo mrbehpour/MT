@@ -1,6 +1,7 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
@@ -111,7 +112,9 @@ Boolean doubleBackToExitPressedOnce = false;
             G.startFragment(targetFragmentNum, true, null);
         }else{
             if (doubleBackToExitPressedOnce) {
+
                 LoginActivity.this.finish();
+
                 System.exit(0);
                 return;
             }
