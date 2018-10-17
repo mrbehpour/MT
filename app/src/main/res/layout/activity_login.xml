@@ -24,11 +24,12 @@
         android:orientation="vertical">
         <!-- App Icon -->
         <!--<pl.droidsonroids.gif.GifTextView-->
-        <ImageView
+        <!--<ImageView-->
+        <pl.droidsonroids.gif.GifTextView
             android:id="@+id/imgIcon"
-            android:layout_width="100dp"
+            android:layout_width="247dp"
             android:layout_height="100dp"
-            android:background="@drawable/login" />
+            android:background="@drawable/login_animatedlogo" />
     </LinearLayout>
 
     //Down layout
@@ -41,7 +42,7 @@
         <!-- Name Spinner -->
         <Spinner
             android:id="@+id/spnUserName"
-            android:layout_width="350dp"
+            android:layout_width="340dp"
             android:layout_height="45dp"
             android:background="@drawable/custom_rectangle"
             android:layout_gravity="center"
@@ -50,7 +51,7 @@
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
             android:fontFamily="@font/byekan"
-            android:layout_width="350dp"
+            android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_gravity="center"
@@ -72,7 +73,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnLogin"
             android:fontFamily="@font/byekan"
-            android:layout_width="350dp"
+            android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:layout_gravity="center"

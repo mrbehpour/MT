@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/green_500</color>
-    <color name="colorPrimaryDark">@color/green_700</color>
-    <color name="colorAccent">#ca0a2d</color>
+    <color name="colorPrimary">@color/orange_500</color>
+    <color name="colorPrimaryDark">@color/orange_700</color>
+    <color name="colorAccent">@color/orange_A300</color>
 
 
 

@@ -113,19 +113,13 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:orientation="vertical">
-
-            </LinearLayout>
-            <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
+                android:layout_marginTop="2dp"
                 android:layout_height="wrap_content">
 
                 <ir.saa.android.mt.components.TextViewFont
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/iconTest"
                     android:textSize="20dp"
@@ -134,20 +128,20 @@
                     app:fontFamily="@font/fw"
                     />
                 <ir.saa.android.mt.components.TextViewFont
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/iconBazrasi"
+                    android:layout_marginLeft="8dp"
                     android:text="@string/icon_Bazrasi"
                     app:fontFamily="@font/fw"
                     android:textColor="@color/icon_off"
                     android:textSize="20dp"
                     />
                 <ir.saa.android.mt.components.TextViewFont
-                    android:layout_width="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/iconPolomp"
+                    android:layout_marginLeft="8dp"
                     android:text="@string/icon_polomp"
                     app:fontFamily="@font/fw"
                     android:textColor="@color/icon_off"
