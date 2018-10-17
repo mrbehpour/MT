@@ -195,6 +195,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                 inspectionDtl.InspectionInfoID = Integer.valueOf(inspectionInfoId.toString());
                 inspectionDtl.RemarkValue = String.valueOf(objectValue);
                 inspectionDtl.ReadTypeID = 1;
+                inspectionDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
                 Long inspectionDtlId = bazrasiViewModel.insertInspectionDtl(inspectionDtl);
                 if (inspectionDtlId != null) {
                     Toast.makeText((AppCompatActivity) context, "اطلاعات با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
@@ -216,7 +217,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
             inspectionDtl.RemarkValue=String.valueOf(objectValue);
             inspectionDtl.ReadTypeID=1;
             inspectionDtl.InspectionDtlID=inspectionAllInfo.InspectionDtlID;
-
+            inspectionDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
             int inspectionDtlId =bazrasiViewModel.updateInspectionDtl(inspectionDtl);
             if(objectValue==null){
                 bazrasiViewModel.deleteAll(inspectionInfo,inspectionDtl);

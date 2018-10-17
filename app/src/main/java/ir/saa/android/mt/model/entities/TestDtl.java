@@ -19,4 +19,6 @@ public class TestDtl {
     public Integer TestInfoID ;
 
     public String TestValue;
+
+    public Integer AgentID ;
 }

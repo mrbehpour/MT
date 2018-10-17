@@ -194,6 +194,39 @@ public class SendViewModel extends AndroidViewModel {
                         for (TestDtl testDtl:testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID)){
                             testDtl.TestInfoID=null;
                             testDtl.TestDtlID = null;
+                            switch (testDtl.TestID){
+                                case 13:
+                                    testDtl.TestValue=String.format("%.3f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 14:
+                                    testDtl.TestValue=String.format("%.3f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 15:
+                                    testDtl.TestValue=String.format("%.3f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 41:
+                                    testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 10:
+                                    testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 11:
+                                    testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 12:
+                                    testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 16:
+                                    testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 17:
+                                    testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+                                case 18:
+                                    testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                                    break;
+
+                            }
                             testDtls.add(testDtl);
                         }
                         testInfo.TestInfoID=null;

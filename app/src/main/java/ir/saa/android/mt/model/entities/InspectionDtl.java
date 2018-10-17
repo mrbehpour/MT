@@ -33,4 +33,6 @@ public class InspectionDtl {
 
     public int RemovedCount;
 
+    public Integer AgentID ;
+
 }
