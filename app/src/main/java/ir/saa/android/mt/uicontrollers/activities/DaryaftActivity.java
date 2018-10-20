@@ -25,22 +25,22 @@ import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
 public class DaryaftActivity extends AppCompatActivity   {
 
-    LinearLayout llMoshtarkin;
+    //LinearLayout llMoshtarkin;
     LinearLayout llTanzimat;
     LinearLayout llPayeh;
     LinearLayout llKarbaran;
     NumberProgressBar pbDaryaftEtelatPayeh;
     NumberProgressBar pbKarbaran;
-    NumberProgressBar pbMoshtarakin;
+    //NumberProgressBar pbMoshtarakin;
     NumberProgressBar pbTanzimat;
     ImageView ivTanzimat;
     ImageView ivDaryaftEtelatPayeh;
     ImageView ivKarbaran;
-    ImageView ivMoshtarakin;
+    //ImageView ivMoshtarakin;
     Boolean isDownloadBaseInfo;
     Boolean isDownloadUser;
     Boolean isDownloadSetting;
-    Boolean isDownloadClient;
+    //Boolean isDownloadClient;
 
     BaseInfoViewModel baseInfoViewModel = null;
     @Override
@@ -51,7 +51,7 @@ public class DaryaftActivity extends AppCompatActivity   {
         isDownloadBaseInfo=false;
         isDownloadUser=false;
         isDownloadSetting=false;
-        isDownloadClient=false;
+        //isDownloadClient=false;
 
         baseInfoViewModel=ViewModelProviders.of(this).get(BaseInfoViewModel.class);
         pbDaryaftEtelatPayeh =  findViewById(R.id.pbDaryaftEtelatPayeh);
@@ -60,20 +60,20 @@ public class DaryaftActivity extends AppCompatActivity   {
         pbKarbaran =  findViewById(R.id.pbKarbaran);
         pbKarbaran.setMax(100);
 
-        pbMoshtarakin =  findViewById(R.id.pbMoshtarakin);
-        pbMoshtarakin.setMax(100);
+//        pbMoshtarakin =  findViewById(R.id.pbMoshtarakin);
+//        pbMoshtarakin.setMax(100);
 
         pbTanzimat =  findViewById(R.id.pbTanzimat);
         pbTanzimat.setMax(100);
 
 
         llTanzimat=(LinearLayout)findViewById(R.id.llTanzimat);
-        llMoshtarkin=(LinearLayout)findViewById(R.id.llMoshtarakin);
+        //llMoshtarkin=(LinearLayout)findViewById(R.id.llMoshtarakin);
         llPayeh=(LinearLayout)findViewById(R.id.llPayeh);
         llKarbaran=(LinearLayout)findViewById(R.id.llKarbaran);
 
         ivTanzimat=(ImageView)findViewById(R.id.ivTanzimat);
-        ivMoshtarakin=(ImageView)findViewById(R.id.ivMoshtarakin);
+        //ivMoshtarakin=(ImageView)findViewById(R.id.ivMoshtarakin);
         ivKarbaran=(ImageView)findViewById(R.id.ivKarbaran);
         ivDaryaftEtelatPayeh=(ImageView)findViewById(R.id.ivPayeh);
 
@@ -142,7 +142,7 @@ public class DaryaftActivity extends AppCompatActivity   {
             @Override
             public void onChanged(@Nullable String s) {
                 isDownloadBaseInfo=false;
-                isDownloadClient=false;
+                //isDownloadClient=false;
                 isDownloadSetting=false;
                 isDownloadUser=false;
                 Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
@@ -162,37 +162,37 @@ public class DaryaftActivity extends AppCompatActivity   {
             }
         });
 
-        llMoshtarkin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isDownloadClient==false) {
-                    isDownloadClient=true;
-                    GetClientInput getClientInput = new GetClientInput();
-                    getClientInput.handHeldSerial = G.getPref("DeviceId");
-                    getClientInput.agentId = Integer.valueOf(G.getPref("UserID"));
-
-                    getClientInput.regionId = Integer.valueOf(G.getPref("RegionID"));
-                    baseInfoViewModel.getClientFromServer(getClientInput);
-                }
-            }
-        });
-        baseInfoViewModel.clientProgressPercentLiveData.observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(@Nullable Integer integer) {
-                pbMoshtarakin.setProgress(integer);
-                if(integer==100){
-                    isDownloadClient=false;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        ivMoshtarakin.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
-                    }
-                }
-            }
-        });
+//        llMoshtarkin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(isDownloadClient==false) {
+//                    isDownloadClient=true;
+//                    GetClientInput getClientInput = new GetClientInput();
+//                    getClientInput.handHeldSerial = G.getPref("DeviceId");
+//                    getClientInput.agentId = Integer.valueOf(G.getPref("UserID"));
+//
+//                    getClientInput.regionId = Integer.valueOf(G.getPref("RegionID"));
+//                    baseInfoViewModel.getClientFromServer(getClientInput);
+//                }
+//            }
+//        });
+//        baseInfoViewModel.clientProgressPercentLiveData.observe(this, new Observer<Integer>() {
+//            @Override
+//            public void onChanged(@Nullable Integer integer) {
+//                pbMoshtarakin.setProgress(integer);
+//                if(integer==100){
+//                    isDownloadClient=false;
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                        ivMoshtarakin.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
+//                    }
+//                }
+//            }
+//        });
     }
 
     @Override
     public void onBackPressed() {
-        if(isDownloadBaseInfo ||  isDownloadClient || isDownloadSetting || isDownloadUser){
+        if(isDownloadBaseInfo  || isDownloadSetting || isDownloadUser){
             Toast.makeText(DaryaftActivity.this,R.string.backMessage,Toast.LENGTH_SHORT).show();
             return;
         }
