@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#e6e6e6">
-
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <!-- Daryaft Etelat Payeh Layout -->
     <android.support.v7.widget.CardView
@@ -163,8 +165,6 @@
     </android.support.v7.widget.CardView>
 
 
-
-
     <!-- Karbaran Layout -->
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -242,89 +242,15 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
-
-
-
-
-
-    <!-- Moshtarakin Layout -->
-    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:id="@+id/cvMoshtarakin"
-        android:orientation="horizontal"
-        android:clickable="true"
-        android:background="?attr/selectableItemBackground"
-        app:cardElevation="2dp"
-        app:cardCornerRadius="4dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <!-- Info Layout -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <!-- Title Layout -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-                    <!-- Title Lable -->
-                    <TextView
-                        android:id="@+id/tvLableMoshtarakin"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical|right"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/byekan"
-                        android:text="دریافت مشترکین"
-                        android:textAlignment="gravity"
-                        android:textColor="@color/grey_900"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <!-- ProgressBar Layout -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.daimajia.numberprogressbar.NumberProgressBar
-                        android:id="@+id/pbMoshtarakin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- Icon Layout -->
-            <ImageView
-                android:id="@+id/ivMoshtarakin"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/daryaft_moshtarakin"
-                android:orientation="horizontal"></ImageView>
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-
-
-
-
-
+    <!-- Help -->
+    <TextView android:id="@+id/tvSanjesh"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/byekan"
+        android:text="جهت شروع دریافت، قسمت مربوطه را لمس نمایید"
+        android:textColor="@color/grey_600"
+        android:gravity="center|bottom"
+        android:textSize="11sp"/>
 </LinearLayout>
