@@ -43,6 +43,8 @@
         </activity>
         <activity android:name=".uicontrollers.activities.SendActivity">
         </activity>
+        <activity android:name=".uicontrollers.activities.DaryaftMoshtarakinActivity">
+        </activity>
     </application>
 
 </manifest>

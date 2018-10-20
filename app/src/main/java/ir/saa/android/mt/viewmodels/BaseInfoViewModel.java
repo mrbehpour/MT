@@ -2,6 +2,7 @@ package ir.saa.android.mt.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -581,6 +582,10 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
 
 
+    }
+
+    public LiveData<List<Region>> getRegion(){
+        return regionRepo.getRegions();
     }
 
     private int getPrecent(int progress,int totalCount){

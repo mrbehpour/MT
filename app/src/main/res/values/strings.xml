@@ -11,8 +11,9 @@
     <string name="menuItem3">ارتباط با ماژول</string>
     <string name="menuItem4">تنظیمات</string>
     <string name="menuItem5">دریافت اطلاعات پایه</string>
-    <string name="menuItem6">ارسال</string>
-    <string name="menuItem7">خروج</string>
+    <string name="menuItem6">دریافت مشترکین</string>
+    <string name="menuItem7">ارسال</string>
+    <string name="menuItem8">خروج</string>
 
     <!--،Toast Masseage -->
     <string name="backMessage">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
