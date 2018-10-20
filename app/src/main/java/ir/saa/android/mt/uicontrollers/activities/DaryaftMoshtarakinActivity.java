@@ -35,6 +35,7 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
 
     Spinner spinnerRegion;
     List<String> spinnerArray;
+    GetClientInput getClientInput;
     ArrayAdapter<String> adapter;
     HashMap<Integer, Integer> spinnerMap = new HashMap<Integer, Integer>();
     @Override
@@ -84,7 +85,7 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (isDownloadClient == false) {
                     isDownloadClient = true;
-                    GetClientInput getClientInput = new GetClientInput();
+                    getClientInput = new GetClientInput();
                     getClientInput.handHeldSerial = G.getPref("DeviceId");
                     getClientInput.agentId = Integer.valueOf(G.getPref("UserID"));
                     getClientInput.regionId = Integer.valueOf(G.getPref("RegionID"));
