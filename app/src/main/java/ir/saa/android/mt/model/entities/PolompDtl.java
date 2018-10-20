@@ -11,7 +11,7 @@ public class PolompDtl  {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public int PolompDtlID ;
+    public Integer PolompDtlID ;
 
     public int CurrentColorID ;
 
@@ -19,7 +19,7 @@ public class PolompDtl  {
 
     public int PolompID ;
 
-    public long PolompInfoID ;
+    public Long PolompInfoID ;
 
     public int PreviousColorID ;
 
