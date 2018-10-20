@@ -193,6 +193,7 @@ public class AmaliyatFragment extends Fragment {
             TestContorFieldName testContorFieldName = new TestContorFieldName();
             Field[] fieldsTestcontorParam = TestContorParams.class.getFields();
             testDtl.ReadTypeID = 1;
+            testDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
             testDtl.TestID = testContorFieldName.getTestId("testContorParams_RoundNum");
             testDtl.TestValue = String.valueOf(testContorParams.RoundNum);
             amaliyatViewModel.insertTestDtl(testDtl);

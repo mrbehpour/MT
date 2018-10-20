@@ -140,14 +140,16 @@ public class SendViewModel extends AndroidViewModel {
                         inspectionInfo.ClientID=inspectionAllInfos.get(0).ClientID;
                         inspectionInfo.AgentID=inspectionAllInfos.get(0).AgentID;
                         inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
+                        inspectionInfo.FollowUpCode=inspectionAllInfos.get(0).FollowUpCode;
                         ClientAllInfo.InspectionInfo =inspectionInfo;
                         for (InspectionAllInfo inspectionAllInfo:inspectionAllInfos) {
                             InspectionDtl inspectionDtl=new InspectionDtl();
-                            //inspectionDtl.InspectionDtlID=inspectionAllInfo.InspectionDtlID;
-                            //inspectionDtl.InspectionInfoID=inspectionAllInfo.InspectionInfoID;
+                            inspectionDtl.InspectionDtlID=null;
+                            inspectionDtl.InspectionInfoID=null;
                             inspectionDtl.ReadTypeID=inspectionAllInfo.ReadTypeID;
                             inspectionDtl.RemarkValue=inspectionAllInfo.RemarkValue;
                             inspectionDtl.RemarkID=inspectionAllInfo.RemarkID;
+                            inspectionDtl.AgentID=inspectionAllInfo.AgentID;
                             ClientAllInfo.InspectionDtls=new ArrayList<>();
                             ClientAllInfo.InspectionDtls.add(inspectionDtl);
 
@@ -165,6 +167,7 @@ public class SendViewModel extends AndroidViewModel {
                         polompInfo.AgentID=polompAllInfos.get(0).AgentID;
                         polompInfo.ChangeTime=polompAllInfos.get(0).ChangeTime;
                         polompInfo.ChangeDate=polompAllInfos.get(0).ChangeDate;
+                        polompInfo.FollowUpCode=polompAllInfos.get(0).FollowUpCode;
                         //polompInfo.PolompInfoID=polompAllInfos.get(0).PolompInfoID;
                         ClientAllInfo.PolompInfo=polompInfo;
                         for (PolompAllInfo polompAllInfo:polompAllInfos) {
@@ -174,9 +177,10 @@ public class SendViewModel extends AndroidViewModel {
                             polompDtl.PreviousColorID=polompAllInfo.PreviousColorID;
                             polompDtl.PreviousPolompTypeID=polompAllInfo.PreviousPolompTypeID;
                             polompDtl.CurrentColorID=polompAllInfo.CurrentColorID;
-                           // polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
-                           // polompDtl.PolompInfoID=Long.valueOf(polompAllInfo.PolompInfoID);
+                            polompDtl.PolompDtlID=null;
+                            polompDtl.PolompInfoID=null;
                             polompDtl.PolompID=polompAllInfo.PolompID;
+                            polompDtl.AgentID=polompAllInfo.AgentID;
                             polompDtl.PreviousPolomp=polompAllInfo.PreviousPolomp;
                             polompDtl.ReadTypeID=polompAllInfo.ReadTypeID;
                             polompDtl.IsDuplicated=false;
@@ -194,6 +198,7 @@ public class SendViewModel extends AndroidViewModel {
                         for (TestDtl testDtl:testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID)){
                             testDtl.TestInfoID=null;
                             testDtl.TestDtlID = null;
+                            Changevalue(testDtl);
                             testDtls.add(testDtl);
                         }
                         testInfo.TestInfoID=null;
@@ -241,6 +246,42 @@ public class SendViewModel extends AndroidViewModel {
                             });
                 }
 
+            }
+
+            private void Changevalue(TestDtl testDtl) {
+                switch (testDtl.TestID){
+                    case 13:
+                        testDtl.TestValue=String.format("%.3f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 14:
+                        testDtl.TestValue=String.format("%.3f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 15:
+                        testDtl.TestValue=String.format("%.3f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 41:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 10:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 11:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 12:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 16:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 17:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 18:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+
+                }
             }
         }).subscribeOn(Schedulers.io())
                 .subscribeWith(new CompletableObserver() {

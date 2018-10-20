@@ -182,15 +182,15 @@ public class PolompFragmentSave extends Fragment {
                     spnRangPolompGhadim.setSelection(0);
                     etPolompGhadim.setText("");
                 }else{
-                    tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.icon_off));
-                    tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.icon_off)  );
+                    tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black));
+                    tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
                     cbOldNakhana.setEnabled(true);
                     chkNadradGhadim=false;
                     spnModelPolompGhadim.setEnabled(true);
                     spnRangPolompGhadim.setEnabled(true);
                     etPolompGhadim.setEnabled(true);
                     tilGhadim.setHintEnabled(true);
-                    etPolompGhadim.setTextColor(getResources().getColor(R.color.icon_off)  );
+                    etPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
 
                 }
 
@@ -219,8 +219,8 @@ public class PolompFragmentSave extends Fragment {
                     spnRangPolompJadid.setSelection(0);
                     etPolompJadid.setText("");
                 }else{
-                    tvRangPolompJadid.setTextColor(getResources().getColor(R.color.icon_off));
-                    tvModelPolompJadid.setTextColor(getResources().getColor(R.color.icon_off)  );
+                    tvRangPolompJadid.setTextColor(getResources().getColor(R.color.ms_black));
+                    tvModelPolompJadid.setTextColor(getResources().getColor(R.color.ms_black)  );
 
                     tilNew.setHintEnabled(true);
                     cbNewNakhana.setEnabled(true);
@@ -428,7 +428,7 @@ public class PolompFragmentSave extends Fragment {
             polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
             polompDtl.PreviousPolomp=etPolompGhadim.getText().toString();
             polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
-
+            polompDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
             Long  polompInfoId= polompViewModel.insertPolompInfo(polompInfo);
             polompDtl.PolompInfoID=polompInfoId;
             Long polompDtlId=polompViewModel.insertPolompDtl(polompDtl);
@@ -463,7 +463,7 @@ public class PolompFragmentSave extends Fragment {
             polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
             polompDtl.PreviousPolomp=etPolompGhadim.getText().toString();
             polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
-
+            polompDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
             polompViewModel.updatePolompDtl(polompDtl);
             Toast.makeText(getActivity(),"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
 

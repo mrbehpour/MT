@@ -316,80 +316,81 @@ public class AmaliyatViewModel extends AndroidViewModel {
         List<TestInfo> testInfos=testInfoRepo.getTestInfoWithClientId(ClientId,sendId);
         for (TestInfo testInfo:testInfos) {
             List<TestDtl> testDtls=testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID);
+            testResultItemDisplay = new TestResultItemDisplay();
             for (TestDtl testDtl:testDtls) {
 
 
             if(testDtl.TestID!=0) {
                 switch (testContorFieldName.getTestFieldName(testDtl.TestID)) {
                     case "ContorConst":
-                        ContorConst = Integer.valueOf(testDtl.TestValue);
+                        testResultItemDisplay.ContorConst = Integer.valueOf(testDtl.TestValue);
                         break;
                     case "CTCoeff":
-                        CTCoeff = Integer.valueOf(testDtl.TestValue);
+                        testResultItemDisplay.CTCoeff = Integer.valueOf(testDtl.TestValue);
                         break;
                     case "SensorRatio":
-                        SensorRatio = Integer.valueOf(testDtl.TestValue);
+                        testResultItemDisplay.SensorRatio = Integer.valueOf(testDtl.TestValue);
                         break;
                     case "testContorParams_RoundNum":
-                        RoundNumForTest = Integer.valueOf(testDtl.TestValue);
+                        testResultItemDisplay.RoundNumForTest = Integer.valueOf(testDtl.TestValue);
                         break;
                     case "ErrPerc":
-                        ErrPerc = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                        testResultItemDisplay.ErrPerc = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
 
                         break;
                     case "PF_A":
-                        PF_A = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
+                        testResultItemDisplay.PF_A = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "PF_B":
-                        PF_B = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
+                        testResultItemDisplay.PF_B = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "PF_C":
-                        PF_C = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
+                        testResultItemDisplay.PF_C = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "RoundNum":
-                        RoundNum = Integer.valueOf(testDtl.TestValue);
+                        testResultItemDisplay.RoundNum = Integer.valueOf(testDtl.TestValue);
                         break;
                     case "AIRMS_Period1":
-                        AIRMS_Period1 = testDtl.TestValue;
+                        testResultItemDisplay.AIRMS_Period1 = testDtl.TestValue;
                         break;
                     case "BIRMS_Period1":
-                        BIRMS_Period1 =testDtl.TestValue;
+                        testResultItemDisplay.BIRMS_Period1 =testDtl.TestValue;
                         break;
                     case "Q_A":
-                        CIRMS_Period1 = testDtl.TestValue;
+                        testResultItemDisplay.Q_A = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "Q_B":
-                        NIRMS_Period1 = testDtl.TestValue;
+                        testResultItemDisplay.Q_B = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "Q_C":
-                        AVRMS_Period1 = testDtl.TestValue;
+                        testResultItemDisplay.Q_C = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );;
                         break;
                     case "S_A":
-                        BVRMS_Period1 = testDtl.TestValue;
+                        testResultItemDisplay.S_A = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "S_B":
-                        CVRMS_Period1 = testDtl.TestValue;
+                        testResultItemDisplay.S_B = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "S_C":
-                        Period_Period1_A = testDtl.TestValue;
+                        testResultItemDisplay.S_C = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
                         break;
                     case "CIRMS_Period1":
-                        CIRMS_Period1 = testDtl.TestValue;;
+                        testResultItemDisplay.CIRMS_Period1 = testDtl.TestValue;
                         break;
                     case "NIRMS_Period1":
-                        NIRMS_Period1 = testDtl.TestValue;;
+                        testResultItemDisplay.NIRMS_Period1 = testDtl.TestValue;;
                         break;
                     case "AVRMS_Period1":
-                        AVRMS_Period1 = testDtl.TestValue;;
+                        testResultItemDisplay.AVRMS_Period1 = testDtl.TestValue;
                         break;
                     case "BVRMS_Period1":
-                        BVRMS_Period1 = testDtl.TestValue;;
+                        testResultItemDisplay.BVRMS_Period1 = testDtl.TestValue ;
                         break;
                     case "CVRMS_Period1":
-                        CVRMS_Period1 = testDtl.TestValue;;
+                        testResultItemDisplay.CVRMS_Period1 = testDtl.TestValue;
                         break;
                     case "Period_Period1_A":
-                        Period_Period1_A = testDtl.TestValue;;
+                        testResultItemDisplay.Period_Period1_A = testDtl.TestValue;;
                         break;
                 }
             }
@@ -397,15 +398,11 @@ public class AmaliyatViewModel extends AndroidViewModel {
 
 
             }
-            Active = testInfo.TestTypeID == 1 ? true : false;
-            SinglePhase = testInfo.ContorTypeID == 1 ? true : false;
-            FisrtTest = testInfo.TestCount == 1 ? true : false;
+            testResultItemDisplay.Active = testInfo.TestTypeID == 1 ? true : false;
+            testResultItemDisplay.SinglePhase = testInfo.ContorTypeID == 1 ? true : false;
+            testResultItemDisplay.FisrtTest = testInfo.TestCount == 1 ? true : false;
 
-            testResultItemDisplay = new TestResultItemDisplay(RoundNum, ErrPerc, PF_A, PF_B, PF_C, MeterEnergy_Period1_A, MeterEnergy_Period1_B,
-                    MeterEnergy_Period1_C, Time_Period1, AIRMS_Period1, BIRMS_Period1, CIRMS_Period1, NIRMS_Period1,
-                    AVRMS_Period1, BVRMS_Period1, CVRMS_Period1, ANGLE0_Period1, ANGLE1_Period1, ANGLE2_Period1,
-                    Period_Period1_A, Period_Period1_B, Period_Period1_C, Pow_A, Pow_B, Pow_C, Active,
-                    SinglePhase, FisrtTest, CTCoeff, ContorConst, SensorRatio, RoundNumForTest,Q_A,Q_B,Q_C,S_A,S_B,S_C);
+
             listMutableLiveDataTemp.add(testResultItemDisplay);
 
 
