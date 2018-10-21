@@ -90,4 +90,16 @@
     <!--MoshtarakFragment_Tab-->
     <string name="Tab_Amaliyat">عملیات</string>
     <string name="Tab_Detail">جزییات</string>
+
+    <!--TestContorFragment-->
+    <string name="ValidationConnect">اتصال به دستگاه تست کنتور</string>
+    <string name="Wait_Connect">لطفا منتظر بمانید تا اتصال برقرار شود...</string>
+
+    <string name="ZaribContor_Message">لطفا ضریب کنتور را وارد کنید</string>
+    <string name="SabetContor_Message">لطفا ثابت کنتور را وارد کنید</string>
+    <string name="NesbatSensor_Message">لطفا نسبت سنسور را وارد کنید</string>
+    <string name="ZaribContor_Message_Zero">لطفا ضریب کنتور را صفر وارد نکنید</string>
+    <string name="SabetContor_Message_Zero">لطفا ثابت کنتور را صفر وارد نکنید</string>
+    <string name="NesbatSensor_Message_Zero">لطفا نسبت سنسور را صفر وارد نکنید</string>
+
 </resources>
