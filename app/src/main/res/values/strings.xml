@@ -79,5 +79,15 @@
     <!--Bazdid-->
     <string name="UniqField">اشتراک : </string>
 
+    <!--DisplayTestFragment-->
+    <string name="Test">تست</string>
+    <string name="TestResult">نمایش سابقه تست</string>
 
+    <!--Moshtarak Detail-->
+    <string name="SingleFaz">تکفاز</string>
+    <string name="ThreeFaz">سه فاز</string>
+
+    <!--MoshtarakFragment_Tab-->
+    <string name="Tab_Amaliyat">عملیات</string>
+    <string name="Tab_Detail">جزییات</string>
 </resources>

@@ -433,7 +433,7 @@ public class PolompFragmentSave extends Fragment {
             polompDtl.PolompInfoID=polompInfoId;
             Long polompDtlId=polompViewModel.insertPolompDtl(polompDtl);
             if(polompDtlId!=null){
-                Toast.makeText(getActivity(),"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
             }
         }else{
             polompDtl=new PolompDtl();
@@ -465,7 +465,7 @@ public class PolompFragmentSave extends Fragment {
             polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
             polompDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
             polompViewModel.updatePolompDtl(polompDtl);
-            Toast.makeText(getActivity(),"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
 
 
         }

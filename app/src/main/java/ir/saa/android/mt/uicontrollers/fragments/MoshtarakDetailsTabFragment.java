@@ -92,10 +92,10 @@ public class MoshtarakDetailsTabFragment extends Fragment
                         String MeterTypeName="";
                         switch (client.Faz){
                             case 1:
-                                MeterTypeName="تکفاز";
+                                MeterTypeName= (String) getResources().getText(R.string.SingleFaz);
                                 break;
                             case 3:
-                                MeterTypeName="سه فاز";
+                                MeterTypeName= (String) getResources().getText(R.string.ThreeFaz);
                                 break;
                         }
                         tvShomareBadane.setText(client.MeterNumActive==null?"":client.MeterNumActive.toString());
