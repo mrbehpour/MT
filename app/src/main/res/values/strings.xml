@@ -18,6 +18,31 @@
     <!--،Toast Masseage -->
     <string name="backMessage">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
     <string name="CaptionRegion">منطقه : </string>
+    <string name="MessageSuccess">اطلاعات با موفقیت ثبت شد</string>
 
+    <!--BazrasiAdapter-->
+    <string name="BazrasiAdapter_BtnSave">ذخیره</string>
 
+    <!--TestDisplayAdapter-->
+    <string name="TypeTest1_TestDisplayAdapter">تست 1</string>
+    <string name="TypeTest2_TestDisplayAdapter">تست 2</string>
+    <string name="ModelActive_TestDisplayAdapter">اکتیو</string>
+    <string name="ModelReActive_TestDisplayAdapter">راکتیو</string>
+
+    <!--TestResultAdapter-->
+    <string name="ERR_TestResultAdapter">درصد خطا</string>
+    <string name="DateTest_TestResultAdapter">زمان تست</string>
+    <string name="TypeDateTest_TestResultAdapter">میلی ثانیه</string>
+
+    <!--Fragmet Name-->
+
+    <string name="Setting_G">تنظیمات</string>
+    <string name="Bazdid_G">بازدید</string>
+    <string name="Module_G">ارتباط با ماژول</string>
+    <string name="Test_G">تست کنـتور</string>
+    <string name="TestContor_G">تست کنـتور</string>
+    <string name="TestEnrege_G">اتصال کلمپ ها</string>
+    <string name="ResultTest_G">نتایج تست</string>
+    <string name="Polomp_G">پلمپ</string>
+    <string name="Bazrasi_G">بازرسی</string>
 </resources>

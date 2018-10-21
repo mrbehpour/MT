@@ -95,11 +95,11 @@ public class G extends Application {
                 break;
             case FragmentsEnum.SettingFragment:
                 targetFragment=new SettingFragment();
-                setActionbarTitleText("تنظیمات");
+                setActionbarTitleText((String) context.getResources().getText(R.string.Setting_G));
                 break;
             case FragmentsEnum.BazdidFragment:
                 targetFragment=new BazdidFragment();
-                setActionbarTitleText("بازدید");
+                setActionbarTitleText((String) context.getResources().getText(R.string.Bazdid_G));
                 break;
             case FragmentsEnum.MoshtarakFragment:
                 targetFragment=new MoshtarakFragment();
@@ -107,27 +107,27 @@ public class G extends Application {
                 break;
             case FragmentsEnum.ModuleFragment:
                 targetFragment=new ModuleFragment();
-                setActionbarTitleText("ارتباط با ماژول");
+                setActionbarTitleText((String) context.getResources().getText(R.string.Module_G));
                 break;
             case FragmentsEnum.TestContorFragment:
                 targetFragment=new TestContorFragment();
-                setActionbarTitleText("تست کنـتور");
+                setActionbarTitleText((String) context.getResources().getText(R.string.Test_G));
                 break;
             case FragmentsEnum.DisplayTestFragment:
                 targetFragment=new DisplayTestFragment();
-                setActionbarTitleText("تست کنـتور");
+                setActionbarTitleText((String) context.getResources().getText(R.string.TestContor_G));
                 break;
             case FragmentsEnum.TestEnergyFragment:
                 targetFragment=new TestEnergyFragment();
-                setActionbarTitleText("اتصال کلمپ ها");
+                setActionbarTitleText((String) context.getResources().getText(R.string.TestEnrege_G));
                 break;
             case FragmentsEnum.AmaliyatFragment:
                 targetFragment=new AmaliyatFragment();
-                setActionbarTitleText("نتایج تست");
+                setActionbarTitleText((String) context.getResources().getText(R.string.ResultTest_G));
                 break;
             case FragmentsEnum.PolompFragment:
                 targetFragment=new PolompFragment();
-                setActionbarTitleText("پلمپ");
+                setActionbarTitleText((String) context.getResources().getText(R.string.Polomp_G));
                 break;
             case FragmentsEnum.PolompFragmentSave:
                 targetFragment=new PolompFragmentSave();
@@ -135,7 +135,7 @@ public class G extends Application {
                 break;
             case FragmentsEnum.BazrasiFragment:
                 targetFragment=new BazrasiFragment();
-                setActionbarTitleText("بازرسی");
+                setActionbarTitleText((String) context.getResources().getText(R.string.Bazrasi_G));
                 break;
         }
 
