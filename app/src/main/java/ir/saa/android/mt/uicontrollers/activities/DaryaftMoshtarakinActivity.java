@@ -64,6 +64,8 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
 
         adapterInit();
 
+        spinnerRegion.setSelection(spinnerMap.get(G.getPref("UserID")));
+
 
         baseInfoViewModel.getRegion().observe(this, new Observer<List<Region>>() {
             @Override
@@ -87,7 +89,7 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
                     isDownloadClient = true;
                     getClientInput = new GetClientInput();
                     getClientInput.handHeldSerial = G.getPref("DeviceId");
-                    getClientInput.agentId = Integer.valueOf(G.getPref("UserID"));
+                    getClientInput.agentId = spinnerMap.get(spinnerRegion.getSelectedItemPosition());
                     getClientInput.regionId = Integer.valueOf(G.getPref("RegionID"));
                     baseInfoViewModel.getClientFromServer(getClientInput);
                 }
