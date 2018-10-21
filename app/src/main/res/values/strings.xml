@@ -69,4 +69,15 @@
     <string name="Fri_Tarikh">جمعه</string>
     <string name="Sat_Tarikh">شنبه</string>
 
+    <!--Login-->
+    <string name="LoginFail">نام کاربری یا کلمه عبور اشتباه است</string>
+    <string name="Exit_Back">برای خروج دوبار کلیک کنید</string>
+
+    <!--Amaliyat-->
+    <string name="TestFail">هیچ نتیجه تستی وجود ندارد.</string>
+
+    <!--Bazdid-->
+    <string name="UniqField">اشتراک : </string>
+
+
 </resources>

@@ -135,7 +135,7 @@ public class AmaliyatFragment extends Fragment {
                         }
                         else{
                             btnSaveResult.setVisibility(View.GONE);
-                            Toast.makeText(G.context,"هیچ نتیجه تستی وجود ندارد.",Toast.LENGTH_SHORT ).show();
+                            Toast.makeText(G.context,getResources().getText(R.string.TestFail),Toast.LENGTH_SHORT ).show();
                         }
                     }
                 }
@@ -169,7 +169,7 @@ public class AmaliyatFragment extends Fragment {
 
                 saveTestResult(testResult);
 
-                Toast.makeText(G.context,"نتایج تست با موفقیت ذخیره شد.",Toast.LENGTH_SHORT ).show();
+                Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT ).show();
             }
         });
 
