@@ -45,4 +45,28 @@
     <string name="ResultTest_G">نتایج تست</string>
     <string name="Polomp_G">پلمپ</string>
     <string name="Bazrasi_G">بازرسی</string>
+
+    <!--Month-->
+    <string name="Farvardin_Tarikh">فروردین</string>
+    <string name="Ordi_Tarikh">اردیبهشت</string>
+    <string name="Khordad_Tarikh">خرداد</string>
+    <string name="Tir_Tarikh">تیر</string>
+    <string name="Mordad_Tarikh">مرداد</string>
+    <string name="Sharivar_Tarikh">شهریور</string>
+    <string name="Meher_Tarikh">مهر</string>
+    <string name="Aban_Tarikh">آبان</string>
+    <string name="Azar_Tarikh">آذر</string>
+    <string name="Day_Tarikh">دی</string>
+    <string name="Bahman_Tarikh">بهمن</string>
+    <string name="Esfand_Tarikh">اسفند</string>
+
+    <!--WeekDay-->
+    <string name="Sun_Tarikh">یکشنبه</string>
+    <string name="Mon_Tarikh">دوشنبه</string>
+    <string name="Tue_Tarikh">سه شنبه</string>
+    <string name="Wed_Tarikh">چهارشنبه</string>
+    <string name="Thu_Tarikh">پنج شنبه</string>
+    <string name="Fri_Tarikh">جمعه</string>
+    <string name="Sat_Tarikh">شنبه</string>
+
 </resources>
