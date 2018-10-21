@@ -22,6 +22,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.AddedClient;
 import ir.saa.android.mt.model.entities.Client;
@@ -230,7 +231,7 @@ public class SendViewModel extends AndroidViewModel {
                                     String s=recordeSummaries.get(0).Description;
                                     sendAllDataProgress.postValue(100);
                                     if(recordeSummaries.get(0).Result){
-                                        messageErrorLiveData.postValue("عملیات با موفقیت ارسال شد");
+                                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
                                     }else {
                                         messageErrorLiveData.postValue(recordeSummaries.get(0).Description);
                                     }

@@ -102,4 +102,12 @@
     <string name="SabetContor_Message_Zero">لطفا ثابت کنتور را صفر وارد نکنید</string>
     <string name="NesbatSensor_Message_Zero">لطفا نسبت سنسور را صفر وارد نکنید</string>
 
+    <!--GetInformation-->
+    <string name="FailSend">دریافت با مشکل مواجه شد</string>
+
+    <string name="Non">ندارد</string>
+    <string name="AdminName">مدیر سیستم</string>
+
+    <string name="ErrorInConnect">خطا در اتصال به دستگاه</string>
+    <string name="Arrow_Clamp">جهت کلمپ ها یکسان نیست</string>
 </resources>

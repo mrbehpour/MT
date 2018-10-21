@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.RelUser;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
@@ -40,7 +41,7 @@ public class LoginViewModel extends AndroidViewModel {
         relUsers=reluserRepo.getUsers();
         if(relUsers.size()==0){
             RelUser relUser=new RelUser();
-            relUser.FirstName="مدیر سیستم";
+            relUser.FirstName= (String) G.context.getResources().getText(R.string.AdminName);
             relUser.LastName="";
             relUser.HandheldPass="1";
             reluserRepo.insertUser(relUser);
@@ -61,7 +62,7 @@ public class LoginViewModel extends AndroidViewModel {
                 G.setPref("RegionID", String.valueOf(user.RegionID));
             }
             else{
-                G.setPref("RegionName","ندارد");
+                G.setPref("RegionName",G.context.getResources().getString(R.string.Non));
                 G.setPref("RegionID", "-1");
             }
 

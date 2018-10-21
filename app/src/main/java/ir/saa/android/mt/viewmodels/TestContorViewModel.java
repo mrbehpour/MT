@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
@@ -42,7 +43,7 @@ public class TestContorViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
                 connectionStateMutableLiveData.postValue(false);
-                Toast.makeText(G.context, String.format("%s:\n%s","خطا در اتصال به دستگاه",errMsg), Toast.LENGTH_SHORT).show();
+                Toast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), Toast.LENGTH_SHORT).show();
                 Log.d("response","onConnectionError : "+errMsg);
             }
 
