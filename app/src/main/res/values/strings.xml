@@ -105,6 +105,15 @@
     <!--GetInformation-->
     <string name="FailSend">دریافت با مشکل مواجه شد</string>
 
+    <!--GetInformation-->
+
+
+    <string name="Non">ندارد</string>
+    <string name="AdminName">مدیر سیستم</string>
+
+    <string name="ErrorInConnect">خطا در اتصال به دستگاه</string>
+    <string name="Arrow_Clamp">جهت کلمپ ها یکسان نیست</string>
+
     <!-- Layouts persian texts-->
     <!-- activity-baseinfo -->
     <string name="darHaleDaryaft">در حال دریافت...</string>
