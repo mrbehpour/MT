@@ -11,9 +11,9 @@ public class InspectionDtl {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public int InspectionDtlID;
+    public Integer InspectionDtlID;
 
-    public int InspectionInfoID;
+    public Integer InspectionInfoID;
 
     public int ReadTypeID;
 
@@ -32,5 +32,7 @@ public class InspectionDtl {
     public int AddedCount;
 
     public int RemovedCount;
+
+    public Integer AgentID ;
 
 }
