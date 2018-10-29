@@ -64,7 +64,9 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
 
         adapterInit();
 
-        spinnerRegion.setSelection(spinnerMap.get(G.getPref("UserID")));
+        if(G.getPref("UserID").equals("0")==false) {
+            spinnerRegion.setSelection(spinnerMap.get(G.getPref("UserID")));
+        }
 
 
         baseInfoViewModel.getRegion().observe(this, new Observer<List<Region>>() {
