@@ -61,8 +61,8 @@
                             android:layout_gravity="center_vertical|left"
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
-                            android:text="در حال دریافت..."
-                            android:visibility="visible"/>
+                            android:text="@strings/darHaleDaryaft"
+                            android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
                             android:id="@+id/tvLableDaryaftEtelatPayeh"
@@ -74,7 +74,7 @@
                             android:layout_gravity="center_vertical|right"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_800"
-                            android:text="دریافت اطلاعات پایه" />
+                            android:text="@strings/daryaftPayeh" />
                     </LinearLayout>
 
                     <!-- ProgressBar Layout -->
@@ -155,8 +155,8 @@
                             android:layout_gravity="center_vertical|left"
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
-                            android:text="در حال دریافت..."
-                            android:visibility="visible"/>
+                            android:text="@strings/darHaleDaryaft"
+                            android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
                             android:id="@+id/tvLableTanzimat"
@@ -168,7 +168,7 @@
                             android:layout_gravity="center_vertical|right"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_800"
-                            android:text="دریافت تنظیمات" />
+                            android:text="@strings/daryaftTenzimat" />
                     </LinearLayout>
 
                     <!-- ProgressBar Layout -->
@@ -250,8 +250,8 @@
                             android:layout_gravity="center_vertical|left"
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
-                            android:text="در حال دریافت..."
-                            android:visibility="visible"/>
+                            android:text="@strings/darHaleDaryaft"
+                            android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
                             android:id="@+id/tvLableKarbaran"
@@ -263,7 +263,7 @@
                             android:layout_gravity="center_vertical|right"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_800"
-                            android:text="دریافت کاربران" />
+                            android:text="@strings/dryaftKarbaran" />
                     </LinearLayout>
 
                     <!-- ProgressBar Layout -->
@@ -301,7 +301,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/byekan"
-        android:text="جهت شروع دریافت، قسمت مربوطه را لمس نمایید"
+        android:text="@strings/startDownloadHelp"
         android:textColor="@color/grey_600"
         android:gravity="center|bottom"
         android:textSize="11sp"/>

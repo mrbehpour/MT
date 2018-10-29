@@ -19,4 +19,14 @@
     <string name="CaptionRegion">منطقه : </string>
 
 
+    <!-- Layouts persian texts-->
+    <!-- activity-baseinfo -->
+    <string name="darHaleDaryaft">در حال دریافت...</string>
+    <string name="daryaftPayeh">دریافت اطلاعات پایه</string>
+    <string name="daryaftTenzimat">دریافت تنظیمات</string>
+    <string name="dryaftKarbaran">دریافت کاربران</string>
+    <string name="startDownloadHelp">جهت شروع دریافت، قسمت مربوطه را لمس نمایید</string>
+
+    <!--  <string name=""></string>   -->
+
 </resources>
