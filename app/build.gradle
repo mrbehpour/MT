@@ -44,15 +44,14 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     implementation 'com.github.angads25:toggle:1.0.0'
-
     //implementation 'org.parceler:parceler-api:1.1.11'
     //annotationProcessor 'org.parceler:parceler:1.1.11'
-
     def lifecycle_version = "1.1.1"
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     // alternatively - just ViewModel
-    implementation "android.arch.lifecycle:viewmodel:$lifecycle_version" // use -ktx for Kotlin
+    implementation "android.arch.lifecycle:viewmodel:$lifecycle_version"
+    // use -ktx for Kotlin
     // alternatively - just LiveData
     implementation "android.arch.lifecycle:livedata:$lifecycle_version"
     // alternatively - Lifecycles only (no ViewModel or LiveData).
@@ -65,15 +64,11 @@ dependencies {
     implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
     // optional - Test helpers for LiveData
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
-
     implementation 'android.arch.lifecycle:extensions:' + rootProject.archLifecycleVersion
     implementation 'android.arch.persistence.room:runtime:' + rootProject.archRoomVersion
     annotationProcessor 'android.arch.lifecycle:compiler:' + rootProject.archLifecycleVersion
     annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
-
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
-
     // to use gif in project
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
-
 }

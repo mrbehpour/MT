@@ -2,6 +2,7 @@ package ir.saa.android.mt.viewmodels;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
@@ -294,7 +296,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     @Override
                     public void onError(Throwable e) {
                         //Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
+                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.FailSend));
                     }
                 });
 
@@ -327,7 +329,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     @Override
                     public void onError(Throwable e) {
 
-                        messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
+                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.FailSend));
                     }
                 })
         ;
@@ -356,7 +358,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     @Override
                     public void onError(Throwable e) {
 
-                        messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
+                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.FailSend));
                     }
 
                 });
@@ -575,12 +577,16 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     @Override
                     public void onError(Throwable e) {
                         // Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        messageErrorLiveData.postValue("دریافت با مشکل مواجه شد");
+                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.FailSend));
                     }
                 });
 
 
 
+    }
+
+    public LiveData<List<Region>> getRegion(){
+        return regionRepo.getRegions();
     }
 
     private int getPrecent(int progress,int totalCount){

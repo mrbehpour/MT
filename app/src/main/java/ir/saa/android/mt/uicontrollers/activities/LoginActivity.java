@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else
-                Toast.makeText(this, "نام کاربری یا کلمه عبور اشتباه است", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
         });
 
         loginViewModel.getUsers().observe(this, relUsers -> {
@@ -119,7 +119,7 @@ Boolean doubleBackToExitPressedOnce = false;
                 return;
             }
             this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(G.context,"برای خروج دوبار کلیک کنید", Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,getResources().getText(R.string.Exit_Back), Toast.LENGTH_SHORT).show();
             new android.os.Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 1500);
         }
     }

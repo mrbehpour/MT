@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
+
 
 public class Tarikh {
 
@@ -185,65 +188,65 @@ public class Tarikh {
 
             switch (month) {
                 case 1:
-                    strMonth = "فروردین";
+                    strMonth = (String) G.context.getResources().getText(R.string.Farvardin_Tarikh);
                     break;
                 case 2:
-                    strMonth = "اردیبهشت";
+                    strMonth = (String) G.context.getResources().getText(R.string.Ordi_Tarikh);
                     break;
                 case 3:
-                    strMonth = "خرداد";
+                    strMonth = (String) G.context.getResources().getText(R.string.Khordad_Tarikh);
                     break;
                 case 4:
-                    strMonth = "تیر";
+                    strMonth = (String) G.context.getResources().getText(R.string.Tir_Tarikh);
                     break;
                 case 5:
-                    strMonth = "مرداد";
+                    strMonth = (String) G.context.getResources().getText(R.string.Mordad_Tarikh);
                     break;
                 case 6:
-                    strMonth = "شهریور";
+                    strMonth = (String) G.context.getResources().getText(R.string.Sharivar_Tarikh);
                     break;
                 case 7:
-                    strMonth = "مهر";
+                    strMonth = (String) G.context.getResources().getText(R.string.Meher_Tarikh);
                     break;
                 case 8:
-                    strMonth = "آبان";
+                    strMonth = (String) G.context.getResources().getText(R.string.Aban_Tarikh);
                     break;
                 case 9:
-                    strMonth = "آذر";
+                    strMonth = (String) G.context.getResources().getText(R.string.Azar_Tarikh);
                     break;
                 case 10:
-                    strMonth = "دی";
+                    strMonth = (String) G.context.getResources().getText(R.string.Day_Tarikh);
                     break;
                 case 11:
-                    strMonth = "بهمن";
+                    strMonth = (String) G.context.getResources().getText(R.string.Bahman_Tarikh);
                     break;
                 case 12:
-                    strMonth = "اسفند";
+                    strMonth = (String) G.context.getResources().getText(R.string.Esfand_Tarikh);
                     break;
             }
 
             switch (WeekDay) {
 
                 case 0:
-                    strWeekDay = "یکشنبه";
+                    strWeekDay = (String) G.context.getResources().getText(R.string.Sun_Tarikh);
                     break;
                 case 1:
-                    strWeekDay = "دوشنبه";
+                    strWeekDay = (String) G.context.getResources().getText(R.string.Mon_Tarikh);
                     break;
                 case 2:
-                    strWeekDay = "سه شنبه";
+                    strWeekDay = (String) G.context.getResources().getText(R.string.Tue_Tarikh);
                     break;
                 case 3:
-                    strWeekDay = "چهارشنبه";
+                    strWeekDay = (String) G.context.getResources().getText(R.string.Wed_Tarikh);
                     break;
                 case 4:
-                    strWeekDay = "پنج شنبه";
+                    strWeekDay = (String) G.context.getResources().getText(R.string.Thu_Tarikh);
                     break;
                 case 5:
-                    strWeekDay = "جمعه";
+                    strWeekDay = (String) G.context.getResources().getText(R.string.Fri_Tarikh);
                     break;
                 case 6:
-                    strWeekDay = "شنبه";
+                    strWeekDay = (String) G.context.getResources().getText(R.string.Sat_Tarikh);
                     break;
             }
 

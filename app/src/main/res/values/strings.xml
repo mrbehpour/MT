@@ -11,13 +11,99 @@
     <string name="menuItem3">ارتباط با ماژول</string>
     <string name="menuItem4">تنظیمات</string>
     <string name="menuItem5">دریافت اطلاعات پایه</string>
-    <string name="menuItem6">ارسال</string>
-    <string name="menuItem7">خروج</string>
+    <string name="menuItem6">دریافت مشترکین</string>
+    <string name="menuItem7">ارسال</string>
+    <string name="menuItem8">خروج</string>
 
     <!--،Toast Masseage -->
     <string name="backMessage">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
     <string name="CaptionRegion">منطقه : </string>
+    <string name="MessageSuccess">اطلاعات با موفقیت ثبت شد</string>
 
+    <!--BazrasiAdapter-->
+    <string name="BazrasiAdapter_BtnSave">ذخیره</string>
+
+    <!--TestDisplayAdapter-->
+    <string name="TypeTest1_TestDisplayAdapter">تست 1</string>
+    <string name="TypeTest2_TestDisplayAdapter">تست 2</string>
+    <string name="ModelActive_TestDisplayAdapter">اکتیو</string>
+    <string name="ModelReActive_TestDisplayAdapter">راکتیو</string>
+
+    <!--TestResultAdapter-->
+    <string name="ERR_TestResultAdapter">درصد خطا</string>
+    <string name="DateTest_TestResultAdapter">زمان تست</string>
+    <string name="TypeDateTest_TestResultAdapter">میلی ثانیه</string>
+
+    <!--Fragmet Name-->
+
+    <string name="Setting_G">تنظیمات</string>
+    <string name="Bazdid_G">بازدید</string>
+    <string name="Module_G">ارتباط با ماژول</string>
+    <string name="Test_G">تست کنـتور</string>
+    <string name="TestContor_G">تست کنـتور</string>
+    <string name="TestEnrege_G">اتصال کلمپ ها</string>
+    <string name="ResultTest_G">نتایج تست</string>
+    <string name="Polomp_G">پلمپ</string>
+    <string name="Bazrasi_G">بازرسی</string>
+
+    <!--Month-->
+    <string name="Farvardin_Tarikh">فروردین</string>
+    <string name="Ordi_Tarikh">اردیبهشت</string>
+    <string name="Khordad_Tarikh">خرداد</string>
+    <string name="Tir_Tarikh">تیر</string>
+    <string name="Mordad_Tarikh">مرداد</string>
+    <string name="Sharivar_Tarikh">شهریور</string>
+    <string name="Meher_Tarikh">مهر</string>
+    <string name="Aban_Tarikh">آبان</string>
+    <string name="Azar_Tarikh">آذر</string>
+    <string name="Day_Tarikh">دی</string>
+    <string name="Bahman_Tarikh">بهمن</string>
+    <string name="Esfand_Tarikh">اسفند</string>
+
+    <!--WeekDay-->
+    <string name="Sun_Tarikh">یکشنبه</string>
+    <string name="Mon_Tarikh">دوشنبه</string>
+    <string name="Tue_Tarikh">سه شنبه</string>
+    <string name="Wed_Tarikh">چهارشنبه</string>
+    <string name="Thu_Tarikh">پنج شنبه</string>
+    <string name="Fri_Tarikh">جمعه</string>
+    <string name="Sat_Tarikh">شنبه</string>
+
+    <!--Login-->
+    <string name="LoginFail">نام کاربری یا کلمه عبور اشتباه است</string>
+    <string name="Exit_Back">برای خروج دوبار کلیک کنید</string>
+
+    <!--Amaliyat-->
+    <string name="TestFail">هیچ نتیجه تستی وجود ندارد.</string>
+
+    <!--Bazdid-->
+    <string name="UniqField">اشتراک : </string>
+
+    <!--DisplayTestFragment-->
+    <string name="Test">تست</string>
+    <string name="TestResult">نمایش سابقه تست</string>
+
+    <!--Moshtarak Detail-->
+    <string name="SingleFaz">تکفاز</string>
+    <string name="ThreeFaz">سه فاز</string>
+
+    <!--MoshtarakFragment_Tab-->
+    <string name="Tab_Amaliyat">عملیات</string>
+    <string name="Tab_Detail">جزییات</string>
+
+    <!--TestContorFragment-->
+    <string name="ValidationConnect">اتصال به دستگاه تست کنتور</string>
+    <string name="Wait_Connect">لطفا منتظر بمانید تا اتصال برقرار شود...</string>
+
+    <string name="ZaribContor_Message">لطفا ضریب کنتور را وارد کنید</string>
+    <string name="SabetContor_Message">لطفا ثابت کنتور را وارد کنید</string>
+    <string name="NesbatSensor_Message">لطفا نسبت سنسور را وارد کنید</string>
+    <string name="ZaribContor_Message_Zero">لطفا ضریب کنتور را صفر وارد نکنید</string>
+    <string name="SabetContor_Message_Zero">لطفا ثابت کنتور را صفر وارد نکنید</string>
+    <string name="NesbatSensor_Message_Zero">لطفا نسبت سنسور را صفر وارد نکنید</string>
+
+    <!--GetInformation-->
+    <string name="FailSend">دریافت با مشکل مواجه شد</string>
 
     <!-- Layouts persian texts-->
     <!-- activity-baseinfo -->

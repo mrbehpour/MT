@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity{
                 return;
             }
             this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(G.context,"برای خروج دوبار کلیک کنید", Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,getResources().getText(R.string.Exit_Back), Toast.LENGTH_SHORT).show();
             new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 1500);
         }
     }

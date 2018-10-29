@@ -82,7 +82,7 @@ public class BazdidFragment extends Fragment
                     isBazrasi=bazdidViewModel.getInspectionValue(client.ClientID);
                     isPolomp=bazdidViewModel.getPolompValue(client.ClientID);
                     isTest=bazdidViewModel.getTestValue(client.ClientID);
-                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,"اشتراک : ",client.CustId, R.drawable.account,client.SendId
+                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address, (String) getResources().getText(R.string.UniqField),client.CustId, R.drawable.account,client.SendId
                             ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,client.FollowUpCode ));
                 }
 

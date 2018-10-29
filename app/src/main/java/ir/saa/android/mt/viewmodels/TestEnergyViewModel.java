@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
@@ -96,7 +97,7 @@ public class TestEnergyViewModel extends AndroidViewModel {
 
                 G.startFragment(FragmentsEnum.AmaliyatFragment, false, bundle);
             } else {
-                Toast.makeText(G.context, "جهت کلمپ ها یکسان نیست", Toast.LENGTH_SHORT).show();
+                Toast.makeText(G.context, G.context.getResources().getText(R.string.Arrow_Clamp), Toast.LENGTH_SHORT).show();
             }
         }
         catch (Exception ex){

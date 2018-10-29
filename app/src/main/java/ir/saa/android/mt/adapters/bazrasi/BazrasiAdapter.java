@@ -113,7 +113,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                 myCheckList.setSelectionByValue(Integer.valueOf(current.remarkValue));
 
 
-                                dialog.addButton("ذخیره", new View.OnClickListener() {
+                                dialog.addButton(G.context.getResources().getString(R.string.BazrasiAdapter_BtnSave), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
 
@@ -198,7 +198,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                 inspectionDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
                 Long inspectionDtlId = bazrasiViewModel.insertInspectionDtl(inspectionDtl);
                 if (inspectionDtlId != null) {
-                    Toast.makeText((AppCompatActivity) context, "اطلاعات با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
+                    Toast.makeText((AppCompatActivity) context, G.context.getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
                 }
             }
         }else{
@@ -223,7 +223,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                 bazrasiViewModel.deleteAll(inspectionInfo,inspectionDtl);
             }
             if(inspectionDtlId!=0){
-                Toast.makeText((AppCompatActivity)context,"اطلاعات با موفقیت ثبت شد",Toast.LENGTH_SHORT).show();
+                Toast.makeText((AppCompatActivity)context,G.context.getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
             }
 
         }

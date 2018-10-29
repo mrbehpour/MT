@@ -17,6 +17,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
+import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
 import ir.saa.android.mt.uicontrollers.activities.LoginActivity;
 import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
@@ -67,14 +68,18 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 //                    Activity activity=new DaryaftActivity();
 //                    activity.startActivity(intent);
 
-
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem6))==0){
+                    Intent intent=new Intent(G.context, DaryaftMoshtarakinActivity.class);
+                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                    G.context.startActivity(intent);
+
+                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem7))==0){
 
                     Intent intent=new Intent(G.context,SendActivity.class);
                     intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     G.context.startActivity(intent);
 
-                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem7))==0){
+                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem8))==0){
                     System.exit(0);
                 }
             }

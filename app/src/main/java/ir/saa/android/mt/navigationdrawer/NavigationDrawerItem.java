@@ -50,6 +50,7 @@ public class NavigationDrawerItem {
                 R.drawable.cast_connected,
                 R.drawable.settings,
                 R.drawable.file_download_outline,
+                R.drawable.file_download_outline,
                 R.drawable.briefcase_upload,
                 R.drawable.exit_to_app
         };
@@ -64,6 +65,7 @@ public class NavigationDrawerItem {
                 G.context.getResources().getString(R.string.menuItem5),
                 G.context.getResources().getString(R.string.menuItem6),
                 G.context.getResources().getString(R.string.menuItem7),
+                G.context.getResources().getString(R.string.menuItem8),
         };
     }
 }

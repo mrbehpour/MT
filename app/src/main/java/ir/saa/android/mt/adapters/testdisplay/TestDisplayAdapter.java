@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.repositories.metertester.TestResult;
 
 public class TestDisplayAdapter extends RecyclerView.Adapter<TestDisplayAdapter.MyViewHolder> {
@@ -40,9 +41,11 @@ public class TestDisplayAdapter extends RecyclerView.Adapter<TestDisplayAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         TestResultItemDisplay current=mDataList.get(position);
-        holder.tvResultTitle.setText(current.FisrtTest==true?"تست 1":"تست 2");
+        holder.tvResultTitle.setText(current.FisrtTest==true? G.context.getResources().getText(R.string.TypeTest1_TestDisplayAdapter)
+                :G.context.getResources().getText(R.string.TypeTest2_TestDisplayAdapter));
         holder.tvResultError.setText(String.valueOf(current.ErrPerc));
-        holder.tvTestType.setText(current.Active==true?"اکتیو":"راکتیو");
+        holder.tvTestType.setText(current.Active==true?G.context.getResources().getText(R.string.ModelActive_TestDisplayAdapter)
+                :G.context.getResources().getText(R.string.ModelReActive_TestDisplayAdapter));
         holder.tvRowV_R.setText(current.AVRMS_Period1);
         holder.tvRowV_S.setText(current.BVRMS_Period1);
         holder.tvRowV_T.setText(current.CVRMS_Period1);

@@ -70,7 +70,8 @@ public class MoshtarakFragment extends Fragment
 
     public static class TabsPagerAdapter extends FragmentStatePagerAdapter {
         final int PAGE_COUNT = 2;
-        private String tabtitles[] = new String[] { "عملیات", "جزییات" };
+        private String tabtitles[] = new String[] {(String) G.context.getResources().getText(R.string.Tab_Amaliyat),
+                (String) G.context.getResources().getText(R.string.Tab_Detail) };
         Long ClientID = null;
         public TabsPagerAdapter(FragmentManager fragmentManager,Long clientID) {
             super(fragmentManager);

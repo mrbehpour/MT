@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 
 public class DisplayTestFragment extends Fragment {
@@ -62,7 +63,9 @@ public class DisplayTestFragment extends Fragment {
 
     public static class TabsPagerAdapter extends FragmentStatePagerAdapter {
         final int PAGE_COUNT = 2;
-        private String tabtitles[] = new String[] { "تست", "نمایش سابقه تست" };
+        private String tabtitles[] = new String[] {(String) G.context.getResources().getText(R.string.Test)
+                ,(String) G.context.getResources().getText(R.string.TestResult)
+        };
 
         public TabsPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);

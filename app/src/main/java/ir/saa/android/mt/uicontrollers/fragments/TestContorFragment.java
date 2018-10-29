@@ -131,8 +131,8 @@ public class TestContorFragment extends Fragment
     private void connectToModuleDialog(){
         ad = new AlertDialog.Builder(this.getContext()).create();
         ad.setCancelable(true);
-        ad.setTitle("اتصال به دستگاه تست کنتور");
-        ad.setMessage("لطفا منتظر بمانید تا اتصال برقرار شود...");
+        ad.setTitle(getResources().getText(R.string.ValidationConnect));
+        ad.setMessage(getResources().getText(R.string.Wait_Connect));
         new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -150,31 +150,31 @@ public class TestContorFragment extends Fragment
         boolean res=true;
 
         if(edtCTCoeff.getText().toString().equals("")){
-            Toast.makeText(G.context,"لطفا ضریب کنتور را وارد کنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,getResources().getText(R.string.ZaribContor_Message),Toast.LENGTH_SHORT).show();
             res=false;
         }
 
         if(edtContorConst.getText().toString().equals("")){
-            Toast.makeText(G.context,"لطفا ثابت کنتور را وارد کنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,getResources().getText(R.string.SabetContor_Message),Toast.LENGTH_SHORT).show();
             res=false;
         }
 
         if(edtSensorRatio.getText().toString().equals("")){
-            Toast.makeText(G.context,"لطفا نسبت سنسور را وارد کنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,getResources().getText(R.string.NesbatSensor_Message),Toast.LENGTH_SHORT).show();
             res=false;
         }
         if(edtCTCoeff.getText().toString().equals("0")){
-            Toast.makeText(G.context,"لطفا ضریب کنتور را صفر وارد نکنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,getResources().getText(R.string.ZaribContor_Message_Zero),Toast.LENGTH_SHORT).show();
             res=false;
         }
 
         if(edtContorConst.getText().toString().equals("0")){
-            Toast.makeText(G.context,"لطفا ثابت کنتور را صفر وارد نکنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,getResources().getText(R.string.SabetContor_Message_Zero),Toast.LENGTH_SHORT).show();
             res=false;
         }
 
         if(edtSensorRatio.getText().toString().equals("0")){
-            Toast.makeText(G.context,"لطفا نسبت سنسور را صفر وارد نکنید",Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context,getResources().getText(R.string.NesbatSensor_Message_Zero),Toast.LENGTH_SHORT).show();
             res=false;
         }
 
