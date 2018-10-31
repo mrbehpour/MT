@@ -92,7 +92,7 @@
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
                             android:text="در حال دریافت..."
-                            android:visibility="visible"/>
+                            android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
                             android:id="@+id/tvLableMoshtarakin"

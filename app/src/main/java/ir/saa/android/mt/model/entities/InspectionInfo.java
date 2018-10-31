@@ -11,7 +11,7 @@ public class InspectionInfo  {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public int InspectionInfoID;
+    public Integer InspectionInfoID;
 
     public int AgentID;
 

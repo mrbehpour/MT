@@ -133,7 +133,7 @@ public class SendViewModel extends AndroidViewModel {
 
                     if(inspectionAllInfos.size()!=0) {
                         InspectionInfo inspectionInfo=new InspectionInfo();
-                        //inspectionInfo.InspectionInfoID=inspectionAllInfos.get(0).InspectionInfoID;
+                        inspectionInfo.InspectionInfoID=null;
                         inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
                         inspectionInfo.InspectionTime=inspectionAllInfos.get(0).InspectionTime;
                         inspectionInfo.InspectionDate=inspectionAllInfos.get(0).InspectionDate;
@@ -169,7 +169,7 @@ public class SendViewModel extends AndroidViewModel {
                         polompInfo.ChangeTime=polompAllInfos.get(0).ChangeTime;
                         polompInfo.ChangeDate=polompAllInfos.get(0).ChangeDate;
                         polompInfo.FollowUpCode=polompAllInfos.get(0).FollowUpCode;
-                        //polompInfo.PolompInfoID=polompAllInfos.get(0).PolompInfoID;
+                        polompInfo.PolompInfoID=null;
                         ClientAllInfo.PolompInfo=polompInfo;
                         for (PolompAllInfo polompAllInfo:polompAllInfos) {
                             PolompDtl polompDtl=new PolompDtl();
@@ -217,7 +217,8 @@ public class SendViewModel extends AndroidViewModel {
                 }
                 
                 if(clientinfolList.size()!=0){
-
+                    Gson gson = new Gson();
+                    String val=gson.toJson(clientinfolList);
                     retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientinfolList)
                             .subscribeOn(Schedulers.io())
                             .subscribeWith(new SingleObserver<List<RecordeSummary>>() {

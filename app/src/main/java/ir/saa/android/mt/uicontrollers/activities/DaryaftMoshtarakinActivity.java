@@ -1,5 +1,6 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Build;
@@ -12,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
 
@@ -37,13 +40,18 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
     List<String> spinnerArray;
     GetClientInput getClientInput;
     ArrayAdapter<String> adapter;
+    TextView tvLabelDarhaleDaryaftMoshtarakin;
     HashMap<Integer, Integer> spinnerMap = new HashMap<Integer, Integer>();
+    HashMap<Integer, Integer> spinnerMapID = new HashMap<Integer, Integer>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getmoshtarkin);
 
         isDownloadClient = false;
+
+        tvLabelDarhaleDaryaftMoshtarakin=(TextView) findViewById(R.id.tvLabelDarhaleDaryaftMoshtarakin);
+
 
         pbMoshtarakin = findViewById(R.id.pbMoshtarakin);
         pbMoshtarakin.setMax(100);
@@ -57,16 +65,14 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
         spinnerRegion = findViewById(R.id.spnOmoor);
 
         spinnerArray = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, R.layout.al_spinner_item, spinnerArray);
-        adapter.setDropDownViewResource(R.layout.al_spinner_dropdown_item);
+        adapter = new ArrayAdapter<>(this, R.layout.al_polomp_save_spinner_item, spinnerArray);
+        adapter.setDropDownViewResource(R.layout.al_polomp_save_spinner_dropdown);
 
         spinnerRegion.setAdapter(adapter);
 
         adapterInit();
 
-        if(G.getPref("UserID").equals("0")==false) {
-            spinnerRegion.setSelection(spinnerMap.get(G.getPref("UserID")));
-        }
+
 
 
         baseInfoViewModel.getRegion().observe(this, new Observer<List<Region>>() {
@@ -74,20 +80,29 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
             public void onChanged(@Nullable List<Region> regions) {
                 spinnerArray.clear();
                 spinnerMap.clear();
+                spinnerMap.put(0,0);
+                spinnerArray.add(0,"");
                 for (int i = 0; i < regions.size(); i++) {
-                    spinnerMap.put(i, regions.get(i).RegionID);
+                    spinnerMap.put(i+1, regions.get(i).RegionID);
+                    spinnerMapID.put(regions.get(i).RegionID,i+1);
                     spinnerArray.add(regions.get(i).RegionName);
                 }
                 adapter.notifyDataSetChanged();
+                if(G.getPref("RegionID").equals("0")==false) {
+                    spinnerRegion.setSelection(spinnerMapID.get(Integer.valueOf(G.getPref("RegionID"))));
+                }
+
             }
         });
 
 
 
         llMoshtarkin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 if (isDownloadClient == false) {
+                    tvLabelDarhaleDaryaftMoshtarakin.setVisibility(View.VISIBLE);
                     isDownloadClient = true;
                     getClientInput = new GetClientInput();
                     getClientInput.handHeldSerial = G.getPref("DeviceId");
@@ -97,7 +112,18 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
                 }
             }
         });
+        baseInfoViewModel.messageErrorLiveData.observe(this, new Observer<String>() {
+
+            @Override
+            public void onChanged(@Nullable String s) {
+                tvLabelDarhaleDaryaftMoshtarakin.setVisibility(View.INVISIBLE);
+                isDownloadClient=false;
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+
+            }
+        });
         baseInfoViewModel.clientProgressPercentLiveData.observe(this, new Observer<Integer>() {
+
             @Override
             public void onChanged(@Nullable Integer integer) {
                 pbMoshtarakin.setProgress(integer);
@@ -107,8 +133,15 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
                         ivMoshtarakin.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.green_A400));
                     }
                 }
+
             }
         });
+        try {
+            Thread.sleep(0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
     private void adapterInit() {
         spinnerArray.clear();
@@ -117,5 +150,6 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
                 spinnerArray.add(region.RegionName);
             }
         }
+
     }
     }

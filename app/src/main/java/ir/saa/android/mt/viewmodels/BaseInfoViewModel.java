@@ -347,7 +347,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
                         if(clients.Success) {
                             for (Integer i = 0; i < clients.Data.size(); i++) {
                                 clientRepo.insertClient(clients.Data.get(i));
+
                                 clientProgressPercentLiveData.postValue(getPrecent(i + 1, clients.Data.size()));
+                                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
                             }
                         }else {
                             messageErrorLiveData.postValue(clients.Message);

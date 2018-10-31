@@ -61,7 +61,7 @@
                             android:layout_gravity="center_vertical|left"
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
-                            android:text="@strings/darHaleDaryaft"
+                            android:text="@string/darHaleDaryaft"
                             android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
@@ -74,7 +74,7 @@
                             android:layout_gravity="center_vertical|right"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_800"
-                            android:text="@strings/daryaftPayeh" />
+                            android:text="@string/daryaftPayeh" />
                     </LinearLayout>
 
                     <!-- ProgressBar Layout -->
@@ -155,7 +155,7 @@
                             android:layout_gravity="center_vertical|left"
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
-                            android:text="@strings/darHaleDaryaft"
+                            android:text="@string/darHaleDaryaft"
                             android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
@@ -168,7 +168,7 @@
                             android:layout_gravity="center_vertical|right"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_800"
-                            android:text="@strings/daryaftTenzimat" />
+                            android:text="@string/daryaftTenzimat" />
                     </LinearLayout>
 
                     <!-- ProgressBar Layout -->
@@ -250,7 +250,7 @@
                             android:layout_gravity="center_vertical|left"
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
-                            android:text="@strings/darHaleDaryaft"
+                            android:text="@string/darHaleDaryaft"
                             android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
@@ -263,7 +263,7 @@
                             android:layout_gravity="center_vertical|right"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_800"
-                            android:text="@strings/dryaftKarbaran" />
+                            android:text="@string/dryaftKarbaran" />
                     </LinearLayout>
 
                     <!-- ProgressBar Layout -->
@@ -301,7 +301,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/byekan"
-        android:text="@strings/startDownloadHelp"
+        android:text="@string/startDownloadHelp"
         android:textColor="@color/grey_600"
         android:gravity="center|bottom"
         android:textSize="11sp"/>
