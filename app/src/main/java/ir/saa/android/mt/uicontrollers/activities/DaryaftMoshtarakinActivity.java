@@ -88,8 +88,11 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
                     spinnerArray.add(regions.get(i).RegionName);
                 }
                 adapter.notifyDataSetChanged();
-                if(G.getPref("RegionID").equals("0")==false) {
+                if(G.getPref("RegionID").equals("-1")==false) {
                     spinnerRegion.setSelection(spinnerMapID.get(Integer.valueOf(G.getPref("RegionID"))));
+                    spinnerRegion.setEnabled(false);
+                }else{
+                    spinnerRegion.setEnabled(true);
                 }
 
             }
@@ -102,12 +105,13 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isDownloadClient == false) {
+
                     tvLabelDarhaleDaryaftMoshtarakin.setVisibility(View.VISIBLE);
                     isDownloadClient = true;
                     getClientInput = new GetClientInput();
                     getClientInput.handHeldSerial = G.getPref("DeviceId");
-                    getClientInput.agentId = spinnerMap.get(spinnerRegion.getSelectedItemPosition());
-                    getClientInput.regionId = Integer.valueOf(G.getPref("RegionID"));
+                    getClientInput.agentId = Integer.valueOf(G.getPref("UserID"));
+                    getClientInput.regionId = spinnerMap.get(spinnerRegion.getSelectedItemPosition());
                     baseInfoViewModel.getClientFromServer(getClientInput);
                 }
             }
@@ -118,6 +122,7 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
             public void onChanged(@Nullable String s) {
                 tvLabelDarhaleDaryaftMoshtarakin.setVisibility(View.INVISIBLE);
                 isDownloadClient=false;
+                pbMoshtarakin.setProgress(0);
                 Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
 
             }
