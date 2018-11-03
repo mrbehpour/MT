@@ -47,7 +47,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="زمان تست"/>
+                    android:text="@string/zamanTest"/>
 
                 <!-- Darsad Khata -->
                 <TextView
@@ -60,7 +60,7 @@
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/grey_900"
-                    android:text="درصد خطا"/>
+                    android:text="@string/darsadKhata3"/>
             </LinearLayout>
 
             <!-- Row 2 Layout -->
@@ -80,7 +80,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/blue_900"
                     android:textAlignment="center"
-                    android:text="V:"/>
+                    android:text="@string/v2"/>
 
                 <!-- Voltage Faze C -->
                 <TextView
@@ -92,7 +92,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="ولتاژ فاز C"/>
+                    android:text="@string/voltazhC"/>
 
                 <!-- Voltage Faze B -->
                 <TextView
@@ -103,7 +103,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="ولتاژ فاز B"/>
+                    android:text="@string/voltazhB"/>
 
                 <!-- Voltage Faze A -->
                 <TextView
@@ -114,7 +114,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="ولتاژ فاز A"/>
+                    android:text="@string/voltazhA"/>
             </LinearLayout>
 
             <!-- Row 3 Layout -->
@@ -133,7 +133,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/green_900"
                     android:textAlignment="center"
-                    android:text="I:"/>
+                    android:text="@string/I2"/>
 
                 <!-- Jaryane Faze C -->
                 <TextView
@@ -145,7 +145,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="جریان فاز C"/>
+                    android:text="@string/jaryanC"/>
 
                 <!-- Jaryane Faze B -->
                 <TextView
@@ -156,7 +156,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="جریان فاز B"/>
+                    android:text="@string/jaryanB"/>
 
                 <!-- Jaryane Faze A -->
                 <TextView
@@ -167,7 +167,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="جریان فاز A"/>
+                    android:text="@string/jaryanA"/>
             </LinearLayout>
 
             <!-- Row 4 Layout -->
@@ -186,7 +186,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/red_900"
                     android:textAlignment="center"
-                    android:text="PF:"/>
+                    android:text="@string/PF2"/>
 
                 <!-- Zarib Tavan C -->
                 <TextView
@@ -198,7 +198,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="ضریب توان C"/>
+                    android:text="@string/zaribC"/>
 
                 <!--  Zarib Tavan B -->
                 <TextView
@@ -209,7 +209,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="ضریب توان B"/>
+                    android:text="@string/zaribB"/>
 
                 <!--  Zarib Tavan A -->
                 <TextView
@@ -220,7 +220,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="ضریب توان A"/>
+                    android:text="@string/zaribA"/>
 
 
             </LinearLayout>
@@ -238,7 +238,7 @@
             android:textColor="@color/grey_600"
             android:gravity="center_vertical|center_horizontal"
             android:textAlignment="gravity"
-            android:text="1"/>
+            android:text="@string/dash"/>
 
     </LinearLayout>
 

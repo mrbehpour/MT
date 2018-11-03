@@ -41,7 +41,7 @@
                     android:textColor="@color/grey_900"
                     android:textAlignment="gravity"
                     android:gravity="right"
-                    android:text="-"
+                    android:text="@string/dash"
                     android:layout_weight="1"/>
                 <!-- Name Lable -->
                 <TextView
@@ -51,7 +51,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="نام مشترک: " />
+                    android:text="@string/nameMoshtarak" />
             </LinearLayout>
 
             <!-- Shomare Badane Layout -->
@@ -71,7 +71,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_500"
-                    android:text="-" />
+                    android:text="@string/dash" />
                 <!-- Shomare Badane Lable -->
                 <TextView
                     android:id="@+id/tvUniqueTitle"
@@ -80,7 +80,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_500"
-                    android:text="شماره بدنه: " />
+                    android:text="@string/shomareBadane2" />
             </LinearLayout>
 
             <!-- Address Layout-->
@@ -100,7 +100,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="12sp"
                     android:textColor="@color/grey_500"
-                    android:text="-" />
+                    android:text="@string/dash" />
                 <!-- Address Lable -->
                 <TextView
                     android:id="@+id/tvLableAddress"
@@ -109,8 +109,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="12sp"
                     android:textColor="@color/grey_500"
-                    android:text="آدرس: " />
-
+                    android:text="@string/address" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -118,15 +117,17 @@
                 android:layout_marginTop="2dp"
                 android:layout_height="wrap_content">
 
+                <!-- Icon Test -->
                 <ir.saa.android.mt.components.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/iconTest"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:text="@string/icon_Test"
                     android:textColor="@color/icon_off"
                     app:fontFamily="@font/fw"
                     />
+                <!-- Icon BAzrasi -->
                 <ir.saa.android.mt.components.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,8 +136,9 @@
                     android:text="@string/icon_Bazrasi"
                     app:fontFamily="@font/fw"
                     android:textColor="@color/icon_off"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     />
+                <!-- Icon Polomp -->
                 <ir.saa.android.mt.components.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,25 +147,18 @@
                     android:text="@string/icon_polomp"
                     app:fontFamily="@font/fw"
                     android:textColor="@color/icon_off"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     />
             </LinearLayout>
-            //space
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:orientation="vertical">
-
-            </LinearLayout>
-            //line
+            <!-- line -->
             <LinearLayout
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginTop="8dp"
                 android:background="#aaa">
             </LinearLayout>
-
         </LinearLayout>
 
         <!-- Icon Layout -->
@@ -175,8 +170,6 @@
             android:layout_marginRight="16dp"
             android:src="@drawable/bazdid_user">
         </ImageView>
-
-
 
     </LinearLayout>
 

@@ -115,13 +115,148 @@
     <string name="Arrow_Clamp">جهت کلمپ ها یکسان نیست</string>
 
     <!-- Layouts persian texts-->
-    <!-- activity-baseinfo -->
+    <!-- activity_baseinfo -->
     <string name="darHaleDaryaft">در حال دریافت...</string>
     <string name="daryaftPayeh">دریافت اطلاعات پایه</string>
     <string name="daryaftTenzimat">دریافت تنظیمات</string>
     <string name="dryaftKarbaran">دریافت کاربران</string>
     <string name="startDownloadHelp">جهت شروع دریافت، قسمت مربوطه را لمس نمایید</string>
 
-    <!--  <string name=""></string>   -->
+    <!-- activity_getmoshtarakin -->
+    <string name="omoorMarboote">امور مربوطه:</string>
+    <string name="daryaftMoshtarakin">دریافت مشترکین</string>
+
+    <!-- activity_login -->
+    <string name="vorood">ورود</string>
+    <string name="nemitavanidVaredShavid">نمی توانید وارد شوید؟</string>
+    <string name="shomareSerial">شماره سریال</string>
+    <string name="sanjesh">Sanjesh Afzar Asia Co LTD.</string>
+
+    <!-- activity_send -->
+    <string name="ersalEtelat">ارسال اطلاعات</string>
+
+    <!-- fragment_amaliyat -->
+    <string name="darsadKhata">درصد خطا:</string>
+    <string name="sefr">0</string>
+    <string name="tedadDorTest">تعداد دور تست:</string>
+    <string name="zakhireNatayej">ذخیره نتایج</string>
+    <string name="payanNatayej">پایان و مشاهده نتایج</string>
+    <string name="startTest">شروع تست</string>
+
+    <!-- fragment_bazrasi -->
+    <string name="zakhire">ذخیره</string>
+
+    <!-- fragment_module -->
+    <string name="bluetooth">بلوتوث</string>
+    <string name="pairedDevices">دستگاه های pair شده:</string>
+    <string name="Buzzer">Buzzer</string>
+    <string name="deviceVoiceOnOff">روشن و خاموش کردن صدای دستگاه</string>
+    <string name="LED">LED</string>
+    <string name="deviceLightOnOff">روشن و خاموش کردن چراغ های دستگاه</string>
+    <string name="reset">ریست</string>
+
+    <!-- fragment_moshtarak_detail -->
+    <string name="dash">-</string>
+    <string name="eshterak">اشتراک</string>
+    <string name="shenasae">شناسایی</string>
+    <string name="parvande">پرونده</string>
+    <string name="ramz">رمز</string>
+    <string name="shomareBadane">شماره بدنه</string>
+    <string name="noeKontor">نوع کنتور</string>
+    <string name="amper">آمپراژ</string>
+    <string name="noeTarefe">نوع تعرفه</string>
+    <string name="noeVoltazh">نوع ولتاژ</string>
+    <string name="ghodrat">قدرت قرارداد</string>
+    <string name="dimandMojaz">دیماند مجاز</string>
+    <string name="motevasetMasraf">متوسط مصرف</string>
+    <string name="masrafeAkhar">مصرف دوره آخر</string>
+    <string name="kilowatAkhar">کیلو وات دوره آخر</string>
+    <string name="zaribeKontor">ضریب کنتور</string>
+    <string name="tedadActive">تعداد ارقام اکتیو</string>
+    <string name="tedadReactive">تعداد ارقام راکتیو</string>
+    <string name="serialReactive">سریال راکتیو</string>
+    <string name="tarikheEnsheab">تاریخ انشعاب</string>
+    <string name="telephone">تلفن</string>
+    <string name="codePosti">کد پستی</string>
+    <string name="codeTarefe">کد تعرفه</string>
+
+    <!-- fragment_moshtarak_operation -->
+    <string name="bazrasi">بازرسی</string>
+    <string name="polomp">پلمپ</string>
+
+    <!-- fragment_polomp_save -->
+    <string name="polompGhadim">پلمپ قدیم</string>
+    <string name="shomarePolomp">شماره پلمپ</string>
+    <string name="modelPolomp">مدل پلمپ:</string>
+    <string name="rangPolomp">رنگ پلمپ:</string>
+    <string name="nakhana">ناخوانا</string>
+    <string name="nadarad">ندارد</string>
+    <string name="polompJadid">پلمپ جدید</string>
+
+    <!-- fragment_test -->
+    <string name="sabteMane">ثبت مانع</string>
+    <string name="anjamTest">انجام تست</string>
+
+    <!-- fragment_test_contor -->
+    <string name="active">اکتیو</string>
+    <string name="reactive">راکتیو</string>
+    <string name="takFaz">تک فاز</string>
+    <string name="seFaz">سه فاز</string>
+    <string name="testAval">تست اول</string>
+    <string name="testDovom">تست دوم</string>
+    <string name="zaribKontor">ضریب کنتور</string>
+    <string name="sabetKontor">ثابت کنتور</string>
+    <string name="nesbatSensor">نسبت سنسور</string>
+    <string name="tedadDor">تعداد دور</string>
+    <string name="sabteKhata99">ثبت خطای %99-</string>
+    <string name="taeed">تأیید</string>
+
+    <!-- fragment_test_energy -->
+    <string name="plus">+</string>
+
+    <!-- listitem_bazdid -->
+    <string name="nameMoshtarak">نام مشترک: </string>
+    <string name="shomareBadane2">شماره بدنه: </string>
+    <string name="address">آدرس: </string>
+
+    <!-- listitem_bazrasi -->
+    <string name="soalBazrasi">سوال بازرسی</string>
+
+    <!-- listitem_test_display -->
+    <string name="noeTest">نوع تست</string>
+    <string name="darsadKhata2">درصد خطای محاسبه شده :</string>
+    <string name="noeTest2">نوع تست :</string>
+    <string name="onvan">عنوان</string>
+    <string name="R">R</string>
+    <string name="S">S</string>
+    <string name="T">T</string>
+    <string name="voltazhV">(V) ولتاژ</string>
+    <string name="jaryanI">جریان (I)</string>
+    <string name="tavanP">توان اکتیو (P)</string>
+    <string name="tavanQ">توان راکتیو (Q)</string>
+    <string name="tavanS">توان ظاهری (S)</string>
+    <string name="zaribPF">ضریب قدرت (PF)</string>
+
+    <!-- listitem_test_result -->
+    <string name="zamanTest">زمان تست</string>
+    <string name="darsadKhata3">درصد خطا</string>
+    <string name="v2">V:</string>
+    <string name="voltazhC">ولتاژ فاز C</string>
+    <string name="voltazhB">ولتاژ فاز B</string>
+    <string name="voltazhA">ولتاژ فاز A</string>
+    <string name="I2">I:</string>
+    <string name="jaryanC">جریان فاز C</string>
+    <string name="jaryanB">جریان فاز B</string>
+    <string name="jaryanA">جریان فاز A</string>
+    <string name="PF2">PF:</string>
+    <string name="zaribC">ضریب توان C</string>
+    <string name="zaribB">ضریب توان B</string>
+    <string name="zaribA">ضریب توان A</string>
+
+    <!-- progress_dialog_layout -->
+    <string name="downloding">Downloading data. Please wait..</string>
+
+    <!-- fragment_home -->
+    <string name="narafzar">نرم افزار تست و بازرسی کنتور</string>
 
 </resources>

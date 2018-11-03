@@ -21,6 +21,6 @@
             android:layout_height="match_parent"
             android:textColor="@color/grey_900"
             android:textSize="18sp"
-            android:text="Downloading data. Please wait.." />
+            android:text="@string/downloding" />
     </TableRow>
 </RelativeLayout>

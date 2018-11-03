@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="تست"/>
+        android:text="@string/Test"/>
 
     <!-- Bazrasi Button-->
     <android.support.v7.widget.AppCompatButton
@@ -26,7 +26,7 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="بازرسی"/>
+        android:text="@string/bazrasi"/>
 
     <!-- Polomp Button-->
     <android.support.v7.widget.AppCompatButton
@@ -38,6 +38,6 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="پلمپ"/>
+        android:text="@string/polomp"/>
 
 </LinearLayout>

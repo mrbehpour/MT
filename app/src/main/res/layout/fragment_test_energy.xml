@@ -29,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/byekan"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="-"
+                android:text="@string/dash"
                 android:textAlignment="gravity"
                 android:textColor="@color/grey_900"
                 android:textSize="32sp" />
@@ -48,7 +48,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/byekan"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="+"
+                android:text="@string/plus"
                 android:textAlignment="gravity"
                 android:textColor="@color/grey_900"
                 android:textSize="32sp" />
@@ -68,7 +68,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/byekan"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="-"
+                android:text="@string/dash"
                 android:textAlignment="gravity"
                 android:textColor="@color/grey_900"
                 android:textSize="32sp" />
@@ -84,7 +84,7 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:fontFamily="@font/byekan"
-        android:text="تایید"
+        android:text="@string/taeed"
         android:textColor="#ffffff"
         android:textSize="16sp" />
 

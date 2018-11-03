@@ -36,8 +36,8 @@
                     android:layout_margin="2dp"
                     android:textSize="22sp"
                     app:on="true"
-                    app:textOn="اکتیو"
-                    app:textOff="راکتیو"
+                    app:textOn="@string/active"
+                    app:textOff="reactive"
                     app:colorOn="#f16f13"
                     app:colorBorder="#f16f13"/>
 
@@ -58,8 +58,8 @@
                     android:layout_margin="2dp"
                     android:textSize="22sp"
                     app:on="true"
-                    app:textOn="تک فاز"
-                    app:textOff="سه فاز"
+                    app:textOn="@string/takFaz"
+                    app:textOff="@string/seFaz"
                     app:colorOn="#f16f13"
                     app:colorBorder="#f16f13"/>
 
@@ -80,8 +80,8 @@
                     android:layout_margin="2dp"
                     android:textSize="22sp"
                     app:on="true"
-                    app:textOn="تست اول"
-                    app:textOff="تست دوم"
+                    app:textOn="@string/testAval"
+                    app:textOff="@string/testDovom"
                     app:colorOn="#f16f13"
                     app:colorBorder="#f16f13"/>
 
@@ -109,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="ضریب کنتور"
+                android:hint="@string/zaribKontor"
                 android:layout_gravity="center">
                 <EditText android:id="@+id/edtZaribCT"
                     android:layout_width="match_parent"
@@ -130,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="ثابت کنتور"
+                android:hint="@string/sabetKontor"
                 android:layout_gravity="center">
                 <EditText android:id="@+id/edtSabeteKontor"
                     android:layout_width="match_parent"
@@ -150,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="نسبت سنسور"
+                android:hint="@string/nesbatSensor"
                 android:layout_gravity="center">
                 <EditText android:id="@+id/edtNesbatKontor"
                     android:layout_width="match_parent"
@@ -170,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="تعداد دور"
+                android:hint="@string/tedadDor"
                 android:layout_gravity="center">
                 <EditText android:id="@+id/edtTedadDor"
                     android:layout_width="match_parent"
@@ -199,7 +199,7 @@
                 android:textAlignment="gravity"
                 android:gravity="right|center_vertical"
                 android:layoutDirection="rtl"
-                android:text="ثبت خطای %99-"
+                android:text="@string/sabteKhata99"
                 android:visibility="gone"/>
 
             </LinearLayout>
@@ -217,5 +217,5 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="تأیید"/>
+        android:text="@string/taeed"/>
 </LinearLayout>
