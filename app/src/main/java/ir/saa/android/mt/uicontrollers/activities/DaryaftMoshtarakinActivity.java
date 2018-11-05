@@ -122,7 +122,7 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
             public void onChanged(@Nullable String s) {
                 tvLabelDarhaleDaryaftMoshtarakin.setVisibility(View.INVISIBLE);
                 isDownloadClient=false;
-                pbMoshtarakin.setProgress(0);
+                //pbMoshtarakin.setProgress(0);
                 Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
 
             }

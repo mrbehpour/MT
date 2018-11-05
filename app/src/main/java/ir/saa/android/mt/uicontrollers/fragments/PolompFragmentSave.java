@@ -122,6 +122,8 @@ public class PolompFragmentSave extends Fragment {
         spnRangPolompGhadim=rootView.findViewById(R.id.spnRangPolompGhadim);
         spnRangPolompJadid=rootView.findViewById(R.id.spnRangPolompJadid);
 
+
+
         cbNewNakhana=rootView.findViewById(R.id.cbJadidNakhana);
         cbNewNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -408,13 +410,13 @@ public class PolompFragmentSave extends Fragment {
                 polompDtl.StatePolomp=2;
             }
             polompDtl.ReadTypeID=1;
-            polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+            polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition())==0?null:spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
             polompDtl.CurrentPolomp=etPolompJadid.getText().toString();
             polompDtl.PolompID=polompParams.PolompId;
-            polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-            polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+            polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition())==0?null:spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+            polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition())==0?null:spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
             polompDtl.PreviousPolomp=etPolompGhadim.getText().toString();
-            polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+            polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition())==0?null:spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
             polompDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
             Long  polompInfoId= polompViewModel.insertPolompInfo(polompInfo);
             polompDtl.PolompInfoID=polompInfoId;
@@ -437,13 +439,13 @@ public class PolompFragmentSave extends Fragment {
             polompDtl.ReadTypeID=1;
             polompDtl.PolompDtlID=polompAllInfo.PolompDtlID;
             polompDtl.PolompInfoID=Long.valueOf( polompAllInfo.PolompInfoID);
-            polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+            polompDtl.CurrentColorID=spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition())==0?null:spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
             polompDtl.CurrentPolomp=etPolompJadid.getText().toString();
             polompDtl.PolompID=polompParams.PolompId;
-            polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-            polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+            polompDtl.PolompTypeID=spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition())==0?null:spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+            polompDtl.PreviousColorID=spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition())==0?null:spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
             polompDtl.PreviousPolomp=etPolompGhadim.getText().toString();
-            polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+            polompDtl.PreviousPolompTypeID=spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition())==0?null:spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
             polompDtl.AgentID=Integer.valueOf (G.getPref("UserID"));
             polompViewModel.updatePolompDtl(polompDtl);
             Toast.makeText(getActivity(),getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();

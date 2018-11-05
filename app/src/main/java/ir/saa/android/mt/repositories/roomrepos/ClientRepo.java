@@ -6,6 +6,7 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.daos.ClientDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.Client;
@@ -18,6 +19,7 @@ public class ClientRepo {
 
     public ClientRepo(Application application){
         MTDatabase db= MTDatabase.getDatabase(application);
+        //String backupDBPath = db.getDatabase(G.context).getOpenHelper().getWritableDatabase().getPath();
         clientDao=db.clientModel();
         Clients=clientDao.getClientsLiveData();
     }

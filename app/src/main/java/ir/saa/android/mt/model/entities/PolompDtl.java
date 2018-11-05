@@ -13,7 +13,7 @@ public class PolompDtl  {
     @NonNull
     public Integer PolompDtlID ;
 
-    public int CurrentColorID ;
+    public Integer CurrentColorID ;
 
     public String CurrentPolomp ;
 
@@ -21,7 +21,7 @@ public class PolompDtl  {
 
     public Long PolompInfoID ;
 
-    public int PreviousColorID ;
+    public Integer PreviousColorID ;
 
     public String PreviousPolomp ;
 
@@ -29,9 +29,9 @@ public class PolompDtl  {
 
     public boolean IsDuplicated ;
 
-    public int PolompTypeID ;
+    public Integer PolompTypeID ;
 
-    public int PreviousPolompTypeID ;
+    public Integer PreviousPolompTypeID ;
 
     public Integer AgentID ;
 

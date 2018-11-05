@@ -54,8 +54,8 @@ public interface RemarkDao {
     @Query("Select * from Remark" +
             " inner join GroupingFormat on" +
             " Remark.RemarkID=GroupingFormat.remark_id" +
-            " Where GroupingFormat.mastergroupdetail_id=:Id and Remark.RemarkTypeID=:remarkTypeId")
-    LiveData<List<RemarkGroupingFormat>> getRemarkGroupingFormat(Integer Id,Integer remarkTypeId);
+            " Where GroupingFormat.mastergroupdetail_id=:Id and GroupingFormat.remarkgroup_id=:remarkgroupId")
+    LiveData<List<RemarkGroupingFormat>> getRemarkGroupingFormat(Integer Id,Integer remarkgroupId);
 
 
 

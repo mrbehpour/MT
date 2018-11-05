@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
+import ir.saa.android.mt.uicontrollers.pojos.TestContor.DecimalDigitsInputFilter;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.TestContorViewModel;
 
@@ -58,6 +60,10 @@ public class TestContorFragment extends Fragment
         edtContorConst = rootView.findViewById(R.id.edtSabeteKontor);
         edtSensorRatio = rootView.findViewById(R.id.edtNesbatKontor);
         edtRoundNum = rootView.findViewById(R.id.edtTedadDor);
+
+        //for Do ragham ashar
+        //edtContorConst.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,2)});
+
         com.github.angads25.toggle.LabeledSwitch switchTestType = rootView.findViewById(R.id.switchTestType);
         com.github.angads25.toggle.LabeledSwitch switchPhase = rootView.findViewById(R.id.switchPhase);
         com.github.angads25.toggle.LabeledSwitch switchTestNum = rootView.findViewById(R.id.switchTestNum);
@@ -178,10 +184,14 @@ public class TestContorFragment extends Fragment
             res=false;
         }
 
-//        if(edtRoundNum.getText().toString().equals("")){
-//            Toast.makeText(G.context,"تعداد دور را لطفا وارد کنید",Toast.LENGTH_SHORT).show();
-//            res=false;
-//        }
+        if(edtRoundNum.getText().toString().equals("")){
+            Toast.makeText(G.context,getResources().getText(R.string.TedadDore_Message),Toast.LENGTH_SHORT).show();
+            res=false;
+        }
+        if(edtRoundNum.getText().toString().equals("0")){
+            Toast.makeText(G.context,getResources().getText(R.string.TedadDore_Message_Zero),Toast.LENGTH_SHORT).show();
+            res=false;
+        }
 
         return  res;
     }

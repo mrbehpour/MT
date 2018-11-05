@@ -76,6 +76,7 @@ public interface ClientDao {
             "Client.RoozKar," +
             "AnswerGroupDtlName as TariffTypeName " +
             "from Client " +
+            "INNER JOIN AnswerGroup on AnswerGroup.AnswerGroupID=AnswerGroupDtl.answergroup_id and AnswerGroup.Description='Tariff'"+
             "INNER JOIN AnswerGroupDtl on Client.tarifftype_id=AnswerGroupDtl.Description "+
              "where ClientID= :clientId"   )
     LiveData<ClientWithTarif> getClientWithTarif(Long clientId);

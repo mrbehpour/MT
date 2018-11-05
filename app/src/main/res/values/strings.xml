@@ -98,10 +98,11 @@
     <string name="ZaribContor_Message">لطفا ضریب کنتور را وارد کنید</string>
     <string name="SabetContor_Message">لطفا ثابت کنتور را وارد کنید</string>
     <string name="NesbatSensor_Message">لطفا نسبت سنسور را وارد کنید</string>
+    <string name="TedadDore_Message">لطفا تعداد دور را وارد نکنید</string>
     <string name="ZaribContor_Message_Zero">لطفا ضریب کنتور را صفر وارد نکنید</string>
     <string name="SabetContor_Message_Zero">لطفا ثابت کنتور را صفر وارد نکنید</string>
     <string name="NesbatSensor_Message_Zero">لطفا نسبت سنسور را صفر وارد نکنید</string>
-
+    <string name="TedadDore_Message_Zero">لطفا تعداد دور را صفر وارد نکنید</string>
     <!--GetInformation-->
     <string name="FailSend">دریافت با مشکل مواجه شد</string>
 
