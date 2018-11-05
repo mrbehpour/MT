@@ -118,37 +118,28 @@
                 android:layout_height="wrap_content">
 
                 <!-- Icon Test -->
-                <ir.saa.android.mt.components.TextViewFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
                     android:id="@+id/iconTest"
-                    android:textSize="20sp"
-                    android:text="@string/icon_Test"
-                    android:textColor="@color/icon_off"
-                    app:fontFamily="@font/fw"
-                    />
-                <!-- Icon BAzrasi -->
-                <ir.saa.android.mt.components.TextViewFont
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="24dp"
+                    android:background="@drawable/icon_test"
+                    android:backgroundTint="@color/icon_off" />
+                <!-- Icon Bazrasi -->
+                <ImageView
                     android:id="@+id/iconBazrasi"
-                    android:layout_marginLeft="8dp"
-                    android:text="@string/icon_Bazrasi"
-                    app:fontFamily="@font/fw"
-                    android:textColor="@color/icon_off"
-                    android:textSize="20sp"
-                    />
-                <!-- Icon Polomp -->
-                <ir.saa.android.mt.components.TextViewFont
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/icon_bazrasi"
+                    android:backgroundTint="@color/icon_off" />
+                <!-- Icon Polomp -->
+                <ImageView
                     android:id="@+id/iconPolomp"
-                    android:layout_marginLeft="8dp"
-                    android:text="@string/icon_polomp"
-                    app:fontFamily="@font/fw"
-                    android:textColor="@color/icon_off"
-                    android:textSize="20sp"
-                    />
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/icon_polomp"
+                    android:backgroundTint="@color/icon_off" />
             </LinearLayout>
 
             <!-- line -->
