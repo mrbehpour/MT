@@ -47,7 +47,7 @@ public interface InspectionDtlDao {
     @Query("Select * from InspectionInfo " +
             "inner join InspectionDtl on " +
             "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
-            "Where InspectionInfo.ClientID=:clientId and InspectionInfo.RemarkID=:remarkId")
+            "Where InspectionInfo.ClientID=:clientId and InspectionDtl.RemarkID=:remarkId")
     InspectionAllInfo getInspectionAllInfo(Long clientId,Integer remarkId);
 
     @Query("Select * from InspectionInfo " +

@@ -23,9 +23,9 @@ public class InspectionInfo  {
 
     public int SendID;
 
-    public int BlockID;
+    public Integer BlockID;
 
-    public int RemarkID;
+    //public int RemarkID;
 
     public Long FollowUpCode;
 

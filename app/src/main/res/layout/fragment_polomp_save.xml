@@ -259,6 +259,7 @@
                     android:gravity="right|center_vertical"
                     android:layoutDirection="rtl"
                     android:text="ناخوانا"
+                    android:visibility="invisible"
                     android:textAlignment="gravity"
                     android:textDirection="rtl"
                     android:textSize="18sp" />
@@ -273,6 +274,7 @@
                 android:fontFamily="@font/byekan"
                 android:gravity="right|center_vertical"
                 android:layoutDirection="rtl"
+                android:visibility="invisible"
                 android:text="ندارد"
                 android:textAlignment="gravity"
                 android:textDirection="rtl"

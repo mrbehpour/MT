@@ -33,9 +33,7 @@ public class PolompDtl  {
 
     public int PreviousPolompTypeID ;
 
-    public int StateOld;
-
-    public int StateNew;
-
     public Integer AgentID ;
+
+   public Integer StatePolomp;
 }

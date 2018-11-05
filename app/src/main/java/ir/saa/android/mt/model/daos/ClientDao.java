@@ -22,6 +22,11 @@ public interface ClientDao {
     @Query("select * from Client")
     List<Client> getClients();
 
+    @Query("select * from Client where RegionID=:regionId")
+    List<Client> getClientsWithRegionId(Integer regionId);
+
+    @Query("select * from Client where RegionID=:regionId")
+    LiveData<List<Client>> getClientsWithRegionIdLiveData(Integer regionId);
     @Query("Select " +
             "Client.ClientID," +
             "Client.tarifftype_id," +

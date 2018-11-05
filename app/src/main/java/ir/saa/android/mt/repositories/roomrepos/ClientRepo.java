@@ -2,6 +2,7 @@ package ir.saa.android.mt.repositories.roomrepos;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.Query;
 
 import java.util.List;
 
@@ -28,6 +29,14 @@ public class ClientRepo {
 
     public List<Client> getClients() {
         return clientDao.getClients();
+    }
+
+    public List<Client> getClientsWithRegionId(Integer regionId){
+        return clientDao.getClientsWithRegionId(regionId);
+    }
+
+    public LiveData<List<Client>> getClientsWithRegionIdLiveData(Integer regionId){
+        return clientDao.getClientsWithRegionIdLiveData(regionId);
     }
 
     public void updateClient(Client client) {

@@ -134,14 +134,15 @@ public class SendViewModel extends AndroidViewModel {
                     if(inspectionAllInfos.size()!=0) {
                         InspectionInfo inspectionInfo=new InspectionInfo();
                         inspectionInfo.InspectionInfoID=null;
-                        inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
+                        //inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
                         inspectionInfo.InspectionTime=inspectionAllInfos.get(0).InspectionTime;
                         inspectionInfo.InspectionDate=inspectionAllInfos.get(0).InspectionDate;
                         inspectionInfo.SendID=inspectionAllInfos.get(0).SendID;
                         inspectionInfo.ClientID=inspectionAllInfos.get(0).ClientID;
                         inspectionInfo.AgentID=inspectionAllInfos.get(0).AgentID;
-                        inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
+                        //inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
                         inspectionInfo.FollowUpCode=inspectionAllInfos.get(0).FollowUpCode;
+                        inspectionInfo.BlockID=null;
                         ClientAllInfo.InspectionInfo =inspectionInfo;
                         for (InspectionAllInfo inspectionAllInfo:inspectionAllInfos) {
                             InspectionDtl inspectionDtl=new InspectionDtl();
@@ -184,6 +185,7 @@ public class SendViewModel extends AndroidViewModel {
                             polompDtl.AgentID=polompAllInfo.AgentID;
                             polompDtl.PreviousPolomp=polompAllInfo.PreviousPolomp;
                             polompDtl.ReadTypeID=polompAllInfo.ReadTypeID;
+                            polompDtl.StatePolomp=polompAllInfo.StatePolomp;
                             polompDtl.IsDuplicated=false;
                             ClientAllInfo.PolompDtls=new ArrayList<>();
                             ClientAllInfo.PolompDtls.add(polompDtl);
@@ -217,8 +219,8 @@ public class SendViewModel extends AndroidViewModel {
                 }
                 
                 if(clientinfolList.size()!=0){
-//                    Gson gson = new Gson();
-//                    String val=gson.toJson(clientinfolList);
+                    Gson gson = new Gson();
+                    String val=gson.toJson(clientinfolList);
                     retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientinfolList)
                             .subscribeOn(Schedulers.io())
                             .subscribeWith(new SingleObserver<List<RecordeSummary>>() {
