@@ -4,6 +4,6 @@
     <string name="icon_polomp">&#xf023;</string>
     <string name="icon_Bazrasi">&#xf022;</string>
     <string name="tp_text_icon">"fw"</string>
-    <color name="icon_off">@color/grey_500</color>
-    <color name="icon_on">#99be06</color>
+    <color name="icon_off">@color/grey_400</color>
+    <color name="icon_on">@color/green_A300</color>
 </resources>
