@@ -8,82 +8,44 @@
     android:orientation="vertical"
     android:id="@+id/listItempolompRoot">
 
+    <!-- Name Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         android:orientation="horizontal">
-
-        <!-- Info Layout -->
-        <LinearLayout
+        <!-- Name -->
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_marginRight="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:orientation="vertical">
-
-            <!-- Name Layout -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <!-- Name -->
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_marginRight="4dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
-                    android:textColor="@color/grey_900"
-                    android:textAlignment="gravity"
-                    android:gravity="center"
-                    android:text="@string/dash"
-                    android:layout_weight="1"/>
-                <!-- Name Lable -->
-
-            </LinearLayout>
-
-
-
-
-
-
-            //space
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="8dp"
-                android:orientation="vertical"></LinearLayout>
-            //line
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#aaa">
-            </LinearLayout>
-        </LinearLayout>
-
-
-
-        <!-- hidden texts, they are used in app, don't delete them! -->
-        <TextView
-            android:id="@+id/tvId"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
             android:fontFamily="@font/byekan"
-            android:textSize="12sp"
-            android:textColor="@color/grey_500"
+            android:textSize="14sp"
+            android:textColor="@color/grey_900"
+            android:textAlignment="gravity"
             android:gravity="center"
-            android:visibility="invisible"
-            android:text="کد پلمپ :" />
-        <TextView
-            android:id="@+id/tvClientId"
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            android:fontFamily="@font/byekan"
-            android:textSize="1sp"
-            android:textColor="@color/grey_500"
-            android:gravity="center"
-            android:visibility="invisible"
-             />
+            android:text="@string/dash"/>
     </LinearLayout>
 
+    <!-- line -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#aaa">
+    </LinearLayout>
+
+    <!-- hidden texts, they are used in app, don't delete them! -->
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"/>
+    <TextView
+        android:id="@+id/tvClientId"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"/>
 </LinearLayout>

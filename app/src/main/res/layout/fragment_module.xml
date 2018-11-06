@@ -70,90 +70,90 @@
         />
 
     <!-- Buzzer -->
-    <LinearLayout
-        android:id="@+id/ll1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingRight="50dp"
-        android:paddingLeft="20dp">
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/swBuzzer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:orientation="vertical">
-            <ir.saa.android.mt.components.TextViewFont
-                android:id="@+id/tvBuzzer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Buzzer"
-                android:textColor="@color/grey_900"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:customFont="@string/font_default" />
-            <ir.saa.android.mt.components.TextViewFont
-                android:id="@+id/tvLableBuzzer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/deviceVoiceOnOff"
-                android:textColor="@color/grey_500"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:customFont="@string/font_menu" />
-        </LinearLayout>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ll1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:minHeight="50dp"-->
+        <!--android:background="?attr/selectableItemBackground"-->
+        <!--android:clickable="true"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingRight="50dp"-->
+        <!--android:paddingLeft="20dp">-->
+        <!--<android.support.v7.widget.SwitchCompat-->
+            <!--android:id="@+id/swBuzzer"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="right"-->
+            <!--android:orientation="vertical">-->
+            <!--<ir.saa.android.mt.components.TextViewFont-->
+                <!--android:id="@+id/tvBuzzer"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/Buzzer"-->
+                <!--android:textColor="@color/grey_900"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textStyle="bold"-->
+                <!--app:customFont="@string/font_default" />-->
+            <!--<ir.saa.android.mt.components.TextViewFont-->
+                <!--android:id="@+id/tvLableBuzzer"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/deviceVoiceOnOff"-->
+                <!--android:textColor="@color/grey_500"-->
+                <!--android:textSize="13sp"-->
+                <!--android:textStyle="bold"-->
+                <!--app:customFont="@string/font_menu" />-->
+        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
     <!-- LED -->
-    <LinearLayout
-        android:id="@+id/lLED"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="50dp"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingRight="50dp"
-        android:paddingLeft="20dp">
-        <android.support.v7.widget.SwitchCompat
-            android:id="@+id/swLED"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:orientation="vertical">
-            <ir.saa.android.mt.components.TextViewFont
-                android:id="@+id/tvLED"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/LED"
-                android:textColor="@color/grey_900"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:customFont="@string/font_default" />
-            <ir.saa.android.mt.components.TextViewFont
-                android:id="@+id/tvLableLED"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/deviceLightOnOff"
-                android:textColor="@color/grey_500"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                app:customFont="@string/font_menu" />
-        </LinearLayout>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:id="@+id/lLED"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:minHeight="50dp"-->
+        <!--android:background="?attr/selectableItemBackground"-->
+        <!--android:clickable="true"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingRight="50dp"-->
+        <!--android:paddingLeft="20dp">-->
+        <!--<android.support.v7.widget.SwitchCompat-->
+            <!--android:id="@+id/swLED"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="right"-->
+            <!--android:orientation="vertical">-->
+            <!--<ir.saa.android.mt.components.TextViewFont-->
+                <!--android:id="@+id/tvLED"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/LED"-->
+                <!--android:textColor="@color/grey_900"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textStyle="bold"-->
+                <!--app:customFont="@string/font_default" />-->
+            <!--<ir.saa.android.mt.components.TextViewFont-->
+                <!--android:id="@+id/tvLableLED"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/deviceLightOnOff"-->
+                <!--android:textColor="@color/grey_500"-->
+                <!--android:textSize="13sp"-->
+                <!--android:textStyle="bold"-->
+                <!--app:customFont="@string/font_menu" />-->
+        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
 
     <!-- Reset Button    -->
     <android.support.v7.widget.AppCompatButton
