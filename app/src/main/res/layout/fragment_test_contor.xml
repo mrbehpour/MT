@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,7 +42,7 @@
                     android:textSize="22sp"
                     app:on="true"
                     app:textOn="@string/active"
-                    app:textOff="reactive"
+                    app:textOff="@string/reactive"
                     app:colorOn="#f16f13"
                     app:colorBorder="#f16f13"/>
 
@@ -220,3 +225,5 @@
         android:textSize="16sp"
         android:text="@string/taeed"/>
 </LinearLayout>
+
+</ScrollView>
