@@ -36,9 +36,7 @@ public class PolompAllInfo {
 
     public Integer PreviousPolompTypeID ;
 
-    public Integer StateOld;
-
-    public Integer StateNew;
-
     public Long FollowUpCode;
+
+    public Integer StatePolomp;
 }

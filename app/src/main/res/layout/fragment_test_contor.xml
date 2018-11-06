@@ -125,6 +125,7 @@
 
 
             <!-- Sabete Kontor -->
+            <!--android:inputType="numberDecimal" Ashari-->
             <android.support.design.widget.TextInputLayout
                 android:fontFamily="@font/byekan"
                 android:layout_width="match_parent"

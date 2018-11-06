@@ -16,7 +16,7 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 
 @Dao
 public interface RegionDao {
-    @Query("SELECT * FROM Region")
+    @Query("SELECT * FROM Region where RegionID<>-1")
     LiveData<List<Region>> getRegions();
 
     @Query("Delete From Region")

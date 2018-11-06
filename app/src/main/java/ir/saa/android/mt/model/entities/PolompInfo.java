@@ -11,7 +11,7 @@ public class PolompInfo {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    public int PolompInfoID ;
+    public Integer PolompInfoID ;
 
     public int AgentID ;
 

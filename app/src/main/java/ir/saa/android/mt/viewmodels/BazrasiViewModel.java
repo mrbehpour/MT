@@ -57,7 +57,7 @@ public class BazrasiViewModel extends AndroidViewModel {
 
            if(remarkRepo.getRemarkGroupingFormat(Id,3).getValue()!=null){
                List<RemarkItem> remarkInit=new ArrayList<>();
-               for (RemarkGroupingFormat remark:remarkRepo.getRemarkGroupingFormat(Id,3).getValue()) {
+               for (RemarkGroupingFormat remark:remarkRepo.getRemarkGroupingFormat(Id,0).getValue()) {
                    InspectionAllInfo inspectionAllInfo1=inspectionDtlRepo.getInspectionAllInfo(G.clientInfo.ClientId,remark.RemarkID);
                    if(inspectionAllInfo1==null){
                        remarkInit.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,"-1"));
@@ -68,7 +68,7 @@ public class BazrasiViewModel extends AndroidViewModel {
                RemarkItemLiveData.postValue( remarkInit);
            }
 
-           remarkRepo.getRemarkGroupingFormat(G.clientInfo.GroupId,3).observeForever(remarks -> {
+           remarkRepo.getRemarkGroupingFormat(G.clientInfo.GroupId,0).observeForever(remarks -> {
                List<RemarkItem> remarkItems=new ArrayList<>();
                InspectionAllInfo inspectionAllInfo=new InspectionAllInfo();
                for (RemarkGroupingFormat remark:remarks) {

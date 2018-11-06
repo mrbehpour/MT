@@ -2,9 +2,11 @@ package ir.saa.android.mt.repositories.roomrepos;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.daos.ClientDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.Client;
@@ -17,6 +19,7 @@ public class ClientRepo {
 
     public ClientRepo(Application application){
         MTDatabase db= MTDatabase.getDatabase(application);
+        //String backupDBPath = db.getDatabase(G.context).getOpenHelper().getWritableDatabase().getPath();
         clientDao=db.clientModel();
         Clients=clientDao.getClientsLiveData();
     }
@@ -28,6 +31,14 @@ public class ClientRepo {
 
     public List<Client> getClients() {
         return clientDao.getClients();
+    }
+
+    public List<Client> getClientsWithRegionId(Integer regionId){
+        return clientDao.getClientsWithRegionId(regionId);
+    }
+
+    public LiveData<List<Client>> getClientsWithRegionIdLiveData(Integer regionId){
+        return clientDao.getClientsWithRegionIdLiveData(regionId);
     }
 
     public void updateClient(Client client) {

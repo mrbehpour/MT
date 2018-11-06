@@ -277,6 +277,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     agentAccessListRepo.insertAgentAccessList(agentAccessLists.Data.get(i));
                     UsersProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
+                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
 
 
             }
@@ -317,6 +318,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                             for (Integer i = 0; i < settings.Data.size(); i++) {
                                 settingRepo.insertSetting(settings.Data.get(i));
                                 settingProgressPercentLiveData.postValue(getPrecent(i + 1, settings.Data.size()));
+                                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
                             }
                         }else{
                             messageErrorLiveData.postValue(settings.Message);
@@ -347,7 +349,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
                         if(clients.Success) {
                             for (Integer i = 0; i < clients.Data.size(); i++) {
                                 clientRepo.insertClient(clients.Data.get(i));
+
                                 clientProgressPercentLiveData.postValue(getPrecent(i + 1, clients.Data.size()));
+                                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
                             }
                         }else {
                             messageErrorLiveData.postValue(clients.Message);
@@ -558,6 +562,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     polompTypeRepo.insertPolompType(polompTypes.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
+                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
 
 
             }

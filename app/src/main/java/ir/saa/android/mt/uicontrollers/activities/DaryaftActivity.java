@@ -14,6 +14,7 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.*;
@@ -42,6 +43,10 @@ public class DaryaftActivity extends AppCompatActivity   {
     Boolean isDownloadSetting;
     //Boolean isDownloadClient;
 
+    TextView tvLabelDarhaleDaryaftEtelatPayeh;
+    TextView tvLabelDarhaleDaryaftTanzimat;
+    TextView tvLabelDarhaleDaryaftUsers;
+
     BaseInfoViewModel baseInfoViewModel = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +61,10 @@ public class DaryaftActivity extends AppCompatActivity   {
         baseInfoViewModel=ViewModelProviders.of(this).get(BaseInfoViewModel.class);
         pbDaryaftEtelatPayeh =  findViewById(R.id.pbDaryaftEtelatPayeh);
         pbDaryaftEtelatPayeh.setMax(100);
+
+        tvLabelDarhaleDaryaftEtelatPayeh=findViewById(R.id.tvLabelDarhaleDaryaftEtelatPayeh);
+        tvLabelDarhaleDaryaftTanzimat=findViewById(R.id.tvLabelDarhaleDaryaftTanzimat);
+        tvLabelDarhaleDaryaftUsers=findViewById(R.id.tvLabelDarhaleDaryaftUsers);
 
         pbKarbaran =  findViewById(R.id.pbKarbaran);
         pbKarbaran.setMax(100);
@@ -83,7 +92,7 @@ public class DaryaftActivity extends AppCompatActivity   {
                 if(isDownloadSetting==false){
                     isDownloadSetting=true;
                     baseInfoViewModel.getSettingFromServer();
-
+                    tvLabelDarhaleDaryaftTanzimat.setVisibility(View.VISIBLE);
                 }
 
 
@@ -110,6 +119,7 @@ public class DaryaftActivity extends AppCompatActivity   {
                 if(isDownloadUser==false){
                     isDownloadUser=true;
                     baseInfoViewModel.getUserFromServer();
+                    tvLabelDarhaleDaryaftUsers.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -134,6 +144,7 @@ public class DaryaftActivity extends AppCompatActivity   {
                 if(isDownloadBaseInfo==false){
                     isDownloadBaseInfo=true;
                     baseInfoViewModel.getBaseInfoFromServer();
+                    tvLabelDarhaleDaryaftEtelatPayeh.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -145,6 +156,11 @@ public class DaryaftActivity extends AppCompatActivity   {
                 //isDownloadClient=false;
                 isDownloadSetting=false;
                 isDownloadUser=false;
+
+                tvLabelDarhaleDaryaftEtelatPayeh.setVisibility(View.INVISIBLE);
+                tvLabelDarhaleDaryaftTanzimat.setVisibility(View.INVISIBLE);
+                tvLabelDarhaleDaryaftUsers.setVisibility(View.INVISIBLE);
+
                 Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
 
             }

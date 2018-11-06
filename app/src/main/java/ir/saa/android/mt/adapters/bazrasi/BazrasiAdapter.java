@@ -188,7 +188,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
 
                 inspectionInfo.InspectionDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
                 inspectionInfo.InspectionTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
-                inspectionInfo.RemarkID = currentItem.Id;
+                //inspectionInfo.RemarkID = currentItem.Id;
                 Long inspectionInfoId = bazrasiViewModel.insertInspectionInfo(inspectionInfo);
                 InspectionDtl inspectionDtl = new InspectionDtl();
                 inspectionDtl.RemarkID = currentItem.Id;
@@ -208,7 +208,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
             inspectionInfo.ClientID=inspectionAllInfo.ClientID;
             inspectionInfo.InspectionDate=inspectionAllInfo.InspectionDate;
             inspectionInfo.InspectionTime=inspectionAllInfo.InspectionTime;
-            inspectionInfo.RemarkID=inspectionAllInfo.RemarkID;
+            //inspectionInfo.RemarkID=inspectionAllInfo.RemarkID;
             inspectionInfo.InspectionInfoID=inspectionAllInfo.InspectionInfoID;
             int inspectionInfoId =bazrasiViewModel.updateInspectionInfo(inspectionInfo);
             InspectionDtl inspectionDtl=new InspectionDtl();

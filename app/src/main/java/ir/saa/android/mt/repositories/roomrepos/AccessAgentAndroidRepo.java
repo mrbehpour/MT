@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.daos.AccessAgentAndroidDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
@@ -15,6 +16,7 @@ public class AccessAgentAndroidRepo {
 
     public AccessAgentAndroidRepo(Application application){
         MTDatabase db = MTDatabase.getDatabase(application);
+
         accessAgentAndroidDao=db.accessAgentAndroidModel();
         AccessAgentAndroids=accessAgentAndroidDao.getAccessAgentAndroids();
 

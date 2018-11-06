@@ -76,6 +76,10 @@ public class BazdidViewModel extends AndroidViewModel {
         return clientRepo.getClientsLiveData();
     }
 
+    public LiveData<List<Client>> getClientsWithRegionIdLiveData(Integer regionId){
+        return clientRepo.getClientsWithRegionIdLiveData(regionId);
+    }
+
 
 
     public Boolean getInspectionValue(Long clientId) {

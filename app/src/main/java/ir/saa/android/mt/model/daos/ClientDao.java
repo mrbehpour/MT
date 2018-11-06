@@ -22,6 +22,11 @@ public interface ClientDao {
     @Query("select * from Client")
     List<Client> getClients();
 
+    @Query("select * from Client where RegionID=:regionId")
+    List<Client> getClientsWithRegionId(Integer regionId);
+
+    @Query("select * from Client where RegionID=:regionId")
+    LiveData<List<Client>> getClientsWithRegionIdLiveData(Integer regionId);
     @Query("Select " +
             "Client.ClientID," +
             "Client.tarifftype_id," +
@@ -71,6 +76,7 @@ public interface ClientDao {
             "Client.RoozKar," +
             "AnswerGroupDtlName as TariffTypeName " +
             "from Client " +
+            "INNER JOIN AnswerGroup on AnswerGroup.AnswerGroupID=AnswerGroupDtl.answergroup_id and AnswerGroup.Description='Tariff'"+
             "INNER JOIN AnswerGroupDtl on Client.tarifftype_id=AnswerGroupDtl.Description "+
              "where ClientID= :clientId"   )
     LiveData<ClientWithTarif> getClientWithTarif(Long clientId);

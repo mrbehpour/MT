@@ -18,7 +18,7 @@ public class TestContorFieldName {
             hashMapCode.put("CTCoeff",23);
             hashMapCode.put("SensorRatio",22);
             hashMapCode.put("testContorParams_RoundNum",24);
-            hashMapCode.put("ErrPerc",41);
+            hashMapCode.put("ErrPerc",40);
             hashMapCode.put("PF_A",13);
             hashMapCode.put("PF_B",14);
             hashMapCode.put("PF_C",15);
@@ -44,7 +44,7 @@ public class TestContorFieldName {
             hashMapName.put(23,"CTCoeff");
             hashMapName.put(22,"SensorRatio");
             hashMapName.put(24,"testContorParams_RoundNum");
-            hashMapName.put(41,"ErrPerc");
+            hashMapName.put(40,"ErrPerc");
             hashMapName.put(13,"PF_A");
             hashMapName.put(14,"PF_B");
             hashMapName.put(15,"PF_C");
