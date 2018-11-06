@@ -260,4 +260,6 @@
     <!-- fragment_home -->
     <string name="narafzar">نرم افزار تست و بازرسی کنتور</string>
 
+    <!-- fragment_settings -->
+    <string name="serverAddress">آدرس سرور:</string>
 </resources>
