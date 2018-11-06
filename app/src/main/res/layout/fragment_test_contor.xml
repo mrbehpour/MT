@@ -4,24 +4,11 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/grey_200">
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
-
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/grey_200">
@@ -29,7 +16,8 @@
         <!-- Main Layout -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="vertical">
             <!-- Top Layout -->
@@ -46,17 +34,6 @@
                     android:gravity="center_horizontal"
                     android:layout_marginTop="16dp">
 
-                <com.github.angads25.toggle.LabeledSwitch
-                    android:id="@+id/switchTestType"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:textSize="22sp"
-                    app:on="true"
-                    app:textOn="@string/active"
-                    app:textOff="@string/reactive"
-                    app:colorOn="#f16f13"
-                    app:colorBorder="#f16f13"/>
                     <com.github.angads25.toggle.LabeledSwitch
                         android:id="@+id/switchTestType"
                         android:layout_width="140dp"
@@ -65,7 +42,7 @@
                         android:textSize="22sp"
                         app:on="true"
                         app:textOn="@string/active"
-                        app:textOff="reactive"
+                        app:textOff="@string/reactive"
                         app:colorOn="#f16f13"
                         app:colorBorder="#f16f13"/>
 
@@ -112,14 +89,22 @@
                         app:textOff="@string/testDovom"
                         app:colorOn="#f16f13"
                         app:colorBorder="#f16f13"/>
+
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:orientation="vertical">
             </LinearLayout>
 
             <!-- Info (center) Layout -->
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center"
                 android:orientation="vertical">
 
@@ -145,6 +130,7 @@
 
 
                 <!-- Sabete Kontor -->
+                <!--android:inputType="numberDecimal" Ashari-->
                 <android.support.design.widget.TextInputLayout
                     android:fontFamily="@font/byekan"
                     android:layout_width="match_parent"
@@ -209,40 +195,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp">
-                <CheckBox
-                    android:id="@+id/cbSabte99"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
-                    android:textDirection="rtl"
-                    android:textAlignment="gravity"
-                    android:gravity="right|center_vertical"
-                    android:layoutDirection="rtl"
-                    android:text="@string/sabteKhata99"
-                    android:visibility="gone"/>
+                    <CheckBox
+                        android:id="@+id/cbSabte99"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textDirection="rtl"
+                        android:textAlignment="gravity"
+                        android:gravity="right|center_vertical"
+                        android:layoutDirection="rtl"
+                        android:text="@string/sabteKhata99"
+                        android:visibility="gone"/>
+
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
-        <!-- button layout -->
-        <LinearLayout
+        <!-- Taeed Button -->
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnTaeed"
+            android:fontFamily="@font/byekan"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center|bottom"
-            android:orientation="vertical">
-            <!-- Taeed Button -->
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnTaeed"
-                android:fontFamily="@font/byekan"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_margin="16dp"
-                android:layout_gravity="center"
-                android:textColor="#ffffff"
-                android:textSize="16sp"
-                android:text="@string/taeed"/>
-        </LinearLayout>
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:text="@string/taeed"/>
     </LinearLayout>
+
 </ScrollView>

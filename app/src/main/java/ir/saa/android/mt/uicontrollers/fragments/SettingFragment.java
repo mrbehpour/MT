@@ -44,12 +44,12 @@ public class SettingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.ll1).setOnClickListener(v->{
-            ((SwitchCompat)view.findViewById(R.id.sw1)).setChecked(!(((SwitchCompat) view.findViewById(R.id.sw1)).isChecked()));
-        });
-        view.findViewById(R.id.ll2).setOnClickListener(v->{
-            ((SwitchCompat)view.findViewById(R.id.sw2)).setChecked(!(((SwitchCompat) view.findViewById(R.id.sw2)).isChecked()));
-        });
+//        view.findViewById(R.id.ll1).setOnClickListener(v->{
+//            ((SwitchCompat)view.findViewById(R.id.sw1)).setChecked(!(((SwitchCompat) view.findViewById(R.id.sw1)).isChecked()));
+//        });
+//        view.findViewById(R.id.ll2).setOnClickListener(v->{
+//            ((SwitchCompat)view.findViewById(R.id.sw2)).setChecked(!(((SwitchCompat) view.findViewById(R.id.sw2)).isChecked()));
+//        });
     }
 
     @Override
