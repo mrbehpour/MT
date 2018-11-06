@@ -187,7 +187,7 @@
 
     <!-- fragment_polomp_save -->
     <string name="polompGhadim">پلمپ قدیم</string>
-    <string name="shomarePolomp">شماره پلمپ</string>
+    <string name="shomarePolomp">شماره پلمپ :</string>
     <string name="modelPolomp">مدل پلمپ:</string>
     <string name="rangPolomp">رنگ پلمپ:</string>
     <string name="nadarad">ندارد</string>
