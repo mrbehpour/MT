@@ -58,8 +58,7 @@ public class PolompFragmentSave extends Fragment {
     AppCompatButton btnSave;
 
     CheckBox cbGhadimNadard;
-    CheckBox cbJadidNadard;
-    CheckBox cbNewNakhana;
+
     CheckBox cbOldNakhana;
 
     TextView tvModelPolompGhadim;
@@ -124,25 +123,7 @@ public class PolompFragmentSave extends Fragment {
 
 
 
-        cbNewNakhana=rootView.findViewById(R.id.cbJadidNakhana);
-        cbNewNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    tilNew.setHintEnabled(false);
-                    etPolompJadid.setEnabled(false);
-                    chkNewNakhana=true;
-                    cbJadidNadard.setEnabled(false);
 
-                }else{
-                    tilNew.setHintEnabled(true);
-                    chkNewNakhana=false;
-                    etPolompJadid.setEnabled(true);
-                    cbJadidNadard.setEnabled(true);
-
-                }
-            }
-        });
 
         cbOldNakhana=rootView.findViewById(R.id.cbGhadimNakhana);
         cbOldNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -203,38 +184,7 @@ public class PolompFragmentSave extends Fragment {
         tvRangPolompJadid=rootView.findViewById(R.id.tvRangPolompJadid);
         tilNew=rootView.findViewById(R.id.tilNew);
 
-        cbJadidNadard=rootView.findViewById(R.id.cbJadidNadarad);
-        cbJadidNadard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                   chkNadaradJadid=true;
-                    tvRangPolompJadid.setTextColor(getResources().getColor(R.color.grey_500));
-                    tvModelPolompJadid.setTextColor(getResources().getColor(R.color.grey_500)  );
 
-                    tilNew.setHintEnabled(false);
-                    spnModelPolompJadid.setEnabled(false);
-                    spnRangPolompJadid.setEnabled(false);
-                    etPolompJadid.setEnabled(false);
-                    cbNewNakhana.setEnabled(false);
-                    spnModelPolompJadid.setSelection(0);
-                    spnRangPolompJadid.setSelection(0);
-                    etPolompJadid.setText("");
-                }else{
-                    tvRangPolompJadid.setTextColor(getResources().getColor(R.color.ms_black));
-                    tvModelPolompJadid.setTextColor(getResources().getColor(R.color.ms_black)  );
-
-                    tilNew.setHintEnabled(true);
-                    cbNewNakhana.setEnabled(true);
-                    chkNadaradJadid=false;
-                    spnModelPolompJadid.setEnabled(true);
-                    spnRangPolompJadid.setEnabled(true);
-                    etPolompJadid.setEnabled(true);
-
-                }
-
-            }
-        });
 
         spinnerArrayColorGhadim=new ArrayList<>();
         spinnerArrayColorJadid=new ArrayList<>();

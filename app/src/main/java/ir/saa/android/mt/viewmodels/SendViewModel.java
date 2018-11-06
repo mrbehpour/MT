@@ -236,7 +236,7 @@ public class SendViewModel extends AndroidViewModel {
                                 @Override
                                 public void onSuccess(List<RecordeSummary> recordeSummaries) {
                                     String s=recordeSummaries.get(0).Description;
-                                    //sendAllDataProgress.postValue(100);
+                                    sendAllDataProgress.postValue(100);
                                     if(recordeSummaries.get(0).Result){
                                         messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
                                     }else {
@@ -248,7 +248,7 @@ public class SendViewModel extends AndroidViewModel {
                                 public void onError(Throwable e) {
 
                                     String error=e.getMessage();
-                                    //sendAllDataProgress.postValue(-1);
+                                    sendAllDataProgress.postValue(-1);
                                     messageErrorLiveData.postValue(e.getMessage());
                                 }
                             });

@@ -13,29 +13,32 @@ import com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.viewmodels.SendViewModel;
+import pl.droidsonroids.gif.GifTextView;
 
 public class SendActivity extends AppCompatActivity {
 
     AppCompatButton btnSend;
-    AnimatedCircleLoadingView progerssSend;
+
     SendViewModel sendViewModel;
+    GifTextView  imgSending;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
         sendViewModel= ViewModelProviders.of(this).get(SendViewModel.class);
-        progerssSend=(AnimatedCircleLoadingView)findViewById(R.id.circle_loading_view);
+
 
         btnSend=(AppCompatButton)findViewById(R.id.btnStartUploading);
-        btnSend.setEnabled(true);
+        imgSending=(GifTextView)findViewById(R.id.imgSending);
+
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                progerssSend.startDeterminate();
-                btnSend.setEnabled(false);
 
+
+                imgSending.setBackgroundResource(R.drawable.sending);
                 sendViewModel.sendData();
             }
         });
@@ -50,13 +53,13 @@ public class SendActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Integer integer) {
 
-                progerssSend.setPercent(integer);
+
                 if(integer==-1){
-                    progerssSend.resetLoading();
-                    progerssSend.stopFailure();
+
+                    imgSending.setBackgroundResource(R.drawable.sending_failed);
                 }
                 else if(integer==100){
-                    progerssSend.stopOk();
+                    imgSending.setBackgroundResource(R.drawable.sending_successful);
 
                 }
 

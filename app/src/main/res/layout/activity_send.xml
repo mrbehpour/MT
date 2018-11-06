@@ -21,24 +21,12 @@
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="300dp"
             android:layout_height="300dp">
-            <!-- ProgressBar -->
-            <com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/circle_loading_view"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:background="@color/grey_200"
-                android:layout_centerInParent="true"
-                app:mainColor="@color/green_600"
-                app:secondaryColor="@color/grey_600"
-                app:textColor="@color/grey_1000"
-                android:visibility="invisible"/>
             <!-- Animated Gif -->
             <pl.droidsonroids.gif.GifTextView
                 android:id="@+id/imgSending"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:background="@drawable/sending"
+                android:background="@drawable/sending_ready"
                 android:visibility="visible"/>
         </FrameLayout>
     </LinearLayout>

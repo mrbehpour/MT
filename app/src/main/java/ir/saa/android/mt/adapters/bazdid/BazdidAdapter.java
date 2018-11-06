@@ -2,10 +2,14 @@ package ir.saa.android.mt.adapters.bazdid;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,21 +79,35 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
 
         if(current.isPolommp){
 
-            holder.tvfIconPolomp.setTextColor(ContextCompat.getColor(context, R.color.icon_on));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    holder.IconPolomp.setImageTintList(G.context.getResources().getColorStateList(R.color.icon_on));
+                }
+            }
         }else {
-            holder.tvfIconPolomp.setTextColor(ContextCompat.getColor(context, R.color.icon_off));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.IconPolomp.setImageTintList(G.context.getResources().getColorStateList(R.color.icon_off));
+            }
         }
 
         if(current.isTest){
-            holder.tvfIconTest.setTextColor(ContextCompat.getColor(context, R.color.icon_on));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.IconTest.setImageTintList(ContextCompat.getColorStateList(G.context.getApplicationContext(), R.color.icon_on));
+            }
         }else {
-                    holder.tvfIconTest.setTextColor(ContextCompat.getColor(context, R.color.icon_off));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.IconTest.setImageTintList(ContextCompat.getColorStateList(G.context.getApplicationContext(), R.color.icon_off));
+            }
                 }
         if(current.isBazrasi){
 
-           holder.tvfIconBazrasi.setTextColor(ContextCompat.getColor(context, R.color.icon_on));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(G.context.getApplicationContext(), R.color.icon_on));
+            }
         }else {
-                    holder.tvfIconBazrasi.setTextColor(ContextCompat.getColor(context, R.color.icon_off));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(G.context.getApplicationContext(), R.color.icon_off));
+            }
         }
 
 
@@ -134,9 +152,9 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         TextView tvUniqueTitle;
         TextView tvUniqueValue;
         TextView tvAddress;
-        TextViewFont tvfIconTest;
-        TextViewFont tvfIconBazrasi;
-        TextViewFont tvfIconPolomp;
+        ImageView IconTest;
+        ImageView IconBazrasi;
+        ImageView IconPolomp;
         ImageView imgBazdidMoshtarak;
 
         public MyViewHolder(View itemView) {
@@ -147,9 +165,9 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
             tvUniqueValue = itemView.findViewById(R.id.tvUniqueValue);
             tvAddress = itemView.findViewById(R.id.tvAddress);
             imgBazdidMoshtarak = itemView.findViewById(R.id.imgBazdidMoshtarak);
-            tvfIconTest=itemView.findViewById(R.id.iconTest);
-            tvfIconBazrasi=itemView.findViewById(R.id.iconBazrasi);
-            tvfIconPolomp=itemView.findViewById(R.id.iconPolomp);
+            IconTest=itemView.findViewById(R.id.iconTest);
+            IconBazrasi=itemView.findViewById(R.id.iconBazrasi);
+            IconPolomp=itemView.findViewById(R.id.iconPolomp);
 
 //            Typeface iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
 //            FontManager.markAsIconContainer(tvfIconTest,iconFont);

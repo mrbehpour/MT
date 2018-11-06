@@ -12,12 +12,12 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_settings);
 
-        findViewById(R.id.ll1).setOnClickListener(v->{
-            ((SwitchCompat)findViewById(R.id.sw1)).setChecked(!(((SwitchCompat) findViewById(R.id.sw1)).isChecked()));
-        });
-        findViewById(R.id.ll2).setOnClickListener(v->{
-            ((SwitchCompat)findViewById(R.id.sw2)).setChecked(!(((SwitchCompat) findViewById(R.id.sw2)).isChecked()));
-        });
+//        findViewById(R.id.ll1).setOnClickListener(v->{
+////            ((SwitchCompat)findViewById(R.id.sw1)).setChecked(!(((SwitchCompat) findViewById(R.id.sw1)).isChecked()));
+//        });
+////        findViewById(R.id.ll2).setOnClickListener(v->{
+////            ((SwitchCompat)findViewById(R.id.sw2)).setChecked(!(((SwitchCompat) findViewById(R.id.sw2)).isChecked()));
+//        });
 
 //        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN_MR1)
 //            getListView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
