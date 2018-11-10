@@ -3,6 +3,7 @@ package ir.saa.android.mt.uicontrollers.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,8 +21,15 @@ public class SettingActivity extends AppCompatActivity {
         edtServerAddress=(EditText)findViewById(R.id.edtServerAddress);
         btnSave=(Button)findViewById(R.id.btnSave);
 
-        edtServerAddress.setText(G.getPref(""));
+        edtServerAddress.setText(edtServerAddress.getText().toString()+G.getPref("ServerAddress"));
 
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.setPref("ServerAddress",edtServerAddress.getText().toString());
+            }
+        });
 //        findViewById(R.id.ll1).setOnClickListener(v->{
 ////            ((SwitchCompat)findViewById(R.id.sw1)).setChecked(!(((SwitchCompat) findViewById(R.id.sw1)).isChecked()));
 //        });
