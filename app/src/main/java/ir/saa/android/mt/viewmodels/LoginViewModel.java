@@ -26,8 +26,8 @@ public class LoginViewModel extends AndroidViewModel {
             regionRepo=new RegionRepo(application);
         if(reluserRepo==null)
             reluserRepo = new ReluserRepo(application);
-        if(retrofitMT==null)
-            retrofitMT= RetrofitMT.getInstance();
+//        if(retrofitMT==null)
+//            retrofitMT= RetrofitMT.getInstance();
         //getAnswerGroupsFromServer();
         //getCitiesFromServer();
         //getUserFromServer();

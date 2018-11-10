@@ -18,12 +18,18 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
 
 public class SettingFragment extends Fragment {
 
+
+    EditText edtServerAddress;
+    Button btnSave;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -38,6 +44,19 @@ public class SettingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+        edtServerAddress=rootView.findViewById(R.id.edtServerAddress);
+        btnSave=rootView.findViewById(R.id.btnSave);
+
+        edtServerAddress.setText(G.getPref("ServerAddress"));
+
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.setPref("ServerAddress",edtServerAddress.getText().toString());
+                Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
+            }
+        });
         return rootView;
     }
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
@@ -21,13 +22,14 @@ public class SettingActivity extends AppCompatActivity {
         edtServerAddress=(EditText)findViewById(R.id.edtServerAddress);
         btnSave=(Button)findViewById(R.id.btnSave);
 
-        edtServerAddress.setText(edtServerAddress.getText().toString()+G.getPref("ServerAddress"));
+        edtServerAddress.setText(G.getPref("ServerAddress"));
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 G.setPref("ServerAddress",edtServerAddress.getText().toString());
+                Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
             }
         });
 //        findViewById(R.id.ll1).setOnClickListener(v->{
