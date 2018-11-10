@@ -80,33 +80,33 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         if(current.isPolommp){
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    holder.IconPolomp.setImageTintList(G.context.getResources().getColorStateList(R.color.icon_on));
-                }
+                holder.IconPolomp.setImageTintList(ContextCompat.getColorStateList(holder.contextHolder, R.color.icon_on));
             }
+
+
         }else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                holder.IconPolomp.setImageTintList(G.context.getResources().getColorStateList(R.color.icon_off));
+                holder.IconPolomp.setImageTintList(ContextCompat.getColorStateList(holder.contextHolder, R.color.icon_off));
             }
         }
 
         if(current.isTest){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                holder.IconTest.setImageTintList(ContextCompat.getColorStateList(G.context.getApplicationContext(), R.color.icon_on));
+                holder.IconTest.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_on));
             }
         }else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                holder.IconTest.setImageTintList(ContextCompat.getColorStateList(G.context.getApplicationContext(), R.color.icon_off));
+                holder.IconTest.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
             }
                 }
         if(current.isBazrasi){
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(G.context.getApplicationContext(), R.color.icon_on));
+                holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_on));
             }
         }else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(G.context.getApplicationContext(), R.color.icon_off));
+                holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
             }
         }
 
@@ -156,7 +156,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         ImageView IconBazrasi;
         ImageView IconPolomp;
         ImageView imgBazdidMoshtarak;
-
+Context contextHolder;
         public MyViewHolder(View itemView) {
             super(itemView);
             listItemBazdidRoot = itemView.findViewById(R.id.listItemBazdidRoot);
@@ -168,6 +168,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
             IconTest=itemView.findViewById(R.id.iconTest);
             IconBazrasi=itemView.findViewById(R.id.iconBazrasi);
             IconPolomp=itemView.findViewById(R.id.iconPolomp);
+            contextHolder= itemView.getContext().getApplicationContext();
 
 //            Typeface iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
 //            FontManager.markAsIconContainer(tvfIconTest,iconFont);

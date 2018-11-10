@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
 
+import ir.saa.android.mt.application.G;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,16 +17,17 @@ public class RetrofitMT {
     private static RetrofitMT instance = null;
     private Retrofit retrofit;
     private MTApi mtApi;
-
+    private String ServerAddress;
     private RetrofitMT() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(120, TimeUnit.SECONDS)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .build();
+        ServerAddress= G.getPref("ServerAddress")+"/services/AndroidServices.svc/json/";
 //http://192.168.3.176:645/services/AndroidServices.svc/json/"
         //"http://89.43.6.254:808/services/AndroidServices.svc/json/
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.3.176:8650/services/AndroidServices.svc/json/")
+                .baseUrl(ServerAddress)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)

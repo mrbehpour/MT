@@ -122,7 +122,7 @@
                     android:id="@+id/iconTest"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:background="@drawable/icon_test"
+                    android:src="@drawable/icon_test"
                     android:backgroundTint="@color/icon_off" />
                 <!-- Icon Bazrasi -->
                 <ImageView
@@ -130,7 +130,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginLeft="4dp"
-                    android:background="@drawable/icon_bazrasi"
+                    android:src="@drawable/icon_bazrasi"
                     android:backgroundTint="@color/icon_off" />
                 <!-- Icon Polomp -->
                 <ImageView
@@ -138,7 +138,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginLeft="4dp"
-                    android:background="@drawable/icon_polomp"
+                    android:src="@drawable/icon_polomp"
                     android:backgroundTint="@color/icon_off" />
             </LinearLayout>
 
