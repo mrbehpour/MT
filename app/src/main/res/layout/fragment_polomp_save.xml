@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -47,19 +51,23 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
-                    <EditText
+
+                    <ir.saa.android.mt.components.EditTextFont
                         android:id="@+id/edtGhadimShomarePolomp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="4dp"
-                        android:fontFamily="@font/byekan"
+                        android:layout_weight="1"
                         android:background="@android:color/transparent"
-                        android:textSize="16sp"
+                        android:fontFamily="@font/byekan"
                         android:gravity="right"
+                        android:maxLength="16"
+                        android:maxLines="1"
                         android:textAlignment="gravity"
-                        android:text="@string/dash"/>
+                        android:textSize="16sp"
+                        android:theme="@style/Base.V7.Widget.AppCompat.EditText" />
+
                     <TextView
                         android:id="@+id/tvShomarePolompGhadim"
                         android:layout_width="wrap_content"
@@ -77,6 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
                     android:orientation="horizontal">
+
                     <Spinner
                         android:id="@+id/spnModelPolompGhadim"
                         android:layout_width="0dp"
@@ -85,6 +94,7 @@
                         android:layout_marginRight="4dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_rectangle" />
+
                     <TextView
                         android:id="@+id/tvModelPolompGhadim"
                         android:layout_width="wrap_content"
@@ -103,6 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal">
+
                     <Spinner
                         android:id="@+id/spnRangPolompGhadim"
                         android:layout_width="0dp"
@@ -111,6 +122,7 @@
                         android:layout_marginRight="4dp"
                         android:layout_weight="1"
                         android:background="@drawable/custom_rectangle" />
+
                     <TextView
                         android:id="@+id/tvRangPolompGhadim"
                         android:layout_width="wrap_content"
@@ -122,6 +134,7 @@
                         android:textColor="@color/grey_1000"
                         android:textSize="16sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -130,10 +143,10 @@
                     <CheckBox
                         android:id="@+id/cbGhadimNakhana"
                         android:layout_width="0dp"
-                        android:layout_weight="0.5"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:layout_marginTop="12dp"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/byekan"
                         android:gravity="right|center_vertical"
                         android:layoutDirection="rtl"
@@ -145,9 +158,9 @@
                     <CheckBox
                         android:id="@+id/cbGhadimNadarad"
                         android:layout_width="0dp"
-                        android:layout_weight="0.5"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
+                        android:layout_weight="0.5"
                         android:fontFamily="@font/byekan"
                         android:gravity="right|center_vertical"
                         android:layoutDirection="rtl"
@@ -194,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal">
-                    <EditText
+                    <ir.saa.android.mt.components.EditTextFont
                         android:id="@+id/edtJadidShomarePolomp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -205,8 +218,11 @@
                         android:background="@android:color/transparent"
                         android:textSize="16sp"
                         android:gravity="right"
+                        android:maxLength="16"
+                        android:maxLines="1"
+                        android:theme="@style/Base.V7.Widget.AppCompat.EditText"
                         android:textAlignment="gravity"
-                        android:text="@string/dash"/>
+                        ></ir.saa.android.mt.components.EditTextFont>
                     <TextView
                         android:id="@+id/tvShomarePolompJadid"
                         android:layout_width="wrap_content"
@@ -289,3 +305,4 @@
         android:textSize="16sp"
         android:text="@string/zakhire"/>
 </LinearLayout>
+</ScrollView>

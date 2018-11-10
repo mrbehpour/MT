@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.daimajia.numberprogressbar.*;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.GetClientInput;
+import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
 public class DaryaftActivity extends AppCompatActivity   {
@@ -42,6 +44,7 @@ public class DaryaftActivity extends AppCompatActivity   {
     Boolean isDownloadUser;
     Boolean isDownloadSetting;
     //Boolean isDownloadClient;
+    private DrawerLayout mDrawerLayout;
 
     TextView tvLabelDarhaleDaryaftEtelatPayeh;
     TextView tvLabelDarhaleDaryaftTanzimat;
@@ -52,6 +55,9 @@ public class DaryaftActivity extends AppCompatActivity   {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baseinfo);
+
+
+
 
         isDownloadBaseInfo=false;
         isDownloadUser=false;

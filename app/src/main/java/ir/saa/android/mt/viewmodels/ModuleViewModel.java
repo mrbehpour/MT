@@ -39,13 +39,20 @@ public class ModuleViewModel extends AndroidViewModel {
         return isEnableBluetooth;
     }
 
-    public void setBluetoothEnable(Boolean state){
+    public void setBluetoothEnable(Boolean state) throws InterruptedException {
+        Thread.sleep(0);
         if(state){
-            bluetoothAdapter.enable();
             listBluetoothName.postValue(getPairedDevice());
+
+            bluetoothAdapter.enable();
+
+
         }else{
-            bluetoothAdapter.disable();
             listBluetoothName.postValue(new ArrayList<String>());
+
+            bluetoothAdapter.disable();
+
         }
+
     }
 }

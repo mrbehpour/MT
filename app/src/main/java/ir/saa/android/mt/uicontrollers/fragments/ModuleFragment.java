@@ -28,7 +28,7 @@ public class ModuleFragment extends Fragment
     ModuleViewModel moduleViewModel;
     Spinner spinner;
     SwitchCompat swBluetooth;
-    List<String> spinnerArray;
+    //List<String> spinnerArray;
     public ModuleFragment() {
     }
 
@@ -43,14 +43,15 @@ public class ModuleFragment extends Fragment
 
         moduleViewModel = ViewModelProviders.of(getActivity()).get(ModuleViewModel.class);
         swBluetooth=rootView.findViewById(R.id.swBluetooth);
-        spinnerArray=new ArrayList<>();
+        //spinnerArray=new ArrayList<>();
         spinner = rootView.findViewById(R.id.spnPaired);
         moduleViewModel.listBluetoothName.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
-                spinnerArray=strings;
+
                 if(strings.size()!=0) {
-                    fillPairedDeviceSpinner();
+
+                    fillPairedDeviceSpinner(strings);
                 }
             }
         });
@@ -58,6 +59,7 @@ public class ModuleFragment extends Fragment
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 swBluetooth.setChecked(aBoolean);
+                spinner.setEnabled(aBoolean);
             }
         });
 
@@ -65,10 +67,23 @@ public class ModuleFragment extends Fragment
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(compoundButton.isChecked()){
-                    moduleViewModel.setBluetoothEnable(true);
+
+                    try {
+                        moduleViewModel.setBluetoothEnable(true);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
 
                 }else{
-                    moduleViewModel.setBluetoothEnable(false);
+
+
+                    try {
+                        moduleViewModel.setBluetoothEnable(false);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
 
 
                 }
@@ -93,10 +108,10 @@ public class ModuleFragment extends Fragment
         return rootView;
     }
 
-    private void fillPairedDeviceSpinner(){
+    private void fillPairedDeviceSpinner(List<String> spinnerArray){
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.al_majol_spinner_item, spinnerArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.al_majol_spinner_item,spinnerArray );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);

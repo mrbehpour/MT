@@ -4,6 +4,7 @@ package ir.saa.android.mt.navigationdrawer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +24,14 @@ import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static ir.saa.android.mt.application.G.currentFragmentNum;
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.MyViewHolder> {
 
     private List<NavigationDrawerItem> mDataList ;
     private LayoutInflater inflater;
     private Context context;
+
 
     public NavigationDrawerAdapter(Context context, List<NavigationDrawerItem> data) {
         this.context = context;

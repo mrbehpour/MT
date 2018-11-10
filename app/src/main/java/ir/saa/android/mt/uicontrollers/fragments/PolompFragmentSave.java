@@ -55,6 +55,7 @@ public class PolompFragmentSave extends Fragment {
 
     EditText etPolompJadid;
     EditText etPolompGhadim;
+    TextView tvShomareGhadim;
     AppCompatButton btnSave;
 
     CheckBox cbGhadimNadard;
@@ -124,18 +125,20 @@ public class PolompFragmentSave extends Fragment {
 
 
 
-
+        tvShomareGhadim=rootView.findViewById(R.id.tvShomarePolompGhadim);
         cbOldNakhana=rootView.findViewById(R.id.cbGhadimNakhana);
         cbOldNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    tilGhadim.setHintEnabled(false);
+                    tvShomareGhadim.setTextColor(getResources().getColor(R.color.grey_500)  );
+                    //tilGhadim.setHintEnabled(false);
                     etPolompGhadim.setEnabled(false);
                     chkOldNakhana=true;
                     cbGhadimNadard.setEnabled(false);
                 }else{
-                    tilGhadim.setHintEnabled(true);
+                    tvShomareGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
+                    //tilGhadim.setHintEnabled(true);
                     chkOldNakhana=false;
                     etPolompGhadim.setEnabled(true);
                     cbGhadimNadard.setEnabled(true);
@@ -154,8 +157,8 @@ public class PolompFragmentSave extends Fragment {
                 if(b){
                     tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.grey_500));
                     tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.grey_500)  );
-
-                    tilGhadim.setHintEnabled(false);
+                    tvShomareGhadim.setTextColor(getResources().getColor(R.color.grey_500)  );
+                    //tilGhadim.setHintEnabled(false);
                    chkNadradGhadim=true;
                     spnModelPolompGhadim.setEnabled(false);
                     spnRangPolompGhadim.setEnabled(false);
@@ -172,8 +175,9 @@ public class PolompFragmentSave extends Fragment {
                     spnModelPolompGhadim.setEnabled(true);
                     spnRangPolompGhadim.setEnabled(true);
                     etPolompGhadim.setEnabled(true);
-                    tilGhadim.setHintEnabled(true);
+                    //tilGhadim.setHintEnabled(true);
                     etPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
+                    tvShomareGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
 
                 }
 
