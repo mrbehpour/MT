@@ -50,7 +50,7 @@ public class NavigationDrawerItem {
                 R.drawable.cast_connected,
                 R.drawable.settings,
                 R.drawable.file_download_outline,
-                R.drawable.file_download_outline,
+                R.drawable.icon_daryaftmoshtarakin,
                 R.drawable.briefcase_upload,
                 R.drawable.exit_to_app
         };
