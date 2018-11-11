@@ -48,10 +48,15 @@ public class BazdidFragment extends Fragment
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_bazdid, container, false);
         SearchView svBazdidMoshtarakin = rootView.findViewById(R.id.svBazdidMoshtarakin);
-        setUpRecyclerView(rootView);
+        setUpRecyclerView(rootView,G.clientInfo.Postion);
         svBazdidMoshtarakin.setSubmitButtonEnabled(true);
         svBazdidMoshtarakin.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -70,11 +75,14 @@ public class BazdidFragment extends Fragment
         return rootView;
     }
 
-    private void setUpRecyclerView(View view) {
+    private void setUpRecyclerView(View view,Integer Postion) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvBazdidMoshtarakin);
+
         adapter = new BazdidAdapter(getActivity(), clientItems);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
             bazdidViewModel.getClientsWithRegionIdLiveData(Integer.valueOf(G.getPref("RegionID"))).observe(this, new Observer<List<Client>>() {
                 @Override
@@ -93,6 +101,9 @@ public class BazdidFragment extends Fragment
                     adapter.notifyDataSetChanged();
                 }
             });
+        if(Postion!=null) {
+            recyclerView.scrollToPosition(Postion);
+        }
 
 
     }

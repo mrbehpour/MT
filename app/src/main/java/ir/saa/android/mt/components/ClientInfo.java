@@ -6,6 +6,7 @@ public class ClientInfo {
     public static  Integer GroupId;
     public static Long FollowUpCode;
     public  static  String ClientName;
+    public static Integer Postion;
 
 
 }
