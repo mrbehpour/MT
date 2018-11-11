@@ -7,6 +7,7 @@ import java.util.List;
 
 import ir.saa.android.mt.model.daos.PolompInfoDao;
 import ir.saa.android.mt.model.database.MTDatabase;
+import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.model.entities.PolompInfo;
 
 public class PolompInfoRepo  {
@@ -58,4 +59,6 @@ public class PolompInfoRepo  {
     public void updatePolompInfo(PolompInfo polompInfo) {
         polompInfoDao.updatePolompInfo(polompInfo);
     }
+
+
 }

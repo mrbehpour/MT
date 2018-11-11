@@ -21,6 +21,10 @@ public interface InspectionInfoDao {
     @Query("Select * from InspectionInfo where InspectionInfoID=:Id")
     LiveData<InspectionInfo> getInspectionInfoById(Integer Id);
 
+    @Query("Select * from InspectionInfo where ClientID=:clientId")
+    List<InspectionInfo> getInspectionInfoByClientId(Long clientId);
+
+
     @Query("Delete  From InspectionInfo")
     void deleteAll();
 

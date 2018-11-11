@@ -59,4 +59,8 @@ public class InspectionInfoRepo  {
     public void deleteInspectionInfo(InspectionInfo inspectionInfo) {
         inspectionInfoDao.deleteInspectionInfo(inspectionInfo);
     }
+
+    public List<InspectionInfo> getInspectionInfoByClientId(Long clientId){
+        return inspectionInfoDao.getInspectionInfoByClientId(clientId);
+    }
 }

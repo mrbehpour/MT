@@ -107,6 +107,9 @@ public class BazrasiViewModel extends AndroidViewModel {
        public InspectionAllInfo getInspectionAllInfo(Long clientId,Integer remarkID){
         return inspectionDtlRepo.getInspectionAllInfo(clientId,remarkID);
        }
+       public List<InspectionInfo> getInspectionInfo(Long clientId){
+        return inspectionInfoRepo.getInspectionInfoByClientId(clientId);
+       }
        public void deleteAll(InspectionInfo inspectionInfo,InspectionDtl inspectionDtl){
         inspectionInfoRepo.deleteInspectionInfo(inspectionInfo);
         inspectionDtlRepo.deleteInspectionDtl(inspectionDtl);
