@@ -61,7 +61,8 @@ public class BazrasiFragment extends Fragment {
     private void setUpRecyclerView(View view) {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvSoal);
-
+        recyclerView.setScrollbarFadingEnabled(false);
+        recyclerView.setScrollBarSize(50);
         adapter = new BazrasiAdapter(getActivity(), bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue()==null?new ArrayList<>(): bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

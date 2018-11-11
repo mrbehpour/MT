@@ -60,7 +60,8 @@ public class PolompFragment extends Fragment {
     private void setUpRecyclerView(View view) {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvPolomp);
-
+        recyclerView.setScrollbarFadingEnabled(false);
+        recyclerView.setScrollBarSize(50);
         polompAdapter = new PolompAdapter(getActivity(),polompViewModel.getPolompList(clientId).getValue()==null?new ArrayList<>()
                 :polompViewModel.getPolompList(clientId).getValue());
         recyclerView.setAdapter(polompAdapter);
