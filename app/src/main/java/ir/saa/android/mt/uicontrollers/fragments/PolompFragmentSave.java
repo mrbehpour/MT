@@ -1,5 +1,6 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -130,14 +131,20 @@ public class PolompFragmentSave extends Fragment {
         cbOldNakhana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Activity activity = getActivity();
+                activity = getActivity();
                 if(b){
-                    tvShomareGhadim.setTextColor(getResources().getColor(R.color.grey_500)  );
+                    if(activity != null && isAdded()) {
+                        tvShomareGhadim.setTextColor(getResources().getColor(R.color.grey_500));
+                    }
                     //tilGhadim.setHintEnabled(false);
                     etPolompGhadim.setEnabled(false);
                     chkOldNakhana=true;
                     cbGhadimNadard.setEnabled(false);
                 }else{
-                    tvShomareGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
+                    if(activity != null && isAdded()) {
+                        tvShomareGhadim.setTextColor(getResources().getColor(R.color.ms_black));
+                    }
                     //tilGhadim.setHintEnabled(true);
                     chkOldNakhana=false;
                     etPolompGhadim.setEnabled(true);
@@ -154,10 +161,15 @@ public class PolompFragmentSave extends Fragment {
         cbGhadimNadard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Activity activity = getActivity();
+                activity = getActivity();
                 if(b){
-                    tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.grey_500));
-                    tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.grey_500)  );
-                    tvShomareGhadim.setTextColor(getResources().getColor(R.color.grey_500)  );
+
+                    if(activity != null && isAdded()) {
+                        tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.grey_500));
+                        tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.grey_500));
+                        tvShomareGhadim.setTextColor(getResources().getColor(R.color.grey_500));
+                    }
                     //tilGhadim.setHintEnabled(false);
                    chkNadradGhadim=true;
                     spnModelPolompGhadim.setEnabled(false);
@@ -168,16 +180,19 @@ public class PolompFragmentSave extends Fragment {
                     spnRangPolompGhadim.setSelection(0);
                     etPolompGhadim.setText("");
                 }else{
-                    tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black));
-                    tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
+                    if(activity != null && isAdded()) {
+                        tvRangPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black));
+                        tvModelPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black));
+                        etPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
+                        tvShomareGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
+                    }
                     cbOldNakhana.setEnabled(true);
                     chkNadradGhadim=false;
                     spnModelPolompGhadim.setEnabled(true);
                     spnRangPolompGhadim.setEnabled(true);
                     etPolompGhadim.setEnabled(true);
                     //tilGhadim.setHintEnabled(true);
-                    etPolompGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
-                    tvShomareGhadim.setTextColor(getResources().getColor(R.color.ms_black)  );
+
 
                 }
 

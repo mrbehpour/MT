@@ -92,7 +92,7 @@
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
                             android:text="@string/darHaleDaryaft"
-                            android:visibility="visible"/>
+                            android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
                             android:id="@+id/tvLableMoshtarakin"
@@ -129,6 +129,7 @@
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:layout_marginRight="16dp"
+                    android:backgroundTint="@color/ms_gray3"
                     android:src="@drawable/daryaft_moshtarakin"
                     android:orientation="horizontal"/>
             </LinearLayout>

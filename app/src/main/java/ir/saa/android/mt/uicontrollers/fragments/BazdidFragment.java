@@ -75,26 +75,7 @@ public class BazdidFragment extends Fragment
         adapter = new BazdidAdapter(getActivity(), clientItems);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        if(G.getPref("RegionID")=="-1"){
-            bazdidViewModel.getClientsLiveData().observe(this, new Observer<List<Client>>() {
-                @Override
-                public void onChanged(@Nullable List<Client> clients) {
-                    clientItems.clear();
-                    for(Client client:clients){
-                        isBazrasi=bazdidViewModel.getInspectionValue(client.ClientID);
-                        isPolomp=bazdidViewModel.getPolompValue(client.ClientID);
-                        isTest=bazdidViewModel.getTestValue(client.ClientID);
-                        clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address, (String) getResources().getText(R.string.UniqField),client.CustId, R.drawable.account,client.SendId
-                                ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,client.FollowUpCode ));
-                    }
 
-                    adapter.clearDataSet();
-                    adapter.addAll(clientItems);
-                    adapter.notifyDataSetChanged();
-                }
-            });
-
-        }else{
             bazdidViewModel.getClientsWithRegionIdLiveData(Integer.valueOf(G.getPref("RegionID"))).observe(this, new Observer<List<Client>>() {
                 @Override
                 public void onChanged(@Nullable List<Client> clients) {
@@ -113,7 +94,7 @@ public class BazdidFragment extends Fragment
                 }
             });
 
-        }
+
     }
 
 }
