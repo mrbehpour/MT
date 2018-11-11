@@ -1,5 +1,6 @@
 package ir.saa.android.mt.viewmodels;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
@@ -98,6 +99,7 @@ public class SendViewModel extends AndroidViewModel {
             messageErrorLiveData.setValue("");
     }
 
+    @SuppressLint("CheckResult")
     public void sendData(){
         ArrayList<ClientAllInfo> clientinfolList =new ArrayList<>();
         Completable.fromAction(new Action() {
@@ -233,14 +235,28 @@ public class SendViewModel extends AndroidViewModel {
 
                                 }
 
+
+                                @SuppressLint("StringFormatMatches")
                                 @Override
                                 public void onSuccess(List<RecordeSummary> recordeSummaries) {
-                                    String s=recordeSummaries.get(0).Description;
-                                    sendAllDataProgress.postValue(100);
-                                    if(recordeSummaries.get(0).Result){
+                                    String ErrorMessageSite="";
+
+                                    Integer countTrue=0;
+                                    for(RecordeSummary recordeSummary:recordeSummaries){
+                                        if(recordeSummary.Result){
+                                            countTrue++;
+                                        }else {
+                                            ErrorMessageSite=recordeSummary.Description;
+                                        }
+                                    }
+                                    if(recordeSummaries.size()==countTrue){
+                                        sendAllDataProgress.postValue(100);
                                         messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
                                     }else {
-                                        messageErrorLiveData.postValue("پیغام سرور"+"\n"+recordeSummaries.get(0).Description);
+                                        sendAllDataProgress.postValue(-1);
+                                        Integer countRegister=recordeSummaries.size()-countTrue;
+                                        messageErrorLiveData.postValue(G.context.getResources().getString(R.string.MessageCount,countRegister.toString(),String.valueOf(recordeSummaries.size())));
+
                                     }
                                 }
 

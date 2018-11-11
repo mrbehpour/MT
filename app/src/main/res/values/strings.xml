@@ -19,9 +19,13 @@
     <string name="backMessage">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
     <string name="CaptionRegion">منطقه : </string>
     <string name="MessageSuccess">اطلاعات با موفقیت ثبت شد</string>
+    <string name="ServerError">پیغام سرور</string>
+    <string name="MessageCount">اطلاعات %1$s مشترک از %2$s مشترک در سایت ثبت نشده است  </string>
 
     <!--BazrasiAdapter-->
     <string name="BazrasiAdapter_BtnSave">ذخیره</string>
+    <string name="Submit">تایید</string>
+    <string name="Error">خطا</string>
 
     <!--TestDisplayAdapter-->
     <string name="TypeTest1_TestDisplayAdapter">تست 1</string>
