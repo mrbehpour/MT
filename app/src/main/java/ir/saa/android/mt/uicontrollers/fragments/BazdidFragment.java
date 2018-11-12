@@ -100,11 +100,13 @@ public class BazdidFragment extends Fragment
                     adapter.clearDataSet();
                     adapter.addAll(clientItems);
                     adapter.notifyDataSetChanged();
+                    if(Postion!=null) {
+                        recyclerView.scrollToPosition(Postion);
+                    }
                 }
             });
-        if(Postion!=null) {
-            recyclerView.scrollToPosition(Postion);
-        }
+
+
 
 
     }

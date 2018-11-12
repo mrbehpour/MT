@@ -25,7 +25,7 @@
     <!--BazrasiAdapter-->
     <string name="BazrasiAdapter_BtnSave">ذخیره</string>
     <string name="Submit">تایید</string>
-    <string name="Error">خطا</string>
+    <string name="Error">پیام دریافت شده از سایت</string>
 
     <!--TestDisplayAdapter-->
     <string name="TypeTest1_TestDisplayAdapter">تست 1</string>

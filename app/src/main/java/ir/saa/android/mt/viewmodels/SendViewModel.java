@@ -131,17 +131,17 @@ public class SendViewModel extends AndroidViewModel {
                     //-----Inspection Send
                     List<InspectionAllInfo> inspectionAllInfos=inspectionDtlRepo.getInspectionAllInfoWithSendId(clientList.get(i).ClientID
                             ,clientList.get(i).SendId);
-
-
+                    //Last InspectionInfo
+                    Integer LastItem=inspectionAllInfos.size()-1;
                     if(inspectionAllInfos.size()!=0) {
                         InspectionInfo inspectionInfo=new InspectionInfo();
                         inspectionInfo.InspectionInfoID=null;
                         //inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
-                        inspectionInfo.InspectionTime=inspectionAllInfos.get(0).InspectionTime;
-                        inspectionInfo.InspectionDate=inspectionAllInfos.get(0).InspectionDate;
-                        inspectionInfo.SendID=inspectionAllInfos.get(0).SendID;
-                        inspectionInfo.ClientID=inspectionAllInfos.get(0).ClientID;
-                        inspectionInfo.AgentID=inspectionAllInfos.get(0).AgentID;
+                        inspectionInfo.InspectionTime=inspectionAllInfos.get(LastItem).InspectionTime;
+                        inspectionInfo.InspectionDate=inspectionAllInfos.get(LastItem).InspectionDate;
+                        inspectionInfo.SendID=inspectionAllInfos.get(LastItem).SendID;
+                        inspectionInfo.ClientID=inspectionAllInfos.get(LastItem).ClientID;
+                        inspectionInfo.AgentID=inspectionAllInfos.get(LastItem).AgentID;
                         //inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
                         inspectionInfo.FollowUpCode=inspectionAllInfos.get(0).FollowUpCode;
                         inspectionInfo.BlockID=null;
@@ -164,15 +164,17 @@ public class SendViewModel extends AndroidViewModel {
                     //-----Polomp Send
                     List<PolompAllInfo> polompAllInfos=polompDtlRepo.getPolompAllInfoWithSendId(clientList.get(i).ClientID
                             ,clientList.get(i).SendId);
+                    //last polompInfo
+                     LastItem=polompAllInfos.size()-1;
                     if(polompAllInfos.size()!=0){
                         PolompInfo polompInfo=new PolompInfo();
 
-                        polompInfo.SendID=polompAllInfos.get(0).SendID;
-                        polompInfo.ClientID=polompAllInfos.get(0).ClientID;
-                        polompInfo.AgentID=polompAllInfos.get(0).AgentID;
-                        polompInfo.ChangeTime=polompAllInfos.get(0).ChangeTime;
-                        polompInfo.ChangeDate=polompAllInfos.get(0).ChangeDate;
-                        polompInfo.FollowUpCode=polompAllInfos.get(0).FollowUpCode;
+                        polompInfo.SendID=polompAllInfos.get(LastItem).SendID;
+                        polompInfo.ClientID=polompAllInfos.get(LastItem).ClientID;
+                        polompInfo.AgentID=polompAllInfos.get(LastItem).AgentID;
+                        polompInfo.ChangeTime=polompAllInfos.get(LastItem).ChangeTime;
+                        polompInfo.ChangeDate=polompAllInfos.get(LastItem).ChangeDate;
+                        polompInfo.FollowUpCode=polompAllInfos.get(LastItem).FollowUpCode;
                         polompInfo.PolompInfoID=null;
                         ClientAllInfo.PolompInfo=polompInfo;
                         ClientAllInfo.PolompDtls=new ArrayList<>();
@@ -225,8 +227,8 @@ public class SendViewModel extends AndroidViewModel {
                 }
                 
                 if(clientinfolList.size()!=0){
-//                    Gson gson = new Gson();
-//                    String val=gson.toJson(clientinfolList);
+                   Gson gson = new Gson();
+                    String val=gson.toJson(clientinfolList);
                     retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientinfolList)
                             .subscribeOn(Schedulers.io())
                             .subscribeWith(new SingleObserver<List<RecordeSummary>>() {
