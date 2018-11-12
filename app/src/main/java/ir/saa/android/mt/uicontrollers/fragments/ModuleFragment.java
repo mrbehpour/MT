@@ -28,6 +28,7 @@ public class ModuleFragment extends Fragment
     ModuleViewModel moduleViewModel;
     Spinner spinner;
     SwitchCompat swBluetooth;
+    ArrayAdapter<String> adapter;
     //List<String> spinnerArray;
     public ModuleFragment() {
     }
@@ -45,6 +46,10 @@ public class ModuleFragment extends Fragment
         swBluetooth=rootView.findViewById(R.id.swBluetooth);
         //spinnerArray=new ArrayList<>();
         spinner = rootView.findViewById(R.id.spnPaired);
+        if( G.getPref(SharePrefEnum.ModuleBluetoothName)!=null && adapter!=null) {
+
+
+        }
         moduleViewModel.listBluetoothName.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
@@ -111,7 +116,7 @@ public class ModuleFragment extends Fragment
     private void fillPairedDeviceSpinner(List<String> spinnerArray){
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.al_majol_spinner_item,spinnerArray );
+         adapter = new ArrayAdapter<>(this.getActivity(), R.layout.al_majol_spinner_item,spinnerArray );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);

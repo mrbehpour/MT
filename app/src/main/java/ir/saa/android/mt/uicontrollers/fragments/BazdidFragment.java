@@ -39,6 +39,7 @@ public class BazdidFragment extends Fragment
     public BazdidFragment() {
     }
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +50,19 @@ public class BazdidFragment extends Fragment
 
     @Override
     public void onResume() {
+
+
+
         super.onResume();
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_bazdid, container, false);
         SearchView svBazdidMoshtarakin = rootView.findViewById(R.id.svBazdidMoshtarakin);
+
         setUpRecyclerView(rootView,G.clientInfo.Postion);
         svBazdidMoshtarakin.setSubmitButtonEnabled(true);
         svBazdidMoshtarakin.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -73,38 +80,40 @@ public class BazdidFragment extends Fragment
         });
 
         return rootView;
+
     }
 
-    private void setUpRecyclerView(View view,Integer Postion) {
+
+    public void setUpRecyclerView(View view,Integer Postion) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvBazdidMoshtarakin);
         recyclerView.setScrollbarFadingEnabled(false);
         recyclerView.setScrollBarSize(50);
         adapter = new BazdidAdapter(getActivity(), clientItems);
+        bazdidViewModel.getClientsWithRegionIdLiveData(Integer.valueOf(G.getPref("RegionID"))).observe(this, new Observer<List<Client>>() {
+            @Override
+            public void onChanged(@Nullable List<Client> clients) {
+                clientItems.clear();
+                for(Client client:clients){
+                    isBazrasi=bazdidViewModel.getInspectionValue(client.ClientID);
+                    isPolomp=bazdidViewModel.getPolompValue(client.ClientID);
+                    isTest=bazdidViewModel.getTestValue(client.ClientID);
+                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address, (String) getResources().getText(R.string.UniqField),client.CustId, R.drawable.account,client.SendId
+                            ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,client.FollowUpCode ));
+                }
 
+                adapter.clearDataSet();
+                adapter.addAll(clientItems);
+                adapter.notifyDataSetChanged();
+                if(Postion!=null) {
+                    recyclerView.scrollToPosition(Postion);
+                }
+            }
+        });
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-            bazdidViewModel.getClientsWithRegionIdLiveData(Integer.valueOf(G.getPref("RegionID"))).observe(this, new Observer<List<Client>>() {
-                @Override
-                public void onChanged(@Nullable List<Client> clients) {
-                    clientItems.clear();
-                    for(Client client:clients){
-                        isBazrasi=bazdidViewModel.getInspectionValue(client.ClientID);
-                        isPolomp=bazdidViewModel.getPolompValue(client.ClientID);
-                        isTest=bazdidViewModel.getTestValue(client.ClientID);
-                        clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address, (String) getResources().getText(R.string.UniqField),client.CustId, R.drawable.account,client.SendId
-                                ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,client.FollowUpCode ));
-                    }
 
-                    adapter.clearDataSet();
-                    adapter.addAll(clientItems);
-                    adapter.notifyDataSetChanged();
-                    if(Postion!=null) {
-                        recyclerView.scrollToPosition(Postion);
-                    }
-                }
-            });
 
 
 

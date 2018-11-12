@@ -58,7 +58,7 @@ public class BazrasiFragment extends Fragment {
         return rootView;
     }
 
-    private void setUpRecyclerView(View view) {
+    public void setUpRecyclerView(View view) {
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvSoal);
         recyclerView.setScrollbarFadingEnabled(false);
@@ -89,5 +89,8 @@ public class BazrasiFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+
+
     }
 }

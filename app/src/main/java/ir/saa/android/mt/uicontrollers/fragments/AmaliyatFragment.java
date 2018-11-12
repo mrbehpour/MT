@@ -224,7 +224,9 @@ public class AmaliyatFragment extends Fragment {
                 }
             }
 
-
+//Bastan Form Sabt
+        G.fragmentNumStack.pop();
+        G.startFragment(G.fragmentNumStack.pop(), true, null);
 
 
             }
