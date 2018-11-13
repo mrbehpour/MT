@@ -16,6 +16,7 @@ import android.widget.CompoundButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import ir.saa.android.mt.R;
@@ -29,6 +30,7 @@ public class ModuleFragment extends Fragment
     Spinner spinner;
     SwitchCompat swBluetooth;
     ArrayAdapter<String> adapter;
+    HashMap<String, Integer> spinnerMap = new HashMap<String, Integer>();
     //List<String> spinnerArray;
     public ModuleFragment() {
     }
@@ -46,10 +48,7 @@ public class ModuleFragment extends Fragment
         swBluetooth=rootView.findViewById(R.id.swBluetooth);
         //spinnerArray=new ArrayList<>();
         spinner = rootView.findViewById(R.id.spnPaired);
-        if( G.getPref(SharePrefEnum.ModuleBluetoothName)!=null && adapter!=null) {
 
-
-        }
         moduleViewModel.listBluetoothName.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
@@ -57,6 +56,7 @@ public class ModuleFragment extends Fragment
                 if(strings.size()!=0) {
 
                     fillPairedDeviceSpinner(strings);
+
                 }
             }
         });
@@ -64,7 +64,8 @@ public class ModuleFragment extends Fragment
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 swBluetooth.setChecked(aBoolean);
-                spinner.setEnabled(aBoolean);
+
+
             }
         });
 
@@ -72,24 +73,10 @@ public class ModuleFragment extends Fragment
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(compoundButton.isChecked()){
-
-                    try {
                         moduleViewModel.setBluetoothEnable(true);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
 
                 }else{
-
-
-                    try {
                         moduleViewModel.setBluetoothEnable(false);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-
 
                 }
             }
@@ -116,9 +103,19 @@ public class ModuleFragment extends Fragment
     private void fillPairedDeviceSpinner(List<String> spinnerArray){
 
 
+
          adapter = new ArrayAdapter<>(this.getActivity(), R.layout.al_majol_spinner_item,spinnerArray );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        for(int i=0;i<spinnerArray.size();i++){
+            spinnerMap.put(spinnerArray.get(i).toString(),i);
+        }
+        if( G.getPref(SharePrefEnum.ModuleBluetoothName)!=null && spinnerMap.size()!=0) {
+            spinner.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName)));
+
+        }
+
     }
 }
