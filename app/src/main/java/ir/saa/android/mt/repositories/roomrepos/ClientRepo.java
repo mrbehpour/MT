@@ -10,6 +10,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.daos.ClientDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientWithAction;
 import ir.saa.android.mt.model.entities.ClientWithTarif;
 
 public class ClientRepo {
@@ -31,6 +32,14 @@ public class ClientRepo {
 
     public List<Client> getClients() {
         return clientDao.getClients();
+    }
+
+    public LiveData<List<ClientWithAction>> getClientWithActionLiveData(){
+        return clientDao.getClientsWithActionLiveData();
+    }
+
+    public LiveData<List<ClientWithAction>> getClientWithActionWithRegionIdLiveData(Integer regionId){
+        return clientDao.getClientsWithActionWithRegionIdLiveData(regionId);
     }
 
     public List<Client> getClientsWithRegionId(Integer regionId){

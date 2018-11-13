@@ -10,6 +10,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientWithAction;
 import ir.saa.android.mt.model.entities.ClientWithTarif;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
@@ -21,6 +22,133 @@ public interface ClientDao {
 
     @Query("select * from Client")
     List<Client> getClients();
+
+    @Query("Select " +
+            "Client.ClientID," +
+            "Client.tarifftype_id," +
+            "Client.Active1," +
+            "Client.Active2," +
+            "Client.Active3," +
+            "Client.ActiveT1," +
+            "Client.ActiveTariffCount," +
+            "Client.Address," +
+            "Client.Amp," +
+            "Client.ChngDateContor," +
+            "Client.ClientCity," +
+            "Client.ClientPass," +
+            "Client.ClientRow," +
+            "Client.clienttype_id," +
+            "Client.CustId," +
+            "Client.Demand," +
+            "Client.DurationType," +
+            "Client.Faz," +
+            "Client.FileID," +
+            "Client.IDInst," +
+            "Client.Status," +
+            "Client.SubScript," +
+            "Client.clienttype_id," +
+            "Client.ClientRow," +
+            "Client.ClientPass," +
+            "Client.Name," +
+            "Client.NumContract," +
+            "Client.NumDigitContor," +
+            "Client.InsDateContor," +
+            "Client.KindVolt," +
+            "Client.Tel," +
+            "Client.PostalCode," +
+            "Client.Name," +
+            "Client.UseAvrR," +
+            "Client.Mamoor," +
+            "Client.LastReadDate," +
+            "Client.MeterNumActive," +
+            "Client.MxmeterCode," +
+            "Client.MxMeterZarib," +
+            "Client.MxValue," +
+            "Client.Pelak," +
+            "Client.PosType," +
+            "Client.RegionID," +
+            "Client.Zarib , "+
+            "Client.SendId, "+
+            "Client.UseAvrA, "+
+            "Client.RoozKar," +
+            "Client.mastergroupdtl_id," +
+            "Client.RoozKar, " +
+            "PolompInfo.SendID as isPolomp,  "+
+            "TestInfo.SendID as isTest, "+
+            "InspectionInfo.SendID as isBazrasi "+
+            "from Client " +
+            "Left join PolompInfo on "+
+            "PolompInfo.ClientID=Client.ClientID "+
+            "Left Join TestInfo on "+
+            "TestInfo.ClientID=Client.ClientID "+
+            "Left join InspectionInfo on "+
+            "InspectionInfo.ClientID=Client.ClientID"
+    )
+    LiveData<List<ClientWithAction>> getClientsWithActionLiveData();
+
+    @Query("Select " +
+            "Client.ClientID," +
+            "Client.tarifftype_id," +
+            "Client.Active1," +
+            "Client.Active2," +
+            "Client.Active3," +
+            "Client.ActiveT1," +
+            "Client.ActiveTariffCount," +
+            "Client.Address," +
+            "Client.Amp," +
+            "Client.ChngDateContor," +
+            "Client.ClientCity," +
+            "Client.ClientPass," +
+            "Client.ClientRow," +
+            "Client.clienttype_id," +
+            "Client.CustId," +
+            "Client.Demand," +
+            "Client.DurationType," +
+            "Client.Faz," +
+            "Client.FileID," +
+            "Client.IDInst," +
+            "Client.Status," +
+            "Client.SubScript," +
+            "Client.clienttype_id," +
+            "Client.ClientRow," +
+            "Client.ClientPass," +
+            "Client.Name," +
+            "Client.NumContract," +
+            "Client.NumDigitContor," +
+            "Client.InsDateContor," +
+            "Client.KindVolt," +
+            "Client.Tel," +
+            "Client.PostalCode," +
+            "Client.Name," +
+            "Client.UseAvrR," +
+            "Client.Mamoor," +
+            "Client.LastReadDate," +
+            "Client.MeterNumActive," +
+            "Client.MxmeterCode," +
+            "Client.MxMeterZarib," +
+            "Client.MxValue," +
+            "Client.Pelak," +
+            "Client.PosType," +
+            "Client.RegionID," +
+            "Client.Zarib , "+
+            "Client.SendId, "+
+            "Client.UseAvrA, "+
+            "Client.RoozKar," +
+            "Client.mastergroupdtl_id," +
+            "Client.RoozKar, " +
+            "PolompInfo.SendID as isPolomp,  "+
+            "TestInfo.SendID as isTest, "+
+            "InspectionInfo.SendID as isBazrasi "+
+            "from Client " +
+            "Left join PolompInfo on "+
+            "PolompInfo.ClientID=Client.ClientID "+
+            "Left Join TestInfo on "+
+            "TestInfo.ClientID=Client.ClientID "+
+            "Left join InspectionInfo on "+
+            "InspectionInfo.ClientID=Client.ClientID "+
+            "where RegionID=:regionId"
+    )
+    LiveData<List<ClientWithAction>> getClientsWithActionWithRegionIdLiveData(Integer regionId);
 
     @Query("select * from Client where RegionID=:regionId")
     List<Client> getClientsWithRegionId(Integer regionId);

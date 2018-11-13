@@ -14,6 +14,7 @@ import java.util.List;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazdid.ClientItem;
 import ir.saa.android.mt.model.entities.Client;
+import ir.saa.android.mt.model.entities.ClientWithAction;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.TestAllInfo;
@@ -71,14 +72,14 @@ public class BazdidViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<Client>> getClientsLiveData(){
+    public LiveData<List<ClientWithAction>> getClientsLiveData(){
 
-        return clientRepo.getClientsLiveData();
+        return clientRepo.getClientWithActionLiveData();
     }
 
-    public LiveData<List<Client>> getClientsWithRegionIdLiveData(Integer regionId){
+    public LiveData<List<ClientWithAction>> getClientsWithRegionIdLiveData(Integer regionId){
         if(regionId!=-1) {
-            return clientRepo.getClientsWithRegionIdLiveData(regionId);
+            return clientRepo.getClientWithActionWithRegionIdLiveData(regionId);
         }
         return getClientsLiveData();
     }
