@@ -16,6 +16,7 @@ import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
+import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
 import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroupingFormat;
 import ir.saa.android.mt.repositories.roomrepos.AnswerGroupDtlRepo;
@@ -58,11 +59,11 @@ public class BazrasiViewModel extends AndroidViewModel {
            if(remarkRepo.getRemarkGroupingFormat(Id,3).getValue()!=null){
                List<RemarkItem> remarkInit=new ArrayList<>();
                for (RemarkGroupingFormat remark:remarkRepo.getRemarkGroupingFormat(Id,0).getValue()) {
-                   InspectionAllInfo inspectionAllInfo1=inspectionDtlRepo.getInspectionAllInfo(G.clientInfo.ClientId,remark.RemarkID);
+                   InspectionWithAnswerGroup inspectionAllInfo1=inspectionDtlRepo.getInspectionAllInfo(G.clientInfo.ClientId,remark.RemarkID,remark.AnswerGroupID);
                    if(inspectionAllInfo1==null){
-                       remarkInit.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,"-1"));
+                       remarkInit.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,"-1",""));
                    }else{
-                       remarkInit.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,inspectionAllInfo1.RemarkValue));
+                       remarkInit.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,inspectionAllInfo1.RemarkValue,inspectionAllInfo1.AnswerGroupDtlName));
                    }
                }
                RemarkItemLiveData.postValue( remarkInit);
@@ -72,11 +73,11 @@ public class BazrasiViewModel extends AndroidViewModel {
                List<RemarkItem> remarkItems=new ArrayList<>();
                InspectionAllInfo inspectionAllInfo=new InspectionAllInfo();
                for (RemarkGroupingFormat remark:remarks) {
-                   InspectionAllInfo inspectionAllInfo1=inspectionDtlRepo.getInspectionAllInfo(G.clientInfo.ClientId,remark.RemarkID);
+                   InspectionWithAnswerGroup inspectionAllInfo1=inspectionDtlRepo.getInspectionAllInfo(G.clientInfo.ClientId,remark.RemarkID,remark.AnswerGroupID);
                    if(inspectionAllInfo1==null){
-                       remarkItems.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,"-1"));
+                       remarkItems.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,"-1",""));
                    }else{
-                       remarkItems.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,inspectionAllInfo1.RemarkValue));
+                       remarkItems.add(new RemarkItem(remark.RemarkID,remark.RemarkName,remark.AnswerGroupID,inspectionAllInfo1.RemarkValue,inspectionAllInfo1.AnswerGroupDtlName));
                    }
 
                }
@@ -87,6 +88,10 @@ public class BazrasiViewModel extends AndroidViewModel {
 
        public LiveData<List<AnswerGroupDtl>> getAnswerGroupDtls(Integer Id){
           return answerGroupDtlRepo.getAnswerGroupDtlByAnswerGroupId(Id);
+       }
+
+       public LiveData<AnswerGroupDtl> getAnswerGroupDtl(Integer Id){
+        return  answerGroupDtlRepo.getAnswerGroupDtlById(Id);
        }
 
        public Long insertInspectionInfo(InspectionInfo inspectionInfo){
@@ -104,8 +109,8 @@ public class BazrasiViewModel extends AndroidViewModel {
        public int updateInspectionInfo(InspectionInfo inspectionInfo){
         return  inspectionInfoRepo.updateInspectionInfo(inspectionInfo);
        }
-       public InspectionAllInfo getInspectionAllInfo(Long clientId,Integer remarkID){
-        return inspectionDtlRepo.getInspectionAllInfo(clientId,remarkID);
+       public InspectionWithAnswerGroup getInspectionAllInfo(Long clientId,Integer remarkID,Integer answerGroupId){
+        return inspectionDtlRepo.getInspectionAllInfo(clientId,remarkID,answerGroupId);
        }
        public List<InspectionInfo> getInspectionInfo(Long clientId){
         return inspectionInfoRepo.getInspectionInfoByClientId(clientId);
@@ -114,6 +119,10 @@ public class BazrasiViewModel extends AndroidViewModel {
         inspectionInfoRepo.deleteInspectionInfo(inspectionInfo);
         inspectionDtlRepo.deleteInspectionDtl(inspectionDtl);
 
+       }
+
+       public AnswerGroupDtl getAnswerGroupDtlByIdAndAnswegroupId(int Id,int answergroupId){
+        return answerGroupDtlRepo.getAnswerGroupDtl(Id,answergroupId);
        }
 
 

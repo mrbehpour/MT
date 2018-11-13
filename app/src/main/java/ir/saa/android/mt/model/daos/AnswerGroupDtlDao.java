@@ -38,6 +38,9 @@ public interface AnswerGroupDtlDao {
     @Query("select * from AnswerGroupDtl where AnswerGroupDtlID= :Id")
     LiveData<AnswerGroupDtl> getAnswerGroupDtlById(int Id);
 
+    @Query("select * from AnswerGroupDtl where AnswerGroupDtlID= :Id and answergroup_id= :answergroupId")
+   AnswerGroupDtl getAnswerGroupDtl(int Id,int answergroupId);
+
     @Query("Delete from AnswerGroupDtl where AnswerGroupDtlID= :Id")
     void deleteAnswerGroupDtlById(int Id);
 

@@ -36,6 +36,7 @@ import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
+import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 
 import static android.content.Context.WINDOW_SERVICE;
@@ -73,15 +74,18 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
             RemarkItem current=mDataList.get(position);
+
+
             holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
             if(current.remarkValue!="-1"){
                 holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
+
             }
             holder.listitemRemarkRoot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                      final  MyDialog dialog=new MyDialog(context) ;
-                    InspectionAllInfo inspectionAllInfo=bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId,current.Id);
+                    InspectionWithAnswerGroup inspectionAllInfo=bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId,current.Id,current.answerGroupId);
                     if(inspectionAllInfo!=null){
                         current.remarkValue=inspectionAllInfo.RemarkValue;
                     }else {
@@ -119,13 +123,18 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
 
 
                                         objects=myCheckList.getSelectedItemsValues();
+                                        current.AnswerCaption= myCheckList.getSelectedCheckListItems().get(0).Text;
+
                                     if(objects.size()==0){
                                         saveBazrasi(current, null);
                                         holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
+
                                     }else {
 
                                         saveBazrasi(current, objects.get(0));
                                         holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
+                                        holder.tvResult.setText(current.AnswerCaption);
+
                                     }
                                         dialog.dismiss();
 
@@ -158,6 +167,8 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
 
             holder.tvId.setText(current.Id.toString());
             holder.tvSoal.setText(current.RemarkName);
+        holder.tvResult.setText(current.AnswerCaption);
+
     }
 
     @Override
@@ -175,7 +186,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     }
 
     private void saveBazrasi(RemarkItem currentItem,Object objectValue){
-        InspectionAllInfo inspectionAllInfo=bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId,currentItem.Id);
+        InspectionWithAnswerGroup inspectionAllInfo=bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId,currentItem.Id,currentItem.answerGroupId);
         if(inspectionAllInfo==null){
             if(objectValue!=null) {
                 InspectionInfo inspectionInfo = new InspectionInfo();
@@ -237,6 +248,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
         CardView listitemRemarkRoot;
         TextView tvSoal;
         TextView tvId;
+        TextView tvResult;
 
 
         public MyViewHolder(View itemView) {
@@ -244,6 +256,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
             listitemRemarkRoot=itemView.findViewById(R.id.cvSoal);
             tvSoal=itemView.findViewById(R.id.tvSoal);
             tvId=itemView.findViewById(R.id.tvId);
+            tvResult=itemView.findViewById(R.id.tvResult);
 
         }
     }

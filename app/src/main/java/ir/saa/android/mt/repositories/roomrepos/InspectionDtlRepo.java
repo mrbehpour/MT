@@ -9,6 +9,7 @@ import ir.saa.android.mt.model.daos.InspectionDtlDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
+import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
 
 public class InspectionDtlRepo  {
 
@@ -65,8 +66,8 @@ public class InspectionDtlRepo  {
        return inspectionDtlDao.updateInspectionDtl(inspectionDtl);
     }
 
-    public InspectionAllInfo getInspectionAllInfo(Long clientId, Integer remarkId){
-            return inspectionDtlDao.getInspectionAllInfo( clientId ,remarkId);
+    public InspectionWithAnswerGroup getInspectionAllInfo(Long clientId, Integer remarkId, Integer answerGroupId){
+            return inspectionDtlDao.getInspectionAllInfo( clientId ,remarkId,answerGroupId);
     }
 
     public List<InspectionAllInfo> getInspectionAllInfoWithSendId(Long ClientId, Integer SendId){
@@ -76,4 +77,6 @@ public class InspectionDtlRepo  {
     public List<InspectionAllInfo> getInspectionAllInfoWithClientId(Long ClientId){
         return inspectionDtlDao.getInspectionAllInfoWithClientId(ClientId);
     }
+
+
 }

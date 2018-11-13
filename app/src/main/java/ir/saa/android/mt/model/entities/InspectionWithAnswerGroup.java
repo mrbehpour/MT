@@ -2,7 +2,7 @@ package ir.saa.android.mt.model.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 
-public class InspectionAllInfo {
+public class InspectionWithAnswerGroup {
     public Integer InspectionInfoID;
 
     public Integer AgentID;
@@ -39,4 +39,12 @@ public class InspectionAllInfo {
 
     public Long FollowUpCode;
 
+    public int AnswerGroupDtlID ;
+
+    public String AnswerGroupDtlName ;
+
+    @ColumnInfo(name = "answergroup_id")
+    public int AnswerGroupID ;
+
+    public String Description ;
 }

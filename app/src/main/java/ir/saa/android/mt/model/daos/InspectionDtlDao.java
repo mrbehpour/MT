@@ -12,6 +12,7 @@ import java.util.List;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
+import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 
@@ -47,8 +48,10 @@ public interface InspectionDtlDao {
     @Query("Select * from InspectionInfo " +
             "inner join InspectionDtl on " +
             "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
+            "Inner Join AnswerGroupDtl on "+
+            "InspectionDtl.RemarkValue=AnswerGroupDtl.AnswerGroupDtlID And  AnswerGroupDtl.answergroup_id=:answerGroupId "+
             "Where InspectionInfo.ClientID=:clientId and InspectionDtl.RemarkID=:remarkId")
-    InspectionAllInfo getInspectionAllInfo(Long clientId,Integer remarkId);
+    InspectionWithAnswerGroup getInspectionAllInfo(Long clientId, Integer remarkId, Integer answerGroupId);
 
     @Query("Select * from InspectionInfo " +
             "inner join InspectionDtl on " +

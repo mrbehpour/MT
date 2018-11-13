@@ -63,4 +63,8 @@ public class AnswerGroupDtlRepo   {
     public LiveData<List<AnswerGroupDtl>> getAnswerGroupDtlByAnswerGroupId(int answergroupId) {
         return answerGroupDtlDao.getAnswerGroupDtlByAnswerGroupId(answergroupId);
     }
+
+    public AnswerGroupDtl getAnswerGroupDtl(int Id,int answergroupId){
+        return answerGroupDtlDao.getAnswerGroupDtl(Id,answergroupId);
+    }
 }
