@@ -44,7 +44,40 @@
                     android:text="@string/polompGhadim"
                     android:textColor="@color/grey_1000"
                     android:textSize="18sp" />
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <!-- Nakhana Ghadim -->
+                    <CheckBox
+                        android:id="@+id/cbGhadimNakhana"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_weight="0.5"
+                        android:fontFamily="@font/byekan"
+                        android:gravity="right|center_vertical"
+                        android:layoutDirection="rtl"
+                        android:text="@string/nakhana"
+                        android:textAlignment="gravity"
+                        android:textDirection="rtl"
+                        android:textSize="16sp" />
+                    <!-- Nadarad Ghadim -->
+                    <CheckBox
+                        android:id="@+id/cbGhadimNadarad"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_weight="0.5"
+                        android:fontFamily="@font/byekan"
+                        android:gravity="right|center_vertical"
+                        android:layoutDirection="rtl"
+                        android:text="@string/nadarad"
+                        android:textAlignment="gravity"
+                        android:textDirection="rtl"
+                        android:textSize="16sp" />
+                </LinearLayout>
                 <!-- Shomare Polomp Ghadim -->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -62,6 +95,8 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/byekan"
                         android:gravity="right"
+                        android:inputType="text"
+                        android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopasdfghjklyxcvbnm,_,-"
                         android:maxLength="16"
                         android:maxLines="1"
                         android:textAlignment="gravity"
@@ -135,40 +170,7 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-                    <!-- Nakhana Ghadim -->
-                    <CheckBox
-                        android:id="@+id/cbGhadimNakhana"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginTop="12dp"
-                        android:layout_weight="0.5"
-                        android:fontFamily="@font/byekan"
-                        android:gravity="right|center_vertical"
-                        android:layoutDirection="rtl"
-                        android:text="@string/nakhana"
-                        android:textAlignment="gravity"
-                        android:textDirection="rtl"
-                        android:textSize="16sp" />
-                    <!-- Nadarad Ghadim -->
-                    <CheckBox
-                        android:id="@+id/cbGhadimNadarad"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_weight="0.5"
-                        android:fontFamily="@font/byekan"
-                        android:gravity="right|center_vertical"
-                        android:layoutDirection="rtl"
-                        android:text="@string/nadarad"
-                        android:textAlignment="gravity"
-                        android:textDirection="rtl"
-                        android:textSize="16sp" />
-                </LinearLayout>
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -217,6 +219,8 @@
                         android:fontFamily="@font/byekan"
                         android:background="@android:color/transparent"
                         android:textSize="16sp"
+                        android:inputType="text"
+                        android:digits="0,1,2,3,4,5,6,7,8,9,*,qwertzuiopasdfghjklyxcvbnm,_,-"
                         android:gravity="right"
                         android:maxLength="16"
                         android:maxLines="1"

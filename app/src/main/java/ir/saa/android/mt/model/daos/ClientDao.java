@@ -73,16 +73,10 @@ public interface ClientDao {
             "Client.RoozKar," +
             "Client.mastergroupdtl_id," +
             "Client.RoozKar, " +
-            "PolompInfo.SendID as isPolomp,  "+
-            "TestInfo.SendID as isTest, "+
-            "InspectionInfo.SendID as isBazrasi "+
-            "from Client " +
-            "Left join PolompInfo on "+
-            "PolompInfo.ClientID=Client.ClientID "+
-            "Left Join TestInfo on "+
-            "TestInfo.ClientID=Client.ClientID "+
-            "Left join InspectionInfo on "+
-            "InspectionInfo.ClientID=Client.ClientID"
+            "(select SendID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1) as isPolomp,  "+
+            "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID limit 1) as isTest, "+
+            "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi "+
+            "from Client "
     )
     LiveData<List<ClientWithAction>> getClientsWithActionLiveData();
 
@@ -136,16 +130,10 @@ public interface ClientDao {
             "Client.RoozKar," +
             "Client.mastergroupdtl_id," +
             "Client.RoozKar, " +
-            "PolompInfo.SendID as isPolomp,  "+
-            "TestInfo.SendID as isTest, "+
-            "InspectionInfo.SendID as isBazrasi "+
+            "(select SendID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1) as isPolomp,  "+
+            "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID limit 1) as isTest, "+
+            "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi "+
             "from Client " +
-            "Left join PolompInfo on "+
-            "PolompInfo.ClientID=Client.ClientID "+
-            "Left Join TestInfo on "+
-            "TestInfo.ClientID=Client.ClientID "+
-            "Left join InspectionInfo on "+
-            "InspectionInfo.ClientID=Client.ClientID "+
             "where RegionID=:regionId"
     )
     LiveData<List<ClientWithAction>> getClientsWithActionWithRegionIdLiveData(Integer regionId);
