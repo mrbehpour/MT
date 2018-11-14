@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:orientation="vertical"
+    android:background="@color/grey_100"
     android:id="@+id/listItemTestResultRoot">
 
     <LinearLayout
@@ -228,18 +229,23 @@
         </LinearLayout>
 
         <!-- Number Layout -->
-        <TextView
-            android:id="@+id/tvNumber"
+        <LinearLayout
             android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="8dp"
-            android:fontFamily="@font/byekan"
-            android:textSize="30sp"
-            android:textColor="@color/grey_600"
-            android:gravity="center_vertical|center_horizontal"
-            android:textAlignment="gravity"
-            android:text="@string/dash"/>
-
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tvNumber"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/custom_rect_testresult"
+                android:fontFamily="@font/byekan"
+                android:textSize="18sp"
+                android:textColor="@color/grey_600"
+                android:gravity="center_vertical|center_horizontal"
+                android:textAlignment="gravity"
+                android:text="99"/>
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Line Layout -->

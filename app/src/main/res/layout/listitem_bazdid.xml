@@ -151,16 +151,31 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Icon Layout -->
-        <ImageView
-            android:id="@+id/imgBazdidMoshtarak"
+        <LinearLayout
             android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/bazdid_user">
-        </ImageView>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="16dp">
+            <!-- Icon Layout -->
+            <ImageView
+                android:id="@+id/imgBazdidMoshtarak"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/bazdid_user">
+            </ImageView>
+            <TextView
+                android:id="@+id/tvRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_horizontal"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/byekan"
+                android:textSize="16sp"
+                android:textColor="@color/grey_700"
+                android:text="@string/dash"/>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

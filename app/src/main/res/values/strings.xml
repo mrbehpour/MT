@@ -266,4 +266,5 @@
 
     <!-- fragment_settings -->
     <string name="serverAddress">آدرس سرور:</string>
+    <string name="http">http://</string>
 </resources>
