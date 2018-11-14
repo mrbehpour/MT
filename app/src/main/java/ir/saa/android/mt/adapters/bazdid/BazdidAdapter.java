@@ -29,10 +29,10 @@ import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.pojos.FontManager.FontManager;
 import ir.saa.android.mt.viewmodels.BazdidViewModel;
 
-public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHolder> {
+public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHolder> {
 
-    private List<ClientItem> clientItemListOrginal ;
-    private List<ClientItem> mDataList ;
+    private List<ClientItem> clientItemListOrginal;
+    private List<ClientItem> mDataList;
     private LayoutInflater inflater;
     private Context context;
     BazdidViewModel bazdidViewModel;
@@ -44,7 +44,7 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         clientItemListOrginal = new ArrayList<>();
         mDataList.addAll(data);
         clientItemListOrginal.addAll(data);
-        this.bazdidViewModel= ViewModelProviders.of((AppCompatActivity)context).get(BazdidViewModel.class);
+        this.bazdidViewModel = ViewModelProviders.of((AppCompatActivity) context).get(BazdidViewModel.class);
     }
 
     @Override
@@ -58,18 +58,18 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
     public void onBindViewHolder(final BazdidAdapter.MyViewHolder holder, int position) {
         ClientItem current = mDataList.get(position);
 
-        holder.listItemBazdidRoot.setOnClickListener(v->{
+        holder.listItemBazdidRoot.setOnClickListener(v -> {
             G.setActionbarTitleText(current.Name);
             Bundle bundle = new Bundle();
-            bundle.putLong(BundleKeysEnum.ClientID,current.Id);
-            G.clientInfo.ClientId=current.Id;
-            G.clientInfo.SendId=current.SendId;
-            G.clientInfo.GroupId=current.GroupId;
-            G.clientInfo.FollowUpCode=current.FollowUpCode;
-            G.clientInfo.ClientName=current.Name;
-            G.clientInfo.Postion=position;
+            bundle.putLong(BundleKeysEnum.ClientID, current.Id);
+            G.clientInfo.ClientId = current.Id;
+            G.clientInfo.SendId = current.SendId;
+            G.clientInfo.GroupId = current.GroupId;
+            G.clientInfo.FollowUpCode = current.FollowUpCode;
+            G.clientInfo.ClientName = current.Name;
+            G.clientInfo.Postion = position;
             G.setActionbarTitleText(current.Name);
-            G.startFragment(FragmentsEnum.MoshtarakFragment,false,bundle);
+            G.startFragment(FragmentsEnum.MoshtarakFragment, false, bundle);
         });
         //holder.imgBazdidMoshtarak.setImageResource(current.Pic);
         holder.tvName.setText(current.Name);
@@ -78,34 +78,34 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         holder.tvAddress.setText(current.Address);
 
 
-        if(current.isPolommp){
+        if (current.isPolommp) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconPolomp.setImageTintList(ContextCompat.getColorStateList(holder.contextHolder, R.color.icon_on));
             }
 
 
-        }else {
+        } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconPolomp.setImageTintList(ContextCompat.getColorStateList(holder.contextHolder, R.color.icon_off));
             }
         }
 
-        if(current.isTest){
+        if (current.isTest) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconTest.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_on));
             }
-        }else {
+        } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconTest.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
             }
-                }
-        if(current.isBazrasi){
+        }
+        if (current.isBazrasi) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_on));
             }
-        }else {
+        } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
             }
@@ -115,17 +115,16 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
     }
 
 
-
     @Override
     public int getItemCount() {
         return mDataList.size();
     }
 
-    public void clearDataSet(){
+    public void clearDataSet() {
         mDataList.clear();
     }
 
-    public void addAll(List<ClientItem> clientItems){
+    public void addAll(List<ClientItem> clientItems) {
         mDataList.clear();
         clientItemListOrginal.clear();
         mDataList.addAll(clientItems);
@@ -134,12 +133,12 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
 
     public void filter(String query) {
         mDataList.clear();
-        if(query.isEmpty()){
+        if (query.isEmpty()) {
             mDataList.addAll(clientItemListOrginal);
-        } else{
+        } else {
             query = query.toLowerCase();
-            for(ClientItem item: clientItemListOrginal){
-                if(item.Name.toLowerCase().contains(query) || item.Address.toLowerCase().contains(query) || item.UniqueFieldValue.toLowerCase().contains(query)){
+            for (ClientItem item : clientItemListOrginal) {
+                if (item.Name.toLowerCase().contains(query) || item.Address.toLowerCase().contains(query) || item.UniqueFieldValue.toLowerCase().contains(query)) {
                     mDataList.add(item);
                 }
             }
@@ -157,7 +156,8 @@ public class BazdidAdapter  extends RecyclerView.Adapter<BazdidAdapter.MyViewHol
         ImageView IconBazrasi;
         ImageView IconPolomp;
         ImageView imgBazdidMoshtarak;
-Context contextHolder;
+        Context contextHolder;
+
         public MyViewHolder(View itemView) {
             super(itemView);
             listItemBazdidRoot = itemView.findViewById(R.id.listItemBazdidRoot);
@@ -166,10 +166,10 @@ Context contextHolder;
             tvUniqueValue = itemView.findViewById(R.id.tvUniqueValue);
             tvAddress = itemView.findViewById(R.id.tvAddress);
             imgBazdidMoshtarak = itemView.findViewById(R.id.imgBazdidMoshtarak);
-            IconTest=itemView.findViewById(R.id.iconTest);
-            IconBazrasi=itemView.findViewById(R.id.iconBazrasi);
-            IconPolomp=itemView.findViewById(R.id.iconPolomp);
-            contextHolder= itemView.getContext().getApplicationContext();
+            IconTest = itemView.findViewById(R.id.iconTest);
+            IconBazrasi = itemView.findViewById(R.id.iconBazrasi);
+            IconPolomp = itemView.findViewById(R.id.iconPolomp);
+            contextHolder = itemView.getContext().getApplicationContext();
 
 //            Typeface iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);
 //            FontManager.markAsIconContainer(tvfIconTest,iconFont);
