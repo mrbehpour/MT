@@ -60,8 +60,8 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     G.startFragment(FragmentsEnum.BazdidFragment,false,null);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem2))==0){
 
-                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem3))==0){
-                    G.startFragment(FragmentsEnum.ModuleFragment,false,null);
+//                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem3))==0){
+//                    G.startFragment(FragmentsEnum.ModuleFragment,false,null);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem4))==0){
                     G.startFragment(FragmentsEnum.SettingFragment,false,null);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem5))==0){

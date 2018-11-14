@@ -76,7 +76,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
         holder.tvUniqueTitle.setText(current.UniqueFieldTitle);
         holder.tvUniqueValue.setText(current.UniqueFieldValue);
         holder.tvAddress.setText(current.Address);
-
+        holder.tvRowId.setText(current.RowId.toString());
 
         if (current.isPolommp) {
 
@@ -138,7 +138,8 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
         } else {
             query = query.toLowerCase();
             for (ClientItem item : clientItemListOrginal) {
-                if (item.Name.toLowerCase().contains(query) || item.Address.toLowerCase().contains(query) || item.UniqueFieldValue.toLowerCase().contains(query)) {
+                if (item.Name.toLowerCase().contains(query) || item.Address.toLowerCase().contains(query)
+                        || item.UniqueFieldValue.toLowerCase().contains(query) || item.RowId.toString().contains(query) ) {
                     mDataList.add(item);
                 }
             }
@@ -152,6 +153,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
         TextView tvUniqueTitle;
         TextView tvUniqueValue;
         TextView tvAddress;
+        TextView tvRowId;
         ImageView IconTest;
         ImageView IconBazrasi;
         ImageView IconPolomp;
@@ -169,6 +171,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
             IconTest = itemView.findViewById(R.id.iconTest);
             IconBazrasi = itemView.findViewById(R.id.iconBazrasi);
             IconPolomp = itemView.findViewById(R.id.iconPolomp);
+            tvRowId=itemView.findViewById(R.id.tvRow);
             contextHolder = itemView.getContext().getApplicationContext();
 
 //            Typeface iconFont = FontManager.getTypeface(context, FontManager.FONTAWESOME);

@@ -113,12 +113,14 @@ public class BazdidFragment extends Fragment
                 public void onChanged(@Nullable List<ClientWithAction> clients) {
 
                 clientItems.clear();
+                Integer RowId=0;
                 for(ClientWithAction client:clients){
                     isBazrasi=client.isBazrasi!=0?true:false;
                     isPolomp=client.isPolomp!=0?true:false;
                     isTest=client.isTest!=0?true:false;
+                    RowId+=1;
                     clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address, (String) getResources().getText(R.string.UniqField),client.CustId, R.drawable.account,client.SendId
-                            ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,client.FollowUpCode ));
+                            ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,client.FollowUpCode,RowId ));
                 }
 
                 adapter.clearDataSet();

@@ -47,7 +47,6 @@ public class NavigationDrawerItem {
         return new int[]{
                 R.drawable.account_search,
                 R.drawable.finance,
-                R.drawable.cast_connected,
                 R.drawable.settings,
                 R.drawable.file_download_outline,
                 R.drawable.icon_daryaftmoshtarakin,
@@ -60,7 +59,7 @@ public class NavigationDrawerItem {
         return new String[]{
                 G.context.getResources().getString(R.string.menuItem1),
                 G.context.getResources().getString(R.string.menuItem2),
-                G.context.getResources().getString(R.string.menuItem3),
+                //G.context.getResources().getString(R.string.menuItem3),
                 G.context.getResources().getString(R.string.menuItem4),
                 G.context.getResources().getString(R.string.menuItem5),
                 G.context.getResources().getString(R.string.menuItem6),
