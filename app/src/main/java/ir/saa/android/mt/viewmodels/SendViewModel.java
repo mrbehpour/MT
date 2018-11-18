@@ -227,8 +227,8 @@ public class SendViewModel extends AndroidViewModel {
                 }
                 
                 if(clientinfolList.size()!=0){
-                   Gson gson = new Gson();
-                    String val=gson.toJson(clientinfolList);
+                   //Gson gson = new Gson();
+                    //String val=gson.toJson(clientinfolList);
                     retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientinfolList)
                             .subscribeOn(Schedulers.io())
                             .subscribeWith(new SingleObserver<List<RecordeSummary>>() {
@@ -304,6 +304,9 @@ public class SendViewModel extends AndroidViewModel {
                         testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
                         break;
                     case 18:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 40:
                         testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
                         break;
 

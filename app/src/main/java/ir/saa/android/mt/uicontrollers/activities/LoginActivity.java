@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableInt;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.provider.Settings;
@@ -58,6 +59,22 @@ public class LoginActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, R.layout.al_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(R.layout.al_spinner_dropdown_item);
         tvSanjesh = findViewById(R.id.tvSanjesh);
+        new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.Builder(LoginActivity.this)
+                .setTarget(findViewById(R.id.tvSanjesh))
+                .setPrimaryText("شماره سریال دستگاه")
+                .setSecondaryText("جهت نمایش سریال دستگاه حتما باید دسترسی خواندن وضعیت تلفن به برنامه داده شود.")
+                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
+                {
+                    @Override
+                    public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
+                    {
+                        if (state == uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+                        {
+
+                        }
+                    }
+                })
+                .show();
         tvSanjesh.setText(tvSanjesh.getText()+"\n"+ getDeviceIMEI());
         G.setPref("DeviceId",getDeviceIMEI());
         spinner.setAdapter(adapter);
