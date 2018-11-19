@@ -33,6 +33,9 @@ public class TestContorFieldName {
             hashMapCode.put("Q_A",10);
             hashMapCode.put("Q_B",11);
             hashMapCode.put("Q_C",12);
+            hashMapCode.put("Pow_A",7);
+            hashMapCode.put("Pow_B",8);
+            hashMapCode.put("Pow_C",9);
             hashMapCode.put("S_A",16);
             hashMapCode.put("S_B",17);
             hashMapCode.put("S_C",18);
@@ -60,6 +63,9 @@ public class TestContorFieldName {
             hashMapName.put(10,"Q_A");
             hashMapName.put(11,"Q_B");
             hashMapName.put(12,"Q_C");
+            hashMapName.put(7,"Pow_A");
+            hashMapName.put(8,"Pow_B");
+            hashMapName.put(9,"Pow_C");
             hashMapName.put(16,"S_A");
             hashMapName.put(17,"S_B");
             hashMapName.put(18,"S_C");

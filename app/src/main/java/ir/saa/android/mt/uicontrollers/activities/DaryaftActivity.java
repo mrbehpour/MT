@@ -1,29 +1,24 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.daimajia.numberprogressbar.*;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.model.entities.GetClientInput;
-import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
 public class DaryaftActivity extends AppCompatActivity   {
@@ -50,15 +45,25 @@ public class DaryaftActivity extends AppCompatActivity   {
     TextView tvLabelDarhaleDaryaftTanzimat;
     TextView tvLabelDarhaleDaryaftUsers;
 
+
     BaseInfoViewModel baseInfoViewModel = null;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baseinfo);
 
+        android.support.v7.widget.Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //Your toolbar is now an action bar and you can use it like you always do, for example:
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        getSupportActionBar().setTitle("");
         isDownloadBaseInfo=false;
         isDownloadUser=false;
         isDownloadSetting=false;
@@ -211,6 +216,8 @@ public class DaryaftActivity extends AppCompatActivity   {
 //            }
 //        });
     }
+
+
 
     @Override
     public void onBackPressed() {

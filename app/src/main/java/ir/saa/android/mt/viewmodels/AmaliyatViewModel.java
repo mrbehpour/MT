@@ -365,6 +365,15 @@ public class AmaliyatViewModel extends AndroidViewModel {
                     case "Q_C":
                         testResultItemDisplay.Q_C = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );;
                         break;
+                    case "Pow_A":
+                        testResultItemDisplay.Pow_A = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                        break;
+                    case "Pow_B":
+                        testResultItemDisplay.Pow_B = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                        break;
+                    case "Pow_C":
+                        testResultItemDisplay.Pow_C = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );;
+                        break;
                     case "S_A":
                         testResultItemDisplay.S_A = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
                         break;

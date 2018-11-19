@@ -48,6 +48,19 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getmoshtarkin);
 
+        android.support.v7.widget.Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //Your toolbar is now an action bar and you can use it like you always do, for example:
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        getSupportActionBar().setTitle("");
+
         isDownloadClient = false;
 
         tvLabelDarhaleDaryaftMoshtarakin=(TextView) findViewById(R.id.tvLabelDarhaleDaryaftMoshtarakin);

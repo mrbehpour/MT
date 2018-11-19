@@ -164,4 +164,8 @@ public class G extends Application {
         tvActionbarTitle.setText(strTitle);
     }
 
+    public static void setEnableActionBar(Boolean state){
+        actionBar.setDisplayHomeAsUpEnabled(state);
+    }
+
 }

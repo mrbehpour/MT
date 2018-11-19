@@ -308,6 +308,15 @@ public class SendViewModel extends AndroidViewModel {
                     case 40:
                         testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
                         break;
+                    case 7:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 8:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
+                    case 9:
+                        testDtl.TestValue=String.format("%.2f",Double.parseDouble(testDtl.TestValue)) ;
+                        break;
 
                 }
             }
