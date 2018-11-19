@@ -222,7 +222,7 @@ public class SendViewModel extends AndroidViewModel {
 
                     }
 
-                    sendAllDataProgress.postValue(getPrecent(i+1,clientList.size())-1);
+
 
                 }
                 
@@ -246,9 +246,8 @@ public class SendViewModel extends AndroidViewModel {
                                     Integer countTrue=0;
                                     for(RecordeSummary recordeSummary:recordeSummaries){
                                         if(recordeSummary.Result){
-                                            countTrue++;
-                                        }else {
-                                            ErrorMessageSite=recordeSummary.Description;
+                                            sendAllDataProgress.postValue(getPrecent(countTrue++,recordeSummaries.size())-1);
+                                            //countTrue++;
                                         }
                                     }
                                     if(recordeSummaries.size()==countTrue){
