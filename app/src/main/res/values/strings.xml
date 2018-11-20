@@ -267,4 +267,10 @@
     <!-- fragment_settings -->
     <string name="serverAddress">آدرس سرور:</string>
     <string name="http">http://</string>
+    <string name="fontSize">سایز فونت:</string>
+    <string name="small">کوچک</string>
+    <string name="normal">متوسط</string>
+    <string name="large">بزرگ</string>
+    <string name="huge">بزرگ تر</string>
+
 </resources>
