@@ -19,9 +19,10 @@ import com.daimajia.numberprogressbar.*;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
-public class DaryaftActivity extends AppCompatActivity   {
+public class DaryaftActivity extends AppCompatActivity {
 
     //LinearLayout llMoshtarkin;
     LinearLayout llTanzimat;

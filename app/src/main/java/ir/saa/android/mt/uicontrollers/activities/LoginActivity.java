@@ -8,11 +8,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableInt;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -35,6 +37,7 @@ import java.util.Observer;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.RelUser;
+
 import ir.saa.android.mt.viewmodels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,6 +53,20 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (!Settings.System.canWrite(getApplicationContext())) {
+//                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:" + getPackageName()));
+//                startActivityForResult(intent, 200);
+//            }
+//        }
+//
+//
+////        Configuration config = new Configuration();
+////        config.fontScale = 1.3f;
+////        getResources().getConfiguration().setTo(config);
+//
+//        startActivity(new Intent(Settings.ACTION_D));
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         //loginViewModel.initializerUser();

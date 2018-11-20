@@ -11,6 +11,7 @@ import android.widget.Toast;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 
+
 public class SettingActivity extends AppCompatActivity {
 
     EditText edtServerAddress;

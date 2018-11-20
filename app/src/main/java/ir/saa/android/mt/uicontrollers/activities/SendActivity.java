@@ -20,6 +20,7 @@ import ir.saa.android.mt.components.MyCheckList;
 import ir.saa.android.mt.components.MyCheckListItem;
 import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.components.MyDialog;
+
 import ir.saa.android.mt.viewmodels.SendViewModel;
 import pl.droidsonroids.gif.GifTextView;
 

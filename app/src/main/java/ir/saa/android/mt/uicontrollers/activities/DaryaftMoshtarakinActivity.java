@@ -26,6 +26,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.Region;
+
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
 public class DaryaftMoshtarakinActivity extends AppCompatActivity {
