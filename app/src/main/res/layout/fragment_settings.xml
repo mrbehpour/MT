@@ -109,6 +109,63 @@
         android:textSize="12sp"
         android:text="@string/http"/>
 
+    <!-- Line -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/grey_300"/>
+
+    <!-- font size -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="@font/byekan"
+        android:textSize="16sp"
+        android:text="@string/fontSize"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/rbtSmall"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:fontFamily="@font/byekan"
+            android:textSize="16sp"
+            android:text="@string/small"/>
+        <RadioButton
+            android:id="@+id/rbtNormal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:fontFamily="@font/byekan"
+            android:textSize="16sp"
+            android:text="@string/normal"/>
+        <RadioButton
+            android:id="@+id/rbtLarge"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:fontFamily="@font/byekan"
+            android:textSize="16sp"
+            android:text="@string/large"/>
+        <RadioButton
+            android:id="@+id/rbtHuge"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:fontFamily="@font/byekan"
+            android:textSize="16sp"
+            android:text="@string/huge"/>
+    </RadioGroup>
+
     <!-- Spacer -->
     <LinearLayout
         android:layout_width="match_parent"
