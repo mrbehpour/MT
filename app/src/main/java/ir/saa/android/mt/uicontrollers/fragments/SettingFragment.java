@@ -11,22 +11,26 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,6 +38,8 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.viewmodels.ModuleViewModel;
+
+import static android.content.Context.WINDOW_SERVICE;
 
 public class SettingFragment extends Fragment {
 
@@ -44,7 +50,13 @@ public class SettingFragment extends Fragment {
     Spinner spinner;
     SwitchCompat swBluetooth;
     ArrayAdapter<String> adapter;
+    RadioButton rbtSmall;
+    RadioButton rbtNormal;
+    RadioButton rbtLarge;
+    RadioButton rbtHuge;
+
     HashMap<String, Integer> spinnerMap = new HashMap<String, Integer>();
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -61,14 +73,61 @@ public class SettingFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
         edtServerAddress=rootView.findViewById(R.id.edtServerAddress);
         btnSave=rootView.findViewById(R.id.btnSave);
-//-Address
+        //-Fontsize
+        rbtSmall=rootView.findViewById(R.id.rbtSmall);
+        rbtNormal=rootView.findViewById(R.id.rbtNormal);
+        rbtLarge=rootView.findViewById(R.id.rbtLarge);
+        rbtHuge=rootView.findViewById(R.id.rbtHuge);
+
+        switch (  G.getPref(SharePrefEnum.FontSize)){
+            case "0.85":
+                rbtSmall.setChecked(true);
+                break;
+            case "1":
+                rbtNormal.setChecked(true);
+                break;
+            case "1.15":
+                rbtLarge.setChecked(true);
+                break;
+            case "1.3":
+                rbtHuge.setChecked(true);
+                break;
+        }
+
+        rbtSmall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.setPref(SharePrefEnum.FontSize,"0.85");
+            }
+        });
+
+        rbtNormal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.setPref(SharePrefEnum.FontSize,"1");
+            }
+        });
+        rbtLarge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.setPref(SharePrefEnum.FontSize,"1.15");
+            }
+        });
+
+        rbtHuge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.setPref(SharePrefEnum.FontSize,"1.3");
+            }
+        });
+        //-Address
         edtServerAddress.setText(G.getPref("ServerAddress"));
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                G.setPref("ServerAddress",edtServerAddress.getText().toString());
+                G.setPref(SharePrefEnum.AddressServer,edtServerAddress.getText().toString());
                 Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
             }
         });
