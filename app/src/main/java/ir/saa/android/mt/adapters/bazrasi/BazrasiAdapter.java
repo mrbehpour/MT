@@ -123,7 +123,9 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
 
 
                                     objects = myCheckList.getSelectedItemsValues();
-                                    current.AnswerCaption = myCheckList.getSelectedCheckListItems().get(0).Text;
+                                    if( myCheckList.getSelectedCheckListItems().size()!=0) {
+                                        current.AnswerCaption = myCheckList.getSelectedCheckListItems().get(0).Text;
+                                    }
 
                                     if (objects.size() == 0) {
                                         saveBazrasi(current, null);

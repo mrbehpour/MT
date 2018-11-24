@@ -38,6 +38,7 @@ import java.util.Observer;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.RelUser;
 
 import ir.saa.android.mt.viewmodels.LoginViewModel;
@@ -51,9 +52,9 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvSanjesh;
     HashMap<Integer, Integer> spinnerMap = new HashMap<Integer, Integer>();
 
-    public  void adjustFontScale( Configuration configuration) {
+    public  void adjustFontScale( Configuration configuration,Float fontSize) {
 
-        configuration.fontScale = (float) 1.3;
+        configuration.fontScale = (float) fontSize;
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(metrics);
@@ -65,7 +66,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //adjustFontScale(getResources().getConfiguration());
+
+       adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            if (!Settings.System.canWrite(getApplicationContext())) {
 //                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:" + getPackageName()));
@@ -88,22 +90,22 @@ public class LoginActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, R.layout.al_spinner_item, spinnerArray);
         adapter.setDropDownViewResource(R.layout.al_spinner_dropdown_item);
         tvSanjesh = findViewById(R.id.tvSanjesh);
-        new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.Builder(LoginActivity.this)
-                .setTarget(findViewById(R.id.tvSanjesh))
-                .setPrimaryText("شماره سریال دستگاه")
-                .setSecondaryText("جهت نمایش سریال دستگاه حتما باید دسترسی خواندن وضعیت تلفن به برنامه داده شود.")
-                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
-                {
-                    @Override
-                    public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
-                    {
-                        if (state == uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
-                        {
-
-                        }
-                    }
-                })
-                .show();
+//        new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.Builder(LoginActivity.this)
+//                .setTarget(findViewById(R.id.tvSanjesh))
+//                .setPrimaryText("شماره سریال دستگاه")
+//                .setSecondaryText("جهت نمایش سریال دستگاه حتما باید دسترسی خواندن وضعیت تلفن به برنامه داده شود.")
+//                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
+//                {
+//                    @Override
+//                    public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
+//                    {
+//                        if (state == uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+//                        {
+//
+//                        }
+//                    }
+//                })
+//                .show();
         tvSanjesh.setText(tvSanjesh.getText()+"\n"+ getDeviceIMEI());
         G.setPref("DeviceId",getDeviceIMEI());
         spinner.setAdapter(adapter);

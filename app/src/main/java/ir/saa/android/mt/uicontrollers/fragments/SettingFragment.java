@@ -67,6 +67,16 @@ public class SettingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+    public  void adjustFontScale(Configuration configuration, Float fontSize) {
+
+        configuration.fontScale = (float) fontSize;
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        WindowManager wm = (WindowManager) G.context.getSystemService(WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        metrics.scaledDensity = configuration.fontScale * metrics.density;
+       getResources().updateConfiguration(configuration, metrics);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -120,15 +130,19 @@ public class SettingFragment extends Fragment {
                 G.setPref(SharePrefEnum.FontSize,"1.3");
             }
         });
+        adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
         //-Address
-        edtServerAddress.setText(G.getPref("ServerAddress"));
+        edtServerAddress.setText(G.getPref(SharePrefEnum.AddressServer));
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 G.setPref(SharePrefEnum.AddressServer,edtServerAddress.getText().toString());
+                adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+
                 Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
+                G.startFragment(G.fragmentNumStack.pop(), true, null);
             }
         });
         //-BlueTooth

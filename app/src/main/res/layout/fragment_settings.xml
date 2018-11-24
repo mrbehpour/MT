@@ -131,6 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="32dp"
         android:layout_marginLeft="32dp"
+        android:fontFamily="@font/byekan"
         android:orientation="vertical">
         <RadioButton
             android:id="@+id/rbtSmall"

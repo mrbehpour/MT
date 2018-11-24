@@ -1,14 +1,17 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -16,6 +19,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestEnergyFragment;
 
@@ -25,12 +29,21 @@ import ir.saa.android.mt.uicontrollers.fragments.TestEnergyFragment;
 public class MainActivity extends AppCompatActivity{
 
     Toolbar toolbar;
+    public  void adjustFontScale(Configuration configuration, Float fontSize) {
 
+        configuration.fontScale = (float) fontSize;
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        metrics.scaledDensity = configuration.fontScale * metrics.density;
+        getBaseContext().getResources().updateConfiguration(configuration, metrics);
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
         //Initialize Actionbar For This Activity
         setUpActionBar();
         //Initialize NavigationDrawer For This Activity

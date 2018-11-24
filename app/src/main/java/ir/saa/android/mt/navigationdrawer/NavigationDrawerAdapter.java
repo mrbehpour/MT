@@ -4,11 +4,14 @@ package ir.saa.android.mt.navigationdrawer;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,20 +20,24 @@ import java.util.List;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
 import ir.saa.android.mt.uicontrollers.activities.LoginActivity;
 import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
 
+import static android.content.Context.WINDOW_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static ir.saa.android.mt.application.G.currentFragmentNum;
+
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.MyViewHolder> {
 
     private List<NavigationDrawerItem> mDataList ;
     private LayoutInflater inflater;
     private Context context;
+
 
 
     public NavigationDrawerAdapter(Context context, List<NavigationDrawerItem> data) {
@@ -43,6 +50,7 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.nav_drawer_list_item, parent, false);
         MyViewHolder holder = new MyViewHolder(view);
+
         return holder;
     }
 
@@ -100,7 +108,10 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
 
         public MyViewHolder(View itemView) {
             super(itemView);
+
             title = (TextView) itemView.findViewById(R.id.title);
+
+
             imgIcon = (ImageView) itemView.findViewById(R.id.imgIcon);
         }
     }

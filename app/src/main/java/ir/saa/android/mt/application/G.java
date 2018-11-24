@@ -19,6 +19,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.components.ClientInfo;
 import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.uicontrollers.fragments.AmaliyatFragment;
 import ir.saa.android.mt.uicontrollers.fragments.BazdidFragment;
 import ir.saa.android.mt.uicontrollers.fragments.BazrasiFragment;
@@ -56,7 +57,8 @@ public class G extends Application {
         fragmentNumStack = new Stack<>();
         pref = getSharedPreferences("MTPrefs", Context.MODE_PRIVATE);
         prefEditor = pref.edit();
-        setPref("ServerAddress","http://192.168.3.176:8650");
+        setPref(SharePrefEnum.AddressServer,"http://192.168.3.176:8650");
+        setPref(SharePrefEnum.FontSize,"1.3");
     }
 
     public static void removePref(String prefName){

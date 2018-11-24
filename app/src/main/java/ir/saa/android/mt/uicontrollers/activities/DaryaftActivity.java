@@ -2,13 +2,16 @@ package ir.saa.android.mt.uicontrollers.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import com.daimajia.numberprogressbar.*;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
 public class DaryaftActivity extends AppCompatActivity {
@@ -48,11 +52,21 @@ public class DaryaftActivity extends AppCompatActivity {
 
 
     BaseInfoViewModel baseInfoViewModel = null;
+    public  void adjustFontScale(Configuration configuration, Float fontSize) {
+
+        configuration.fontScale = (float) fontSize;
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        metrics.scaledDensity = configuration.fontScale * metrics.density;
+        getBaseContext().getResources().updateConfiguration(configuration, metrics);
+
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baseinfo);
-
+        adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
         android.support.v7.widget.Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Your toolbar is now an action bar and you can use it like you always do, for example:
