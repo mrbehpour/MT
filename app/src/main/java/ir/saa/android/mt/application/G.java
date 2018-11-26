@@ -58,7 +58,7 @@ public class G extends Application {
         pref = getSharedPreferences("MTPrefs", Context.MODE_PRIVATE);
         prefEditor = pref.edit();
         setPref(SharePrefEnum.AddressServer,"http://192.168.3.176:8650");
-        setPref(SharePrefEnum.FontSize,"1.3");
+        //setPref(SharePrefEnum.FontSize,"1.3");
     }
 
     public static void removePref(String prefName){

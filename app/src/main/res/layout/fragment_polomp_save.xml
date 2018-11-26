@@ -44,6 +44,7 @@
                     android:text="@string/polompGhadim"
                     android:textColor="@color/grey_1000"
                     android:textSize="18sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -93,10 +94,10 @@
                         android:layout_marginRight="4dp"
                         android:layout_weight="1"
                         android:background="@android:color/transparent"
+                        android:digits="0,1,2,3,4,5,6,7,8,9,qwertzuiopasdfghjklyxcvbnm"
                         android:fontFamily="@font/byekan"
                         android:gravity="right"
                         android:inputType="text"
-                        android:digits="0,1,2,3,4,5,6,7,8,9,qwertzuiopasdfghjklyxcvbnm"
                         android:maxLength="16"
                         android:maxLines="1"
                         android:textAlignment="gravity"
@@ -219,7 +220,7 @@
                         android:fontFamily="@font/byekan"
                         android:background="@android:color/transparent"
                         android:textSize="16sp"
-                        android:inputType="text"
+                        android:inputType="textAutoComplete"
                         android:digits="0,1,2,3,4,5,6,7,8,9,qwertzuiopasdfghjklyxcvbnm"
                         android:gravity="right"
                         android:maxLength="16"

@@ -28,7 +28,9 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".uicontrollers.activities.SettingActivity" />
-        <activity android:name=".Main2Activity">
+        <activity android:name=".Main2Activity"
+
+            >
              <!--<intent-filter>-->
                  <!--<action android:name="android.intent.action.MAIN" />-->
                  <!--<category android:name="android.intent.category.DEFAULT" />-->

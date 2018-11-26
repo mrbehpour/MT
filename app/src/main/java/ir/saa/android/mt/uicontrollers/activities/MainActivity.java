@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+        if(G.getPref(SharePrefEnum.FontSize)!=null) {
+            adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+        }
         //Initialize Actionbar For This Activity
         setUpActionBar();
         //Initialize NavigationDrawer For This Activity

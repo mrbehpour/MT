@@ -66,21 +66,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if(G.getPref(SharePrefEnum.FontSize)!=null) {
+            adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+        }
 
-       adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            if (!Settings.System.canWrite(getApplicationContext())) {
-//                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:" + getPackageName()));
-//                startActivityForResult(intent, 200);
-//            }
-//        }
-//
-//
-////        Configuration config = new Configuration();
-////        config.fontScale = 1.3f;
-////        getResources().getConfiguration().setTo(config);
-//
-//        startActivity(new Intent(Settings.ACTION_D));
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         //loginViewModel.initializerUser();

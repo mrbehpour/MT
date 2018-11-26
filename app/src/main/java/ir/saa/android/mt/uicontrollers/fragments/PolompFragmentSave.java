@@ -10,8 +10,11 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -100,6 +103,12 @@ public class PolompFragmentSave extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    private void hideKeyboard(){
+        InputMethodManager imm=(InputMethodManager)G.context.getApplicationContext().getSystemService(G.context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(etPolompGhadim.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(etPolompJadid.getWindowToken(), 0);
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,6 +150,7 @@ public class PolompFragmentSave extends Fragment {
                     etPolompGhadim.setEnabled(false);
                     chkOldNakhana=true;
                     cbGhadimNadard.setEnabled(false);
+                    etPolompGhadim.setText("");
                 }else{
                     if(activity != null && isAdded()) {
                         tvShomareGhadim.setTextColor(getResources().getColor(R.color.ms_black));
@@ -199,11 +209,40 @@ public class PolompFragmentSave extends Fragment {
             }
         });
 
+
         tvModelPolompJadid=rootView.findViewById(R.id.tvModelPolompJadid);
         tvRangPolompJadid=rootView.findViewById(R.id.tvRangPolompJadid);
         tilNew=rootView.findViewById(R.id.tilNew);
 
+        spnModelPolompGhadim.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+               hideKeyboard();
+                return false;
+            }
+        });
+        spnRangPolompJadid.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                hideKeyboard();
+                return false;
+            }
+        });
 
+        spnModelPolompJadid.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                hideKeyboard();
+                return false;
+            }
+        });
+        spnRangPolompGhadim.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                hideKeyboard();
+                return false;
+            }
+        });
 
         spinnerArrayColorGhadim=new ArrayList<>();
         spinnerArrayColorJadid=new ArrayList<>();
@@ -349,15 +388,20 @@ public class PolompFragmentSave extends Fragment {
     private void PolompSave(){
 
 
+
+
+          PolompAllInfo polompAllInfo=polompViewModel.getPolompData(polompParams);
         if(spnRangPolompJadid.getSelectedItemPosition()==0 && etPolompJadid.getText().toString().equals("") &&
                 spnRangPolompJadid.getSelectedItemPosition()==0 && spnRangPolompGhadim.getSelectedItemPosition()==0 &&
                 etPolompGhadim.getText().toString().equals("") && spnModelPolompGhadim.getSelectedItemPosition()==0 &&
                  !chkOldNakhana && !chkNewNakhana && !chkNadradGhadim && !chkNadaradJadid){
+            if(polompAllInfo!=null){
+                polompViewModel.deleteAllPolomp(polompAllInfo.PolompInfoID,polompAllInfo.PolompDtlID);
+            }
+
+            G.startFragment(G.fragmentNumStack.pop(), true, null);
             return;
-
         }
-
-          PolompAllInfo polompAllInfo=polompViewModel.getPolompData(polompParams);
         if(polompAllInfo==null){
 
             polompInfo=new PolompInfo();

@@ -88,21 +88,22 @@ public class SettingFragment extends Fragment {
         rbtNormal=rootView.findViewById(R.id.rbtNormal);
         rbtLarge=rootView.findViewById(R.id.rbtLarge);
         rbtHuge=rootView.findViewById(R.id.rbtHuge);
-
-        switch (  G.getPref(SharePrefEnum.FontSize)){
-            case "0.85":
-                rbtSmall.setChecked(true);
-                break;
-            case "1":
-                rbtNormal.setChecked(true);
-                break;
-            case "1.15":
-                rbtLarge.setChecked(true);
-                break;
-            case "1.3":
-                rbtHuge.setChecked(true);
-                break;
-        }
+    if(G.getPref(SharePrefEnum.FontSize)!=null) {
+    switch (G.getPref(SharePrefEnum.FontSize)) {
+        case "0.85":
+            rbtSmall.setChecked(true);
+            break;
+        case "1":
+            rbtNormal.setChecked(true);
+            break;
+        case "1.15":
+            rbtLarge.setChecked(true);
+            break;
+        case "1.3":
+            rbtHuge.setChecked(true);
+            break;
+    }
+}
 
         rbtSmall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +131,9 @@ public class SettingFragment extends Fragment {
                 G.setPref(SharePrefEnum.FontSize,"1.3");
             }
         });
-        adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+        if(G.getPref(SharePrefEnum.FontSize)!=null) {
+            adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+        }
         //-Address
         edtServerAddress.setText(G.getPref(SharePrefEnum.AddressServer));
 
