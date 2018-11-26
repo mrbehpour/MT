@@ -57,7 +57,7 @@ public class G extends Application {
         fragmentNumStack = new Stack<>();
         pref = getSharedPreferences("MTPrefs", Context.MODE_PRIVATE);
         prefEditor = pref.edit();
-        setPref(SharePrefEnum.AddressServer,"http://192.168.3.176:8650");
+        //setPref(SharePrefEnum.AddressServer,"http://192.168.3.176:8650");
         //setPref(SharePrefEnum.FontSize,"1.3");
     }
 

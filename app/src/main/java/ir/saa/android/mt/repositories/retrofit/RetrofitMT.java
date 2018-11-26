@@ -24,18 +24,20 @@ public class RetrofitMT {
                 .readTimeout(120, TimeUnit.SECONDS)
                 .connectTimeout(120, TimeUnit.SECONDS)
                 .build();
-        ServerAddress= G.getPref(SharePrefEnum.AddressServer)+"/services/AndroidServices.svc/json/";
+        if( G.getPref(SharePrefEnum.AddressServer)!=null) {
+            ServerAddress = G.getPref(SharePrefEnum.AddressServer) + "/services/AndroidServices.svc/json/";
+
 //http://192.168.3.176:645/services/AndroidServices.svc/json/"
-        //"http://89.43.6.254:808/services/AndroidServices.svc/json/
-        retrofit = new Retrofit.Builder()
-                .baseUrl(ServerAddress)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
+            //"http://89.43.6.254:808/services/AndroidServices.svc/json/
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(ServerAddress)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(okHttpClient)
+                    .build();
             mtApi = retrofit.create(MTApi.class);
 
-
+        }
     }
 
     public static RetrofitMT getInstance() {

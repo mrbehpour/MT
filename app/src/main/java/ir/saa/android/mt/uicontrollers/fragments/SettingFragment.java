@@ -135,7 +135,9 @@ public class SettingFragment extends Fragment {
             adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
         }
         //-Address
-        edtServerAddress.setText(G.getPref(SharePrefEnum.AddressServer));
+        if(G.getPref(SharePrefEnum.AddressServer)!=null) {
+            edtServerAddress.setText(G.getPref(SharePrefEnum.AddressServer));
+        }
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
