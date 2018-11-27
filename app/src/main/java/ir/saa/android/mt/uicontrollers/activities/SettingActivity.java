@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.SharePrefEnum;
 
 
 public class SettingActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class SettingActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                G.setPref("ServerAddress",edtServerAddress.getText().toString());
+                G.setPref(SharePrefEnum.AddressServer,edtServerAddress.getText().toString());
                 Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
             }
         });
