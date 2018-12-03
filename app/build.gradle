@@ -72,4 +72,5 @@ dependencies {
     // to use gif in project
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
     implementation 'uk.co.samuelwall:material-tap-target-prompt:2.0.1'
+    implementation 'com.google.android.gms:play-services:12.0.1'
 }
