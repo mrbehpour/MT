@@ -166,7 +166,7 @@ public class AmaliyatFragment extends Fragment {
             public void onClick(View view) {
                 MT meterTest=MT.getInstance();
                 TestResult testResult= meterTest.prepareTestResultForSave(lastTestResultList);
-
+                testResult.ErrPerc=Double.parseDouble((String) tvErrPerc.getText());
                 saveTestResult(testResult);
 
                 Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT ).show();

@@ -1,26 +1,21 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
 
-import android.app.ProgressDialog;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 
 import java.util.ArrayList;
@@ -107,6 +102,8 @@ public class BazdidFragment extends Fragment
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvBazdidMoshtarakin);
         recyclerView.setScrollbarFadingEnabled(false);
         recyclerView.setScrollBarSize(50);
+
+
        adapter = new BazdidAdapter(getActivity(), clientItems);
        bazdidViewModel.getClientsWithRegionIdLiveData(Integer.valueOf(G.getPref("RegionID"))).observeForever(new Observer<List<ClientWithAction>>() {
             @Override
