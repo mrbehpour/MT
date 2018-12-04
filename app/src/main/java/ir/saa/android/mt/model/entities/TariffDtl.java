@@ -19,4 +19,8 @@ public class TariffDtl {
     public int TariffInfoID ;
 
     public String TariffValue ;
+
+    public String Long ;
+
+    public String Lat ;
 }

@@ -21,4 +21,8 @@ public class MeterChangeDtl {
     public int PreviousValue ;
 
     public int ReadTypeID ;
+
+    public String Long ;
+
+    public String Lat ;
 }

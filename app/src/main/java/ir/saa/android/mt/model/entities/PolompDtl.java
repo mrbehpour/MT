@@ -36,4 +36,8 @@ public class PolompDtl  {
     public Integer AgentID ;
 
    public Integer StatePolomp;
+
+    public String Long ;
+
+    public String Lat ;
 }

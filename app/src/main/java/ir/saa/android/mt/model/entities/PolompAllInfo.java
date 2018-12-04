@@ -39,4 +39,8 @@ public class PolompAllInfo {
     public Long FollowUpCode;
 
     public Integer StatePolomp;
+
+    public String Long ;
+
+    public String Lat ;
 }

@@ -21,4 +21,8 @@ public class TestDtl {
     public String TestValue;
 
     public Integer AgentID ;
+
+    public String Long ;
+
+    public String Lat ;
 }
