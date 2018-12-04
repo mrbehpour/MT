@@ -4,6 +4,7 @@ package ir.saa.android.mt.uicontrollers.fragments;
 import android.annotation.TargetApi;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +30,7 @@ import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
@@ -37,10 +39,12 @@ import ir.saa.android.mt.repositories.metertester.TestResult;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorFieldName;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
+import ir.saa.android.mt.viewmodels.LocationViewModel;
 
 public class AmaliyatFragment extends Fragment {
 
     AmaliyatViewModel amaliyatViewModel = null;
+    LocationViewModel locationViewModel=null;
     TestContorParams testContorParams;
     List<TestResult> lastTestResultList;
     TestResultAdapter adapter;
@@ -63,7 +67,7 @@ public class AmaliyatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fargment_amaliyat, container, false);
         amaliyatViewModel = ViewModelProviders.of(this).get(AmaliyatViewModel.class);
-
+        locationViewModel=ViewModelProviders.of(this).get(LocationViewModel.class);
         Button btnStartTest = rootView.findViewById(R.id.btnStartTest);
         Button btnFinishTest = rootView.findViewById(R.id.btnFinishTest);
         Button btnSaveResult = rootView.findViewById(R.id.btnSaveTestResult);
@@ -176,6 +180,18 @@ public class AmaliyatFragment extends Fragment {
         return rootView;
     }
     private void saveTestResult(TestResult testResult) {
+            Location location=locationViewModel.getLocation();
+            if(location!=null) {
+                GPSInfo gpsInfo = new GPSInfo();
+                gpsInfo.ClientID = G.clientInfo.ClientId;
+                gpsInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                gpsInfo.SendID = G.clientInfo.SendId;
+                gpsInfo.GPSDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
+                gpsInfo.GPSTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
+                gpsInfo.Lat = String.valueOf(location.getLatitude());
+                gpsInfo.Long = String.valueOf(location.getLongitude());
+                amaliyatViewModel.insertGpsInfo(gpsInfo);
+            }
 
             TestInfo testInfo = new TestInfo();
             testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));

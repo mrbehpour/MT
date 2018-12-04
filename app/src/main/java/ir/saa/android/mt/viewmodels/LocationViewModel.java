@@ -11,12 +11,12 @@ import ir.saa.android.mt.services.GPSTracker;
 
 public class LocationViewModel extends AndroidViewModel {
 
-    public GPSTracker gpsTracker;
+     GPSTracker gpsTracker;
 
     public LocationViewModel(@NonNull Application application) {
         super(application);
 
-        if(gpsTracker!=null){
+        if(gpsTracker==null){
             gpsTracker=new GPSTracker(application);
         }
     }
