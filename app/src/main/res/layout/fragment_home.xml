@@ -33,12 +33,9 @@
             android:orientation="horizontal">
             <!-- ersal -->
             <LinearLayout
-                android:id="@+id/layErsal"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -49,48 +46,53 @@
                     android:layout_marginBottom="4dp"
                     android:orientation="vertical"
                     android:background="@drawable/custom_homeitem">
-                    <ImageView
-                        android:id="@+id/ivErsal"
+                    <LinearLayout
+                        android:id="@+id/layErsal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/briefcase_upload"
-                        android:tint="@color/orange_400"/>
-                    <TextView
-                        android:id="@+id/tvErsal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
-                        android:gravity="center"
-                        android:text="@string/menuItem7"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
-                        android:gravity="center"
-                        android:text="@string/tozih_ersal"/>
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivErsal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/briefcase_upload"
+                            android:tint="@color/orange_400"/>
+                        <TextView
+                            android:id="@+id/tvErsal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="14sp"
+                            android:textColor="@color/grey_700"
+                            android:gravity="center"
+                            android:text="@string/menuItem7"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="12sp"
+                            android:textColor="@color/grey_400"
+                            android:gravity="center"
+                            android:text="@string/tozih_ersal"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
             <!-- gozaresh -->
             <LinearLayout
-                android:id="@+id/layGozareshat"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,48 +103,53 @@
                     android:layout_marginBottom="4dp"
                     android:orientation="vertical"
                     android:background="@drawable/custom_homeitem">
-                    <ImageView
-                        android:id="@+id/ivGozareshat"
+                    <LinearLayout
+                        android:id="@+id/layGozareshat"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/finance"
-                        android:tint="@color/orange_400"/>
-                    <TextView
-                        android:id="@+id/tvGozareshat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
-                        android:gravity="center"
-                        android:text="@string/menuItem2"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
-                        android:gravity="center"
-                        android:text="@string/tozih_gozareshat"/>
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivGozareshat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/finance"
+                            android:tint="@color/orange_400"/>
+                        <TextView
+                            android:id="@+id/tvGozareshat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="14sp"
+                            android:textColor="@color/grey_700"
+                            android:gravity="center"
+                            android:text="@string/menuItem2"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="12sp"
+                            android:textColor="@color/grey_400"
+                            android:gravity="center"
+                            android:text="@string/tozih_gozareshat"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
             <!-- bazdid -->
             <LinearLayout
-                android:id="@+id/layBazdid"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -153,38 +160,46 @@
                     android:layout_marginBottom="4dp"
                     android:orientation="vertical"
                     android:background="@drawable/custom_homeitem">
-                    <ImageView
-                        android:id="@+id/ivBazdid"
+                    <LinearLayout
+                        android:id="@+id/layBazdid"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/account_search"
-                        android:tint="@color/orange_400"/>
-                    <TextView
-                        android:id="@+id/tvBazdid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
-                        android:gravity="center"
-                        android:text="@string/menuItem1"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
-                        android:gravity="center"
-                        android:text="@string/tozih_bazdid"/>
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivBazdid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/account_search"
+                            android:tint="@color/orange_400"/>
+                        <TextView
+                            android:id="@+id/tvBazdid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="14sp"
+                            android:textColor="@color/grey_700"
+                            android:gravity="center"
+                            android:text="@string/menuItem1"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="12sp"
+                            android:textColor="@color/grey_400"
+                            android:gravity="center"
+                            android:text="@string/tozih_bazdid"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -196,12 +211,9 @@
             android:orientation="horizontal">
             <!-- settings -->
             <LinearLayout
-                android:id="@+id/laySettings"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -212,48 +224,53 @@
                     android:layout_marginBottom="8dp"
                     android:orientation="vertical"
                     android:background="@drawable/custom_homeitem">
-                    <ImageView
-                        android:id="@+id/ivSettings"
+                    <LinearLayout
+                        android:id="@+id/laySettings"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/settings"
-                        android:tint="@color/orange_400"/>
-                    <TextView
-                        android:id="@+id/tvSettings"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
-                        android:gravity="center"
-                        android:text="@string/menuItem4"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
-                        android:gravity="center"
-                        android:text="@string/tozih_settings"/>
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivSettings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/settings"
+                            android:tint="@color/orange_400"/>
+                        <TextView
+                            android:id="@+id/tvSettings"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="14sp"
+                            android:textColor="@color/grey_700"
+                            android:gravity="center"
+                            android:text="@string/menuItem4"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="12sp"
+                            android:textColor="@color/grey_400"
+                            android:gravity="center"
+                            android:text="@string/tozih_settings"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
             <!-- daryaft moshtarakin -->
             <LinearLayout
-                android:id="@+id/layMoshtarakin"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -264,48 +281,53 @@
                     android:layout_marginBottom="8dp"
                     android:orientation="vertical"
                     android:background="@drawable/custom_homeitem">
-                    <ImageView
-                        android:id="@+id/ivMoshtarakin"
+                    <LinearLayout
+                        android:id="@+id/layMoshtarakin"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/icon_daryaftmoshtarakin"
-                        android:tint="@color/orange_400"/>
-                    <TextView
-                        android:id="@+id/tvMoshtarakin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
-                        android:gravity="center"
-                        android:text="@string/menuItem6"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
-                        android:gravity="center"
-                        android:text="@string/tozih_daryaftmoshtarakin"/>
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivMoshtarakin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/icon_daryaftmoshtarakin"
+                            android:tint="@color/orange_400"/>
+                        <TextView
+                            android:id="@+id/tvMoshtarakin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="14sp"
+                            android:textColor="@color/grey_700"
+                            android:gravity="center"
+                            android:text="@string/menuItem6"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="12sp"
+                            android:textColor="@color/grey_400"
+                            android:gravity="center"
+                            android:text="@string/tozih_daryaftmoshtarakin"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
             <!-- daryaft -->
             <LinearLayout
-                android:id="@+id/layDaryaft"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -316,38 +338,46 @@
                     android:layout_marginBottom="8dp"
                     android:orientation="vertical"
                     android:background="@drawable/custom_homeitem">
-                    <ImageView
-                        android:id="@+id/ivDaryaft"
+                    <LinearLayout
+                        android:id="@+id/layDaryaft"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/file_download_outline"
-                        android:tint="@color/orange_400"/>
-                    <TextView
-                        android:id="@+id/tvDaryaft"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
-                        android:gravity="center"
-                        android:text="@string/menuItem5"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
-                        android:gravity="center"
-                        android:text="@string/tozih_daryaftpayeh"/>
+                        android:layout_height="match_parent"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:id="@+id/ivDaryaft"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/file_download_outline"
+                            android:tint="@color/orange_400"/>
+                        <TextView
+                            android:id="@+id/tvDaryaft"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="14sp"
+                            android:textColor="@color/grey_700"
+                            android:gravity="center"
+                            android:text="@string/menuItem5"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:fontFamily="@font/byekan"
+                            android:textSize="12sp"
+                            android:textColor="@color/grey_400"
+                            android:gravity="center"
+                            android:text="@string/tozih_daryaftpayeh"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
