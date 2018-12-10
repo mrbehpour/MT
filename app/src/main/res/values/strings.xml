@@ -262,7 +262,13 @@
     <string name="downloding">Downloading data. Please wait..</string>
 
     <!-- fragment_home -->
-    <string name="narafzar">نرم افزار تست و بازرسی کنتور</string>
+    <string name="tozih_ersal">ارسال اطلاعات به سرور</string>
+    <string name="tozih_gozareshat">مشاهده گزارش های تست و بازرسی</string>
+    <string name="tozih_bazdid">بخش بازدید از کنتور مشترک</string>
+    <string name="tozih_settings">بخش تنظیمات مربوط به نرم افزار</string>
+    <string name="tozih_daryaftmoshtarakin">دریافت لیست مشترکین از سرور</string>
+    <string name="tozih_daryaftpayeh">دریافت اطلاعات پایه از سرور</string>
+
 
     <!-- fragment_settings -->
     <string name="serverAddress">آدرس سرور:</string>
