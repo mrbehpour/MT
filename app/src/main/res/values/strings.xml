@@ -273,4 +273,14 @@
     <string name="large">بزرگ</string>
     <string name="huge">بزرگ تر</string>
 
+    <!--Location-->
+    <string name="Location_Off">"موقعیت مکانی یافت نشد."</string>
+    <string name="Network_Off">موقعیت مکانی یافت نشد. لطفا برای موقعیت یابی دقیق تر اینترنت گوشی خود را فعال کنید.</string>
+    <string name="Title_setting">تنظیمات موقعیت مکانی</string>
+    <string name="Message_Setting">موقعیت مکانی دستگاه فعال نمی باشد. آیا مایلید به منو تنظیمات بروید ؟</string>
+    <string name="Buttom_Setting">تنظیمات</string>
+    <string name="Buttom_Cancel">انصراف</string>
+    <string name="ValidationLocation">در حال دریافت موقعیت مکانی</string>
+    <string name="Wait_Location">لطفا منتظر بمانید </string>
+
 </resources>

@@ -1,6 +1,7 @@
 package ir.saa.android.mt.services;
 
 import android.app.AlertDialog;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,15 +12,20 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
-public final class GPSTracker implements LocationListener {
+import ir.saa.android.mt.R;
 
+public class GPSTracker  implements LocationListener {
+
+    private static GPSTracker gpsTracker=null;
+    ILocationCallBack iLocationCallBack;
     private final Context mContext;
 
+    public MutableLiveData<Boolean> isHasLocation;
     // flag for GPS status
     public boolean isGPSEnabled = false;
 
     // flag for network status
-    boolean isNetworkEnabled = false;
+    public boolean isNetworkEnabled = false;
 
     // flag for GPS status
     boolean canGetLocation = false;
@@ -39,9 +45,21 @@ public final class GPSTracker implements LocationListener {
 
     public GPSTracker(Context context) {
         this.mContext = context;
+        if(isHasLocation==null){
+            isHasLocation=new MutableLiveData<>();
+        }
+
         getLocation();
     }
 
+    public static GPSTracker getInstance(Context context) {
+       if(gpsTracker==null)
+           gpsTracker = new GPSTracker(context);
+       return gpsTracker;
+    }
+public void setiLocationCallBack(ILocationCallBack iLocationCallBack){
+        this.iLocationCallBack=iLocationCallBack;
+}
     /**
      * Function to get the user's current location
      *
@@ -49,6 +67,7 @@ public final class GPSTracker implements LocationListener {
      */
     public Location getLocation() {
         try {
+            location=null;
             locationManager = (LocationManager) mContext
                     .getSystemService(Context.LOCATION_SERVICE);
 
@@ -159,28 +178,28 @@ public final class GPSTracker implements LocationListener {
      * Function to show settings alert dialog On pressing Settings button will
      * lauch Settings Options
      * */
-    public void showSettingsAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+    public void showSettingsAlert(Context ContextFrag) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(ContextFrag);
 
         // Setting Dialog Title
-        alertDialog.setTitle("GPS is settings");
+        alertDialog.setTitle(ContextFrag.getResources().getText(R.string.Title_setting));
 
         // Setting Dialog Message
         alertDialog
-                .setMessage("GPS is not enabled. Do you want to go to settings menu?");
+                .setMessage(ContextFrag.getResources().getText(R.string.Message_Setting));
 
         // On pressing Settings button
-        alertDialog.setPositiveButton("Settings",
+        alertDialog.setPositiveButton(ContextFrag.getResources().getText(R.string.Buttom_Setting),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(
                                 Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        mContext.startActivity(intent);
+                        ContextFrag.startActivity(intent);
                     }
                 });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel",
+        alertDialog.setNegativeButton(ContextFrag.getResources().getText(R.string.Buttom_Cancel),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -193,6 +212,11 @@ public final class GPSTracker implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        if(location!=null) {
+           this.location=location;
+           iLocationCallBack.HasLocation(location);
+
+        }
     }
 
     @Override
