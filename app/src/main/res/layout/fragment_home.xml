@@ -60,7 +60,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/briefcase_upload"
-                        android:tint="@color/orange_400"/>
+                        android:tint="@color/orange_300"/>
                     <TextView
                         android:id="@+id/tvErsal"
                         android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/finance"
-                        android:tint="@color/orange_400"/>
+                        android:tint="@color/orange_300"/>
                     <TextView
                         android:id="@+id/tvGozareshat"
                         android:layout_width="match_parent"
@@ -172,7 +172,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/account_search"
-                        android:tint="@color/orange_400"/>
+                        android:tint="@color/orange_300"/>
                     <TextView
                         android:id="@+id/tvBazdid"
                         android:layout_width="match_parent"
@@ -234,7 +234,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/settings"
-                        android:tint="@color/orange_400"/>
+                        android:tint="@color/orange_300"/>
                     <TextView
                         android:id="@+id/tvSettings"
                         android:layout_width="match_parent"
@@ -289,7 +289,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/icon_daryaftmoshtarakin"
-                        android:tint="@color/orange_400"/>
+                        android:tint="@color/orange_300"/>
                     <TextView
                         android:id="@+id/tvMoshtarakin"
                         android:layout_width="match_parent"
@@ -344,7 +344,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/file_download_outline"
-                        android:tint="@color/orange_400"/>
+                        android:tint="@color/orange_300"/>
                     <TextView
                         android:id="@+id/tvDaryaft"
                         android:layout_width="match_parent"
