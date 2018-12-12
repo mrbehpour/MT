@@ -206,6 +206,8 @@ public class AmaliyatFragment extends Fragment {
                     if(location==null) {
                         connectToModuleDialog();
                     }
+                }else {
+                    location=null;
                 }
                 saveTestResult(testResult);
 
@@ -242,15 +244,9 @@ public class AmaliyatFragment extends Fragment {
             amaliyatViewModel.insertGpsInfo(gpsInfo);
             isLocation = true;
         }else {
-
-
             locationViewModel.trunOnGps(this.getContext());
-
-
-
             isLocation=false;
             return;
-
         }
 
         if (isLocation) {

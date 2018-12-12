@@ -1,6 +1,8 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.location.Location;
@@ -99,6 +101,7 @@ public class PolompFragmentSave extends Fragment {
 
     PolompInfo polompInfo;
     PolompDtl polompDtl;
+    ProgressDialog progressDialog;
     public PolompFragmentSave(){
 
     }
@@ -106,6 +109,20 @@ public class PolompFragmentSave extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+    private void connectToModuleDialog(){
+
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.setMessage(getResources().getText(R.string.Wait_Location));
+        progressDialog.setTitle(getResources().getText(R.string.ValidationLocation));
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+
+    }
+
+    public void HideProgressDialog(){
+        if(progressDialog!=null) progressDialog.dismiss();
+    }
+
 
     private void hideKeyboard(){
         InputMethodManager imm=(InputMethodManager)G.context.getApplicationContext().getSystemService(G.context.INPUT_METHOD_SERVICE);
@@ -117,11 +134,12 @@ public class PolompFragmentSave extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         polompViewModel= ViewModelProviders.of(getActivity()).get(PolompViewModel.class);
-        locationViewModel=ViewModelProviders.of(getActivity()).get(LocationViewModel.class);
+
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_polomp_save, container, false);
+        locationViewModel=ViewModelProviders.of(getActivity()).get(LocationViewModel.class);
         chkNadaradJadid=false;
         chkNadradGhadim=false;
         chkNewNakhana=false;
@@ -359,11 +377,26 @@ public class PolompFragmentSave extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(locationViewModel.isGpsEnable()) {
+                    if(location==null) {
+                        connectToModuleDialog();
+                    }
+                }else{
+                    location=null;
+                }
                 PolompSave();
             }
         });
 
-
+       locationViewModel.locationMutableLiveData.observe((LifecycleOwner) getContext(), new Observer<Location>() {
+           @Override
+           public void onChanged(@Nullable Location locationObserver) {
+               if(locationObserver!=null) {
+                   location = locationObserver;
+                   HideProgressDialog();
+               }
+           }
+       });
         return rootView;
     }
     private void adapterInit() {
@@ -393,7 +426,7 @@ public class PolompFragmentSave extends Fragment {
 
     private void PolompSave() {
 
-        location=null;
+
         location = locationViewModel.getLocation(this.getContext());
         PolompAllInfo polompAllInfo = polompViewModel.getPolompData(polompParams);
         if (spnRangPolompJadid.getSelectedItemPosition() == 0 && etPolompJadid.getText().toString().equals("") &&
@@ -477,15 +510,9 @@ public class PolompFragmentSave extends Fragment {
         //Bastan Form Sabt polomp
         G.startFragment(G.fragmentNumStack.pop(), true, null);
     }else{
-            if(!locationViewModel.isNetworkEnable()) {
-                Toast.makeText(getContext(), getResources().getText(R.string.Network_Off), Toast.LENGTH_SHORT).show();
-            }
-            if(locationViewModel.isGpsEnable()) {
-                Toast.makeText(getContext(), getResources().getText(R.string.Location_Off), Toast.LENGTH_SHORT).show();
-            }
 
             locationViewModel.trunOnGps(getContext());
-            return;
+
         }
 
 
