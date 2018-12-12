@@ -1,33 +1,26 @@
 package ir.saa.android.mt.adapters.bazrasi;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.NotSerializableException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import ir.saa.android.mt.R;
@@ -38,14 +31,13 @@ import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
-import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
+import ir.saa.android.mt.services.GPSTracker;
+import ir.saa.android.mt.services.ILocationCallBack;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
-
-import static android.content.Context.WINDOW_SERVICE;
 
 public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHolder> {
 
@@ -102,16 +94,26 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         RemarkItem current = mDataList.get(position);
-        locationViewModel.locationMutableLiveData.observe((LifecycleOwner) context, new Observer<Location>() {
+//        locationViewModel.locationMutableLiveData.observe((LifecycleOwner) context, new Observer<Location>() {
+//            @Override
+//            public void onChanged(@Nullable Location locationOberver) {
+//                if(locationOberver!=null){
+//                    location=locationOberver;
+//                    HideProgressDialog();
+//                }
+//            }
+//        });
+
+        GPSTracker gpsTracker=GPSTracker.getInstance(context);
+        gpsTracker.setiLocationCallBack(new ILocationCallBack() {
             @Override
-            public void onChanged(@Nullable Location locationOberver) {
-                if(locationOberver!=null){
-                    location=locationOberver;
+            public void HasLocation(Location locationCallBack) {
+                if(locationCallBack!=null){
+                    location=locationCallBack;
                     HideProgressDialog();
                 }
             }
         });
-
         holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
         if (current.remarkValue != "-1") {
             holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
@@ -121,12 +123,18 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
             @Override
             public void onClick(View view) {
 
-                location=locationViewModel.getLocation(context);
+                gpsTracker.getLocation();
+                //location=locationViewModel.getLocation(context);
                 if(locationViewModel.isGpsEnable()){
                     if(location==null){
                         connectToModuleDialog();
                     }
+                }else{
+                    location=null;
                 }
+
+
+
 
                 if (location != null) {
                     final MyDialog dialog = new MyDialog(context);

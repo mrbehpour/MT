@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 
@@ -47,10 +46,13 @@ public class LocationViewModel extends AndroidViewModel  {
     GPSTracker gpsTracker;
     Context context;
     LocationManager manager = null;
+
     protected static final String TAG = "LocationOnOff";
 
     private GoogleApiClient googleApiClient;
     final static int REQUEST_LOCATION = 199;
+
+
 
 
     public LocationViewModel(@NonNull Application application) {
@@ -72,9 +74,12 @@ public class LocationViewModel extends AndroidViewModel  {
             public void HasLocation(Location location) {
                 locationMutableLiveData.postValue(location);
 
+
             }
+
         });
     }
+
 
     private FusedLocationProviderClient client;
 

@@ -5,4 +5,5 @@ import android.location.Location;
 public interface ILocationCallBack {
 
     void HasLocation(Location location);
+
 }
