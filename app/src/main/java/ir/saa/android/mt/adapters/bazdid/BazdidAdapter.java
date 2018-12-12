@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Typeface;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -28,6 +29,7 @@ import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.pojos.FontManager.FontManager;
 import ir.saa.android.mt.viewmodels.BazdidViewModel;
+import ir.saa.android.mt.viewmodels.LocationViewModel;
 
 public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHolder> {
 
@@ -36,6 +38,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
     private LayoutInflater inflater;
     private Context context;
     BazdidViewModel bazdidViewModel;
+    LocationViewModel locationViewModel;
 
     public BazdidAdapter(Context context, List<ClientItem> data) {
         this.context = context;
@@ -45,6 +48,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
         mDataList.addAll(data);
         clientItemListOrginal.addAll(data);
         this.bazdidViewModel = ViewModelProviders.of((AppCompatActivity) context).get(BazdidViewModel.class);
+        this.locationViewModel=ViewModelProviders.of((AppCompatActivity) context).get(LocationViewModel.class);
     }
 
     @Override
@@ -69,7 +73,12 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
             G.clientInfo.ClientName = current.Name;
             G.clientInfo.Postion = position;
             G.setActionbarTitleText(current.Name);
+
             G.startFragment(FragmentsEnum.MoshtarakFragment, false, bundle);
+
+
+
+
         });
         //holder.imgBazdidMoshtarak.setImageResource(current.Pic);
         holder.tvName.setText(current.Name);

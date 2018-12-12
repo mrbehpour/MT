@@ -27,6 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.adapters.testdisplay.TestResultItemDisplay;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
@@ -34,6 +35,7 @@ import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.metertester.TestResult;
+import ir.saa.android.mt.repositories.roomrepos.GPSInfoRepo;
 import ir.saa.android.mt.repositories.roomrepos.TestDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.TestInfoRepo;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorFieldName;
@@ -53,6 +55,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     Handler handler=null;
     TestInfoRepo testInfoRepo;
     TestDtlRepo testDtlRepo;
+    GPSInfoRepo gpsInfoRepo;
 
 //    public MutableLiveData<Boolean> setTimerMutableLiveData;
     public MutableLiveData<String> testResultMutableLiveData;
@@ -92,6 +95,9 @@ public class AmaliyatViewModel extends AndroidViewModel {
         }
         if(testDtlRepo==null){
             testDtlRepo=new TestDtlRepo(application);
+        }
+        if(gpsInfoRepo==null){
+            gpsInfoRepo=new GPSInfoRepo(application);
         }
 
         testResultMutableLiveData = new MutableLiveData<>();
@@ -258,6 +264,10 @@ public class AmaliyatViewModel extends AndroidViewModel {
     public Long insertTestDtl(TestDtl testDtl){
 
         return testDtlRepo.insertTestDtl(testDtl);
+    }
+
+    public void insertGpsInfo(GPSInfo gpsInfo){
+         gpsInfoRepo.insertGPSInfo(gpsInfo);
     }
 
     public Long insertTestInfo(TestInfo testInfo){

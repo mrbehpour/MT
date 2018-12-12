@@ -1,10 +1,13 @@
 package ir.saa.android.mt.application;
 
+import android.Manifest;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -71,6 +74,16 @@ public class G extends Application {
     }
     public static String getPref(String prefName,String defultValue){
         return pref.getString(prefName,defultValue);
+    }
+    public static boolean checkPermissions() {
+        int permissionState1 = ActivityCompat.checkSelfPermission(context,
+                android.Manifest.permission.ACCESS_FINE_LOCATION);
+
+        int permissionState2 = ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        return permissionState1 == PackageManager.PERMISSION_GRANTED && permissionState2 == PackageManager.PERMISSION_GRANTED;
+
     }
     public static String getPref(String prefName){
         return pref.getString(prefName,null);

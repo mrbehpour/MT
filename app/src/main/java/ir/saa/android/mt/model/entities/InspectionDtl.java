@@ -35,4 +35,8 @@ public class InspectionDtl {
 
     public Integer AgentID ;
 
+    public String Long ;
+
+    public String Lat ;
+
 }

@@ -1,5 +1,9 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
+import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,9 +16,11 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.viewmodels.LocationViewModel;
 
 public class MoshtarakOperationsTabFragment extends Fragment
 {
+    LocationViewModel locationViewModel=null;
     private Long clientID = null;
     public MoshtarakOperationsTabFragment() {
         // Required empty public constructor
@@ -28,6 +34,7 @@ public class MoshtarakOperationsTabFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        locationViewModel= ViewModelProviders.of(this).get(LocationViewModel.class);
     }
 
     @Override
@@ -47,12 +54,21 @@ public class MoshtarakOperationsTabFragment extends Fragment
         Button btnPolomp=rootView.findViewById(R.id.btnPolomp);
         Button btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
         btnTest.setOnClickListener(view -> {
-            //G.startFragment(FragmentsEnum.TestContorFragment,false,null);
-            G.startFragment(FragmentsEnum.DisplayTestFragment,false,null);
+            locationViewModel.trunOnGps(getContext());
+
+            final LocationManager manager = (LocationManager) getContext().getSystemService( Context.LOCATION_SERVICE );
+
+            if ( manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                G.startFragment(FragmentsEnum.DisplayTestFragment,false,null);
+
+                return;
+            }
+
         });
         btnPolomp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Bundle bundle=new Bundle();
                 if(clientID!=null) {
                     bundle.putLong(BundleKeysEnum.ClientID, clientID);
@@ -60,14 +76,32 @@ public class MoshtarakOperationsTabFragment extends Fragment
                     bundle.putLong(BundleKeysEnum.ClientID, G.clientInfo.ClientId);
                 }
 
-                G.startFragment(FragmentsEnum.PolompFragment, false, bundle);
+                locationViewModel.trunOnGps(getContext());
+
+                final LocationManager manager = (LocationManager) getContext().getSystemService( Context.LOCATION_SERVICE );
+
+                if ( manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                    G.startFragment(FragmentsEnum.PolompFragment, false, bundle);
+                    return;
+                }
+
+
             }
         });
 
         btnBazrasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                G.startFragment(FragmentsEnum.BazrasiFragment,false,null);
+                locationViewModel.trunOnGps(getContext());
+
+                final LocationManager manager = (LocationManager) getContext().getSystemService( Context.LOCATION_SERVICE );
+
+                if ( manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                    G.startFragment(FragmentsEnum.BazrasiFragment,false,null);
+
+                    return;
+                }
+
             }
         });
         G.setActionbarTitleText(G.clientInfo.ClientName);

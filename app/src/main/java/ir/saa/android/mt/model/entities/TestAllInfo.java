@@ -31,4 +31,8 @@ public class TestAllInfo {
     public Integer TestID ;
 
     public String TestValue;
+
+    public String Long ;
+
+    public String Lat ;
 }

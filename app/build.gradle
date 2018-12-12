@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -73,4 +74,5 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
     implementation 'uk.co.samuelwall:material-tap-target-prompt:2.0.1'
     implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.android.support:multidex:1.0.3'
 }
