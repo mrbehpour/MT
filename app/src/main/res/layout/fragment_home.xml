@@ -36,170 +36,166 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_homeitem">
                 <LinearLayout
+                    android:id="@+id/layErsal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="vertical"
-                    android:background="@drawable/custom_homeitem">
-                    <LinearLayout
-                        android:id="@+id/layErsal"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivErsal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:id="@+id/ivErsal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/briefcase_upload"
-                            android:tint="@color/orange_400"/>
-                        <TextView
-                            android:id="@+id/tvErsal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="14sp"
-                            android:textColor="@color/grey_700"
-                            android:gravity="center"
-                            android:text="@string/menuItem7"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="12sp"
-                            android:textColor="@color/grey_400"
-                            android:gravity="center"
-                            android:text="@string/tozih_ersal"/>
-                    </LinearLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight="0.65"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/briefcase_upload"
+                        android:tint="@color/orange_400"/>
+                    <TextView
+                        android:id="@+id/tvErsal"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_700"
+                        android:gravity="center"
+                        android:text="@string/menuItem7"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_400"
+                        android:gravity="center"
+                        android:text="@string/tozih_ersal"/>
                 </LinearLayout>
             </LinearLayout>
+
             <!-- gozaresh -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_homeitem">
                 <LinearLayout
+                    android:id="@+id/layGozareshat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="vertical"
-                    android:background="@drawable/custom_homeitem">
-                    <LinearLayout
-                        android:id="@+id/layGozareshat"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivGozareshat"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:id="@+id/ivGozareshat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/finance"
-                            android:tint="@color/orange_400"/>
-                        <TextView
-                            android:id="@+id/tvGozareshat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="14sp"
-                            android:textColor="@color/grey_700"
-                            android:gravity="center"
-                            android:text="@string/menuItem2"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="12sp"
-                            android:textColor="@color/grey_400"
-                            android:gravity="center"
-                            android:text="@string/tozih_gozareshat"/>
-                    </LinearLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight="0.65"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/finance"
+                        android:tint="@color/orange_400"/>
+                    <TextView
+                        android:id="@+id/tvGozareshat"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_700"
+                        android:gravity="center"
+                        android:text="@string/menuItem2"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_400"
+                        android:gravity="center"
+                        android:text="@string/tozih_gozareshat"/>
                 </LinearLayout>
             </LinearLayout>
+
             <!-- bazdid -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:orientation="vertical">
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_homeitem">
                 <LinearLayout
+                    android:id="@+id/layBazdid"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="vertical"
-                    android:background="@drawable/custom_homeitem">
-                    <LinearLayout
-                        android:id="@+id/layBazdid"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivBazdid"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:id="@+id/ivBazdid"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/account_search"
-                            android:tint="@color/orange_400"/>
-                        <TextView
-                            android:id="@+id/tvBazdid"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="14sp"
-                            android:textColor="@color/grey_700"
-                            android:gravity="center"
-                            android:text="@string/menuItem1"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="12sp"
-                            android:textColor="@color/grey_400"
-                            android:gravity="center"
-                            android:text="@string/tozih_bazdid"/>
-                    </LinearLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight="0.65"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/account_search"
+                        android:tint="@color/orange_400"/>
+                    <TextView
+                        android:id="@+id/tvBazdid"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_700"
+                        android:gravity="center"
+                        android:text="@string/menuItem1"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_400"
+                        android:gravity="center"
+                        android:text="@string/tozih_bazdid"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -214,56 +210,54 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:orientation="vertical">
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_homeitem">
                 <LinearLayout
+                    android:id="@+id/laySettings"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="vertical"
-                    android:background="@drawable/custom_homeitem">
-                    <LinearLayout
-                        android:id="@+id/laySettings"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivSettings"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:id="@+id/ivSettings"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/settings"
-                            android:tint="@color/orange_400"/>
-                        <TextView
-                            android:id="@+id/tvSettings"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="14sp"
-                            android:textColor="@color/grey_700"
-                            android:gravity="center"
-                            android:text="@string/menuItem4"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="12sp"
-                            android:textColor="@color/grey_400"
-                            android:gravity="center"
-                            android:text="@string/tozih_settings"/>
-                    </LinearLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight="0.65"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/settings"
+                        android:tint="@color/orange_400"/>
+                    <TextView
+                        android:id="@+id/tvSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_700"
+                        android:gravity="center"
+                        android:text="@string/menuItem4"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_400"
+                        android:gravity="center"
+                        android:text="@string/tozih_settings"/>
                 </LinearLayout>
             </LinearLayout>
             <!-- daryaft moshtarakin -->
@@ -271,56 +265,54 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:orientation="vertical">
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_homeitem">
                 <LinearLayout
+                    android:id="@+id/layMoshtarakin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="vertical"
-                    android:background="@drawable/custom_homeitem">
-                    <LinearLayout
-                        android:id="@+id/layMoshtarakin"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivMoshtarakin"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:id="@+id/ivMoshtarakin"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/icon_daryaftmoshtarakin"
-                            android:tint="@color/orange_400"/>
-                        <TextView
-                            android:id="@+id/tvMoshtarakin"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="14sp"
-                            android:textColor="@color/grey_700"
-                            android:gravity="center"
-                            android:text="@string/menuItem6"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="12sp"
-                            android:textColor="@color/grey_400"
-                            android:gravity="center"
-                            android:text="@string/tozih_daryaftmoshtarakin"/>
-                    </LinearLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight="0.65"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_daryaftmoshtarakin"
+                        android:tint="@color/orange_400"/>
+                    <TextView
+                        android:id="@+id/tvMoshtarakin"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_700"
+                        android:gravity="center"
+                        android:text="@string/menuItem6"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_400"
+                        android:gravity="center"
+                        android:text="@string/tozih_daryaftmoshtarakin"/>
                 </LinearLayout>
             </LinearLayout>
             <!-- daryaft -->
@@ -328,56 +320,54 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.33"
-                android:orientation="vertical">
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_homeitem">
                 <LinearLayout
+                    android:id="@+id/layDaryaft"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="vertical"
-                    android:background="@drawable/custom_homeitem">
-                    <LinearLayout
-                        android:id="@+id/layDaryaft"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivDaryaft"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="?attr/selectableItemBackground"
-                        android:clickable="true"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:id="@+id/ivDaryaft"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/file_download_outline"
-                            android:tint="@color/orange_400"/>
-                        <TextView
-                            android:id="@+id/tvDaryaft"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="14sp"
-                            android:textColor="@color/grey_700"
-                            android:gravity="center"
-                            android:text="@string/menuItem5"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            android:fontFamily="@font/byekan"
-                            android:textSize="12sp"
-                            android:textColor="@color/grey_400"
-                            android:gravity="center"
-                            android:text="@string/tozih_daryaftpayeh"/>
-                    </LinearLayout>
+                        android:layout_height="0dp"
+                        android:layout_weight="0.65"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/file_download_outline"
+                        android:tint="@color/orange_400"/>
+                    <TextView
+                        android:id="@+id/tvDaryaft"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_700"
+                        android:gravity="center"
+                        android:text="@string/menuItem5"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_400"
+                        android:gravity="center"
+                        android:text="@string/tozih_daryaftpayeh"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
