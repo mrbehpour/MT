@@ -85,7 +85,7 @@ public class LocationViewModel extends AndroidViewModel  {
         Location location = null;
         if (G.checkPermissions()) {
             location = gpsTracker.getLocation();
-            //locationMutableLiveData.postValue(location);
+            locationMutableLiveData.postValue(location);
         }
 
         return location;
