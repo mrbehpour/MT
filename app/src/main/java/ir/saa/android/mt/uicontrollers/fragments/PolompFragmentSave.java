@@ -48,8 +48,8 @@ import ir.saa.android.mt.viewmodels.PolompViewModel;
 
 public class PolompFragmentSave extends Fragment {
 
-    PolompViewModel polompViewModel;
-    LocationViewModel locationViewModel;
+    PolompViewModel polompViewModel=null;
+    LocationViewModel locationViewModel=null;
     PolompParams polompParams;
     Location location;
 
@@ -133,13 +133,14 @@ public class PolompFragmentSave extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        polompViewModel= ViewModelProviders.of(getActivity()).get(PolompViewModel.class);
+
 
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_polomp_save, container, false);
-        locationViewModel=ViewModelProviders.of(getActivity()).get(LocationViewModel.class);
+        locationViewModel=ViewModelProviders.of(this).get(LocationViewModel.class);
+        polompViewModel= ViewModelProviders.of(this).get(PolompViewModel.class);
         chkNadaradJadid=false;
         chkNadradGhadim=false;
         chkNewNakhana=false;
@@ -427,7 +428,7 @@ public class PolompFragmentSave extends Fragment {
     private void PolompSave() {
 
 
-        location = locationViewModel.getLocation(this.getContext());
+         locationViewModel.getLocation(this.getContext());
         PolompAllInfo polompAllInfo = polompViewModel.getPolompData(polompParams);
         if (spnRangPolompJadid.getSelectedItemPosition() == 0 && etPolompJadid.getText().toString().equals("") &&
                 spnRangPolompJadid.getSelectedItemPosition() == 0 && spnRangPolompGhadim.getSelectedItemPosition() == 0 &&

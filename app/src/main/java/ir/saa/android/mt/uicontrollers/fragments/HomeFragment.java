@@ -14,12 +14,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
+import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
+import ir.saa.android.mt.uicontrollers.activities.SendActivity;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class HomeFragment extends Fragment
 {
+    LinearLayout layErsal;
+    LinearLayout layGozareshat;
+    LinearLayout layBazdid;
+    LinearLayout laySettings;
+    LinearLayout layMoshtarakin;
+    LinearLayout layDaryaft;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -37,6 +52,61 @@ public class HomeFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        layBazdid=rootView.findViewById(R.id.layBazdid);
+        layDaryaft=rootView.findViewById(R.id.layDaryaft);
+        layErsal=rootView.findViewById(R.id.layErsal);
+        layGozareshat=rootView.findViewById(R.id.layGozareshat);
+        layMoshtarakin=rootView.findViewById(R.id.layMoshtarakin);
+        laySettings=rootView.findViewById(R.id.laySettings);
+
+        layBazdid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.startFragment(FragmentsEnum.BazdidFragment,false,null);
+            }
+        });
+
+        layDaryaft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(G.context,DaryaftActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                G.context.startActivity(intent);
+            }
+        });
+        layErsal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(G.context,SendActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                G.context.startActivity(intent);
+            }
+        });
+
+        layGozareshat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        laySettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.startFragment(FragmentsEnum.SettingFragment,false,null);
+            }
+        });
+
+        layMoshtarakin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(G.context, DaryaftMoshtarakinActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                G.context.startActivity(intent);
+            }
+        });
+
+
         return rootView;
     }
 
