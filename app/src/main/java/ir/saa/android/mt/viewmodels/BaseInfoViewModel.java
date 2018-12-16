@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import java.io.IOException;
@@ -340,6 +341,8 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
     public void getClientFromServer(GetClientInput getClientInput){
 
+        Gson gson = new Gson();
+        String val=gson.toJson(getClientInput);
         retrofitMT.getMtApi().GetClients(getClientInput)
                 .subscribeOn(Schedulers.io())
                 //.observeOn(AndroidSchedulers.mainThread())
