@@ -150,6 +150,7 @@
 
     <!-- fragment_bazrasi -->
     <string name="zakhire">ذخیره</string>
+    <string name="selectAll">انتخاب همه</string>
 
     <!-- fragment_module -->
     <string name="bluetooth">بلوتوث</string>
