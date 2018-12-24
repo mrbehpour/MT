@@ -428,7 +428,7 @@ public class PolompFragmentSave extends Fragment {
     private void PolompSave() {
 
 
-         locationViewModel.getLocation(this.getContext());
+        location=locationViewModel.getLocation(this.getContext());
         PolompAllInfo polompAllInfo = polompViewModel.getPolompData(polompParams);
         if (spnRangPolompJadid.getSelectedItemPosition() == 0 && etPolompJadid.getText().toString().equals("") &&
                 spnRangPolompJadid.getSelectedItemPosition() == 0 && spnRangPolompGhadim.getSelectedItemPosition() == 0 &&
