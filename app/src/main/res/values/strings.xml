@@ -279,6 +279,8 @@
     <string name="normal">متوسط</string>
     <string name="large">بزرگ</string>
     <string name="huge">بزرگ تر</string>
+    <string name="mahdoode">محدوده مجاز میان بازرسی ها (متر):</string>
+    <string name="mahdoode_help">درصورتیکه مامور بیش از این فاصله را جهت بازرسی بعدی طی کند، نرم افزار اجازه بازرسی به او نخواهد داد.</string>
 
     <!--Location-->
     <string name="Location_Off">"موقعیت مکانی یافت نشد."</string>
