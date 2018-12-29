@@ -1,8 +1,10 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
@@ -36,7 +38,7 @@ import ir.saa.android.mt.services.ILocationCallBack;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
 
-public class BazrasiFragment extends Fragment {
+public class BazrasiFragment extends Fragment  {
 
     BazrasiViewModel bazrasiViewModel;
     BazrasiAdapter adapter;
@@ -45,15 +47,18 @@ public class BazrasiFragment extends Fragment {
     ArrayList<Object> objects = new ArrayList<>();
     MyCheckList myCheckList;
     Location location;
-    Boolean isLocation;
+    Context context;
     ProgressDialog progressDialog;
+    GPSTracker gpsTracker;
 
     public BazrasiFragment() {
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
     }
 
     private void connectToModuleDialog(){
@@ -73,22 +78,16 @@ public class BazrasiFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bazrasiViewModel = ViewModelProviders.of(getActivity()).get(BazrasiViewModel.class);
+
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_bazrasi, container, false);
+        this.context=this.getContext();
+        bazrasiViewModel = ViewModelProviders.of(this).get(BazrasiViewModel.class);
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
-        AppCompatButton btnsave=rootView.findViewById(R.id.btnSave);
-
-        btnsave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         cbSelectAll=rootView.findViewById(R.id.cbSelectAll);
         cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -104,6 +103,7 @@ public class BazrasiFragment extends Fragment {
                     }else{
                         location=null;
                     }
+
                     if (location != null) {
                         final MyDialog dialog = new MyDialog(getContext());
                         //InspectionWithAnswerGroup inspectionAllInfo = bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId, 1, 1);
@@ -138,13 +138,7 @@ public class BazrasiFragment extends Fragment {
                                         @Override
                                         public void onClick(View view) {
 
-
-
-
                                             dialog.dismiss();
-
-
-
                                         }
                                     });
 
@@ -176,7 +170,6 @@ public class BazrasiFragment extends Fragment {
                 }
             }
         });
-        setUpRecyclerView(rootView);
         locationViewModel.locationMutableLiveData.observe(this, new Observer<Location>() {
             @Override
             public void onChanged(@Nullable Location locationViewModel) {
@@ -186,6 +179,22 @@ public class BazrasiFragment extends Fragment {
                 }
             }
         });
+        setUpRecyclerView(rootView);
+        if(gpsTracker==null){
+            gpsTracker=GPSTracker.getInstance(this.getContext());
+        }
+
+
+        gpsTracker.isHasLocation.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(aBoolean){
+                    location=gpsTracker.getLocation();
+                    HideProgressDialog();
+                }
+            }
+        });
+
         return rootView;
     }
 
@@ -224,4 +233,6 @@ public class BazrasiFragment extends Fragment {
 
 
     }
+
+
 }
