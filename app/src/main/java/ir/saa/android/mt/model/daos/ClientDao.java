@@ -73,7 +73,7 @@ public interface ClientDao {
             "Client.RoozKar," +
             "Client.mastergroupdtl_id," +
             "Client.RoozKar, " +
-            "(select SendID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1) as isPolomp,  "+
+            "(select PolompInfoID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1 ) as isPolomp,  "+
             "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID limit 1) as isTest, "+
             "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi "+
             "from Client "
@@ -130,7 +130,7 @@ public interface ClientDao {
             "Client.RoozKar," +
             "Client.mastergroupdtl_id," +
             "Client.RoozKar, " +
-            "(select SendID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1) as isPolomp,  "+
+            "(select PolompInfoID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1 ) as isPolomp,  "+
             "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID limit 1) as isTest, "+
             "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi "+
             "from Client " +

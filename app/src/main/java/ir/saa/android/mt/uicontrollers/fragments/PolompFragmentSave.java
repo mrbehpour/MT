@@ -298,11 +298,11 @@ public class PolompFragmentSave extends Fragment {
             spinnerArrayColorJadid.clear();
             spinnerMapColorJadid.clear();
 
-            spinnerArrayColorGhadim.add("");
-            spinnerMapColorGhadim.put(0,0);
-            spinnerArrayColorJadid.add("");
-            spinnerMapColorJadid.put(0,0);
-            spinnerMapColor.put(0,0);
+//            spinnerArrayColorGhadim.add("");
+//            spinnerMapColorGhadim.put(0,0);
+//            spinnerArrayColorJadid.add("");
+//            spinnerMapColorJadid.put(0,0);
+//            spinnerMapColor.put(0,0);
 
             for(int i=0;i<polompColors.size();i++){
                 spinnerArrayColorGhadim.add(polompColors.get(i).FldName);
@@ -320,11 +320,11 @@ public class PolompFragmentSave extends Fragment {
             spinnerArrayModelJadid.clear();
             spinnerMapModelJadid.clear();
 
-            spinnerArrayModelGhadim.add("");
-            spinnerMapModelGhadim.put(0,0);
-            spinnerArrayModelJadid.add("");
-            spinnerMapModelJadid.put(0,0);
-            spinnerMapModel.put(0,0);
+//            spinnerArrayModelGhadim.add("");
+//            spinnerMapModelGhadim.put(0,0);
+//            spinnerArrayModelJadid.add("");
+//            spinnerMapModelJadid.put(0,0);
+//            spinnerMapModel.put(0,0);
 
             for(int i=0;i<polompTypes.size();i++){
                 spinnerArrayModelGhadim.add(polompTypes.get(i).PolompTypeName);
@@ -406,10 +406,10 @@ public class PolompFragmentSave extends Fragment {
         spinnerArrayModelJadid.clear();
         spinnerArrayModelGhadim.clear();
 
-        spinnerArrayColorJadid.add("");
-        spinnerArrayColorGhadim.add("");
-        spinnerArrayModelJadid.add("");
-        spinnerArrayModelGhadim.add("");
+//        spinnerArrayColorJadid.add("");
+//        spinnerArrayColorGhadim.add("");
+//        spinnerArrayModelJadid.add("");
+//        spinnerArrayModelGhadim.add("");
 
         if(polompViewModel.getPolompColor().getValue()!=null) {
             for (PolompColor polompColor : polompViewModel.getPolompColor().getValue()) {

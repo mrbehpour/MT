@@ -123,7 +123,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
             @Override
             public void onClick(View view) {
 
-                gpsTracker.getLocation();
+                location=gpsTracker.getLocation();
                 //location=locationViewModel.getLocation(context);
                 if(locationViewModel.isGpsEnable()){
                     if(location==null){
@@ -132,10 +132,6 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                 }else{
                     location=null;
                 }
-
-
-
-
                 if (location != null) {
                     final MyDialog dialog = new MyDialog(context);
                     InspectionWithAnswerGroup inspectionAllInfo = bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId, current.Id, current.answerGroupId);
@@ -186,14 +182,19 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
 
 
                                             if (objects.size() == 0) {
-                                                saveBazrasi(current, null);
+                                                bazrasiViewModel.saveBazrasi(current, null,location);
                                                 holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
 
                                             } else {
 
-                                                saveBazrasi(current, objects.get(0));
+                                                boolean state=bazrasiViewModel.saveBazrasi(current, objects.get(0),location);
+
                                                 holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
                                                 holder.tvResult.setText(current.AnswerCaption);
+
+                                                if(state){
+                                                    Toast.makeText((AppCompatActivity)context,G.context.getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
+                                                }
 
                                             }
                                             dialog.dismiss();
@@ -252,70 +253,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
         mDataList.clear();
     }
 
-    private void saveBazrasi(RemarkItem currentItem, Object objectValue) {
 
-
-            InspectionWithAnswerGroup inspectionAllInfo = bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId, currentItem.Id, currentItem.answerGroupId);
-        if (inspectionAllInfo == null) {
-            if (objectValue != null) {
-                InspectionInfo inspectionInfo = new InspectionInfo();
-                inspectionInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
-                inspectionInfo.ClientID = G.clientInfo.ClientId;
-                inspectionInfo.SendID = G.clientInfo.SendId;
-
-                inspectionInfo.FollowUpCode = G.clientInfo.FollowUpCode;
-
-
-                inspectionInfo.InspectionDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
-                inspectionInfo.InspectionTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
-                //inspectionInfo.RemarkID = currentItem.Id;
-                Long inspectionInfoId = bazrasiViewModel.insertInspectionInfo(inspectionInfo);
-                InspectionDtl inspectionDtl = new InspectionDtl();
-                inspectionDtl.RemarkID = currentItem.Id;
-                inspectionDtl.InspectionInfoID = Integer.valueOf(inspectionInfoId.toString());
-                inspectionDtl.RemarkValue = String.valueOf(objectValue);
-                inspectionDtl.ReadTypeID = 1;
-                inspectionDtl.Lat=String.valueOf(location.getLatitude());
-                inspectionDtl.Long=String.valueOf(location.getLongitude());
-                inspectionDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
-                Long inspectionDtlId = bazrasiViewModel.insertInspectionDtl(inspectionDtl);
-                if (inspectionDtlId != null) {
-                    Toast.makeText((AppCompatActivity) context, G.context.getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
-                }
-            }
-        } else {
-
-            InspectionInfo inspectionInfo = new InspectionInfo();
-            inspectionInfo.AgentID = inspectionAllInfo.AgentID;
-            inspectionInfo.ClientID = inspectionAllInfo.ClientID;
-            inspectionInfo.InspectionDate = inspectionAllInfo.InspectionDate;
-            inspectionInfo.InspectionTime = inspectionAllInfo.InspectionTime;
-            //inspectionInfo.RemarkID=inspectionAllInfo.RemarkID;
-            inspectionInfo.InspectionInfoID = inspectionAllInfo.InspectionInfoID;
-            int inspectionInfoId = bazrasiViewModel.updateInspectionInfo(inspectionInfo);
-            InspectionDtl inspectionDtl = new InspectionDtl();
-            inspectionDtl.RemarkID = inspectionAllInfo.RemarkID;
-            inspectionDtl.InspectionInfoID = inspectionAllInfo.InspectionInfoID;
-            inspectionDtl.RemarkValue = String.valueOf(objectValue);
-            inspectionDtl.ReadTypeID = 1;
-            inspectionDtl.Lat=String.valueOf(location.getLatitude());
-            inspectionDtl.Long=String.valueOf(location.getLongitude());
-            inspectionDtl.InspectionDtlID = inspectionAllInfo.InspectionDtlID;
-            inspectionDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
-            int inspectionDtlId = bazrasiViewModel.updateInspectionDtl(inspectionDtl);
-            if (objectValue == null) {
-                bazrasiViewModel.deleteAll(inspectionInfo, inspectionDtl);
-            }
-            if (inspectionDtlId != 0) {
-                Toast.makeText((AppCompatActivity) context, G.context.getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
-            }
-
-        }
-
-
-
-
-    }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         CardView listitemRemarkRoot;

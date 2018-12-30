@@ -20,12 +20,14 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazrasi.BazrasiAdapter;
+import ir.saa.android.mt.adapters.bazrasi.RemarkItem;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyCheckList;
 import ir.saa.android.mt.components.MyCheckListItem;
@@ -105,10 +107,11 @@ public class BazrasiFragment extends Fragment  {
                     }
 
                     if (location != null) {
-                        final MyDialog dialog = new MyDialog(getContext());
-                        //InspectionWithAnswerGroup inspectionAllInfo = bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId, 1, 1);
+                        if(bazrasiViewModel.isEqualAnswerGroupDtl(G.clientInfo.GroupId)) {
+                            final MyDialog dialog = new MyDialog(getContext());
+                            //InspectionWithAnswerGroup inspectionAllInfo = bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId, 1, 1);
 
-                        //if (current.answerGroupId != null) {
+                            //if (current.answerGroupId != null) {
                             bazrasiViewModel.getAnswerGroupDtls(11).observe((AppCompatActivity) getContext(), new Observer<List<AnswerGroupDtl>>() {
                                 @Override
                                 public void onChanged(@Nullable List<AnswerGroupDtl> answerGroupDtls) {
@@ -137,7 +140,21 @@ public class BazrasiFragment extends Fragment  {
                                     dialog.addButton(G.context.getResources().getString(R.string.BazrasiAdapter_BtnSave), new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
+                                            objects = myCheckList.getSelectedItemsValues();
+                                            Object objectAnswer;
+                                            if(objects.size()==0){
+                                                objectAnswer=null;
+                                            }else {
+                                                objectAnswer=objects.get(0);
+                                            }
+                                            List<RemarkItem> remarkItems=bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue();
 
+                                            for(RemarkItem renarkItem:remarkItems){
+                                                bazrasiViewModel.saveBazrasi(renarkItem,objectAnswer,location);
+                                            }
+                                            if(objectAnswer!=null) {
+                                                Toast.makeText(getContext(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                                            }
                                             dialog.dismiss();
                                         }
                                     });
@@ -156,7 +173,10 @@ public class BazrasiFragment extends Fragment  {
 
                                 }
                             });
-                        //}
+                            //}
+                        }else{
+
+                        }
                     }else{
                         cbSelectAll.setChecked(false);
                         locationViewModel.trunOnGps(getContext());

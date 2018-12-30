@@ -218,7 +218,9 @@ public class SettingFragment extends Fragment {
             spinnerMap.put(spinnerArray.get(i).toString(),i);
         }
         if( G.getPref(SharePrefEnum.ModuleBluetoothName)!=null && spinnerMap.size()!=0) {
-            spinner.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName)));
+            if(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName))!=null) {
+                spinner.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName)));
+            }
 
         }
 
