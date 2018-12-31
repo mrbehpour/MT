@@ -26,6 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.AddedClient;
+import ir.saa.android.mt.model.entities.Bazdid;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientAllInfo;
 import ir.saa.android.mt.model.entities.GPSInfo;
@@ -43,6 +44,7 @@ import ir.saa.android.mt.model.entities.TariffInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
+import ir.saa.android.mt.repositories.roomrepos.BazdidRepo;
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionInfoRepo;
@@ -55,6 +57,7 @@ public class SendViewModel extends AndroidViewModel {
 
     RetrofitMT retrofitMT=null;
     PolompInfoRepo polompInfoRepo=null;
+    BazdidRepo bazdidRepo=null;
     PolompDtlRepo polompDtlRepo=null;
     InspectionInfoRepo inspectionInfoRepo=null;
     InspectionDtlRepo inspectionDtlRepo=null;
@@ -78,6 +81,9 @@ public class SendViewModel extends AndroidViewModel {
         }
         if(inspectionInfoRepo==null){
             inspectionInfoRepo=new InspectionInfoRepo(application);
+        }
+        if(bazdidRepo==null){
+            bazdidRepo=new BazdidRepo(application);
         }
         if(inspectionDtlRepo==null){
             inspectionDtlRepo=new InspectionDtlRepo(application);
@@ -248,6 +254,14 @@ public class SendViewModel extends AndroidViewModel {
                                         if(recordeSummary.Result){
                                             sendAllDataProgress.postValue(getPrecent(countTrue++,recordeSummaries.size())-1);
                                             //countTrue++;
+                                            Bazdid bazdid=new Bazdid();
+                                            bazdid=bazdidRepo.getBazdid(Long.parseLong(recordeSummary.ClientId));
+                                            if(bazdid!=null){
+                                                bazdid.isSend=true;
+                                                bazdidRepo.updateBazdid(bazdid);
+                                            }
+
+
                                         }
                                     }
                                     if(recordeSummaries.size()==countTrue){
@@ -259,6 +273,7 @@ public class SendViewModel extends AndroidViewModel {
                                         messageErrorLiveData.postValue(G.context.getResources().getString(R.string.MessageCount,countRegister.toString(),String.valueOf(recordeSummaries.size())));
 
                                     }
+
                                 }
 
                                 @Override
