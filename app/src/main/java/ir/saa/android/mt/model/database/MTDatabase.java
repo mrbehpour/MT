@@ -16,6 +16,7 @@ import ir.saa.android.mt.model.daos.AddedClientDao;
 import ir.saa.android.mt.model.daos.AgentAccessListDao;
 import ir.saa.android.mt.model.daos.AnswerGroupDao;
 import ir.saa.android.mt.model.daos.AnswerGroupDtlDao;
+import ir.saa.android.mt.model.daos.BazdidDao;
 import ir.saa.android.mt.model.daos.CityDao;
 import ir.saa.android.mt.model.daos.ClientDao;
 import ir.saa.android.mt.model.daos.ClientTypeDao;
@@ -52,6 +53,7 @@ import ir.saa.android.mt.model.entities.AddedClient;
 import ir.saa.android.mt.model.entities.AgentAccessList;
 import ir.saa.android.mt.model.entities.AnswerGroup;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
+import ir.saa.android.mt.model.entities.Bazdid;
 import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientType;
@@ -101,7 +103,8 @@ import ir.saa.android.mt.model.entities.TestInfo;
         PolompInfo.class,GPSInfo.class,
         PolompDtl.class,TariffInfo.class,
         TariffDtl.class,TestInfo.class,TestDtl.class,
-        PolompColor.class, PolompType.class, AddedClient.class },version = 39)
+        PolompColor.class, PolompType.class, AddedClient.class,
+        Bazdid.class},version = 40)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -178,6 +181,8 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract PolompColorDao polompColorModel();
 
     public abstract AddedClientDao addedClientModel();
+
+    public abstract BazdidDao bazdidModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {
