@@ -132,6 +132,7 @@
             android:layout_marginRight="16dp"
             android:fontFamily="@font/byekan"
             android:textSize="16sp"
+            android:visibility="gone"
             android:text="@string/mahdoode"/>
         <EditText
             android:id="@+id/edtMahdoode"
@@ -144,6 +145,7 @@
             android:imeOptions="actionDone"
             android:fontFamily="@font/byekan"
             android:textSize="12sp"
+            android:visibility="gone"
             android:textAlignment="center"
             android:text="0"/>
         <TextView
@@ -152,6 +154,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:textColor="@color/grey_500"
+            android:visibility="gone"
             android:fontFamily="@font/byekan"
             android:textSize="12sp"
             android:text="@string/mahdoode_help"/>
