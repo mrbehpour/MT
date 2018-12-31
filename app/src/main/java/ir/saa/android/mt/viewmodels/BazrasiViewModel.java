@@ -4,14 +4,20 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.location.Location;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.List;
 
+import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazrasi.RemarkItem;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
@@ -86,6 +92,23 @@ public class BazrasiViewModel extends AndroidViewModel {
            return RemarkItemLiveData;
        }
 
+       public boolean isEqualAnswerGroupDtl(Integer iD){
+           boolean hasOk=true;
+
+           List<RemarkItem> remarkItems=getRemarks(iD).getValue();
+           if(remarkItems.size()!=0) {
+               Integer answerGroupId = remarkItems.get(0).answerGroupId;
+               for (int i=1;i<remarkItems.size(); i++) {
+                   if(remarkItems.get(i).answerGroupId!=answerGroupId){
+                       hasOk=false;
+                   }
+               }
+           }else{
+               hasOk=false;
+           }
+           return hasOk;
+       }
+
        public LiveData<List<AnswerGroupDtl>> getAnswerGroupDtls(Integer Id){
           return answerGroupDtlRepo.getAnswerGroupDtlByAnswerGroupId(Id);
        }
@@ -124,6 +147,76 @@ public class BazrasiViewModel extends AndroidViewModel {
        public AnswerGroupDtl getAnswerGroupDtlByIdAndAnswegroupId(int Id,int answergroupId){
         return answerGroupDtlRepo.getAnswerGroupDtl(Id,answergroupId);
        }
+
+
+      public boolean saveBazrasi(RemarkItem currentItem, Object objectValue, Location location) {
+
+
+        InspectionWithAnswerGroup inspectionAllInfo = getInspectionAllInfo(G.clientInfo.ClientId, currentItem.Id, currentItem.answerGroupId);
+        if (inspectionAllInfo == null) {
+            if (objectValue != null) {
+                InspectionInfo inspectionInfo = new InspectionInfo();
+                inspectionInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                inspectionInfo.ClientID = G.clientInfo.ClientId;
+                inspectionInfo.SendID = G.clientInfo.SendId;
+
+                inspectionInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+
+                inspectionInfo.Lat=String.valueOf(location.getLatitude());
+                inspectionInfo.Long=String.valueOf(location.getLongitude());
+                inspectionInfo.InspectionDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
+                inspectionInfo.InspectionTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
+                //inspectionInfo.RemarkID = currentItem.Id;
+                Long inspectionInfoId = insertInspectionInfo(inspectionInfo);
+                InspectionDtl inspectionDtl = new InspectionDtl();
+                inspectionDtl.RemarkID = currentItem.Id;
+                inspectionDtl.InspectionInfoID = Integer.valueOf(inspectionInfoId.toString());
+                inspectionDtl.RemarkValue = String.valueOf(objectValue);
+                inspectionDtl.ReadTypeID = 1;
+
+                inspectionDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
+                Long inspectionDtlId = insertInspectionDtl(inspectionDtl);
+                if (inspectionDtlId != null) {
+                    return  true;
+                }
+            }
+        } else {
+
+
+            InspectionInfo inspectionInfo = new InspectionInfo();
+            inspectionInfo.AgentID = inspectionAllInfo.AgentID;
+            inspectionInfo.ClientID = inspectionAllInfo.ClientID;
+            inspectionInfo.SendID = G.clientInfo.SendId;
+            inspectionInfo.Lat=String.valueOf(location.getLatitude());
+            inspectionInfo.Long=String.valueOf(location.getLongitude());
+            inspectionInfo.InspectionDate = inspectionAllInfo.InspectionDate;
+            inspectionInfo.InspectionTime = inspectionAllInfo.InspectionTime;
+            //inspectionInfo.RemarkID=inspectionAllInfo.RemarkID;
+            inspectionInfo.InspectionInfoID = inspectionAllInfo.InspectionInfoID;
+            int inspectionInfoId = updateInspectionInfo(inspectionInfo);
+            InspectionDtl inspectionDtl = new InspectionDtl();
+            inspectionDtl.RemarkID = inspectionAllInfo.RemarkID;
+            inspectionDtl.InspectionInfoID = inspectionAllInfo.InspectionInfoID;
+            inspectionDtl.RemarkValue = String.valueOf(objectValue);
+            inspectionDtl.ReadTypeID = 1;
+            inspectionDtl.InspectionDtlID = inspectionAllInfo.InspectionDtlID;
+            inspectionDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
+            int inspectionDtlId = updateInspectionDtl(inspectionDtl);
+            if (objectValue == null) {
+                deleteAll(inspectionInfo, inspectionDtl);
+                return false;
+            }
+            if (inspectionDtlId != 0) {
+               return true;
+            }
+
+        }
+        return false;
+
+
+
+
+    }
 
 
 }

@@ -298,18 +298,18 @@ public class PolompFragmentSave extends Fragment {
             spinnerArrayColorJadid.clear();
             spinnerMapColorJadid.clear();
 
-            spinnerArrayColorGhadim.add("");
-            spinnerMapColorGhadim.put(0,0);
-            spinnerArrayColorJadid.add("");
-            spinnerMapColorJadid.put(0,0);
-            spinnerMapColor.put(0,0);
+//            spinnerArrayColorGhadim.add("");
+//            spinnerMapColorGhadim.put(0,0);
+//            spinnerArrayColorJadid.add("");
+//            spinnerMapColorJadid.put(0,0);
+//            spinnerMapColor.put(0,0);
 
             for(int i=0;i<polompColors.size();i++){
                 spinnerArrayColorGhadim.add(polompColors.get(i).FldName);
-                spinnerMapColorGhadim.put(i+1,polompColors.get(i).FldID);
+                spinnerMapColorGhadim.put(i,polompColors.get(i).FldID);
                 spinnerArrayColorJadid.add(polompColors.get(i).FldName);
-                spinnerMapColorJadid.put(i+1,polompColors.get(i).FldID);
-                spinnerMapColor.put(polompColors.get(i).FldID,i+1);
+                spinnerMapColorJadid.put(i,polompColors.get(i).FldID);
+                spinnerMapColor.put(polompColors.get(i).FldID,i);
             }
             adapterColorJadid.notifyDataSetChanged();
             adapterColorGhadim.notifyDataSetChanged();
@@ -320,18 +320,18 @@ public class PolompFragmentSave extends Fragment {
             spinnerArrayModelJadid.clear();
             spinnerMapModelJadid.clear();
 
-            spinnerArrayModelGhadim.add("");
-            spinnerMapModelGhadim.put(0,0);
-            spinnerArrayModelJadid.add("");
-            spinnerMapModelJadid.put(0,0);
-            spinnerMapModel.put(0,0);
+//            spinnerArrayModelGhadim.add("");
+//            spinnerMapModelGhadim.put(0,0);
+//            spinnerArrayModelJadid.add("");
+//            spinnerMapModelJadid.put(0,0);
+//            spinnerMapModel.put(0,0);
 
             for(int i=0;i<polompTypes.size();i++){
                 spinnerArrayModelGhadim.add(polompTypes.get(i).PolompTypeName);
-                spinnerMapModelGhadim.put(i+1,polompTypes.get(i).PolompTypeID);
+                spinnerMapModelGhadim.put(i,polompTypes.get(i).PolompTypeID);
                 spinnerArrayModelJadid.add(polompTypes.get(i).PolompTypeName);
-                spinnerMapModelJadid.put(i+1,polompTypes.get(i).PolompTypeID);
-                spinnerMapModel.put(polompTypes.get(i).PolompTypeID,i+1);
+                spinnerMapModelJadid.put(i,polompTypes.get(i).PolompTypeID);
+                spinnerMapModel.put(polompTypes.get(i).PolompTypeID,i);
             }
             adapterModelJadid.notifyDataSetChanged();
             adapterModelGhadim.notifyDataSetChanged();
@@ -406,10 +406,10 @@ public class PolompFragmentSave extends Fragment {
         spinnerArrayModelJadid.clear();
         spinnerArrayModelGhadim.clear();
 
-        spinnerArrayColorJadid.add("");
-        spinnerArrayColorGhadim.add("");
-        spinnerArrayModelJadid.add("");
-        spinnerArrayModelGhadim.add("");
+//        spinnerArrayColorJadid.add("");
+//        spinnerArrayColorGhadim.add("");
+//        spinnerArrayModelJadid.add("");
+//        spinnerArrayModelGhadim.add("");
 
         if(polompViewModel.getPolompColor().getValue()!=null) {
             for (PolompColor polompColor : polompViewModel.getPolompColor().getValue()) {
@@ -451,12 +451,12 @@ public class PolompFragmentSave extends Fragment {
                 polompInfo.ChangeTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
                 polompInfo.ClientID = polompParams.ClientId;
                 polompInfo.SendID = G.clientInfo.SendId;
-
+                polompInfo.Lat = String.valueOf(location.getLatitude());
+                polompInfo.Long = String.valueOf(location.getLongitude());
                 polompInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
 
                 polompDtl = new PolompDtl();
-                polompDtl.Lat = String.valueOf(location.getLatitude());
-                polompDtl.Long = String.valueOf(location.getLongitude());
+
                 polompDtl.StatePolomp = 0;
                 if (chkNadradGhadim == true) {
                     polompDtl.StatePolomp = 1;
@@ -465,13 +465,13 @@ public class PolompFragmentSave extends Fragment {
                     polompDtl.StatePolomp = 2;
                 }
                 polompDtl.ReadTypeID = 1;
-                polompDtl.CurrentColorID = spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+                polompDtl.CurrentColorID = spinnerMapColorJadid.get(spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition()));
                 polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
                 polompDtl.PolompID = polompParams.PolompId;
-                polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-                polompDtl.PreviousColorID = spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+                polompDtl.PolompTypeID = spinnerMapModelJadid.get(spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition()));
+                polompDtl.PreviousColorID = chkNadradGhadim.booleanValue()==true?null: spinnerMapColorGhadim.get(spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition()));
                 polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
-                polompDtl.PreviousPolompTypeID = spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+                polompDtl.PreviousPolompTypeID =chkNadradGhadim.booleanValue()==true?null: spinnerMapModelGhadim.get(spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()));
                 polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
                 Long polompInfoId = polompViewModel.insertPolompInfo(polompInfo);
                 polompDtl.PolompInfoID = polompInfoId;
@@ -490,8 +490,7 @@ public class PolompFragmentSave extends Fragment {
 
                     polompDtl.StatePolomp = 2;
                 }
-                polompDtl.Lat = String.valueOf(location.getLatitude());
-                polompDtl.Long = String.valueOf(location.getLongitude());
+
                 polompDtl.ReadTypeID = 1;
                 polompDtl.PolompDtlID = polompAllInfo.PolompDtlID;
                 polompDtl.PolompInfoID = Long.valueOf(polompAllInfo.PolompInfoID);
@@ -499,9 +498,9 @@ public class PolompFragmentSave extends Fragment {
                 polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
                 polompDtl.PolompID = polompParams.PolompId;
                 polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-                polompDtl.PreviousColorID = spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+                polompDtl.PreviousColorID =chkNadradGhadim.booleanValue()==true?null: spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
                 polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
-                polompDtl.PreviousPolompTypeID = spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+                polompDtl.PreviousPolompTypeID =chkNadradGhadim.booleanValue()==true?null: spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
                 polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
                 polompViewModel.updatePolompDtl(polompDtl);
                 Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();

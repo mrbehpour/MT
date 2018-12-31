@@ -29,4 +29,8 @@ public class InspectionInfo  {
 
     public Long FollowUpCode;
 
+    public String Long ;
+
+    public String Lat ;
+
 }

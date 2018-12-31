@@ -214,8 +214,11 @@ public void setiLocationCallBack(ILocationCallBack iLocationCallBack){
     public void onLocationChanged(Location location) {
         if(location!=null) {
            this.location=location;
+           isHasLocation.postValue(true);
            iLocationCallBack.HasLocation(location);
 
+        }else{
+            isHasLocation.postValue(false);
         }
     }
 

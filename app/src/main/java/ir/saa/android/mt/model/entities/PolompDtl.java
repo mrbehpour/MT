@@ -37,7 +37,5 @@ public class PolompDtl  {
 
    public Integer StatePolomp;
 
-    public String Long ;
 
-    public String Lat ;
 }
