@@ -451,12 +451,12 @@ public class PolompFragmentSave extends Fragment {
                 polompInfo.ChangeTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
                 polompInfo.ClientID = polompParams.ClientId;
                 polompInfo.SendID = G.clientInfo.SendId;
-
+                polompInfo.Lat = String.valueOf(location.getLatitude());
+                polompInfo.Long = String.valueOf(location.getLongitude());
                 polompInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
 
                 polompDtl = new PolompDtl();
-                polompDtl.Lat = String.valueOf(location.getLatitude());
-                polompDtl.Long = String.valueOf(location.getLongitude());
+
                 polompDtl.StatePolomp = 0;
                 if (chkNadradGhadim == true) {
                     polompDtl.StatePolomp = 1;
@@ -490,8 +490,7 @@ public class PolompFragmentSave extends Fragment {
 
                     polompDtl.StatePolomp = 2;
                 }
-                polompDtl.Lat = String.valueOf(location.getLatitude());
-                polompDtl.Long = String.valueOf(location.getLongitude());
+
                 polompDtl.ReadTypeID = 1;
                 polompDtl.PolompDtlID = polompAllInfo.PolompDtlID;
                 polompDtl.PolompInfoID = Long.valueOf(polompAllInfo.PolompInfoID);

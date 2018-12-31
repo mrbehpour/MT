@@ -162,7 +162,8 @@ public class BazrasiViewModel extends AndroidViewModel {
 
                 inspectionInfo.FollowUpCode = G.clientInfo.FollowUpCode;
 
-
+                inspectionInfo.Lat=String.valueOf(location.getLatitude());
+                inspectionInfo.Long=String.valueOf(location.getLongitude());
                 inspectionInfo.InspectionDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
                 inspectionInfo.InspectionTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
                 //inspectionInfo.RemarkID = currentItem.Id;
@@ -172,8 +173,7 @@ public class BazrasiViewModel extends AndroidViewModel {
                 inspectionDtl.InspectionInfoID = Integer.valueOf(inspectionInfoId.toString());
                 inspectionDtl.RemarkValue = String.valueOf(objectValue);
                 inspectionDtl.ReadTypeID = 1;
-                inspectionDtl.Lat=String.valueOf(location.getLatitude());
-                inspectionDtl.Long=String.valueOf(location.getLongitude());
+
                 inspectionDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
                 Long inspectionDtlId = insertInspectionDtl(inspectionDtl);
                 if (inspectionDtlId != null) {
@@ -187,6 +187,8 @@ public class BazrasiViewModel extends AndroidViewModel {
             inspectionInfo.AgentID = inspectionAllInfo.AgentID;
             inspectionInfo.ClientID = inspectionAllInfo.ClientID;
             inspectionInfo.SendID = G.clientInfo.SendId;
+            inspectionInfo.Lat=String.valueOf(location.getLatitude());
+            inspectionInfo.Long=String.valueOf(location.getLongitude());
             inspectionInfo.InspectionDate = inspectionAllInfo.InspectionDate;
             inspectionInfo.InspectionTime = inspectionAllInfo.InspectionTime;
             //inspectionInfo.RemarkID=inspectionAllInfo.RemarkID;
@@ -197,8 +199,6 @@ public class BazrasiViewModel extends AndroidViewModel {
             inspectionDtl.InspectionInfoID = inspectionAllInfo.InspectionInfoID;
             inspectionDtl.RemarkValue = String.valueOf(objectValue);
             inspectionDtl.ReadTypeID = 1;
-            inspectionDtl.Lat=String.valueOf(location.getLatitude());
-            inspectionDtl.Long=String.valueOf(location.getLongitude());
             inspectionDtl.InspectionDtlID = inspectionAllInfo.InspectionDtlID;
             inspectionDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
             int inspectionDtlId = updateInspectionDtl(inspectionDtl);

@@ -13,12 +13,14 @@ import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazdid.ClientItem;
+import ir.saa.android.mt.model.entities.Bazdid;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientWithAction;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
+import ir.saa.android.mt.repositories.roomrepos.BazdidRepo;
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompDtlRepo;
@@ -33,6 +35,7 @@ public class BazdidViewModel extends AndroidViewModel {
     private InspectionDtlRepo inspectionDtlRepo;
     private PolompDtlRepo polompDtlRepo;
     private TestDtlRepo testDtlRepo;
+    private BazdidRepo bazdidRepo;
 
     public BazdidViewModel(@NonNull Application application) {
         super(application);
@@ -40,6 +43,9 @@ public class BazdidViewModel extends AndroidViewModel {
             clientRepo = new ClientRepo(application);
         if(polompDtlRepo==null){
             polompDtlRepo=new PolompDtlRepo(application);
+        }
+        if(bazdidRepo==null){
+            bazdidRepo=new BazdidRepo(application);
         }
         if(testDtlRepo==null){
             testDtlRepo=new TestDtlRepo(application);
@@ -56,6 +62,7 @@ public class BazdidViewModel extends AndroidViewModel {
         if(isPolomp==null){
             isPolomp=false;
         }
+
 
 //        Client client=new Client();
 //        client.Active1=1;
@@ -77,6 +84,7 @@ public class BazdidViewModel extends AndroidViewModel {
         return clientRepo.getClientWithActionLiveData();
     }
 
+
     public LiveData<List<ClientWithAction>> getClientsWithRegionIdLiveData(Integer regionId){
         if(regionId!=-1) {
             return clientRepo.getClientWithActionWithRegionIdLiveData(regionId);
@@ -85,6 +93,16 @@ public class BazdidViewModel extends AndroidViewModel {
     }
 
 
+    public Long insertBazdid(Bazdid bazdid){
+        return bazdidRepo.insertBazdid(bazdid);
+    }
+    public Bazdid  getBazdid(Long ClientId){
+        return  bazdidRepo.getBazdid(ClientId);
+    }
+
+    public  void updateBazdid(Bazdid bazdid){
+        bazdidRepo.updateBazdid(bazdid);
+    }
 
     public Boolean getInspectionValue(Long clientId) {
         List<InspectionAllInfo> inspectionAllInfos=new ArrayList<>();

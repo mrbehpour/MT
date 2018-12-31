@@ -30,7 +30,7 @@ public interface BazdidDao {
 
 
     @Query("Select * from Bazdid where ClientId= :iD")
-    LiveData<Bazdid> getBazdid(Long iD);
+    Bazdid getBazdid(Long iD);
 
     @Delete
     void deleteBazdid(Bazdid bazdid);

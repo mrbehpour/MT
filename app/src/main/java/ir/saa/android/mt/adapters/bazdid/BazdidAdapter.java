@@ -1,5 +1,7 @@
 package ir.saa.android.mt.adapters.bazdid;
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -7,6 +9,7 @@ import android.graphics.Typeface;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +30,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.model.entities.Bazdid;
 import ir.saa.android.mt.uicontrollers.pojos.FontManager.FontManager;
 import ir.saa.android.mt.viewmodels.BazdidViewModel;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
@@ -73,7 +77,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
             G.clientInfo.ClientName = current.Name;
             G.clientInfo.Postion = position;
             G.setActionbarTitleText(current.Name);
-
+;
             G.startFragment(FragmentsEnum.MoshtarakFragment, false, bundle);
 
 
@@ -86,14 +90,14 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
         holder.tvUniqueValue.setText(current.UniqueFieldValue);
         holder.tvAddress.setText(current.Address);
         holder.tvRowId.setText(current.RowId.toString());
-
+        int CountAmliyat=0;
         if (current.isPolommp) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconPolomp.setImageTintList(ContextCompat.getColorStateList(holder.contextHolder, R.color.icon_on));
             }
 
-
+            CountAmliyat+=1;
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconPolomp.setImageTintList(ContextCompat.getColorStateList(holder.contextHolder, R.color.icon_off));
@@ -104,6 +108,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconTest.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_on));
             }
+            CountAmliyat+=1;
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconTest.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
@@ -114,9 +119,22 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_on));
             }
+            CountAmliyat++;
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 holder.IconBazrasi.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
+            }
+        }
+        if(CountAmliyat==2){
+            Bazdid bazdidAsli=new Bazdid();
+            bazdidAsli.ClientId=current.Id;
+            bazdidAsli.isBazdid=true;
+            if(bazdidViewModel.getBazdid(current.Id)==null){
+
+                    bazdidViewModel.insertBazdid(bazdidAsli);
+
+            }else{
+                bazdidViewModel.updateBazdid(bazdidAsli);
             }
         }
 

@@ -35,7 +35,7 @@ public class BazdidRepo  {
     }
 
 
-    public LiveData<Bazdid> getBazdid(Long iD) {
+    public Bazdid getBazdid(Long iD) {
         return bazdidDao.getBazdid(iD);
     }
 
