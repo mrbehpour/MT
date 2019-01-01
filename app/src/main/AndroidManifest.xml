@@ -37,7 +37,7 @@
         <activity android:name=".uicontrollers.activities.SplashScreenActivity">
              <intent-filter>
                  <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.DEFAULT" />
+                 <!--<category android:name="android.intent.category.DEFAULT" />-->
                  <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>
@@ -51,6 +51,8 @@
         <activity android:name=".uicontrollers.activities.DaryaftActivity">
         </activity>
         <activity android:name=".uicontrollers.activities.SendActivity">
+        </activity>
+        <activity android:name=".uicontrollers.activities.SendSerialActivity">
         </activity>
         <activity android:name=".uicontrollers.activities.DaryaftMoshtarakinActivity">
         </activity>

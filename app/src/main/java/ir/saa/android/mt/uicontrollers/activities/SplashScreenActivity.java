@@ -53,7 +53,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
     private void goToNextActivity(int animationIn, int animationOut) {
-        Intent intent = new Intent(context, LoginActivity.class);
+        Intent intent = new Intent(context, SendSerialActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
