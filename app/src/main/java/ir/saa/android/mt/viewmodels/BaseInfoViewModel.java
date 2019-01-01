@@ -29,6 +29,7 @@ import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
 import ir.saa.android.mt.model.entities.AnswerGroup;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
+import ir.saa.android.mt.model.entities.Bazdid;
 import ir.saa.android.mt.model.entities.City;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.GetClientInput;
@@ -51,6 +52,7 @@ import ir.saa.android.mt.repositories.roomrepos.AccessAgentAndroidRepo;
 import ir.saa.android.mt.repositories.roomrepos.AgentAccessListRepo;
 import ir.saa.android.mt.repositories.roomrepos.AnswerGroupDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.AnswerGroupRepo;
+import ir.saa.android.mt.repositories.roomrepos.BazdidRepo;
 import ir.saa.android.mt.repositories.roomrepos.CityRepo;
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
 import ir.saa.android.mt.repositories.roomrepos.ClientTypeRepo;
@@ -99,6 +101,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
     SettingRepo settingRepo=null;
     PolompTypeRepo polompTypeRepo=null;
     PolompColorRepo polompColorRepo=null;
+    BazdidRepo bazdidRepo=null;
 
     //---------------------------------------
 
@@ -161,6 +164,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
             polompColorRepo=new PolompColorRepo(application);
         if(polompTypeRepo==null)
             polompTypeRepo=new PolompTypeRepo(application);
+        if(bazdidRepo==null){
+            bazdidRepo=new BazdidRepo(application);
+        }
 
 
         //---------------------------------------------
@@ -224,6 +230,10 @@ public class BaseInfoViewModel extends AndroidViewModel {
 //                    }
 //                });
 //    }
+
+    public List<Bazdid> getBazdidIsSend(Boolean hasSend){
+        return bazdidRepo.getBazdidIsSend(hasSend);
+    }
 
     public void getUserFromServer(){
 

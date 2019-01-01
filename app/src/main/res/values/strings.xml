@@ -126,6 +126,7 @@
     <string name="daryaftTenzimat">دریافت تنظیمات</string>
     <string name="dryaftKarbaran">دریافت کاربران</string>
     <string name="startDownloadHelp">جهت شروع دریافت، قسمت مربوطه را لمس نمایید</string>
+    <string name="Message_CheckSend">شما قادر به گرفتن کار جدید نمی باشید چون هنوز اطلاعات بطور کامل ارسال نشده است</string>
 
     <!-- activity_getmoshtarakin -->
     <string name="omoorMarboote">امور مربوطه:</string>
@@ -291,5 +292,6 @@
     <string name="Buttom_Cancel">انصراف</string>
     <string name="ValidationLocation">در حال دریافت موقعیت مکانی</string>
     <string name="Wait_Location">لطفا منتظر بمانید </string>
+
 
 </resources>

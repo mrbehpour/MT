@@ -53,4 +53,8 @@ public class BazdidRepo  {
     public void deleteBazdidById(Long iD) {
              bazdidDao.deleteBazdidById(iD);
     }
+
+    public  List<Bazdid> getBazdidIsSend(Boolean hasSend){
+        return bazdidDao.getBazdidIsSend(hasSend);
+    }
 }

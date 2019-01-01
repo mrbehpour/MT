@@ -28,6 +28,7 @@ import java.util.List;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.Bazdid;
 import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.Region;
 
@@ -134,6 +135,11 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                List<Bazdid> bazdids=baseInfoViewModel.getBazdidIsSend(false);
+                if(bazdids.size()!=0){
+                    Toast.makeText(DaryaftMoshtarakinActivity.this,getResources().getText(R.string.Message_CheckSend),Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (isDownloadClient == false) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         ivMoshtarakin.setImageTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.ms_gray3));

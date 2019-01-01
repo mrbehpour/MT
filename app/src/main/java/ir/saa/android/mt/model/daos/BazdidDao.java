@@ -42,5 +42,9 @@ public interface BazdidDao {
     void deleteBazdidById(Long iD);
 
 
+    @Query("Select * from Bazdid where isSend= :hasSend")
+    List<Bazdid> getBazdidIsSend(Boolean hasSend);
+
+
 
 }
