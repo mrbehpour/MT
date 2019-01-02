@@ -42,9 +42,9 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
     Boolean isDownloadClient;
     BaseInfoViewModel baseInfoViewModel = null;
 
+    GetClientInput getClientInput;
     Spinner spinnerRegion;
     List<String> spinnerArray;
-    GetClientInput getClientInput;
     ArrayAdapter<String> adapter;
     TextView tvLabelDarhaleDaryaftMoshtarakin;
     HashMap<Integer, Integer> spinnerMap = new HashMap<Integer, Integer>();

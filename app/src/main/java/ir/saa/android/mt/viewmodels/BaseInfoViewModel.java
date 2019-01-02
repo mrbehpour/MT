@@ -396,7 +396,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 List<AnswerGroupDtl> answerGroupDtls = null;
                 answerGroupDtls=new ArrayList<>();
                 DataClass<PropertyType> propertyTypes = null;
-                DataClass<Region> regions = null;
+//                DataClass<Region> regions = null;
                 DataClass<City> cities = null;
                 DataClass<Remark> remarks = null;
                 DataClass<GroupingFormat> groupingFormats = null;
@@ -424,11 +424,11 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     messageErrorLiveData.postValue(propertyTypes.Message);
 
                 }
-                regions = retrofitMT.getMtApi().GetRegions().blockingGet();
-                if(!regions.Success){
-                    messageErrorLiveData.postValue(regions.Message);
-
-                }
+//                regions = retrofitMT.getMtApi().GetRegions().blockingGet();
+//                if(!regions.Success){
+//                    messageErrorLiveData.postValue(regions.Message);
+//
+//                }
                 cities = retrofitMT.getMtApi().GetCities().blockingGet();
                 if(!cities.Success){
                     messageErrorLiveData.postValue(cities.Message);
@@ -483,7 +483,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 }
 
                 Integer totalCount = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() +
-                        regions.Data.size() + cities.Data.size() + remarks.Data.size() + groupingFormats.Data.size() +
+                        /*regions.Data.size()*/  cities.Data.size() + remarks.Data.size() + groupingFormats.Data.size() +
                         remarkGroups.Data.size() + masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size() +
                         polompGroupingFormats.Data.size()+polompColors.Data.size()+polompTypes.Data.size();
                 Integer startProgress = 0;
@@ -502,41 +502,41 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
                 startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size();
-                for (Integer i = 0; i < regions.Data.size(); i++) {
-                    regionRepo.insertRegion(regions.Data.get(i));
-                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
-                }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size();
+//                for (Integer i = 0; i < regions.Data.size(); i++) {
+//                    regionRepo.insertRegion(regions.Data.get(i));
+//                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+//                }
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() ; /*regions.Data.size()*/;
                 for (Integer i = 0; i < cities.Data.size(); i++) {
                     cityRepo.insertCity(cities.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + /*regions.Data.size() +*/
                         cities.Data.size();
                 for (Integer i = 0; i < remarks.Data.size(); i++) {
                     remarkRepo.insertRemark(remarks.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + /*regions.Data.size() +*/
                         cities.Data.size() + remarks.Data.size();
                 for (Integer i = 0; i < remarkGroups.Data.size(); i++) {
                     remarkGroupRepo.insertRemarkGroup(remarkGroups.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + /*regions.Data.size() +*/
                         cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size();
                 for (Integer i = 0; i < groupingFormats.Data.size(); i++) {
                     groupingFormatRepo.insertGroupingFormat(groupingFormats.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() /*+ regions.Data.size()*/ +
                         cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size();
 
                 for (Integer i = 0; i < masterGroupDetails.Data.size(); i++) {
                     masterGroupDetailRepo.insertMasterGroupDetail(masterGroupDetails.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + /*regions.Data.size() +*/
                         cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
                         masterGroupDetails.Data.size();
 
@@ -544,7 +544,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     polompRepo.insertPolomp(polomps.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + /*regions.Data.size() +*/
                         cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
                         masterGroupDetails.Data.size() + polomps.Data.size();
 
@@ -552,7 +552,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     polompGroupRepo.insertPolompGroup(polompGroups.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + /*regions.Data.size() +*/
                         cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
                         masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size();
 
@@ -567,7 +567,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     polompColorRepo.insertPolompColor(polompColors.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + /*regions.Data.size() +*/
                         cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
                         masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size()+polompGroupingFormats.Data.size()+
                         polompColors.Data.size();

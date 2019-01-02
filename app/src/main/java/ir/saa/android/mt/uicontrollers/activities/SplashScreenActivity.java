@@ -1,5 +1,6 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,9 @@ import android.os.Handler;
 import android.content.Intent;
 import android.content.Context;
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.model.entities.DeviceSerial;
+import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
+
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
@@ -18,14 +22,15 @@ public class SplashScreenActivity extends AppCompatActivity {
     Context context = SplashScreenActivity.this;
     LinearLayout flRect;
     pl.droidsonroids.gif.GifTextView ivLogo;
+    DeviceSerialViewModel deviceSerialViewModel=null;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_splashscreen);
-
+        deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
         flRect=(LinearLayout)findViewById(R.id.flRect);
-
+        deviceSerialViewModel.getRegionFromServer();
         // New Handler to start the Login-Activity
         // and close this Splash-Screen after some seconds
         new Handler().postDelayed(new Runnable(){
