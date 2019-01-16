@@ -20,7 +20,10 @@ public interface DeviceSerialDao {
     LiveData<List<DeviceSerial>> getDeviceSerials();
 
     @Query("Select * from DeviceSerial where SerialId= :SerialID")
-    LiveData<DeviceSerial> getDeviceSerialById(String SerialID);
+    LiveData<DeviceSerial> getDeviceSerialByIdLiveData(String SerialID);
+
+    @Query("Select * from DeviceSerial where SerialId= :SerialID")
+    DeviceSerial getDeviceSerialById(String SerialID);
 
     @Insert(onConflict = IGNORE)
     void insertDeviceSerial(DeviceSerial deviceSerial);

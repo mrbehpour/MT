@@ -25,8 +25,12 @@ public class DeviceSerialRepo  {
     }
 
 
-    public LiveData<DeviceSerial> getDeviceSerialById(String SerialID) {
+    public DeviceSerial getDeviceSerialById(String SerialID) {
         return deviceSerialDao.getDeviceSerialById(SerialID);
+    }
+
+    public LiveData<DeviceSerial> getDeviceSerialByIdLiveData(String SerialID) {
+        return deviceSerialDao.getDeviceSerialByIdLiveData(SerialID);
     }
 
 

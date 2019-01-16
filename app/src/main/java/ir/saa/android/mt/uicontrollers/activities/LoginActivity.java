@@ -39,12 +39,16 @@ import java.util.Observer;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.DeviceSerial;
+import ir.saa.android.mt.model.entities.ImiRegisterInput;
 import ir.saa.android.mt.model.entities.RelUser;
 
+import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
 import ir.saa.android.mt.viewmodels.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
     LoginViewModel loginViewModel;
+    DeviceSerialViewModel deviceSerialViewModel;
     Spinner spinner;
     EditText edtPassword;
     List<String> spinnerArray;
@@ -72,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        deviceSerialViewModel=ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
         //loginViewModel.initializerUser();
         spinner = findViewById(R.id.spnUserName);
         edtPassword = findViewById(R.id.edtPassword);
@@ -95,20 +100,45 @@ public class LoginActivity extends AppCompatActivity {
 //                    }
 //                })
 //                .show();
-        tvSanjesh.setText(tvSanjesh.getText()+"\n"+ getDeviceIMEI());
-        G.setPref("DeviceId",getDeviceIMEI());
+        tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
+
         spinner.setAdapter(adapter);
 
         adapterInit();
 
+        deviceSerialViewModel.IsValidImi.observe(this, new android.arch.lifecycle.Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(aBoolean){
+                    boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
+                    if (isLoginValid) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else
+                        Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         findViewById(R.id.btnLogin).setOnClickListener(v -> {
-            boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
-            if (isLoginValid) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
-            } else
-                Toast.makeText(this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+            DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+            if(deviceSerial.isActive==false){
+                ImiRegisterInput imiRegisterInput=new ImiRegisterInput();
+                imiRegisterInput.regionId=deviceSerial.regionId;
+                imiRegisterInput.handHeldSerial=deviceSerial.SerialId;
+                deviceSerialViewModel.confirmImi(imiRegisterInput);
+
+            }else{
+                boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
+                if (isLoginValid) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else
+                    Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+            }
+
         });
 
         loginViewModel.getUsers().observe(this, relUsers -> {
@@ -132,15 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public String getDeviceIMEI() {
-        String deviceUniqueIdentifier = null;
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
-            deviceUniqueIdentifier = telephonyManager.getDeviceId();
 
-        }
-        return deviceUniqueIdentifier;
-    }
 Boolean doubleBackToExitPressedOnce = false;
      @Override
     public void onBackPressed() {

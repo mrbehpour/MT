@@ -12,5 +12,8 @@ public class DeviceSerial {
     @PrimaryKey
     @android.support.annotation.NonNull
     public String SerialId;
+
+    public short regionId;
+
     public boolean isActive;
 }

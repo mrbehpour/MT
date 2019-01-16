@@ -5,7 +5,7 @@ import java.util.List;
 public class DataClass<T> {
 
 
-    public List<T> Data;
+    public T Data;
 
     public String Message;
 

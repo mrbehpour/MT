@@ -240,9 +240,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
         Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {
-                DataClass<RelUser> relUsers = null;
-                DataClass<AgentAccessList> agentAccessLists = null;
-                DataClass<AccessAgentAndroid> accessAgentAndroids = null;
+                DataClass<List<RelUser>> relUsers = null;
+                DataClass<List<AgentAccessList>> agentAccessLists = null;
+                DataClass<List<AccessAgentAndroid>> accessAgentAndroids = null;
 
                 relUsers = retrofitMT.getMtApi().GetAgentList().blockingGet();
                 ArrayList<Integer> agentIdList = new ArrayList<>();
@@ -319,9 +319,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
         retrofitMT.getMtApi().GetSettings()
                 .subscribeOn(Schedulers.io())
-                .subscribeWith(new DisposableSingleObserver<DataClass<Setting>>() {
+                .subscribeWith(new DisposableSingleObserver<DataClass<List<Setting>>>() {
                     @Override
-                    public void onSuccess(DataClass<Setting> settings) {
+                    public void onSuccess(DataClass<List<Setting>> settings) {
 //                if(settingRepo.getSettings().getValue().size()>0){
 //                    settingRepo.deleteAll();
 //                }
@@ -356,9 +356,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
         retrofitMT.getMtApi().GetClients(getClientInput)
                 .subscribeOn(Schedulers.io())
                 //.observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<DataClass<Client>>() {
+                .subscribeWith(new DisposableSingleObserver<DataClass<List<Client>>>() {
                     @Override
-                    public void onSuccess(DataClass<Client> clients) {
+                    public void onSuccess(DataClass<List<Client>> clients) {
                         if(clients.Success) {
                             for (Integer i = 0; i < clients.Data.size(); i++) {
                                 clientRepo.insertClient(clients.Data.get(i));
@@ -391,22 +391,22 @@ public class BaseInfoViewModel extends AndroidViewModel {
         Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {
-                DataClass<AnswerGroup> answerGroups = new DataClass<AnswerGroup>();
+                DataClass<List<AnswerGroup>> answerGroups = new DataClass<List<AnswerGroup>>();
 
                 List<AnswerGroupDtl> answerGroupDtls = null;
                 answerGroupDtls=new ArrayList<>();
-                DataClass<PropertyType> propertyTypes = null;
+                DataClass<List<PropertyType>> propertyTypes = null;
 //                DataClass<Region> regions = null;
-                DataClass<City> cities = null;
-                DataClass<Remark> remarks = null;
-                DataClass<GroupingFormat> groupingFormats = null;
-                DataClass<RemarkGroup> remarkGroups = null;
-                DataClass<MasterGroupDetail> masterGroupDetails = null;
-                DataClass<Polomp> polomps = null;
-                DataClass<PolompGroup> polompGroups = null;
-                DataClass<PolompGroupingFormat> polompGroupingFormats = null;
-                DataClass<PolompColor> polompColors=null;
-                DataClass<PolompType> polompTypes=null;
+                DataClass<List<City>> cities = null;
+                DataClass<List<Remark>> remarks = null;
+                DataClass<List<GroupingFormat>> groupingFormats = null;
+                DataClass<List<RemarkGroup>> remarkGroups = null;
+                DataClass<List<MasterGroupDetail>> masterGroupDetails = null;
+                DataClass<List<Polomp>> polomps = null;
+                DataClass<List<PolompGroup>> polompGroups = null;
+                DataClass<List<PolompGroupingFormat>> polompGroupingFormats = null;
+                DataClass<List<PolompColor>> polompColors=null;
+                DataClass<List<PolompType>> polompTypes=null;
 
                 answerGroups = retrofitMT.getMtApi().GetAnswerGroups().blockingGet();
                 if(answerGroups.Success) {
@@ -434,7 +434,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     messageErrorLiveData.postValue(cities.Message);
 
                 }
-                DataClass<AnswerGroupDtl> ClientTarif = null;
+                DataClass<List<AnswerGroupDtl>> ClientTarif = null;
                 ClientTarif = retrofitMT.getMtApi().GetClientsTariff().blockingGet();
                 if(ClientTarif.Success) {
                     for (Integer i = 0; i < ClientTarif.Data.size(); i++) {

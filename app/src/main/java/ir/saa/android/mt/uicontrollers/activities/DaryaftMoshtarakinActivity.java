@@ -148,7 +148,7 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
                     tvLabelDarhaleDaryaftMoshtarakin.setVisibility(View.VISIBLE);
                     isDownloadClient = true;
                     getClientInput = new GetClientInput();
-                    getClientInput.handHeldSerial = G.getPref("DeviceId");
+                    getClientInput.handHeldSerial = G.getPref(SharePrefEnum.DeviceId);
                     getClientInput.agentId = Integer.valueOf(G.getPref("UserID"));
                     getClientInput.regionId = spinnerMap.get(spinnerRegion.getSelectedItemPosition());
                     baseInfoViewModel.getClientFromServer(getClientInput);

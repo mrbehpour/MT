@@ -13,6 +13,7 @@ import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientAllInfo;
 import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.GroupingFormat;
+import ir.saa.android.mt.model.entities.ImiRegisterInput;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.Polomp;
 import ir.saa.android.mt.model.entities.PolompColor;
@@ -38,62 +39,68 @@ public interface MTApi {
     //public final static String WEB_SERVICE_BASE_URL = "http://192.168.3.176:645/services/AndroidServices.svc/json";
 
     @GET("GetAgentList")
-    Single<DataClass<RelUser>> GetAgentList();
+    Single<DataClass<List<RelUser>>> GetAgentList();
 
     @GET("GetCities")
-    Single<DataClass<City>> GetCities();
+    Single<DataClass<List<City>>> GetCities();
 
     @GET("GetAnswerGroups")
-    Single<DataClass<AnswerGroup>> GetAnswerGroups();
+    Single<DataClass<List<AnswerGroup>>> GetAnswerGroups();
 
     @GET("GetClientsTariff")
-    Single<DataClass<AnswerGroupDtl>> GetClientsTariff();
+    Single<DataClass<List<AnswerGroupDtl>>> GetClientsTariff();
 
     @GET("GetGroupingFormat")
-    Single<DataClass<GroupingFormat>> GetGroupingFormat();
+    Single<DataClass<List<GroupingFormat>>> GetGroupingFormat();
 
     @GET("GetMasterGroupDtl")
-    Single<DataClass<MasterGroupDetail>> GetMasterGroupDtl();
+    Single<DataClass<List<MasterGroupDetail>>> GetMasterGroupDtl();
 
     @GET("GetPolompGroup")
-    Single<DataClass<PolompGroup>> GetPolompGroup();
+    Single<DataClass<List<PolompGroup>>> GetPolompGroup();
 
     @GET("GetPolompGroupingFormat")
-    Single<DataClass<PolompGroupingFormat>> GetPolompGroupingFormat();
+    Single<DataClass<List<PolompGroupingFormat>>> GetPolompGroupingFormat();
 
     @GET("GetPolomps")
-    Single<DataClass<Polomp>> GetPolomps();
+    Single<DataClass<List<Polomp>>> GetPolomps();
 
     @GET("GetPolompColor")
-    Single<DataClass<PolompColor>> GetPolompColor();
+    Single<DataClass<List<PolompColor>>> GetPolompColor();
 
     @GET("GetPolompType")
-    Single<DataClass<PolompType>> GetPolompType();
+    Single<DataClass<List<PolompType>>> GetPolompType();
 
     @GET("GetPropertyTypies")
-    Single<DataClass<PropertyType>> GetPropertyTypies();
+    Single<DataClass<List<PropertyType>>> GetPropertyTypies();
 
     @GET("GetRegions")
-    Single<DataClass<Region>> GetRegions();
+    Single<DataClass<List<Region>>> GetRegions();
 
     @GET("GetRemarkGroup")
-    Single<DataClass<RemarkGroup>> GetRemarkGroup();
+    Single<DataClass<List<RemarkGroup>>> GetRemarkGroup();
 
     @GET("GetRemarks")
-    Single<DataClass<Remark>> GetRemarks();
+    Single<DataClass<List<Remark>>> GetRemarks();
 
     @GET("GetSettings")
-    Single<DataClass<Setting>> GetSettings();
+    Single<DataClass<List<Setting>>> GetSettings();
 
     @GET("GetAgentAccessList")
-    Single<DataClass<AgentAccessList>> GetAgentAccessList();
+    Single<DataClass<List<AgentAccessList>>> GetAgentAccessList();
 
     @POST("GetClients")
-    Single<DataClass<Client>> GetClients(@Body GetClientInput getClientInput);
+    Single<DataClass<List<Client>>> GetClients(@Body GetClientInput getClientInput);
 
     @POST("GetAgentAccessByUserIdList")
-    Single<DataClass<AccessAgentAndroid>> GetAgentAccessByUserIdList(@Body ArrayList<Integer> agentIdList);
+    Single<DataClass<List<AccessAgentAndroid>>> GetAgentAccessByUserIdList(@Body ArrayList<Integer> agentIdList);
 
     @POST("SaveClientAllInfoAndroid")
     Single<List<RecordeSummary>> SaveClientAllInfoAndroid(@Body List<ClientAllInfo> clientinfolList);
+
+    @POST("RegisterDeviceImi")
+    Single<DataClass<Integer>> RegisterDeviceImi(@Body ImiRegisterInput imiRegisterInput);
+
+    @POST("GetImiConfirmStatus")
+    Single<DataClass<Boolean>> GetImiConfirmStatus(@Body ImiRegisterInput imiRegisterInput);
 }

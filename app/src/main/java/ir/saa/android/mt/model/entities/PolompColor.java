@@ -15,4 +15,6 @@ public class PolompColor {
     public String FldDes ;
 
     public String FldName ;
+
+    public Boolean IsDefault;
 }

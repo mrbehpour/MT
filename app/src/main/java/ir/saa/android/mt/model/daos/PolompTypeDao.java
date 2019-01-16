@@ -14,7 +14,7 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 @Dao
 public interface PolompTypeDao {
 
-    @Query("Select * from PolompType")
+    @Query("Select * from PolompType order by IsDefault")
     LiveData<List<PolompType>> getPolompTypes();
 
 

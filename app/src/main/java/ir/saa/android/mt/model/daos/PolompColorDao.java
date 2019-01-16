@@ -13,7 +13,7 @@ import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 
 @Dao
 public interface PolompColorDao {
-    @Query("select * from PolompColor")
+    @Query("select * from PolompColor order by IsDefault")
     LiveData<List<PolompColor>> getPolompColors();
 
     @Insert(onConflict = IGNORE)

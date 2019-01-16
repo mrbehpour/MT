@@ -15,4 +15,6 @@ public class PolompType {
     public String KeyName ;
 
     public String PolompTypeName ;
+
+    public Boolean IsDefault;
 }
