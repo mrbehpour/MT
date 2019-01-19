@@ -1,6 +1,7 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.net.ConnectivityManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +9,14 @@ import android.os.Handler;
 import android.content.Intent;
 import android.content.Context;
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.DeviceSerial;
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
 
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -30,7 +33,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splashscreen);
         deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
         flRect=(LinearLayout)findViewById(R.id.flRect);
-        deviceSerialViewModel.getRegionFromServer();
+
         // New Handler to start the Login-Activity
         // and close this Splash-Screen after some seconds
         new Handler().postDelayed(new Runnable(){
@@ -54,6 +57,13 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.splashanimation);
         flRect.startAnimation(myanim);
+
+        if(G.getConnectionWay()==0) {
+            Toast.makeText(this,getResources().getText(R.string.MessageConntection),Toast.LENGTH_SHORT).show();
+        }else{
+            deviceSerialViewModel.getRegionFromServer();
+
+        }
     }
 
 
@@ -64,6 +74,12 @@ public class SplashScreenActivity extends AppCompatActivity {
         context.startActivity(intent);
         overridePendingTransition(animationIn, animationOut);
         SplashScreenActivity.this.finish();
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 
 }

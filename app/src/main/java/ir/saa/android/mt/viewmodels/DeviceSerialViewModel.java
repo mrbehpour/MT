@@ -70,7 +70,7 @@ public class DeviceSerialViewModel extends AndroidViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        String s=e.getMessage();
                     }
                 });
     }

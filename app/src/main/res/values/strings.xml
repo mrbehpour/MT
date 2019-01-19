@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MT</string>
+    <string name="app_name">تست کنتور</string>
 
     <string name="font_menu">fonts/B_Koodak_Bold.ttf</string>
     <string name="font_home">fonts/B_Koodak_Bold.ttf</string>
@@ -293,5 +293,7 @@
     <string name="ValidationLocation">در حال دریافت موقعیت مکانی</string>
     <string name="Wait_Location">لطفا منتظر بمانید </string>
 
+    <!--splashActvity-->
+    <string name="MessageConntection">لطفا دستگاه را به اینترنت متصل کنید</string>
 
 </resources>

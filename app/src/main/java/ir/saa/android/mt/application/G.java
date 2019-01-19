@@ -5,6 +5,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
@@ -12,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -181,6 +184,32 @@ public class G extends Application {
 
     public static void setEnableActionBar(Boolean state){
         actionBar.setDisplayHomeAsUpEnabled(state);
+    }
+    public static int getConnectionWay(){
+        int connectionWay = 0;
+
+
+
+        ConnectivityManager check = (ConnectivityManager)
+                G.context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo[] info = check.getAllNetworkInfo();
+//        for (int i = 0; i < info.length; i++) {
+//            //Log.i("tag","net 1 : "+ info[i].getTypeName() + " , " + info[i].getState().toString());
+//            if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+//                //MyToast.Show(G.context, "Net is connected", Toast.LENGTH_SHORT);
+//                connectionWay+=2;;
+//            }
+//        }
+        NetworkInfo mWifi = check.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        if (mWifi.isConnected()) {
+            connectionWay+=2;
+        }
+
+        Log.i("usb","Connection way : "+connectionWay);
+//        if ( !isNetConnected)
+//            return;
+        return connectionWay;
     }
 
 }
