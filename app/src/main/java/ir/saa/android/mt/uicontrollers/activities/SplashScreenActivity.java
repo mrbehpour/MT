@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.Context;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.MyDialog;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DeviceSerial;
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
 
@@ -17,6 +19,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.net.InetAddress;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -58,11 +62,16 @@ public class SplashScreenActivity extends AppCompatActivity {
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.splashanimation);
         flRect.startAnimation(myanim);
 
-        if(G.getConnectionWay()==0) {
-            Toast.makeText(this,getResources().getText(R.string.MessageConntection),Toast.LENGTH_SHORT).show();
+        MyDialog myDialog=new MyDialog(this);
+        //myDialog.addContentXml()
+        if(isNetworkConnected()){
+            if(isInternetAvailable()) {
+                deviceSerialViewModel.getRegionFromServer();
+            }else{
+                Toast.makeText(this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+            }
         }else{
-            deviceSerialViewModel.getRegionFromServer();
-
+            Toast.makeText(this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -80,6 +89,16 @@ public class SplashScreenActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
+    }
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName(G.getPref(SharePrefEnum.AddressServer));
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

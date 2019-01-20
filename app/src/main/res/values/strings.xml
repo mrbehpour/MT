@@ -295,5 +295,5 @@
 
     <!--splashActvity-->
     <string name="MessageConntection">لطفا دستگاه را به اینترنت متصل کنید</string>
-
+    <string name="MessagAccessMessage">دسترسی به آدرس امکان پذیر نیست</string>
 </resources>
