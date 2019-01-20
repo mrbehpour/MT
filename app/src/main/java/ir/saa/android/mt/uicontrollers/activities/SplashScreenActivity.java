@@ -63,7 +63,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         flRect.startAnimation(myanim);
 
         MyDialog myDialog=new MyDialog(this);
-        //myDialog.addContentXml()
+        myDialog.addContentXml(R.layout.dialog_address);
+        myDialog.show();
         if(isNetworkConnected()){
             //if(isInternetAvailable()) {
                 deviceSerialViewModel.getRegionFromServer();
