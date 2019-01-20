@@ -65,11 +65,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         MyDialog myDialog=new MyDialog(this);
         //myDialog.addContentXml()
         if(isNetworkConnected()){
-            if(isInternetAvailable()) {
+            //if(isInternetAvailable()) {
                 deviceSerialViewModel.getRegionFromServer();
-            }else{
-                Toast.makeText(this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
-            }
+            //}else{
+                //Toast.makeText(this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+            //}
         }else{
             Toast.makeText(this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
         }
