@@ -1,6 +1,7 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
 
+import android.app.Activity;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -108,15 +109,22 @@ public class BazdidFragment extends Fragment
        bazdidViewModel.getClientsWithRegionIdLiveData(Integer.valueOf(G.getPref("RegionID"))).observeForever(new Observer<List<ClientWithAction>>() {
             @Override
                 public void onChanged(@Nullable List<ClientWithAction> clients) {
-
+                Activity activity = getActivity();
+                activity = getActivity();
                 clientItems.clear();
                 Integer RowId=0;
+                String UniqField="";
+                if(activity != null && isAdded()) {
+                    UniqField= (String) getResources().getText(R.string.UniqField);
+                }
+
                 for(ClientWithAction client:clients){
+
                     isBazrasi=client.isBazrasi!=0?true:false;
                     isPolomp=client.isPolomp!=0?true:false;
                     isTest=client.isTest!=0?true:false;
                     RowId+=1;
-                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address, (String) getResources().getText(R.string.UniqField),client.CustId, R.drawable.account,client.SendId
+                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,UniqField ,client.CustId, R.drawable.account,client.SendId
                             ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,client.FollowUpCode,RowId ));
                 }
 

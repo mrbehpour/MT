@@ -293,7 +293,9 @@
     <string name="ValidationLocation">در حال دریافت موقعیت مکانی</string>
     <string name="Wait_Location">لطفا منتظر بمانید </string>
 
-    <!--splashActvity-->
+    <!--ConfirmActvity-->
     <string name="MessageConntection">لطفا دستگاه را به اینترنت متصل کنید</string>
     <string name="MessagAccessMessage">دسترسی به آدرس امکان پذیر نیست</string>
+    <string name="OkButton">تایید</string>
+    <string name="TitleCaption">آدرس</string>
 </resources>

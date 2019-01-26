@@ -62,18 +62,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.splashanimation);
         flRect.startAnimation(myanim);
 
-        MyDialog myDialog=new MyDialog(this);
-        myDialog.addContentXml(R.layout.dialog_address);
-        myDialog.show();
-        if(isNetworkConnected()){
-            //if(isInternetAvailable()) {
-                deviceSerialViewModel.getRegionFromServer();
-            //}else{
-                //Toast.makeText(this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
-            //}
-        }else{
-            Toast.makeText(this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
-        }
+
     }
 
 
@@ -86,21 +75,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         SplashScreenActivity.this.finish();
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        return cm.getActiveNetworkInfo() != null;
-    }
-    public boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName(G.getPref(SharePrefEnum.AddressServer));
-            //You can replace it with your name
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
 }
 

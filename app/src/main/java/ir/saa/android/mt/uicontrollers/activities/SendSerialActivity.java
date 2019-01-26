@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -18,16 +19,19 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DeviceSerial;
 import ir.saa.android.mt.model.entities.ImiRegisterInput;
@@ -64,18 +68,59 @@ public class SendSerialActivity extends AppCompatActivity {
         return deviceUniqueIdentifier;
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }
+    public boolean isInternetAvailable() {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendserial);
+        deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
         if(G.getPref(SharePrefEnum.FontSize)!=null) {
             adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+        }
+
+        if(G.getPref(SharePrefEnum.AddressServer)==null){
+            MyDialog myDialog=new MyDialog(this);
+            myDialog.addContentXml(R.layout.dialog_address);
+            EditText edtAddress=myDialog.getDialog().findViewById(R.id.edtAddress);
+            myDialog.setTitle(getResources().getText(R.string.TitleCaption).toString());
+            myDialog.addButton(getResources().getText(R.string.OkButton).toString(), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(edtAddress.getText().toString().equals("-")){
+                       return;
+                    }
+                    G.setPref(SharePrefEnum.AddressServer,edtAddress.getText().toString());
+                    myDialog.dismiss();
+                }
+            });
+            myDialog.show();
+
+        }
+
+        if(isNetworkConnected()){
+            if(isInternetAvailable()) {
+                deviceSerialViewModel.getRegionFromServer();
+            }else{
+                Toast.makeText(this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            Toast.makeText(this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
+            return;
         }
 
         G.setPref(SharePrefEnum.DeviceId,getDeviceIMEI());
         tvSanjesh=(TextView)findViewById(R.id.tvSerial);
         tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
-        deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
+
         spinnerRegion=(Spinner)findViewById(R.id.spnOmoor);
         spinnerArray=new ArrayList<>();
         adapter=new ArrayAdapter<>(this,R.layout.al_polomp_save_spinner_item, spinnerArray);
