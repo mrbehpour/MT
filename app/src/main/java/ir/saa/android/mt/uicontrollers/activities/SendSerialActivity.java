@@ -82,11 +82,23 @@ public class SendSerialActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendserial);
+
         deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
+
         if(G.getPref(SharePrefEnum.FontSize)!=null) {
             adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
         }
 
+        DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+
+        if(deviceSerial!=null) {
+            if(deviceSerial.isActive) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                this.finish();
+                return;
+            }
+        }
         if(G.getPref(SharePrefEnum.AddressServer)==null){
             MyDialog myDialog=new MyDialog(this);
             myDialog.addContentXml(R.layout.dialog_address);
@@ -174,15 +186,7 @@ public class SendSerialActivity extends AppCompatActivity {
             }
         });
 
-        DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
-        if(deviceSerial!=null) {
-            if(deviceSerial.isActive) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                this.finish();
-            }
-        }
     }
 
     private void adapterInit() {
