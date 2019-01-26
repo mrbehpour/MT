@@ -174,10 +174,15 @@ public class SendSerialActivity extends AppCompatActivity {
             }
         });
 
+        DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
-//        Intent intent=new Intent(this,LoginActivity.class);
-//        startActivity(intent);
-//        this.finish();
+        if(deviceSerial!=null) {
+            if(deviceSerial.isActive) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                this.finish();
+            }
+        }
     }
 
     private void adapterInit() {
