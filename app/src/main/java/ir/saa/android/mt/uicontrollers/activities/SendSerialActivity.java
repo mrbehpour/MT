@@ -2,6 +2,7 @@ package ir.saa.android.mt.uicontrollers.activities;
 
 
 import android.Manifest;
+import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -100,10 +101,11 @@ public class SendSerialActivity extends AppCompatActivity {
             }
         }
         if(G.getPref(SharePrefEnum.AddressServer)==null){
-            MyDialog myDialog=new MyDialog(this);
+            MyDialog myDialog=new MyDialog(SendSerialActivity.this);
             myDialog.addContentXml(R.layout.dialog_address);
             EditText edtAddress=myDialog.getDialog().findViewById(R.id.edtAddress);
             myDialog.setTitle(getResources().getText(R.string.TitleCaption).toString());
+
             myDialog.addButton(getResources().getText(R.string.OkButton).toString(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -114,19 +116,26 @@ public class SendSerialActivity extends AppCompatActivity {
                     myDialog.dismiss();
                 }
             });
+
             myDialog.show();
 
-        }
+//            Dialog dialog=new Dialog(SendSerialActivity.this);
+//            dialog.setContentView(R.layout.dialog_address);
+//            dialog.show();
 
-        if(isNetworkConnected()){
-            if(isInternetAvailable()) {
-                deviceSerialViewModel.getRegionFromServer();
-            }else{
-                Toast.makeText(this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+
+        }
+        if(G.getPref(SharePrefEnum.AddressServer)!=null) {
+            if (isNetworkConnected()) {
+                if (isInternetAvailable()) {
+                    deviceSerialViewModel.getRegionFromServer();
+                } else {
+                    Toast.makeText(this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
+                return;
             }
-        }else{
-            Toast.makeText(this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
-            return;
         }
 
         G.setPref(SharePrefEnum.DeviceId,getDeviceIMEI());
