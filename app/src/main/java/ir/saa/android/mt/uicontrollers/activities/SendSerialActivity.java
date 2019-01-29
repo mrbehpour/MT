@@ -2,6 +2,7 @@ package ir.saa.android.mt.uicontrollers.activities;
 
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -10,12 +11,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -47,6 +52,7 @@ public class SendSerialActivity extends AppCompatActivity {
     TextView tvSanjesh;
     Button btnConfirm;
     DeviceSerialViewModel deviceSerialViewModel=null;
+    private static final int MY_PERMISSIONS_REQUEST=0;
     HashMap<Integer,Integer> spinnerMapRegion = new HashMap<Integer, Integer>();
     public  void adjustFontScale(Configuration configuration, Float fontSize) {
 
@@ -74,15 +80,20 @@ public class SendSerialActivity extends AppCompatActivity {
 
         return cm.getActiveNetworkInfo() != null;
     }
+
     public boolean isInternetAvailable() {
         final ConnectivityManager connectivityManager = ((ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE));
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendserial);
+
+        checkAndRequestPermissions();
 
         deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
 
@@ -196,6 +207,45 @@ public class SendSerialActivity extends AppCompatActivity {
         });
 
 
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private  void checkAndRequestPermissions() {
+
+
+        String [] permissions=new String[]{
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
+				android.Manifest.permission.BLUETOOTH_ADMIN,
+                Manifest.permission.INTERNET,
+				android.Manifest.permission.BLUETOOTH,
+                android.Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.WRITE_SETTINGS,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.WRITE_SECURE_SETTINGS,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+        };
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        for (String permission:permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(permission);
+            }
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            requestPermissions(listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),MY_PERMISSIONS_REQUEST);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        Log.e("Req Code", "" + requestCode);
+
+        switch (requestCode){
+            case MY_PERMISSIONS_REQUEST:
+                adapterInit();
+        }
     }
 
     private void adapterInit() {
