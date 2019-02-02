@@ -20,6 +20,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.net.InetAddress;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -29,13 +30,14 @@ public class SplashScreenActivity extends AppCompatActivity {
     Context context = SplashScreenActivity.this;
     LinearLayout flRect;
     pl.droidsonroids.gif.GifTextView ivLogo;
-    DeviceSerialViewModel deviceSerialViewModel=null;
+
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_splashscreen);
-        deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
+
+
         flRect=(LinearLayout)findViewById(R.id.flRect);
 
         // New Handler to start the Login-Activity
@@ -65,14 +67,17 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
-
+    Intent intent=null;
     private void goToNextActivity(int animationIn, int animationOut) {
-        Intent intent = new Intent(context, SendSerialActivity.class);
+        intent = new Intent(context, SettingActivity.class);
+
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
         overridePendingTransition(animationIn, animationOut);
+
         SplashScreenActivity.this.finish();
+
     }
 
 

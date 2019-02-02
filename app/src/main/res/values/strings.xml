@@ -217,6 +217,7 @@
     <string name="tedadDor">تعداد دور</string>
     <string name="sabteKhata99">ثبت خطای %99-</string>
     <string name="taeed">تأیید</string>
+    <string name="getRegion">مرحله بعد</string>
 
     <!-- fragment_test_energy -->
     <string name="plus">+</string>
@@ -298,4 +299,5 @@
     <string name="MessagAccessMessage">دسترسی به آدرس امکان پذیر نیست</string>
     <string name="OkButton">تایید</string>
     <string name="TitleCaption">آدرس</string>
+    <string name="GetRegionFromServer">در حال دریافت داده ها از سرور</string>
 </resources>

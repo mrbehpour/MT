@@ -37,6 +37,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:orientation="vertical">
+        <!-- button -->
 
         <!-- omoor text -->
         <TextView
@@ -63,6 +64,7 @@
             />
 
         <!-- button -->
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnConfirm"
             android:fontFamily="@font/byekan"
@@ -75,6 +77,7 @@
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:text="@string/taeed"/>
+
 
         <!-- spacer -->
         <LinearLayout
@@ -156,4 +159,5 @@
                 tools:ignore="Suspicious0dp" />
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

@@ -4,6 +4,7 @@ package ir.saa.android.mt.uicontrollers.activities;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -26,10 +28,12 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,10 +42,12 @@ import java.util.List;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyDialog;
+import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DeviceSerial;
 import ir.saa.android.mt.model.entities.ImiRegisterInput;
 import ir.saa.android.mt.model.entities.Region;
+import ir.saa.android.mt.uicontrollers.fragments.SettingFragment;
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
 
 public class SendSerialActivity extends AppCompatActivity {
@@ -50,7 +56,10 @@ public class SendSerialActivity extends AppCompatActivity {
     List<String> spinnerArray;
     ArrayAdapter<String> adapter;
     TextView tvSanjesh;
+    LinearLayout laySettings;
     Button btnConfirm;
+    AppCompatButton btnGetRegion;
+    ProgressDialog progressDialog;
     DeviceSerialViewModel deviceSerialViewModel=null;
     private static final int MY_PERMISSIONS_REQUEST=0;
     HashMap<Integer,Integer> spinnerMapRegion = new HashMap<Integer, Integer>();
@@ -65,6 +74,19 @@ public class SendSerialActivity extends AppCompatActivity {
 
     }
 
+    private void connectToModuleDialog(){
+
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage(getResources().getText(R.string.Wait_Location));
+        progressDialog.setTitle(getResources().getText(R.string.GetRegionFromServer));
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+
+    }
+
+    public void HideProgressDialog(){
+        if(progressDialog!=null) progressDialog.dismiss();
+    }
     public String getDeviceIMEI() {
         String deviceUniqueIdentifier = null;
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -75,31 +97,65 @@ public class SendSerialActivity extends AppCompatActivity {
         return deviceUniqueIdentifier;
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        return cm.getActiveNetworkInfo() != null;
-    }
 
-    public boolean isInternetAvailable() {
-        final ConnectivityManager connectivityManager = ((ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE));
-        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
-    }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sendserial);
+        if(G.getPref(SharePrefEnum.FontSize)!=null) {
+            adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
 
-        checkAndRequestPermissions();
+        }
 
         deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
 
-        if(G.getPref(SharePrefEnum.FontSize)!=null) {
-            adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+        checkAndRequestPermissions();
+        laySettings=(LinearLayout)findViewById(R.id.laySettings);
+
+        laySettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent=new Intent(SendSerialActivity.this,SettingActivity.class);
+               startActivity(intent);
+
+            }
+        });
+
+
+        if(G.getPref(SharePrefEnum.AddressServer)!=null) {
+            if (isNetworkConnected()) {
+                if (isInternetAvailable()) {
+                    if(Ping(G.getPref(SharePrefEnum.AddressServer).substring(7).split(":")[0])) {
+                        deviceSerialViewModel.getRegionFromServer();
+                        connectToModuleDialog();
+
+                    }
+                } else {
+                    Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
+
+
+            deviceSerialViewModel.IsCompleted.observe(this, new Observer<Boolean>() {
+                @Override
+                public void onChanged(@Nullable Boolean aBoolean) {
+                    if(aBoolean){
+                        HideProgressDialog();
+                    }else{
+                        HideProgressDialog();
+                    }
+                }
+            });
+
+
 
         DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
@@ -111,53 +167,6 @@ public class SendSerialActivity extends AppCompatActivity {
                 return;
             }
         }
-        if(G.getPref(SharePrefEnum.AddressServer)==null){
-            MyDialog myDialog=new MyDialog(SendSerialActivity.this);
-            myDialog.addContentXml(R.layout.dialog_address);
-            EditText edtAddress=myDialog.getDialog().findViewById(R.id.edtAddress);
-            myDialog.setTitle(getResources().getText(R.string.TitleCaption).toString());
-
-            myDialog.addButton(getResources().getText(R.string.OkButton).toString(), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if(edtAddress.getText().toString().equals("-")){
-                       return;
-                    }
-                    G.setPref(SharePrefEnum.AddressServer,edtAddress.getText().toString());
-                    myDialog.dismiss();
-                }
-            });
-
-            myDialog.show();
-
-//            Dialog dialog=new Dialog(SendSerialActivity.this);
-//            dialog.setContentView(R.layout.dialog_address);
-//            dialog.show();
-
-
-        }
-        if(G.getPref(SharePrefEnum.AddressServer)!=null) {
-            if (isNetworkConnected()) {
-                if (isInternetAvailable()) {
-                    deviceSerialViewModel.getRegionFromServer();
-                } else {
-                    Toast.makeText(this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
-                return;
-            }
-        }
-
-        G.setPref(SharePrefEnum.DeviceId,getDeviceIMEI());
-        tvSanjesh=(TextView)findViewById(R.id.tvSerial);
-        tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
-
-        spinnerRegion=(Spinner)findViewById(R.id.spnOmoor);
-        spinnerArray=new ArrayList<>();
-        adapter=new ArrayAdapter<>(this,R.layout.al_polomp_save_spinner_item, spinnerArray);
-        adapter.setDropDownViewResource(R.layout.al_polomp_save_spinner_dropdown);
-        spinnerRegion.setAdapter(adapter);
         adapterInit();
 
         deviceSerialViewModel.getRegion().observe(this, new Observer<List<Region>>() {
@@ -172,6 +181,18 @@ public class SendSerialActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+
+
+        G.setPref(SharePrefEnum.DeviceId,getDeviceIMEI());
+        tvSanjesh=(TextView)findViewById(R.id.tvSerial);
+        tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
+
+        spinnerRegion=(Spinner)findViewById(R.id.spnOmoor);
+        spinnerArray=new ArrayList<>();
+        adapter=new ArrayAdapter<>(this,R.layout.al_polomp_save_spinner_item, spinnerArray);
+        adapter.setDropDownViewResource(R.layout.al_polomp_save_spinner_dropdown);
+        spinnerRegion.setAdapter(adapter);
+
         deviceSerialViewModel.IsRegisterImi.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
@@ -200,15 +221,18 @@ public class SendSerialActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ImiRegisterInput  imiRegisterInput=new ImiRegisterInput();
                 imiRegisterInput.handHeldSerial=G.getPref(SharePrefEnum.DeviceId);
-                imiRegisterInput.regionId= Short.valueOf(spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition()).toString());
-                deviceSerialViewModel.registerImi(imiRegisterInput);
+                if(spinnerRegion.getSelectedItemPosition()!=-1) {
+                    imiRegisterInput.regionId = Short.valueOf(spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition()).toString());
+                    deviceSerialViewModel.registerImi(imiRegisterInput);
+                }
 
             }
         });
 
 
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
+
     private  void checkAndRequestPermissions() {
 
 
@@ -221,7 +245,7 @@ public class SendSerialActivity extends AppCompatActivity {
                 android.Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.WRITE_SETTINGS,
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.WRITE_SECURE_SETTINGS,
+                //Manifest.permission.WRITE_SECURE_SETTINGS,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
         };
 
@@ -237,7 +261,42 @@ public class SendSerialActivity extends AppCompatActivity {
             requestPermissions(listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),MY_PERMISSIONS_REQUEST);
         }
     }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        return cm.getActiveNetworkInfo() != null;
+    }
+
+    public boolean isInternetAvailable() {
+        final ConnectivityManager connectivityManager = ((ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE));
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+    private boolean Ping(String IP){
+        System.out.println("executeCommand");
+        Runtime runtime = Runtime.getRuntime();
+        try
+        {
+            Process  mIpAddrProcess = runtime.exec("/system/bin/ping -c 1 " + IP);
+            int mExitValue = mIpAddrProcess.waitFor();
+            System.out.println(" mExitValue "+mExitValue);
+            if(mExitValue==0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        catch (InterruptedException ignore)
+        {
+            ignore.printStackTrace();
+            System.out.println(" Exception:"+ignore);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            System.out.println(" Exception:"+e);
+        }
+        return false;
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
         Log.e("Req Code", "" + requestCode);
@@ -249,7 +308,7 @@ public class SendSerialActivity extends AppCompatActivity {
     }
 
     private void adapterInit() {
-        spinnerArray.clear();
+        //spinnerArray.clear();
         if (deviceSerialViewModel.getRegion().getValue() != null) {
             for (Region region : deviceSerialViewModel.getRegion().getValue()) {
                 spinnerArray.add(region.RegionName);
@@ -258,10 +317,12 @@ public class SendSerialActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
                 SendSerialActivity.this.finish();
                 System.exit(0);
     }
+
 
 }
