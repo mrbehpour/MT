@@ -21,6 +21,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.DecimalDigitsInputFilter;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
@@ -67,6 +68,7 @@ public class TestContorFragment extends Fragment
         com.github.angads25.toggle.LabeledSwitch switchTestType = rootView.findViewById(R.id.switchTestType);
         com.github.angads25.toggle.LabeledSwitch switchPhase = rootView.findViewById(R.id.switchPhase);
         com.github.angads25.toggle.LabeledSwitch switchTestNum = rootView.findViewById(R.id.switchTestNum);
+        com.github.angads25.toggle.LabeledSwitch switchPaulserType = rootView.findViewById(R.id.switchPaulserType);
 
         setDefaultValue();
 
@@ -80,7 +82,8 @@ public class TestContorFragment extends Fragment
                         Integer.parseInt(String.valueOf(edtContorConst.getText())),
                         Integer.parseInt(String.valueOf(edtSensorRatio.getText())),
 //                    Integer.parseInt(String.valueOf(edtRoundNum.getText()))
-                        1);
+                        1,
+                        switchPaulserType.isOn());
 
                 bundle = new Bundle();
                 bundle.putSerializable(BundleKeysEnum.TestContorParams, testContorParams);
@@ -135,9 +138,10 @@ public class TestContorFragment extends Fragment
     }
 
     private void connectToModuleDialog(){
+        String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
         ad = new AlertDialog.Builder(this.getContext()).create();
         ad.setCancelable(true);
-        ad.setTitle(getResources().getText(R.string.ValidationConnect));
+        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ValidationConnect),BluetoothDeviceName));
         ad.setMessage(getResources().getText(R.string.Wait_Connect));
         new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

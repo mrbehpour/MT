@@ -53,6 +53,8 @@ public class MoshtarakOperationsTabFragment extends Fragment
         Button btnTest=rootView.findViewById(R.id.btnTest);
         Button btnPolomp=rootView.findViewById(R.id.btnPolomp);
         Button btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
+        Button btnReadmeter=rootView.findViewById(R.id.btnReadmeter);
+
         btnTest.setOnClickListener(view -> {
             locationViewModel.trunOnGps(getContext());
 
@@ -65,6 +67,7 @@ public class MoshtarakOperationsTabFragment extends Fragment
             }
 
         });
+
         btnPolomp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,6 +107,15 @@ public class MoshtarakOperationsTabFragment extends Fragment
 
             }
         });
+
+        btnReadmeter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.startFragment(FragmentsEnum.ReadmeterFragment,false,null);
+                return;
+            }
+        });
+
         G.setActionbarTitleText(G.clientInfo.ClientName);
         return rootView;
     }

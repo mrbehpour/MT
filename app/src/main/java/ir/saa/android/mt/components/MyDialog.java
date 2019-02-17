@@ -29,6 +29,7 @@ public class MyDialog {
 	private ImageView _imgDialogLeftTitle;
 	private ImageView _imgDialogRightTitle;
 	private Typeface tf = Typeface.createFromAsset(G.context.getAssets(), "fonts/byekan.ttf");
+
 	public MyDialog(Context context) {
 		_context = context;
 		_dialog = new Dialog(_context, R.style.FullHeightDialogNotFloating);
@@ -126,10 +127,11 @@ public class MyDialog {
 	}
 	public MyDialog addBodyText(String text,int textSize) {
 		LinearLayout ll = new LinearLayout(_context);
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,40);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
 		ll.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
 		
 		TextView txt= new TextView(_context);
+		txt.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		txt.setText(text);
 		txt.setTextSize(textSize);
 		txt.setTypeface(tf);

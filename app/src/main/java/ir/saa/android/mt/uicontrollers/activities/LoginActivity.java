@@ -122,22 +122,29 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnLogin).setOnClickListener(v -> {
-            DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
-            if(deviceSerial.isActive==false){
-                ImiRegisterInput imiRegisterInput=new ImiRegisterInput();
-                imiRegisterInput.regionId=deviceSerial.regionId;
-                imiRegisterInput.handHeldSerial=deviceSerial.SerialId;
-                deviceSerialViewModel.confirmImi(imiRegisterInput);
+            boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
+            if (isLoginValid) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            } else
+                Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+            //DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+           // if(deviceSerial.isActive==false){
+//                ImiRegisterInput imiRegisterInput=new ImiRegisterInput();
+//                imiRegisterInput.regionId=deviceSerial.regionId;
+//                imiRegisterInput.handHeldSerial=deviceSerial.SerialId;
+//                deviceSerialViewModel.confirmImi(imiRegisterInput);
 
-            }else{
-                boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
-                if (isLoginValid) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else
-                    Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
-            }
+//            }else{
+//                boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
+//                if (isLoginValid) {
+//                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                } else
+//                    Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+//            }
 
         });
 

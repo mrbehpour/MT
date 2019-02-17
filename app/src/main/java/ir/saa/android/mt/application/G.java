@@ -35,7 +35,10 @@ import ir.saa.android.mt.uicontrollers.fragments.ModuleFragment;
 import ir.saa.android.mt.uicontrollers.fragments.MoshtarakFragment;
 import ir.saa.android.mt.uicontrollers.fragments.PolompFragment;
 import ir.saa.android.mt.uicontrollers.fragments.PolompFragmentSave;
+import ir.saa.android.mt.uicontrollers.fragments.ReadmeterFragment;
+import ir.saa.android.mt.uicontrollers.fragments.SanjeshFragment;
 import ir.saa.android.mt.uicontrollers.fragments.SettingFragment;
+import ir.saa.android.mt.uicontrollers.fragments.TempFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestContorFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestEnergyFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestFragment;
@@ -155,6 +158,15 @@ public class G extends Application {
             case FragmentsEnum.BazrasiFragment:
                 targetFragment=new BazrasiFragment();
                 setActionbarTitleText((String) context.getResources().getText(R.string.Bazrasi_G));
+                break;
+            case FragmentsEnum.SanjeshFragment:
+                targetFragment=new SanjeshFragment();
+                setActionbarTitleText((String) context.getResources().getText(R.string.Sanjesh_G));
+                break;
+            case FragmentsEnum.ReadmeterFragment:
+                targetFragment=new ReadmeterFragment();
+//                targetFragment=new TempFragment();
+                setActionbarTitleText((String) context.getResources().getText(R.string.Readmeter_G));
                 break;
         }
 
