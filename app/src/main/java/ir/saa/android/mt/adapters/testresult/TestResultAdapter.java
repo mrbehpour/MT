@@ -3,6 +3,7 @@ package ir.saa.android.mt.adapters.testresult;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.repositories.metertester.TestResult;
+import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
 
 public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.MyViewHolder> {
 
@@ -69,7 +73,10 @@ public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.My
             holder.tvV_C.setText(String.valueOf(current.CVRMS_Period1));
         }
         catch (Exception ex){
-            Toast.makeText(G.context,ex.getMessage(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(G.context,ex.getMessage(),Toast.LENGTH_SHORT).show();
+            Toast fancyToast= FancyToast.makeText(G.context, (String) ex.getMessage(),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
         }
 
     }

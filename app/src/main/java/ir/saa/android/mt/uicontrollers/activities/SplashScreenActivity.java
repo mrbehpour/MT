@@ -1,27 +1,18 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
-import android.arch.lifecycle.ViewModelProviders;
-import android.net.ConnectivityManager;
-import android.support.v4.content.ContextCompat;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.content.Intent;
 import android.content.Context;
 import ir.saa.android.mt.R;
-import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.components.MyDialog;
-import ir.saa.android.mt.enums.SharePrefEnum;
-import ir.saa.android.mt.model.entities.DeviceSerial;
-import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
+
 
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.InetAddress;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

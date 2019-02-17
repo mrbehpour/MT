@@ -35,6 +35,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
@@ -154,7 +156,10 @@ public class SettingFragment extends Fragment {
                     adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
                 }
 
-                Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
+                Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
                 if(myInt!=1) {
                     G.startFragment(G.fragmentNumStack.pop(), true, null);
                 }else{

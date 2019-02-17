@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.SwitchCompat;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -22,6 +23,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -152,8 +155,10 @@ public class SettingActivity extends AppCompatActivity {
                    retrofitMT=RetrofitMT.getInstance();
                 }
 
-                Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
+                Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
                 Intent intent=new Intent(SettingActivity.this, SendSerialActivity.class);
                 startActivity(intent);
                 SettingActivity.this.finish();

@@ -22,13 +22,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -115,8 +119,13 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         finish();
-                    } else
-                        Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+                    } else {
+                        //Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+                        Toast fancyToast = FancyToast.makeText(LoginActivity.this, (String) getResources().getText(R.string.LoginFail), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                    }
                 }
             }
         });
@@ -135,8 +144,12 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
-                } else
-                    Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+                } else {
+                    // Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+                    Toast fancyToast = FancyToast.makeText(LoginActivity.this, (String) getResources().getText(R.string.LoginFail), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
+                }
             }
 
         });
@@ -178,7 +191,11 @@ Boolean doubleBackToExitPressedOnce = false;
                 return;
             }
             this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(G.context,getResources().getText(R.string.Exit_Back), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.Exit_Back), Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.Exit_Back), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+
             new android.os.Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 1500);
         }
     }

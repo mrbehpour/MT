@@ -6,7 +6,10 @@ import android.arch.lifecycle.MutableLiveData;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -97,7 +100,10 @@ public class TestEnergyViewModel extends AndroidViewModel {
 
                 G.startFragment(FragmentsEnum.AmaliyatFragment, false, bundle);
             } else {
-                Toast.makeText(G.context, G.context.getResources().getText(R.string.Arrow_Clamp), Toast.LENGTH_SHORT).show();
+                //toast.makeText(G.context, G.context.getResources().getText(R.string.Arrow_Clamp), Toast.LENGTH_SHORT).show();
+                Toast fancyToast = FancyToast.makeText(G.context, (String) G.context.getResources().getText(R.string.Arrow_Clamp), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
             }
         }
         catch (Exception ex){

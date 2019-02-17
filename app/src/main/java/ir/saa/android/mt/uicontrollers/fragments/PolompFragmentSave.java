@@ -12,6 +12,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.CardView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -477,7 +480,10 @@ public class PolompFragmentSave extends Fragment {
                 polompDtl.PolompInfoID = polompInfoId;
                 Long polompDtlId = polompViewModel.insertPolompDtl(polompDtl);
                 if (polompDtlId != null) {
-                    Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                    Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
                 }
             } else {
                 polompDtl = new PolompDtl();
@@ -503,7 +509,11 @@ public class PolompFragmentSave extends Fragment {
                 polompDtl.PreviousPolompTypeID =chkNadradGhadim.booleanValue()==true?null: spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
                 polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
                 polompViewModel.updatePolompDtl(polompDtl);
-                Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
 
 
             }

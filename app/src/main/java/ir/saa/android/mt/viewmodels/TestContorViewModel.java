@@ -5,7 +5,10 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
@@ -43,7 +46,10 @@ public class TestContorViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
                 connectionStateMutableLiveData.postValue(false);
-                Toast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), Toast.LENGTH_SHORT).show();
+                Toast fancyToast = FancyToast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
                 Log.d("response","onConnectionError : "+errMsg);
             }
 

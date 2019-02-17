@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.daimajia.numberprogressbar.*;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
@@ -198,7 +200,10 @@ public class DaryaftActivity extends AppCompatActivity {
                 tvLabelDarhaleDaryaftTanzimat.setVisibility(View.INVISIBLE);
                 tvLabelDarhaleDaryaftUsers.setVisibility(View.INVISIBLE);
 
-                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+                Toast fancyToast= FancyToast.makeText(getApplicationContext(),s,FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
 
             }
         });
@@ -249,7 +254,10 @@ public class DaryaftActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(isDownloadBaseInfo  || isDownloadSetting || isDownloadUser){
-            Toast.makeText(DaryaftActivity.this,R.string.backMessage,Toast.LENGTH_SHORT).show();
+           // Toast.makeText(DaryaftActivity.this,R.string.backMessage,Toast.LENGTH_SHORT).show();
+            Toast fancyToast= FancyToast.makeText(DaryaftActivity.this, String.valueOf(getResources().getText(R.string.backMessage)),FancyToast.LENGTH_SHORT,FancyToast.INFO,false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             return;
         }
 

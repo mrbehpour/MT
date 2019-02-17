@@ -23,6 +23,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -32,6 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -135,10 +138,16 @@ public class SendSerialActivity extends AppCompatActivity {
 
                     }
                 } else {
-                    Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+                    Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.MessagAccessMessage), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
                 }
             } else {
-                Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
+                Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.MessageConntection), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
                 return;
             }
         }
