@@ -1,32 +1,19 @@
 package ir.saa.android.mt.viewmodels;
 
-import android.annotation.TargetApi;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.Observer;
-import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Callable;
 
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.adapters.testdisplay.TestResultItemDisplay;
-import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
@@ -49,7 +36,10 @@ public class AmaliyatViewModel extends AndroidViewModel {
     double ErrPercAvr=0;
     volatile boolean setTimer=false;
     int lastPaulseCounter=0;
+    int numErrorPulseNum =0;
+    int numErrorConnection =0;
     int myPaulseCounter=0;
+    boolean testPause = false;
     List<TestResult> testResultList;
     Timer timer;
     Handler handler=null;
@@ -62,6 +52,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     public MutableLiveData<Integer> testRoundNumMutableLiveData;
     public MutableLiveData<List<TestResult>> testResultListMutableLiveData;
     public MutableLiveData<MT.TestCommands> testStatusMutableLiveData;
+    public MutableLiveData<Boolean> cancelTestProcess;
 
     public AmaliyatViewModel(@NonNull Application application) {
         super(application);
@@ -83,11 +74,22 @@ public class AmaliyatViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
                 Log.d("response","onConnectionError : "+errMsg);
+                numErrorConnection++;
+                if(numErrorConnection>10) {
+                    testPause = true;
+                    cancelTestProcess.postValue(true);
+                }
+                //finishTest();
             }
 
             @Override
             public void onReportStatus(String statusMsg) {
                 Log.d("response","onReportStatus : "+statusMsg);
+            }
+
+            @Override
+            public void onResponseTimeout(int noResponseTime) {
+
             }
         });
         if(testInfoRepo==null){
@@ -104,6 +106,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
         testRoundNumMutableLiveData = new MutableLiveData<>();
         testResultListMutableLiveData = new MutableLiveData<>();
         testStatusMutableLiveData = new MutableLiveData<>();
+        cancelTestProcess = new MutableLiveData<>();
     }
 
     public void setTestContorParams(TestContorParams testContorParams){
@@ -152,9 +155,23 @@ public class AmaliyatViewModel extends AndroidViewModel {
     }
 
     public void readTestResultFromMeter(){
+        if(testPause) return;
         TestResult testResult=null;
+
         try {
             int paulseCounter = metertester.ReadPaulseCounter();
+            numErrorConnection=0;
+            if(paulseCounter==lastPaulseCounter){
+                numErrorPulseNum++;
+                if(numErrorPulseNum >100) {
+                    testPause=true;
+                    cancelTestProcess.postValue(true);
+                }
+                Log.d("num_duplicate_paulse", numErrorPulseNum + "");
+            }else{
+                numErrorPulseNum = 0;
+            }
+
             if(paulseCounter>=metertester.maxRoundTest) finishTest();
             testRoundNumMutableLiveData.postValue(paulseCounter);
 
@@ -164,7 +181,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
                     for (int pl_cnt = lastPaulseCounter + 1; pl_cnt <= paulseCounter; pl_cnt++) {
                         testResult = metertester.ReadTestResult(pl_cnt, testContorParams);
                         testResultList.add(testResult);
-                        Log.d("response miss round", pl_cnt + "");
+                        Log.d("response_miss_round", pl_cnt + "");
                     }
 //                    testResult = metertester.ReadTestResult(paulseCounter, testContorParams);
 //                    testResultList.add(testResult);
@@ -186,12 +203,18 @@ public class AmaliyatViewModel extends AndroidViewModel {
 
                     lastPaulseCounter=paulseCounter;
                 }
+            }else{
+                Log.d("else paulse", paulseCounter + "");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public  void changeTestPauseStatus(boolean status){
+        testPause=status;
+        numErrorPulseNum = 0;
+    }
     public void checkTestStatus(){
         boolean result=false;
         MT.TestCommands startTestStatus =  metertester.ReadTestCommand();
@@ -208,11 +231,13 @@ public class AmaliyatViewModel extends AndroidViewModel {
         metertester.SendTestCommand(MT.TestCommands.StartTest);
         lastPaulseCounter = 0;
         myPaulseCounter = 0;
+        numErrorPulseNum = 0;
+        numErrorConnection = 0;
         ErrPercAvr = 0;
         setTimer = false;
         testResultList = new ArrayList<>();
 
-        timerSetIntervalStart(250);
+        timerSetIntervalStart(250,1500);
     }
 
     public void finishTest(){
@@ -229,7 +254,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
         testResultListMutableLiveData.postValue(testResultList);
     }
 
-    private void timerSetIntervalStart(long prd) {
+    private void timerSetIntervalStart(long prd,long delay) {
         if(timer != null) {
             return;
         }
@@ -250,7 +275,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
                 });
             }
         };
-        timer.schedule(task, 0, prd);
+        timer.schedule(task, delay, prd);
     }
 
     private void timerSetIntervalStop() {

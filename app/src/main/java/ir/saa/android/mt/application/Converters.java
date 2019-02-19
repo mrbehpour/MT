@@ -51,4 +51,22 @@ public class Converters {
         return c;
     }
 
+    public static byte[] hex2ByteArray2By2(String value) {
+
+        try {
+            value = value.toUpperCase();
+
+            byte[] comBuffer = new byte[value.length() / 2];
+            for (int i = 0; i < value.length(); i = i + 2) {
+                comBuffer[i / 2] = (byte) ((Character.digit(value.charAt(i), 16) << 4) + Character.digit(value.charAt(i + 1), 16));
+            }
+            return comBuffer;
+        }
+        catch (Exception ex){
+            String a=ex.getMessage();
+            return null;
+        }
+
+    }
+
 }

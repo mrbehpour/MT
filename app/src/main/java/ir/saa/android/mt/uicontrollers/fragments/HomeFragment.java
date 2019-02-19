@@ -87,9 +87,10 @@ public class HomeFragment extends Fragment
         layGozareshat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                G.startFragment(FragmentsEnum.SanjeshFragment,false,null);
             }
         });
+
         laySettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

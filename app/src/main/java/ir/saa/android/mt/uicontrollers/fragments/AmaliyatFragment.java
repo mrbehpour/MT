@@ -8,11 +8,9 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,33 +19,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.Switch;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import java.lang.reflect.Field;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import ir.saa.android.mt.R;
-import ir.saa.android.mt.adapters.testresult.TestItem;
 import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.GPSInfo;
-import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.metertester.TestResult;
-import ir.saa.android.mt.services.GPSTracker;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorFieldName;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
@@ -60,12 +52,17 @@ public class AmaliyatFragment extends Fragment {
     TestContorParams testContorParams;
     List<TestResult> lastTestResultList;
     TestResultAdapter adapter;
+    RelativeLayout rlManualPaulser;
     TextView tvRoundNum;
     TextView tvErrPerc;
     RecyclerView recyclerView;
     private Boolean active;
+    ImageView imgNewPaulse;
+    TextView tvManualPaulseNum;
     Location location;
     boolean isLocation;
+    boolean paulserType;
+    int manualPaulseNUm=0;
 
     ProgressDialog progressDialog;
 
@@ -99,13 +96,22 @@ public class AmaliyatFragment extends Fragment {
 
         amaliyatViewModel = ViewModelProviders.of(this).get(AmaliyatViewModel.class);
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
+        rlManualPaulser = rootView.findViewById(R.id.rlManualPaulser);
         Button btnStartTest = rootView.findViewById(R.id.btnStartTest);
         Button btnFinishTest = rootView.findViewById(R.id.btnFinishTest);
         Button btnSaveResult = rootView.findViewById(R.id.btnSaveTestResult);
+        imgNewPaulse = rootView.findViewById(R.id.imgManualPaulse);
+        tvManualPaulseNum =  rootView.findViewById(R.id.txtManualPaulseNum);
         isLocation = false;
         Bundle args = getArguments();
         if (args != null) {
             testContorParams = (TestContorParams) args.getSerializable(BundleKeysEnum.TestContorParams);
+            paulserType = !testContorParams.PaulserType;
+            if(paulserType) {
+                rlManualPaulser.setVisibility(View.VISIBLE);
+            }else{
+                rlManualPaulser.setVisibility(View.GONE);
+            }
         }
 
         tvErrPerc = rootView.findViewById(R.id.tvErrPerc);
@@ -174,6 +180,20 @@ public class AmaliyatFragment extends Fragment {
                     }
                 }
         );
+
+        amaliyatViewModel.cancelTestProcess.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(aBoolean) finishTestDialog();
+            }
+        });
+
+        imgNewPaulse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvManualPaulseNum.setText(String.valueOf(manualPaulseNUm++));
+            }
+        });
 
 
         btnStartTest.setOnClickListener(new View.OnClickListener() {
@@ -304,6 +324,52 @@ public class AmaliyatFragment extends Fragment {
         }
 
 
+
+    }
+
+    private void finishTestDialog(){
+//        new AlertDialog.Builder(this.getContext())
+//                .setTitle("خطا در ارتباط")
+//                .setMessage(getResources().getText(R.string.MessageCancelTest).toString())
+//                .setIcon(android.R.drawable.ic_dialog_alert)
+//                .setPositiveButton(R.string.Ok, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int whichButton) {
+//                        amaliyatViewModel.finishTest();
+//                    }})
+//                .setNegativeButton(
+//                        getResources().getString(R.string.Retry),
+//                        new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialog,
+//                                                int whichButton) {
+//                                amaliyatViewModel.changeTestPauseStatus(false);
+//                            }
+//                        }).show();
+
+
+        MyDialog myDialog=new MyDialog(this.getContext());
+
+        myDialog.setTitle(getResources().getText(R.string.CancelTestProcessTitle).toString());
+        myDialog.addBodyText(getResources().getText(R.string.MessageCancelTest).toString(),18);
+
+        myDialog.addButton(getResources().getText(R.string.Retry).toString(), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                amaliyatViewModel.changeTestPauseStatus(false);
+                myDialog.dismiss();
+            }
+        });
+
+        myDialog.addButton(getResources().getText(R.string.Ok).toString(), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                amaliyatViewModel.finishTest();
+                myDialog.dismiss();
+            }
+        });
+
+        myDialog.show();
 
     }
 

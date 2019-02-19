@@ -7,7 +7,6 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.List;
 
