@@ -60,6 +60,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
 
             @Override
             public void onReportStatus(String statusMsg) {
+                getStatusMutableLiveData.postValue(statusMsg);
                 Log.d("response","onReportStatus : "+statusMsg);
             }
 
