@@ -1,6 +1,5 @@
 package ir.saa.android.mt.repositories.metertester;
 
-
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ public class MT {
     private final static double correctFactor=48.64864864864865;
     private final static int PowerFreq=50;
     public final static int maxRoundTest=250;
+    public final static int maxNumErrorPaulse=250;
 //    String ComStr= new String(new char[]{'/','?','!',(char)0x0D,(char)0x0A});
 //    String AckStr= new String(new char[]{(char)0x06,'0','5','0',(char)0x0D,(char)0x0A});
 
@@ -140,9 +140,9 @@ public class MT {
         try {
             String result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght);
 
-            electericalParams.add(splitElectericalParams(result.substring(0,54)));
-            electericalParams.add(splitElectericalParams(result.substring(54,108)));
-            electericalParams.add(splitElectericalParams(result.substring(108,162)));
+            electericalParams.add(splitElectericalParams(result.substring(0,108)));
+            electericalParams.add(splitElectericalParams(result.substring(108,216)));
+            electericalParams.add(splitElectericalParams(result.substring(216,324)));
 
         } catch (Exception ex) {
             imtCallback.onConnectionError(ex.getMessage());
@@ -362,9 +362,9 @@ public class MT {
             ep.AVARHR = calPower(responseStr.substring(30, 38));
             ep.AVAHR = calPower(responseStr.substring(38, 46));
             ep.ANGLE0 = calAngle(responseStr.substring(46, 50));
-            ep.AWATT = calPower(responseStr.substring(74, 82));
-            ep.AVAR = calPower(responseStr.substring(82, 90));
-            ep.AVA = calPower(responseStr.substring(90, 98));
+//            ep.AWATT = calPower(responseStr.substring(74, 82));
+//            ep.AVAR = calPower(responseStr.substring(82, 90));
+//            ep.AVA = calPower(responseStr.substring(90, 98));
         }
         return ep;
     }

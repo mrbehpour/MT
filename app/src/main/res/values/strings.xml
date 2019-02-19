@@ -49,6 +49,8 @@
     <string name="ResultTest_G">نتایج تست</string>
     <string name="Polomp_G">پلمپ</string>
     <string name="Bazrasi_G">بازرسی</string>
+    <string name="Sanjesh_G">پارامترهای الکتریکی</string>
+    <string name="Readmeter_G">خواندن کنتور</string>
 
     <!--Month-->
     <string name="Farvardin_Tarikh">فروردین</string>
@@ -96,7 +98,7 @@
     <string name="Tab_Detail">جزییات</string>
 
     <!--TestContorFragment-->
-    <string name="ValidationConnect">اتصال به دستگاه تست کنتور</string>
+    <string name="ValidationConnect">اتصال به دستگاه</string>
     <string name="Wait_Connect">لطفا منتظر بمانید تا اتصال برقرار شود...</string>
 
     <string name="ZaribContor_Message">لطفا ضریب کنتور را وارد کنید</string>
@@ -149,6 +151,10 @@
     <string name="payanNatayej">پایان و مشاهده نتایج</string>
     <string name="startTest">شروع تست</string>
 
+    <string name="meterCompany">سازنده کنتور</string>
+    <string name="meterType">مدل کنتور</string>
+    <string name="meterString">رشته کنتور</string>
+
     <!-- fragment_bazrasi -->
     <string name="zakhire">ذخیره</string>
     <string name="selectAll">انتخاب همه</string>
@@ -190,6 +196,7 @@
     <!-- fragment_moshtarak_operation -->
     <string name="bazrasi">بازرسی</string>
     <string name="polomp">پلمپ</string>
+    <string name="readmeter">خواندن کنتور</string>
 
     <!-- fragment_polomp_save -->
     <string name="polompGhadim">پلمپ قدیم</string>
@@ -211,6 +218,8 @@
     <string name="seFaz">سه فاز</string>
     <string name="testAval">تست اول</string>
     <string name="testDovom">تست دوم</string>
+    <string name="autoPaulser">پالسر دستی</string>
+    <string name="manualPaulser">پالسر اتوماتیک</string>
     <string name="zaribKontor">ضریب کنتور</string>
     <string name="sabetKontor">ثابت کنتور</string>
     <string name="nesbatSensor">نسبت سنسور</string>
@@ -295,7 +304,16 @@
 
     <!--ConfirmActvity-->
     <string name="MessageConntection">لطفا دستگاه را به اینترنت متصل کنید</string>
+    <string name="MessageCancelTest">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
     <string name="MessagAccessMessage">دسترسی به آدرس امکان پذیر نیست</string>
-    <string name="OkButton">تایید</string>
-    <string name="TitleCaption">آدرس</string>
+
+    <string name="Ok">تایید</string>
+    <string name="No">خیر</string>
+    <string name="Cancel">انصراف</string>
+    <string name="Retry">تلاش دوباره</string>
+    <string name="Reconnect">اتصال دوباره</string>
+
+    <string name="AddressTitle">آدرس</string>
+    <string name="CancelTestProcessTitle">توقف تست</string>
+
 </resources>

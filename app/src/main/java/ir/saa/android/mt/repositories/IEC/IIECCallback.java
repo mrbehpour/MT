@@ -1,6 +1,6 @@
-package ir.saa.android.mt.repositories.metertester;
+package ir.saa.android.mt.repositories.IEC;
 
-public interface IMTCallback {
+public interface IIECCallback {
     void onConnected();
     void onDisConnected();
     void onConnectionError(String errMsg);

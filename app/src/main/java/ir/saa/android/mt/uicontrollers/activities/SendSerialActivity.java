@@ -2,7 +2,6 @@ package ir.saa.android.mt.uicontrollers.activities;
 
 
 import android.Manifest;
-import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -25,7 +24,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,9 +102,9 @@ public class SendSerialActivity extends AppCompatActivity {
             MyDialog myDialog=new MyDialog(SendSerialActivity.this);
             myDialog.addContentXml(R.layout.dialog_address);
             EditText edtAddress=myDialog.getDialog().findViewById(R.id.edtAddress);
-            myDialog.setTitle(getResources().getText(R.string.TitleCaption).toString());
+            myDialog.setTitle(getResources().getText(R.string.AddressTitle).toString());
 
-            myDialog.addButton(getResources().getText(R.string.OkButton).toString(), new View.OnClickListener() {
+            myDialog.addButton(getResources().getText(R.string.Ok).toString(), new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(edtAddress.getText().toString().equals("-")){

@@ -334,6 +334,7 @@ public class ModBus {
 
         if(timer!=null){
             timer.cancel();
+            timer.purge();
             timer = null;
         }
     }

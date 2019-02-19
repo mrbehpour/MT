@@ -10,8 +10,10 @@ public class TestContorParams implements Serializable {
     public int ContorConst;
     public int SensorRatio;
     public int RoundNum;
+    public Boolean PaulserType;
 
-    public TestContorParams(Boolean Active,Boolean SinglePhase,Boolean FisrtTest,int CTCoeff,int ContorConst,int SensorRatio,int RoundNum){
+
+    public TestContorParams(Boolean Active, Boolean SinglePhase, Boolean FisrtTest, int CTCoeff, int ContorConst, int SensorRatio, int RoundNum, Boolean PaulserType){
         this.Active=Active;
         this.SinglePhase=SinglePhase;
         this.FisrtTest=FisrtTest;
@@ -19,5 +21,6 @@ public class TestContorParams implements Serializable {
         this.ContorConst=ContorConst;
         this.SensorRatio=SensorRatio;
         this.RoundNum=RoundNum;
+        this.PaulserType=PaulserType;
     }
 }
