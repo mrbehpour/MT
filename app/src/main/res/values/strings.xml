@@ -319,5 +319,21 @@
     <string name="GetRegionFromServer">در حال دریافت داده ها از سرور</string>
     <string name="Reconnect">اتصال دوباره</string>
 
+    <string name="MessageCancelTest">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
+
+
+    <string name="Ok">تایید</string>
+
+    <string name="No">خیر</string>
+
+    <string name="Cancel">انصراف</string>
+
+    <string name="Retry">تلاش دوباره</string>
+
+
+
+    <string name="AddressTitle">آدرس</string>
+
+    <string name="CancelTestProcessTitle">توقف تست</string>
 
 </resources>
