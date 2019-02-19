@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -153,7 +156,10 @@ public class BazrasiFragment extends Fragment  {
                                                 bazrasiViewModel.saveBazrasi(renarkItem,objectAnswer,location);
                                             }
                                             if(objectAnswer!=null) {
-                                                Toast.makeText(getContext(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(getContext(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                                                Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                fancyToast.show();
                                             }
                                             dialog.dismiss();
                                         }
@@ -228,6 +234,13 @@ public class BazrasiFragment extends Fragment  {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         bazrasiViewModel.getRemarks(G.clientInfo.GroupId).observe(this, remarkItems -> {
+            if(remarkItems.size()==0){
+                Toast fancyToast= FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageNoData),FancyToast.LENGTH_SHORT,FancyToast.WARNING,false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
+                return;
+
+            }
             adapter.clearDataSet();
             adapter.addAll(remarkItems);
 

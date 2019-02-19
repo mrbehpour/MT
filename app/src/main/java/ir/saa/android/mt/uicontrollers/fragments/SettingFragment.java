@@ -9,6 +9,7 @@ import java.util.List;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Configuration;
@@ -34,9 +35,12 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.uicontrollers.activities.SendSerialActivity;
 import ir.saa.android.mt.viewmodels.ModuleViewModel;
 
 import static android.content.Context.WINDOW_SERVICE;
@@ -54,7 +58,7 @@ public class SettingFragment extends Fragment {
     RadioButton rbtNormal;
     RadioButton rbtLarge;
     RadioButton rbtHuge;
-
+    int myInt;
     HashMap<String, Integer> spinnerMap = new HashMap<String, Integer>();
 
 
@@ -81,6 +85,10 @@ public class SettingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+        if(getArguments()!=null)
+        {
+             myInt = getArguments().getInt("State");
+        }
         edtServerAddress=rootView.findViewById(R.id.edtServerAddress);
         btnSave=rootView.findViewById(R.id.btnSave);
         //-Fontsize
@@ -144,10 +152,20 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 G.setPref(SharePrefEnum.AddressServer,edtServerAddress.getText().toString());
-                adjustFontScale(getResources().getConfiguration(),Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+                if(G.getPref(SharePrefEnum.FontSize)!=null) {
+                    adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
+                }
 
-                Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
-                G.startFragment(G.fragmentNumStack.pop(), true, null);
+                //Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
+                Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
+                if(myInt!=1) {
+                    G.startFragment(G.fragmentNumStack.pop(), true, null);
+                }else{
+                    Intent intent=new Intent(getActivity(), SendSerialActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         //-BlueTooth

@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputFilter;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
@@ -160,40 +163,64 @@ public class TestContorFragment extends Fragment
         boolean res=true;
 
         if(edtCTCoeff.getText().toString().equals("")){
-            Toast.makeText(G.context,getResources().getText(R.string.ZaribContor_Message),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.ZaribContor_Message),Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ZaribContor_Message), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             res=false;
         }
 
         if(edtContorConst.getText().toString().equals("")){
-            Toast.makeText(G.context,getResources().getText(R.string.SabetContor_Message),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.SabetContor_Message),Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.SabetContor_Message), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             res=false;
         }
 
         if(edtSensorRatio.getText().toString().equals("")){
-            Toast.makeText(G.context,getResources().getText(R.string.NesbatSensor_Message),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.NesbatSensor_Message),Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NesbatSensor_Message), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             res=false;
         }
         if(edtCTCoeff.getText().toString().equals("0")){
-            Toast.makeText(G.context,getResources().getText(R.string.ZaribContor_Message_Zero),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.ZaribContor_Message_Zero),Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ZaribContor_Message_Zero), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             res=false;
         }
 
         if(edtContorConst.getText().toString().equals("0")){
-            Toast.makeText(G.context,getResources().getText(R.string.SabetContor_Message_Zero),Toast.LENGTH_SHORT).show();
+           // Toast.makeText(G.context,getResources().getText(R.string.SabetContor_Message_Zero),Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.SabetContor_Message_Zero), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             res=false;
         }
 
         if(edtSensorRatio.getText().toString().equals("0")){
-            Toast.makeText(G.context,getResources().getText(R.string.NesbatSensor_Message_Zero),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.NesbatSensor_Message_Zero),Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NesbatSensor_Message_Zero), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             res=false;
         }
 
         if(edtRoundNum.getText().toString().equals("")){
-            Toast.makeText(G.context,getResources().getText(R.string.TedadDore_Message),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.TedadDore_Message),Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String)getResources().getText(R.string.TedadDore_Message), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             res=false;
         }
         if(edtRoundNum.getText().toString().equals("0")){
-            Toast.makeText(G.context,getResources().getText(R.string.TedadDore_Message_Zero),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.TedadDore_Message_Zero),Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.TedadDore_Message_Zero), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             res=false;
         }
 

@@ -10,9 +10,13 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
 import io.reactivex.Scheduler;
 import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.application.G;
@@ -31,6 +35,7 @@ public class DeviceSerialViewModel extends AndroidViewModel {
     RetrofitMT retrofitMT=null;
     public MutableLiveData<Boolean> IsRegisterImi;
     public MutableLiveData<Boolean> IsValidImi;
+    public MutableLiveData<Boolean> IsCompleted;
 
     public DeviceSerialViewModel(@NonNull Application application) {
         super(application);
@@ -51,29 +56,41 @@ public class DeviceSerialViewModel extends AndroidViewModel {
        if(IsValidImi==null){
            IsValidImi=new MutableLiveData<>();
        }
+       if(IsCompleted==null){
+           IsCompleted=new MutableLiveData<>();
+       }
 
 
     }
 
     public void getRegionFromServer(){
-        retrofitMT.getMtApi().GetRegions()
-                .subscribeOn(Schedulers.io())
-                .subscribeWith(new DisposableSingleObserver<DataClass<List<Region>>>() {
-                    @Override
-                    public void onSuccess(DataClass<List<Region>> regionDataClass) {
-                        if(regionDataClass.Success){
-                            for(int i=0;i<regionDataClass.Data.size();i++){
-                                regionRepo.insertRegion(regionDataClass.Data.get(i));
+            if(retrofitMT.getMtApi()!=null) {
+                retrofitMT.getMtApi().GetRegions()
+                        .subscribeOn(Schedulers.io())
+                        .subscribeWith(new DisposableSingleObserver<DataClass<List<Region>>>() {
+                            @Override
+                            public void onSuccess(DataClass<List<Region>> listDataClass) {
+                                if (listDataClass.Success) {
+                                    for (int i = 0; i < listDataClass.Data.size(); i++) {
+                                        regionRepo.insertRegion(listDataClass.Data.get(i));
+                                    }
+                                }
+                                IsCompleted.postValue(true);
                             }
-                        }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
+                            @Override
+                            public void onError(Throwable e) {
 
-                        String s=e.getMessage();
-                    }
-                });
+                                IsCompleted.postValue(false);
+                            }
+                        });
+            }else{
+                retrofitMT=RetrofitMT.getInstance();
+            }
+
+
+
+
     }
 
     public void registerImi(ImiRegisterInput imiRegisterInput){
