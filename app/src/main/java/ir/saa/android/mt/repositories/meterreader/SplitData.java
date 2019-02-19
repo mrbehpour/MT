@@ -13,7 +13,7 @@ public class SplitData {
             if(!obis.mainObis.isEmpty()) {
                 for (MeterUtility.DataItem dataItem : lstData) {
                     if (dataItem.mainObis.contains(obis.mainObis)) {
-                        MeterUtility.setReadDataValue(readData, obis.tariffName, dataItem.dataStr);
+                        MeterUtility.setReadDataValue(readData, obis.tariffName, dataItem.dataStr, obis.floatPoint);
                         break;
                     }
                 }

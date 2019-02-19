@@ -2,13 +2,11 @@ package ir.saa.android.mt.repositories.meterreader;
 
 import android.util.Log;
 
-import java.io.IOException;
 import java.util.List;
 
 import ir.saa.android.mt.repositories.IEC.IEC_Bussiness;
 import ir.saa.android.mt.repositories.IEC.IEC_Constants;
 import ir.saa.android.mt.repositories.IEC.IIECCallback;
-import ir.saa.android.mt.repositories.modbus.IModbusCallback;
 import ir.saa.android.mt.repositories.modbus.ITransferLayer;
 import ir.saa.android.mt.repositories.IEC.IEC;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
@@ -18,6 +16,7 @@ public class PROB {
     private static PROB prob_instance = null;
     IEC iec;
     IMTCallback probCallback;
+    boolean mustStop = false;
 
     public PROB() {
         iec = IEC.getInstance();
@@ -42,7 +41,12 @@ public class PROB {
             public void onReportStatus(String statusMsg) {
                 probCallback.onReportStatus(statusMsg);
             }
-        });
+
+            @Override
+            public void onResponseTimeout(int noResponseTime) {
+                //CheckNoResponseOperation(noResponseTime);
+                probCallback.onResponseTimeout(noResponseTime);            }
+            });
     }
 
     // static method to create instance of Singleton class
@@ -61,11 +65,12 @@ public class PROB {
         iec.setTransferLayer(tl);
     }
 
-    public String StartConnectionWithMeter() throws Exception {
+    public String StartConnectionWithMeter(MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         String result="";
         try {
-            result = iec.SendCommandToDevice(IEC_Constants.startCommStr,false,MeterUtility.connectionStatus.getMeterString);
+            mustStop = false;
+            result = iec.SendCommandToDevice(IEC_Constants.startCommStr,false, connectionStatus);
             //if(result.isEmpty()) probCallback.onConnectionError("Empty Meter String");
         } catch (Exception ex) {
             probCallback.onConnectionError(ex.getMessage());
@@ -75,13 +80,13 @@ public class PROB {
         return result;
     }
 
-    public String ReadOutMeter(MeterUtility.MeterInfo meterInfo) throws Exception {
+    public String ReadOutMeter(MeterUtility.MeterInfo meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         String result="";
         try {
             char newBaudRate = IEC_Bussiness.getNewBaudRateFromMeterString(meterInfo.MeterString);
             Thread.sleep(100);
-            result = iec.SendCommandToDevice(IEC_Bussiness.makeAcknowledgementString('0',newBaudRate,MeterUtility.readingMode.readout),false,MeterUtility.connectionStatus.getReadoutString);
+            result = iec.SendCommandToDevice(IEC_Bussiness.makeAcknowledgementString('0',newBaudRate,MeterUtility.readingMode.readout),false, connectionStatus);
         } catch (Exception ex) {
             probCallback.onConnectionError(ex.getMessage());
             throw new Exception(ex);
@@ -90,13 +95,13 @@ public class PROB {
         return result;
     }
 
-    public String GetP0FromMeter(MeterUtility.MeterInfo meterInfo) throws Exception {
+    public String GetP0FromMeter(MeterUtility.MeterInfo meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         String result="";
         try {
             char newBaudRate = IEC_Bussiness.getNewBaudRateFromMeterString(meterInfo.MeterString);
             Thread.sleep(100);
-            result = iec.SendCommandToDevice(IEC_Bussiness.makeAcknowledgementString('0',newBaudRate,MeterUtility.readingMode.programming),false,MeterUtility.connectionStatus.getP0String);
+            result = iec.SendCommandToDevice(IEC_Bussiness.makeAcknowledgementString('0',newBaudRate,MeterUtility.readingMode.programming),false, connectionStatus);
         } catch (Exception ex) {
             probCallback.onConnectionError(ex.getMessage());
             throw new Exception(ex);
@@ -105,10 +110,11 @@ public class PROB {
         return result;
     }
 
-    public String SendPasswordToMeter(MeterUtility.MeterInfo meterInfo) throws Exception {
+    public String SendPasswordToMeter(MeterUtility.MeterInfo meterInfo , String PassworString, String P0String ,MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         String result="";
         try {
+            result = iec.SendCommandToDevice(MeterPassword.GetPasswordStr(meterInfo, PassworString, P0String) ,false, connectionStatus);
         } catch (Exception ex) {
             probCallback.onConnectionError(ex.getMessage());
             throw new Exception(ex);
@@ -117,7 +123,7 @@ public class PROB {
         return result;
     }
 
-    public MeterUtility.ReadData ProgrammingReadMeter(MeterUtility.MeterInfo meterInfo) throws Exception {
+    public MeterUtility.ReadData ProgrammingReadMeter(MeterUtility.MeterInfo meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         List<MeterUtility.ObisItem> lstObis = MeterUtility.getListObis(meterInfo.MaterSummaryName);
         MeterUtility.ReadData readData = new MeterUtility.ReadData();
@@ -126,9 +132,10 @@ public class PROB {
         try {
             for (MeterUtility.ObisItem obis: lstObis) {
                 if(!obis.mainObis.isEmpty()) {
+                    if(mustStop) break;
                     String ReadObisStr = MeterUtility.CreateReadObisStr(obis , meterInfo);
-                    result = iec.SendCommandToDevice(ReadObisStr,false,MeterUtility.connectionStatus.getObisString);
-                    MeterUtility.setReadDataValue(readData,obis.tariffName,SplitData.splitDataInOpenPrntsStar(result));
+                    result = iec.SendCommandToDevice(ReadObisStr,false, connectionStatus);
+                    MeterUtility.setReadDataValue(readData,obis.tariffName,SplitData.splitDataInOpenPrntsStar(result),obis.floatPoint);
                 }
             }
         } catch (Exception ex) {
@@ -139,11 +146,11 @@ public class PROB {
         return readData;
     }
 
-    public String DisconnectWithMeter() throws Exception {
+    public String DisconnectWithMeter(MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         String result="";
         try {
-            result = iec.SendCommandToDevice(IEC_Constants.ABORT_CONNECTION,false,MeterUtility.connectionStatus.getObisString);
+            result = iec.SendCommandToDevice(IEC_Constants.ABORT_CONNECTION,false, connectionStatus);
         } catch (Exception ex) {
             probCallback.onConnectionError(ex.getMessage());
             throw new Exception(ex);
@@ -151,6 +158,12 @@ public class PROB {
         //TODO-parsing
         return result;
     }
+
+    public void StopOperation(){
+        mustStop = true;
+        iec.stopOperation();
+    }
+
 
 //    private void SendPasswordToMeter() throws IOException, InterruptedException {
 //        String SendPassStr="";

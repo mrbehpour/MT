@@ -1,6 +1,5 @@
 package ir.saa.android.mt.repositories.IEC;
 
-import android.os.Handler;
 import android.util.Log;
 import java.io.UnsupportedEncodingException;
 import java.util.Timer;
@@ -24,7 +23,9 @@ public class IEC {
         }
     }
 
-    private IEC(){ }
+    private IEC(){
+        timerStart(3000);
+    }
 
     ITransferLayer transferLayer;
     String totalReciveData="";
@@ -32,7 +33,7 @@ public class IEC {
 
     Boolean isIECRunningKey = true;
     Boolean waitForResponse = false;
-    Boolean noResponse = false;
+    int noResponseNum = 0;
 
     IIECCallback IECCallback;
 
@@ -44,10 +45,9 @@ public class IEC {
         @Override
         public void run() {
             if(isIECRunningKey){//
-                if(waitForResponse && noResponse){
-                    isIECRunningKey=false;
-                    IECCallback.onConnectionError("Response Time Out!");
-                    Log.d("response","IEC Time Out.");
+                if(waitForResponse){
+                    noResponseNum++;
+                    IECCallback.onResponseTimeout(noResponseNum);
                 }
             }
         }
@@ -59,11 +59,12 @@ public class IEC {
         }
         timer = new Timer();
         timer.scheduleAtFixedRate(timerTask, prd, prd);
+
     }
 
     private void timerStop() {
-
         if(timer!=null){
+            timerTask.cancel();
             timer.cancel();
             timer.purge();
             timer = null;
@@ -98,7 +99,7 @@ public class IEC {
             @Override
             public void onRecieveData(byte[] responseArray) {
                 try {
-                    noResponse = false;
+                    noResponseNum = 0;
                     tempReciveData = new String(responseArray, "US-ASCII");
                     totalReciveData += tempReciveData;
                 } catch (UnsupportedEncodingException e) {
@@ -124,13 +125,16 @@ public class IEC {
                 dataArray = writeData.getBytes();
             }
             Log.d("write IEC",meterLog(writeData));
+            noResponseNum = 0;
             transferLayer.writeByteArrayToDevice(dataArray);
 
-            noResponse =true;
             waitForResponse=true;
             isIECRunningKey=true;
 
-            timerStart(5000);
+            if(writeData.equals(IEC_Constants.ABORT_CONNECTION)) {
+                waitForResponse=false;
+                isIECRunningKey=false;
+            }
 
             while (isIECRunningKey) {
                 if (checkResponseStr(totalReciveData,cnnStatus)) {
@@ -145,6 +149,12 @@ public class IEC {
             throw new Exception("Transfer Layer is Disconnected");
         }
         return  result;
+    }
+
+    public void stopOperation(){
+        isIECRunningKey=false;
+        waitForResponse=false;
+        noResponseNum=0;
     }
 
     private boolean checkResponseStr(String responseStr, MeterUtility.connectionStatus cnnStatus){
@@ -169,6 +179,12 @@ public class IEC {
                 }
                 break;
 
+            case getPassResult:
+                if (responseStr.contains(String.valueOf(ASCII.ACK))) {
+                    res=true;
+                }
+                break;
+
             case getObisString:
                 if (responseStr.contains(String.valueOf(ASCII.STX)) && (responseStr.contains(String.valueOf(ASCII.ETX)) || responseStr.contains(String.valueOf(ASCII.EOT))) && responseStr.contains("(") && responseStr.contains(")")) {
                     responseStr = responseStr.substring(1,responseStr.length()-2);
@@ -178,7 +194,7 @@ public class IEC {
         }
 
         waitForResponse = !res;
-        //if(res) timerStop();
+        if(res) isIECRunningKey=false;
         return  res;
     }
 

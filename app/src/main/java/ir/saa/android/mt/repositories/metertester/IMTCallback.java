@@ -5,4 +5,5 @@ public interface IMTCallback {
     void onDisConnected();
     void onConnectionError(String errMsg);
     void onReportStatus(String statusMsg);
+    void onResponseTimeout(int noResponseTime);
 }

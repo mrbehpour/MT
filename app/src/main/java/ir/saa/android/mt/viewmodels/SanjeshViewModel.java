@@ -64,6 +64,11 @@ public class SanjeshViewModel extends AndroidViewModel {
             public void onReportStatus(String statusMsg) {
                 Log.d("response","onReportStatus : "+statusMsg);
             }
+
+            @Override
+            public void onResponseTimeout(int noResponseTime) {
+
+            }
         });
 
         sanjeshResultMutableLiveData = new MutableLiveData<>();

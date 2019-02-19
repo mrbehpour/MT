@@ -4,7 +4,6 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -27,12 +26,8 @@ import ir.saa.android.mt.repositories.metertester.IMTCallback;
 public class ReadmeterViewModel extends AndroidViewModel {
     Bluetooth bluetooth;
     PROB meterreader;
-    Timer timerConnectMeter;
-    Timer timer;
-    Handler handler=null;
-
-    int numTryConnectToMeter =0;
-    int numErrorConnection =0;
+    MeterUtility.connectionStatus lastCnnStatus;
+    boolean connectToMeter =false;
 
     public MutableLiveData<String> getStatusMutableLiveData;
     public MutableLiveData<MeterUtility.MeterInfo> readMeterMutableLiveData;
@@ -60,15 +55,18 @@ public class ReadmeterViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
                 Log.d("response","onConnectionError : "+errMsg);
-                numErrorConnection++;
-                if(numErrorConnection>3) {
-
-                }
+                //DisconnectWithMeter();
             }
 
             @Override
             public void onReportStatus(String statusMsg) {
                 Log.d("response","onReportStatus : "+statusMsg);
+            }
+
+            @Override
+            public void onResponseTimeout(int noResponseTime) {
+                Log.d("response","onNoResponse " + noResponseTime);
+                CheckNoResponseOperation(noResponseTime);
             }
         });
 
@@ -77,53 +75,20 @@ public class ReadmeterViewModel extends AndroidViewModel {
         readMeterResultMutableLiveData = new MutableLiveData<>();
         connectionStateMutableLiveData = new MutableLiveData<>();
         recieveDataMutableLiveData = new MutableLiveData<>();
+
+
     }
-
-
-    private void timerConnectMeterStop() {
-        if(timerConnectMeter !=null){
-            timerConnectMeter.cancel();
-            timerConnectMeter.purge();
-            timerConnectMeter =null;
-        }
-    }
-    private void timerConnectMeterStart(long prd, long delay) {
-        if(timerConnectMeter != null) {
-            return;
-        }
-
-        if(handler==null)
-            handler = new Handler();
-        else
-            handler.removeCallbacksAndMessages(null);
-
-        timerConnectMeter = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        StartConnectionWithMeter();
-                        numTryConnectToMeter++;
-                        Log.d("response","timer : " + numTryConnectToMeter);
-                    }
-                });
-            }
-        };
-        timerConnectMeter.schedule(task, delay, prd);
-    }
-
 
     public void StartConnectionWithMeter() {
+        if (connectToMeter) return;
         try {
             final String[] meterString = {null};
             Completable.fromAction(new Action() {
                 @Override
                 public void run() throws Exception {
-
                     try {
-                        meterString[0] = meterreader.StartConnectionWithMeter();
-                        //getStatusMutableLiveData.postValue(String.format("Try To Connect Num %s",numTryConnectToMeter));
+                        lastCnnStatus = MeterUtility.connectionStatus.getMeterString;
+                        meterString[0] = meterreader.StartConnectionWithMeter(lastCnnStatus);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -140,18 +105,20 @@ public class ReadmeterViewModel extends AndroidViewModel {
                         @Override
                         public void onComplete() {
                             //timerConnectMeterStop();
-                            MeterUtility.MeterInfo meterInfo = MeterUtility.getMeterInfo(meterString[0]);
-                            readMeterMutableLiveData.postValue(meterInfo);
-                            if(meterInfo.ReadMode == MeterUtility.readingMode.readout.name()) {
-                                ReadOutMeter(meterInfo);
-                            }else{
-                                GetP0FromMeter(meterInfo);
+                            if(meterString[0]!=null && !meterString[0].isEmpty() ) {
+                                connectToMeter =true;
+                                MeterUtility.MeterInfo meterInfo = MeterUtility.getMeterInfo(meterString[0]);
+                                readMeterMutableLiveData.postValue(meterInfo);
+                                if (meterInfo.ReadMode == MeterUtility.readingMode.readout.name()) {
+                                    ReadOutMeter(meterInfo);
+                                } else {
+                                    GetP0FromMeter(meterInfo);
+                                }
                             }
                         }
 
                         @Override
                         public void onError(Throwable e) {
-
                         }
                     });
 
@@ -168,7 +135,8 @@ public class ReadmeterViewModel extends AndroidViewModel {
             Completable.fromAction(new Action() {
                 @Override
                 public void run() throws Exception {
-                     readoutString[0] = meterreader.ReadOutMeter(meterInfo);
+                    lastCnnStatus = MeterUtility.connectionStatus.getReadoutString;
+                    readoutString[0] = meterreader.ReadOutMeter(meterInfo, lastCnnStatus);
                 }
             }).subscribeOn(Schedulers.io())
                     .subscribeWith(new CompletableObserver() {
@@ -180,7 +148,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
                         @Override
                         public void onComplete() {
 
-                            MeterUtility.ReadData readData = SplitData.splitReadData(readoutString[0],meterInfo);
+                            MeterUtility.ReadData readData = SplitData.splitReadData(MeterUtility.RemoveReadoutChars(readoutString[0]),meterInfo);
                             readMeterResultMutableLiveData.postValue(readData);
                             try {
                                 Thread.sleep(200);
@@ -208,7 +176,8 @@ public class ReadmeterViewModel extends AndroidViewModel {
             Completable.fromAction(new Action() {
                 @Override
                 public void run() throws Exception {
-                    p0String[0] = meterreader.GetP0FromMeter(meterInfo);
+                    lastCnnStatus = MeterUtility.connectionStatus.getP0String;
+                    p0String[0] = meterreader.GetP0FromMeter(meterInfo, lastCnnStatus);
                 }
             }).subscribeOn(Schedulers.io())
                     .subscribeWith(new CompletableObserver() {
@@ -220,7 +189,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
                         @Override
                         public void onComplete() {
 
-                            SendPasswordMeter(meterInfo,p0String[0]);
+                            SendPasswordMeter(meterInfo,SplitData.splitDataInPrnts(p0String[0]));
 
                             try {
                                 Thread.sleep(200);
@@ -249,7 +218,9 @@ public class ReadmeterViewModel extends AndroidViewModel {
                 @Override
                 public void run() throws Exception {
                     if(meterInfo.NeedPassForRead) {
-                        sendPassResultStr[0] = meterreader.SendPasswordToMeter(meterInfo);
+                        lastCnnStatus = MeterUtility.connectionStatus.getPassResult;
+                        String PassworString="KERM";
+                        sendPassResultStr[0] = meterreader.SendPasswordToMeter(meterInfo, PassworString, P0String, lastCnnStatus);
                     }else{
                         ProgrammingReadMeter(meterInfo);
                     }
@@ -272,6 +243,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
                             }
                             if(sendPassResult) {
                                 //TODO start read meter
+                                ProgrammingReadMeter(meterInfo);
                             }else{
                                 //TODO try new pass
                             }
@@ -296,7 +268,8 @@ public class ReadmeterViewModel extends AndroidViewModel {
             Completable.fromAction(new Action() {
                 @Override
                 public void run() throws Exception {
-                    readData[0] = meterreader.ProgrammingReadMeter(meterInfo);
+                    lastCnnStatus = MeterUtility.connectionStatus.getObisString;
+                    readData[0] = meterreader.ProgrammingReadMeter(meterInfo, lastCnnStatus);
                 }
             }).subscribeOn(Schedulers.io())
                     .subscribeWith(new CompletableObserver() {
@@ -325,43 +298,37 @@ public class ReadmeterViewModel extends AndroidViewModel {
 
     private void DisconnectWithMeter(){
         try {
-            meterreader.DisconnectWithMeter();
-            //readMeterMutableLiveData.postValue("disconnecting...");
+            lastCnnStatus = MeterUtility.connectionStatus.disConnecting;
+            meterreader.DisconnectWithMeter(lastCnnStatus);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    private void timerSetIntervalStart(long prd) {
-        if(timer != null) {
-            return;
-        }
-
-        if(handler==null)
-            handler = new Handler();
-        else
-            handler.removeCallbacksAndMessages(null);
-
-        timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    public void run() {
-                        //readTestResultFromMeter();
+    private  void CheckNoResponseOperation(int noResponseTime){
+        switch (lastCnnStatus) {
+            case getMeterString:
+                if (noResponseTime > 3) {
+                    try {
+                        meterreader.StopOperation();
+                        StartConnectionWithMeter();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                });
-            }
-        };
-        timer.schedule(task, 0, prd);
-    }
+                }
+                break;
 
-    private void timerSetIntervalStop() {
-        if(timer!=null){
-            timer.cancel();
-            timer.purge();
-            timer=null;
+            case getReadoutString:
+            case getObisString:
+                if (noResponseTime > 3) {
+                    try {
+                        meterreader.StopOperation();
+                        DisconnectWithMeter();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
         }
     }
 
@@ -373,11 +340,11 @@ public class ReadmeterViewModel extends AndroidViewModel {
         bluetooth.init(BluetoothDeviceName);
     }
 
+
+
     @Override
     protected void onCleared() {
         super.onCleared();
-        timerSetIntervalStop();
-        if(handler!=null) handler.removeCallbacksAndMessages(null);
     }
 
 }

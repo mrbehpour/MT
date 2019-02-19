@@ -135,12 +135,6 @@ public class ReadmeterFragment extends Fragment {
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             public void run() {
-//                handler.postDelayed(new Runnable(){
-//                    public void run() {
-//                        Log.d("meter_response",readResult);
-//                        txtRead.append(readResult);
-//                    }
-//                },1000);
 
                 handler.post(new Runnable(){
                     public void run() {
