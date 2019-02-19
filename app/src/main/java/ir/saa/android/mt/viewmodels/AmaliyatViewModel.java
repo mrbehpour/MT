@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 
@@ -282,49 +283,15 @@ public class AmaliyatViewModel extends AndroidViewModel {
     }
     public LiveData<List<TestResultItemDisplay>> getTestAllInfoWithClientIDLiveData(Long ClientId,Integer sendId){
         TestResultItemDisplay testResultItemDisplay=null;
-        int RoundNum= 0;
-        double ErrPerc=0;
-        double PF_A=0;
-        double PF_B=0;
-        double PF_C=0;
-        String MeterEnergy_Period1_A="";
-        String MeterEnergy_Period1_B="";
-        String MeterEnergy_Period1_C="";
-        String Time_Period1="";
-        String AIRMS_Period1="";
-        String BIRMS_Period1="";
-        String CIRMS_Period1="";
-        String NIRMS_Period1="";
-        String AVRMS_Period1="";
-        String BVRMS_Period1="";
-        String CVRMS_Period1="";
-        String ANGLE0_Period1="";
-        String ANGLE1_Period1="";
-        String ANGLE2_Period1="";
-        String Period_Period1_A="";
-        String Period_Period1_B="";
-        String Period_Period1_C="";
-        double Pow_A=0;
-        double Pow_B=0;
-        double Pow_C=0;
-        Boolean Active=true;
-        Boolean SinglePhase=true;
-        Boolean FisrtTest=true;
-        int CTCoeff=0;
-        int ContorConst=0;
-        int SensorRatio=0;
-        int RoundNumForTest=0;
-        double Q_A=0;
-        double Q_B=0;
-        double Q_C=0;
-        double S_A=0;
-        double S_B=0;
-        double S_C=0;
+
         TestContorFieldName testContorFieldName=new TestContorFieldName();
         MutableLiveData<List<TestResultItemDisplay>> listMutableLiveData=new MutableLiveData<>();
         List<TestResultItemDisplay> listMutableLiveDataTemp=new ArrayList<>();
         List<TestInfo> testInfos=testInfoRepo.getTestInfoWithClientId(ClientId,sendId);
+        String DateTimeTest="";
         for (TestInfo testInfo:testInfos) {
+            DateTimeTest= String.valueOf(testInfo.TestDate)+String.valueOf(testInfo.TestTime);
+
             List<TestDtl> testDtls=testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID);
             testResultItemDisplay = new TestResultItemDisplay();
             for (TestDtl testDtl:testDtls) {
@@ -409,7 +376,10 @@ public class AmaliyatViewModel extends AndroidViewModel {
                         testResultItemDisplay.CVRMS_Period1 = testDtl.TestValue;
                         break;
                     case "Period_Period1_A":
-                        testResultItemDisplay.Period_Period1_A = testDtl.TestValue;;
+                        testResultItemDisplay.Period_Period1_A = testDtl.TestValue;
+                        break;
+                    case "Time_Period1":
+                        testResultItemDisplay.Time_Period1=testDtl.TestValue;
                         break;
                 }
             }
@@ -420,6 +390,8 @@ public class AmaliyatViewModel extends AndroidViewModel {
             testResultItemDisplay.Active = testInfo.TestTypeID == 1 ? true : false;
             testResultItemDisplay.SinglePhase = testInfo.ContorTypeID == 1 ? true : false;
             testResultItemDisplay.FisrtTest = testInfo.TestCount == 1 ? true : false;
+            testResultItemDisplay.DateTime=String.format("%s/%s/%s %s:%s",DateTimeTest.substring(0,4),DateTimeTest.substring(4,6)
+                    ,DateTimeTest.substring(6,8),DateTimeTest.substring(8,10),DateTimeTest.substring(10,12)) ;
 
 
             listMutableLiveDataTemp.add(testResultItemDisplay);

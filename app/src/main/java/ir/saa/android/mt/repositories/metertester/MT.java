@@ -408,6 +408,11 @@ public class MT {
         testResult.S_A=Double.valueOf(testResult.AVRMS_Period1)*Double.valueOf(testResult.AIRMS_Period1);
         testResult.S_B=Double.valueOf(testResult.BVRMS_Period1)*Double.valueOf(testResult.BIRMS_Period1);
         testResult.S_C=Double.valueOf(testResult.CVRMS_Period1)*Double.valueOf(testResult.CIRMS_Period1);
+        double Time_Period=0;
+        for (TestResult result:testResults) {
+            Time_Period+=Double.valueOf(result.Time_Period1);
+        }
+        testResult.Time_Period1=String.format("%.2f",(Time_Period/10));
 
         return testResult;
     }

@@ -39,6 +39,7 @@ public class TestResultItemDisplay {
     public double S_A;
     public double S_B;
     public double S_C;
+    public String DateTime;
 
 
 

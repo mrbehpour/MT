@@ -75,12 +75,12 @@ public class SettingActivity extends AppCompatActivity {
         DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
         if(deviceSerial!=null) {
-            if(deviceSerial.isActive) {
+
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 this.finish();
                 return;
-            }
+
         }
 
 

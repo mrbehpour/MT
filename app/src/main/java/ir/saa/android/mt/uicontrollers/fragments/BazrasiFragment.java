@@ -234,6 +234,13 @@ public class BazrasiFragment extends Fragment  {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         bazrasiViewModel.getRemarks(G.clientInfo.GroupId).observe(this, remarkItems -> {
+            if(remarkItems.size()==0){
+                Toast fancyToast= FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageNoData),FancyToast.LENGTH_SHORT,FancyToast.WARNING,false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
+                return;
+
+            }
             adapter.clearDataSet();
             adapter.addAll(remarkItems);
 

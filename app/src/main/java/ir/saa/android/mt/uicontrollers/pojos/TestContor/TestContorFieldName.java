@@ -39,6 +39,7 @@ public class TestContorFieldName {
             hashMapCode.put("S_A",16);
             hashMapCode.put("S_B",17);
             hashMapCode.put("S_C",18);
+            hashMapCode.put("Time_Period1",32);
             return hashMapCode.get(fieldName);
         }
 
@@ -69,6 +70,7 @@ public class TestContorFieldName {
             hashMapName.put(16,"S_A");
             hashMapName.put(17,"S_B");
             hashMapName.put(18,"S_C");
+            hashMapName.put(32,"Time_Period1");
             return hashMapName.get(testId);
         }
 
