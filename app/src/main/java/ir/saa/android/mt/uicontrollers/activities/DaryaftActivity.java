@@ -2,6 +2,7 @@ package ir.saa.android.mt.uicontrollers.activities;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,7 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -19,12 +22,15 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.daimajia.numberprogressbar.*;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.DeviceSerial;
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
+
 
 public class DaryaftActivity extends AppCompatActivity {
 
@@ -43,6 +49,8 @@ public class DaryaftActivity extends AppCompatActivity {
     Boolean isDownloadBaseInfo;
     Boolean isDownloadUser;
     Boolean isDownloadSetting;
+    AppCompatButton btnNextLevel;
+
     //Boolean isDownloadClient;
     private DrawerLayout mDrawerLayout;
 
@@ -66,9 +74,12 @@ public class DaryaftActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baseinfo);
+
         if(G.getPref(SharePrefEnum.FontSize)!=null) {
             adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
         }
+
+
         android.support.v7.widget.Toolbar toolbar=(android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Your toolbar is now an action bar and you can use it like you always do, for example:
@@ -189,7 +200,10 @@ public class DaryaftActivity extends AppCompatActivity {
                 tvLabelDarhaleDaryaftTanzimat.setVisibility(View.INVISIBLE);
                 tvLabelDarhaleDaryaftUsers.setVisibility(View.INVISIBLE);
 
-                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+                Toast fancyToast= FancyToast.makeText(getApplicationContext(),s,FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
 
             }
         });
@@ -205,6 +219,7 @@ public class DaryaftActivity extends AppCompatActivity {
                 }
             }
         });
+
 
 //        llMoshtarkin.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -239,7 +254,10 @@ public class DaryaftActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if(isDownloadBaseInfo  || isDownloadSetting || isDownloadUser){
-            Toast.makeText(DaryaftActivity.this,R.string.backMessage,Toast.LENGTH_SHORT).show();
+           // Toast.makeText(DaryaftActivity.this,R.string.backMessage,Toast.LENGTH_SHORT).show();
+            Toast fancyToast= FancyToast.makeText(DaryaftActivity.this, String.valueOf(getResources().getText(R.string.backMessage)),FancyToast.LENGTH_SHORT,FancyToast.INFO,false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             return;
         }
 

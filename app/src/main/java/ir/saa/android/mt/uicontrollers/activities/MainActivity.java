@@ -15,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.TextViewFont;
@@ -146,7 +148,10 @@ public class MainActivity extends AppCompatActivity{
                 return;
             }
             this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(G.context,getResources().getText(R.string.Exit_Back), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(G.context,getResources().getText(R.string.Exit_Back), Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.Exit_Back), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
             new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 1500);
         }
     }

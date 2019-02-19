@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -137,7 +139,9 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 List<Bazdid> bazdids=baseInfoViewModel.getBazdidIsSend(false);
                 if(bazdids.size()!=0){
-                    Toast.makeText(DaryaftMoshtarakinActivity.this,getResources().getText(R.string.Message_CheckSend),Toast.LENGTH_SHORT).show();
+                    Toast fancyToast= FancyToast.makeText(DaryaftMoshtarakinActivity.this, (String) getResources().getText(R.string.Message_CheckSend),FancyToast.LENGTH_SHORT,FancyToast.INFO,false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
                     return;
                 }
                 if (isDownloadClient == false) {
@@ -162,7 +166,9 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
                 tvLabelDarhaleDaryaftMoshtarakin.setVisibility(View.INVISIBLE);
                 isDownloadClient=false;
 
-                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+                Toast fancyToast= FancyToast.makeText(getApplicationContext(), s,FancyToast.LENGTH_SHORT,FancyToast.INFO,false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
 
             }
         });

@@ -8,7 +8,7 @@ import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;

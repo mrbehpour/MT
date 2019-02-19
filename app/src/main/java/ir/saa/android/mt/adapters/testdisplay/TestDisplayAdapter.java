@@ -68,7 +68,9 @@ public class TestDisplayAdapter extends RecyclerView.Adapter<TestDisplayAdapter.
         holder.tvRowPF_R.setText(String.valueOf(current.PF_A));
         holder.tvRowPF_S.setText(String.valueOf(current.PF_B));
         holder.tvRowPF_T.setText(String.valueOf(current.PF_C));
-
+        holder.tvTimePeriod.setText(current.Time_Period1 +" " + G.context.getResources().getText(R.string.VahedTest));
+        holder.tvRoundNum.setText(String.valueOf(current.RoundNum));
+        holder.tvDateTime.setText(current.DateTime);
 
 
 
@@ -114,6 +116,9 @@ public class TestDisplayAdapter extends RecyclerView.Adapter<TestDisplayAdapter.
         TextView tvRowPF_R;
         TextView tvRowPF_S;
         TextView tvRowPF_T;
+        TextView tvRoundNum;
+        TextView tvTimePeriod;
+        TextView tvDateTime;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -139,7 +144,9 @@ public class TestDisplayAdapter extends RecyclerView.Adapter<TestDisplayAdapter.
             tvRowPF_R=itemView.findViewById(R.id.tvRowPF_R);
             tvRowPF_S=itemView.findViewById(R.id.tvRowPF_S);
             tvRowPF_T=itemView.findViewById(R.id.tvRowPF_T);
-
+            tvRoundNum=itemView.findViewById(R.id.tvRoundNum);
+            tvTimePeriod=itemView.findViewById(R.id.tvTimePeriod);
+            tvDateTime=itemView.findViewById(R.id.tvDateTime);
         }
     }
 }

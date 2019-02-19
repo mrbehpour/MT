@@ -7,9 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +73,13 @@ public class PolompFragment extends Fragment {
         polompViewModel.getPolompList(clientId).observe(this, new Observer<List<PolompItem>>() {
             @Override
             public void onChanged(@Nullable List<PolompItem> polompItems) {
+                if(polompItems.size()==0){
+                    Toast fancyToast= FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageNoDataPolomp),FancyToast.LENGTH_SHORT,FancyToast.WARNING,false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
+                    return;
+
+                }
                 polompAdapter.clearDataSet();
                 polompAdapter.addAll(polompItems);
                 polompAdapter.notifyDataSetChanged();

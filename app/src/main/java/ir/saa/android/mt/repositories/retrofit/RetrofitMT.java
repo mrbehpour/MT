@@ -18,7 +18,7 @@ public class RetrofitMT {
     private static RetrofitMT instance = null;
     private Retrofit retrofit;
     private MTApi mtApi;
-    private String ServerAddress;
+    private static String ServerAddress;
     private RetrofitMT() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(120, TimeUnit.SECONDS)
@@ -43,6 +43,11 @@ public class RetrofitMT {
     public static RetrofitMT getInstance() {
         if (instance == null) {
             instance = new RetrofitMT();
+        }else {
+            if(G.getPref(SharePrefEnum.AddressServer)!=null){
+                ServerAddress = G.getPref(SharePrefEnum.AddressServer) + "/services/AndroidServices.svc/json/";
+                instance = new RetrofitMT();
+            }
         }
         return instance;
     }

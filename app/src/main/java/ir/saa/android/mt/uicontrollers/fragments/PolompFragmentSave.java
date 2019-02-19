@@ -12,6 +12,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.CardView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -430,15 +433,18 @@ public class PolompFragmentSave extends Fragment {
 
         location=locationViewModel.getLocation(this.getContext());
         PolompAllInfo polompAllInfo = polompViewModel.getPolompData(polompParams);
-        if (spnRangPolompJadid.getSelectedItemPosition() == 0 && etPolompJadid.getText().toString().equals("") &&
-                spnRangPolompJadid.getSelectedItemPosition() == 0 && spnRangPolompGhadim.getSelectedItemPosition() == 0 &&
+//        spnRangPolompJadid.getSelectedItemPosition() == 0 && etPolompJadid.getText().toString().equals("") &&
+//                spnRangPolompJadid.getSelectedItemPosition() == 0 &&&& !chkNewNakhana && !chkNadaradJadid
+        if ( spnRangPolompGhadim.getSelectedItemPosition() == 0 &&
                 etPolompGhadim.getText().toString().equals("") && spnModelPolompGhadim.getSelectedItemPosition() == 0 &&
-                !chkOldNakhana && !chkNewNakhana && !chkNadradGhadim && !chkNadaradJadid) {
+                !chkOldNakhana  && !chkNadradGhadim) {
             if (polompAllInfo != null) {
                 polompViewModel.deleteAllPolomp(polompAllInfo.PolompInfoID, polompAllInfo.PolompDtlID);
             }
-
-            G.startFragment(G.fragmentNumStack.pop(), true, null);
+            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.ConfirmMessage), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+            //G.startFragment(G.fragmentNumStack.pop(), true, null);
             return;
         }
         if (location != null){
@@ -465,19 +471,22 @@ public class PolompFragmentSave extends Fragment {
                     polompDtl.StatePolomp = 2;
                 }
                 polompDtl.ReadTypeID = 1;
-                polompDtl.CurrentColorID = spinnerMapColorJadid.get(spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition()));
+                polompDtl.CurrentColorID = spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
                 polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
                 polompDtl.PolompID = polompParams.PolompId;
-                polompDtl.PolompTypeID = spinnerMapModelJadid.get(spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition()));
-                polompDtl.PreviousColorID = chkNadradGhadim.booleanValue()==true?null: spinnerMapColorGhadim.get(spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition()));
+                polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+                polompDtl.PreviousColorID = chkNadradGhadim.booleanValue()==true?null: spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
                 polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
-                polompDtl.PreviousPolompTypeID =chkNadradGhadim.booleanValue()==true?null: spinnerMapModelGhadim.get(spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()));
+                polompDtl.PreviousPolompTypeID =chkNadradGhadim.booleanValue()==true?null: spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
                 polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
                 Long polompInfoId = polompViewModel.insertPolompInfo(polompInfo);
                 polompDtl.PolompInfoID = polompInfoId;
                 Long polompDtlId = polompViewModel.insertPolompDtl(polompDtl);
                 if (polompDtlId != null) {
-                    Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                    Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
                 }
             } else {
                 polompDtl = new PolompDtl();
@@ -503,7 +512,11 @@ public class PolompFragmentSave extends Fragment {
                 polompDtl.PreviousPolompTypeID =chkNadradGhadim.booleanValue()==true?null: spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
                 polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
                 polompViewModel.updatePolompDtl(polompDtl);
-                Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
 
 
             }
