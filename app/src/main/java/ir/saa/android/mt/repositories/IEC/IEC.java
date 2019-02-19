@@ -101,6 +101,7 @@ public class IEC {
                 try {
                     noResponseNum = 0;
                     tempReciveData = new String(responseArray, "US-ASCII");
+                    IECCallback.onReportStatus(tempReciveData);
                     totalReciveData += tempReciveData;
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();

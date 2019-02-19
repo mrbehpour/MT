@@ -31,6 +31,7 @@ public class ReadmeterFragment extends Fragment {
     TextView txtMeterCompany;
     TextView txtMeterType;
     TextView txtMeterString;
+    TextView txtLog;
     TextView txtRead;
 
     @Override
@@ -52,7 +53,8 @@ public class ReadmeterFragment extends Fragment {
         txtMeterType = rootView.findViewById(R.id.tvMeterType);
         txtMeterString = rootView.findViewById(R.id.tvMeterString);
 
-        txtRead = rootView.findViewById(R.id.txtReaddata);
+        txtRead = rootView.findViewById(R.id.tvReaddata);
+        txtLog = rootView.findViewById(R.id.tvReadLog);
 
         Button btnRead = rootView.findViewById(R.id.btnRead);
         Bundle args = getArguments();
@@ -139,7 +141,7 @@ public class ReadmeterFragment extends Fragment {
                 handler.post(new Runnable(){
                     public void run() {
                         Log.d("meter_response",readResult);
-                        txtRead.append(readResult);
+                        txtLog.append(readResult);
                     }
                 });
             }
