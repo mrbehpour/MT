@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -117,37 +118,40 @@ public class LoginActivity extends AppCompatActivity {
                     if (isLoginValid) {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
-                        LoginActivity.this.finish();
-                    } else
-                        Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+
+
+                    } else {
+                        Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.LoginFail), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                    }
                 }
             }
         });
 
         findViewById(R.id.btnLogin).setOnClickListener(v -> {
-            boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
-            if (isLoginValid) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                LoginActivity.this.finish();
-            } else
-                Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
-            //DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
-           // if(deviceSerial.isActive==false){
-//                ImiRegisterInput imiRegisterInput=new ImiRegisterInput();
-//                imiRegisterInput.regionId=deviceSerial.regionId;
-//                imiRegisterInput.handHeldSerial=deviceSerial.SerialId;
-//                deviceSerialViewModel.confirmImi(imiRegisterInput);
 
-//            }else{
-//                boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
-//                if (isLoginValid) {
-//                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                } else
-//                    Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
-//            }
+                //Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+            DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+            if(deviceSerial.isActive==false){
+                ImiRegisterInput imiRegisterInput=new ImiRegisterInput();
+                imiRegisterInput.regionId=deviceSerial.regionId;
+                imiRegisterInput.handHeldSerial=deviceSerial.SerialId;
+                deviceSerialViewModel.confirmImi(imiRegisterInput);
+
+            }else{
+                boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
+                if (isLoginValid) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+
+
+                } else {
+                    Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.LoginFail), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
+                }
+            }
 
         });
 
@@ -173,26 +177,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-Boolean doubleBackToExitPressedOnce = false;
-     @Override
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
     public void onBackPressed() {
-        if(G.fragmentNumStack.size()>0){
+
+        if (G.fragmentNumStack.size() > 0) {
             Integer targetFragmentNum = G.fragmentNumStack.pop();
             G.startFragment(targetFragmentNum, true, null);
-        }else{
-            if (doubleBackToExitPressedOnce) {
+        } else {
+            if (doubleBackToExitPressedOnce ) {
 
-                LoginActivity.this.finish();
-
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+                finish();
                 System.exit(0);
-                return;
             }
-            this.doubleBackToExitPressedOnce = true;
-            //Toast.makeText(G.context,getResources().getText(R.string.Exit_Back), Toast.LENGTH_SHORT).show();
+            this.doubleBackToExitPressedOnce=true;
+
             Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.Exit_Back), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
             fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             fancyToast.show();
-            new android.os.Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 1500);
+            new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 1500);
         }
     }
 }

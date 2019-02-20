@@ -134,12 +134,13 @@ public class DeviceSerialViewModel extends AndroidViewModel {
                     @Override
                     public void onSuccess(DataClass<Boolean> booleanDataClass) {
                         if(booleanDataClass.Success && booleanDataClass.Data){
-                            IsValidImi.postValue(true);
+
                             DeviceSerial deviceSerial=new DeviceSerial();
                             deviceSerial.isActive=true;
                             deviceSerial.SerialId=imiRegisterInput.handHeldSerial;
                             deviceSerial.regionId=imiRegisterInput.regionId;
                             deviceSerialRepo.updateDeviceSerial(deviceSerial);
+                            IsValidImi.postValue(true);
 
                         }else{
                             IsValidImi.postValue(false);

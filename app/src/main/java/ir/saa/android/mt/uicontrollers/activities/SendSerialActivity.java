@@ -206,23 +206,24 @@ public class SendSerialActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if(aBoolean){
-                    Intent intent=new Intent(SendSerialActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                    SendSerialActivity.this.finish();
-                }
-            }
-        });
-        deviceSerialViewModel.getDeviceSerialLiveData(G.getPref(SharePrefEnum.DeviceId)).observe(this, new Observer<DeviceSerial>() {
-            @Override
-            public void onChanged(@Nullable DeviceSerial deviceSerial) {
-                if(deviceSerial!=null){
-                    Intent intent=new Intent(SendSerialActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                    SendSerialActivity.this.finish();
-                }
 
+                    Intent intent=new Intent(SendSerialActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
+//        deviceSerialViewModel.getDeviceSerialLiveData(G.getPref(SharePrefEnum.DeviceId)).observe(this, new Observer<DeviceSerial>() {
+//            @Override
+//            public void onChanged(@Nullable DeviceSerial deviceSerial) {
+//                if(deviceSerial!=null){
+//                    Intent intent=new Intent(SendSerialActivity.this,LoginActivity.class);
+//                    startActivity(intent);
+//                    SendSerialActivity.this.finish();
+//                }
+//
+//            }
+//        });
 
         btnConfirm=(Button)findViewById(R.id.btnConfirm);
         btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -326,12 +327,8 @@ public class SendSerialActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     public void onBackPressed() {
-                SendSerialActivity.this.finish();
-                System.exit(0);
+        finish();
     }
-
-
 }

@@ -1,5 +1,6 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -134,25 +135,6 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    Boolean doubleBackToExitPressedOnce = false;
-    @Override
-    public void onBackPressed() {
-        if(G.fragmentNumStack.size()>0){
-            Integer targetFragmentNum = G.fragmentNumStack.pop();
-            G.startFragment(targetFragmentNum, true, null);
 
-        }else{
-            if (doubleBackToExitPressedOnce) {
-                MainActivity.this.finish();
-               System.exit(0);
-                return;
-            }
-            this.doubleBackToExitPressedOnce = true;
-            //Toast.makeText(G.context,getResources().getText(R.string.Exit_Back), Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.Exit_Back), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            new Handler().postDelayed(() -> doubleBackToExitPressedOnce=false, 1500);
-        }
-    }
+
 }
