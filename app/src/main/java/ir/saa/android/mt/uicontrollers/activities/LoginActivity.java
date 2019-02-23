@@ -120,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
 
 
+
                     } else {
                         Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.LoginFail), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
                         fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
@@ -144,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (isLoginValid) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+
 
 
                 } else {

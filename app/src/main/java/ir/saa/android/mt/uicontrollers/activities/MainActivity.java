@@ -24,6 +24,7 @@ import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
+import ir.saa.android.mt.uicontrollers.fragments.HomeFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestEnergyFragment;
 
 //import ir.saa.android.mt.navigationdrawer.NavigationDrawerFragment;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity{
         if(G.getPref(SharePrefEnum.FontSize)!=null) {
             adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
         }
+
         //Initialize Actionbar For This Activity
         setUpActionBar();
         //Initialize NavigationDrawer For This Activity
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity{
         G.actionBar = getSupportActionBar();
 
         G.startFragment(FragmentsEnum.HomeFragment,false,null);
+
+
 
 
     }
@@ -135,6 +139,27 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
 
+        if (G.fragmentNumStack.size() > 0) {
+            Integer targetFragmentNum = G.fragmentNumStack.pop();
+            G.startFragment(targetFragmentNum, true, null);
+        } else {
+            if (doubleBackToExitPressedOnce ) {
+                G.currentFragmentNum=null;
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
+            this.doubleBackToExitPressedOnce=true;
 
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.Exit_Back), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+            new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 1500);
+        }
+    }
 }

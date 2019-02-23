@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment
     LinearLayout laySettings;
     LinearLayout layMoshtarakin;
     LinearLayout layDaryaft;
+    LinearLayout laySanjesh;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -55,6 +56,7 @@ public class HomeFragment extends Fragment
         layGozareshat=rootView.findViewById(R.id.layGozareshat);
         layMoshtarakin=rootView.findViewById(R.id.layMoshtarakin);
         laySettings=rootView.findViewById(R.id.laySettings);
+        laySanjesh=rootView.findViewById(R.id.laySanjesh);
 
         layBazdid.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +64,12 @@ public class HomeFragment extends Fragment
                 G.startFragment(FragmentsEnum.BazdidFragment,false,null);
             }
         });
-
+        laySanjesh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                G.startFragment(FragmentsEnum.SanjeshFragment,false,null);
+            }
+        });
         layDaryaft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +90,7 @@ public class HomeFragment extends Fragment
         layGozareshat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                G.startFragment(FragmentsEnum.SanjeshFragment,false,null);
+
             }
         });
 
