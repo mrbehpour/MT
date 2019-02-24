@@ -179,12 +179,10 @@
                         android:id="@+id/tvReadLog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/byekan"
                         android:textSize="14sp"
                         android:layout_marginRight="10dp"
-                        android:gravity="center"
+                        android:gravity="left"
                         android:textAlignment="gravity"
-                        android:textDirection="rtl"
                         android:textColor="@color/grey_900"
                         android:text="@string/sefr" />
                 </ScrollView>

@@ -1,6 +1,5 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
-
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
@@ -16,12 +15,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
+
+import com.daimajia.numberprogressbar.NumberProgressBar;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
+import ir.saa.android.mt.repositories.meterreader.StatusReport;
 import ir.saa.android.mt.viewmodels.ReadmeterViewModel;
 
 public class ReadmeterFragment extends Fragment {
@@ -33,6 +36,7 @@ public class ReadmeterFragment extends Fragment {
     TextView txtMeterString;
     TextView txtLog;
     TextView txtRead;
+    NumberProgressBar progReadMeter;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -56,13 +60,38 @@ public class ReadmeterFragment extends Fragment {
         txtRead = rootView.findViewById(R.id.tvReaddata);
         txtLog = rootView.findViewById(R.id.tvReadLog);
 
+        progReadMeter = rootView.findViewById(R.id.progressBarReadMeter);
+
         Button btnRead = rootView.findViewById(R.id.btnRead);
         Bundle args = getArguments();
 
         readmeterViewModel.getStatusMutableLiveData.observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                updateResponseTest(s);
+                if(StatusReport.checkProgressString(s)) {
+                    StatusReport.progressItem progressItem = StatusReport.getProgressItem(s);
+                    switch (progressItem.progMode){
+                        case setMax:
+                            progReadMeter.setMax(progressItem.progValue);
+                            updateResponseTest(progressItem.progressText);
+                            break;
+                        case setValue:
+                            progReadMeter.setProgress(progressItem.progValue);
+                            updateResponseTest(progressItem.progressText);
+                            break;
+                        case resetValue:
+                            progReadMeter.setProgress(0);
+                            break;
+                        case reportStatus:
+                            updateResponseTest(progressItem.progressText);
+                            break;
+                    }
+
+
+                }else{
+                    updateResponseTest(s);
+                }
+
             }
         });
 
@@ -134,6 +163,7 @@ public class ReadmeterFragment extends Fragment {
     }
 
     private void updateResponseTest(String readResult) {
+
         Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             public void run() {
@@ -141,13 +171,17 @@ public class ReadmeterFragment extends Fragment {
                 handler.post(new Runnable(){
                     public void run() {
                         Log.d("meter_response",readResult);
-                        txtLog.append(readResult);
+                        txtLog.append(readResult + "\r\n");
                     }
                 });
             }
 
         };
         new Thread(runnable).start();
+    }
+
+    private void updateProgressValue(int progStr){
+        progReadMeter.setProgress(progStr);
     }
 
     private void showMeterInfo(MeterUtility.MeterInfo meterInfo){

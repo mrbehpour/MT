@@ -117,13 +117,22 @@ public class MeterUtility {
         List<ObisItem> obisLst = null;
         try {
             obisLst = objectMapper.readValue(jsonArray, new TypeReference<List<ObisItem>>(){});
-            int c=obisLst.size();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return obisLst;
+    }
+
+    public static int getListObisCount(List<ObisItem> lstObisItem){
+        int c = 0;
+        //lstObisItem.stream().filter(o -> o.mainObis()!="").collect(Collectors.toList())
+
+        for(ObisItem obisItem : lstObisItem){
+            if(obisItem.mainObis.isEmpty()) c++;
+        }
+        return c;
     }
 
     public static MeterInfo getMeterInfo(String meterString){
@@ -155,12 +164,12 @@ public class MeterUtility {
         meterInfo.MeterType = "AMP-E";
         meterInfo.MaterSummaryName = "AMP-E";
         meterInfo.MeterString = meterString;
-        meterInfo.ReadMode = readingMode.readout.name();
+        meterInfo.ReadMode = readingMode.programming.name();
         meterInfo.ValidationRegex = "^AMP\\d{3}[(].*[)]$";
         meterInfo.SetDateTime = false;
         meterInfo.NeedPassForRead = true;
-        meterInfo.ReadObisType = "Obis_Prnts_Semi";
-        meterInfo.R_Command="";
+        meterInfo.ReadObisType = "Just_Obis";
+        meterInfo.R_Command=IEC_Constants.R1_Command;
 
 
         return meterInfo;
@@ -280,8 +289,11 @@ public class MeterUtility {
     }
 
     public static boolean CheckSendPassResultStr(String resultStr, MeterInfo meterInfo){
-        //TODO check result
-        return true;
+        boolean res=false;
+        if(meterInfo.NeedPassForRead){
+            if(resultStr.contains(String.valueOf(ASCII.ACK))) res = true;
+        }
+        return res;
     }
 
     public static String RemoveUnitKeywords(String value) {

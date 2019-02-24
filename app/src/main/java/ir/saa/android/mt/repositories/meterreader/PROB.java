@@ -130,11 +130,19 @@ public class PROB {
 
         String result="";
         try {
+            String progItem = StatusReport.createProgressItem(StatusReport.progressBarMode.setMax,"Set Prog Max To " + lstObis.size(),lstObis.size());
+            probCallback.onReportStatus(progItem);
+            Thread.sleep(100);
+            int i=0;
             for (MeterUtility.ObisItem obis: lstObis) {
+                i++;
+                progItem = StatusReport.createProgressItem(StatusReport.progressBarMode.setValue,"Set Prog Value To " + i,i);
+                probCallback.onReportStatus(progItem);
                 if(!obis.mainObis.isEmpty()) {
                     if(mustStop) break;
                     String ReadObisStr = MeterUtility.CreateReadObisStr(obis , meterInfo);
                     result = iec.SendCommandToDevice(ReadObisStr,false, connectionStatus);
+//                    Thread.sleep(100);
                     MeterUtility.setReadDataValue(readData,obis.tariffName,SplitData.splitDataInOpenPrntsStar(result),obis.floatPoint);
                 }
             }
@@ -145,6 +153,7 @@ public class PROB {
         //TODO-parsing
         return readData;
     }
+
 
     public String DisconnectWithMeter(MeterUtility.connectionStatus connectionStatus) throws Exception {
 
