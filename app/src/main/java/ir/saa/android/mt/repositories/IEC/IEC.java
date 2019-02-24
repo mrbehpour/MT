@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import ir.saa.android.mt.application.Converters;
 import ir.saa.android.mt.repositories.meterreader.ASCII;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
+import ir.saa.android.mt.repositories.meterreader.StatusReport;
 import ir.saa.android.mt.repositories.modbus.ITransferLayer;
 import ir.saa.android.mt.repositories.modbus.ITransferLayerCallback;
 
@@ -82,17 +83,20 @@ public class IEC {
 
             @Override
             public void onDisConnected() {
+
                 IECCallback.onDisConnected();
                 isIECRunningKey=false;
             }
 
             @Override
             public void onConnectionError(String errMsg) {
+
                 IECCallback.onConnectionError(errMsg);
             }
 
             @Override
             public void onReportStatus(String statusMsg) {
+
                 IECCallback.onReportStatus(statusMsg);
             }
 
@@ -101,7 +105,7 @@ public class IEC {
                 try {
                     noResponseNum = 0;
                     tempReciveData = new String(responseArray, "US-ASCII");
-                    IECCallback.onReportStatus(tempReciveData);
+                    //IECCallback.onReportStatus(tempReciveData);
                     totalReciveData += tempReciveData;
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
@@ -160,22 +164,26 @@ public class IEC {
 
     private boolean checkResponseStr(String responseStr, MeterUtility.connectionStatus cnnStatus){
         boolean res=false;
+        String progItem="";
 
         switch (cnnStatus) {
             case getMeterString:
                 if (responseStr.contains("/") && responseStr.contains(String.valueOf(ASCII.CR)) &&  responseStr.contains(String.valueOf(ASCII.LF))) {
+                    progItem = StatusReport.createProgressItem(StatusReport.progressBarMode.reportStatus,"Get Meter String...",0);
                     res=true;
                 }
                 break;
 
             case getReadoutString:
                 if (responseStr.contains(String.valueOf(ASCII.STX)) && responseStr.contains("!") && responseStr.contains(String.valueOf(ASCII.ETX))){
+                    progItem = StatusReport.createProgressItem(StatusReport.progressBarMode.reportStatus,"Reading Meter...",0);
                     res=true;
                 }
                 break;
 
             case getP0String:
                 if (responseStr.startsWith(String.valueOf(ASCII.SOH)) && responseStr.contains("(") && responseStr.contains(")") && responseStr.lastIndexOf(ASCII.ETX) == responseStr.length() - 2) {
+                    progItem = StatusReport.createProgressItem(StatusReport.progressBarMode.reportStatus,"Sending Password To Meter...",0);
                     res=true;
                 }
                 break;
@@ -195,7 +203,10 @@ public class IEC {
         }
 
         waitForResponse = !res;
-        if(res) isIECRunningKey=false;
+        if(res) {
+            if(!progItem.isEmpty())IECCallback.onReportStatus(progItem);
+            isIECRunningKey=false;
+        }
         return  res;
     }
 

@@ -7,6 +7,9 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,6 +24,7 @@ import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
 import ir.saa.android.mt.repositories.meterreader.PROB;
 import ir.saa.android.mt.repositories.meterreader.SplitData;
+import ir.saa.android.mt.repositories.meterreader.StatusReport;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
 
 public class ReadmeterViewModel extends AndroidViewModel {
