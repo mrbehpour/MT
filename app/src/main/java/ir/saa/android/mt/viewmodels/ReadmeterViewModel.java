@@ -338,7 +338,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
     }
 
     public void initTranseferLayer(){
-        String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
+        String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothNameRead);
         if(BluetoothDeviceName==null) BluetoothDeviceName="";
         if(BluetoothDeviceName.equals("")) connectionStateMutableLiveData.postValue(false);
         bluetooth.disconnnect();

@@ -204,7 +204,7 @@ public class ReadmeterFragment extends Fragment {
     }
 
     private void connectToModuleDialog(){
-        String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
+        String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothNameRead);
         ad = new AlertDialog.Builder(this.getContext()).create();
         ad.setCancelable(true);
         ad.setTitle(String.format("%s %s", getResources().getText(R.string.ValidationConnect),BluetoothDeviceName));

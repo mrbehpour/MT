@@ -31,61 +31,6 @@
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:orientation="horizontal">
-            <!-- ersal -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.33"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="4dp"
-                android:orientation="vertical"
-                android:background="@drawable/custom_homeitem">
-                <LinearLayout
-                    android:id="@+id/layErsal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:id="@+id/ivErsal"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.65"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/briefcase_upload"
-                        android:tint="@color/orange_300"/>
-                    <TextView
-                        android:id="@+id/tvErsal"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.15"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
-                        android:gravity="center"
-                        android:text="@string/menuItem7"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.2"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
-                        android:gravity="center"
-                        android:text="@string/tozih_ersal"/>
-                </LinearLayout>
-            </LinearLayout>
 
             <!-- gozaresh -->
             <LinearLayout
@@ -140,6 +85,62 @@
                         android:textColor="@color/grey_400"
                         android:gravity="center"
                         android:text="@string/tozih_gozareshat"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- sanjesh -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_homeitem">
+                <LinearLayout
+                    android:id="@+id/laySanjesh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivSanjesh"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.65"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/checkbox_marked_outline"
+                        android:tint="@color/orange_300"/>
+                    <TextView
+                        android:id="@+id/tvSanjesh"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_700"
+                        android:gravity="center"
+                        android:text="@string/sanjesht"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_400"
+                        android:gravity="center"
+                        android:text="@string/tozih_sanjesh"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -200,69 +201,69 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- center layout -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.2"
-            android:orientation="horizontal">
-            <!-- ersal -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="4dp"
-                android:orientation="horizontal"
-                android:background="@drawable/custom_homeitem">
-                <LinearLayout
-                    android:id="@+id/laySanjesh"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
-                        android:gravity="center"
-                        android:text="@string/tozih_sanjesh"/>
-                     <TextView
-                        android:id="@+id/tvSanjesh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
-                        android:gravity="center"
-                        android:text="@string/sanjesht"/>
-                    <ImageView
-                        android:id="@+id/ivSanjesh"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/checkbox_marked_outline"
-                        android:tint="@color/orange_300"/>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
+        <!--&lt;!&ndash; center layout &ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="0.2"-->
+            <!--android:orientation="horizontal">-->
+            <!--&lt;!&ndash; ersal &ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_marginBottom="4dp"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:background="@drawable/custom_homeitem">-->
+                <!--<LinearLayout-->
+                    <!--android:id="@+id/laySanjesh"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:background="?attr/selectableItemBackground"-->
+                    <!--android:clickable="true"-->
+                    <!--android:orientation="horizontal">-->
+                    <!--<TextView-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:layout_marginLeft="8dp"-->
+                        <!--android:layout_marginRight="8dp"-->
+                        <!--android:layout_marginBottom="8dp"-->
+                        <!--android:fontFamily="@font/byekan"-->
+                        <!--android:textSize="12sp"-->
+                        <!--android:textColor="@color/grey_400"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="@string/tozih_sanjesh"/>-->
+                     <!--<TextView-->
+                        <!--android:id="@+id/tvSanjesh"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:layout_marginRight="8dp"-->
+                        <!--android:layout_marginBottom="8dp"-->
+                        <!--android:fontFamily="@font/byekan"-->
+                        <!--android:textSize="14sp"-->
+                        <!--android:textColor="@color/grey_700"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="@string/sanjesht"/>-->
+                    <!--<ImageView-->
+                        <!--android:id="@+id/ivSanjesh"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_marginTop="2dp"-->
+                        <!--android:layout_marginLeft="8dp"-->
+                        <!--android:layout_marginRight="8dp"-->
+                        <!--android:adjustViewBounds="true"-->
+                        <!--android:scaleType="centerCrop"-->
+                        <!--android:src="@drawable/checkbox_marked_outline"-->
+                        <!--android:tint="@color/orange_300"/>-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
 
         <!-- bottom layout -->
         <LinearLayout
@@ -274,10 +275,10 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="4dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="8dp"
                 android:orientation="vertical"
                 android:background="@drawable/custom_homeitem">
@@ -325,11 +326,68 @@
                         android:text="@string/tozih_settings"/>
                 </LinearLayout>
             </LinearLayout>
+
+            <!-- ersal -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical"
+                android:background="@drawable/custom_homeitem">
+                <LinearLayout
+                    android:id="@+id/layErsal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/ivErsal"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.65"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/briefcase_upload"
+                        android:tint="@color/orange_300"/>
+                    <TextView
+                        android:id="@+id/tvErsal"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.15"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_700"
+                        android:gravity="center"
+                        android:text="@string/menuItem7"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.2"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:fontFamily="@font/byekan"
+                        android:textSize="12sp"
+                        android:textColor="@color/grey_400"
+                        android:gravity="center"
+                        android:text="@string/tozih_ersal"/>
+                </LinearLayout>
+            </LinearLayout>
+
             <!-- daryaft moshtarakin -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginLeft="4dp"
@@ -380,11 +438,12 @@
                         android:text="@string/tozih_daryaftmoshtarakin"/>
                 </LinearLayout>
             </LinearLayout>
+
             <!-- daryaft -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="4dp"
@@ -435,6 +494,7 @@
                         android:text="@string/tozih_daryaftpayeh"/>
                 </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
