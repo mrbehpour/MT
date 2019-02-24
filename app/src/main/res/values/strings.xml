@@ -157,7 +157,8 @@
 
     <!-- fragment_module -->
     <string name="bluetooth">بلوتوث</string>
-    <string name="pairedDevices">دستگاه های pair شده:</string>
+    <string name="pairedDevicesforTest">دستگاه های pair شده برای تست:</string>
+    <string name="pairedDevicesforRead">دستگاه های pair شده برای قرائت:</string>
     <string name="Buzzer">Buzzer</string>
     <string name="deviceVoiceOnOff">روشن و خاموش کردن صدای دستگاه</string>
     <string name="LED">LED</string>

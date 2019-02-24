@@ -1,26 +1,18 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,8 +44,10 @@ public class SettingFragment extends Fragment {
     Button btnSave;
     ModuleViewModel moduleViewModel;
     Spinner spinner;
+    Spinner spinnerRead;
     SwitchCompat swBluetooth;
     ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapterRead;
     RadioButton rbtSmall;
     RadioButton rbtNormal;
     RadioButton rbtLarge;
@@ -173,7 +167,7 @@ public class SettingFragment extends Fragment {
         swBluetooth=rootView.findViewById(R.id.swBluetooth);
         //spinnerArray=new ArrayList<>();
         spinner = rootView.findViewById(R.id.spnPaired);
-
+        spinnerRead=rootView.findViewById(R.id.spnPairedRead);
         moduleViewModel.listBluetoothName.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
@@ -181,6 +175,7 @@ public class SettingFragment extends Fragment {
                 if(strings.size()!=0) {
 
                     fillPairedDeviceSpinner(strings);
+                    fillPairedDeviceSpinnerRead(strings);
 
                 }
             }
@@ -221,6 +216,19 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        spinnerRead.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView adapter, View view, int i, long l) {
+                String SelectedItem =  adapter.getItemAtPosition(i).toString();
+                G.setPref(SharePrefEnum.ModuleBluetoothNameRead,SelectedItem);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         return rootView;
     }
     private void fillPairedDeviceSpinner(List<String> spinnerArray){
@@ -230,6 +238,7 @@ public class SettingFragment extends Fragment {
         adapter = new ArrayAdapter<>(this.getActivity(), R.layout.al_majol_spinner_item,spinnerArray );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinner.setAdapter(adapter);
 
         for(int i=0;i<spinnerArray.size();i++){
@@ -238,6 +247,24 @@ public class SettingFragment extends Fragment {
         if( G.getPref(SharePrefEnum.ModuleBluetoothName)!=null && spinnerMap.size()!=0) {
             if(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName))!=null) {
                 spinner.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName)));
+            }
+
+        }
+
+
+    }
+
+    private void fillPairedDeviceSpinnerRead(List<String> spinnerArray){
+
+        adapterRead=new ArrayAdapter<>(this.getActivity(), R.layout.al_majol_spinner_item_read,spinnerArray );
+        adapterRead.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRead.setAdapter(adapterRead);
+        for(int i=0;i<spinnerArray.size();i++){
+            spinnerMap.put(spinnerArray.get(i).toString(),i);
+        }
+        if( G.getPref(SharePrefEnum.ModuleBluetoothNameRead)!=null && spinnerMap.size()!=0) {
+            if(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothNameRead))!=null) {
+                spinnerRead.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothNameRead)));
             }
 
         }

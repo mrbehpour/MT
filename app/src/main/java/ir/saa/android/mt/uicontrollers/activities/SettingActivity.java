@@ -46,8 +46,10 @@ public class SettingActivity extends AppCompatActivity {
     Button btnSave;
     ModuleViewModel moduleViewModel;
     Spinner spinner;
+    Spinner spinnerRead;
     SwitchCompat swBluetooth;
     ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapterRead;
     RadioButton rbtSmall;
     RadioButton rbtNormal;
     RadioButton rbtLarge;
@@ -170,7 +172,7 @@ public class SettingActivity extends AppCompatActivity {
         swBluetooth=(SwitchCompat)findViewById(R.id.swBluetooth);
         //spinnerArray=new ArrayList<>();
         spinner = (Spinner) findViewById(R.id.spnPaired);
-
+        spinnerRead=(Spinner)findViewById(R.id.spnPairedRead);
         moduleViewModel.listBluetoothName.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
@@ -178,7 +180,7 @@ public class SettingActivity extends AppCompatActivity {
                 if(strings.size()!=0) {
 
                     fillPairedDeviceSpinner(strings);
-
+                    fillPairedDeviceSpinnerRead(strings);
                 }
             }
         });
@@ -215,6 +217,18 @@ public class SettingActivity extends AppCompatActivity {
                 String SelectedItem =  adapter.getItemAtPosition(i).toString();
                 G.setPref(SharePrefEnum.ModuleBluetoothName,SelectedItem);
                 //or this can be also right: selecteditem = level[i];
+            }
+        });
+        spinnerRead.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView adapter, View view, int i, long l) {
+                String SelectedItem =  adapter.getItemAtPosition(i).toString();
+                G.setPref(SharePrefEnum.ModuleBluetoothNameRead,SelectedItem);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -273,6 +287,22 @@ public class SettingActivity extends AppCompatActivity {
         if( G.getPref(SharePrefEnum.ModuleBluetoothName)!=null && spinnerMap.size()!=0) {
             if(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName))!=null) {
                 spinner.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName)));
+            }
+
+        }
+
+    }
+    private void fillPairedDeviceSpinnerRead(List<String> spinnerArray){
+
+        adapterRead=new ArrayAdapter<>(this, R.layout.al_majol_spinner_item_read,spinnerArray );
+        adapterRead.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRead.setAdapter(adapterRead);
+        for(int i=0;i<spinnerArray.size();i++){
+            spinnerMap.put(spinnerArray.get(i).toString(),i);
+        }
+        if( G.getPref(SharePrefEnum.ModuleBluetoothNameRead)!=null && spinnerMap.size()!=0) {
+            if(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothNameRead))!=null) {
+                spinnerRead.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothNameRead)));
             }
 
         }

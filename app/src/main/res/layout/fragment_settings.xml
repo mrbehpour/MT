@@ -59,7 +59,7 @@
             android:layout_marginRight="20dp"
             android:textColor="@color/grey_600"
             android:textSize="16sp"
-            android:text="@string/pairedDevices"/>
+            android:text="@string/pairedDevicesforTest"/>
 
         <!-- Spinner Paired -->
         <Spinner
@@ -72,6 +72,39 @@
             android:background="@drawable/custom_rectangle"
             android:layout_gravity="right"
             />
+
+        <!-- Line -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+
+            android:background="@color/grey_300"/>
+        <!-- Spinner Lable -->
+        <TextView
+            android:id="@+id/tvLablePairedRead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/byekan"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/grey_600"
+            android:textSize="16sp"
+            android:text="@string/pairedDevicesforRead"/>
+
+        <!-- Spinner Paired -->
+        <Spinner
+            android:id="@+id/spnPairedRead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/custom_rectangle"
+            android:layout_gravity="right"
+            />
+
 
         <!-- Reset Button    -->
         <android.support.v7.widget.AppCompatButton
@@ -159,12 +192,7 @@
             android:textSize="12sp"
             android:text="@string/mahdoode_help"/>
 
-        <!-- Line -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/grey_300"/>
+
 
         <!-- font size -->
         <TextView
