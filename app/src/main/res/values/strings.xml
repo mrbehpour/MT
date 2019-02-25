@@ -254,12 +254,12 @@
     <string name="R">R</string>
     <string name="S">S</string>
     <string name="T">T</string>
-    <string name="voltazhV">(V) ولتاژ</string>
-    <string name="jaryanI">جریان (I)</string>
-    <string name="tavanP">توان اکتیو (P)</string>
-    <string name="tavanQ">توان راکتیو (Q)</string>
-    <string name="tavanS">توان ظاهری (S)</string>
-    <string name="zaribPF">ضریب قدرت (PF)</string>
+    <string name="voltazhV">(Volt) ولتاژ</string>
+    <string name="jaryanI">جریان (Amp)</string>
+    <string name="tavanP">توان اکتیو (Watt)</string>
+    <string name="tavanQ">توان راکتیو (Var)</string>
+    <string name="tavanS">توان ظاهری (VA)</string>
+    <string name="zaribPF">ضریب قدرت </string>
     <string name="VahedTest"> ثانیه </string>
 
 
