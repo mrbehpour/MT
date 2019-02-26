@@ -76,8 +76,8 @@ public class AmaliyatFragment extends Fragment {
     private void connectToModuleDialog(){
 
         progressDialog=new ProgressDialog(getContext());
-        progressDialog.setMessage(getResources().getText(R.string.Wait_Location));
-        progressDialog.setTitle(getResources().getText(R.string.ValidationLocation));
+        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
         progressDialog.setCancelable(true);
         progressDialog.show();
 
@@ -178,7 +178,7 @@ public class AmaliyatFragment extends Fragment {
                             btnSaveResult.setVisibility(View.VISIBLE);
                         } else {
                             btnSaveResult.setVisibility(View.GONE);
-                            Toast.makeText(G.context, getResources().getText(R.string.TestFail), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(G.context, getResources().getText(R.string.TestResultNotExsist_msg), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -319,7 +319,7 @@ public class AmaliyatFragment extends Fragment {
                     amaliyatViewModel.insertTestDtl(testDetail);
                 }
             }
-            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
             fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             fancyToast.show();
 //Bastan Form Sabt
@@ -355,7 +355,7 @@ public class AmaliyatFragment extends Fragment {
         MyDialog myDialog=new MyDialog(this.getContext());
 
         myDialog.setTitle(getResources().getText(R.string.CancelTestProcessTitle).toString());
-        myDialog.addBodyText(getResources().getText(R.string.MessageCancelTest).toString(),18);
+        myDialog.addBodyText(getResources().getText(R.string.CancelTest_msg).toString(),18);
 
         myDialog.addButton(getResources().getText(R.string.Retry).toString(), new View.OnClickListener() {
             @Override

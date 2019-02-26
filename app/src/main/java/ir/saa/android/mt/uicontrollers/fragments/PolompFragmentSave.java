@@ -115,8 +115,8 @@ public class PolompFragmentSave extends Fragment {
     private void connectToModuleDialog(){
 
         progressDialog=new ProgressDialog(getContext());
-        progressDialog.setMessage(getResources().getText(R.string.Wait_Location));
-        progressDialog.setTitle(getResources().getText(R.string.ValidationLocation));
+        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
         progressDialog.setCancelable(true);
         progressDialog.show();
 
@@ -441,7 +441,7 @@ public class PolompFragmentSave extends Fragment {
             if (polompAllInfo != null) {
                 polompViewModel.deleteAllPolomp(polompAllInfo.PolompInfoID, polompAllInfo.PolompDtlID);
             }
-            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.ConfirmMessage), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.FillOldAndNewPlombInfo_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
             fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             fancyToast.show();
             //G.startFragment(G.fragmentNumStack.pop(), true, null);
@@ -484,7 +484,7 @@ public class PolompFragmentSave extends Fragment {
                 Long polompDtlId = polompViewModel.insertPolompDtl(polompDtl);
                 if (polompDtlId != null) {
                    // Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
-                    Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                    Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     fancyToast.show();
                 }
