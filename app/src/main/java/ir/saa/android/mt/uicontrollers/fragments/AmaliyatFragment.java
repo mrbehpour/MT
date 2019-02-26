@@ -2,10 +2,12 @@ package ir.saa.android.mt.uicontrollers.fragments;
 
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -32,6 +37,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
@@ -67,13 +73,14 @@ public class AmaliyatFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
-
     private void connectToModuleDialog(){
+
         progressDialog=new ProgressDialog(getContext());
-        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
-        progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
+        progressDialog.setMessage(getResources().getText(R.string.Wait_Location));
+        progressDialog.setTitle(getResources().getText(R.string.ValidationLocation));
         progressDialog.setCancelable(true);
         progressDialog.show();
+
     }
 
     public void HideProgressDialog(){
@@ -171,7 +178,7 @@ public class AmaliyatFragment extends Fragment {
                             btnSaveResult.setVisibility(View.VISIBLE);
                         } else {
                             btnSaveResult.setVisibility(View.GONE);
-                            Toast.makeText(G.context, getResources().getText(R.string.TestResultNotExsist_msg), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(G.context, getResources().getText(R.string.TestFail), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -312,8 +319,9 @@ public class AmaliyatFragment extends Fragment {
                     amaliyatViewModel.insertTestDtl(testDetail);
                 }
             }
-
-            Toast.makeText(G.context, getResources().getText(R.string.SaveOperationSuccess_msg), Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
 //Bastan Form Sabt
             G.fragmentNumStack.pop();
             G.startFragment(G.fragmentNumStack.pop(), true, null);
@@ -347,7 +355,7 @@ public class AmaliyatFragment extends Fragment {
         MyDialog myDialog=new MyDialog(this.getContext());
 
         myDialog.setTitle(getResources().getText(R.string.CancelTestProcessTitle).toString());
-        myDialog.addBodyText(getResources().getText(R.string.CancelTest_msg).toString(),18);
+        myDialog.addBodyText(getResources().getText(R.string.MessageCancelTest).toString(),18);
 
         myDialog.addButton(getResources().getText(R.string.Retry).toString(), new View.OnClickListener() {
             @Override
