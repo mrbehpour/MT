@@ -513,7 +513,7 @@ public class PolompFragmentSave extends Fragment {
                 polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
                 polompViewModel.updatePolompDtl(polompDtl);
 
-                //Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+
                 Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 fancyToast.show();

@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -316,8 +319,9 @@ public class AmaliyatFragment extends Fragment {
                     amaliyatViewModel.insertTestDtl(testDetail);
                 }
             }
-
-            Toast.makeText(G.context, getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
 //Bastan Form Sabt
             G.fragmentNumStack.pop();
             G.startFragment(G.fragmentNumStack.pop(), true, null);
