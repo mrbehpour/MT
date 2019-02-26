@@ -35,7 +35,7 @@ public interface TariffInfoDao {
     List<Long> insertTariffInfos(List<TariffInfo> tariffInfos);
 
     @Insert(onConflict = IGNORE)
-    void insertTariffInfo(TariffInfo tariffInfo);
+    Long insertTariffInfo(TariffInfo tariffInfo);
 
     @Update
     void updateTariffInfo(TariffInfo tariffInfo);

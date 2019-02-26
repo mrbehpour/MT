@@ -20,12 +20,17 @@ import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.TariffAllInfo;
+import ir.saa.android.mt.model.entities.TariffDtl;
+import ir.saa.android.mt.model.entities.TariffInfo;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
 import ir.saa.android.mt.repositories.meterreader.PROB;
 import ir.saa.android.mt.repositories.meterreader.SplitData;
 import ir.saa.android.mt.repositories.meterreader.StatusReport;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
+import ir.saa.android.mt.repositories.roomrepos.TariffDtlRepo;
+import ir.saa.android.mt.repositories.roomrepos.TariffInfoRepo;
 
 public class ReadmeterViewModel extends AndroidViewModel {
     Bluetooth bluetooth;
@@ -38,6 +43,8 @@ public class ReadmeterViewModel extends AndroidViewModel {
     public MutableLiveData<MeterUtility.ReadData> readMeterResultMutableLiveData;
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
     public MutableLiveData<Integer> recieveDataMutableLiveData;
+    TariffDtlRepo tariffDtlRepo=null;
+    TariffInfoRepo tariffInfoRepo;
 
     public ReadmeterViewModel(@NonNull Application application) {
         super(application);
@@ -81,6 +88,12 @@ public class ReadmeterViewModel extends AndroidViewModel {
         connectionStateMutableLiveData = new MutableLiveData<>();
         recieveDataMutableLiveData = new MutableLiveData<>();
 
+        if(tariffDtlRepo==null){
+            tariffDtlRepo=new TariffDtlRepo(application);
+        }
+        if(tariffInfoRepo==null){
+            tariffInfoRepo=new TariffInfoRepo(application);
+        }
 
     }
 
@@ -345,7 +358,17 @@ public class ReadmeterViewModel extends AndroidViewModel {
         bluetooth.init(BluetoothDeviceName);
     }
 
+    public  Long insertTariffInfo(TariffInfo tariffInfo) {
+            return tariffInfoRepo.insertTariffInfo(tariffInfo);
+    }
 
+    public void insertTariffDtl(TariffDtl tariffDtl){
+        tariffDtlRepo.insertTariffDtl(tariffDtl);
+    }
+
+    public List<TariffAllInfo> getTariffAllInfo(Long clientId, Integer sendId){
+        return tariffDtlRepo.getTariffAllInfo(clientId,sendId);
+    }
 
     @Override
     protected void onCleared() {

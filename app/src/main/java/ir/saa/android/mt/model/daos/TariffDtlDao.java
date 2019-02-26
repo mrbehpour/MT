@@ -9,6 +9,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import ir.saa.android.mt.model.entities.TariffAllInfo;
 import ir.saa.android.mt.model.entities.TariffDtl;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
@@ -42,5 +43,10 @@ public interface TariffDtlDao {
 
     @Update
     void updateTariffDtl(TariffDtl tariffDtl);
+
+    @Query("Select * from Tariffinfo inner join tariffdtl " +
+            "on Tariffinfo.TariffInfoID=tariffdtl.TariffInfoID  " +
+            "where Tariffinfo.ClientID=:clientId and TariffInfo.SendID=:sendId")
+    List<TariffAllInfo> getTariffAllInfo(Long clientId, Integer sendId);
 
 }

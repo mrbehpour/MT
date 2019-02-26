@@ -7,6 +7,7 @@ import java.util.List;
 
 import ir.saa.android.mt.model.daos.TariffDtlDao;
 import ir.saa.android.mt.model.database.MTDatabase;
+import ir.saa.android.mt.model.entities.TariffAllInfo;
 import ir.saa.android.mt.model.entities.TariffDtl;
 
 public class TariffDtlRepo  {
@@ -62,5 +63,9 @@ public class TariffDtlRepo  {
 
     public void updateTariffDtl(TariffDtl tariffDtl) {
         tariffDtlDao.updateTariffDtl(tariffDtl);
+    }
+
+    public List<TariffAllInfo>  getTariffAllInfo(Long clientId, Integer sendId){
+        return tariffDtlDao.getTariffAllInfo(clientId,sendId);
     }
 }
