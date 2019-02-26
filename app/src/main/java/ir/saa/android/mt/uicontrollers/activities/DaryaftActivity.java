@@ -255,7 +255,7 @@ public class DaryaftActivity extends AppCompatActivity {
     public void onBackPressed() {
         if(isDownloadBaseInfo  || isDownloadSetting || isDownloadUser){
            // Toast.makeText(DaryaftActivity.this,R.string.backMessage,Toast.LENGTH_SHORT).show();
-            Toast fancyToast= FancyToast.makeText(DaryaftActivity.this, String.valueOf(getResources().getText(R.string.backMessage)),FancyToast.LENGTH_SHORT,FancyToast.INFO,false);
+            Toast fancyToast= FancyToast.makeText(DaryaftActivity.this, String.valueOf(getResources().getText(R.string.WaitForRecieveData_msg)),FancyToast.LENGTH_SHORT,FancyToast.INFO,false);
             fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             fancyToast.show();
             return;

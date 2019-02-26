@@ -118,11 +118,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (isLoginValid) {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
-
-
-
                     } else {
-                        Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.LoginFail), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                        Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.UsernameOrPassword_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
                         fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                         fancyToast.show();
                     }
@@ -149,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 } else {
-                    Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.LoginFail), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                    Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.UsernameOrPassword_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     fancyToast.show();
                 }
@@ -198,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             this.doubleBackToExitPressedOnce=true;
 
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.Exit_Back), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.TapAgainForExit_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
             fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             fancyToast.show();
             new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 1500);

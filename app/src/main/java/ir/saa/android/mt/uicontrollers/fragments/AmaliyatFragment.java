@@ -2,12 +2,10 @@ package ir.saa.android.mt.uicontrollers.fragments;
 
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,7 +32,6 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
-import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
@@ -70,14 +67,13 @@ public class AmaliyatFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
-    private void connectToModuleDialog(){
 
+    private void connectToModuleDialog(){
         progressDialog=new ProgressDialog(getContext());
-        progressDialog.setMessage(getResources().getText(R.string.Wait_Location));
-        progressDialog.setTitle(getResources().getText(R.string.ValidationLocation));
+        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
         progressDialog.setCancelable(true);
         progressDialog.show();
-
     }
 
     public void HideProgressDialog(){
@@ -175,7 +171,7 @@ public class AmaliyatFragment extends Fragment {
                             btnSaveResult.setVisibility(View.VISIBLE);
                         } else {
                             btnSaveResult.setVisibility(View.GONE);
-                            Toast.makeText(G.context, getResources().getText(R.string.TestFail), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(G.context, getResources().getText(R.string.TestResultNotExsist_msg), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -317,7 +313,7 @@ public class AmaliyatFragment extends Fragment {
                 }
             }
 
-            Toast.makeText(G.context, getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+            Toast.makeText(G.context, getResources().getText(R.string.SaveOperationSuccess_msg), Toast.LENGTH_SHORT).show();
 //Bastan Form Sabt
             G.fragmentNumStack.pop();
             G.startFragment(G.fragmentNumStack.pop(), true, null);
@@ -351,7 +347,7 @@ public class AmaliyatFragment extends Fragment {
         MyDialog myDialog=new MyDialog(this.getContext());
 
         myDialog.setTitle(getResources().getText(R.string.CancelTestProcessTitle).toString());
-        myDialog.addBodyText(getResources().getText(R.string.MessageCancelTest).toString(),18);
+        myDialog.addBodyText(getResources().getText(R.string.CancelTest_msg).toString(),18);
 
         myDialog.addButton(getResources().getText(R.string.Retry).toString(), new View.OnClickListener() {
             @Override

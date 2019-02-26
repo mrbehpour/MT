@@ -41,11 +41,11 @@ public class TestDisplayAdapter extends RecyclerView.Adapter<TestDisplayAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         TestResultItemDisplay current=mDataList.get(position);
-        holder.tvResultTitle.setText(current.FisrtTest==true? G.context.getResources().getText(R.string.TypeTest1_TestDisplayAdapter)
-                :G.context.getResources().getText(R.string.TypeTest2_TestDisplayAdapter));
+        holder.tvResultTitle.setText(current.FisrtTest==true? G.context.getResources().getText(R.string.FirstTest)
+                :G.context.getResources().getText(R.string.SecondTest));
         holder.tvResultError.setText(String.valueOf(current.ErrPerc));
-        holder.tvTestType.setText(current.Active==true?G.context.getResources().getText(R.string.ModelActive_TestDisplayAdapter)
-                :G.context.getResources().getText(R.string.ModelReActive_TestDisplayAdapter));
+        holder.tvTestType.setText(current.Active==true?G.context.getResources().getText(R.string.Active)
+                :G.context.getResources().getText(R.string.Reactive));
         holder.tvRowV_R.setText(current.AVRMS_Period1);
         holder.tvRowV_S.setText(current.BVRMS_Period1);
         holder.tvRowV_T.setText(current.CVRMS_Period1);

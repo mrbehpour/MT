@@ -96,11 +96,11 @@ public class MainActivity extends AppCompatActivity{
         }
         tvfRegion.setText("");
         if(G.getPref("RegionName")!=null){
-            String RegionName=getText(R.string.CaptionRegion)+" "+G.getPref("RegionName");
+            String RegionName=getText(R.string.RegionTitle)+" "+G.getPref("RegionName");
             tvfRegion.setText(RegionName);
         }
         else{
-            String RegionName=R.string.CaptionRegion+" ";
+            String RegionName=R.string.RegionTitle+" ";
             tvfRegion.setText(RegionName);
         }
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity{
             }
             this.doubleBackToExitPressedOnce=true;
 
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.Exit_Back), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.TapAgainForExit_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
             fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             fancyToast.show();
             new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 1500);

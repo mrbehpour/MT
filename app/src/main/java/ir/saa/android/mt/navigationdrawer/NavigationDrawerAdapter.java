@@ -1,17 +1,12 @@
 package ir.saa.android.mt.navigationdrawer;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,16 +15,11 @@ import java.util.List;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
-import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
-import ir.saa.android.mt.uicontrollers.activities.LoginActivity;
-import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
 
-import static android.content.Context.WINDOW_SERVICE;
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static ir.saa.android.mt.application.G.currentFragmentNum;
 
 
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.MyViewHolder> {
@@ -64,33 +54,33 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, holder.title.getText().toString(), Toast.LENGTH_SHORT).show();
-                if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem1))==0){
+                if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemBazdid))==0){
                     G.startFragment(FragmentsEnum.BazdidFragment,false,null);
-                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem2))==0){
+                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemReport))==0){
 
 //                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem3))==0){
 //                    G.startFragment(FragmentsEnum.ModuleFragment,false,null);
-                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem4))==0){
+                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemSetting))==0){
                     G.startFragment(FragmentsEnum.SettingFragment,false,null);
-                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem5))==0){
+                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemBaseInfo))==0){
                     Intent intent=new Intent(G.context,DaryaftActivity.class);
                     intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     G.context.startActivity(intent);
 //                    Activity activity=new DaryaftActivity();
 //                    activity.startActivity(intent);
 
-                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem6))==0){
+                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemRecieveJoints))==0){
                     Intent intent=new Intent(G.context, DaryaftMoshtarakinActivity.class);
                     intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     G.context.startActivity(intent);
 
-                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem7))==0){
+                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemSendJoints))==0){
 
                     Intent intent=new Intent(G.context,SendActivity.class);
                     intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     G.context.startActivity(intent);
 
-                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem8))==0){
+                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemExit))==0){
                     System.exit(0);
                 }
             }

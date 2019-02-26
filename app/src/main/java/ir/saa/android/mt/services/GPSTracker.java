@@ -182,14 +182,14 @@ public void setiLocationCallBack(ILocationCallBack iLocationCallBack){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(ContextFrag);
 
         // Setting Dialog Title
-        alertDialog.setTitle(ContextFrag.getResources().getText(R.string.Title_setting));
+        alertDialog.setTitle(ContextFrag.getResources().getText(R.string.GetLocationInProgress_msg));
 
         // Setting Dialog Message
         alertDialog
-                .setMessage(ContextFrag.getResources().getText(R.string.Message_Setting));
+                .setMessage(ContextFrag.getResources().getText(R.string.TurnOnGPSSetting_msg));
 
         // On pressing Settings button
-        alertDialog.setPositiveButton(ContextFrag.getResources().getText(R.string.Buttom_Setting),
+        alertDialog.setPositiveButton(ContextFrag.getResources().getText(R.string.LocationSetting),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(
@@ -199,7 +199,7 @@ public void setiLocationCallBack(ILocationCallBack iLocationCallBack){
                 });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton(ContextFrag.getResources().getText(R.string.Buttom_Cancel),
+        alertDialog.setNegativeButton(ContextFrag.getResources().getText(R.string.Cancel),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

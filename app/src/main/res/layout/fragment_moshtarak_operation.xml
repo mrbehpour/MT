@@ -26,7 +26,7 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="@string/bazrasi"/>
+        android:text="@string/Remark"/>
 
     <!-- Polomp Button-->
     <android.support.v7.widget.AppCompatButton
@@ -38,7 +38,7 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="@string/polomp"/>
+        android:text="@string/Polomb"/>
 
     <!-- Polomp Button-->
     <android.support.v7.widget.AppCompatButton
@@ -50,6 +50,6 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="@string/readmeter"/>
+        android:text="@string/Readmeter"/>
 
 </LinearLayout>

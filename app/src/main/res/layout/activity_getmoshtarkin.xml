@@ -91,7 +91,7 @@
                             android:layout_gravity="center_vertical|left"
                             android:textAlignment="gravity"
                             android:textColor="#4291f1"
-                            android:text="@string/darHaleDaryaft"
+                            android:text="@string/RecieveInProgress_msg"
                             android:visibility="invisible"/>
                         <!-- Title Lable -->
                         <TextView
@@ -143,7 +143,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/byekan"
-        android:text="@string/startDownloadHelp"
+        android:text="@string/TouchForDownloading_msg"
         android:textColor="@color/grey_600"
         android:gravity="center|bottom"
         android:textSize="11sp"/>

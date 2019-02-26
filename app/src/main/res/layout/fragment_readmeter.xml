@@ -6,134 +6,149 @@
     android:orientation="vertical"
     android:background="@color/grey_200">
 
-
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_margin="10dp"
-        android:orientation="horizontal"
-        app:cardElevation="2dp"
-        app:cardCornerRadius="4dp">
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RelativeLayout
+        <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="10dp"
                 android:orientation="horizontal"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp">
-                <TextView
-                    android:id="@+id/tvMeterCompany"
-                    android:layout_width="wrap_content"
+                app:cardElevation="2dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:layout_marginRight="10dp"
-                    android:gravity="center"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/grey_900"
-                    android:text="@string/sefr" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvMeterCompanyTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
-                    android:layout_marginRight="16dp"
-                    android:gravity="center"
-                    android:textAlignment="gravity"
-                    android:layout_toRightOf="@id/tvMeterCompany"
-                    android:textDirection="rtl"
-                    android:textColor="@color/grey_900"
-                    android:text="@string/meterCompany" />
+                    <!--meter company-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:paddingRight="16dp"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp">
+                        <TextView
+                            android:id="@+id/tvMeterCompany"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/grey_900"
+                            android:text="@string/DashSign" />
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvMeterCompanyTitle"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/byekan"
+                            android:background="@color/orange_200"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textDirection="rtl"
+                            android:textColor="@color/grey_900"
+                            android:text="@string/MeterCompany" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="horizontal"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp">
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvMeterType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/grey_900"
-                    android:text="@string/sefr" />
+                    <!--meter type-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:paddingRight="16dp"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp">
 
-                <TextView
-                    android:id="@+id/tvMeterTypeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
-                    android:layout_marginRight="16dp"
-                    android:gravity="center"
-                    android:textAlignment="gravity"
-                    android:layout_toRightOf="@id/tvMeterType"
-                    android:textDirection="rtl"
-                    android:textColor="@color/grey_900"
-                    android:text="@string/meterType"/>
+                        <TextView
+                            android:id="@+id/tvMeterType"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/grey_900"
+                            android:text="@string/DashSign" />
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvMeterTypeTitle"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/byekan"
+                            android:background="@color/orange_200"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textDirection="rtl"
+                            android:textColor="@color/grey_900"
+                            android:text="@string/MeterType"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="horizontal"
-                android:paddingRight="16dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp">
+                    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvMeterString"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:gravity="center"
-                    android:layout_marginRight="10dp"
-                    android:textAlignment="gravity"
-                    android:textColor="@color/grey_900"
-                    android:text="@string/sefr" />
+                    <!--meter string-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:paddingRight="16dp"
+                        android:paddingLeft="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp">
 
-                <TextView
-                    android:id="@+id/tvMeterStringTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
-                    android:textSize="14sp"
-                    android:layout_marginRight="16dp"
-                    android:gravity="center"
-                    android:textAlignment="gravity"
-                    android:layout_toRightOf="@id/tvMeterString"
-                    android:textDirection="rtl"
-                    android:textColor="@color/grey_900"
-                    android:text="@string/meterString"/>
+                        <TextView
+                            android:id="@+id/tvMeterString"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textColor="@color/grey_900"
+                            android:text="@string/DashSign" />
 
-            </RelativeLayout>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                        <TextView
+                            android:id="@+id/tvMeterStringTitle"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/byekan"
+                            android:background="@color/orange_200"
+                            android:textSize="14sp"
+                            android:gravity="center"
+                            android:textAlignment="gravity"
+                            android:textDirection="rtl"
+                            android:textColor="@color/grey_900"
+                            android:text="@string/MeterString"/>
 
-    <android.support.v7.widget.CardView
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:orientation="vertical">
+        <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -184,43 +199,915 @@
                         android:gravity="left"
                         android:textAlignment="gravity"
                         android:textColor="@color/grey_900"
-                        android:text="@string/sefr" />
+                        android:text="@string/Zero" />
                 </ScrollView>
             </RelativeLayout>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
         <ScrollView
             android:id="@+id/SCROLLER_ID"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:fillViewport="true">
-        <TextView
-            android:id="@+id/tvReaddata"
-            android:layout_above="@+id/btnRead"
+            <!--<TextView-->
+                <!--android:id="@+id/tvReaddata"-->
+                <!--android:layout_above="@+id/btnRead"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
+
+        <!-- Jadval Layout -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:background="@color/grey_400"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+            <!--RowTitle Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvValueColumn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_300"
+                    android:text="@string/Value" />
+
+                <!-- Obis Column -->
+                <TextView
+                    android:id="@+id/tvObisColumn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_300"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Obis" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvTitleColumn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_300"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Title" />
+            </LinearLayout>
+
+            <!--ACT1 Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvAct1Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvAct1Obis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+                <!-- Title Column -->
+
+                <TextView
+                    android:id="@+id/tvAct1Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_200"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Act1" />
+
+
+            </LinearLayout>
+
+            <!--ACT2 Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvAct2Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Obis Column -->
+                <TextView
+                    android:id="@+id/tvAct2Obis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvAct2Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_100"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Act2" />
+
+            </LinearLayout>
+
+            <!--ACT3 Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvAct3Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvAct3Obis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+                <!-- Title Column -->
+
+                <TextView
+                    android:id="@+id/tvAct3Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_200"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Act3" />
+
+
+            </LinearLayout>
+
+            <!-- ReACT Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvRActVal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Obis Column -->
+                <TextView
+                    android:id="@+id/tvRActObis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvRActTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_100"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Reactive" />
+
+            </LinearLayout>
+
+            <!--Dimand Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvDimVal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvDimObis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+                <!-- Title Column -->
+
+                <TextView
+                    android:id="@+id/tvDimTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_200"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Dimand" />
+
+
+            </LinearLayout>
+
+            <!--SN Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvSNVal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Obis Column -->
+                <TextView
+                    android:id="@+id/tvSNObis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvSNTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_100"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/SerialNumber" />
+
+            </LinearLayout>
+
+            <!--ActSum Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvActSumVal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvActSumObis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+                <!-- Title Column -->
+
+                <TextView
+                    android:id="@+id/tvActSumTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_200"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/ActiveSum" />
+
+
+            </LinearLayout>
+
+            <!--ReverseEnergy Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvRererseEnergyVal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Obis Column -->
+                <TextView
+                    android:id="@+id/tvRererseEnergyObis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvRererseEnergyTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_100"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/ReverseEnergy" />
+
+            </LinearLayout>
+
+            <!--ِDate Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvDateVal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvDateObis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+                <!-- Title Column -->
+
+                <TextView
+                    android:id="@+id/tvDateTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_200"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/MeterDate" />
+
+
+            </LinearLayout>
+
+            <!--Time Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvTimeVal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Obis Column -->
+                <TextView
+                    android:id="@+id/tvTimeObis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvTimeTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_100"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/MeterTime" />
+
+            </LinearLayout>
+
+            <!--RowTitle2 Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvValueColumn23"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_300"
+                    android:text="@string/PhaseT" />
+
+                <TextView
+                    android:id="@+id/tvValueColumn22"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_300"
+                    android:text="@string/PhaseS" />
+
+                <TextView
+                    android:id="@+id/tvValueColumn21"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_300"
+                    android:text="@string/PhaseR" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvTitleColumn2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_300"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Title" />
+            </LinearLayout>
+
+            <!--Volt Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvVolt3Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <TextView
+                    android:id="@+id/tvVolt2Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <TextView
+                    android:id="@+id/tvVolt1Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvVoltTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_100"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Volt" />
+            </LinearLayout>
+
+            <!--Amp Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Value Column -->
+                <TextView
+                    android:id="@+id/tvAmp3Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_800"
+                    android:background="@color/grey_100"
+                    android:text="@string/DashSign" />
+
+                <TextView
+                    android:id="@+id/tvAmp2Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+
+                <TextView
+                    android:id="@+id/tvAmp1Val"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:text="@string/DashSign" />
+
+                <!-- Title Column -->
+                <TextView
+                    android:id="@+id/tvAmpTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginLeft="1dp"
+                    android:textSize="14sp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_700"
+                    android:background="@color/grey_200"
+                    android:lines="2"
+                    android:maxLines="2"
+                    android:text="@string/Amp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
         </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnRead"
             android:fontFamily="@font/byekan"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_margin="16dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:layout_gravity="center"
             android:layout_alignParentBottom="true"
             android:textColor="#ffffff"
             android:textSize="16sp"
-            android:text="@string/Reconnect"/>
+            android:text="@string/Readmeter"/>
 
-    </RelativeLayout>
-
+    </LinearLayout>
 </LinearLayout>

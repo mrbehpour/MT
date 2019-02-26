@@ -34,7 +34,7 @@
                     android:id="@+id/tv3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/bluetooth"
+                    android:text="@string/Bluetooth"
                     android:textColor="@color/grey_900"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -59,7 +59,7 @@
             android:layout_marginRight="20dp"
             android:textColor="@color/grey_600"
             android:textSize="16sp"
-            android:text="@string/pairedDevicesforTest"/>
+            android:text="@string/PairedDevicesforTest"/>
 
         <!-- Spinner Paired -->
         <Spinner
@@ -91,7 +91,7 @@
             android:layout_marginRight="20dp"
             android:textColor="@color/grey_600"
             android:textSize="16sp"
-            android:text="@string/pairedDevicesforRead"/>
+            android:text="@string/PairedDevicesforRead"/>
 
         <!-- Spinner Paired -->
         <Spinner
@@ -117,7 +117,7 @@
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:visibility="gone"
-            android:text="@string/reset"/>
+            android:text="@string/Reset"/>
 
         <!-- Line -->
         <LinearLayout
@@ -136,7 +136,7 @@
             android:layout_marginRight="16dp"
             android:fontFamily="@font/byekan"
             android:textSize="16sp"
-            android:text="@string/serverAddress"/>
+            android:text="@string/ServerAddress"/>
         <EditText
             android:id="@+id/edtServerAddress"
             android:layout_width="match_parent"
@@ -147,7 +147,7 @@
             android:inputType="text"
             android:fontFamily="@font/byekan"
             android:textSize="12sp"
-            android:text="@string/http"/>
+            android:text="@string/Http"/>
 
         <!-- Line -->
         <LinearLayout
@@ -166,7 +166,7 @@
             android:fontFamily="@font/byekan"
             android:textSize="16sp"
             android:visibility="gone"
-            android:text="@string/mahdoode"/>
+            android:text="@string/RemarkValidDistance"/>
         <EditText
             android:id="@+id/edtMahdoode"
             android:layout_width="match_parent"
@@ -203,7 +203,7 @@
             android:layout_marginRight="16dp"
             android:fontFamily="@font/byekan"
             android:textSize="16sp"
-            android:text="@string/fontSize"/>
+            android:text="@string/FontSize"/>
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -218,7 +218,7 @@
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/byekan"
                 android:textSize="16sp"
-                android:text="@string/small"/>
+                android:text="@string/Small"/>
             <RadioButton
                 android:id="@+id/rbtNormal"
                 android:layout_width="fill_parent"
@@ -226,7 +226,7 @@
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/byekan"
                 android:textSize="16sp"
-                android:text="@string/normal"/>
+                android:text="@string/Middle"/>
             <RadioButton
                 android:id="@+id/rbtLarge"
                 android:layout_width="fill_parent"
@@ -234,7 +234,7 @@
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/byekan"
                 android:textSize="16sp"
-                android:text="@string/large"/>
+                android:text="@string/Large"/>
             <RadioButton
                 android:id="@+id/rbtHuge"
                 android:layout_width="fill_parent"
@@ -242,7 +242,7 @@
                 android:layoutDirection="rtl"
                 android:fontFamily="@font/byekan"
                 android:textSize="16sp"
-                android:text="@string/huge"/>
+                android:text="@string/VeryLarge"/>
         </RadioGroup>
 
         <!-- Spacer -->
@@ -262,6 +262,6 @@
             android:layout_gravity="center"
             android:textColor="#ffffff"
             android:textSize="16sp"
-            android:text="@string/zakhire"/>
+            android:text="@string/Save"/>
     </LinearLayout>
 </ScrollView>

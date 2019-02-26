@@ -18,7 +18,6 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
-import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.metertester.EnergiesState;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
@@ -101,7 +100,7 @@ public class TestEnergyViewModel extends AndroidViewModel {
                 G.startFragment(FragmentsEnum.AmaliyatFragment, false, bundle);
             } else {
                 //toast.makeText(G.context, G.context.getResources().getText(R.string.Arrow_Clamp), Toast.LENGTH_SHORT).show();
-                Toast fancyToast = FancyToast.makeText(G.context, (String) G.context.getResources().getText(R.string.Arrow_Clamp), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                Toast fancyToast = FancyToast.makeText(G.context, (String) G.context.getResources().getText(R.string.ClampDirectionError_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 fancyToast.show();
             }

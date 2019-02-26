@@ -4,15 +4,11 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 
 
 import com.google.gson.Gson;
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -288,7 +284,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     agentAccessListRepo.insertAgentAccessList(agentAccessLists.Data.get(i));
                     UsersProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
+                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg));
 
 
             }
@@ -308,7 +304,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     @Override
                     public void onError(Throwable e) {
                         //Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.FailSend));
+                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.RecieveProblem_msg));
                     }
                 });
 
@@ -329,7 +325,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                             for (Integer i = 0; i < settings.Data.size(); i++) {
                                 settingRepo.insertSetting(settings.Data.get(i));
                                 settingProgressPercentLiveData.postValue(getPrecent(i + 1, settings.Data.size()));
-                                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
+                                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg));
                             }
                         }else{
                             messageErrorLiveData.postValue(settings.Message);
@@ -342,7 +338,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     @Override
                     public void onError(Throwable e) {
 
-                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.FailSend));
+                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.RecieveProblem_msg));
                     }
                 })
         ;
@@ -366,7 +362,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                                 clientProgressPercentLiveData.postValue(getPrecent(i + 1, clients.Data.size()));
 
                             }
-                            messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
+                            messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg));
                         }else {
                             messageErrorLiveData.postValue(clients.Message);
                         }
@@ -376,7 +372,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     @Override
                     public void onError(Throwable e) {
 
-                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.FailSend));
+                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.RecieveProblem_msg));
                     }
 
                 });
@@ -576,7 +572,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     polompTypeRepo.insertPolompType(polompTypes.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
-                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
+                messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg));
 
 
             }
@@ -596,7 +592,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     @Override
                     public void onError(Throwable e) {
                         // Toast.makeText(getApplication().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.FailSend));
+                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.RecieveProblem_msg));
                     }
                 });
 

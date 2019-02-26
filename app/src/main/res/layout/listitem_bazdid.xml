@@ -41,7 +41,7 @@
                     android:textColor="@color/grey_900"
                     android:textAlignment="gravity"
                     android:gravity="right"
-                    android:text="@string/dash"
+                    android:text="@string/DashSign"
                     android:layout_weight="1"/>
                 <!-- Name Lable -->
                 <TextView
@@ -51,7 +51,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/nameMoshtarak" />
+                    android:text="@string/JointName" />
             </LinearLayout>
 
             <!-- Shomare Badane Layout -->
@@ -71,7 +71,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_500"
-                    android:text="@string/dash" />
+                    android:text="@string/DashSign" />
                 <!-- Shomare Badane Lable -->
                 <TextView
                     android:id="@+id/tvUniqueTitle"
@@ -80,7 +80,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_500"
-                    android:text="@string/shomareBadane2" />
+                    android:text="@string/SerialNumber" />
             </LinearLayout>
 
             <!-- Address Layout-->
@@ -100,7 +100,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="12sp"
                     android:textColor="@color/grey_500"
-                    android:text="@string/dash" />
+                    android:text="@string/DashSign" />
                 <!-- Address Lable -->
                 <TextView
                     android:id="@+id/tvLableAddress"
@@ -109,7 +109,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="12sp"
                     android:textColor="@color/grey_500"
-                    android:text="@string/address" />
+                    android:text="@string/Address" />
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -174,7 +174,7 @@
                 android:fontFamily="@font/byekan"
                 android:textSize="16sp"
                 android:textColor="@color/grey_700"
-                android:text="@string/dash"/>
+                android:text="@string/DashSign"/>
         </LinearLayout>
     </LinearLayout>
 

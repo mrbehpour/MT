@@ -69,8 +69,8 @@ public class BazrasiFragment extends Fragment  {
     private void connectToModuleDialog(){
 
         progressDialog=new ProgressDialog(getContext());
-        progressDialog.setMessage(getResources().getText(R.string.Wait_Location));
-        progressDialog.setTitle(getResources().getText(R.string.ValidationLocation));
+        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
         progressDialog.setCancelable(true);
         progressDialog.show();
 
@@ -140,7 +140,7 @@ public class BazrasiFragment extends Fragment  {
                                     //myCheckList.setSelectionByValue(Integer.valueOf(current.remarkValue));
 
 
-                                    dialog.addButton(G.context.getResources().getString(R.string.BazrasiAdapter_BtnSave), new View.OnClickListener() {
+                                    dialog.addButton(G.context.getResources().getString(R.string.Save), new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             objects = myCheckList.getSelectedItemsValues();
@@ -157,7 +157,7 @@ public class BazrasiFragment extends Fragment  {
                                             }
                                             if(objectAnswer!=null) {
                                                 //Toast.makeText(getContext(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
-                                                Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                                                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                                 fancyToast.show();
                                             }
@@ -235,7 +235,7 @@ public class BazrasiFragment extends Fragment  {
 
         bazrasiViewModel.getRemarks(G.clientInfo.GroupId).observe(this, remarkItems -> {
             if(remarkItems.size()==0){
-                Toast fancyToast= FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageNoData),FancyToast.LENGTH_SHORT,FancyToast.WARNING,false);
+                Toast fancyToast= FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.RemarkDataNotFound_msg),FancyToast.LENGTH_SHORT,FancyToast.WARNING,false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 fancyToast.show();
                 return;

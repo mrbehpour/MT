@@ -41,5 +41,5 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="@string/ersalEtelat"/>
+        android:text="@string/SendData"/>
 </LinearLayout>

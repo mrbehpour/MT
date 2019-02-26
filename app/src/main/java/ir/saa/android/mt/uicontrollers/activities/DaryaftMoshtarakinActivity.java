@@ -1,6 +1,5 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
-import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.res.Configuration;
@@ -139,7 +138,7 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
             public void onClick(View view) {
                 List<Bazdid> bazdids=baseInfoViewModel.getBazdidIsSend(false);
                 if(bazdids.size()!=0){
-                    Toast fancyToast= FancyToast.makeText(DaryaftMoshtarakinActivity.this, (String) getResources().getText(R.string.Message_CheckSend),FancyToast.LENGTH_SHORT,FancyToast.INFO,false);
+                    Toast fancyToast= FancyToast.makeText(DaryaftMoshtarakinActivity.this, (String) getResources().getText(R.string.CantGetNewJob_msg),FancyToast.LENGTH_SHORT,FancyToast.INFO,false);
                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     fancyToast.show();
                     return;
