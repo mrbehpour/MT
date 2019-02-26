@@ -26,7 +26,7 @@
                 android:gravity="center_horizontal|center_vertical"
                 android:textAlignment="gravity"
                 android:textColor="@color/grey_900"
-                android:text="@string/CaptionSanjesh" />
+                android:text="@string/Sanjesh" />
 
         </LinearLayout>
 
@@ -61,7 +61,7 @@
                     android:background="@color/grey_300"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/onvan" />
+                    android:text="@string/Title" />
 
                 <!-- R Column -->
                 <TextView
@@ -77,7 +77,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_800"
                     android:background="@color/grey_300"
-                    android:text="@string/R" />
+                    android:text="@string/PhaseR" />
 
                 <!-- S Column -->
                 <TextView
@@ -93,7 +93,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_800"
                     android:background="@color/grey_300"
-                    android:text="S" />
+                    android:text="@string/PhaseS" />
 
                 <!-- T Column -->
                 <TextView
@@ -107,7 +107,7 @@
                     android:background="@color/grey_300"
                     android:fontFamily="@font/byekan"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/T"
+                    android:text="@string/PhaseT"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_800"
                     android:textSize="14sp" />
@@ -134,7 +134,7 @@
                     android:background="@color/grey_200"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/voltazhV" />
+                    android:text="@string/Volt" />
 
                 <!-- R Column -->
                 <TextView
@@ -151,7 +151,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -167,7 +167,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
                 <TextView
@@ -183,7 +183,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_I Layout -->
@@ -207,7 +207,7 @@
                     android:background="@color/grey_100"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/jaryanI" />
+                    android:text="@string/AmpA" />
 
                 <!-- R Column -->
 
@@ -225,7 +225,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -241,7 +241,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
                 <TextView
@@ -257,7 +257,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_P Layout -->
@@ -281,7 +281,7 @@
                     android:background="@color/grey_200"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/tavanP" />
+                    android:text="@string/PowerP" />
 
                 <!-- R Column -->
                 <TextView
@@ -298,7 +298,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -314,7 +314,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
 
@@ -331,7 +331,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_Q Layout -->
@@ -355,7 +355,7 @@
                     android:background="@color/grey_100"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/tavanQ" />
+                    android:text="@string/PowerQ" />
 
                 <!-- R Column -->
                 <TextView
@@ -372,7 +372,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -388,7 +388,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
 
@@ -405,7 +405,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_S Layout -->
@@ -429,7 +429,7 @@
                     android:background="@color/grey_200"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/tavanS" />
+                    android:text="@string/PowerS" />
 
                 <!-- R Column -->
                 <TextView
@@ -446,7 +446,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -462,7 +462,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
 
@@ -479,7 +479,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_PF Layout -->
@@ -504,7 +504,7 @@
                     android:background="@color/grey_100"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/zaribPF" />
+                    android:text="@string/PFactCoeff" />
 
                 <!-- R Column -->
 
@@ -523,7 +523,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
                 <!-- S Column -->
                 <TextView
                     android:id="@+id/tvRowPF_S"
@@ -539,7 +539,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
                 <TextView
@@ -556,7 +556,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
         </LinearLayout>
 

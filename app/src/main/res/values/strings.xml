@@ -5,41 +5,7 @@
     <string name="font_home">fonts/B_Koodak_Bold.ttf</string>
     <string name="font_default">fonts/B_Yekan.ttf</string>
 
-    <!--Drawer Menu-->
-    <string name="menuItem1">بازدید</string>
-    <string name="menuItem2">گزارشات</string>
-    <string name="menuItem3">ارتباط با ماژول</string>
-    <string name="menuItem4">تنظیمات</string>
-    <string name="menuItem5">دریافت اطلاعات پایه</string>
-    <string name="menuItem6">دریافت مشترکین</string>
-    <string name="menuItem7">ارسال</string>
-    <string name="menuItem8">خروج</string>
-
-    <!--،Toast Masseage -->
-    <string name="backMessage">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
-    <string name="CaptionRegion">منطقه : </string>
-    <string name="MessageSuccess">اطلاعات با موفقیت ثبت شد</string>
-    <string name="ServerError">پیغام سرور</string>
-    <string name="MessageCount">اطلاعات %1$s مشترک از %2$s مشترک در سایت ثبت نشده است  </string>
-
-    <!--BazrasiAdapter-->
-    <string name="BazrasiAdapter_BtnSave">ذخیره</string>
-    <string name="Submit">تایید</string>
-    <string name="Error">پیام دریافت شده از سایت</string>
-
-    <!--TestDisplayAdapter-->
-    <string name="TypeTest1_TestDisplayAdapter">تست 1</string>
-    <string name="TypeTest2_TestDisplayAdapter">تست 2</string>
-    <string name="ModelActive_TestDisplayAdapter">اکتیو</string>
-    <string name="ModelReActive_TestDisplayAdapter">راکتیو</string>
-
-    <!--TestResultAdapter-->
-    <string name="ERR_TestResultAdapter">درصد خطا</string>
-    <string name="DateTest_TestResultAdapter">زمان تست</string>
-    <string name="TypeDateTest_TestResultAdapter">میلی ثانیه</string>
-
     <!--Fragmet Name-->
-
     <string name="Setting_G">تنظیمات</string>
     <string name="Bazdid_G">بازدید</string>
     <string name="Module_G">ارتباط با ماژول</string>
@@ -51,6 +17,17 @@
     <string name="Bazrasi_G">بازرسی</string>
     <string name="Readmeter_G">خواندن کنتور</string>
     <string name="Sanjesh_G">پارامترهای الکتریکی</string>
+
+    <!--Drawer Menu-->
+    <string name="menuItemBazdid">بازدید</string>
+    <string name="menuItemReport">گزارشات</string>
+    <string name="menuItemConnectModule">ارتباط با ماژول</string>
+    <string name="menuItemSetting">تنظیمات</string>
+    <string name="menuItemBaseInfo">دریافت اطلاعات پایه</string>
+    <string name="menuItemRecieveJoints">دریافت مشترکین</string>
+    <string name="menuItemSendJoints">ارسال</string>
+    <string name="menuItemExit">خروج</string>
+
     <!--Month-->
     <string name="Farvardin_Tarikh">فروردین</string>
     <string name="Ordi_Tarikh">اردیبهشت</string>
@@ -66,278 +43,248 @@
     <string name="Esfand_Tarikh">اسفند</string>
 
     <!--WeekDay-->
+    <string name="Sat_Tarikh">شنبه</string>
     <string name="Sun_Tarikh">یکشنبه</string>
     <string name="Mon_Tarikh">دوشنبه</string>
     <string name="Tue_Tarikh">سه شنبه</string>
     <string name="Wed_Tarikh">چهارشنبه</string>
     <string name="Thu_Tarikh">پنج شنبه</string>
     <string name="Fri_Tarikh">جمعه</string>
-    <string name="Sat_Tarikh">شنبه</string>
 
-    <!--Login-->
-    <string name="LoginFail">نام کاربری یا کلمه عبور اشتباه است</string>
-    <string name="Exit_Back">برای خروج دوبار کلیک کنید</string>
+    <!--*******************-->
+    <!--،Toast Masseage -->
+    <string name="SaveOperationSuccess_msg">اطلاعات با موفقیت ثبت شد</string>
+    <string name="WaitForRecieveData_msg">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
+    <string name="JointsSaveNum_msg">اطلاعات %1$s مشترک از %2$s مشترک در سایت ثبت نشده است</string>
+    <string name="ServerError_msg">پیام خطای سرور</string>
+    <string name="PleaseEneter_msg">لطفا برای %s مقدار معتبر وارد کنید</string>
+    <string name="ConntecInternet_msg">لطفا دستگاه را به اینترنت متصل کنید</string>
+    <string name="AccessServerError_msg">دسترسی به آدرس امکان پذیر نیست</string>
+    <string name="GetRegionFromServer_msg">در حال دریافت داده ها از سرور</string>
+    <string name="UsernameOrPassword_msg">نام کاربری یا کلمه عبور اشتباه است</string>
+    <string name="TapAgainForExit_msg">برای خروج دوبار کلیک کنید</string>
+    <string name="PolombDataNotFound_msg">اطلاعات پلمپ یافت نشد</string>
+    <string name="RemarkDataNotFound_msg">اطلاعات بازرسی یافت نشد</string>
+    <string name="TestResultNotExsist_msg">هیچ نتیجه تستی وجود ندارد.</string>
+    <string name="LocationNotFound_msg">"موقعیت مکانی یافت نشد."</string>
+    <string name="TurnOnInternet_msg">لطفا برای موقعیت یابی دقیق تر اینترنت خط دستگاه خود را روشن نمایید.</string>
+    <string name="TurnOnGPSSetting_msg">موقعیت یاب دستگاه فعال نمی باشد،آیا مایلید به منو تنظیمات بروید؟</string>
+    <string name="GetLocationInProgress_msg">در حال دریافت موقعیت مکانی</string>
+    <string name="PleaseWait_msg">لطفا منتظر بمانید...</string>
+    <string name="ErrorInConnect_msg">خطا در اتصال به دستگاه</string>
+    <string name="ClampDirectionError_msg">جهت کلمپ ها یکسان نیست</string>
+    <string name="RecieveInProgress_msg">در حال دریافت...</string>
+    <string name="TouchForDownloading_msg">جهت شروع دریافت،کلیک کنید</string>
+    <string name="CantGetNewJob_msg">شما قادر به گرفتن کار جدید نمی باشید چون هنوز اطلاعات بطور کامل ارسال نشده است</string>
+    <string name="RecieveProblem_msg">دریافت با مشکل مواجه شد</string>
+    <string name="LoginProblem_msg">نمی توانید وارد شوید؟</string>
+    <string name="Error_msg">پیام دریافت شده از سایت</string>
+    <string name="FillOldAndNewPlombInfo_msg">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
+    <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
+    <string name="Downloding_msg">Downloading data,Please wait..</string>
+    <!--*******************-->
 
-    <!--Amaliyat-->
-    <string name="TestFail">هیچ نتیجه تستی وجود ندارد.</string>
+    <!--TestResultAdapter-->
+    <string name="ErrorPercent">درصد خطا</string>
+    <string name="TestDuraion">زمان تست</string>
+    <string name="TypeDateTest_TestResultAdapter">میلی ثانیه</string>
 
     <!--Bazdid-->
-    <string name="UniqField">اشتراک : </string>
+    <string name="UniqeField">اشتراک</string>
 
     <!--DisplayTestFragment-->
     <string name="Test">تست</string>
     <string name="TestResult">نمایش سابقه تست</string>
 
-    <!--Moshtarak Detail-->
-    <string name="SingleFaz">تکفاز</string>
-    <string name="ThreeFaz">سه فاز</string>
-
     <!--MoshtarakFragment_Tab-->
-    <string name="Tab_Amaliyat">عملیات</string>
-    <string name="Tab_Detail">جزییات</string>
+    <string name="Operation">عملیات</string>
+    <string name="Detail">جزئیات</string>
 
     <!--TestContorFragment-->
-    <string name="ValidationConnect">اتصال به دستگاه تست کنتور</string>
-    <string name="Wait_Connect">لطفا منتظر بمانید تا اتصال برقرار شود...</string>
-
-    <string name="ZaribContor_Message">لطفا ضریب کنتور را وارد کنید</string>
-    <string name="SabetContor_Message">لطفا ثابت کنتور را وارد کنید</string>
-    <string name="NesbatSensor_Message">لطفا نسبت سنسور را وارد کنید</string>
-    <string name="TedadDore_Message">لطفا تعداد دور را وارد نکنید</string>
-    <string name="ZaribContor_Message_Zero">لطفا ضریب کنتور را صفر وارد نکنید</string>
-    <string name="SabetContor_Message_Zero">لطفا ثابت کنتور را صفر وارد نکنید</string>
-    <string name="NesbatSensor_Message_Zero">لطفا نسبت سنسور را صفر وارد نکنید</string>
-    <string name="TedadDore_Message_Zero">لطفا تعداد دور را صفر وارد نکنید</string>
-    <!--GetInformation-->
-    <string name="FailSend">دریافت با مشکل مواجه شد</string>
+    <string name="ConnectToTestModule">اتصال به دستگاه تست کنتور</string>
 
     <!--GetInformation-->
-
-
-    <string name="Non">ندارد</string>
     <string name="AdminName">مدیر سیستم</string>
-
-    <string name="ErrorInConnect">خطا در اتصال به دستگاه</string>
-    <string name="Arrow_Clamp">جهت کلمپ ها یکسان نیست</string>
-
-    <!-- Layouts persian texts-->
-    <!-- activity_baseinfo -->
-    <string name="darHaleDaryaft">در حال دریافت...</string>
-    <string name="daryaftPayeh">دریافت اطلاعات پایه</string>
-    <string name="daryaftTenzimat">دریافت تنظیمات</string>
-    <string name="dryaftKarbaran">دریافت کاربران</string>
-    <string name="startDownloadHelp">جهت شروع دریافت، قسمت مربوطه را لمس نمایید</string>
-    <string name="Message_CheckSend">شما قادر به گرفتن کار جدید نمی باشید چون هنوز اطلاعات بطور کامل ارسال نشده است</string>
 
     <!-- activity_getmoshtarakin -->
     <string name="omoorMarboote">امور مربوطه:</string>
     <string name="daryaftMoshtarakin">دریافت مشترکین</string>
 
     <!-- activity_login -->
-    <string name="vorood">ورود</string>
-    <string name="nemitavanidVaredShavid">نمی توانید وارد شوید؟</string>
-    <string name="shomareSerial">شماره سریال</string>
-    <string name="sanjesh">Sanjesh Afzar Asia Co LTD.</string>
+    <string name="LogIn">ورود</string>
+    <string name="DeviceIMEI">شماره سریال</string>
+    <string name="SAA_Company">Sanjesh Afzar Asia Co LTD.</string>
 
     <!-- activity_send -->
-    <string name="ersalEtelat">ارسال اطلاعات</string>
+    <string name="SendData">ارسال اطلاعات</string>
 
     <!-- fragment_amaliyat -->
-    <string name="darsadKhata">درصد خطا:</string>
-    <string name="sefr">0</string>
-    <string name="tedadDorTest">تعداد دور تست:</string>
-    <string name="zakhireNatayej">ذخیره نتایج</string>
-    <string name="payanNatayej">پایان و مشاهده نتایج</string>
-    <string name="startTest">شروع تست</string>
+    <string name="Zero">0</string>
+    <string name="ShowTestResult">پایان و مشاهده نتایج</string>
 
     <!-- fragment_bazrasi -->
-    <string name="zakhire">ذخیره</string>
-    <string name="selectAll">انتخاب همه</string>
-    <string name="MessageNoData">اطلاعات بازرسی یافت نشد</string>
+    <string name="SelectAll">انتخاب همه</string>
 
     <!-- fragment_module -->
-    <string name="bluetooth">بلوتوث</string>
-    <string name="pairedDevicesforTest">دستگاه های pair شده برای تست:</string>
-    <string name="pairedDevicesforRead">دستگاه های pair شده برای قرائت:</string>
+    <string name="Bluetooth">بلوتوث</string>
+    <string name="PairedDevicesforTest">دستگاه های pair شده برای تست:</string>
+    <string name="PairedDevicesforRead">دستگاه های pair شده برای قرائت:</string>
     <string name="Buzzer">Buzzer</string>
-    <string name="deviceVoiceOnOff">روشن و خاموش کردن صدای دستگاه</string>
+    <string name="DeviceVoiceOnOff">روشن و خاموش کردن صدای دستگاه</string>
+    <string name="DeviceLightOnOff">روشن و خاموش کردن چراغ های دستگاه</string>
     <string name="LED">LED</string>
-    <string name="deviceLightOnOff">روشن و خاموش کردن چراغ های دستگاه</string>
-    <string name="reset">ریست</string>
+
+    <string name="Reset">ریست</string>
 
     <!-- fragment_moshtarak_detail -->
-    <string name="dash">-</string>
-    <string name="eshterak">اشتراک</string>
-    <string name="shenasae">شناسایی</string>
-    <string name="parvande">پرونده</string>
-    <string name="ramz">رمز</string>
-    <string name="shomareBadane">شماره بدنه</string>
-    <string name="noeKontor">نوع کنتور</string>
-    <string name="amper">آمپراژ</string>
-    <string name="noeTarefe">نوع تعرفه</string>
-    <string name="noeVoltazh">نوع ولتاژ</string>
-    <string name="ghodrat">قدرت قرارداد</string>
-    <string name="dimandMojaz">دیماند مجاز</string>
-    <string name="motevasetMasraf">متوسط مصرف</string>
-    <string name="masrafeAkhar">مصرف دوره آخر</string>
-    <string name="kilowatAkhar">کیلو وات دوره آخر</string>
-    <string name="zaribeKontor">ضریب کنتور</string>
-    <string name="tedadActive">تعداد ارقام اکتیو</string>
-    <string name="tedadReactive">تعداد ارقام راکتیو</string>
-    <string name="serialReactive">سریال راکتیو</string>
-    <string name="tarikheEnsheab">تاریخ انشعاب</string>
-    <string name="telephone">تلفن</string>
-    <string name="codePosti">کد پستی</string>
-    <string name="codeTarefe">کد تعرفه</string>
+    <string name="PlusSign">+</string>
+    <string name="DashSign">-</string>
+    <string name="Eshterak">اشتراک</string>
+    <string name="Shenas">شناسایی</string>
+    <string name="Parvande">پرونده</string>
+    <string name="Ramz">رمز</string>
+    <string name="SerialNumber">شماره بدنه</string>
+    <string name="TariffType">نوع تعرفه</string>
+    <string name="VoltType">نوع ولتاژ</string>
+    <string name="ContractPower">قدرت قرارداد</string>
+    <string name="ContarctDimand">دیماند مجاز</string>
+    <string name="UseAvrage">متوسط مصرف</string>
+    <string name="LastCycleUsage">مصرف دوره آخر</string>
+    <string name="LastCycleKwatt">کیلو وات دوره آخر</string>
+    <string name="ActiveNum">تعداد ارقام اکتیو</string>
+    <string name="ReactiveNum">تعداد ارقام راکتیو</string>
+    <string name="SerialNumberReactive">سریال راکتیو</string>
+    <string name="BranchInstallDate">تاریخ انشعاب</string>
+    <string name="Tel">تلفن</string>
+    <string name="PostalCode">کد پستی</string>
+    <string name="TariffCode">کد تعرفه</string>
+    <string name="JointName">نام مشترک: </string>
+    <string name="Address">آدرس</string>
 
     <!-- fragment_moshtarak_operation -->
-    <string name="bazrasi">بازرسی</string>
-    <string name="polomp">پلمپ</string>
-    <string name="readmeter">خواندن کنتور</string>
-    <!--PolompFragment-->
-    <string name="MessageNoDataPolomp">اطلاعات پلمپ یافت نشد</string>
+    <string name="Remark">بازرسی</string>
+    <string name="Polomb">پلمپ</string>
+    <string name="Readmeter">خواندن کنتور</string>
 
     <!-- fragment_polomp_save -->
-    <string name="polompGhadim">پلمپ قدیم</string>
-    <string name="shomarePolomp">شماره پلمپ :</string>
-    <string name="modelPolomp">مدل پلمپ:</string>
-    <string name="rangPolomp">رنگ پلمپ:</string>
-    <string name="nadarad">ندارد</string>
-    <string name="polompJadid">پلمپ جدید</string>
-    <string name="nakhana">ناخوانا</string>
-    <string name="ConfirmMessage">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
+    <string name="OldPolomb">پلمپ قدیم</string>
+    <string name="NewPolomb">پلمپ جدید</string>
+    <string name="PolompNumber">شماره پلمپ</string>
+    <string name="PolombModel">مدل پلمپ</string>
+    <string name="PolombColor">رنگ پلمپ</string>
+    <string name="NotExsist">ندارد</string>
+    <string name="RegionTitle">منطقه</string>
+    <string name="Unreadable">ناخوانا</string>
+
     <!-- fragment_test -->
-    <string name="sabteMane">ثبت مانع</string>
-    <string name="anjamTest">انجام تست</string>
+    <string name="SaveBarrier">ثبت مانع</string>
+    <string name="StartTest">شروع تست</string>
 
     <!-- fragment_test_contor -->
-    <string name="active">اکتیو</string>
-    <string name="reactive">راکتیو</string>
-    <string name="takFaz">تک فاز</string>
-    <string name="seFaz">سه فاز</string>
-    <string name="testAval">تست اول</string>
-    <string name="testDovom">تست دوم</string>
-    <string name="zaribKontor">ضریب کنتور</string>
-    <string name="sabetKontor">ثابت کنتور</string>
-    <string name="nesbatSensor">نسبت سنسور</string>
-    <string name="tedadDor">تعداد دور</string>
-    <string name="sabteKhata99">ثبت خطای %99-</string>
-    <string name="taeed">تأیید</string>
+    <string name="Active">اکتیو</string>
+    <string name="Reactive">راکتیو</string>
+    <string name="OnePhase">تک فاز</string>
+    <string name="ThreePhase">سه فاز</string>
+    <string name="FirstTest">تست اول</string>
+    <string name="SecondTest">تست دوم</string>
+    <string name="MeterCoeff">ضریب کنتور</string>
+    <string name="MeterConst">ثابت کنتور</string>
+    <string name="SensorRate">نسبت سنسور</string>
+    <string name="ErrorPercent99">ثبت خطای %99-</string>
     <string name="getRegion">مرحله بعد</string>
-    <string name="meterCompany">سازنده کنتور</string>
-    <string name="autoPaulser">پالسر دستی</string>
+    <string name="MeterCompany">سازنده کنتور</string>
+    <string name="MeterType">مدل کنتور</string>
+    <string name="ManualPaulser">پالسر دستی</string>
+    <string name="AutoPaulser">پالسر اتوماتیک</string>
+    <string name="MeterString">رشته کنتور</string>
 
-    <string name="manualPaulser">پالسر اتوماتیک</string>
-    <string name="meterType">مدل کنتور</string>
-
-    <string name="meterString">رشته کنتور</string>
-
-    <!-- fragment_test_energy -->
-    <string name="plus">+</string>
-
-    <!-- listitem_bazdid -->
-    <string name="nameMoshtarak">نام مشترک: </string>
-    <string name="shomareBadane2">شماره بدنه: </string>
-    <string name="address">آدرس: </string>
+    <!-- fragment_readmeter -->
+    <string name="Obis">کد ابیس</string>
+    <string name="Act1">اکتیو 1</string>
+    <string name="Act2">اکتیو 2</string>
+    <string name="Act3">اکتیو 3</string>
+    <string name="Dimand">دیماند</string>
+    <string name="ActiveSum">اکتیو مجموع</string>
+    <string name="ReverseEnergy">انرژی برگشتی</string>
+    <string name="MeterDate">تاریخ(ساعت)</string>
+    <string name="MeterTime">ساعت</string>
 
     <!-- listitem_bazrasi -->
-    <string name="soalBazrasi">سوال بازرسی</string>
+    <string name="RemarkQuestion">سوال بازرسی</string>
 
     <!-- listitem_test_display -->
-    <string name="noeTest">نوع تست</string>
-    <string name="darsadKhata2">درصد خطای محاسبه شده :</string>
-    <string name="noeTest2">نوع تست :</string>
-    <string name="RoundNum">تعداد دور :</string>
-    <string name="DateTime">تاریخ و ساعت تست :</string>
-    <string name="Time_Period">مدت زمان تست :</string>
-    <string name="onvan">عنوان</string>
-    <string name="R">R</string>
-    <string name="S">S</string>
-    <string name="T">T</string>
-    <string name="voltazhV">(Volt) ولتاژ</string>
-    <string name="jaryanI">جریان (Amp)</string>
-    <string name="tavanP">توان اکتیو (Watt)</string>
-    <string name="tavanQ">توان راکتیو (Var)</string>
-    <string name="tavanS">توان ظاهری (VA)</string>
-    <string name="zaribPF">ضریب قدرت </string>
-    <string name="VahedTest"> ثانیه </string>
-    <string name="CaptionSanjesh">پارامترهای ااکتریکی</string>
-
+    <string name="ErrPercent">درصد خطا</string>
+    <string name="TestType">نوع تست</string>
+    <string name="RoundNum">تعداد دور</string>
+    <string name="Sensor">سنسور</string>
+    <string name="TestDateTime">تاریخ و ساعت تست</string>
+    <string name="TestDuration">مدت زمان تست</string>
+    <string name="Title">عنوان</string>
+    <string name="Value">مقدار</string>
+    <string name="PhaseR">R</string>
+    <string name="PhaseS">S</string>
+    <string name="PhaseT">T</string>
+    <string name="Volt">(V) ولتاژ</string>
+    <string name="Amp">آمپراژ (I)</string>
+    <string name="PowerP">توان اکتیو (P)</string>
+    <string name="PowerQ">توان راکتیو (Q)</string>
+    <string name="PowerS">توان ظاهری (S)</string>
+    <string name="PFactCoeff">ضریب قدرت (PF)</string>
+    <string name="VahedTest">ثانیه</string>
 
     <!-- listitem_test_result -->
-    <string name="zamanTest">زمان تست</string>
-    <string name="darsadKhata3">درصد خطا</string>
-    <string name="v2">V:</string>
-    <string name="voltazhC">ولتاژ فاز C</string>
-    <string name="voltazhB">ولتاژ فاز B</string>
-    <string name="voltazhA">ولتاژ فاز A</string>
-    <string name="I2">I:</string>
-    <string name="jaryanC">جریان فاز C</string>
-    <string name="jaryanB">جریان فاز B</string>
-    <string name="jaryanA">جریان فاز A</string>
-    <string name="PF2">PF:</string>
-    <string name="zaribC">ضریب توان C</string>
-    <string name="zaribB">ضریب توان B</string>
-    <string name="zaribA">ضریب توان A</string>
-
-    <!-- progress_dialog_layout -->
-    <string name="downloding">Downloading data. Please wait..</string>
+    <string name="VoltTitle">V</string>
+    <string name="VoltC">ولتاژ فاز C</string>
+    <string name="VoltB">ولتاژ فاز B</string>
+    <string name="VoltA">ولتاژ فاز A</string>
+    <string name="AmpTitle">I</string>
+    <string name="AmpC">جریان فاز C</string>
+    <string name="AmpB">جریان فاز B</string>
+    <string name="AmpA">جریان فاز A</string>
+    <string name="PowerFactor">PF</string>
+    <string name="PowerCoeffC">ضریب توان C</string>
+    <string name="PowerCoeffB">ضریب توان B</string>
+    <string name="PowerCoeffA">ضریب توان A</string>
 
     <!-- fragment_home -->
-    <string name="tozih_ersal">ارسال اطلاعات به سرور</string>
-    <string name="tozih_gozareshat">مشاهده گزارش های تست و بازرسی</string>
-    <string name="tozih_bazdid">بخش بازدید از کنتور مشترک</string>
-    <string name="tozih_settings">بخش تنظیمات مربوط به نرم افزار</string>
-    <string name="tozih_daryaftmoshtarakin">دریافت لیست مشترکین از سرور</string>
-    <string name="tozih_daryaftpayeh">دریافت اطلاعات پایه از سرور</string>
-    <string name="sanjesht">سنجش</string>
-    <string name="tozih_sanjesh">صحت سنجی بخش های مختلف تست</string>
-
+    <string name="SendingDes">ارسال اطلاعات به سرور</string>
+    <string name="ReportDes">مشاهده گزارش های تست و بازرسی</string>
+    <string name="BazdidDes">بخش بازدید از کنتور مشترک</string>
+    <string name="SettingDes">بخش تنظیمات مربوط به نرم افزار</string>
+    <string name="RecieveJointsDes">دریافت لیست مشترکین از سرور</string>
+    <string name="RecieveBaseInfoDes">دریافت اطلاعات پایه از سرور</string>
+    <string name="Sanjesh">پارامترهای الکتریکی</string>
+    <string name="SanjeshDes">صحت سنجی بخش های مختلف تست</string>
 
     <!-- fragment_settings -->
-    <string name="serverAddress">آدرس سرور:</string>
-    <string name="http">http://</string>
-    <string name="fontSize">سایز فونت:</string>
-    <string name="small">کوچک</string>
-    <string name="normal">متوسط</string>
-    <string name="large">بزرگ</string>
-    <string name="huge">بزرگ تر</string>
-    <string name="mahdoode">محدوده مجاز میان بازرسی ها (متر):</string>
+    <string name="ServerAddress">آدرس سرور</string>
+    <string name="Http">http://</string>
+    <string name="FontSize">سایز فونت:</string>
+    <string name="Small">کوچک</string>
+    <string name="Middle">متوسط</string>
+    <string name="Large">بزرگ</string>
+    <string name="VeryLarge">بزرگ تر</string>
+    <string name="RemarkValidDistance">محدوده مجاز میان بازرسی ها (متر):</string>
     <string name="mahdoode_help">درصورتیکه مامور بیش از این فاصله را جهت بازرسی بعدی طی کند، نرم افزار اجازه بازرسی به او نخواهد داد.</string>
 
+    <!--recieve-->
+    <string name="RecieveBaseInfo">دریافت اطلاعات پایه</string>
+    <string name="RecieveSetting">دریافت تنظیمات</string>
+    <string name="RecieveUsers">دریافت کاربران</string>
+
     <!--Location-->
-    <string name="Location_Off">"موقعیت مکانی یافت نشد."</string>
-    <string name="Network_Off">موقعیت مکانی یافت نشد. لطفا برای موقعیت یابی دقیق تر اینترنت گوشی خود را فعال کنید.</string>
-    <string name="Title_setting">تنظیمات موقعیت مکانی</string>
-    <string name="Message_Setting">موقعیت مکانی دستگاه فعال نمی باشد. آیا مایلید به منو تنظیمات بروید ؟</string>
-    <string name="Buttom_Setting">تنظیمات</string>
-    <string name="Buttom_Cancel">انصراف</string>
-    <string name="ValidationLocation">در حال دریافت موقعیت مکانی</string>
-    <string name="Wait_Location">لطفا منتظر بمانید </string>
+    <string name="LocationSetting">تنظیمات موقعیت مکانی</string>
 
     <!--ConfirmActvity-->
-    <string name="MessageConntection">لطفا دستگاه را به اینترنت متصل کنید</string>
-    <string name="MessagAccessMessage">دسترسی به آدرس امکان پذیر نیست</string>
-    <string name="OkButton">تایید</string>
-    <string name="TitleCaption">آدرس</string>
-    <string name="GetRegionFromServer">در حال دریافت داده ها از سرور</string>
+    <string name="Connect">اتصال</string>
     <string name="Reconnect">اتصال دوباره</string>
-
-    <string name="MessageCancelTest">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
-
-
     <string name="Ok">تایید</string>
-
     <string name="No">خیر</string>
-
     <string name="Cancel">انصراف</string>
-
     <string name="Retry">تلاش دوباره</string>
-
-
+    <string name="Save">ذخیره</string>
 
     <string name="AddressTitle">آدرس</string>
-
     <string name="CancelTestProcessTitle">توقف تست</string>
 
 </resources>
