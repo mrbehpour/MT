@@ -140,7 +140,8 @@
                     android:layout_marginLeft="4dp"
                     android:src="@drawable/icon_polomp"
                     android:backgroundTint="@color/icon_off" />
-                <!-- Icon Polomp -->
+                <!-- Icon Gherate -->
+
                 <ImageView
                     android:id="@+id/iconGherat"
                     android:layout_width="24dp"
