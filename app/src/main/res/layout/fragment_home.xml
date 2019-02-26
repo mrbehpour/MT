@@ -72,7 +72,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItem2"/>
+                        android:text="@string/menuItemReport"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -84,7 +84,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/tozih_gozareshat"/>
+                        android:text="@string/ReportDes"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -128,7 +128,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/sanjesht"/>
+                        android:text="@string/Sanjesh"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -140,7 +140,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/tozih_sanjesh"/>
+                        android:text="@string/SanjeshDes"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -184,7 +184,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItem1"/>
+                        android:text="@string/menuItemBazdid"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -196,7 +196,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/tozih_bazdid"/>
+                        android:text="@string/BazdidDes"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -311,7 +311,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItem4"/>
+                        android:text="@string/menuItemSetting"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -323,7 +323,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/tozih_settings"/>
+                        android:text="@string/SettingDes"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -367,7 +367,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItem7"/>
+                        android:text="@string/menuItemSendJoints"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -379,7 +379,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/tozih_ersal"/>
+                        android:text="@string/SendingDes"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -423,7 +423,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItem6"/>
+                        android:text="@string/menuItemRecieveJoints"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -435,7 +435,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/tozih_daryaftmoshtarakin"/>
+                        android:text="@string/RecieveJointsDes"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -479,7 +479,7 @@
                         android:textSize="14sp"
                         android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItem5"/>
+                        android:text="@string/menuItemBaseInfo"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -491,7 +491,7 @@
                         android:textSize="12sp"
                         android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/tozih_daryaftpayeh"/>
+                        android:text="@string/RecieveBaseInfoDes"/>
                 </LinearLayout>
             </LinearLayout>
 

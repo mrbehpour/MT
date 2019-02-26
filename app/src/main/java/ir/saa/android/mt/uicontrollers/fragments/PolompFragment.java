@@ -74,7 +74,7 @@ public class PolompFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<PolompItem> polompItems) {
                 if(polompItems.size()==0){
-                    Toast fancyToast= FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageNoDataPolomp),FancyToast.LENGTH_SHORT,FancyToast.WARNING,false);
+                    Toast fancyToast= FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.PolombDataNotFound_msg),FancyToast.LENGTH_SHORT,FancyToast.WARNING,false);
                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     fancyToast.show();
                     return;

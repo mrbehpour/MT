@@ -266,11 +266,11 @@ public class SendViewModel extends AndroidViewModel {
                                     }
                                     if(recordeSummaries.size()==countTrue){
                                         sendAllDataProgress.postValue(100);
-                                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.MessageSuccess));
+                                        messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg));
                                     }else {
                                         sendAllDataProgress.postValue(-1);
                                         Integer countRegister=recordeSummaries.size()-countTrue;
-                                        messageErrorLiveData.postValue(G.context.getResources().getString(R.string.MessageCount,countRegister.toString(),String.valueOf(recordeSummaries.size())));
+                                        messageErrorLiveData.postValue(G.context.getResources().getString(R.string.JointsSaveNum_msg,countRegister.toString(),String.valueOf(recordeSummaries.size())));
 
                                     }
 

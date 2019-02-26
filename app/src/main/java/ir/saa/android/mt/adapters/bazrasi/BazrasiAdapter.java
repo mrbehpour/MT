@@ -73,8 +73,8 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     private void connectToModuleDialog(){
 
         progressDialog=new ProgressDialog(context);
-        progressDialog.setMessage(context.getResources().getText(R.string.Wait_Location));
-        progressDialog.setTitle(context.getResources().getText(R.string.ValidationLocation));
+        progressDialog.setMessage(context.getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(context.getResources().getText(R.string.GetLocationInProgress_msg));
         progressDialog.setCancelable(true);
         progressDialog.show();
 
@@ -169,7 +169,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                 myCheckList.setSelectionByValue(Integer.valueOf(current.remarkValue));
 
 
-                                dialog.addButton(G.context.getResources().getString(R.string.BazrasiAdapter_BtnSave), new View.OnClickListener() {
+                                dialog.addButton(G.context.getResources().getString(R.string.Save), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
 
@@ -197,7 +197,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
 
                                                 if(state){
                                                     //Toast.makeText((AppCompatActivity)context,G.context.getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
-                                                    Toast fancyToast= FancyToast.makeText((AppCompatActivity)context, (String) G.context.getResources().getText(R.string.MessageSuccess),FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false);
+                                                    Toast fancyToast= FancyToast.makeText((AppCompatActivity)context, (String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg),FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false);
                                                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                                     fancyToast.show();
 

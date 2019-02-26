@@ -51,7 +51,7 @@
                             android:gravity="center_horizontal|center_vertical"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_900"
-                            android:text="@string/noeTest" />
+                            android:text="@string/TestType" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                             android:gravity="left|center_vertical"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_900"
-                            android:text="@string/dash" />
+                            android:text="@string/DashSign" />
                         <TextView
                             android:id="@+id/tvLableKhata"
                             android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
                             android:textAlignment="gravity"
                             android:textDirection="rtl"
                             android:textColor="@color/grey_700"
-                            android:text="@string/darsadKhata2" />
+                            android:text="@string/ErrPercent" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -105,7 +105,7 @@
                             android:gravity="left|center_vertical"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_900"
-                            android:text="@string/dash" />
+                            android:text="@string/DashSign" />
                         <TextView
                             android:id="@+id/tvLableTestType"
                             android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
                             android:textAlignment="gravity"
                             android:textDirection="rtl"
                             android:textColor="@color/grey_700"
-                            android:text="@string/noeTest2" />
+                            android:text="@string/TestType" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -138,7 +138,7 @@
                             android:gravity="left|center_vertical"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_900"
-                            android:text="@string/dash" />
+                            android:text="@string/DashSign" />
                         <TextView
                             android:id="@+id/tvLableTimePeriod"
                             android:layout_width="wrap_content"
@@ -150,7 +150,7 @@
                             android:textAlignment="gravity"
                             android:textDirection="rtl"
                             android:textColor="@color/grey_700"
-                            android:text="@string/Time_Period" />
+                            android:text="@string/TestDuration" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -171,7 +171,7 @@
                             android:gravity="left|center_vertical"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_900"
-                            android:text="@string/dash" />
+                            android:text="@string/DashSign" />
                         <TextView
                             android:id="@+id/tvLableRoundNum"
                             android:layout_width="wrap_content"
@@ -204,7 +204,7 @@
                             android:gravity="left|center_vertical"
                             android:textAlignment="gravity"
                             android:textColor="@color/grey_900"
-                            android:text="@string/dash" />
+                            android:text="@string/DashSign" />
                         <TextView
                             android:id="@+id/tvLableDateTime"
                             android:layout_width="wrap_content"
@@ -216,537 +216,13 @@
                             android:textAlignment="gravity"
                             android:textDirection="rtl"
                             android:textColor="@color/grey_700"
-                            android:text="@string/DateTime" />
+                            android:text="@string/TestDateTime" />
                     </LinearLayout>
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
 
-        <!-- Jadval Layout -->
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/grey_400"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--android:layout_marginLeft="16dp"-->
-            <!--android:orientation="vertical">-->
-            <!--&lt;!&ndash; RowTitle Layout &ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash; First Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableFirstColumn"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.4"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_300"-->
-                    <!--android:lines="2"-->
-                    <!--android:maxLines="2"-->
-                    <!--android:text="@string/onvan" />-->
-
-                <!--&lt;!&ndash; R Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableRColumn"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_300"-->
-                    <!--android:text="@string/T" />-->
-
-                <!--&lt;!&ndash; S Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableSColumn"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_300"-->
-                    <!--android:text="@string/S" />-->
-
-                <!--&lt;!&ndash; T Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableTColumn"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginRight="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_300"-->
-                    <!--android:text="@string/R" />-->
-            <!--</LinearLayout>-->
-
-            <!--&lt;!&ndash; Row_V Layout &ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash; First Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableRowV"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.4"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:lines="2"-->
-                    <!--android:maxLines="2"-->
-                    <!--android:text="@string/voltazhV" />-->
-
-                <!--&lt;!&ndash; R Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowV_R"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; S Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowV_S"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; T Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowV_T"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginRight="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-            <!--</LinearLayout>-->
-
-            <!--&lt;!&ndash; Row_I Layout &ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash; First Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableRowI"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.4"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:lines="2"-->
-                    <!--android:maxLines="2"-->
-                    <!--android:text="@string/jaryanI" />-->
-
-                <!--&lt;!&ndash; R Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowI_R"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; S Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowI_S"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; T Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowI_T"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginRight="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-            <!--</LinearLayout>-->
-
-            <!--&lt;!&ndash; Row_P Layout &ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash; First Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableRowP"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.4"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:lines="2"-->
-                    <!--android:maxLines="2"-->
-                    <!--android:text="@string/tavanP" />-->
-
-                <!--&lt;!&ndash; R Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowP_R"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; S Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowP_S"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; T Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowP_T"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginRight="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-            <!--</LinearLayout>-->
-
-            <!--&lt;!&ndash; Row_Q Layout &ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash; First Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableRowQ"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.4"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:lines="2"-->
-                    <!--android:maxLines="2"-->
-                    <!--android:text="@string/tavanQ" />-->
-
-                <!--&lt;!&ndash; R Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowQ_R"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; S Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowQ_S"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; T Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowQ_T"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginRight="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-            <!--</LinearLayout>-->
-
-            <!--&lt;!&ndash; Row_S Layout &ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash; First Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableRowS"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.4"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:lines="2"-->
-                    <!--android:maxLines="2"-->
-                    <!--android:text="@string/tavanS" />-->
-
-                <!--&lt;!&ndash; R Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowS_R"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; S Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowS_S"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; T Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowS_T"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginRight="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_200"-->
-                    <!--android:text="@string/dash" />-->
-            <!--</LinearLayout>-->
-
-            <!--&lt;!&ndash; Row_PF Layout &ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal">-->
-                <!--&lt;!&ndash; First Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvLableRowPF"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="0.4"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginBottom="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_800"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:lines="2"-->
-                    <!--android:maxLines="2"-->
-                    <!--android:text="@string/zaribPF" />-->
-
-                <!--&lt;!&ndash; R Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowPF_R"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginBottom="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; S Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowPF_S"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginBottom="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-
-                <!--&lt;!&ndash; T Column &ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvRowPF_T"-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="0.2"-->
-                    <!--android:fontFamily="@font/byekan"-->
-                    <!--android:layout_marginTop="1dp"-->
-                    <!--android:layout_marginLeft="1dp"-->
-                    <!--android:layout_marginRight="1dp"-->
-                    <!--android:layout_marginBottom="1dp"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:gravity="center_horizontal|center_vertical"-->
-                    <!--android:textAlignment="gravity"-->
-                    <!--android:textColor="@color/grey_700"-->
-                    <!--android:background="@color/grey_100"-->
-                    <!--android:text="@string/dash" />-->
-            <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
         <!-- Jadval Layout -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -755,7 +231,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginBottom="8dp"
             android:orientation="vertical">
             <!-- RowTitle Layout -->
             <LinearLayout
@@ -778,7 +253,7 @@
                     android:background="@color/grey_300"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/onvan" />
+                    android:text="@string/Title" />
 
                 <!-- R Column -->
                 <TextView
@@ -794,7 +269,7 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_800"
                     android:background="@color/grey_300"
-                    android:text="@string/R" />
+                    android:text="@string/PhaseR" />
 
                 <!-- S Column -->
                 <TextView
@@ -810,24 +285,24 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_800"
                     android:background="@color/grey_300"
-                    android:text="S" />
+                    android:text="@string/PhaseS" />
 
                 <!-- T Column -->
                 <TextView
                     android:id="@+id/tvLableTColumn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:fontFamily="@font/byekan"
+                    android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
                     android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp"
-                    android:layout_weight="0.2"
-                    android:background="@color/grey_300"
-                    android:fontFamily="@font/byekan"
+                    android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
-                    android:text="@string/T"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_800"
-                    android:textSize="14sp" />
+                    android:background="@color/grey_300"
+                    android:text="@string/PhaseT" />
             </LinearLayout>
 
             <!-- Row_V Layout -->
@@ -851,24 +326,23 @@
                     android:background="@color/grey_200"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/voltazhV" />
+                    android:text="@string/Volt" />
 
                 <!-- R Column -->
                 <TextView
-                    android:id="@+id/tvRowV_T"
+                    android:id="@+id/tvRowV_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -884,23 +358,24 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
                 <TextView
-                    android:id="@+id/tvRowV_R"
+                    android:id="@+id/tvRowV_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_I Layout -->
@@ -924,25 +399,23 @@
                     android:background="@color/grey_100"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/jaryanI" />
+                    android:text="@string/Amp" />
 
                 <!-- R Column -->
-
                 <TextView
-                    android:id="@+id/tvRowI_T"
+                    android:id="@+id/tvRowI_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -958,23 +431,24 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
                 <TextView
-                    android:id="@+id/tvRowI_R"
+                    android:id="@+id/tvRowI_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_P Layout -->
@@ -998,24 +472,23 @@
                     android:background="@color/grey_200"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/tavanP" />
+                    android:text="@string/PowerP" />
 
                 <!-- R Column -->
                 <TextView
-                    android:id="@+id/tvRowP_T"
+                    android:id="@+id/tvRowP_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -1031,24 +504,24 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
-
                 <TextView
-                    android:id="@+id/tvRowP_R"
+                    android:id="@+id/tvRowP_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_Q Layout -->
@@ -1072,24 +545,23 @@
                     android:background="@color/grey_100"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/tavanQ" />
+                    android:text="@string/PowerQ" />
 
                 <!-- R Column -->
                 <TextView
-                    android:id="@+id/tvRowQ_T"
+                    android:id="@+id/tvRowQ_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -1105,24 +577,24 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
-
                 <TextView
-                    android:id="@+id/tvRowQ_R"
+                    android:id="@+id/tvRowQ_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_S Layout -->
@@ -1146,24 +618,23 @@
                     android:background="@color/grey_200"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/tavanS" />
+                    android:text="@string/PowerS" />
 
                 <!-- R Column -->
                 <TextView
-                    android:id="@+id/tvRowS_T"
+                    android:id="@+id/tvRowS_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
 
                 <!-- S Column -->
                 <TextView
@@ -1179,24 +650,24 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
-
                 <TextView
-                    android:id="@+id/tvRowS_R"
+                    android:id="@+id/tvRowS_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
 
             <!-- Row_PF Layout -->
@@ -1221,26 +692,25 @@
                     android:background="@color/grey_100"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/zaribPF" />
+                    android:text="@string/PFactCoeff" />
 
                 <!-- R Column -->
-
                 <TextView
-                    android:id="@+id/tvRowPF_T"
+                    android:id="@+id/tvRowPF_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:layout_marginBottom="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="221" />
+                    android:text="@string/DashSign" />
+
                 <!-- S Column -->
                 <TextView
                     android:id="@+id/tvRowPF_S"
@@ -1256,24 +726,25 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="220" />
+                    android:text="@string/DashSign" />
 
                 <!-- T Column -->
                 <TextView
-                    android:id="@+id/tvRowPF_R"
+                    android:id="@+id/tvRowPF_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:layout_marginBottom="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
-                    android:text="0.07" />
+                    android:text="@string/DashSign" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

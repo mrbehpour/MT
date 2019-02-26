@@ -9,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +24,6 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.enums.SharePrefEnum;
-import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
-import ir.saa.android.mt.uicontrollers.pojos.TestContor.DecimalDigitsInputFilter;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.TestContorViewModel;
 
@@ -38,6 +35,11 @@ public class TestContorFragment extends Fragment
     TextView edtContorConst;
     TextView edtSensorRatio;
     TextView edtRoundNum;
+
+    com.github.angads25.toggle.LabeledSwitch switchTestType;
+    com.github.angads25.toggle.LabeledSwitch switchPhase;
+    com.github.angads25.toggle.LabeledSwitch switchTestNum;
+    com.github.angads25.toggle.LabeledSwitch switchPaulserType;
 
     AlertDialog ad;
     Bundle bundle;
@@ -65,13 +67,10 @@ public class TestContorFragment extends Fragment
         edtSensorRatio = rootView.findViewById(R.id.edtNesbatKontor);
         edtRoundNum = rootView.findViewById(R.id.edtTedadDor);
 
-        //for Do ragham ashar
-        //edtContorConst.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(5,2)});
-
-        com.github.angads25.toggle.LabeledSwitch switchTestType = rootView.findViewById(R.id.switchTestType);
-        com.github.angads25.toggle.LabeledSwitch switchPhase = rootView.findViewById(R.id.switchPhase);
-        com.github.angads25.toggle.LabeledSwitch switchTestNum = rootView.findViewById(R.id.switchTestNum);
-        com.github.angads25.toggle.LabeledSwitch switchPaulserType = rootView.findViewById(R.id.switchPaulserType);
+        switchTestType = rootView.findViewById(R.id.switchTestType);
+        switchPhase = rootView.findViewById(R.id.switchPhase);
+        switchTestNum = rootView.findViewById(R.id.switchTestNum);
+        switchPaulserType = rootView.findViewById(R.id.switchPaulserType);
 
         setDefaultValue();
 
@@ -126,6 +125,10 @@ public class TestContorFragment extends Fragment
             Bundle b = G.bundleHashMap.get(BundleKeysEnum.TestContorParams);
             testContorParams = (TestContorParams)b.getSerializable(BundleKeysEnum.TestContorParams);
 
+            switchPhase.setOn(testContorParams.SinglePhase);
+            switchTestNum.setOn(testContorParams.FisrtTest);
+            switchTestType.setOn(testContorParams.Active);
+            switchPaulserType.setOn(testContorParams.PaulserType);
             edtCTCoeff.setText(String.valueOf(testContorParams.CTCoeff));
             edtContorConst.setText(String.valueOf(testContorParams.ContorConst));
             edtSensorRatio.setText(String.valueOf(testContorParams.SensorRatio));
@@ -144,8 +147,8 @@ public class TestContorFragment extends Fragment
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
         ad = new AlertDialog.Builder(this.getContext()).create();
         ad.setCancelable(true);
-        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ValidationConnect),BluetoothDeviceName));
-        ad.setMessage(getResources().getText(R.string.Wait_Connect));
+        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ConnectToTestModule),BluetoothDeviceName));
+        ad.setMessage(getResources().getText(R.string.PleaseWait_msg));
         new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -161,70 +164,36 @@ public class TestContorFragment extends Fragment
 
     private boolean validateParams(){
         boolean res=true;
+        String selText="";
 
-        if(edtCTCoeff.getText().toString().equals("")){
-            //Toast.makeText(G.context,getResources().getText(R.string.ZaribContor_Message),Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ZaribContor_Message), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            res=false;
-        }
+        selText = edtCTCoeff.getText().toString();
+        res = ValidationText(selText,(String) getResources().getText(R.string.MeterCoeff));
+        if(!res) return res;
 
-        if(edtContorConst.getText().toString().equals("")){
-            //Toast.makeText(G.context,getResources().getText(R.string.SabetContor_Message),Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.SabetContor_Message), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            res=false;
-        }
+        selText = edtContorConst.getText().toString();
+        res = ValidationText(selText,(String) getResources().getText(R.string.MeterConst));
+        if(!res) return res;
 
-        if(edtSensorRatio.getText().toString().equals("")){
-            //Toast.makeText(G.context,getResources().getText(R.string.NesbatSensor_Message),Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NesbatSensor_Message), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            res=false;
-        }
-        if(edtCTCoeff.getText().toString().equals("0")){
-            //Toast.makeText(G.context,getResources().getText(R.string.ZaribContor_Message_Zero),Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ZaribContor_Message_Zero), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            res=false;
-        }
+        selText = edtSensorRatio.getText().toString();
+        res = ValidationText(selText,(String) getResources().getText(R.string.Sensor));
+        if(!res) return res;
 
-        if(edtContorConst.getText().toString().equals("0")){
-           // Toast.makeText(G.context,getResources().getText(R.string.SabetContor_Message_Zero),Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.SabetContor_Message_Zero), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            res=false;
-        }
-
-        if(edtSensorRatio.getText().toString().equals("0")){
-            //Toast.makeText(G.context,getResources().getText(R.string.NesbatSensor_Message_Zero),Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NesbatSensor_Message_Zero), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            res=false;
-        }
-
-        if(edtRoundNum.getText().toString().equals("")){
-            //Toast.makeText(G.context,getResources().getText(R.string.TedadDore_Message),Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String)getResources().getText(R.string.TedadDore_Message), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            res=false;
-        }
-        if(edtRoundNum.getText().toString().equals("0")){
-            //Toast.makeText(G.context,getResources().getText(R.string.TedadDore_Message_Zero),Toast.LENGTH_SHORT).show();
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.TedadDore_Message_Zero), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            res=false;
-        }
+        selText = edtRoundNum.getText().toString();
+        res = ValidationText(selText,(String) getResources().getText(R.string.RoundNum));
+        if(!res) return res;
 
         return  res;
+    }
+
+    private boolean ValidationText(String selText,String ToastString){
+        boolean res=true;
+        if(selText.equals("") || selText.equals("0")) {
+            Toast fancyToast = FancyToast.makeText(G.context, String.format((String) getResources().getText(R.string.PleaseEneter_msg),ToastString), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+            res = false;
+        }
+        return res;
     }
 
     @Override

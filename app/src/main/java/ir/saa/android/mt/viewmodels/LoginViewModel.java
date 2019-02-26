@@ -62,7 +62,7 @@ public class LoginViewModel extends AndroidViewModel {
                 G.setPref("RegionID", String.valueOf(user.RegionID));
             }
             else{
-                G.setPref("RegionName",G.context.getResources().getString(R.string.Non));
+                G.setPref("RegionName",G.context.getResources().getString(R.string.NotExsist));
                 G.setPref("RegionID", "-1");
             }
 

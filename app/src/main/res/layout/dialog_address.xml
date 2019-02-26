@@ -25,7 +25,7 @@
             android:gravity="right"
             android:textAlignment="gravity"
             android:textSize="14sp"
-            android:text="@string/dash"/>
+            android:text="@string/DashSign"/>
     </LinearLayout>
 
     <!-- main -->
@@ -41,7 +41,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/byekan"
             android:textSize="13sp"
-            android:text="@string/address"/>
+            android:text="@string/Address"/>
         <EditText
             android:id="@+id/edtAddress"
             android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             android:maxLines="1"
             android:fontFamily="@font/byekan"
             android:textSize="12sp"
-            android:text="@string/dash"/>
+            android:text="@string/DashSign"/>
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnSave"
             android:fontFamily="@font/byekan"
@@ -61,7 +61,7 @@
             android:layout_gravity="center"
             android:textColor="#ffffff"
             android:textSize="16sp"
-            android:text="@string/taeed"/>
+            android:text="@string/Ok"/>
     </LinearLayout>
 
 </LinearLayout>

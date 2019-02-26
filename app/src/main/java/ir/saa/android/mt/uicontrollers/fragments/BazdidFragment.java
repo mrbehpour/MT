@@ -115,7 +115,7 @@ public class BazdidFragment extends Fragment
                 Integer RowId=0;
                 String UniqField="";
                 if(activity != null && isAdded()) {
-                    UniqField= (String) getResources().getText(R.string.UniqField);
+                    UniqField= (String) getResources().getText(R.string.UniqeField);
                 }
 
                 for(ClientWithAction client:clients){

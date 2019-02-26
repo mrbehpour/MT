@@ -35,7 +35,11 @@ public class ReadmeterFragment extends Fragment {
     TextView txtMeterType;
     TextView txtMeterString;
     TextView txtLog;
-    TextView txtRead;
+    TextView tvAct1,tvAct2,tvAct3,tvRAct,tvDim,tvSN,tvActSum,tvReverseEnergy,tvDate,tvTime;
+    TextView tvVR,tvVS,tvVT;
+    TextView tvIR,tvIS,tvIT;
+
+
     NumberProgressBar progReadMeter;
 
     @Override
@@ -57,8 +61,27 @@ public class ReadmeterFragment extends Fragment {
         txtMeterType = rootView.findViewById(R.id.tvMeterType);
         txtMeterString = rootView.findViewById(R.id.tvMeterString);
 
-        txtRead = rootView.findViewById(R.id.tvReaddata);
         txtLog = rootView.findViewById(R.id.tvReadLog);
+
+        tvAct1 = rootView.findViewById(R.id.tvAct1Val);
+        tvAct2 = rootView.findViewById(R.id.tvAct2Val);
+        tvAct3 = rootView.findViewById(R.id.tvAct3Val);
+        tvRAct = rootView.findViewById(R.id.tvRActVal);
+        tvDim = rootView.findViewById(R.id.tvDimVal);
+
+        tvActSum = rootView.findViewById(R.id.tvActSumVal);
+        tvReverseEnergy = rootView.findViewById(R.id.tvRererseEnergyVal);
+        tvSN = rootView.findViewById(R.id.tvSNVal);
+        tvDate = rootView.findViewById(R.id.tvDateVal);
+        tvTime = rootView.findViewById(R.id.tvTimeVal);
+
+        tvVR = rootView.findViewById(R.id.tvVolt1Val);
+        tvVS = rootView.findViewById(R.id.tvVolt2Val);
+        tvVT = rootView.findViewById(R.id.tvVolt3Val);
+
+        tvIR = rootView.findViewById(R.id.tvAmp1Val);
+        tvIS = rootView.findViewById(R.id.tvAmp2Val);
+        tvIT = rootView.findViewById(R.id.tvAmp3Val);
 
         progReadMeter = rootView.findViewById(R.id.progressBarReadMeter);
 
@@ -132,16 +155,6 @@ public class ReadmeterFragment extends Fragment {
                 }
         );
 
-        readmeterViewModel.recieveDataMutableLiveData.observe(this, new Observer<Integer>() {
-                    @Override
-                    public void onChanged(@Nullable Integer Int) {
-                        txtRead.append(String.valueOf(Int));
-                        Log.d("meter_response","OK");
-
-                    }
-                }
-        );
-
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -192,23 +205,41 @@ public class ReadmeterFragment extends Fragment {
 
 
     private void showReadResult(MeterUtility.ReadData readResult) {
-        String str = String.format ("ACT1 =%s\nACT2 =%s\nACT3 =%s\nReACT =%s\nDimand =%s\nSN =%s\n",
-                readResult.Active1,
-                readResult.Active2,
-                readResult.Active3,
-                readResult.Reactive,
-                readResult.Dimand,
-                readResult.SerialNum1);
+//        String str = String.format ("ACT1 =%s\nACT2 =%s\nACT3 =%s\nReACT =%s\nDimand =%s\nSN =%s\n",
+//                readResult.Active1,
+//                readResult.Active2,
+//                readResult.Active3,
+//                readResult.Reactive,
+//                readResult.Dimand,
+//                readResult.SerialNum1);
 
-        updateResponseTest(str);
+        tvAct1.setText(String.valueOf(readResult.Active1));
+        tvAct2.setText(String.valueOf(readResult.Active2));
+        tvAct3.setText(String.valueOf(readResult.Active3));
+        tvRAct.setText(String.valueOf(readResult.Reactive));
+        tvDim.setText(String.valueOf(readResult.Dimand));
+
+        tvActSum.setText(String.valueOf(readResult.ActiveSum));
+        tvReverseEnergy.setText(String.valueOf(readResult.ReversEnerji));
+        tvSN.setText(String.valueOf(readResult.SerialNum1));
+        tvDate.setText(String.valueOf(readResult.CurDate));
+        tvTime.setText(String.valueOf(readResult.CurTime));
+
+        tvVR.setText(String.valueOf(readResult.CurVolt1));
+        tvVS.setText(String.valueOf(readResult.CurVolt2));
+        tvVT.setText(String.valueOf(readResult.CurVolt3));
+
+        tvIR.setText(String.valueOf(readResult.Amp1));
+        tvIS.setText(String.valueOf(readResult.Amp2));
+        tvIT.setText(String.valueOf(readResult.Amp3));
     }
 
     private void connectToModuleDialog(){
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothNameRead);
         ad = new AlertDialog.Builder(this.getContext()).create();
         ad.setCancelable(true);
-        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ValidationConnect),BluetoothDeviceName));
-        ad.setMessage(getResources().getText(R.string.Wait_Connect));
+        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ConnectToTestModule),BluetoothDeviceName));
+        ad.setMessage(getResources().getText(R.string.PleaseWait_msg));
         new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

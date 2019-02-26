@@ -158,7 +158,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
 
                 //Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
-                Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 fancyToast.show();
                 Intent intent=new Intent(SettingActivity.this, SendSerialActivity.class);

@@ -47,7 +47,7 @@ public class TestContorViewModel extends AndroidViewModel {
             public void onConnectionError(String errMsg) {
                 connectionStateMutableLiveData.postValue(false);
                 //Toast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), Toast.LENGTH_SHORT).show();
-                Toast fancyToast = FancyToast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
+                Toast fancyToast = FancyToast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect_msg),errMsg), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 fancyToast.show();
                 Log.d("response","onConnectionError : "+errMsg);

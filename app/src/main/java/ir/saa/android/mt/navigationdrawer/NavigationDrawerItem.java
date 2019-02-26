@@ -59,14 +59,14 @@ public class NavigationDrawerItem {
 
     private static String[] getTitles() {
         return new String[]{
-                G.context.getResources().getString(R.string.menuItem1),
-                G.context.getResources().getString(R.string.menuItem2),
+                G.context.getResources().getString(R.string.menuItemBazdid),
+                G.context.getResources().getString(R.string.menuItemReport),
                 //G.context.getResources().getString(R.string.menuItem3),
-                G.context.getResources().getString(R.string.menuItem4),
-                G.context.getResources().getString(R.string.menuItem5),
-                G.context.getResources().getString(R.string.menuItem6),
-                G.context.getResources().getString(R.string.menuItem7),
-                G.context.getResources().getString(R.string.menuItem8),
+                G.context.getResources().getString(R.string.menuItemSetting),
+                G.context.getResources().getString(R.string.menuItemBaseInfo),
+                G.context.getResources().getString(R.string.menuItemRecieveJoints),
+                G.context.getResources().getString(R.string.menuItemSendJoints),
+                G.context.getResources().getString(R.string.menuItemExit),
         };
     }
 }

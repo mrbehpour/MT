@@ -20,7 +20,7 @@
         android:textAlignment="gravity"
         android:textDirection="rtl"
         android:textSize="14sp"
-        android:text="@string/selectAll" />
+        android:text="@string/SelectAll" />
 
 
     <!-- Soal Layout -->
@@ -47,6 +47,6 @@
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:visibility="invisible"
-        android:text="@string/zakhire"/>
+        android:text="@string/Save"/>
 </LinearLayout>
 

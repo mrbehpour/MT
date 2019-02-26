@@ -48,7 +48,7 @@
                     android:fontFamily="@font/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/zamanTest"/>
+                    android:text="@string/TestDuration"/>
 
                 <!-- Darsad Khata -->
                 <TextView
@@ -61,7 +61,7 @@
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/grey_900"
-                    android:text="@string/darsadKhata3"/>
+                    android:text="@string/ErrPercent"/>
             </LinearLayout>
 
             <!-- Row 2 Layout -->
@@ -81,7 +81,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/blue_900"
                     android:textAlignment="center"
-                    android:text="@string/v2"/>
+                    android:text="@string/VoltTitle"/>
 
                 <!-- Voltage Faze C -->
                 <TextView
@@ -93,7 +93,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/voltazhC"/>
+                    android:text="@string/VoltC"/>
 
                 <!-- Voltage Faze B -->
                 <TextView
@@ -104,7 +104,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/voltazhB"/>
+                    android:text="@string/VoltB"/>
 
                 <!-- Voltage Faze A -->
                 <TextView
@@ -115,7 +115,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/voltazhA"/>
+                    android:text="@string/VoltA"/>
             </LinearLayout>
 
             <!-- Row 3 Layout -->
@@ -134,7 +134,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/green_900"
                     android:textAlignment="center"
-                    android:text="@string/I2"/>
+                    android:text="@string/AmpTitle"/>
 
                 <!-- Jaryane Faze C -->
                 <TextView
@@ -146,7 +146,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/jaryanC"/>
+                    android:text="@string/AmpC"/>
 
                 <!-- Jaryane Faze B -->
                 <TextView
@@ -157,7 +157,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/jaryanB"/>
+                    android:text="@string/AmpB"/>
 
                 <!-- Jaryane Faze A -->
                 <TextView
@@ -168,7 +168,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/jaryanA"/>
+                    android:text="@string/AmpA"/>
             </LinearLayout>
 
             <!-- Row 4 Layout -->
@@ -187,7 +187,7 @@
                     android:textSize="14sp"
                     android:textColor="@color/red_900"
                     android:textAlignment="center"
-                    android:text="@string/PF2"/>
+                    android:text="@string/PowerFactor"/>
 
                 <!-- Zarib Tavan C -->
                 <TextView
@@ -199,7 +199,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/zaribC"/>
+                    android:text="@string/PowerCoeffC"/>
 
                 <!--  Zarib Tavan B -->
                 <TextView
@@ -210,7 +210,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/zaribB"/>
+                    android:text="@string/PowerCoeffB"/>
 
                 <!--  Zarib Tavan A -->
                 <TextView
@@ -221,7 +221,7 @@
                     android:layout_height="match_parent"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
-                    android:text="@string/zaribA"/>
+                    android:text="@string/PowerCoeffA"/>
 
 
             </LinearLayout>

@@ -2,8 +2,6 @@ package ir.saa.android.mt.uicontrollers.activities;
 
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -12,10 +10,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +24,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,20 +32,16 @@ import android.widget.Toast;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.components.MyDialog;
-import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DeviceSerial;
 import ir.saa.android.mt.model.entities.ImiRegisterInput;
 import ir.saa.android.mt.model.entities.Region;
-import ir.saa.android.mt.uicontrollers.fragments.SettingFragment;
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
 
 public class SendSerialActivity extends AppCompatActivity {
@@ -80,8 +71,8 @@ public class SendSerialActivity extends AppCompatActivity {
     private void connectToModuleDialog(){
 
         progressDialog=new ProgressDialog(this);
-        progressDialog.setMessage(getResources().getText(R.string.Wait_Location));
-        progressDialog.setTitle(getResources().getText(R.string.GetRegionFromServer));
+        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(getResources().getText(R.string.GetRegionFromServer_msg));
         progressDialog.setCancelable(true);
         progressDialog.show();
 
@@ -139,13 +130,13 @@ public class SendSerialActivity extends AppCompatActivity {
                     }
                 } else {
                     //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
-                    Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.MessagAccessMessage), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
+                    Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.AccessServerError_msg), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     fancyToast.show();
                 }
             } else {
                 //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
-                Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.MessageConntection), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
+                Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.ConntecInternet_msg), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 fancyToast.show();
                 return;

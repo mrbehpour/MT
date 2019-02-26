@@ -201,8 +201,8 @@ public class SanjeshFragment extends Fragment {
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
         ad = new AlertDialog.Builder(this.getContext()).create();
         ad.setCancelable(true);
-        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ValidationConnect),BluetoothDeviceName));
-        ad.setMessage(getResources().getText(R.string.Wait_Connect));
+        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ConnectToTestModule),BluetoothDeviceName));
+        ad.setMessage(getResources().getText(R.string.PleaseWait_msg));
         new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

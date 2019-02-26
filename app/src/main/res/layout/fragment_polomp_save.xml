@@ -42,7 +42,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/byekan"
                     android:gravity="center"
-                    android:text="@string/polompGhadim"
+                    android:text="@string/OldPolomb"
                     android:textColor="@color/grey_1000"
                     android:textSize="18sp" />
 
@@ -60,7 +60,7 @@
                         android:fontFamily="@font/byekan"
                         android:gravity="right|center_vertical"
                         android:layoutDirection="rtl"
-                        android:text="@string/nakhana"
+                        android:text="@string/Unreadable"
                         android:textAlignment="gravity"
                         android:textDirection="rtl"
                         android:textSize="16sp" />
@@ -74,7 +74,7 @@
                         android:fontFamily="@font/byekan"
                         android:gravity="right|center_vertical"
                         android:layoutDirection="rtl"
-                        android:text="@string/nadarad"
+                        android:text="@string/NotExsist"
                         android:textAlignment="gravity"
                         android:textDirection="rtl"
                         android:textSize="16sp" />
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/byekan"
-                        android:text="@string/shomarePolomp"
+                        android:text="@string/PolompNumber"
                         android:textColor="@color/grey_1000"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -138,7 +138,7 @@
                         android:layout_marginRight="4dp"
                         android:fontFamily="@font/byekan"
                         android:gravity="center_vertical"
-                        android:text="@string/modelPolomp"
+                        android:text="@string/PolombModel"
                         android:textColor="@color/grey_1000"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -167,7 +167,7 @@
                         android:layout_marginRight="4dp"
                         android:fontFamily="@font/byekan"
                         android:gravity="center_vertical"
-                        android:text="@string/rangPolomp"
+                        android:text="@string/PolombColor"
                         android:textColor="@color/grey_1000"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -201,7 +201,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/byekan"
                     android:gravity="center"
-                    android:text="@string/polompJadid"
+                    android:text="@string/NewPolomb"
                     android:textColor="@color/grey_1000"
                     android:textSize="18sp" />
 
@@ -235,7 +235,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/byekan"
-                        android:text="@string/shomarePolomp"
+                        android:text="@string/PolompNumber"
                         android:textColor="@color/grey_1000"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -262,7 +262,7 @@
                         android:layout_marginRight="4dp"
                         android:fontFamily="@font/byekan"
                         android:gravity="center_vertical"
-                        android:text="@string/modelPolomp"
+                        android:text="@string/PolombModel"
                         android:textColor="@color/grey_1000"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -291,7 +291,7 @@
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/byekan"
                         android:gravity="center_vertical"
-                        android:text="@string/rangPolomp"
+                        android:text="@string/PolombColor"
                         android:textColor="@color/grey_1000"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -309,6 +309,6 @@
         android:layout_gravity="center"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:text="@string/zakhire"/>
+        android:text="@string/Save"/>
 </LinearLayout>
 </ScrollView>

@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +11,9 @@ import android.support.v7.widget.AppCompatButton;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.github.jlmd.animatedcircleloadingview.AnimatedCircleLoadingView;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.components.MyCheckList;
-import ir.saa.android.mt.components.MyCheckListItem;
-import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.components.MyDialog;
 
 import ir.saa.android.mt.enums.SharePrefEnum;
@@ -91,14 +83,14 @@ public class SendActivity extends AppCompatActivity {
                 dialog.clearAllPanel();
                 dialog.clearButtonPanel();
 
-                dialog.addButton(G.context.getResources().getString(R.string.Submit), new View.OnClickListener() {
+                dialog.addButton(G.context.getResources().getString(R.string.Save), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
                     }
                 });
 
-                dialog.addBodyText(s,15).setTitle((String) context.getResources().getText(R.string.Error)).show();
+                dialog.addBodyText(s,15).setTitle((String) context.getResources().getText(R.string.Error_msg)).show();
 
 
             }
