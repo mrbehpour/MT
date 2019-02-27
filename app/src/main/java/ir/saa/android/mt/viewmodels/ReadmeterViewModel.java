@@ -369,6 +369,9 @@ public class ReadmeterViewModel extends AndroidViewModel {
     public List<TariffAllInfo> getTariffAllInfo(Long clientId, Integer sendId){
         return tariffDtlRepo.getTariffAllInfo(clientId,sendId);
     }
+    public void updateTariffInfo(TariffInfo tariffInfo){
+        tariffInfoRepo.updateTariffInfo(tariffInfo);
+    }
 
     @Override
     protected void onCleared() {

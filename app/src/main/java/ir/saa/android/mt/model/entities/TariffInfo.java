@@ -9,7 +9,7 @@ import io.reactivex.annotations.NonNull;
 @Entity
 public class TariffInfo  {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     public int TariffInfoID ;
 
@@ -18,6 +18,8 @@ public class TariffInfo  {
     public long ClientID ;
 
     public String DigitString ;
+
+    public Long FollowUpCode;
 
     public int SendID ;
 

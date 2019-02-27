@@ -52,8 +52,8 @@ import ir.saa.android.mt.viewmodels.PolompViewModel;
 public class PolompFragmentSave extends Fragment {
 
     PolompViewModel polompViewModel=null;
-    LocationViewModel locationViewModel=null;
     PolompParams polompParams;
+    LocationViewModel locationViewModel=null;
     Location location;
 
     Spinner spnModelPolompJadid;
@@ -526,7 +526,7 @@ public class PolompFragmentSave extends Fragment {
         G.startFragment(G.fragmentNumStack.pop(), true, null);
     }else{
 
-            locationViewModel.trunOnGps(getContext());
+
 
         }
 

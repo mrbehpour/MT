@@ -2,29 +2,45 @@ package ir.saa.android.mt.uicontrollers.fragments;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.shashank.sony.fancytoastlib.FancyToast;
+
+import java.lang.reflect.Field;
+import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.MyDialog;
+import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.TariffAllInfo;
+import ir.saa.android.mt.model.entities.TariffDtl;
+import ir.saa.android.mt.model.entities.TariffInfo;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
 import ir.saa.android.mt.repositories.meterreader.StatusReport;
+import ir.saa.android.mt.uicontrollers.pojos.MeterReader.MeterReaderFieldName;
+import ir.saa.android.mt.viewmodels.LocationViewModel;
 import ir.saa.android.mt.viewmodels.ReadmeterViewModel;
 
 public class ReadmeterFragment extends Fragment {
@@ -38,6 +54,10 @@ public class ReadmeterFragment extends Fragment {
     TextView tvAct1,tvAct2,tvAct3,tvRAct,tvDim,tvSN,tvActSum,tvReverseEnergy,tvDate,tvTime;
     TextView tvVR,tvVS,tvVT;
     TextView tvIR,tvIS,tvIT;
+    LocationViewModel locationViewModel=null;
+    Location location;
+    ProgressDialog progressDialog;
+    MeterUtility.ReadData mainReadData;
 
 
     NumberProgressBar progReadMeter;
@@ -46,6 +66,20 @@ public class ReadmeterFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+    private void connectToModuleDialogLocation(){
+
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+
+    }
+
+    public void HideProgressDialogLocataion(){
+        if(progressDialog!=null) progressDialog.dismiss();
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +89,7 @@ public class ReadmeterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_readmeter, container, false);
-
+        locationViewModel=ViewModelProviders.of(this).get(LocationViewModel.class);
         readmeterViewModel = ViewModelProviders.of(this).get(ReadmeterViewModel.class);
         txtMeterCompany = rootView.findViewById(R.id.tvMeterCompany);
         txtMeterType = rootView.findViewById(R.id.tvMeterType);
@@ -131,7 +165,7 @@ public class ReadmeterFragment extends Fragment {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onChanged(@Nullable MeterUtility.ReadData readResult) {
-                    showReadResult(readResult);
+                    showReadResult(readResult,true);
                 }
             }
         );
@@ -142,6 +176,7 @@ public class ReadmeterFragment extends Fragment {
                     public void onChanged(@Nullable Boolean b) {
                         if(b){
                             HideProgressDialog();
+                            saveTariff(mainReadData);
                             //btnReconnect.setVisibility(View.INVISIBLE);
                         }else{
                             //btnReconnect.setVisibility(View.VISIBLE);
@@ -158,12 +193,26 @@ public class ReadmeterFragment extends Fragment {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 readmeterViewModel.StartConnectionWithMeter();
+
             }
         });
 
         readmeterViewModel.initTranseferLayer();
         connectToModuleDialog();
+
+        locationViewModel.locationMutableLiveData.observe((LifecycleOwner) getContext(), new Observer<Location>() {
+            @Override
+            public void onChanged(@Nullable Location locationObserver) {
+                if(locationObserver!=null) {
+                    location = locationObserver;
+                    HideProgressDialogLocataion();
+                }
+            }
+        });
+        List<TariffAllInfo> tariffAllInfos=readmeterViewModel.getTariffAllInfo(G.clientInfo.ClientId,G.clientInfo.SendId);
+        displayTariff(tariffAllInfos);
 
         return rootView;
     }
@@ -173,6 +222,48 @@ public class ReadmeterFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    private void displayTariff(List<TariffAllInfo> tariffAllInfos){
+        MeterUtility.ReadData readData=new MeterUtility.ReadData();
+        for (TariffAllInfo tariffAllInfo:tariffAllInfos) {
+            switch (tariffAllInfo.TariffID) {
+                case 17:
+                    readData.Dimand=Double.valueOf(tariffAllInfo.TariffValue);
+                    break;
+                case 1:
+                    readData.Active1=Double.valueOf(tariffAllInfo.TariffValue);
+                    break;
+                case 2:
+                    readData.Active2=Double.valueOf(tariffAllInfo.TariffValue);
+                    break;
+                case 3:
+                    readData.Active3=Double.valueOf(tariffAllInfo.TariffValue);
+                    break;
+                case 5:
+                    readData.Reactive=Double.valueOf(tariffAllInfo.TariffValue);
+                    break;
+                case 11:
+                    readData.Holiday=Double.valueOf(tariffAllInfo.TariffValue);
+                    break;
+                case 28:
+                    readData.SerialNum1=tariffAllInfo.TariffValue;
+                    break;
+                case 21:
+                    readData.ActiveSum=Double.valueOf(tariffAllInfo.TariffValue);
+                    break;
+                case 23:
+                    readData.ReversEnerji=Double.valueOf(tariffAllInfo.TariffValue);
+                    break;
+                case 24:
+                    readData.CurDate=tariffAllInfo.TariffValue;
+                    break;
+                case 25:
+                    readData.CurTime=tariffAllInfo.TariffValue;
+                    break;
+            }
+            showReadResult(readData,false);
+        }
     }
 
     private void updateResponseTest(String readResult) {
@@ -204,7 +295,7 @@ public class ReadmeterFragment extends Fragment {
     }
 
 
-    private void showReadResult(MeterUtility.ReadData readResult) {
+    private void showReadResult(MeterUtility.ReadData readResult,boolean State) {
 //        String str = String.format ("ACT1 =%s\nACT2 =%s\nACT3 =%s\nReACT =%s\nDimand =%s\nSN =%s\n",
 //                readResult.Active1,
 //                readResult.Active2,
@@ -232,6 +323,104 @@ public class ReadmeterFragment extends Fragment {
         tvIR.setText(String.valueOf(readResult.Amp1));
         tvIS.setText(String.valueOf(readResult.Amp2));
         tvIT.setText(String.valueOf(readResult.Amp3));
+
+        if(State) {
+            mainReadData=new MeterUtility.ReadData();
+            mainReadData=readResult;
+            MyDialog dialog=new MyDialog(this.getActivity());
+
+            //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
+            dialog.clearAllPanel();
+            dialog.clearButtonPanel();
+
+            dialog.addButton(getResources().getString(R.string.Cancel), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    return;
+                }
+            });
+            dialog.addButton(getResources().getString(R.string.Save), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (locationViewModel.isGpsEnable()) {
+                        if (location == null) {
+                            connectToModuleDialogLocation();
+
+                        }
+                    } else {
+                        location = null;
+                        locationViewModel.trunOnGps(getContext());
+                    }
+                    saveTariff(readResult);
+                    dialog.dismiss();
+
+                }
+            });
+
+            dialog.addBodyText((String) getResources().getText(R.string.Confirm_msg),15).setTitle((String) getResources().getText(R.string.Title_msg)).show();
+
+
+        }
+    }
+
+    private void saveTariff(MeterUtility.ReadData result){
+        if(result==null){
+            return;
+        }
+        List<TariffAllInfo> tariffAllInfos=readmeterViewModel.getTariffAllInfo(G.clientInfo.ClientId,G.clientInfo.SendId);
+        location=locationViewModel.getLocation(this.getContext());
+        if(location != null) {
+            TariffInfo tariffInfo = new TariffInfo();
+
+            tariffInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+            tariffInfo.TariffDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
+            tariffInfo.TariffTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
+            tariffInfo.ClientID = G.clientInfo.ClientId;
+            tariffInfo.SendID = G.clientInfo.SendId;
+            tariffInfo.Lat = String.valueOf(location.getLatitude());
+            tariffInfo.Long = String.valueOf(location.getLongitude());
+            tariffInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
+            Long tariffInfoId = Long.valueOf(0);
+            if (tariffAllInfos.size() == 0) {
+                tariffInfoId = readmeterViewModel.insertTariffInfo(tariffInfo);
+
+
+            } else {
+                tariffInfoId = Long.valueOf(tariffAllInfos.get(0).TariffInfoID);
+                readmeterViewModel.updateTariffInfo(tariffInfo);
+            }
+
+            TariffDtl tariffDtl = new TariffDtl();
+            Field[] triffDtlFiels = MeterUtility.ReadData.class.getFields();
+            for (Field field : triffDtlFiels) {
+                Integer tariffId = MeterReaderFieldName.ReadMeterId(field.getName());
+                if (tariffId != null) {
+                    tariffDtl.ReadTypeID = 1;
+                    tariffDtl.TariffInfoID = Integer.valueOf(tariffInfoId.toString());
+                    tariffDtl.TariffID = tariffId;
+                    Object value = null;
+
+                    try {
+                        value = field.get(result);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                    if (value != null) {
+                        tariffDtl.TariffValue = value.toString();
+                    }
+                    readmeterViewModel.insertTariffDtl(tariffDtl);
+                }
+
+            }
+            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+        }else{
+            locationViewModel.trunOnGps(getContext());
+        }
+
+
     }
 
     private void connectToModuleDialog(){

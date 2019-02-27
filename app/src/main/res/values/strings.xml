@@ -79,6 +79,8 @@
     <string name="RecieveProblem_msg">دریافت با مشکل مواجه شد</string>
     <string name="LoginProblem_msg">نمی توانید وارد شوید؟</string>
     <string name="Error_msg">پیام دریافت شده از سایت</string>
+    <string name="Confirm_msg">آیا مایلید ذخیره شود ؟</string>
+    <string name="Title_msg">توجه</string>
     <string name="FillOldAndNewPlombInfo_msg">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
     <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
     <string name="Downloding_msg">Downloading data,Please wait..</string>

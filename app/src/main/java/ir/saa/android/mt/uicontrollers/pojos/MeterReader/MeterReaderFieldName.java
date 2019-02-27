@@ -16,11 +16,13 @@ public class MeterReaderFieldName {
         hashMapCode.put("SerialNum1",28);
         hashMapCode.put("ActiveSum",21);
         hashMapCode.put("ReversEnerji",23);
+        hashMapCode.put("CurDate",24);
+        hashMapCode.put("CurTime",25);
 
 
         return hashMapCode.get(fieldName);
     }
-    public String getReadMeterFieldName(Integer readMeterId){
+    public static String getReadMeterFieldName(Integer readMeterId){
         hashMapName.put(17,"Dimand");
         hashMapName.put(1,"Active1");
         hashMapName.put(2,"Active2");
@@ -30,6 +32,8 @@ public class MeterReaderFieldName {
         hashMapName.put(28,"SerialNum1");
         hashMapName.put(21,"ActiveSum");
         hashMapName.put(23,"ReversEnerji");
+        hashMapName.put(24,"CurDate");
+        hashMapName.put(25,"CurTime");
 
         return hashMapName.get(readMeterId);
     }
