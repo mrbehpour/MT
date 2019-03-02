@@ -58,7 +58,7 @@ public class ReadmeterFragment extends Fragment {
     Location location;
     ProgressDialog progressDialog;
     MeterUtility.ReadData mainReadData;
-
+    Button btnRead;
 
     NumberProgressBar progReadMeter;
 
@@ -119,7 +119,8 @@ public class ReadmeterFragment extends Fragment {
 
         progReadMeter = rootView.findViewById(R.id.progressBarReadMeter);
 
-        Button btnRead = rootView.findViewById(R.id.btnRead);
+        btnRead = rootView.findViewById(R.id.btnRead);
+        btnRead.setText(getResources().getText(R.string.Readmeter_G));
         Bundle args = getArguments();
 
         readmeterViewModel.getStatusMutableLiveData.observe(this, new Observer<String>() {
@@ -193,7 +194,10 @@ public class ReadmeterFragment extends Fragment {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(mainReadData!=null && btnRead.getText().toString().contains(getResources().getText(R.string.Save))){
+                    saveTariff(mainReadData);
+                    return;
+                }
                 readmeterViewModel.StartConnectionWithMeter();
 
             }
@@ -208,6 +212,7 @@ public class ReadmeterFragment extends Fragment {
                 if(locationObserver!=null) {
                     location = locationObserver;
                     HideProgressDialogLocataion();
+
                 }
             }
         });
@@ -346,11 +351,15 @@ public class ReadmeterFragment extends Fragment {
                     if (locationViewModel.isGpsEnable()) {
                         if (location == null) {
                             connectToModuleDialogLocation();
-
+                            dialog.dismiss();
+                            return;
                         }
                     } else {
-                        location = null;
+
+                        btnRead.setText(getResources().getText(R.string.Save));
                         locationViewModel.trunOnGps(getContext());
+                        dialog.dismiss();
+                        return;
                     }
                     saveTariff(readResult);
                     dialog.dismiss();
@@ -368,6 +377,7 @@ public class ReadmeterFragment extends Fragment {
         if(result==null){
             return;
         }
+
         List<TariffAllInfo> tariffAllInfos=readmeterViewModel.getTariffAllInfo(G.clientInfo.ClientId,G.clientInfo.SendId);
         location=locationViewModel.getLocation(this.getContext());
         if(location != null) {
@@ -416,8 +426,15 @@ public class ReadmeterFragment extends Fragment {
             Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
             fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             fancyToast.show();
+            btnRead.setText(getResources().getText(R.string.Readmeter_G));
+
         }else{
-            locationViewModel.trunOnGps(getContext());
+            if(locationViewModel.isGpsEnable()==false){
+                locationViewModel.trunOnGps(getContext());
+                return;
+            }
+            connectToModuleDialogLocation();
+
         }
 
 
