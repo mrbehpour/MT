@@ -66,6 +66,7 @@ public class AmaliyatFragment extends Fragment {
     boolean isLocation;
     boolean paulserType;
     int manualPaulseNUm=0;
+    TestResult testResultLocation;
 
     ProgressDialog progressDialog;
 
@@ -75,7 +76,7 @@ public class AmaliyatFragment extends Fragment {
     }
     private void connectToModuleDialog(){
 
-        progressDialog=new ProgressDialog(getContext());
+        progressDialog=new ProgressDialog(getActivity());
         progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
         progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
         progressDialog.setCancelable(true);
@@ -96,9 +97,9 @@ public class AmaliyatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fargment_amaliyat, container, false);
-
         amaliyatViewModel = ViewModelProviders.of(this).get(AmaliyatViewModel.class);
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
+        testResultLocation=new TestResult();
         rlManualPaulser = rootView.findViewById(R.id.rlManualPaulser);
         Button btnStartTest = rootView.findViewById(R.id.btnStartTest);
         Button btnFinishTest = rootView.findViewById(R.id.btnFinishTest);
@@ -106,6 +107,7 @@ public class AmaliyatFragment extends Fragment {
         imgNewPaulse = rootView.findViewById(R.id.imgManualPaulse);
         tvManualPaulseNum =  rootView.findViewById(R.id.txtManualPaulseNum);
         isLocation = false;
+        location=null;
         Bundle args = getArguments();
         if (args != null) {
             testContorParams = (TestContorParams) args.getSerializable(BundleKeysEnum.TestContorParams);
@@ -225,14 +227,18 @@ public class AmaliyatFragment extends Fragment {
                 MT meterTest = MT.getInstance();
                 TestResult testResult = meterTest.prepareTestResultForSave(lastTestResultList);
                 testResult.ErrPerc = Double.parseDouble((String) tvErrPerc.getText());
+                testResultLocation=testResult;
                 if(locationViewModel.isGpsEnable()) {
                     if(location==null) {
+                        locationViewModel.getLocation(getContext());
                         connectToModuleDialog();
+
                     }
                 }else {
                     location=null;
+                    locationViewModel.trunOnGps(getActivity());
                 }
-                saveTestResult(testResult);
+                //saveTestResult(testResult);
 
 
             }
@@ -246,6 +252,10 @@ public class AmaliyatFragment extends Fragment {
             location =locationObserve;
 
             HideProgressDialog();
+            if(testResultLocation!=null){
+
+                saveTestResult(testResultLocation);
+            }
         }
     }
 });
@@ -253,7 +263,6 @@ public class AmaliyatFragment extends Fragment {
     }
 
     private void saveTestResult(TestResult testResult) {
-       location=locationViewModel.getLocation(getContext());
         if (location != null) {
 
             GPSInfo gpsInfo = new GPSInfo();
@@ -267,9 +276,9 @@ public class AmaliyatFragment extends Fragment {
             amaliyatViewModel.insertGpsInfo(gpsInfo);
             isLocation = true;
         }else {
-            locationViewModel.trunOnGps(this.getContext());
+            locationViewModel.trunOnGps(getContext());
             isLocation=false;
-            return;
+
         }
 
         if (isLocation) {
