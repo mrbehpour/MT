@@ -50,8 +50,8 @@ public class TariffInfoRepo  {
     }
 
 
-    public void insertTariffInfo(TariffInfo tariffInfo) {
-        tariffInfoDao.insertTariffInfo(tariffInfo);
+    public long insertTariffInfo(TariffInfo tariffInfo) {
+       return tariffInfoDao.insertTariffInfo(tariffInfo);
     }
 
 

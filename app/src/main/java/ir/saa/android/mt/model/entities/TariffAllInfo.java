@@ -1,16 +1,6 @@
 package ir.saa.android.mt.model.entities;
 
-
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
-import io.reactivex.annotations.NonNull;
-
-@Entity
-public class TariffInfo  {
-
-    @PrimaryKey
-    @NonNull
+public class TariffAllInfo {
     public int TariffInfoID ;
 
     public int AgentID ;
@@ -31,4 +21,9 @@ public class TariffInfo  {
 
     public String Lat ;
 
+    public int ReadTypeID ;
+
+    public int TariffID ;
+
+    public String TariffValue ;
 }

@@ -20,7 +20,5 @@ public class TariffDtl {
 
     public String TariffValue ;
 
-    public String Long ;
 
-    public String Lat ;
 }

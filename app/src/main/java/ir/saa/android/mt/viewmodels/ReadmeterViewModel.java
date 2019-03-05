@@ -26,6 +26,9 @@ import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.TariffAllInfo;
+import ir.saa.android.mt.model.entities.TariffDtl;
+import ir.saa.android.mt.model.entities.TariffInfo;
 import ir.saa.android.mt.model.entities.DigitalMeters;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
@@ -34,6 +37,8 @@ import ir.saa.android.mt.repositories.meterreader.SplitData;
 import ir.saa.android.mt.repositories.meterreader.StatusReport;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
 import ir.saa.android.mt.repositories.roomrepos.DigitalMetersRepo;
+import ir.saa.android.mt.repositories.roomrepos.TariffDtlRepo;
+import ir.saa.android.mt.repositories.roomrepos.TariffInfoRepo;
 
 public class ReadmeterViewModel extends AndroidViewModel {
     Bluetooth bluetooth;
@@ -46,6 +51,8 @@ public class ReadmeterViewModel extends AndroidViewModel {
     public MutableLiveData<MeterUtility.ReadData> readMeterResultMutableLiveData;
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
     public MutableLiveData<Integer> recieveDataMutableLiveData;
+    TariffDtlRepo tariffDtlRepo=null;
+    TariffInfoRepo tariffInfoRepo;
 
     private DigitalMetersRepo digitalMetersRepo;
 
@@ -99,6 +106,12 @@ public class ReadmeterViewModel extends AndroidViewModel {
     }
 
     public void InsertDigitlMetersToDB(){
+        if(tariffDtlRepo==null){
+            tariffDtlRepo=new TariffDtlRepo(application);
+        }
+        if(tariffInfoRepo==null){
+            tariffInfoRepo=new TariffInfoRepo(application);
+        }
 
 //        //String jsonArray = "{\"DigitalMeters\":[{\"MeterID\":2,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1350\",\"MeterSummaryName\":\"Elester_A1350\",\"MeterString\":\"ABB5\\\\@V5\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":3,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1500\",\"MeterSummaryName\":\"Elester_A1500\",\"MeterString\":\"ABB5\\\\@V4\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":4,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1440\",\"MeterSummaryName\":\"Elester_A1440\",\"MeterString\":\"ABB5\\\\@V9\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":6,\"MeterCompany\":\"Elester\",\"MeterType\":\"A220\",\"MeterSummaryName\":\"Elester_A220\",\"MeterString\":\"ABB5\\\\@V7\",\"ReadMode\":\"1\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":15,\"MeterCompany\":\"AMPY\",\"MeterType\":\"5194E\",\"MeterSummaryName\":\"AMPY_E\",\"MeterString\":\"AMP2519\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^AMP\\\\\\\\d{3}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":\"KERM\",\"Pass2\":\"AZAR\",\"Pass3\":null},{\"MeterID\":30,\"MeterCompany\":\"AfzarAzma\",\"MeterType\":\"JAM300\",\"MeterSummaryName\":\"JAM_300\",\"MeterString\":\"EAA5JAM3\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":null,\"Pass2\":null,\"Pass3\":null}]}";
 //        String jsonArray = "[{\"MeterID\":2,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1350\",\"MeterSummaryName\":\"Elester_A1350\",\"MeterString\":\"ABB5\\\\@V5\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":3,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1500\",\"MeterSummaryName\":\"Elester_A1500\",\"MeterString\":\"ABB5\\\\@V4\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":4,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1440\",\"MeterSummaryName\":\"Elester_A1440\",\"MeterString\":\"ABB5\\\\@V9\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":6,\"MeterCompany\":\"Elester\",\"MeterType\":\"A220\",\"MeterSummaryName\":\"Elester_A220\",\"MeterString\":\"ABB5\\\\@V7\",\"ReadMode\":\"1\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":15,\"MeterCompany\":\"AMPY\",\"MeterType\":\"5194E\",\"MeterSummaryName\":\"AMPY_E\",\"MeterString\":\"AMP2519\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^AMP\\\\\\\\d{3}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":\"KERM\",\"Pass2\":\"AZAR\",\"Pass3\":null},{\"MeterID\":30,\"MeterCompany\":\"AfzarAzma\",\"MeterType\":\"JAM300\",\"MeterSummaryName\":\"JAM_300\",\"MeterString\":\"EAA5JAM3\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":null,\"Pass2\":null,\"Pass3\":null}]";
@@ -390,6 +403,18 @@ public class ReadmeterViewModel extends AndroidViewModel {
         if(BluetoothDeviceName.equals("")) connectionStateMutableLiveData.postValue(false);
         bluetooth.disconnnect();
         bluetooth.init(BluetoothDeviceName);
+    }
+
+    public  Long insertTariffInfo(TariffInfo tariffInfo) {
+            return tariffInfoRepo.insertTariffInfo(tariffInfo);
+    }
+
+    public void insertTariffDtl(TariffDtl tariffDtl){
+        tariffDtlRepo.insertTariffDtl(tariffDtl);
+    }
+
+    public List<TariffAllInfo> getTariffAllInfo(Long clientId, Integer sendId){
+        return tariffDtlRepo.getTariffAllInfo(clientId,sendId);
     }
 
     @Override

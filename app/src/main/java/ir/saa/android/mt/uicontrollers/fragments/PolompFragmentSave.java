@@ -11,12 +11,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -27,6 +29,7 @@ import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,11 +38,13 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompDtl;
 import ir.saa.android.mt.model.entities.PolompInfo;
 import ir.saa.android.mt.model.entities.PolompType;
+import ir.saa.android.mt.uicontrollers.pojos.Polomp.PolompParams;
 import ir.saa.android.mt.uicontrollers.pojos.Polomp.PolompParams;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
 import ir.saa.android.mt.viewmodels.PolompViewModel;
@@ -508,6 +513,8 @@ public class PolompFragmentSave extends Fragment {
                 polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
                 polompViewModel.updatePolompDtl(polompDtl);
 
+
+                //Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                 //Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
                 Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
