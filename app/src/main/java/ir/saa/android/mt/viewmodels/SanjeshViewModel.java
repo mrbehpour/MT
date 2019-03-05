@@ -45,12 +45,13 @@ public class SanjeshViewModel extends AndroidViewModel {
             @Override
             public void onConnected() {
                 connectionStateMutableLiveData.postValue(true);
-                readSanjeshResultFromMeter();
+                //readSanjeshResultFromMeter();
                 Log.d("response","onConnected");
             }
 
             @Override
             public void onDisConnected() {
+                //connectionStateMutableLiveData.postValue(false);
                 Log.d("response","onDisConnected");
             }
 
@@ -74,7 +75,7 @@ public class SanjeshViewModel extends AndroidViewModel {
         sanjeshResultMutableLiveData = new MutableLiveData<>();
         connectionStateMutableLiveData = new MutableLiveData<>();
 
-        timerSetIntervalStart(2000);
+        timerSetIntervalStart(400);
     }
 
     public void readSanjeshResultFromMeter(){
@@ -124,6 +125,11 @@ public class SanjeshViewModel extends AndroidViewModel {
             timer.purge();
             timer=null;
         }
+    }
+
+    public void AbortOperation(){
+        timerSetIntervalStop();
+        metertester.AbortOperation();
     }
 
     @Override

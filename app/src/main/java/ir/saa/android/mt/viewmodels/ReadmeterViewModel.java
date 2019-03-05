@@ -7,8 +7,14 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,12 +26,14 @@ import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.DigitalMeters;
 import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
 import ir.saa.android.mt.repositories.meterreader.PROB;
 import ir.saa.android.mt.repositories.meterreader.SplitData;
 import ir.saa.android.mt.repositories.meterreader.StatusReport;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
+import ir.saa.android.mt.repositories.roomrepos.DigitalMetersRepo;
 
 public class ReadmeterViewModel extends AndroidViewModel {
     Bluetooth bluetooth;
@@ -38,6 +46,8 @@ public class ReadmeterViewModel extends AndroidViewModel {
     public MutableLiveData<MeterUtility.ReadData> readMeterResultMutableLiveData;
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
     public MutableLiveData<Integer> recieveDataMutableLiveData;
+
+    private DigitalMetersRepo digitalMetersRepo;
 
     public ReadmeterViewModel(@NonNull Application application) {
         super(application);
@@ -53,11 +63,13 @@ public class ReadmeterViewModel extends AndroidViewModel {
 
             @Override
             public void onDisConnected() {
+
                 Log.d("response","onDisConnected");
             }
 
             @Override
             public void onConnectionError(String errMsg) {
+
                 Log.d("response","onConnectionError : "+errMsg);
                 //DisconnectWithMeter();
             }
@@ -81,7 +93,42 @@ public class ReadmeterViewModel extends AndroidViewModel {
         connectionStateMutableLiveData = new MutableLiveData<>();
         recieveDataMutableLiveData = new MutableLiveData<>();
 
+        if(digitalMetersRepo==null){
+            digitalMetersRepo=new DigitalMetersRepo(application);
+        }
+    }
 
+    public void InsertDigitlMetersToDB(){
+
+//        //String jsonArray = "{\"DigitalMeters\":[{\"MeterID\":2,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1350\",\"MeterSummaryName\":\"Elester_A1350\",\"MeterString\":\"ABB5\\\\@V5\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":3,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1500\",\"MeterSummaryName\":\"Elester_A1500\",\"MeterString\":\"ABB5\\\\@V4\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":4,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1440\",\"MeterSummaryName\":\"Elester_A1440\",\"MeterString\":\"ABB5\\\\@V9\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":6,\"MeterCompany\":\"Elester\",\"MeterType\":\"A220\",\"MeterSummaryName\":\"Elester_A220\",\"MeterString\":\"ABB5\\\\@V7\",\"ReadMode\":\"1\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":15,\"MeterCompany\":\"AMPY\",\"MeterType\":\"5194E\",\"MeterSummaryName\":\"AMPY_E\",\"MeterString\":\"AMP2519\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^AMP\\\\\\\\d{3}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":\"KERM\",\"Pass2\":\"AZAR\",\"Pass3\":null},{\"MeterID\":30,\"MeterCompany\":\"AfzarAzma\",\"MeterType\":\"JAM300\",\"MeterSummaryName\":\"JAM_300\",\"MeterString\":\"EAA5JAM3\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":null,\"Pass2\":null,\"Pass3\":null}]}";
+//        String jsonArray = "[{\"MeterID\":2,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1350\",\"MeterSummaryName\":\"Elester_A1350\",\"MeterString\":\"ABB5\\\\@V5\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":3,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1500\",\"MeterSummaryName\":\"Elester_A1500\",\"MeterString\":\"ABB5\\\\@V4\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":4,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1440\",\"MeterSummaryName\":\"Elester_A1440\",\"MeterString\":\"ABB5\\\\@V9\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":6,\"MeterCompany\":\"Elester\",\"MeterType\":\"A220\",\"MeterSummaryName\":\"Elester_A220\",\"MeterString\":\"ABB5\\\\@V7\",\"ReadMode\":\"1\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":15,\"MeterCompany\":\"AMPY\",\"MeterType\":\"5194E\",\"MeterSummaryName\":\"AMPY_E\",\"MeterString\":\"AMP2519\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^AMP\\\\\\\\d{3}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":\"KERM\",\"Pass2\":\"AZAR\",\"Pass3\":null},{\"MeterID\":30,\"MeterCompany\":\"AfzarAzma\",\"MeterType\":\"JAM300\",\"MeterSummaryName\":\"JAM_300\",\"MeterString\":\"EAA5JAM3\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":null,\"Pass2\":null,\"Pass3\":null}]";
+//        List<DigitalMeters> digitalMetersList = null;
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        //Set pretty printing of json
+//        objectMapper.setSerializationInclusion (JsonInclude.Include.NON_NULL);
+//        objectMapper.setSerializationInclusion (JsonInclude.Include.NON_EMPTY);
+//        objectMapper.setSerializationInclusion (JsonInclude.Include.NON_DEFAULT);
+//
+//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//
+//        //Gson gson=new Gson();
+//        try {
+//            digitalMetersList = objectMapper.readValue(String.valueOf(jsonArray), new TypeReference<List<DigitalMeters>>(){});
+//            //Data data=gson.fromJson(String.valueOf(jsonArray),Data.class );
+//            //digitalMetersList=data.digitalMeters;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//        for (DigitalMeters dm:digitalMetersList) {
+//            digitalMetersRepo.insertDigitalMeters(dm);
+//        }
+
+        List<DigitalMeters> digitalMetersList = digitalMetersRepo.getDigitalMeters();
+        int a=digitalMetersList.size();
     }
 
     public void StartConnectionWithMeter() {
@@ -310,7 +357,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
         }
     }
 
-    private  void CheckNoResponseOperation(int noResponseTime){
+    private void CheckNoResponseOperation(int noResponseTime){
         switch (lastCnnStatus) {
             case getMeterString:
                 if (noResponseTime > 3) {
@@ -345,11 +392,14 @@ public class ReadmeterViewModel extends AndroidViewModel {
         bluetooth.init(BluetoothDeviceName);
     }
 
-
-
     @Override
     protected void onCleared() {
         super.onCleared();
     }
 
+    public class Data{
+        private List<DigitalMeters> digitalMeters;
+    }
 }
+
+

@@ -2,12 +2,15 @@ package ir.saa.android.mt.uicontrollers.fragments;
 
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,7 +54,12 @@ public class SanjeshFragment extends Fragment {
 
     SanjeshViewModel sanjeshViewModel = null;
     List<ElectericalParams> sanjeshResult;
+    //List<ElectericalParams> sanjeshResultAvrage = new ArrayList<>(3);
+    List<List<ElectericalParams>> sanjeshResultAvrage = new ArrayList<>(3);
+
     AlertDialog ad;
+    int numDisconnect=0;
+    int numGetSample=0;
 
     Button btnReconnect;
     TextView tvVR,tvVS,tvVT;
@@ -71,6 +79,8 @@ public class SanjeshFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sanjesh, container, false);
@@ -81,7 +91,9 @@ public class SanjeshFragment extends Fragment {
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onChanged(@Nullable List<ElectericalParams> sanjeshResult) {
-                        showSanjeshResult(sanjeshResult);
+                        numDisconnect=0;
+                        calAvrageOfElectricalParams(sanjeshResult);
+                        //showSanjeshResult(sanjeshResult);
                     }
                 }
         );
@@ -93,8 +105,14 @@ public class SanjeshFragment extends Fragment {
                         if(b){
                             HideProgressDialog();
                             btnReconnect.setVisibility(View.INVISIBLE);
+                            sanjeshViewModel.readSanjeshResultFromMeter();
+
                         }else{
-                            btnReconnect.setVisibility(View.VISIBLE);
+                            numDisconnect++;
+                            if(numDisconnect>3){
+                                btnReconnect.setVisibility(View.VISIBLE);
+                                AbortConnection();
+                            }
                         }
                         try {
                             Thread.sleep(200);
@@ -107,6 +125,27 @@ public class SanjeshFragment extends Fragment {
         connectToModule();
         return rootView;
     }
+
+    private void EnableBT(){
+        Intent intentBtEnabled = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        // The REQUEST_ENABLE_BT constant passed to startActivityForResult() is a locally defined integer (which must be greater than 0), that the system passes back to you in your onActivityResult()
+        // implementation as the requestCode parameter.
+        int REQUEST_ENABLE_BT = 1;
+        startActivityForResult(intentBtEnabled, REQUEST_ENABLE_BT);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                //String result=data.getStringExtra("result");
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 
     private void connectToModule(){
         showEmptyResult();
@@ -150,27 +189,112 @@ public class SanjeshFragment extends Fragment {
         tvPFT = rootView.findViewById(R.id.tvRowPF_T);
     }
 
+
+    private void calAvrageOfElectricalParams(List<ElectericalParams> sanjeshResult) {
+        double[] vals =  new double[18];
+        sanjeshResultAvrage.add(sanjeshResult);
+
+        if(sanjeshResultAvrage.size()==10){
+            for (List<ElectericalParams> lstEP : sanjeshResultAvrage) {
+
+                vals[0] += Double.valueOf(lstEP.get(0).AVRMS);
+                vals[1] += Double.valueOf(lstEP.get(0).AIRMS);
+                vals[2] += Double.valueOf(lstEP.get(0).AWATT);
+                vals[3] += Double.valueOf(lstEP.get(0).AVAR);
+                vals[4] += Double.valueOf(lstEP.get(0).AVA);
+                vals[5] += Double.valueOf(lstEP.get(0).ANGLE0);
+
+                vals[6] += Double.valueOf(lstEP.get(1).AVRMS);
+                vals[7] += Double.valueOf(lstEP.get(1).AIRMS);
+                vals[8] += Double.valueOf(lstEP.get(1).AWATT);
+                vals[9] += Double.valueOf(lstEP.get(1).AVAR);
+                vals[10] += Double.valueOf(lstEP.get(1).AVA);
+                vals[11] += Double.valueOf(lstEP.get(1).ANGLE0);
+
+                vals[12] += Double.valueOf(lstEP.get(2).AVRMS);
+                vals[13] += Double.valueOf(lstEP.get(2).AIRMS);
+                vals[14] += Double.valueOf(lstEP.get(2).AWATT);
+                vals[15] += Double.valueOf(lstEP.get(2).AVAR);
+                vals[16] += Double.valueOf(lstEP.get(2).AVA);
+                vals[17] += Double.valueOf(lstEP.get(2).ANGLE0);
+
+            }
+
+            List<ElectericalParams> sanjeshResultFinal = new ArrayList<>();
+            for(int i=0;i<3;i++) {
+                ElectericalParams epAvg = new ElectericalParams();
+
+                epAvg.AVRMS = String.format("%.2f",(vals[0+i*5] / 10));
+                epAvg.AIRMS = String.format("%.2f",(vals[1+i*5] / 10));
+
+                epAvg.AWATT = String.format("%.2f",(vals[2+i*5] / 10));
+                epAvg.AVAR = String.format("%.2f",(vals[3+i*5] / 10));
+                epAvg.AVA = String.format("%.2f",(vals[4+i*5] / 10));
+
+                epAvg.ANGLE0 = String.format("%.2f",(vals[5+i*5] / 10));
+
+                sanjeshResultFinal.add(epAvg);
+            }
+
+            sanjeshResultAvrage.clear();
+            showSanjeshResult(sanjeshResultFinal);
+            //int i=sanjeshResultFinal.size();
+        }
+
+
+//        ElectericalParams epAvg = new ElectericalParams() ;
+//
+//        if(sanjeshResultAvrage.isEmpty()){
+//            sanjeshResultAvrage.add(sanjeshResult.get(0));
+//            sanjeshResultAvrage.add(sanjeshResult.get(1));
+//            sanjeshResultAvrage.add(sanjeshResult.get(2));
+//        }else {
+//            for (int i = 0; i < 3; i++) {
+//
+//                epAvg.AVRMS = String.valueOf((Double.valueOf(epAvg.AVRMS) + Double.valueOf(sanjeshResult.get(i).AVRMS)) / 2);
+//                epAvg.AIRMS = String.valueOf((Double.valueOf(epAvg.AIRMS) + Double.valueOf(sanjeshResult.get(i).AIRMS)) / 2);
+//
+//                epAvg.AWATT = String.valueOf((Double.valueOf(epAvg.AWATT) + Double.valueOf(sanjeshResult.get(i).AWATT)) / 2);
+//                epAvg.AVAR = String.valueOf((Double.valueOf(epAvg.AVAR) + Double.valueOf(sanjeshResult.get(i).AVAR)) / 2);
+//                epAvg.AVA = String.valueOf((Double.valueOf(epAvg.AVA) + Double.valueOf(sanjeshResult.get(i).AVA)) / 2);
+//
+//                sanjeshResultAvrage.set(i, epAvg);
+//            }
+//        }
+//
+//
+//        if(numGetSample>6) {
+//            showSanjeshResult(sanjeshResultAvrage);
+//            numGetSample++;
+//        }else{
+//            numGetSample=0;
+//        }
+    }
+
     private void showSanjeshResult(List<ElectericalParams> sanjeshResult) {
         tvVR.setText(sanjeshResult.get(0).AVRMS);
         tvIR.setText(sanjeshResult.get(0).AIRMS);
-        tvPR.setText(sanjeshResult.get(0).AWATTHR);
-        tvQR.setText(sanjeshResult.get(0).AVARHR);
-        tvSR.setText(sanjeshResult.get(0).AVAHR);
-        tvPFR.setText(String.format("%.2f", Math.cos(Double.valueOf(sanjeshResult.get(0).ANGLE0))));
+        tvPR.setText(sanjeshResult.get(0).AWATT);
+        tvQR.setText(sanjeshResult.get(0).AVAR);
+        tvSR.setText(sanjeshResult.get(0).AVA);
+        tvPFR.setText(sanjeshResult.get(0).ANGLE0);
+        //tvPFR.setText(String.format("%.2f", Double.valueOf(sanjeshResult.get(0).ANGLE0)));
 
         tvVS.setText(sanjeshResult.get(1).AVRMS);
         tvIS.setText(sanjeshResult.get(1).AIRMS);
-        tvPS.setText(sanjeshResult.get(1).AWATTHR);
-        tvQS.setText(sanjeshResult.get(1).AVARHR);
-        tvSS.setText(sanjeshResult.get(1).AVAHR);
-        tvPFS.setText(String.format("%.2f", Math.cos(Double.valueOf(sanjeshResult.get(1).ANGLE0))));
+        tvPS.setText(sanjeshResult.get(1).AWATT);
+        tvQS.setText(sanjeshResult.get(1).AVAR);
+        tvSS.setText(sanjeshResult.get(1).AVA);
+        tvPFS.setText(sanjeshResult.get(1).ANGLE0);
+        //tvPFS.setText(String.format("%.2f", Double.valueOf(sanjeshResult.get(1).ANGLE0)));
 
         tvVT.setText(sanjeshResult.get(2).AVRMS);
         tvIT.setText(sanjeshResult.get(2).AIRMS);
-        tvPT.setText(sanjeshResult.get(2).AWATTHR);
-        tvQT.setText(sanjeshResult.get(2).AVARHR);
-        tvST.setText(sanjeshResult.get(2).AVAHR);
-        tvPFT.setText(String.format("%.2f", Math.cos(Double.valueOf(sanjeshResult.get(2).ANGLE0))));
+        tvPT.setText(sanjeshResult.get(2).AWATT);
+        tvQT.setText(sanjeshResult.get(2).AVAR);
+        tvST.setText(sanjeshResult.get(2).AVA);
+        tvPFT.setText(sanjeshResult.get(2).ANGLE0);
+        //tvPFT.setText(String.format("%.2f", Double.valueOf(sanjeshResult.get(2).ANGLE0)));
     }
 
     private void showEmptyResult() {
@@ -219,6 +343,10 @@ public class SanjeshFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    public void AbortConnection(){
+        sanjeshViewModel.AbortOperation();
     }
 
     @Override

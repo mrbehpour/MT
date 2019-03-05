@@ -123,6 +123,7 @@ public class ReadmeterFragment extends Fragment {
                 @Override
                 public void onChanged(@Nullable MeterUtility.MeterInfo meterInfo) {
                     showMeterInfo(meterInfo);
+
                 }
             }
         );
@@ -158,7 +159,9 @@ public class ReadmeterFragment extends Fragment {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                readmeterViewModel.StartConnectionWithMeter();
+
+//                readmeterViewModel.StartConnectionWithMeter();
+                readmeterViewModel.InsertDigitlMetersToDB();
             }
         });
 

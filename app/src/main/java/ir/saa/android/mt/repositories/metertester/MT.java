@@ -20,6 +20,7 @@ public class MT {
     private final static byte SLAVE_ID=1;
 //    private final static double correctFactor=47.59552;
     private final static double correctFactor=48.64864864864865;
+    private final static double powerCalCoeff=0.0703125;
     private final static int PowerFreq=50;
     public final static int maxRoundTest=250;
     public final static int maxNumErrorPaulse=250;
@@ -138,7 +139,7 @@ public class MT {
         totalReciveData="";
         RegisterInfo ri = findRegisterInfo(RegisterInfo.regNames.ElecParams_ALL);
         try {
-            String result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght);
+            String result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
 
             electericalParams.add(splitElectericalParams(result.substring(0,108)));
             electericalParams.add(splitElectericalParams(result.substring(108,216)));
@@ -237,7 +238,7 @@ public class MT {
                 Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_C));
 
         ErrPerc = ph * correctFactor;
-        double k = (3600000 * testContorParams.SensorRatio) / testContorParams.ContorConst;
+        double k = (3600000 * testContorParams.SensorRatio * testContorParams.CTCoeff) / testContorParams.ContorConst;
 
         if((k - ErrPerc)>=ErrPerc || ErrPerc==0) {
             ErrPerc = 99.99;
@@ -356,15 +357,18 @@ public class MT {
     private ElectericalParams splitElectericalParams (String responseStr){
         ElectericalParams ep = new ElectericalParams();
         if (responseStr.trim().length() > 0) {
-            ep.AVRMS = calVoltage(responseStr.substring(6, 14));
-            ep.AIRMS = calAmp(responseStr.substring(14, 22));
-            ep.AWATTHR = calPower(responseStr.substring(22, 30));
-            ep.AVARHR = calPower(responseStr.substring(30, 38));
-            ep.AVAHR = calPower(responseStr.substring(38, 46));
-            ep.ANGLE0 = calAngle(responseStr.substring(46, 50));
-//            ep.AWATT = calPower(responseStr.substring(74, 82));
-//            ep.AVAR = calPower(responseStr.substring(82, 90));
-//            ep.AVA = calPower(responseStr.substring(90, 98));
+            ep.AVRMS = calVoltage(responseStr.substring(0, 8));
+            ep.AIRMS = calAmp(responseStr.substring(8, 16));
+
+//            ep.AWATTHR = calPower(responseStr.substring(16, 24));
+//            ep.AVARHR = calPower(responseStr.substring(24, 32));
+//            ep.AVAHR = calPower(responseStr.substring(32, 40));
+
+            ep.ANGLE0 = calAngle(responseStr.substring(40, 44));
+
+            ep.AWATT = calPower(responseStr.substring(68, 76));
+            ep.AVAR = calPower(responseStr.substring(76, 84));
+            ep.AVA = calPower(responseStr.substring(84, 92));
         }
         return ep;
     }
@@ -440,13 +444,17 @@ public class MT {
 
     private String calAngle (String responseStr){
         int ang = Integer.parseInt(responseStr, 16);
-        double pf = Math.cos(ang * 360 * 50 / (double) 256);
+        //double pf = Math.cos(ang * 360 * 50 / (double) 256);
+        double pf = Math.cos(Math.toRadians(ang * powerCalCoeff));
+
+        //Log.d("Angle",responseStr + " _ " + String.valueOf(pf));
+
         return String.valueOf(pf);
     }
 
     private String calPower (String responseStr){
 
-        double d = twosComplement(responseStr) / (double) 5288;
+        double d = (twosComplement(responseStr) * 1000) / (double) 5288;
         return String.format("%.2f", d);
     }
 
@@ -459,6 +467,10 @@ public class MT {
         }
 
         return v;
+    }
+
+    public void AbortOperation(){
+        modBus.Dispose();
     }
 
 }

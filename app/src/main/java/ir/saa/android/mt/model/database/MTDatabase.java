@@ -22,6 +22,7 @@ import ir.saa.android.mt.model.daos.ClientDao;
 import ir.saa.android.mt.model.daos.ClientTypeDao;
 import ir.saa.android.mt.model.daos.CompanyDao;
 import ir.saa.android.mt.model.daos.DeviceSerialDao;
+import ir.saa.android.mt.model.daos.DigitalMetersDao;
 import ir.saa.android.mt.model.daos.GPSInfoDao;
 import ir.saa.android.mt.model.daos.GroupingFormatDao;
 import ir.saa.android.mt.model.daos.InspectionDtlDao;
@@ -60,6 +61,7 @@ import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientType;
 import ir.saa.android.mt.model.entities.Company;
 import ir.saa.android.mt.model.entities.DeviceSerial;
+import ir.saa.android.mt.model.entities.DigitalMeters;
 import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.GroupingFormat;
 import ir.saa.android.mt.model.entities.InspectionDtl;
@@ -106,7 +108,7 @@ import ir.saa.android.mt.model.entities.TestInfo;
         PolompDtl.class,TariffInfo.class,
         TariffDtl.class,TestInfo.class,TestDtl.class,
         PolompColor.class, PolompType.class, AddedClient.class,
-        Bazdid.class, DeviceSerial.class},version = 45)
+        Bazdid.class, DeviceSerial.class, DigitalMeters.class },version = 47)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -187,6 +189,8 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract BazdidDao bazdidModel();
 
     public abstract DeviceSerialDao deviceSerialModel();
+
+    public abstract DigitalMetersDao digitalMetersModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {

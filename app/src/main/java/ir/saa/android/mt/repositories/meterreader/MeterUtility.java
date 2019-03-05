@@ -117,7 +117,6 @@ public class MeterUtility {
         List<ObisItem> obisLst = null;
         try {
             obisLst = objectMapper.readValue(jsonArray, new TypeReference<List<ObisItem>>(){});
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -141,7 +140,7 @@ public class MeterUtility {
 
 //        meterInfo.MeterCompany = "EAA";
 //        meterInfo.MeterType = "JAM-300";
-//        meterInfo.MaterSummaryName = "JAM-300";
+//        meterInfo.MeterSummaryName = "JAM-300";
 //        meterInfo.MeterString = meterString;
 //        meterInfo.ReadMode = readingMode.readout.name();
 //        meterInfo.ValidationRegex = "^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\d{1,2}[(].*[)]$";
@@ -162,7 +161,7 @@ public class MeterUtility {
 
 //        meterInfo.MeterCompany = "AMPY";
 //        meterInfo.MeterType = "AMP-E";
-//        meterInfo.MaterSummaryName = "AMP-E";
+//        meterInfo.MeterSummaryName = "AMP-E";
 //        meterInfo.MeterString = meterString;
 //        meterInfo.ReadMode = readingMode.programming.name();
 //        meterInfo.ValidationRegex = "^AMP\\d{3}[(].*[)]$";

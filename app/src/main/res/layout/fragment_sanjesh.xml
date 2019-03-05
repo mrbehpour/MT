@@ -207,7 +207,7 @@
                     android:background="@color/grey_100"
                     android:lines="2"
                     android:maxLines="2"
-                    android:text="@string/AmpA" />
+                    android:text="@string/Amp" />
 
                 <!-- R Column -->
 

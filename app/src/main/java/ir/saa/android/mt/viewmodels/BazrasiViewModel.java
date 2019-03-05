@@ -34,7 +34,7 @@ public class BazrasiViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<RemarkItem>> RemarkItemLiveData;
     private RemarkRepo remarkRepo;
-    private  AnswerGroupDtlRepo answerGroupDtlRepo;
+    private AnswerGroupDtlRepo answerGroupDtlRepo;
     private InspectionInfoRepo inspectionInfoRepo;
     private InspectionDtlRepo inspectionDtlRepo;
 

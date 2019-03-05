@@ -3,6 +3,8 @@ package ir.saa.android.mt.viewmodels;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
@@ -50,6 +52,7 @@ public class TestContorViewModel extends AndroidViewModel {
                 Toast fancyToast = FancyToast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect_msg),errMsg), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 fancyToast.show();
+
                 Log.d("response","onConnectionError : "+errMsg);
             }
 
@@ -64,6 +67,8 @@ public class TestContorViewModel extends AndroidViewModel {
             }
         });
     }
+
+
 
     public void initTranseferLayer(){
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);

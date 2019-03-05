@@ -29,13 +29,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     Context context = SplashScreenActivity.this;
     LinearLayout flRect;
     pl.droidsonroids.gif.GifTextView ivLogo;
-    DeviceSerialViewModel deviceSerialViewModel=null;
+
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_splashscreen);
-        deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
+
         flRect=(LinearLayout)findViewById(R.id.flRect);
 
         // New Handler to start the Login-Activity

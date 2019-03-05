@@ -111,6 +111,7 @@ public class ModBus {
     //-------check response-------
     private boolean checkResponseStr(String responseStr){
         boolean res=false;
+        if(responseStr.isEmpty()) return res;
 
         switch (Last_Register_FC) {
             case READ_INPUT_REGISTER_FC:
@@ -143,6 +144,7 @@ public class ModBus {
                 }
                 break;
         }
+
         waitForResponse = !res;
         return  res;
     }
@@ -191,6 +193,7 @@ public class ModBus {
             }
         }
         else {
+            Log.d("response","Disconn.");
             modbusCallback.onConnectionError("Transfer Layer is Disconnected");
             throw new Exception("Transfer Layer is Disconnected");
         }
@@ -315,6 +318,7 @@ public class ModBus {
         public void run() {
             if(isModbusRunningKey){//
                 if(waitForResponse){
+                    waitForResponse = false;
                     isModbusRunningKey=false;
                     Log.d("response","Time Out.");
                 }
@@ -340,7 +344,13 @@ public class ModBus {
     }
     //-------------------------------
 
+    public void AbortOperation(){
+
+    }
+
     public void Dispose(){
+        //Log.d("response","Disposing.");
+        waitForResponse = false;
         isModbusRunningKey = false;
     }
 

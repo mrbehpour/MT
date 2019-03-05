@@ -3,6 +3,7 @@ package ir.saa.android.mt.repositories.bluetooth;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Intent;
 import android.util.Log;
 
 import java.io.IOException;
@@ -189,6 +190,7 @@ public class Bluetooth implements ITransferLayer {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         if(!mBluetoothAdapter.isEnabled()) {
+
             throw new btException(bt_err_bluetoothIsOff, new Throwable(String.valueOf(btException.class)));
         }
 
