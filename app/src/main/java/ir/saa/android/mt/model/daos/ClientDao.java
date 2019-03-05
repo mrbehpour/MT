@@ -75,7 +75,8 @@ public interface ClientDao {
             "Client.RoozKar, " +
             "(select PolompInfoID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1 ) as isPolomp,  "+
             "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID limit 1) as isTest, "+
-            "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi "+
+            "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi, "+
+            "(select SendID from TariffInfo where TariffInfo.ClientID=Client.ClientID limit 1) as isTariff "+
             "from Client "
     )
     LiveData<List<ClientWithAction>> getClientsWithActionLiveData();
@@ -132,7 +133,8 @@ public interface ClientDao {
             "Client.RoozKar, " +
             "(select PolompInfoID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1 ) as isPolomp,  "+
             "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID limit 1) as isTest, "+
-            "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi "+
+            "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi, "+
+            "(select SendID from TariffInfo where TariffInfo.ClientID=Client.ClientID limit 1) as isTariff "+
             "from Client " +
             "where RegionID=:regionId"
     )

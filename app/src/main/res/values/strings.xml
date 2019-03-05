@@ -79,6 +79,8 @@
     <string name="RecieveProblem_msg">دریافت با مشکل مواجه شد</string>
     <string name="LoginProblem_msg">نمی توانید وارد شوید؟</string>
     <string name="Error_msg">پیام دریافت شده از سایت</string>
+    <string name="Confirm_msg">آیا مایلید ذخیره شود ؟</string>
+    <string name="Title_msg">توجه</string>
     <string name="FillOldAndNewPlombInfo_msg">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
     <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
     <string name="Downloding_msg">Downloading data,Please wait..</string>
@@ -224,12 +226,12 @@
     <string name="PhaseR">R</string>
     <string name="PhaseS">S</string>
     <string name="PhaseT">T</string>
-    <string name="Volt">(V) ولتاژ</string>
-    <string name="Amp">آمپراژ (I)</string>
-    <string name="PowerP">توان اکتیو (P)</string>
-    <string name="PowerQ">توان راکتیو (Q)</string>
-    <string name="PowerS">توان ظاهری (S)</string>
-    <string name="PFactCoeff">ضریب قدرت (PF)</string>
+    <string name="Volt">(Volt) ولتاژ</string>
+    <string name="Amp">آمپراژ (Amp)</string>
+    <string name="PowerP">توان اکتیو (Watt)</string>
+    <string name="PowerQ">توان راکتیو (Var)</string>
+    <string name="PowerS">توان ظاهری (VA)</string>
+    <string name="PFactCoeff">ضریب قدرت </string>
     <string name="VahedTest">ثانیه</string>
 
     <!-- listitem_test_result -->

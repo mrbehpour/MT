@@ -102,4 +102,6 @@ public class ClientWithAction {
 
     public int isBazrasi;
 
+    public int isTariff;
+
 }

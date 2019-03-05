@@ -330,13 +330,14 @@
 
                 <!-- R Column -->
                 <TextView
-                    android:id="@+id/tvRowV_R"
+                    android:id="@+id/tvRowV_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -361,15 +362,15 @@
                     android:text="@string/DashSign" />
 
                 <!-- T Column -->
+
                 <TextView
-                    android:id="@+id/tvRowV_T"
+                    android:id="@+id/tvRowV_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -402,14 +403,16 @@
                     android:text="@string/Amp" />
 
                 <!-- R Column -->
+
                 <TextView
-                    android:id="@+id/tvRowI_R"
+                    android:id="@+id/tvRowI_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -435,14 +438,13 @@
 
                 <!-- T Column -->
                 <TextView
-                    android:id="@+id/tvRowI_T"
+                    android:id="@+id/tvRowI_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -475,14 +477,16 @@
                     android:text="@string/PowerP" />
 
                 <!-- R Column -->
+
                 <TextView
-                    android:id="@+id/tvRowP_R"
+                    android:id="@+id/tvRowP_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -508,14 +512,13 @@
 
                 <!-- T Column -->
                 <TextView
-                    android:id="@+id/tvRowP_T"
+                    android:id="@+id/tvRowP_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -547,15 +550,18 @@
                     android:maxLines="2"
                     android:text="@string/PowerQ" />
 
+
+
                 <!-- R Column -->
                 <TextView
-                    android:id="@+id/tvRowQ_R"
+                    android:id="@+id/tvRowQ_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -580,15 +586,15 @@
                     android:text="@string/DashSign" />
 
                 <!-- T Column -->
+
                 <TextView
-                    android:id="@+id/tvRowQ_T"
+                    android:id="@+id/tvRowQ_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -621,14 +627,16 @@
                     android:text="@string/PowerS" />
 
                 <!-- R Column -->
+
                 <TextView
-                    android:id="@+id/tvRowS_R"
+                    android:id="@+id/tvRowS_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -654,14 +662,13 @@
 
                 <!-- T Column -->
                 <TextView
-                    android:id="@+id/tvRowS_T"
+                    android:id="@+id/tvRowS_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
                     android:textAlignment="gravity"
@@ -695,14 +702,16 @@
                     android:text="@string/PFactCoeff" />
 
                 <!-- R Column -->
+
                 <TextView
-                    android:id="@+id/tvRowPF_R"
+                    android:id="@+id/tvRowPF_T"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
                     android:layout_marginBottom="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"
@@ -730,14 +739,13 @@
 
                 <!-- T Column -->
                 <TextView
-                    android:id="@+id/tvRowPF_T"
+                    android:id="@+id/tvRowPF_R"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
                     android:fontFamily="@font/byekan"
                     android:layout_marginTop="1dp"
                     android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
                     android:layout_marginBottom="1dp"
                     android:textSize="14sp"
                     android:gravity="center_horizontal|center_vertical"

@@ -46,7 +46,9 @@ public interface TariffDtlDao {
 
     @Query("Select * from Tariffinfo inner join tariffdtl " +
             "on Tariffinfo.TariffInfoID=tariffdtl.TariffInfoID  " +
-            "where Tariffinfo.ClientID=:clientId and TariffInfo.SendID=:sendId")
+            "where Tariffinfo.ClientID=:clientId and TariffInfo.SendID=:sendId"+
+            " order by TariffInfo.TariffInfoID"
+    )
     List<TariffAllInfo> getTariffAllInfo(Long clientId, Integer sendId);
 
 }
