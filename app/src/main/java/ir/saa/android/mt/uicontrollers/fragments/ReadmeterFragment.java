@@ -166,7 +166,7 @@ public class ReadmeterFragment extends Fragment {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onChanged(@Nullable MeterUtility.ReadData readResult) {
-                    showReadResult(readResult);
+                    showReadResult(readResult,false);
                 }
             }
         );
