@@ -59,7 +59,7 @@ public class ReadmeterFragment extends Fragment {
     ProgressDialog progressDialog;
     MeterUtility.ReadData mainReadData;
     Button btnRead;
-
+    int CountGherat;
     NumberProgressBar progReadMeter;
 
     @Override
@@ -90,6 +90,7 @@ public class ReadmeterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_readmeter, container, false);
         locationViewModel=ViewModelProviders.of(this).get(LocationViewModel.class);
+        CountGherat=0;
         readmeterViewModel = ViewModelProviders.of(this).get(ReadmeterViewModel.class);
         txtMeterCompany = rootView.findViewById(R.id.tvMeterCompany);
         txtMeterType = rootView.findViewById(R.id.tvMeterType);
@@ -166,7 +167,7 @@ public class ReadmeterFragment extends Fragment {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onChanged(@Nullable MeterUtility.ReadData readResult) {
-                    showReadResult(readResult,false);
+                    showReadResult(readResult,true);
                 }
             }
         );
@@ -177,7 +178,7 @@ public class ReadmeterFragment extends Fragment {
                     public void onChanged(@Nullable Boolean b) {
                         if(b){
                             HideProgressDialog();
-                            saveTariff(mainReadData);
+
                             //btnReconnect.setVisibility(View.INVISIBLE);
                         }else{
                             //btnReconnect.setVisibility(View.VISIBLE);
@@ -196,9 +197,10 @@ public class ReadmeterFragment extends Fragment {
             public void onClick(View view) {
                 if(mainReadData!=null && btnRead.getText().toString().contains(getResources().getText(R.string.Save))){
                     saveTariff(mainReadData);
-                    return;
+
+                }else {
+                    readmeterViewModel.StartConnectionWithMeter();
                 }
-                readmeterViewModel.StartConnectionWithMeter();
 
             }
         });
@@ -211,6 +213,9 @@ public class ReadmeterFragment extends Fragment {
             public void onChanged(@Nullable Location locationObserver) {
                 if(locationObserver!=null) {
                     location = locationObserver;
+                    if(mainReadData!=null){
+                        saveTariff(mainReadData);
+                    }
                     HideProgressDialogLocataion();
 
                 }
@@ -332,43 +337,7 @@ public class ReadmeterFragment extends Fragment {
         if(State) {
             mainReadData=new MeterUtility.ReadData();
             mainReadData=readResult;
-            MyDialog dialog=new MyDialog(this.getActivity());
-
-            //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_SHORT).show();
-            dialog.clearAllPanel();
-            dialog.clearButtonPanel();
-
-            dialog.addButton(getResources().getString(R.string.Cancel), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                    return;
-                }
-            });
-            dialog.addButton(getResources().getString(R.string.Save), new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (locationViewModel.isGpsEnable()) {
-                        if (location == null) {
-                            connectToModuleDialogLocation();
-                            dialog.dismiss();
-                            return;
-                        }
-                    } else {
-
-                        btnRead.setText(getResources().getText(R.string.Save));
-                        locationViewModel.trunOnGps(getContext());
-                        dialog.dismiss();
-                        return;
-                    }
-                    saveTariff(readResult);
-                    dialog.dismiss();
-
-                }
-            });
-
-            dialog.addBodyText((String) getResources().getText(R.string.Confirm_msg),15).setTitle((String) getResources().getText(R.string.Title_msg)).show();
-
+            btnRead.setText(getResources().getText(R.string.Save));
 
         }
     }
@@ -380,7 +349,11 @@ public class ReadmeterFragment extends Fragment {
 
         List<TariffAllInfo> tariffAllInfos=readmeterViewModel.getTariffAllInfo(G.clientInfo.ClientId,G.clientInfo.SendId);
         location=locationViewModel.getLocation(this.getContext());
-        if(location != null) {
+        if(location != null ) {
+            CountGherat++;
+            if(CountGherat>=2){
+                return;
+            }
             TariffInfo tariffInfo = new TariffInfo();
 
             tariffInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
@@ -429,6 +402,7 @@ public class ReadmeterFragment extends Fragment {
             btnRead.setText(getResources().getText(R.string.Readmeter_G));
 
         }else{
+
             if(locationViewModel.isGpsEnable()==false){
                 locationViewModel.trunOnGps(getContext());
                 return;

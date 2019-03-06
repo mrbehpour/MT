@@ -67,7 +67,7 @@ public class AmaliyatFragment extends Fragment {
     boolean paulserType;
     int manualPaulseNUm=0;
     TestResult testResultLocation;
-
+    int CountSaveTest;
     ProgressDialog progressDialog;
 
     @Override
@@ -99,6 +99,7 @@ public class AmaliyatFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fargment_amaliyat, container, false);
         amaliyatViewModel = ViewModelProviders.of(this).get(AmaliyatViewModel.class);
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
+        CountSaveTest=0;
         testResultLocation=new TestResult();
         rlManualPaulser = rootView.findViewById(R.id.rlManualPaulser);
         Button btnStartTest = rootView.findViewById(R.id.btnStartTest);
@@ -263,7 +264,8 @@ public class AmaliyatFragment extends Fragment {
     }
 
     private void saveTestResult(TestResult testResult) {
-        if (location != null) {
+        CountSaveTest++;
+        if (location != null && CountSaveTest==1) {
 
             GPSInfo gpsInfo = new GPSInfo();
             gpsInfo.ClientID = G.clientInfo.ClientId;
@@ -334,6 +336,7 @@ public class AmaliyatFragment extends Fragment {
 //Bastan Form Sabt
             G.fragmentNumStack.pop();
             G.startFragment(G.fragmentNumStack.pop(), true, null);
+            isLocation=false;
         }
 
 

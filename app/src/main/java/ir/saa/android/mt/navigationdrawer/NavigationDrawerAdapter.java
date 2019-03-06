@@ -3,6 +3,7 @@ package ir.saa.android.mt.navigationdrawer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
+import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -81,7 +83,25 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     G.context.startActivity(intent);
 
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemExit))==0){
-                    System.exit(0);
+//
+////                    ((AppCompatActivity)context).finish();
+////
+////
+////
+////                    System.exit(0);
+                    if (G.fragmentNumStack.size() > 0) {
+                        Integer targetFragmentNum = G.fragmentNumStack.pop();
+                        G.startFragment(targetFragmentNum, true, null);
+                    }
+                    G.currentFragmentNum = null;
+                    ((AppCompatActivity)context).finish();
+                    Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+
+                    homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    context.startActivity(homeIntent);
+
+//                    //android.os.Process.killProcess(android.os.Process.myPid());
+//
                 }
             }
         });

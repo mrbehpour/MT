@@ -29,7 +29,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.4"
             android:orientation="horizontal">
 
             <!-- gozaresh -->
@@ -269,7 +269,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="0.4"
             android:orientation="horizontal">
             <!-- settings -->
             <LinearLayout
@@ -494,6 +494,19 @@
                         android:text="@string/RecieveBaseInfoDes"/>
                 </LinearLayout>
             </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.1"
+            android:layout_height="0dp">
+            <ImageView
+                android:layout_width="match_parent"
+                android:background="@color/grey_200"
+                android:id="@+id/imgExit"
+                android:src="@drawable/exit"
+                android:layout_height="match_parent" />
+
 
         </LinearLayout>
     </LinearLayout>

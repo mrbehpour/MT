@@ -149,10 +149,13 @@ public class MainActivity extends AppCompatActivity{
         } else {
             if (doubleBackToExitPressedOnce ) {
                 G.currentFragmentNum=null;
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+
                 finish();
-                return;
+                System.exit(0);
             }
             this.doubleBackToExitPressedOnce=true;
 
