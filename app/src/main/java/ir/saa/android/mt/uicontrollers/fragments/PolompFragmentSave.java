@@ -112,6 +112,7 @@ public class PolompFragmentSave extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
     private void connectToModuleDialog(){
 
         progressDialog=new ProgressDialog(getContext());

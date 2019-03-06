@@ -1,13 +1,14 @@
 package ir.saa.android.mt.repositories.meterreader;
 
 import ir.saa.android.mt.application.Converters;
+import ir.saa.android.mt.model.entities.DigitalMeters;
 import ir.saa.android.mt.repositories.IEC.IEC_Constants;
 
 public class MeterPassword {
 
-    public static String GetPasswordStr(MeterUtility.MeterInfo meterInfo, String meterPass, String P0String){
+    public static String GetPasswordStr(DigitalMeters meterInfo, String meterPass, String P0String){
         String SendPassStr="";
-        switch (meterInfo.MaterSummaryName){
+        switch (meterInfo.MeterSummaryName){
             case "AMP-E":
                 SendPassStr=createMeterCommandStr(IEC_Constants.P2_Command,String.format("(%s)",CalculateAmpyPassword(meterPass,P0String)));
                 break;

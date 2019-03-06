@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -300,7 +301,7 @@
                 android:orientation="horizontal">
 
                 <!-- Value Column -->
-                <TextView
+                <EditText
                     android:id="@+id/tvAct1Val"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -313,6 +314,9 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:maxLength="10"
                     android:text="@string/DashSign" />
 
                 <!-- Value Column -->
@@ -358,7 +362,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- Value Column -->
-                <TextView
+                <EditText
                     android:id="@+id/tvAct2Val"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -371,6 +375,9 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:maxLength="10"
                     android:text="@string/DashSign" />
 
                 <!-- Obis Column -->
@@ -416,7 +423,7 @@
                 android:orientation="horizontal">
 
                 <!-- Value Column -->
-                <TextView
+                <EditText
                     android:id="@+id/tvAct3Val"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -429,6 +436,9 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:maxLength="10"
                     android:text="@string/DashSign" />
 
                 <!-- Value Column -->
@@ -474,7 +484,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <!-- Value Column -->
-                <TextView
+                <EditText
                     android:id="@+id/tvRActVal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -487,6 +497,9 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_100"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:maxLength="10"
                     android:text="@string/DashSign" />
 
                 <!-- Obis Column -->
@@ -532,7 +545,7 @@
                 android:orientation="horizontal">
 
                 <!-- Value Column -->
-                <TextView
+                <EditText
                     android:id="@+id/tvDimVal"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -545,6 +558,9 @@
                     android:textAlignment="gravity"
                     android:textColor="@color/grey_700"
                     android:background="@color/grey_200"
+                    android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
+                    android:maxLength="10"
                     android:text="@string/DashSign" />
 
                 <!-- Value Column -->
@@ -1095,19 +1111,72 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btnRead"
-            android:fontFamily="@font/byekan"
-            android:layout_width="match_parent"
+        <LinearLayout
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_gravity="center"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ffffff"
-            android:textSize="16sp"
-            android:text="@string/Readmeter"/>
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnProbRead"
+                android:fontFamily="@font/byekan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="@string/ReadByProb"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnCancelManualRead"
+                android:fontFamily="@font/byekan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="@string/Cancel"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnManualRead"
+                android:fontFamily="@font/byekan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="@string/ReadManual"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnSaveManualRead"
+                android:fontFamily="@font/byekan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="@string/Save"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

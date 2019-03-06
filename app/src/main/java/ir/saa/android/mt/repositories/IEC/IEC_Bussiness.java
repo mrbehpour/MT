@@ -8,7 +8,7 @@ public class IEC_Bussiness {
     public static char getNewBaudRateFromMeterString(String meterString) {
         char newBaudrate = '0';
         try {
-            newBaudrate =  meterString.charAt(4);
+            newBaudrate =  meterString.charAt(3);
         } catch (Exception ex) {
             newBaudrate = 'X';
         }

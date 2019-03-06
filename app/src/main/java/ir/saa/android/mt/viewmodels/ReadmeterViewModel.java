@@ -49,7 +49,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
     boolean connectToMeter =false;
 
     public MutableLiveData<String> getStatusMutableLiveData;
-    public MutableLiveData<MeterUtility.MeterInfo> readMeterMutableLiveData;
+    public MutableLiveData<DigitalMeters> readMeterMutableLiveData;
     public MutableLiveData<MeterUtility.ReadData> readMeterResultMutableLiveData;
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
     public MutableLiveData<Integer> recieveDataMutableLiveData;
@@ -113,6 +113,39 @@ public class ReadmeterViewModel extends AndroidViewModel {
         }
     }
 
+    public void InsertDigitlMetersToDB(){
+
+        //String jsonArray = "{\"DigitalMeters\":[{\"MeterID\":2,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1350\",\"MeterSummaryName\":\"Elester_A1350\",\"MeterString\":\"ABB5\\\\@V5\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":3,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1500\",\"MeterSummaryName\":\"Elester_A1500\",\"MeterString\":\"ABB5\\\\@V4\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":4,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1440\",\"MeterSummaryName\":\"Elester_A1440\",\"MeterString\":\"ABB5\\\\@V9\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":6,\"MeterCompany\":\"Elester\",\"MeterType\":\"A220\",\"MeterSummaryName\":\"Elester_A220\",\"MeterString\":\"ABB5\\\\@V7\",\"ReadMode\":\"1\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":15,\"MeterCompany\":\"AMPY\",\"MeterType\":\"5194E\",\"MeterSummaryName\":\"AMPY_E\",\"MeterString\":\"AMP2519\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^AMP\\\\\\\\d{3}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":\"KERM\",\"Pass2\":\"AZAR\",\"Pass3\":null},{\"MeterID\":30,\"MeterCompany\":\"AfzarAzma\",\"MeterType\":\"JAM300\",\"MeterSummaryName\":\"JAM_300\",\"MeterString\":\"EAA5JAM3\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":null,\"Pass2\":null,\"Pass3\":null}]}";
+//        String jsonArray = "[{\"MeterID\":2,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1350\",\"MeterSummaryName\":\"Elester_A1350\",\"MeterString\":\"ABB5\\\\@V5\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":3,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1500\",\"MeterSummaryName\":\"Elester_A1500\",\"MeterString\":\"ABB5\\\\@V4\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":4,\"MeterCompany\":\"Elester\",\"MeterType\":\"A1440\",\"MeterSummaryName\":\"Elester_A1440\",\"MeterString\":\"ABB5\\\\@V9\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":6,\"MeterCompany\":\"Elester\",\"MeterType\":\"A220\",\"MeterSummaryName\":\"Elester_A220\",\"MeterString\":\"ABB5\\\\@V7\",\"ReadMode\":\"1\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Obis_Prnts_Semi\",\"R_Command\":\"R5\",\"MakePassAlgorithm\":null,\"Pass1\":\"00000000\",\"Pass2\":null,\"Pass3\":null},{\"MeterID\":15,\"MeterCompany\":\"AMPY\",\"MeterType\":\"5194E\",\"MeterSummaryName\":\"AMPY_E\",\"MeterString\":\"AMP2519\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^AMP\\\\\\\\d{3}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":\"KERM\",\"Pass2\":\"AZAR\",\"Pass3\":null},{\"MeterID\":30,\"MeterCompany\":\"AfzarAzma\",\"MeterType\":\"JAM300\",\"MeterSummaryName\":\"JAM_300\",\"MeterString\":\"EAA5JAM3\",\"ReadMode\":\"0\",\"ValidationRegex\":\"^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\\\\\\\d{1,2}[(].*[)]$\",\"SetDateTime\":false,\"NeedPassForRead\":false,\"ReadObisType\":\"Just_Obis\",\"R_Command\":\"R1\",\"MakePassAlgorithm\":null,\"Pass1\":null,\"Pass2\":null,\"Pass3\":null}]";
+//        List<DigitalMeters> digitalMetersList = null;
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        //Set pretty printing of json
+//        objectMapper.setSerializationInclusion (JsonInclude.Include.NON_NULL);
+//        objectMapper.setSerializationInclusion (JsonInclude.Include.NON_EMPTY);
+//        objectMapper.setSerializationInclusion (JsonInclude.Include.NON_DEFAULT);
+//
+//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//
+//        //Gson gson=new Gson();
+//        try {
+//            digitalMetersList = objectMapper.readValue(String.valueOf(jsonArray), new TypeReference<List<DigitalMeters>>(){});
+//            //Data data=gson.fromJson(String.valueOf(jsonArray),Data.class );
+//            //digitalMetersList=data.digitalMeters;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//        for (DigitalMeters dm:digitalMetersList) {
+//            digitalMetersRepo.insertDigitalMeters(dm);
+//        }
+
+        List<DigitalMeters> digitalMetersList = digitalMetersRepo.getDigitalMeters();
+        int a=digitalMetersList.size();
+    }
+
     public void StartConnectionWithMeter() {
         if (connectToMeter) return;
         try {
@@ -141,7 +174,9 @@ public class ReadmeterViewModel extends AndroidViewModel {
                             //timerConnectMeterStop();
                             if(meterString[0]!=null && !meterString[0].isEmpty() ) {
                                 connectToMeter =true;
-                                MeterUtility.MeterInfo meterInfo = MeterUtility.getMeterInfo(meterString[0]);
+                                //String ms=meterString[0].substring(1,9);
+                                DigitalMeters meterInfo = GetMeterInfo(meterString[0]);
+
                                 readMeterMutableLiveData.postValue(meterInfo);
                                 if (meterInfo.ReadMode == MeterUtility.readingMode.readout.name()) {
                                     ReadOutMeter(meterInfo);
@@ -163,7 +198,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
         }
     }
 
-    private void ReadOutMeter(MeterUtility.MeterInfo meterInfo){
+    private void ReadOutMeter(DigitalMeters meterInfo){
         try {
             final String[] readoutString = {""};
             Completable.fromAction(new Action() {
@@ -204,7 +239,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
 
     }
 
-    private void GetP0FromMeter(MeterUtility.MeterInfo meterInfo){
+    private void GetP0FromMeter(DigitalMeters meterInfo){
         try {
             final String[] p0String = {""};
             Completable.fromAction(new Action() {
@@ -245,7 +280,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
 
     }
 
-    private void SendPasswordMeter(MeterUtility.MeterInfo meterInfo,String P0String){
+    private void SendPasswordMeter(DigitalMeters meterInfo,String P0String){
         try {
             final String[] sendPassResultStr = {""};
             Completable.fromAction(new Action() {
@@ -295,7 +330,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
 
     }
 
-    private void ProgrammingReadMeter(MeterUtility.MeterInfo meterInfo){
+    private void ProgrammingReadMeter(DigitalMeters meterInfo){
         try {
             //final String[] ProgReadString = {""};
             final MeterUtility.ReadData[] readData = {new MeterUtility.ReadData()};
@@ -364,6 +399,20 @@ public class ReadmeterViewModel extends AndroidViewModel {
                 }
                 break;
         }
+    }
+
+    private DigitalMeters GetMeterInfo(String meterString){
+        String meterSummaryName="";
+        List<MeterUtility.MeterStringInfo> meterStringInfos = digitalMetersRepo.getAllDigitalMetersString();
+        for (MeterUtility.MeterStringInfo mui:meterStringInfos) {
+            if(meterString.contains(mui.MeterString)){
+                meterSummaryName=mui.MeterSummaryName;
+                break;
+            }
+        }
+
+        DigitalMeters meterInfo = digitalMetersRepo.getDigitalMetersByMeterSummaryName(meterSummaryName);
+        return  meterInfo;
     }
 
     public void initTranseferLayer(){
