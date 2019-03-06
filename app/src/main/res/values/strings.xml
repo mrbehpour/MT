@@ -102,6 +102,7 @@
 
     <!--TestContorFragment-->
     <string name="ConnectToTestModule">اتصال به دستگاه تست کنتور</string>
+    <string name="ConnectToOpticalProb">اتصال به پروب نوری</string>
 
     <!--GetInformation-->
     <string name="AdminName">مدیر سیستم</string>
@@ -165,6 +166,8 @@
     <string name="Remark">بازرسی</string>
     <string name="Polomb">پلمپ</string>
     <string name="Readmeter">خواندن کنتور</string>
+    <string name="ReadByProb">خواندن با پروب</string>
+    <string name="ReadManual">خواندن دستی</string>
 
     <!-- fragment_polomp_save -->
     <string name="OldPolomb">پلمپ قدیم</string>

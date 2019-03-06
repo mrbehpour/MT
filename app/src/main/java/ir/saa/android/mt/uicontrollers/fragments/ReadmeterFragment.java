@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import com.daimajia.numberprogressbar.NumberProgressBar;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.DigitalMeters;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
 import ir.saa.android.mt.repositories.meterreader.StatusReport;
 import ir.saa.android.mt.viewmodels.ReadmeterViewModel;
@@ -35,10 +37,12 @@ public class ReadmeterFragment extends Fragment {
     TextView txtMeterType;
     TextView txtMeterString;
     TextView txtLog;
-    TextView tvAct1,tvAct2,tvAct3,tvRAct,tvDim,tvSN,tvActSum,tvReverseEnergy,tvDate,tvTime;
+    EditText tvAct1,tvAct2,tvAct3,tvRAct,tvDim;
+    TextView tvSN,tvActSum,tvReverseEnergy,tvDate,tvTime;
     TextView tvVR,tvVS,tvVT;
     TextView tvIR,tvIS,tvIT;
 
+    Button btnProbRead,btnManualRead,btnCancelManualRead,btnSaveManualRead;
 
     NumberProgressBar progReadMeter;
 
@@ -85,7 +89,11 @@ public class ReadmeterFragment extends Fragment {
 
         progReadMeter = rootView.findViewById(R.id.progressBarReadMeter);
 
-        Button btnRead = rootView.findViewById(R.id.btnRead);
+        btnProbRead = rootView.findViewById(R.id.btnProbRead);
+        btnManualRead = rootView.findViewById(R.id.btnManualRead);
+        btnCancelManualRead = rootView.findViewById(R.id.btnCancelManualRead);
+        btnSaveManualRead = rootView.findViewById(R.id.btnSaveManualRead);
+
         Bundle args = getArguments();
 
         readmeterViewModel.getStatusMutableLiveData.observe(this, new Observer<String>() {
@@ -118,10 +126,10 @@ public class ReadmeterFragment extends Fragment {
             }
         });
 
-        readmeterViewModel.readMeterMutableLiveData.observe(this, new Observer<MeterUtility.MeterInfo>()  {
+        readmeterViewModel.readMeterMutableLiveData.observe(this, new Observer<DigitalMeters>()  {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
-                public void onChanged(@Nullable MeterUtility.MeterInfo meterInfo) {
+                public void onChanged(@Nullable DigitalMeters meterInfo) {
                     showMeterInfo(meterInfo);
 
                 }
@@ -143,6 +151,8 @@ public class ReadmeterFragment extends Fragment {
                     public void onChanged(@Nullable Boolean b) {
                         if(b){
                             HideProgressDialog();
+                            btnManualRead.setVisibility(View.INVISIBLE);
+                            readmeterViewModel.StartConnectionWithMeter();
                             //btnReconnect.setVisibility(View.INVISIBLE);
                         }else{
                             //btnReconnect.setVisibility(View.VISIBLE);
@@ -156,17 +166,32 @@ public class ReadmeterFragment extends Fragment {
                 }
         );
 
-        btnRead.setOnClickListener(new View.OnClickListener() {
+        btnProbRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                readmeterViewModel.StartConnectionWithMeter();
-                //readmeterViewModel.InsertDigitlMetersToDB();
+                readmeterViewModel.initTranseferLayer();
+                connectToModuleDialog();
             }
         });
 
-        readmeterViewModel.initTranseferLayer();
-        connectToModuleDialog();
+        btnManualRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnProbRead.setVisibility(View.GONE);
+                btnManualRead.setVisibility(View.GONE);
+                btnCancelManualRead.setVisibility(View.VISIBLE);
+                btnSaveManualRead.setVisibility(View.VISIBLE);
+            }
+        });
+
+        btnCancelManualRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetUI();
+            }
+        });
+
+
 
         return rootView;
     }
@@ -176,6 +201,14 @@ public class ReadmeterFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    private void resetUI(){
+
+        btnProbRead.setVisibility(View.VISIBLE);
+        btnManualRead.setVisibility(View.VISIBLE);
+        btnCancelManualRead.setVisibility(View.GONE);
+        btnSaveManualRead.setVisibility(View.GONE);
     }
 
     private void updateResponseTest(String readResult) {
@@ -200,7 +233,7 @@ public class ReadmeterFragment extends Fragment {
         progReadMeter.setProgress(progStr);
     }
 
-    private void showMeterInfo(MeterUtility.MeterInfo meterInfo){
+    private void showMeterInfo(DigitalMeters meterInfo){
         txtMeterCompany.setText(meterInfo.MeterCompany);
         txtMeterType.setText(meterInfo.MeterType);
         txtMeterString.setText(meterInfo.MeterString);
@@ -241,7 +274,7 @@ public class ReadmeterFragment extends Fragment {
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothNameRead);
         ad = new AlertDialog.Builder(this.getContext()).create();
         ad.setCancelable(true);
-        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ConnectToTestModule),BluetoothDeviceName));
+        ad.setTitle(String.format("%s %s", getResources().getText(R.string.ConnectToOpticalProb),BluetoothDeviceName));
         ad.setMessage(getResources().getText(R.string.PleaseWait_msg));
         new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {

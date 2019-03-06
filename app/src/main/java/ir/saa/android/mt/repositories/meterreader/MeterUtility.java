@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import ir.saa.android.mt.model.entities.DigitalMeters;
 import ir.saa.android.mt.repositories.IEC.IEC_Constants;
 
 public class MeterUtility {
@@ -52,21 +53,26 @@ public class MeterUtility {
         public String dataStr;
     }
 
-    public static class MeterInfo{
-        public String MeterCompany;
-        public String MeterType;
-        public String MaterSummaryName;
+//    public static class MeterInfo{
+//        public String MeterCompany;
+//        public String MeterType;
+//        public String MaterSummaryName;
+//        public String MeterString;
+//        public String ReadMode;
+//        public String ValidationRegex;
+//        public boolean SetDateTime;
+//        public boolean NeedPassForRead;
+//        public String ReadObisType;
+//        public String R_Command;
+//        public int MakePassAlgorithm;
+//        public String Pass1;
+//        public String Pass2;
+//        public String Pass3;
+//    }
+
+    public static class MeterStringInfo{
+        public String MeterSummaryName;
         public String MeterString;
-        public String ReadMode;
-        public String ValidationRegex;
-        public boolean SetDateTime;
-        public boolean NeedPassForRead;
-        public String ReadObisType;
-        public String R_Command;
-        public int MakePassAlgorithm;
-        public String Pass1;
-        public String Pass2;
-        public String Pass3;
     }
 
     public static class ReadData{
@@ -134,45 +140,45 @@ public class MeterUtility {
         return c;
     }
 
-    public static MeterInfo getMeterInfo(String meterString){
-
-        MeterInfo meterInfo = new MeterInfo();
-
-//        meterInfo.MeterCompany = "EAA";
-//        meterInfo.MeterType = "JAM-300";
-//        meterInfo.MeterSummaryName = "JAM-300";
-//        meterInfo.MeterString = meterString;
-//        meterInfo.ReadMode = readingMode.readout.name();
+//    public static MeterInfo getMeterInfo(DigitalMeters digitalMeter){
+//
+//        MeterInfo meterInfo = new MeterInfo();
+//
+////        meterInfo.MeterCompany = "EAA";
+////        meterInfo.MeterType = "JAM-300";
+////        meterInfo.MeterSummaryName = "JAM-300";
+////        meterInfo.MeterString = meterString;
+////        meterInfo.ReadMode = readingMode.readout.name();
+////        meterInfo.ValidationRegex = "^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\d{1,2}[(].*[)]$";
+////        meterInfo.SetDateTime = false;
+////        meterInfo.NeedPassForRead=false;
+////        meterInfo.R_Command="";
+//
+//        meterInfo.MeterCompany = digitalMeter.MeterCompany;
+//        meterInfo.MeterType = digitalMeter.MeterType;
+//        meterInfo.MaterSummaryName = digitalMeter.MeterSummaryName;
+//        meterInfo.MeterString = digitalMeter.MeterString;
+//        meterInfo.ReadMode = digitalMeter.ReadMode;
 //        meterInfo.ValidationRegex = "^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\d{1,2}[(].*[)]$";
 //        meterInfo.SetDateTime = false;
-//        meterInfo.NeedPassForRead=false;
-//        meterInfo.R_Command="";
-
-        meterInfo.MeterCompany = "ELESTER";
-        meterInfo.MeterType = "ABB-1440";
-        meterInfo.MaterSummaryName = "ABB-1440";
-        meterInfo.MeterString = meterString;
-        meterInfo.ReadMode = readingMode.programming.name();;
-        meterInfo.ValidationRegex = "^[FC0-9]{1,2}[.][FC0-9]{1,2}[.]\\d{1,2}[(].*[)]$";
-        meterInfo.SetDateTime = false;
-        meterInfo.NeedPassForRead = false;
-        meterInfo.ReadObisType = "Obis_Prnts_Semi";
-        meterInfo.R_Command=IEC_Constants.R5_Command;
-
-//        meterInfo.MeterCompany = "AMPY";
-//        meterInfo.MeterType = "AMP-E";
-//        meterInfo.MeterSummaryName = "AMP-E";
-//        meterInfo.MeterString = meterString;
-//        meterInfo.ReadMode = readingMode.programming.name();
-//        meterInfo.ValidationRegex = "^AMP\\d{3}[(].*[)]$";
-//        meterInfo.SetDateTime = false;
-//        meterInfo.NeedPassForRead = true;
-//        meterInfo.ReadObisType = "Just_Obis";
-//        meterInfo.R_Command=IEC_Constants.R1_Command;
-
-
-        return meterInfo;
-    }
+//        meterInfo.NeedPassForRead = false;
+//        meterInfo.ReadObisType = "Obis_Prnts_Semi";
+//        meterInfo.R_Command=IEC_Constants.R5_Command;
+//
+////        meterInfo.MeterCompany = "AMPY";
+////        meterInfo.MeterType = "AMP-E";
+////        meterInfo.MeterSummaryName = "AMP-E";
+////        meterInfo.MeterString = meterString;
+////        meterInfo.ReadMode = readingMode.programming.name();
+////        meterInfo.ValidationRegex = "^AMP\\d{3}[(].*[)]$";
+////        meterInfo.SetDateTime = false;
+////        meterInfo.NeedPassForRead = true;
+////        meterInfo.ReadObisType = "Just_Obis";
+////        meterInfo.R_Command=IEC_Constants.R1_Command;
+//
+//
+//        return meterInfo;
+//    }
 
 
 
@@ -200,7 +206,7 @@ public class MeterUtility {
         }
     }
 
-    public static List<DataItem> CreateReadDataList(String readStr, MeterInfo meterInfo){
+    public static List<DataItem> CreateReadDataList(String readStr, DigitalMeters meterInfo){
         String[] rowData = readStr.split("\r\n");
         List<DataItem> meterData = new ArrayList();
         Pattern patern = Pattern.compile(meterInfo.ValidationRegex);
@@ -249,7 +255,7 @@ public class MeterUtility {
 
     }
 
-    public static String CreateReadObisStr(MeterUtility.ObisItem obisItem, MeterUtility.MeterInfo meterInfo){
+    public static String CreateReadObisStr(MeterUtility.ObisItem obisItem, DigitalMeters meterInfo){
         String readObisStr="";
         switch (meterCommandFormat.valueOf(meterInfo.ReadObisType)){
             case Obis_Prnts_Semi:
@@ -287,7 +293,7 @@ public class MeterUtility {
         return (char) bccVal;
     }
 
-    public static boolean CheckSendPassResultStr(String resultStr, MeterInfo meterInfo){
+    public static boolean CheckSendPassResultStr(String resultStr, DigitalMeters meterInfo){
         boolean res=false;
         if(meterInfo.NeedPassForRead){
             if(resultStr.contains(String.valueOf(ASCII.ACK))) res = true;

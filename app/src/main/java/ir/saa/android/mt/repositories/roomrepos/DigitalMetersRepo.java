@@ -9,6 +9,7 @@ import ir.saa.android.mt.model.daos.DigitalMetersDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.DeviceSerial;
 import ir.saa.android.mt.model.entities.DigitalMeters;
+import ir.saa.android.mt.repositories.meterreader.MeterUtility;
 
 public class DigitalMetersRepo  {
 
@@ -23,16 +24,16 @@ public class DigitalMetersRepo  {
         listDigitalMeters=digitalMetersDao.getDigitalMeters();
     }
 
-//    public LiveData<List<DigitalMeters>> getDigitalMeters() {
-//        return listLiveData;
-//    }
-
     public List<DigitalMeters> getDigitalMeters() {
         return listDigitalMeters;
     }
 
-    public LiveData<DigitalMeters> getDigitalMetersByMeterStringLiveData(String MeterString) {
-        return digitalMetersDao.getDigitalMetersByMeterStringLiveData(MeterString);
+    public DigitalMeters getDigitalMetersByMeterSummaryName(String MeterString) {
+        return digitalMetersDao.getDigitalMetersByMeterSummaryName(MeterString);
+    }
+
+    public List<MeterUtility.MeterStringInfo> getAllDigitalMetersString() {
+        return digitalMetersDao.getAllDigitalMetersString();
     }
 
     public void insertDigitalMeters(DigitalMeters digitalMeters) {

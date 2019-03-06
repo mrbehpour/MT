@@ -31,6 +31,7 @@ import ir.saa.android.mt.model.daos.MasterGroupDetailDao;
 import ir.saa.android.mt.model.daos.MasterGroupInfoDao;
 import ir.saa.android.mt.model.daos.MeterChangeDtlDao;
 import ir.saa.android.mt.model.daos.MeterChangeInfoDao;
+import ir.saa.android.mt.model.daos.MetersObisDao;
 import ir.saa.android.mt.model.daos.PolompColorDao;
 import ir.saa.android.mt.model.daos.PolompDao;
 import ir.saa.android.mt.model.daos.PolompDtlDao;
@@ -70,6 +71,7 @@ import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.MasterGroupInfo;
 import ir.saa.android.mt.model.entities.MeterChangeDtl;
 import ir.saa.android.mt.model.entities.MeterChangeInfo;
+import ir.saa.android.mt.model.entities.MetersObis;
 import ir.saa.android.mt.model.entities.Polomp;
 import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompDtl;
@@ -108,7 +110,7 @@ import ir.saa.android.mt.model.entities.TestInfo;
         PolompDtl.class,TariffInfo.class,
         TariffDtl.class,TestInfo.class,TestDtl.class,
         PolompColor.class, PolompType.class, AddedClient.class,
-        Bazdid.class, DeviceSerial.class, DigitalMeters.class },version = 47)
+        Bazdid.class, DeviceSerial.class, DigitalMeters.class, MetersObis.class},version = 47)
 @TypeConverters({AnswerGroupDtlConverters.class})
 public abstract class MTDatabase extends RoomDatabase {
 
@@ -191,6 +193,8 @@ public abstract class MTDatabase extends RoomDatabase {
     public abstract DeviceSerialDao deviceSerialModel();
 
     public abstract DigitalMetersDao digitalMetersModel();
+
+    public abstract MetersObisDao metersObisModel();
 
     public static MTDatabase getDatabase(Context context) {
         if (INSTANCE == null) {

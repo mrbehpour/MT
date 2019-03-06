@@ -10,6 +10,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import ir.saa.android.mt.model.entities.DigitalMeters;
+import ir.saa.android.mt.repositories.meterreader.MeterUtility;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 
@@ -20,8 +21,14 @@ public interface DigitalMetersDao {
 //    LiveData<List<DigitalMeters>> getDigitalMeters();
     List<DigitalMeters> getDigitalMeters();
 
-    @Query("Select * from DigitalMeters where MeterString= :MeterString")
-    LiveData<DigitalMeters> getDigitalMetersByMeterStringLiveData(String MeterString);
+//    @Query("Select * from DigitalMeters where MeterString= :MeterString")
+//    DigitalMeters getDigitalMetersByMeterStringLiveData(String MeterString);
+
+    @Query("Select * from DigitalMeters where MeterSummaryName = :MeterString ")
+    DigitalMeters getDigitalMetersByMeterSummaryName(String MeterString);
+
+    @Query("Select MeterSummaryName,MeterString from DigitalMeters ")
+    List<MeterUtility.MeterStringInfo> getAllDigitalMetersString();
 
     @Insert(onConflict = IGNORE)
     void insertDigitalMeters(DigitalMeters digitalMeters);

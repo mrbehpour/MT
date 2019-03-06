@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.List;
 
+import ir.saa.android.mt.model.entities.DigitalMeters;
 import ir.saa.android.mt.repositories.IEC.IEC_Bussiness;
 import ir.saa.android.mt.repositories.IEC.IEC_Constants;
 import ir.saa.android.mt.repositories.IEC.IIECCallback;
@@ -80,7 +81,7 @@ public class PROB {
         return result;
     }
 
-    public String ReadOutMeter(MeterUtility.MeterInfo meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
+    public String ReadOutMeter(DigitalMeters meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         String result="";
         try {
@@ -95,7 +96,7 @@ public class PROB {
         return result;
     }
 
-    public String GetP0FromMeter(MeterUtility.MeterInfo meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
+    public String GetP0FromMeter(DigitalMeters meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         String result="";
         try {
@@ -110,7 +111,7 @@ public class PROB {
         return result;
     }
 
-    public String SendPasswordToMeter(MeterUtility.MeterInfo meterInfo , String PassworString, String P0String ,MeterUtility.connectionStatus connectionStatus) throws Exception {
+    public String SendPasswordToMeter(DigitalMeters meterInfo , String PassworString, String P0String ,MeterUtility.connectionStatus connectionStatus) throws Exception {
 
         String result="";
         try {
@@ -123,9 +124,9 @@ public class PROB {
         return result;
     }
 
-    public MeterUtility.ReadData ProgrammingReadMeter(MeterUtility.MeterInfo meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
+    public MeterUtility.ReadData ProgrammingReadMeter(DigitalMeters meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
 
-        List<MeterUtility.ObisItem> lstObis = MeterUtility.getListObis(meterInfo.MaterSummaryName);
+        List<MeterUtility.ObisItem> lstObis = MeterUtility.getListObis(meterInfo.MeterSummaryName);
         MeterUtility.ReadData readData = new MeterUtility.ReadData();
 
         String result="";
