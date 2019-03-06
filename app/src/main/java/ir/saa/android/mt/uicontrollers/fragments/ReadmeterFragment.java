@@ -163,10 +163,10 @@ public class ReadmeterFragment extends Fragment {
             }
         });
 
-        readmeterViewModel.readMeterMutableLiveData.observe(this, new Observer<MeterUtility.MeterInfo>()  {
+        readmeterViewModel.readMeterMutableLiveData.observe(this, new Observer<DigitalMeters>()  {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
-                public void onChanged(@Nullable MeterUtility.MeterInfo meterInfo) {
+                public void onChanged(@Nullable DigitalMeters meterInfo) {
                     showMeterInfo(meterInfo);
 
                 }
@@ -177,7 +177,7 @@ public class ReadmeterFragment extends Fragment {
                 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onChanged(@Nullable MeterUtility.ReadData readResult) {
-                    showReadResult(readResult);
+                    showReadResult(readResult,true);
                 }
             }
         );
