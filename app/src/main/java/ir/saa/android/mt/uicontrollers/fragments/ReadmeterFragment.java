@@ -203,7 +203,7 @@ public class ReadmeterFragment extends Fragment {
                 }
         );
 
-        btnRead.setOnClickListener(new View.OnClickListener() {
+        btnProbRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 readmeterViewModel.initTranseferLayer();
