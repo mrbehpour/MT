@@ -53,8 +53,9 @@ public class ReadmeterViewModel extends AndroidViewModel {
     public MutableLiveData<MeterUtility.ReadData> readMeterResultMutableLiveData;
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
     public MutableLiveData<Integer> recieveDataMutableLiveData;
-    TariffDtlRepo tariffDtlRepo=null;
-    TariffInfoRepo tariffInfoRepo;
+
+    TariffDtlRepo tariffDtlRepo = null;
+    TariffInfoRepo tariffInfoRepo = null;
 
     private DigitalMetersRepo digitalMetersRepo;
 
@@ -424,10 +425,12 @@ public class ReadmeterViewModel extends AndroidViewModel {
     }
 
     public  Long insertTariffInfo(TariffInfo tariffInfo) {
-            return tariffInfoRepo.insertTariffInfo(tariffInfo);
+
+        return tariffInfoRepo.insertTariffInfo(tariffInfo);
     }
 
     public void insertTariffDtl(TariffDtl tariffDtl){
+
         tariffDtlRepo.insertTariffDtl(tariffDtl);
     }
 
