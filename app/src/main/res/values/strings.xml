@@ -260,6 +260,7 @@
     <string name="RecieveBaseInfoDes">دریافت اطلاعات پایه از سرور</string>
     <string name="Sanjesh">پارامترهای الکتریکی</string>
     <string name="SanjeshDes">صحت سنجی بخش های مختلف تست</string>
+    <string name="NameAndVersion">نرم افزار تست و بازرسی، نسخه: </string>
 
     <!-- fragment_settings -->
     <string name="ServerAddress">آدرس سرور</string>
