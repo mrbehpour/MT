@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import ir.saa.android.mt.R;
@@ -33,7 +35,7 @@ public class HomeFragment extends Fragment
     LinearLayout layMoshtarakin;
     LinearLayout layDaryaft;
     LinearLayout laySanjesh;
-    ImageView imgExit;
+    AppCompatButton btnExit;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -60,7 +62,7 @@ public class HomeFragment extends Fragment
         layMoshtarakin=rootView.findViewById(R.id.layMoshtarakin);
         laySettings=rootView.findViewById(R.id.laySettings);
         laySanjesh=rootView.findViewById(R.id.laySanjesh);
-        imgExit=rootView.findViewById(R.id.imgExit);
+        btnExit=rootView.findViewById(R.id.btnExit);
         layBazdid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,7 +115,7 @@ public class HomeFragment extends Fragment
             }
         });
 
-        imgExit.setOnClickListener(new View.OnClickListener() {
+        btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (G.fragmentNumStack.size() > 0) {
@@ -126,6 +128,7 @@ public class HomeFragment extends Fragment
                 homeIntent.addCategory( Intent.CATEGORY_HOME );
                 homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(homeIntent);
+                getActivity().finish();
                 System.exit(0);
             }
         });

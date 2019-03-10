@@ -53,7 +53,7 @@ public class NavigationDrawerItem {
                 R.drawable.file_download_outline,
                 R.drawable.icon_daryaftmoshtarakin,
                 R.drawable.briefcase_upload,
-                R.drawable.exit_to_app
+                //R.drawable.exit_to_app
         };
     }
 
@@ -66,7 +66,7 @@ public class NavigationDrawerItem {
                 G.context.getResources().getString(R.string.menuItemBaseInfo),
                 G.context.getResources().getString(R.string.menuItemRecieveJoints),
                 G.context.getResources().getString(R.string.menuItemSendJoints),
-                G.context.getResources().getString(R.string.menuItemExit),
+                //G.context.getResources().getString(R.string.menuItemExit),
         };
     }
 }

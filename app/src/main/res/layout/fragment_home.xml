@@ -429,28 +429,29 @@
             <!-- exit button -->
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnExit"
-                android:fontFamily="@font/byekan"
-                android:layout_width="110dp"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_weight="0.22"
                 android:layout_height="match_parent"
-                android:layout_marginTop="3dp"
+                android:layout_gravity="center"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
-                android:paddingLeft="6dp"
-                android:layout_gravity="center"
-                style="?android:attr/borderlessButtonStyle"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/custom_home_exit"
-                android:textColor="@color/orange_300"
-                android:textSize="12sp"
-                android:text="@string/menuItemExit"
                 android:drawableLeft="@drawable/exit_to_app"
-                android:drawableTint="@color/orange_300"/>
+                android:drawableTint="@color/orange_300"
+                android:fontFamily="@font/byekan"
+                android:paddingLeft="6dp"
+                android:text="@string/menuItemExit"
+                android:textColor="@color/orange_300"
+                android:textSize="12sp" />
 
             <!-- version -->
             <TextView
                 android:id="@+id/tvVersion"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.35"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="2dp"
                 android:fontFamily="@font/byekan"
@@ -461,7 +462,8 @@
 
             <!-- text -->
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.35"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"

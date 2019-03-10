@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -139,30 +140,22 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
-    boolean doubleBackToExitPressedOnce = false;
+
     @Override
     public void onBackPressed() {
-
-        if (G.fragmentNumStack.size() > 0) {
-            Integer targetFragmentNum = G.fragmentNumStack.pop();
-            G.startFragment(targetFragmentNum, true, null);
-        } else {
-            if (doubleBackToExitPressedOnce ) {
-                G.currentFragmentNum=null;
-                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                homeIntent.addCategory( Intent.CATEGORY_HOME );
-                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(homeIntent);
-
-                finish();
-                System.exit(0);
+        if(G.currentFragmentNum==1) {
+            if (G.mDrawerLayout.isDrawerOpen(G.fragmentDrawer)){
+                G.mDrawerLayout.closeDrawer(G.fragmentDrawer);
+                return;
             }
-            this.doubleBackToExitPressedOnce=true;
+            G.currentFragmentNum=null;
+            finish();
+        }else{
+            G.startFragment(G.fragmentNumStack.pop(), true, null);
 
-            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.TapAgainForExit_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 1500);
         }
+
     }
+
+
 }

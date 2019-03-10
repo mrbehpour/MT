@@ -189,5 +189,30 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    boolean doubleBackToExitPressedOnce = false;
+    @Override
+    public void onBackPressed() {
+
+        if (G.fragmentNumStack.size() > 0) {
+            Integer targetFragmentNum = G.fragmentNumStack.pop();
+            G.startFragment(targetFragmentNum, true, null);
+        } else {
+            if (doubleBackToExitPressedOnce ) {
+                G.currentFragmentNum=null;
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+
+                finish();
+                System.exit(0);
+            }
+            this.doubleBackToExitPressedOnce=true;
+
+            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.TapAgainForExit_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0,0);
+            fancyToast.show();
+        }
+    }
 
 }
