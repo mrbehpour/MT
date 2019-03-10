@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
@@ -118,18 +119,31 @@ public class HomeFragment extends Fragment
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (G.fragmentNumStack.size() > 0) {
-                    Integer targetFragmentNum = G.fragmentNumStack.pop();
-                    G.startFragment(targetFragmentNum, true, null);
-                }
-                getActivity().finish();
-                G.currentFragmentNum=null;
-                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                homeIntent.addCategory( Intent.CATEGORY_HOME );
-                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(homeIntent);
-                getActivity().finish();
-                System.exit(0);
+                MyDialog myDialog=new MyDialog(getActivity());
+                myDialog.setTitle((String) getResources().getText(R.string.Title_msg));
+                myDialog.addBodyText( (String)getResources().getText(R.string.Exit_msg),20);
+                myDialog.addButton((String) getResources().getText(R.string.No), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        myDialog.dismiss();
+                    }
+                });
+                myDialog.addButton((String) getResources().getText(R.string.Yes), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        G.currentFragmentNum=null;
+                        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                        homeIntent.addCategory( Intent.CATEGORY_HOME );
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(homeIntent);
+                        getActivity().finish();
+                        System.exit(0);
+                        myDialog.dismiss();
+                    }
+                });
+                myDialog.show();
+
             }
         });
         return rootView;

@@ -63,6 +63,7 @@
     <string name="GetRegionFromServer_msg">در حال دریافت داده ها از سرور</string>
     <string name="UsernameOrPassword_msg">نام کاربری یا کلمه عبور اشتباه است</string>
     <string name="TapAgainForExit_msg">برای خروج دوبار کلیک کنید</string>
+    <string name="Exit_msg"> آیا برای خروج مطمئن هستید ؟ </string>
     <string name="PolombDataNotFound_msg">اطلاعات پلمپ یافت نشد</string>
     <string name="RemarkDataNotFound_msg">اطلاعات بازرسی یافت نشد</string>
     <string name="TestResultNotExsist_msg">هیچ نتیجه تستی وجود ندارد.</string>
@@ -286,6 +287,7 @@
     <string name="Reconnect">اتصال دوباره</string>
     <string name="Ok">تایید</string>
     <string name="No">خیر</string>
+    <string name="Yes">بله</string>
     <string name="Cancel">انصراف</string>
     <string name="Retry">تلاش دوباره</string>
     <string name="Save">ذخیره</string>
