@@ -40,7 +40,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:text="3216"/>
+                    android:text="@string/DashSign"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:text="تعداد بازرسی:"/>
+                    android:text="@string/tedadBazrasi"/>
             </LinearLayout>
             <!-- test -->
             <LinearLayout
@@ -72,7 +72,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:text="6845"/>
+                    android:text="@string/DashSign"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:text="تعداد تست:"/>
+                    android:text="@string/tedadTest"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -114,7 +114,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:text="5641"/>
+                    android:text="@string/DashSign"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:text="تعداد قرائت:"/>
+                    android:text="@string/tedadGheraat"/>
             </LinearLayout>
             <!-- Polomp -->
             <LinearLayout
@@ -146,7 +146,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:text="6541"/>
+                    android:text="@string/DashSign"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -157,7 +157,7 @@
                     android:gravity="center"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:text="تعداد پلمپ:"/>
+                    android:text="@string/tedadPolomp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
