@@ -23,6 +23,7 @@ import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
+import ir.saa.android.mt.uicontrollers.activities.ReportActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -96,7 +97,9 @@ public class HomeFragment extends Fragment
         layGozareshat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent=new Intent(G.context, ReportActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                G.context.startActivity(intent);
             }
         });
 
