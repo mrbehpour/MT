@@ -18,6 +18,7 @@ import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientWithAction;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
+import ir.saa.android.mt.model.entities.Report;
 import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.repositories.roomrepos.BazdidRepo;
@@ -137,5 +138,12 @@ public class BazdidViewModel extends AndroidViewModel {
         return isTest;
     }
 
+    public LiveData<Report> getReport(){
+        return bazdidRepo.getReport();
+    }
+
+    public LiveData<Report> getReportByRegionId(Integer RegionId){
+        return bazdidRepo.getReportByRegionId(RegionId);
+    }
 
 }
