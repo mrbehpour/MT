@@ -8,6 +8,7 @@ import java.util.List;
 import ir.saa.android.mt.model.daos.BazdidDao;
 import ir.saa.android.mt.model.database.MTDatabase;
 import ir.saa.android.mt.model.entities.Bazdid;
+import ir.saa.android.mt.model.entities.Report;
 
 public class BazdidRepo  {
 
@@ -56,5 +57,13 @@ public class BazdidRepo  {
 
     public  List<Bazdid> getBazdidIsSend(Boolean hasSend){
         return bazdidDao.getBazdidIsSend(hasSend);
+    }
+
+    public LiveData<Report> getReport(){
+        return bazdidDao.getReport();
+    }
+
+    public LiveData<Report> getReportByRegionId(Integer RegionId){
+        return bazdidDao.getReportByRegionId(RegionId);
     }
 }

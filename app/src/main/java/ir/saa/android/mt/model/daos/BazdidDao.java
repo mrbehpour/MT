@@ -11,6 +11,7 @@ import android.arch.persistence.room.Update;
 import java.util.List;
 
 import ir.saa.android.mt.model.entities.Bazdid;
+import ir.saa.android.mt.model.entities.Report;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
 
@@ -44,6 +45,36 @@ public interface BazdidDao {
     @Query("Select * from Bazdid where isSend= :hasSend")
     List<Bazdid> getBazdidIsSend(Boolean hasSend);
 
+    @Query("Select client.RegionID," +
+            "Count(Client.ClientID) as ClientCount," +
+            "Count(TestInfo.ClientID) as TestCount, " +
+            "Count(PolompInfo.ClientID) as PolompCount," +
+            "Count(TariffInfo.ClientID) as TriffCount," +
+            "Count(InspectionInfo.ClientID) as BazrasiCount"+
+            " from Client " +
+            "Left join (select distinct * from TestInfo) as TestInfo on TestInfo.ClientID=Client.ClientID " +
+            "left join (select distinct * from PolompInfo) as PolompInfo on PolompInfo.ClientID=Client.ClientID " +
+            "left join (select distinct * from InspectionInfo) as InspectionInfo on InspectionInfo.ClientID=Client.ClientID " +
+            "left join (select distinct * from TariffInfo) as TariffInfo on TariffInfo.ClientID=Client.ClientID " +
+            "Where Client.RegionID=:regionId " +
+            "group by Client.RegionID"
+    )
+    LiveData<Report> getReportByRegionId(Integer regionId);
+
+    @Query("Select " +
+            "Count(Client.ClientID) as ClientCount," +
+            "Count(TestInfo.ClientID) as TestCount, " +
+            "Count(PolompInfo.ClientID) as PolompCount," +
+            "Count(TariffInfo.ClientID) as TriffCount," +
+            "Count(InspectionInfo.ClientID) as BazrasiCount"+
+            " from Client " +
+            "Left join (select distinct * from TestInfo) as TestInfo on TestInfo.ClientID=Client.ClientID " +
+            "left join (select distinct * from PolompInfo) as PolompInfo on PolompInfo.ClientID=Client.ClientID " +
+            "left join (select distinct * from InspectionInfo) as InspectionInfo on InspectionInfo.ClientID=Client.ClientID " +
+            "left join (select distinct * from TariffInfo) as TariffInfo on TariffInfo.ClientID=Client.ClientID "
+
+    )
+    LiveData<Report> getReport();
 
 
 }
