@@ -52,10 +52,10 @@ public interface BazdidDao {
             "Count(TariffInfo.ClientID) as TriffCount," +
             "Count(InspectionInfo.ClientID) as BazrasiCount"+
             " from Client " +
-            "Left join (select distinct * from TestInfo) as TestInfo on TestInfo.ClientID=Client.ClientID " +
-            "left join (select distinct * from PolompInfo) as PolompInfo on PolompInfo.ClientID=Client.ClientID " +
-            "left join (select distinct * from InspectionInfo) as InspectionInfo on InspectionInfo.ClientID=Client.ClientID " +
-            "left join (select distinct * from TariffInfo) as TariffInfo on TariffInfo.ClientID=Client.ClientID " +
+            "Left join (select distinct TestInfo.ClientID from TestInfo) as TestInfo on TestInfo.ClientID=Client.ClientID " +
+            "left join (select distinct PolompInfo.ClientID from PolompInfo) as PolompInfo on PolompInfo.ClientID=Client.ClientID " +
+            "left join (select distinct InspectionInfo.ClientID from InspectionInfo) as InspectionInfo on InspectionInfo.ClientID=Client.ClientID " +
+            "left join (select distinct TariffInfo.ClientID from TariffInfo) as TariffInfo on TariffInfo.ClientID=Client.ClientID " +
             "Where Client.RegionID=:regionId " +
             "group by Client.RegionID"
     )
@@ -68,10 +68,10 @@ public interface BazdidDao {
             "Count(TariffInfo.ClientID) as TriffCount," +
             "Count(InspectionInfo.ClientID) as BazrasiCount"+
             " from Client " +
-            "Left join (select distinct * from TestInfo) as TestInfo on TestInfo.ClientID=Client.ClientID " +
-            "left join (select distinct * from PolompInfo) as PolompInfo on PolompInfo.ClientID=Client.ClientID " +
-            "left join (select distinct * from InspectionInfo) as InspectionInfo on InspectionInfo.ClientID=Client.ClientID " +
-            "left join (select distinct * from TariffInfo) as TariffInfo on TariffInfo.ClientID=Client.ClientID "
+            "Left join (select distinct TestInfo.ClientID from TestInfo) as TestInfo on TestInfo.ClientID=Client.ClientID " +
+            "left join (select distinct PolompInfo.ClientID from PolompInfo) as PolompInfo on PolompInfo.ClientID=Client.ClientID " +
+            "left join (select distinct InspectionInfo.ClientID from InspectionInfo) as InspectionInfo on InspectionInfo.ClientID=Client.ClientID " +
+            "left join (select distinct TariffInfo.ClientID from TariffInfo) as TariffInfo on TariffInfo.ClientID=Client.ClientID "
 
     )
     LiveData<Report> getReport();

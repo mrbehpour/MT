@@ -294,10 +294,20 @@
 
     <string name="AddressTitle">آدرس</string>
     <string name="CancelTestProcessTitle">توقف تست</string>
+    <string name="ChartTitle">نمودار بازدید</string>
+    <string name="ChartAmarTitle">نمودار بازدید</string>
+    <string name="PieTestTitle">تست</string>
+    <string name="PiePolompTitle">پلمپ</string>
+    <string name="PieTariffTitle">قرائت</string>
+    <string name="PieBazrasiTitle">بازرسی</string>
+    <string name="PieChartNoData">داده ای برای نمایش وجود ندارد</string>
+
 
     <!-- Report -->
     <string name="tedadBazrasi">تعداد بازرسی:</string>
     <string name="tedadTest">تعداد تست:</string>
     <string name="tedadGheraat">تعداد قرائت:</string>
     <string name="tedadPolomp">تعداد پلمپ:</string>
+    <string name="tedadTitle">تعداد</string>
+
 </resources>
