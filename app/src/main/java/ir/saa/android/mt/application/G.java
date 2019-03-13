@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -51,6 +52,7 @@ public class G extends Application {
     public static DrawerLayout mDrawerLayout;
     public static View fragmentDrawer;
     public static ClientInfo clientInfo;
+    public static String MY_VERSION = "" ;
 
     public static Integer currentFragmentNum = null;
     public static Stack<Integer> fragmentNumStack;
@@ -68,6 +70,15 @@ public class G extends Application {
         prefEditor = pref.edit();
         //setPref(SharePrefEnum.AddressServer,"http://192.168.3.176:8650");
         //setPref(SharePrefEnum.FontSize,"1.3");
+        PackageInfo pinfo = null;
+        try {
+            pinfo = G.context.getPackageManager().getPackageInfo(G.context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        //int versionNumber = pinfo.versionCode;
+        MY_VERSION = pinfo.versionName;
     }
 
     public static void removePref(String prefName){

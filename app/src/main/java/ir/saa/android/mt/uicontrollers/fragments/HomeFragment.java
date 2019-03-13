@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyDialog;
@@ -37,6 +39,7 @@ public class HomeFragment extends Fragment
     LinearLayout layMoshtarakin;
     LinearLayout layDaryaft;
     LinearLayout laySanjesh;
+    TextView tvVersion;
     AppCompatButton btnExit;
 
     public HomeFragment() {
@@ -64,6 +67,8 @@ public class HomeFragment extends Fragment
         layMoshtarakin=rootView.findViewById(R.id.layMoshtarakin);
         laySettings=rootView.findViewById(R.id.laySettings);
         laySanjesh=rootView.findViewById(R.id.laySanjesh);
+        tvVersion=rootView.findViewById(R.id.tvVersion);
+        tvVersion.setText(G.MY_VERSION);
         btnExit=rootView.findViewById(R.id.btnExit);
         layBazdid.setOnClickListener(new View.OnClickListener() {
             @Override

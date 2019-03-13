@@ -32,11 +32,15 @@ public class Chart {
         ArrayList<String> xEntery=new ArrayList<>();
 
         for(int i=0;i<yData.length;i++){
-            yEntrys.add(new PieEntry(yData[i],xData[i]));
+
+                yEntrys.add(new PieEntry(yData[i], xData[i]));
+
         }
 
         for(int i=1;i<xData.length;i++){
-            xEntery.add(xData[i]);
+
+                xEntery.add(xData[i]);
+
         }
 
 
@@ -45,13 +49,14 @@ public class Chart {
         pieDataSet.setValueTextSize(20);
 
 
+
         final Typeface tfByekan = Typeface.createFromAsset(G.context.getAssets(), "fonts/byekan.ttf");
         ArrayList<Integer> colors=new ArrayList<>();
         colors.add(G.context.getResources().getColor(R.color.blue_300));
         colors.add(G.context.getResources().getColor(R.color.red_300));
         colors.add(G.context.getResources().getColor(R.color.orange_300));
         colors.add(G.context.getResources().getColor(R.color.green_300));
-        pieDataSet.setColors(colors);
+
         ArrayList<Integer> colorsText=new ArrayList<>();
         colorsText.add(Color.WHITE);
         colorsText.add(Color.WHITE);
@@ -60,6 +65,7 @@ public class Chart {
         pieDataSet.setValueTextColors(colorsText);
         pieDataSet.setValueTypeface(tfByekan);
         pieDataSet.setHighlightEnabled(true);
+
 
         LegendEntry legendEntryTest=new LegendEntry();
         LegendEntry legendEntryBazrasi=new LegendEntry();
@@ -95,6 +101,15 @@ public class Chart {
         legend.setTextSize(20);
         legend.setTypeface(tfByekan);
         legend.setCustom(legendEntries);
+
+        for(int i=0;i<pieDataSet.getEntryCount();i++){
+            if(pieDataSet.getEntryForIndex(i).getValue()==0){
+               pieDataSet.removeEntry(i);
+               colors.remove(i);
+               }
+
+        }
+        pieDataSet.setColors(colors);
 
         PieData pieData=new PieData(pieDataSet);
         pieChart.setData(pieData);
