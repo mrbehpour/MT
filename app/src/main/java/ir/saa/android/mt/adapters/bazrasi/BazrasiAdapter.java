@@ -126,7 +126,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
             @Override
             public void onClick(View view) {
 
-                location=gpsTracker.getLocation();
+                gpsTracker.getLocation();
                 //location=locationViewModel.getLocation(context);
                 if(locationViewModel.isGpsEnable()){
                     if(location==null){
