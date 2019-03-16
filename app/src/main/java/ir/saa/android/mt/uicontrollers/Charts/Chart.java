@@ -27,7 +27,7 @@ import ir.saa.android.mt.application.G;
 
 public class Chart {
 
-    public void addDataSetForPieChart(PieChart pieChart,float[] yData,String[] xData) {
+    public void addDataSetForPieChart(PieChart pieChart,Integer[] yData,String[] xData) {
         ArrayList<PieEntry> yEntrys=new ArrayList<>();
         ArrayList<String> xEntery=new ArrayList<>();
 

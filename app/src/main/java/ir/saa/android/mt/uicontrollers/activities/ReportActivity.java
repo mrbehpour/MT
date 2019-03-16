@@ -38,7 +38,7 @@ public class ReportActivity extends AppCompatActivity {
     TextView tvTariff;
     PieChart pieChartBazdid;
     AppCompatButton btnExit;
-    static  float[] arryX={0,0,0,0};
+    static  Integer[] arryX={0,0,0,0};
     static  String[] arryY={"","","",""};
     BazdidViewModel bazdidViewModel=null;
     public  void adjustFontScale(Configuration configuration, Float fontSize) {
