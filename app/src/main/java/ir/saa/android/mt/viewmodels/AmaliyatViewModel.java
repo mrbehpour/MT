@@ -314,7 +314,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
         List<TestInfo> testInfos=testInfoRepo.getTestInfoWithClientId(ClientId,sendId);
         String DateTimeTest="";
         for (TestInfo testInfo:testInfos) {
-            DateTimeTest= String.valueOf(testInfo.TestDate)+String.valueOf(testInfo.TestTime);
+            DateTimeTest= String.valueOf(testInfo.TestDate)+String.format("%04d", Integer.parseInt(String.valueOf(testInfo.TestTime)));;
 
             List<TestDtl> testDtls=testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID);
             testResultItemDisplay = new TestResultItemDisplay();
