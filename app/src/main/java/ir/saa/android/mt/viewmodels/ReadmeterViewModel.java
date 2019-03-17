@@ -525,9 +525,9 @@ public class ReadmeterViewModel extends AndroidViewModel {
 
     public MetersObis getMeterObis(String meterSummaryName){
 
-//        //if(metersObisRepo.getMetersObisCount()==0){
-//            InsertMeterObisStr();
-//        //} ,
+        if(metersObisRepo.getMetersObisCount()==0){
+            InsertMeterObisStr();
+        }
 
         MetersObis meterObis = null;
         meterObis = metersObisRepo.getMetersObisByMeterSummaryNameLiveData(meterSummaryName);
