@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/home_back2"/>
+            android:src="@drawable/home_back3"/>
     </LinearLayout>
 
     <!-- button layouts -->
@@ -37,13 +37,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginBottom="4dp"
-                android:orientation="vertical"
-                android:background="@drawable/custom_homeitem">
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="0.33"
+                android:background="@drawable/custom_homeitem"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/layGozareshat"
                     android:layout_width="match_parent"
@@ -51,39 +52,42 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/ivGozareshat"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/finance"
-                        android:tint="@color/orange_300"/>
+                        android:tint="@color/orange_300" />
+
                     <TextView
                         android:id="@+id/tvGozareshat"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
                         android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItemReport"/>
+                        android:text="@string/menuItemReport"
+                        android:textColor="@color/grey_700"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.3"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/ReportDes"/>
+                        android:text="@string/ReportDes"
+                        android:textColor="@color/grey_400"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -91,13 +95,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.34"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="4dp"
-                android:orientation="vertical"
-                android:background="@drawable/custom_homeitem">
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="0.34"
+                android:background="@drawable/custom_homeitem"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/laySanjesh"
                     android:layout_width="match_parent"
@@ -105,39 +110,42 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/ivSanjesh"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/checkbox_marked_outline"
-                        android:tint="@color/orange_300"/>
+                        android:tint="@color/orange_300" />
+
                     <TextView
                         android:id="@+id/tvSanjesh"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
                         android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/Sanjesh"/>
+                        android:text="@string/Sanjesh"
+                        android:textColor="@color/grey_700"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.3"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/SanjeshDes"/>
+                        android:text="@string/SanjeshDes"
+                        android:textColor="@color/grey_400"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -145,13 +153,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.33"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="4dp"
-                android:orientation="vertical"
-                android:background="@drawable/custom_homeitem">
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="0.33"
+                android:background="@drawable/custom_homeitem"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/layBazdid"
                     android:layout_width="match_parent"
@@ -159,39 +168,42 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/ivBazdid"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/account_search"
-                        android:tint="@color/orange_300"/>
+                        android:tint="@color/orange_300" />
+
                     <TextView
                         android:id="@+id/tvBazdid"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
                         android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItemBazdid"/>
+                        android:text="@string/menuItemBazdid"
+                        android:textColor="@color/grey_700"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.3"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/BazdidDes"/>
+                        android:text="@string/BazdidDes"
+                        android:textColor="@color/grey_400"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -206,13 +218,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"
-                android:orientation="vertical"
-                android:background="@drawable/custom_homeitem">
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/custom_homeitem"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/laySettings"
                     android:layout_width="match_parent"
@@ -220,39 +233,42 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/ivSettings"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/settings"
-                        android:tint="@color/orange_300"/>
+                        android:tint="@color/orange_300" />
+
                     <TextView
                         android:id="@+id/tvSettings"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
                         android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItemSetting"/>
+                        android:text="@string/menuItemSetting"
+                        android:textColor="@color/grey_700"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.3"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/SettingDes"/>
+                        android:text="@string/SettingDes"
+                        android:textColor="@color/grey_400"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -260,13 +276,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="8dp"
-                android:orientation="vertical"
-                android:background="@drawable/custom_homeitem">
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/custom_homeitem"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/layErsal"
                     android:layout_width="match_parent"
@@ -274,39 +291,42 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/ivErsal"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/briefcase_upload"
-                        android:tint="@color/orange_300"/>
+                        android:tint="@color/orange_300" />
+
                     <TextView
                         android:id="@+id/tvErsal"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
                         android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItemSendJoints"/>
+                        android:text="@string/menuItemSendJoints"
+                        android:textColor="@color/grey_700"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.3"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/SendingDes"/>
+                        android:text="@string/SendingDes"
+                        android:textColor="@color/grey_400"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -314,13 +334,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="8dp"
-                android:orientation="vertical"
-                android:background="@drawable/custom_homeitem">
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/custom_homeitem"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/layMoshtarakin"
                     android:layout_width="match_parent"
@@ -328,39 +349,42 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/ivMoshtarakin"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/icon_daryaftmoshtarakin"
-                        android:tint="@color/orange_300"/>
+                        android:tint="@color/orange_300" />
+
                     <TextView
                         android:id="@+id/tvMoshtarakin"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
                         android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItemRecieveJoints"/>
+                        android:text="@string/menuItemRecieveJoints"
+                        android:textColor="@color/grey_700"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.3"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/RecieveJointsDes"/>
+                        android:text="@string/RecieveJointsDes"
+                        android:textColor="@color/grey_400"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -368,13 +392,14 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:layout_marginTop="4dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="4dp"
                 android:layout_marginBottom="8dp"
-                android:orientation="vertical"
-                android:background="@drawable/custom_homeitem">
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_weight="0.25"
+                android:background="@drawable/custom_homeitem"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:id="@+id/layDaryaft"
                     android:layout_width="match_parent"
@@ -382,39 +407,42 @@
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="vertical">
+
                     <ImageView
                         android:id="@+id/ivDaryaft"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="0.5"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:src="@drawable/file_download_outline"
-                        android:tint="@color/orange_300"/>
+                        android:tint="@color/orange_300" />
+
                     <TextView
                         android:id="@+id/tvDaryaft"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.2"
                         android:fontFamily="@font/byekan"
-                        android:textSize="14sp"
-                        android:textColor="@color/grey_700"
                         android:gravity="center"
-                        android:text="@string/menuItemBaseInfo"/>
+                        android:text="@string/menuItemBaseInfo"
+                        android:textColor="@color/grey_700"
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="0.3"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
+                        android:layout_weight="0.3"
                         android:fontFamily="@font/byekan"
-                        android:textSize="12sp"
-                        android:textColor="@color/grey_400"
                         android:gravity="center"
-                        android:text="@string/RecieveBaseInfoDes"/>
+                        android:text="@string/RecieveBaseInfoDes"
+                        android:textColor="@color/grey_400"
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -423,7 +451,7 @@
         <!-- bottom layout -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="45dp"
             android:orientation="horizontal">
 
             <!-- exit button -->
@@ -431,12 +459,12 @@
                 android:id="@+id/btnExit"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
-                android:layout_weight="0.22"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="3dp"
+                android:layout_weight="0.22"
                 android:background="@drawable/custom_home_exit"
                 android:drawableLeft="@drawable/exit_to_app"
                 android:drawableTint="@color/orange_300"
@@ -451,27 +479,26 @@
                 android:id="@+id/tvVersion"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.35"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="2dp"
+                android:layout_weight="0.35"
                 android:fontFamily="@font/byekan"
-                android:textColor="@color/grey_600"
                 android:gravity="center|right"
-                android:textSize="11sp"
-                android:text="@string/DashSign"/>
+                android:text="@string/DashSign"
+                android:textColor="@color/grey_600"
+                android:textSize="14sp" />
 
             <!-- text -->
             <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.35"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:layout_marginRight="8dp"
                 android:fontFamily="@font/byekan"
-                android:textColor="@color/grey_600"
                 android:gravity="center"
-                android:textSize="11sp"
-                android:text="@string/NameAndVersion"/>
+                android:text="@string/NameAndVersion"
+                android:textColor="@color/grey_600"
+                android:textSize="11sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
