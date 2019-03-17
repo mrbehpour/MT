@@ -1132,6 +1132,18 @@
                 android:text="@string/ReadByProb"/>
 
             <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnSaveProbRead"
+                android:fontFamily="@font/byekan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="@string/Save"/>
+
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnCancelManualRead"
                 android:fontFamily="@font/byekan"
                 android:layout_width="match_parent"

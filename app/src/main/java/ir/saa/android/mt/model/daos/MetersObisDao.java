@@ -19,15 +19,21 @@ public interface MetersObisDao {
 //    LiveData<List<DigitalMeters>> getDigitalMeters();
     List<MetersObis> getMetersObis();
 
-    @Query("Select * from DigitalMeters where MeterString= :MeterSummaryName")
-    MetersObis getMetersObisByMeterSummaryNameLiveData(String MeterSummaryName);
+    @Query("Select * from MetersObis where MeterSummaryName= :MeterSummaryName")
+    MetersObis getMetersObisByMeterSummaryName(String MeterSummaryName);
 
     @Insert(onConflict = IGNORE)
-    void insertDigitalMeters(MetersObis metersObis);
+    void insertMetersObis(MetersObis metersObis);
+
+    @Query("Select Count(MeterSummaryName) from MetersObis ")
+    int getMetersObisCount();
 
     @Update
-    void updateDigitalMeters(MetersObis metersObis);
+    void updateMetersObis(MetersObis metersObis);
 
     @Delete
-    void deleteDigitalMeters(MetersObis metersObis);
+    void deleteMetersObis(MetersObis metersObis);
+
+    @Query("DELETE FROM MetersObis")
+    void deleteAllMetersObis();
 }

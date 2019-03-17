@@ -4,50 +4,28 @@ package ir.saa.android.mt.uicontrollers.fragments;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.R;
-import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
 import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.components.MyDialog;
-import ir.saa.android.mt.components.Tarikh;
-import ir.saa.android.mt.enums.BundleKeysEnum;
-import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.enums.SharePrefEnum;
-import ir.saa.android.mt.model.entities.GPSInfo;
-import ir.saa.android.mt.model.entities.TestDtl;
-import ir.saa.android.mt.model.entities.TestInfo;
-import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.metertester.ElectericalParams;
-import ir.saa.android.mt.repositories.metertester.MT;
-import ir.saa.android.mt.repositories.metertester.TestResult;
-import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorFieldName;
-import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
-import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
-import ir.saa.android.mt.viewmodels.LocationViewModel;
 import ir.saa.android.mt.viewmodels.SanjeshViewModel;
 
 public class SanjeshFragment extends Fragment {
@@ -59,8 +37,9 @@ public class SanjeshFragment extends Fragment {
 
     AlertDialog ad;
     int numDisconnect=0;
-    int numGetSample=0;
+    boolean firstSample=true;
 
+    com.github.angads25.toggle.LabeledSwitch switchPlayPause;
     Button btnReconnect;
     TextView tvVR,tvVS,tvVT;
     TextView tvIR,tvIS,tvIT;
@@ -92,8 +71,13 @@ public class SanjeshFragment extends Fragment {
                     @Override
                     public void onChanged(@Nullable List<ElectericalParams> sanjeshResult) {
                         numDisconnect=0;
-                        calAvrageOfElectricalParams(sanjeshResult);
-                        //showSanjeshResult(sanjeshResult);
+                        if(switchPlayPause.isOn()) {
+                            calAvrageOfElectricalParams(sanjeshResult);
+                            if (firstSample) {
+                                showSanjeshResult(sanjeshResult);
+                                firstSample = false;
+                            }
+                        }
                     }
                 }
         );
@@ -109,7 +93,7 @@ public class SanjeshFragment extends Fragment {
 
                         }else{
                             numDisconnect++;
-                            if(numDisconnect>3){
+                            if(numDisconnect>6){
                                 btnReconnect.setVisibility(View.VISIBLE);
                                 AbortConnection();
                             }
@@ -163,6 +147,13 @@ public class SanjeshFragment extends Fragment {
                 connectToModule();
             }
         });
+
+        switchPlayPause = rootView.findViewById(R.id.switchPlayPause);
+//        switchPlayPause.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//            }
+//        });
 
         tvVR = rootView.findViewById(R.id.tvRowV_R);
         tvVS = rootView.findViewById(R.id.tvRowV_S);
@@ -224,14 +215,14 @@ public class SanjeshFragment extends Fragment {
             for(int i=0;i<3;i++) {
                 ElectericalParams epAvg = new ElectericalParams();
 
-                epAvg.AVRMS = String.format("%.2f",(vals[0+i*5] / 10));
-                epAvg.AIRMS = String.format("%.2f",(vals[1+i*5] / 10));
+                epAvg.AVRMS = String.format("%.2f",(vals[0+i*6] / 10));
+                epAvg.AIRMS = String.format("%.2f",(vals[1+i*6] / 10));
 
-                epAvg.AWATT = String.format("%.2f",(vals[2+i*5] / 10));
-                epAvg.AVAR = String.format("%.2f",(vals[3+i*5] / 10));
-                epAvg.AVA = String.format("%.2f",(vals[4+i*5] / 10));
+                epAvg.AWATT = String.format("%.2f",(vals[2+i*6] / 10));
+                epAvg.AVAR = String.format("%.2f",(vals[3+i*6] / 10));
+                epAvg.AVA = String.format("%.2f",(vals[4+i*6] / 10));
 
-                epAvg.ANGLE0 = String.format("%.2f",(vals[5+i*5] / 10));
+                epAvg.ANGLE0 = String.format("%.2f",(vals[5+i*6] / 10));
 
                 sanjeshResultFinal.add(epAvg);
             }

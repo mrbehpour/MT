@@ -129,7 +129,7 @@ public class IEC {
             } else {
                 dataArray = writeData.getBytes();
             }
-            Log.d("write IEC",meterLog(writeData));
+            //Log.d("write IEC",meterLog(writeData));
             noResponseNum = 0;
             transferLayer.writeByteArrayToDevice(dataArray);
 

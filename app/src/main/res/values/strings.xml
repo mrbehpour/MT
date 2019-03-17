@@ -84,6 +84,7 @@
     <string name="FillOldAndNewPlombInfo_msg">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
     <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
     <string name="Downloding_msg">Downloading data,Please wait..</string>
+    <string name="MeterUnknown_msg">مشخصات کنتور ثبت نشده است</string>
     <!--*******************-->
 
     <!--TestResultAdapter-->
@@ -163,6 +164,9 @@
     <string name="TariffCode">کد تعرفه</string>
     <string name="JointName">نام مشترک: </string>
     <string name="Address">آدرس</string>
+    <string name="Play">ادامه</string>
+    <string name="Pause">توقف</string>
+    <string name="Unknown">ناشناس</string>
 
     <!-- fragment_moshtarak_operation -->
     <string name="Remark">بازرسی</string>
@@ -170,6 +174,7 @@
     <string name="Readmeter">خواندن کنتور</string>
     <string name="ReadByProb">خواندن با پروب</string>
     <string name="ReadManual">خواندن دستی</string>
+
 
     <!-- fragment_polomp_save -->
     <string name="OldPolomb">پلمپ قدیم</string>

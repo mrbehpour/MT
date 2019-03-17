@@ -25,18 +25,22 @@ public class MetersObisRepo {
     }
 
     public MetersObis getMetersObisByMeterSummaryNameLiveData(String MeterSummaryName) {
-        return null;
+        return metersObisDao.getMetersObisByMeterSummaryName(MeterSummaryName);
     }
 
-    public void insertDigitalMeters(MetersObis metersObis) {
+    public void insertMetersObis(MetersObis metersObis) {
+        metersObisDao.insertMetersObis(metersObis);
+    }
 
+    public int getMetersObisCount(){
+        return metersObisDao.getMetersObisCount();
     }
 
     public void updateDigitalMeters(MetersObis metersObis) {
 
     }
 
-    public void deleteDigitalMeters(MetersObis metersObis) {
-
+    public void deleteAllMetersObis() {
+        metersObisDao.deleteAllMetersObis();
     }
 }

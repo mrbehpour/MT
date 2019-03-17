@@ -444,12 +444,9 @@ public class MT {
 
     private String calAngle (String responseStr){
         int ang = Integer.parseInt(responseStr, 16);
-        //double pf = Math.cos(ang * 360 * 50 / (double) 256);
         double pf = Math.cos(Math.toRadians(ang * powerCalCoeff));
 
-        //Log.d("Angle",responseStr + " _ " + String.valueOf(pf));
-
-        return String.valueOf(pf);
+        return String.format("%.2f", pf);
     }
 
     private String calPower (String responseStr){
