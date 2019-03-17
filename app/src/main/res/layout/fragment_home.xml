@@ -457,7 +457,7 @@
                 android:fontFamily="@font/byekan"
                 android:textColor="@color/grey_600"
                 android:gravity="center|right"
-                android:textSize="11sp"
+                android:textSize="14sp"
                 android:text="@string/DashSign"/>
 
             <!-- text -->
