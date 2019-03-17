@@ -3,12 +3,13 @@ package ir.saa.android.mt.repositories.meterreader;
 import java.util.List;
 
 import ir.saa.android.mt.model.entities.DigitalMeters;
+import ir.saa.android.mt.model.entities.MetersObis;
 
 public class SplitData {
 
-    public static MeterUtility.ReadData splitReadData(String readStr, DigitalMeters meterInfo){
+    public static MeterUtility.ReadData splitReadData(String readStr, DigitalMeters meterInfo, String meterObisStr){
         List<MeterUtility.DataItem> lstData = MeterUtility.CreateReadDataList(readStr,meterInfo);
-        List<MeterUtility.ObisItem> lstObis = MeterUtility.getListObis(meterInfo.MeterSummaryName);
+        List<MeterUtility.ObisItem> lstObis = MeterUtility.getListObis(meterObisStr);
         MeterUtility.ReadData readData = new MeterUtility.ReadData();
 
         for (MeterUtility.ObisItem obis: lstObis) {

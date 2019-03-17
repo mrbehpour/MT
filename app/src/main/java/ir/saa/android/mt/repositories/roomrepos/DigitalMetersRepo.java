@@ -36,6 +36,10 @@ public class DigitalMetersRepo  {
         return digitalMetersDao.getAllDigitalMetersString();
     }
 
+    public int getDigitalMetersCount() {
+        return digitalMetersDao.getDigitalMetersCount();
+    }
+
     public void insertDigitalMeters(DigitalMeters digitalMeters) {
         digitalMetersDao.insertDigitalMeters(digitalMeters);
     }
@@ -46,5 +50,9 @@ public class DigitalMetersRepo  {
 
     public void deleteDigitalMeters(DigitalMeters digitalMeters) {
 
+    }
+
+    public void deleteAllDigitalMeters() {
+        digitalMetersDao.deleteAllDigitalMeters();
     }
 }

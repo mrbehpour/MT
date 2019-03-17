@@ -28,6 +28,21 @@
                 android:textColor="@color/grey_900"
                 android:text="@string/Sanjesh" />
 
+                <!-- Play/Pause Layout -->
+                <com.github.angads25.toggle.LabeledSwitch
+                    android:id="@+id/switchPlayPause"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    app:on="true"
+                    app:textOn="@string/Play"
+                    app:textOff="@string/Pause"
+                    app:colorOn="#f16f13"
+                    app:colorBorder="#f16f13"/>
+
         </LinearLayout>
 
         <!-- Jadval Layout -->

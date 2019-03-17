@@ -2,12 +2,10 @@ package ir.saa.android.mt.uicontrollers.fragments;
 
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.DialogInterface;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,9 +33,8 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.testresult.TestResultAdapter;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyDialog;
-import ir.saa.android.mt.components.Tarikh;
+import ir.saa.android.mt.components.PersianCalendar;
 import ir.saa.android.mt.enums.BundleKeysEnum;
-import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.model.entities.TestInfo;
@@ -271,8 +268,8 @@ public class AmaliyatFragment extends Fragment {
             gpsInfo.ClientID = G.clientInfo.ClientId;
             gpsInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
             gpsInfo.SendID = G.clientInfo.SendId;
-            gpsInfo.GPSDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
-            gpsInfo.GPSTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
+            gpsInfo.GPSDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+            gpsInfo.GPSTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
             gpsInfo.Lat = String.valueOf(location.getLatitude());
             gpsInfo.Long = String.valueOf(location.getLongitude());
             amaliyatViewModel.insertGpsInfo(gpsInfo);
@@ -286,8 +283,8 @@ public class AmaliyatFragment extends Fragment {
         if (isLocation) {
             TestInfo testInfo = new TestInfo();
             testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
-            testInfo.TestDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
-            testInfo.TestTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
+            testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+            testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
             testInfo.SendID = G.clientInfo.SendId;
             testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
             testInfo.ClientID = G.clientInfo.ClientId;

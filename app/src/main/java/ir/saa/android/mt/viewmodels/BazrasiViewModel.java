@@ -6,24 +6,19 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.location.Location;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
 
 
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
 import java.util.List;
 
-import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazrasi.RemarkItem;
 import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.components.Tarikh;
+import ir.saa.android.mt.components.PersianCalendar;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
-import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroupingFormat;
 import ir.saa.android.mt.repositories.roomrepos.AnswerGroupDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
@@ -164,8 +159,8 @@ public class BazrasiViewModel extends AndroidViewModel {
 
                 inspectionInfo.Lat=String.valueOf(location.getLatitude());
                 inspectionInfo.Long=String.valueOf(location.getLongitude());
-                inspectionInfo.InspectionDate = Integer.valueOf(Tarikh.getCurrentShamsidatetimeWithoutSlash().substring(0, 8));
-                inspectionInfo.InspectionTime = Integer.valueOf(Tarikh.getTimeWithoutColon());
+                inspectionInfo.InspectionDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                inspectionInfo.InspectionTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
                 //inspectionInfo.RemarkID = currentItem.Id;
                 Long inspectionInfoId = insertInspectionInfo(inspectionInfo);
                 InspectionDtl inspectionDtl = new InspectionDtl();

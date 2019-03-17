@@ -1,8 +1,6 @@
 package ir.saa.android.mt.adapters.bazrasi;
 
-import android.app.Application;
 import android.app.ProgressDialog;
-import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -32,10 +30,7 @@ import ir.saa.android.mt.components.MyCheckList;
 import ir.saa.android.mt.components.MyCheckListItem;
 import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.components.MyDialog;
-import ir.saa.android.mt.components.Tarikh;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
-import ir.saa.android.mt.model.entities.InspectionDtl;
-import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
 import ir.saa.android.mt.services.GPSTracker;
 import ir.saa.android.mt.services.ILocationCallBack;

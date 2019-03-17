@@ -30,6 +30,9 @@ public interface DigitalMetersDao {
     @Query("Select MeterSummaryName,MeterString from DigitalMeters ")
     List<MeterUtility.MeterStringInfo> getAllDigitalMetersString();
 
+    @Query("Select Count(MeterSummaryName) from DigitalMeters ")
+    int getDigitalMetersCount();
+
     @Insert(onConflict = IGNORE)
     void insertDigitalMeters(DigitalMeters digitalMeters);
 
@@ -39,4 +42,6 @@ public interface DigitalMetersDao {
     @Delete
     void deleteDigitalMeters(DigitalMeters digitalMeters);
 
+    @Query("DELETE FROM DigitalMeters")
+    void deleteAllDigitalMeters();
 }
