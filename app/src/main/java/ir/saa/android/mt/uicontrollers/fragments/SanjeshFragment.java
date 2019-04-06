@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,7 @@ public class SanjeshFragment extends Fragment {
     List<List<ElectericalParams>> sanjeshResultAvrage = new ArrayList<>(3);
 
     AlertDialog ad;
-    int numDisconnect=0;
+
     boolean firstSample=true;
 
     com.github.angads25.toggle.LabeledSwitch switchPlayPause;
@@ -67,45 +68,47 @@ public class SanjeshFragment extends Fragment {
         initObjects(rootView);
 
         sanjeshViewModel.sanjeshResultMutableLiveData.observe(this, new Observer<List<ElectericalParams>>() {
-                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public void onChanged(@Nullable List<ElectericalParams> sanjeshResult) {
-                        numDisconnect=0;
-                        if(switchPlayPause.isOn()) {
-                            calAvrageOfElectricalParams(sanjeshResult);
-                            if (firstSample) {
-                                showSanjeshResult(sanjeshResult);
-                                firstSample = false;
-                            }
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void onChanged(@Nullable List<ElectericalParams> sanjeshResult) {
+                    if(switchPlayPause.isOn()) {
+                        calAvrageOfElectricalParams(sanjeshResult);
+                        if (firstSample) {
+                            showSanjeshResult(sanjeshResult);
+                            firstSample = false;
                         }
                     }
                 }
+            }
         );
 
         sanjeshViewModel.connectionStateMutableLiveData.observe(this, new Observer<Boolean>() {
-                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public void onChanged(@Nullable Boolean b) {
-                        if(b){
-                            HideProgressDialog();
-                            btnReconnect.setVisibility(View.INVISIBLE);
-                            sanjeshViewModel.readSanjeshResultFromMeter();
-
-                        }else{
-                            numDisconnect++;
-                            if(numDisconnect>6){
-                                btnReconnect.setVisibility(View.VISIBLE);
-                                AbortConnection();
-                            }
-                        }
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void onChanged(@Nullable Boolean b) {
+                    Log.d("response disconnect",b + "");
+                    if(b){
+                        HideProgressDialog();
+                        sanjeshViewModel.readSanjeshResultFromMeter();
                     }
                 }
+            }
         );
+
+        sanjeshViewModel.abortOperationMutableLiveData.observe(this, new Observer<Boolean>() {
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void onChanged(@Nullable Boolean b) {
+                    if (b) {
+                        btnReconnect.setVisibility(View.VISIBLE);
+                    }else{
+                        btnReconnect.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+        );
+
+
         connectToModule();
         return rootView;
     }
@@ -334,10 +337,6 @@ public class SanjeshFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-    }
-
-    public void AbortConnection(){
-        sanjeshViewModel.AbortOperation();
     }
 
     @Override

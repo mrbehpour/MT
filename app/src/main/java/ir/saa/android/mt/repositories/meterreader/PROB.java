@@ -124,10 +124,10 @@ public class PROB {
         return result;
     }
 
-    public MeterUtility.ReadData ProgrammingReadMeter(DigitalMeters meterInfo , MeterUtility.connectionStatus connectionStatus) throws Exception {
+    public MeterUtility.ReadData ProgrammingReadMeter(DigitalMeters meterInfo , MeterUtility.connectionStatus connectionStatus , String meterObisStr) throws Exception {
 
-        List<MeterUtility.ObisItem> lstObis = MeterUtility.getListObis(meterInfo.MeterSummaryName);
         MeterUtility.ReadData readData = new MeterUtility.ReadData();
+        List<MeterUtility.ObisItem> lstObis = MeterUtility.getListObis(meterObisStr);
 
         String result="";
         try {
@@ -144,7 +144,7 @@ public class PROB {
                     String ReadObisStr = MeterUtility.CreateReadObisStr(obis , meterInfo);
                     result = iec.SendCommandToDevice(ReadObisStr,false, connectionStatus);
 //                    Thread.sleep(100);
-                    MeterUtility.setReadDataValue(readData,obis.tariffName,SplitData.splitDataInOpenPrntsStar(result),obis.floatPoint);
+                    MeterUtility.setReadDataValue(readData,SplitData.splitDataInOpenPrntsStar(result),obis);
                 }
             }
         } catch (Exception ex) {

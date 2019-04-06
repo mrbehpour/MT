@@ -33,9 +33,11 @@ public class SanjeshViewModel extends AndroidViewModel {
     Timer timer;
     Handler handler=null;
     boolean pauseGetSample=false;
+    int numDisconnect=0;
 
     public MutableLiveData<List<ElectericalParams>> sanjeshResultMutableLiveData;
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
+    public MutableLiveData<Boolean> abortOperationMutableLiveData;
 
     public SanjeshViewModel(@NonNull Application application) {
         super(application);
@@ -46,6 +48,7 @@ public class SanjeshViewModel extends AndroidViewModel {
             @Override
             public void onConnected() {
                 connectionStateMutableLiveData.postValue(true);
+                numDisconnect = 0;
                 readSanjeshResultFromMeter();
                 Log.d("response","onConnected");
             }
@@ -59,7 +62,8 @@ public class SanjeshViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
                 connectionStateMutableLiveData.postValue(false);
-                Log.d("response","onConnectionError : "+errMsg);
+                checkConnectionError();
+                Log.d("response","onConnectionError vm: "+errMsg);
             }
 
             @Override
@@ -75,13 +79,27 @@ public class SanjeshViewModel extends AndroidViewModel {
 
         sanjeshResultMutableLiveData = new MutableLiveData<>();
         connectionStateMutableLiveData = new MutableLiveData<>();
+        abortOperationMutableLiveData = new MutableLiveData<>();
 
         timerSetIntervalStart(400);
 //        timerSetIntervalStart(1000);
     }
 
+    private void checkConnectionError(){
+
+        numDisconnect++;
+        Log.d("response","check err num vm: " + numDisconnect);
+        if(numDisconnect>5){
+            abortOperationMutableLiveData.postValue(true);
+            AbortOperation();
+
+        }
+    }
+
     public void readSanjeshResultFromMeter(){
         try {
+            if(timer==null) timerSetIntervalStart(400);
+            abortOperationMutableLiveData.postValue(false);
             sanjeshResult = metertester.ReadAllElectericalParams();
             sanjeshResultMutableLiveData.postValue(sanjeshResult);
         } catch (Exception e) {
@@ -113,7 +131,7 @@ public class SanjeshViewModel extends AndroidViewModel {
             public void run() {
                 handler.post(new Runnable() {
                     public void run() {
-                        readSanjeshResultFromMeter();
+                        if(timer!=null) readSanjeshResultFromMeter();
                     }
                 });
             }
@@ -130,8 +148,14 @@ public class SanjeshViewModel extends AndroidViewModel {
     }
 
     public void AbortOperation(){
-        timerSetIntervalStop();
+
         metertester.AbortOperation();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        timerSetIntervalStop();
     }
 
     @Override

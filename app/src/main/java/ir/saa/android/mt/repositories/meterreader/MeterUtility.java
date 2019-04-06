@@ -8,12 +8,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import ir.saa.android.mt.application.Converters;
+import ir.saa.android.mt.components.PersianCalendar;
 import ir.saa.android.mt.model.entities.DigitalMeters;
-import ir.saa.android.mt.repositories.IEC.IEC_Constants;
 
 public class MeterUtility {
 
@@ -183,17 +183,37 @@ public class MeterUtility {
 
 
 
-    public static void setReadDataValue(ReadData readData, String propName, String value, int floatingPoint){
+    public static void setReadDataValue(ReadData readData, String value, ObisItem obisItem){
         try {
+            switch (obisItem.convertType){
+                case 1:
+                    value = Converters.convertHexToDec(value);
+                    break;
+                case 2:
+                    value = Converters.reverseString2By2(value);
+                    break;
+                case 3:
+                    value = Converters.hex2DecimalTotal2By2Reverse(value);
+                    break;
+                case 4:
+                    value = PersianCalendar.getSimpleShamsiDate6DigitGregorian(Converters.reverseString2By2(value));
+                    break;
+                case 5:
+                    value = PersianCalendar.convertToTimeFormat(Converters.reverseString2By2(value));
+                    break;
+                case 6:
+                    value = Converters.hex2AsciiString2By2(value);
+                    break;
+            }
             Class<?> c = readData.getClass();
 
             Field f = null;
-            f = c.getDeclaredField(propName);
+            f = c.getDeclaredField(obisItem.tariffName);
 
             f.setAccessible(true);
 
             if(f.getType().toString().equals("double")){
-                f.set(readData, Double.valueOf(value)/ Math.pow(10,floatingPoint));
+                f.set(readData, Double.valueOf(value)/ Math.pow(10,obisItem.floatPoint));
             }else {
                 f.set(readData, value);
             }

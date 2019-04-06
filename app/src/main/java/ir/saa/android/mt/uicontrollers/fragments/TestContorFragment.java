@@ -100,20 +100,20 @@ public class TestContorFragment extends Fragment
         });
 
         testContorViewModel.connectionStateMutableLiveData.observe(this, new Observer<Boolean>() {
-                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-                    @Override
-                    public void onChanged(@Nullable Boolean b) {
-                        if(b){
-                            G.startFragment(FragmentsEnum.TestEnergyFragment, false, bundle);
-                        }
-                        try {
-                            Thread.sleep(200);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        HideProgressDialog();
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public void onChanged(@Nullable Boolean b) {
+                    if(b){
+                        G.startFragment(FragmentsEnum.TestEnergyFragment, false, bundle);
                     }
+                    try {
+                        Thread.sleep(200);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    HideProgressDialog();
                 }
+            }
         );
 
         return rootView;

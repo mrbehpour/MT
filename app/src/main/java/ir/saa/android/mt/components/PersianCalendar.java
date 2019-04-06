@@ -257,6 +257,7 @@ public class PersianCalendar {
 	}
 
 	public static String getSimpleShamsiDate(String gregorianDate) {
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 		Date gregDate = null;
 		try { // parse string date to date type
@@ -273,7 +274,26 @@ public class PersianCalendar {
 				perCal.month) +  String.format(loc, "%02d", perCal.date);
 
 	}
-	
+
+
+	public static String getSimpleShamsiDate6DigitGregorian(String gregorianDate) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd", Locale.US);
+		Date gregDate = null;
+		try { // parse string date to date type
+			gregDate = sdf.parse(gregorianDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Locale loc = new Locale("en_US");
+		PersianCalendar perCal = new PersianCalendar(gregDate);
+
+		return String.valueOf(perCal.year) + "-" + String.format(loc, "%02d", perCal.month) + "-" +  String.format(loc, "%02d", perCal.date);
+
+	}
+
 	public static String getCurrentSimpleTime(){
 
 		Calendar c= Calendar.getInstance();
@@ -286,6 +306,18 @@ public class PersianCalendar {
 
 		return String.format("%s%s%s", hour,minute,second);
 
+	}
+
+	public static String convertToTimeFormat(String TimeStr){
+		if (TimeStr.length()==4){
+			TimeStr = String.format("%s00", TimeStr);
+		}
+
+		if (TimeStr.length()==5){
+			TimeStr = String.format("0%s", TimeStr);
+		}
+
+		return  String.format("%s:%s:%s", TimeStr.substring(0, 2) , TimeStr.substring(2, 4) , TimeStr.substring(4, 6));
 	}
 	
 	public static String getCurrentTime(){

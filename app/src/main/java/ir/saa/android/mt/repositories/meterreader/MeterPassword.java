@@ -9,8 +9,11 @@ public class MeterPassword {
     public static String GetPasswordStr(DigitalMeters meterInfo, String meterPass, String P0String){
         String SendPassStr="";
         switch (meterInfo.MeterSummaryName){
-            case "AMP-E":
+            case "AMPY_F":
                 SendPassStr=createMeterCommandStr(IEC_Constants.P2_Command,String.format("(%s)",CalculateAmpyPassword(meterPass,P0String)));
+                break;
+            case "Elester_A1350i":
+                SendPassStr=createMeterCommandStr(IEC_Constants.P2_Command,String.format("(%s)",CalculateElesterPassword(meterPass,P0String)));
                 break;
         }
 
