@@ -129,7 +129,7 @@ public class IEC {
             } else {
                 dataArray = writeData.getBytes();
             }
-            //Log.d("write IEC",meterLog(writeData));
+            Log.d("write IEC",meterLog(writeData));
             noResponseNum = 0;
             transferLayer.writeByteArrayToDevice(dataArray);
 
@@ -189,7 +189,7 @@ public class IEC {
                 break;
 
             case getPassResult:
-                if (responseStr.contains(String.valueOf(ASCII.ACK))) {
+                if (responseStr.contains(String.valueOf(ASCII.ACK)) || responseStr.equals("x")) {
                     res=true;
                 }
                 break;

@@ -85,4 +85,9 @@
     <color name="orange_A200">#FFAB40</color>
     <color name="orange_A300">#FF9100</color>
     <color name="orange_A400">#FF6D00</color>
+
+    <color name="r_phase">#000000</color>
+    <color name="s_phase">#ffe100</color>
+    <color name="t_phase">#ff0d00</color>
+
 </resources>

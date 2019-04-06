@@ -11,68 +11,155 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
+        android:layout_weight="1"
+
         android:gravity="center"
-        android:layout_weight="1">
+        android:orientation="horizontal">
 
-        <!-- Left Layout -->
+        <!-- R Layout -->
         <LinearLayout
-            android:id="@+id/llLeft"
+            android:id="@+id/llR"
             android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/shape_circle">
+            android:layout_height="185dp"
+            android:background="@drawable/rounded"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
-                android:id="@+id/tvLeft"
+                android:id="@+id/tvRLabel"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:fontFamily="@font/byekan"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/DashSign"
+                android:text="@string/PhaseR"
                 android:textAlignment="gravity"
                 android:textColor="@color/grey_900"
                 android:textSize="32sp" />
-        </LinearLayout>
 
-        <!-- Center Layout -->
-        <LinearLayout
-            android:id="@+id/llCenter"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:background="@drawable/shape_circle">
+            <LinearLayout
+                android:id="@+id/llRight"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/shape_circle">
+
+                <TextView
+                    android:id="@+id/tvRight"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/DashSign"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_900"
+                    android:textSize="32sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvCenter"
+                android:id="@+id/tvRightColor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/r_phase" />
+
+        </LinearLayout>
+
+        <!-- S Layout -->
+        <LinearLayout
+            android:id="@+id/llS"
+            android:layout_width="90dp"
+            android:layout_height="185dp"
+            android:background="@drawable/rounded"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tvSLabel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:fontFamily="@font/byekan"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/PlusSign"
+                android:text="@string/PhaseS"
                 android:textAlignment="gravity"
                 android:textColor="@color/grey_900"
                 android:textSize="32sp" />
-        </LinearLayout>
 
-        <!-- Right Layout -->
-        <LinearLayout
-            android:id="@+id/llRight"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginLeft="16dp"
-            android:background="@drawable/shape_circle">
+            <LinearLayout
+                android:id="@+id/llCenter"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/shape_circle">
+
+                <TextView
+                    android:id="@+id/tvCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/PlusSign"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_900"
+                    android:textSize="32sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/tvRight"
+                android:id="@+id/tvCeneterColor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/s_phase" />
+
+        </LinearLayout>
+
+        <!-- T Layout -->
+        <LinearLayout
+            android:id="@+id/llT"
+            android:layout_width="90dp"
+            android:layout_height="185dp"
+            android:background="@drawable/rounded"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/tvTLabel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:fontFamily="@font/byekan"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/DashSign"
+                android:text="@string/PhaseT"
                 android:textAlignment="gravity"
                 android:textColor="@color/grey_900"
                 android:textSize="32sp" />
+
+            <LinearLayout
+                android:id="@+id/llLeft"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/shape_circle">
+
+                <TextView
+                    android:id="@+id/tvLeft"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/byekan"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/DashSign"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_900"
+                    android:textSize="32sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLeftColor"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="@color/t_phase" />
         </LinearLayout>
+
+
+
+
     </LinearLayout>
 
 
