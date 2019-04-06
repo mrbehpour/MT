@@ -123,6 +123,10 @@ public class LoginActivity extends AppCompatActivity {
                         fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                         fancyToast.show();
                     }
+                }else {
+                    Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.UsernamenotValid_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
                 }
             }
         });

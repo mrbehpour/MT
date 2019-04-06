@@ -62,6 +62,7 @@
     <string name="AccessServerError_msg">دسترسی به آدرس امکان پذیر نیست</string>
     <string name="GetRegionFromServer_msg">در حال دریافت داده ها از سرور</string>
     <string name="UsernameOrPassword_msg">نام کاربری یا کلمه عبور اشتباه است</string>
+    <string name="UsernamenotValid_msg">نام کاربری شما در سایت تایید نشده است</string>
     <string name="TapAgainForExit_msg">برای خروج دوبار کلیک کنید</string>
     <string name="Exit_msg"> آیا برای خروج مطمئن هستید ؟ </string>
     <string name="PolombDataNotFound_msg">اطلاعات پلمپ یافت نشد</string>
