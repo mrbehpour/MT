@@ -106,7 +106,16 @@ public class SendSerialActivity extends AppCompatActivity {
         }
 
         deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
+        DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
+        if(deviceSerial!=null) {
+            if(deviceSerial.isActive) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                this.finish();
+                return;
+            }
+        }
         checkAndRequestPermissions();
         laySettings=(LinearLayout)findViewById(R.id.laySettings);
 
@@ -157,16 +166,7 @@ public class SendSerialActivity extends AppCompatActivity {
 
 
 
-        DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
-        if(deviceSerial!=null) {
-            if(deviceSerial.isActive) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                this.finish();
-                return;
-            }
-        }
         adapterInit();
 
         deviceSerialViewModel.getRegion().observe(this, new Observer<List<Region>>() {
