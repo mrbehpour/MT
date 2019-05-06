@@ -12,6 +12,7 @@ public class MeterPassword {
             case "AMPY_F":
                 SendPassStr=createMeterCommandStr(IEC_Constants.P2_Command,String.format("(%s)",CalculateAmpyPassword(meterPass,P0String)));
                 break;
+            case "Elester_A120":
             case "Elester_A1350i":
                 SendPassStr=createMeterCommandStr(IEC_Constants.P2_Command,String.format("(%s)",CalculateElesterPassword(meterPass,P0String)));
                 break;

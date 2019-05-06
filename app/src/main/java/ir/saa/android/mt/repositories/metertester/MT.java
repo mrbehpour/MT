@@ -38,7 +38,8 @@ public class MT {
 
     public enum TestCommands {
         DisableTest,
-        StartTest,
+        StartAutoTest,
+        StartManualTest,
         FinishTest,
     }
 
@@ -89,8 +90,8 @@ public class MT {
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PA,4,6));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PB,31,6));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PC,58,6));
-        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Init_Params,220,6));
-        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Command,228,1));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Init_Params,221,8));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Command,230,1));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Result,222,28));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Paulse_Counter,867,1));
     }
@@ -238,7 +239,9 @@ public class MT {
                 Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_C));
 
         ErrPerc = ph * correctFactor;
-        double k = (3600000 * testContorParams.SensorRatio * testContorParams.CTCoeff) / testContorParams.ContorConst;
+        //ErrPerc = ph * Double.valueOf(G.getPref(SharePrefEnum.CorrectCoeff));
+
+        double k = ((double) 3600000 * testContorParams.SensorRatio * testContorParams.CTCoeff * testContorParams.RoundNum) / testContorParams.ContorConst;
 
         if((k - ErrPerc)>=ErrPerc || ErrPerc==0) {
             ErrPerc = 99.99;
@@ -263,7 +266,7 @@ public class MT {
                 pf = Double.parseDouble(testResult.ANGLE2_Period1);
                 break;
         }
-        double pf_final = Math.cos((((pf*360*PowerFreq)/256000)*Math.PI)/180);
+        double pf_final = Math.cos((((pf*360*PowerFreq)/(double) 256000)*Math.PI)/180);
         return pf_final;
     }
 
@@ -277,11 +280,14 @@ public class MT {
                 case DisableTest:
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress,  0);
                     break;
-                case StartTest:
+                case StartAutoTest:
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress, 1);
                     break;
-                case FinishTest:
+                case StartManualTest:
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress, 2);
+                    break;
+                case FinishTest:
+                    result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress, 3);
                     break;
             }
         }catch (Exception ex){
@@ -307,7 +313,7 @@ public class MT {
                 testCommands = TestCommands.DisableTest;
                 break;
             case "0001":
-                testCommands = TestCommands.StartTest;
+                testCommands = TestCommands.StartAutoTest;
                 break;
             case "0002":
                 testCommands = TestCommands.FinishTest;
@@ -338,7 +344,7 @@ public class MT {
         tmp = Converters.ConvertInt2ByteArray(tcp.SinglePhase ? 1 : 2, false);
         data = Converters.ConcatenateTwoArray(data, tmp);
 
-        tmp = Converters.ConvertInt2ByteArray(1, false);
+        tmp = Converters.ConvertInt2ByteArray(tcp.PaulserType ? 1 : 2, false);
         data = Converters.ConcatenateTwoArray(data, tmp);
 
         try {

@@ -83,6 +83,7 @@ public class TestContorFragment extends Fragment
                         Integer.parseInt(String.valueOf(edtCTCoeff.getText())),
                         Integer.parseInt(String.valueOf(edtContorConst.getText())),
                         Integer.parseInt(String.valueOf(edtSensorRatio.getText())),
+
 //                    Integer.parseInt(String.valueOf(edtRoundNum.getText()))
                         1,
                         switchPaulserType.isOn());

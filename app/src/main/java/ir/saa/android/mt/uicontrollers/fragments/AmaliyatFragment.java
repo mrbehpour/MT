@@ -59,6 +59,7 @@ public class AmaliyatFragment extends Fragment {
     private Boolean active;
     ImageView imgNewPaulse;
     TextView tvManualPaulseNum;
+    //TextView tvEnergi;
     Location location;
     boolean isLocation;
     boolean paulserType;
@@ -104,6 +105,7 @@ public class AmaliyatFragment extends Fragment {
         Button btnSaveResult = rootView.findViewById(R.id.btnSaveTestResult);
         imgNewPaulse = rootView.findViewById(R.id.imgManualPaulse);
         tvManualPaulseNum =  rootView.findViewById(R.id.txtManualPaulseNum);
+        //tvEnergi = rootView.findViewById(R.id.tvEnergi);
         isLocation = false;
         location=null;
         Bundle args = getArguments();
@@ -125,16 +127,21 @@ public class AmaliyatFragment extends Fragment {
                     @Override
                     public void onChanged(@Nullable String testResult) {
                         tvErrPerc.setText(testResult);
+
+//                        tvErrPerc.setText(testResult.split(",")[0]);
+//                        tvEnergi.setText(testResult.split(",")[1]);
                     }
                 }
         );
+
+
 
         amaliyatViewModel.testStatusMutableLiveData.observe(this, new Observer<MT.TestCommands>() {
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onChanged(@Nullable MT.TestCommands testCommands) {
                         switch (testCommands) {
-                            case StartTest:
+                            case StartAutoTest:
                                 btnStartTest.setVisibility(View.GONE);
                                 btnFinishTest.setVisibility(View.VISIBLE);
                                 btnSaveResult.setVisibility(View.GONE);
@@ -206,7 +213,7 @@ public class AmaliyatFragment extends Fragment {
                 setUpRecyclerView(rootView, testResults);
 
                 amaliyatViewModel.setTestContorParams(testContorParams);
-                amaliyatViewModel.startTest();
+                amaliyatViewModel.startTestOperation();
                 //btnStartTest.setEnabled(false);
             }
         });

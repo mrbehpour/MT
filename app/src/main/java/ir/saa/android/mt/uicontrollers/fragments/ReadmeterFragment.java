@@ -224,6 +224,7 @@ public class ReadmeterFragment extends Fragment {
             public void onClick(View view) {
                 btnProbRead.setVisibility(View.GONE);
                 btnManualRead.setVisibility(View.GONE);
+                btnSaveProbRead.setVisibility(View.GONE);
                 btnCancelManualRead.setVisibility(View.VISIBLE);
                 btnSaveManualRead.setVisibility(View.VISIBLE);
             }

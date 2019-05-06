@@ -147,6 +147,7 @@ public class PROB {
                     MeterUtility.setReadDataValue(readData,SplitData.splitDataInOpenPrntsStar(result),obis);
                 }
             }
+
         } catch (Exception ex) {
             probCallback.onConnectionError(ex.getMessage());
             throw new Exception(ex);

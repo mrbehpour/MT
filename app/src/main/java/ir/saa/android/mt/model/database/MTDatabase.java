@@ -112,6 +112,7 @@ import ir.saa.android.mt.model.entities.TestInfo;
         PolompColor.class, PolompType.class, AddedClient.class,
         Bazdid.class, DeviceSerial.class, DigitalMeters.class, MetersObis.class},version = 48)
 @TypeConverters({AnswerGroupDtlConverters.class})
+
 public abstract class MTDatabase extends RoomDatabase {
 
     private static MTDatabase INSTANCE;

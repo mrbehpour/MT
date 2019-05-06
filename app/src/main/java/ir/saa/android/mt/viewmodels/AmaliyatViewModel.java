@@ -199,8 +199,11 @@ public class AmaliyatViewModel extends AndroidViewModel {
                     ErrPercAvr += testResult.ErrPerc;
                     myPaulseCounter++;
                     Log.d("response round Err Perc",  testResult.ErrPerc + "," + ErrPercAvr);
-                    testResultMutableLiveData.postValue(String.format("%.2f", ErrPercAvr/myPaulseCounter));
 
+
+
+                    testResultMutableLiveData.postValue(String.format("%.2f", ErrPercAvr/myPaulseCounter));
+                    //testResultMutableLiveData.postValue(String.format("%.2f,%s_%s_%s", ErrPercAvr/myPaulseCounter, testResult.MeterEnergy_Period1_A, testResult.MeterEnergy_Period1_B, testResult.MeterEnergy_Period1_C));
                     lastPaulseCounter=paulseCounter;
                 }
             }else{
@@ -211,24 +214,47 @@ public class AmaliyatViewModel extends AndroidViewModel {
         }
     }
 
+    public void readTestResultFromMeterManual(){
+        try {
+            int paulseCounter = metertester.ReadPaulseCounter();
+            TestResult testResult = metertester.ReadTestResult(paulseCounter, testContorParams);
+            testResultList.add(testResult);
+
+            ErrPercAvr += testResult.ErrPerc;
+            myPaulseCounter++;
+
+            testResultMutableLiveData.postValue(String.format("%.2f", ErrPercAvr/myPaulseCounter));
+            //testResultMutableLiveData.postValue(String.format("%.2f,%s_%s_%s", ErrPercAvr/myPaulseCounter, testResult.MeterEnergy_Period1_A, testResult.MeterEnergy_Period1_B, testResult.MeterEnergy_Period1_C));
+            lastPaulseCounter=paulseCounter;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public  void changeTestPauseStatus(boolean status){
         testPause=status;
         numErrorPulseNum = 0;
     }
-    public void checkTestStatus(){
-        boolean result=false;
-        MT.TestCommands startTestStatus =  metertester.ReadTestCommand();
-        if(!startTestStatus.equals(MT.TestCommands.StartTest)) {
-            result=true;
-        }
 
+    public void checkTestStatus(){
+
+        MT.TestCommands startTestStatus =  metertester.ReadTestCommand();
         testStatusMutableLiveData.postValue(startTestStatus);
     }
 
-    public void startTest() {
-        testStatusMutableLiveData.postValue(MT.TestCommands.StartTest);
+    public void startTestOperation(){
+        if(testContorParams.PaulserType){
+            startAutoTest();
+        }else{
+            startManualTest();
+        }
+    }
 
-        metertester.SendTestCommand(MT.TestCommands.StartTest);
+    public void startAutoTest() {
+        testStatusMutableLiveData.postValue(MT.TestCommands.StartAutoTest);
+
+        metertester.SendTestCommand(MT.TestCommands.StartAutoTest);
         lastPaulseCounter = 0;
         myPaulseCounter = 0;
         numErrorPulseNum = 0;
@@ -238,6 +264,21 @@ public class AmaliyatViewModel extends AndroidViewModel {
         testResultList = new ArrayList<>();
 
         timerSetIntervalStart(250,1500);
+    }
+
+    public void startManualTest() {
+        testStatusMutableLiveData.postValue(MT.TestCommands.StartAutoTest);
+
+        metertester.SendTestCommand(MT.TestCommands.StartManualTest);
+        lastPaulseCounter = 0;
+        myPaulseCounter = 0;
+        numErrorPulseNum = 0;
+        numErrorConnection = 0;
+        ErrPercAvr = 0;
+        setTimer = false;
+        testResultList = new ArrayList<>();
+
+        readTestResultFromMeterManual();
     }
 
     public void finishTest(){

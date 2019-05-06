@@ -185,6 +185,13 @@ public class MeterUtility {
 
     public static void setReadDataValue(ReadData readData, String value, ObisItem obisItem){
         try {
+
+            if(!obisItem.secondObis.isEmpty()){
+                if(obisItem.secondObis.startsWith("$")){
+                    value = SplitData.findSubstringObis(value, obisItem);
+                }
+            }
+
             switch (obisItem.convertType){
                 case 1:
                     value = Converters.convertHexToDec(value);
@@ -203,6 +210,9 @@ public class MeterUtility {
                     break;
                 case 6:
                     value = Converters.hex2AsciiString2By2(value);
+                    break;
+                case 7:
+                    value = PersianCalendar.convertToPersianDateFormat(Converters.reverseString2By2(value));
                     break;
             }
             Class<?> c = readData.getClass();

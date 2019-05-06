@@ -43,6 +43,7 @@ import ir.saa.android.mt.viewmodels.ModuleViewModel;
 public class SettingActivity extends AppCompatActivity {
 
     EditText edtServerAddress;
+    EditText edtCorrectCoeff;
     Button btnSave;
     ModuleViewModel moduleViewModel;
     Spinner spinner;
@@ -86,7 +87,9 @@ public class SettingActivity extends AppCompatActivity {
         }
 
 
-        edtServerAddress=(EditText) findViewById(R.id.edtServerAddress);
+        edtServerAddress =(EditText) findViewById(R.id.edtServerAddress);
+        edtCorrectCoeff =(EditText) findViewById(R.id.edtCoeff);
+
         btnSave=(AppCompatButton)findViewById(R.id.btnSave);
         //-Fontsize
         rbtSmall=(RadioButton)findViewById(R.id.rbtSmall);
@@ -144,11 +147,17 @@ public class SettingActivity extends AppCompatActivity {
             edtServerAddress.setText(G.getPref(SharePrefEnum.AddressServer));
         }
 
+        //-Coeff
+        if(G.getPref(SharePrefEnum.CorrectCoeff)!=null) {
+            edtCorrectCoeff.setText(G.getPref(SharePrefEnum.CorrectCoeff));
+        }
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 G.setPref(SharePrefEnum.AddressServer,edtServerAddress.getText().toString());
+                G.setPref(SharePrefEnum.CorrectCoeff,edtCorrectCoeff.getText().toString());
+
                 if(G.getPref(SharePrefEnum.FontSize)!=null) {
                     adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
                 }

@@ -308,6 +308,22 @@ public class PersianCalendar {
 
 	}
 
+	public static String convertToPersianDateFormat(String DateStr){
+		if (DateStr.length()==6){
+			DateStr = String.format("13%s", DateStr);
+		}
+
+		if (DateStr.length()!=8){
+			return "";
+		}
+
+		if(!DateStr.substring(4,5).equals("0") && !DateStr.substring(4,5).equals("1") && !DateStr.substring(4,5).equals("2")) {
+			DateStr = DateStr.substring(0,4)+"0"+DateStr.substring(5,8);
+		}
+
+		return  String.format("%s-%s-%s", DateStr.substring(0, 4) , DateStr.substring(4, 6) , DateStr.substring(6, 8));
+	}
+
 	public static String convertToTimeFormat(String TimeStr){
 		if (TimeStr.length()==4){
 			TimeStr = String.format("%s00", TimeStr);
@@ -451,7 +467,6 @@ public class PersianCalendar {
 				year=Integer.valueOf( date.substring(0, 2)) -80;
 				month=Integer.valueOf( date.substring(2, 4));
 				day=Integer.valueOf( date.substring(4, 6));
-
 			}
 			else {
 
@@ -488,6 +503,86 @@ public class PersianCalendar {
 		}
 	}
 
+	public static String jalaliToGregorian(String PersianDate) {
+		int py = Integer.getInteger(PersianDate.substring(0, 4));
+		int pm = Integer.getInteger(PersianDate.substring(4, 6));
+		int pd = Integer.getInteger(PersianDate.substring(6, 8));
+
+		return "";
+	}
+
+
+	public static Calendar getGregorianCalendar(int year, int month, int day) {
+		int g_days_in_month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		int j_days_in_month[] = { 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29 };
+		int gy, gm, gd;
+		int jy, jm, jd;
+		long g_day_no, j_day_no;
+		boolean leap;
+
+		int i;
+
+		jy = year - 979;
+		jm = month - 1;
+		jd = day - 1;
+
+		j_day_no = 365 * jy + (jy / 33) * 8 + (jy % 33 + 3) / 4;
+		for (i = 0; i < jm; ++i)
+			j_day_no += j_days_in_month[i];
+
+		j_day_no += jd;
+
+		g_day_no = j_day_no + 79;
+
+		gy = (int) (1600 + 400 * (g_day_no / 146097)); /*
+		 * 146097 = 365*400 +
+		 * 400/4 - 400/100 +
+		 * 400/400
+		 */
+		g_day_no = g_day_no % 146097;
+
+		leap = true;
+		if (g_day_no >= 36525) /* 36525 = 365*100 + 100/4 */
+		{
+			g_day_no--;
+			gy += 100 * (g_day_no / 36524); /* 36524 = 365*100 + 100/4 - 100/100 */
+			g_day_no = g_day_no % 36524;
+
+			if (g_day_no >= 365)
+				g_day_no++;
+			else
+				leap = false;
+		}
+
+		gy += 4 * (g_day_no / 1461); /* 1461 = 365*4 + 4/4 */
+		g_day_no %= 1461;
+
+		if (g_day_no >= 366) {
+			leap = false;
+
+			g_day_no--;
+			gy += g_day_no / 365;
+			g_day_no = g_day_no % 365;
+		}
+
+		for (i = 0; g_day_no >= g_days_in_month[i] + parsBooleanToInt(i == 1 && leap); i++)
+			g_day_no -= g_days_in_month[i] + parsBooleanToInt(i == 1 && leap);
+
+		gm = i + 1;
+		gd = (int) (g_day_no + 1);
+
+		Calendar gregorian = Calendar.getInstance();
+		gregorian.set(gy, gm - 1, gd);
+
+		return gregorian;
+	}
+
+	private static int parsBooleanToInt(Boolean sample) {
+		if (sample)
+			return 1;
+		else
+			return 0;
+	}
 
 //	public static String getCurrentDateByLang(){
 //		if(G.appLang.equals("fa")){

@@ -41,6 +41,8 @@ public class SettingFragment extends Fragment {
 
 
     EditText edtServerAddress;
+    EditText edtCorrectCoeff;
+
     Button btnSave;
     ModuleViewModel moduleViewModel;
     Spinner spinner;
@@ -83,7 +85,10 @@ public class SettingFragment extends Fragment {
         {
              myInt = getArguments().getInt("State");
         }
-        edtServerAddress=rootView.findViewById(R.id.edtServerAddress);
+
+        edtServerAddress = rootView.findViewById(R.id.edtServerAddress);
+        edtCorrectCoeff = rootView.findViewById(R.id.edtCoeff);
+
         btnSave=rootView.findViewById(R.id.btnSave);
         //-Fontsize
         rbtSmall=rootView.findViewById(R.id.rbtSmall);
@@ -141,14 +146,25 @@ public class SettingFragment extends Fragment {
             edtServerAddress.setText(G.getPref(SharePrefEnum.AddressServer));
         }
 
+        if(G.getPref(SharePrefEnum.CorrectCoeff)!=null) {
+            edtCorrectCoeff.setText(G.getPref(SharePrefEnum.CorrectCoeff));
+        }
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 G.setPref(SharePrefEnum.AddressServer,edtServerAddress.getText().toString());
+                G.setPref(SharePrefEnum.CorrectCoeff,edtCorrectCoeff.getText().toString());
+
                 if(G.getPref(SharePrefEnum.FontSize)!=null) {
                     adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
                 }
+
+                //-Coeff
+                if(G.getPref(SharePrefEnum.CorrectCoeff)!=null) {
+                    edtCorrectCoeff.setText(G.getPref(SharePrefEnum.CorrectCoeff));
+                }
+
 
                 //Toast.makeText(G.context,getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
                 Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);

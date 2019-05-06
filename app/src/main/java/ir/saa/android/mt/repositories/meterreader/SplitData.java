@@ -18,7 +18,7 @@ public class SplitData {
                 for (MeterUtility.DataItem dataItem : lstData) {
                     if (dataItem.mainObis.equals(obis.mainObis)) {
 
-                        if(!obis.secondObis.isEmpty()   ) {
+                        if(!obis.secondObis.isEmpty()) {
                             if(obis.secondObis.startsWith("+")) {
                                 dataItem.dataStr = dataItem.dataStr + findPartTwoObis(lstData, obis);
                             }else if(obis.secondObis.startsWith("$")){
@@ -35,6 +35,8 @@ public class SplitData {
 
         return readData;
     }
+
+
 
     public static String findPartTwoObis(List<MeterUtility.DataItem> lstData, MeterUtility.ObisItem obis){
 

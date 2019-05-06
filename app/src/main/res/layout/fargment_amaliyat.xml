@@ -70,6 +70,21 @@
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp">
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvEnergi"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/byekan"-->
+                    <!--android:textSize="18sp"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:textAlignment="gravity"-->
+                    <!--android:textDirection="rtl"-->
+                    <!--android:textColor="@color/grey_900"-->
+                    <!--android:text="1,2,3" />-->
+
                 <TextView
                     android:id="@+id/tvTestRoundNum"
                     android:layout_width="wrap_content"
@@ -79,6 +94,7 @@
                     android:gravity="center"
                     android:layout_marginRight="10dp"
                     android:textAlignment="gravity"
+                    android:layout_toLeftOf="@id/tvTestRoundNumTitle"
                     android:textDirection="rtl"
                     android:textColor="@color/grey_900"
                     android:text="@string/Zero" />
@@ -92,7 +108,7 @@
                     android:layout_marginRight="16dp"
                     android:gravity="center"
                     android:textAlignment="gravity"
-                    android:layout_toRightOf="@id/tvTestRoundNum"
+                    android:layout_alignParentRight="true"
                     android:textDirection="rtl"
                     android:textColor="@color/grey_900"
                     android:text="@string/RoundNum"/>
