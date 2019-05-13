@@ -44,6 +44,7 @@ import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorFieldName;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class AmaliyatFragment extends Fragment {
 
@@ -63,7 +64,7 @@ public class AmaliyatFragment extends Fragment {
     Location location;
     boolean isLocation;
     boolean paulserType;
-    int manualPaulseNUm=0;
+    int manualPaulseNum =0;
     TestResult testResultLocation;
     int CountSaveTest;
     ProgressDialog progressDialog;
@@ -72,6 +73,9 @@ public class AmaliyatFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
+
+
     private void connectToModuleDialog(){
 
         progressDialog=new ProgressDialog(getActivity());
@@ -91,6 +95,24 @@ public class AmaliyatFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    private void showManualTestHelp(View v){
+        new MaterialTapTargetPrompt.Builder(getActivity())
+                .setTarget(v.findViewById(R.id.button))
+                .setPrimaryText("شماره سریال دستگاه")
+                .setSecondaryText("جهت نمایش سریال دستگاه حتما باید دسترسی خواندن وضعیت تلفن به برنامه داده شود.")
+                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
+                {
+                    @Override
+                    public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
+                    {
+                        if (state == uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+                        {
+
+                        }
+                    }
+                })
+                .show();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -112,11 +134,6 @@ public class AmaliyatFragment extends Fragment {
         if (args != null) {
             testContorParams = (TestContorParams) args.getSerializable(BundleKeysEnum.TestContorParams);
             paulserType = !testContorParams.PaulserType;
-            if(paulserType) {
-                rlManualPaulser.setVisibility(View.VISIBLE);
-            }else{
-                rlManualPaulser.setVisibility(View.GONE);
-            }
         }
 
         tvErrPerc = rootView.findViewById(R.id.tvErrPerc);
@@ -141,24 +158,34 @@ public class AmaliyatFragment extends Fragment {
                     @Override
                     public void onChanged(@Nullable MT.TestCommands testCommands) {
                         switch (testCommands) {
-                            case StartAutoTest:
+                            case StartTest:
                                 btnStartTest.setVisibility(View.GONE);
                                 btnFinishTest.setVisibility(View.VISIBLE);
                                 btnSaveResult.setVisibility(View.GONE);
                                 tvErrPerc.setText("");
                                 tvRoundNum.setText("");
+                                manualPaulseNum=0;
+                                tvManualPaulseNum.setText(String.valueOf(manualPaulseNum));
+                                if(paulserType) {
+                                    rlManualPaulser.setVisibility(View.VISIBLE);
+                                }else{
+                                    rlManualPaulser.setVisibility(View.GONE);
+                                }
                                 break;
 
                             case FinishTest:
                                 btnStartTest.setVisibility(View.VISIBLE);
                                 btnFinishTest.setVisibility(View.GONE);
                                 btnSaveResult.setVisibility(View.VISIBLE);
+                                rlManualPaulser.setVisibility(View.GONE);
+
                                 break;
 
                             case DisableTest:
                                 btnStartTest.setVisibility(View.VISIBLE);
                                 btnFinishTest.setVisibility(View.GONE);
                                 btnSaveResult.setVisibility(View.GONE);
+                                rlManualPaulser.setVisibility(View.GONE);
                                 break;
                         }
                     }
@@ -201,7 +228,10 @@ public class AmaliyatFragment extends Fragment {
         imgNewPaulse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tvManualPaulseNum.setText(String.valueOf(manualPaulseNUm++));
+                tvManualPaulseNum.setText(String.valueOf(manualPaulseNum));
+                amaliyatViewModel.readTestResultFromMeterManual(manualPaulseNum);
+
+                manualPaulseNum++;
             }
         });
 
@@ -250,20 +280,22 @@ public class AmaliyatFragment extends Fragment {
         });
 
 
-    locationViewModel.locationMutableLiveData.observe((LifecycleOwner) getContext(), new Observer<Location>() {
-    @Override
-    public void onChanged(@Nullable Location locationObserve) {
-        if(locationObserve!=null){
-            location =locationObserve;
+        locationViewModel.locationMutableLiveData.observe((LifecycleOwner) getContext(), new Observer<Location>() {
+        @Override
+        public void onChanged(@Nullable Location locationObserve) {
+            if(locationObserve!=null){
+                location =locationObserve;
 
-            HideProgressDialog();
-            if(testResultLocation!=null){
+                HideProgressDialog();
+                if(testResultLocation!=null){
 
-                saveTestResult(testResultLocation);
+                    //saveTestResult(testResultLocation);
+                }
             }
         }
-    }
-});
+        });
+
+        //showManualTestHelp(rootView);
         return rootView;
     }
 

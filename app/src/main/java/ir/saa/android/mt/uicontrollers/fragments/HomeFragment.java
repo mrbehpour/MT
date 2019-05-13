@@ -1,5 +1,6 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +28,8 @@ import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
 import ir.saa.android.mt.uicontrollers.activities.ReportActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
+import ir.saa.android.mt.uicontrollers.activities.SettingActivity;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
@@ -111,7 +114,10 @@ public class HomeFragment extends Fragment
         laySettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                G.startFragment(FragmentsEnum.SettingFragment,false,null);
+                //G.startFragment(FragmentsEnum.SettingFragment,false,null);
+                Intent intent=new Intent(G.context, SettingActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                G.context.startActivity(intent);
             }
         });
 
@@ -154,6 +160,7 @@ public class HomeFragment extends Fragment
 
             }
         });
+        showManualTestHelp(rootView);
         return rootView;
     }
 
@@ -171,6 +178,25 @@ public class HomeFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    private void showManualTestHelp(View v){
+        new MaterialTapTargetPrompt.Builder(getActivity())
+                .setTarget(v.findViewById(R.id.ivBazdid))
+                .setPrimaryText("بازدید")
+                .setSecondaryText("جهت ورود به فرم بازدید کلیک کنید")
+                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
+                {
+                    @Override
+                    public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
+                    {
+                        if (state == uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+                        {
+
+                        }
+                    }
+                })
+                .show();
     }
 
 }

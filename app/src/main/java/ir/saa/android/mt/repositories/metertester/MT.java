@@ -38,7 +38,7 @@ public class MT {
 
     public enum TestCommands {
         DisableTest,
-        StartAutoTest,
+        StartTest,
         StartManualTest,
         FinishTest,
     }
@@ -280,7 +280,7 @@ public class MT {
                 case DisableTest:
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress,  0);
                     break;
-                case StartAutoTest:
+                case StartTest:
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress, 1);
                     break;
                 case StartManualTest:
@@ -313,7 +313,7 @@ public class MT {
                 testCommands = TestCommands.DisableTest;
                 break;
             case "0001":
-                testCommands = TestCommands.StartAutoTest;
+                testCommands = TestCommands.StartTest;
                 break;
             case "0002":
                 testCommands = TestCommands.FinishTest;

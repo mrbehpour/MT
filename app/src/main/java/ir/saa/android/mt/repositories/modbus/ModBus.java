@@ -250,7 +250,7 @@ public class ModBus {
             Last_Register_FC = WRITE_SINGLE_REGISTER_FC;
             Last_Send_Command = Converters.ArrayByte2Hex(dataArray);
             transferLayer.writeByteArrayToDevice(dataArray);
-            Log.d("response write multi",Last_Send_Command);
+            Log.d("response write single",Last_Send_Command);
 
             waitForResponse=true;
             isModbusRunningKey=true;

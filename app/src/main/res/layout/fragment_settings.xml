@@ -136,17 +136,33 @@
             android:fontFamily="@font/byekan"
             android:textSize="16sp"
             android:text="@string/ServerAddress"/>
-        <EditText
-            android:id="@+id/edtServerAddress"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:maxLines="1"
-            android:inputType="text"
-            android:fontFamily="@font/byekan"
-            android:textSize="12sp"
-            android:text="@string/Http"/>
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtServerAddress"
+                android:layout_width="281dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/byekan"
+                android:inputType="text"
+                android:maxLines="1"
+                android:text="@string/Http"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnTestConnection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/ConnectionTest" />
+
+
+        </RelativeLayout>
 
         <!-- Line -->
         <LinearLayout
@@ -249,7 +265,7 @@
             android:layout_weight="1">
         </LinearLayout>
 
-        <!-- Server Address -->
+        <!-- Coeff -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -258,6 +274,7 @@
             android:layout_marginRight="16dp"
             android:fontFamily="@font/byekan"
             android:textSize="16sp"
+            android:visibility="gone"
             android:text="ضریب"/>
 
         <EditText
@@ -279,6 +296,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="16dp"
+            android:visibility="gone"
             android:layout_gravity="center"
             android:textColor="#ffffff"
             android:textSize="16sp"

@@ -87,6 +87,8 @@
     <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
     <string name="Downloding_msg">Downloading data,Please wait..</string>
     <string name="MeterUnknown_msg">مشخصات کنتور ثبت نشده است</string>
+    <string name="ConnectionOK_msg">اتصال با سرور برقرار است</string>
+    <string name="ConnectionFail_msg">مشکل در برقراری ارتباط با سرور</string>
     <!--*******************-->
 
     <!--TestResultAdapter-->
@@ -267,7 +269,7 @@
     <string name="RecieveBaseInfoDes">دریافت اطلاعات پایه از سرور</string>
     <string name="Sanjesh">پارامترهای الکتریکی</string>
     <string name="SanjeshDes">صحت سنجی بخش های مختلف تست</string>
-    <string name="NameAndVersion">سنجش یار،   نسخه: </string>
+    <string name="NameAndVersion">سنجش یار نسخه: </string>
 
     <!-- fragment_settings -->
     <string name="ServerAddress">آدرس سرور</string>
@@ -277,6 +279,7 @@
     <string name="Middle">متوسط</string>
     <string name="Large">بزرگ</string>
     <string name="VeryLarge">بزرگ تر</string>
+    <string name="ConnectionTest">تست اتصال</string>
     <string name="RemarkValidDistance">محدوده مجاز میان بازرسی ها (متر):</string>
     <string name="mahdoode_help">درصورتیکه مامور بیش از این فاصله را جهت بازرسی بعدی طی کند، نرم افزار اجازه بازرسی به او نخواهد داد.</string>
 

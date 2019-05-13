@@ -214,14 +214,17 @@ public class AmaliyatViewModel extends AndroidViewModel {
         }
     }
 
-    public void readTestResultFromMeterManual(){
+    public void readTestResultFromMeterManual(int manualPaulseNum){
         try {
-            int paulseCounter = metertester.ReadPaulseCounter();
-            TestResult testResult = metertester.ReadTestResult(paulseCounter, testContorParams);
-            testResultList.add(testResult);
+            int paulseCounter = 0;// metertester.ReadPaulseCounter();
+            metertester.SendTestCommand(MT.TestCommands.StartManualTest);
+            if(manualPaulseNum>0) {
+                TestResult testResult = metertester.ReadTestResult(manualPaulseNum, testContorParams);
+                testResultList.add(testResult);
+                ErrPercAvr += testResult.ErrPerc;
+            }
 
-            ErrPercAvr += testResult.ErrPerc;
-            myPaulseCounter++;
+            //myPaulseCounter++;
 
             testResultMutableLiveData.postValue(String.format("%.2f", ErrPercAvr/myPaulseCounter));
             //testResultMutableLiveData.postValue(String.format("%.2f,%s_%s_%s", ErrPercAvr/myPaulseCounter, testResult.MeterEnergy_Period1_A, testResult.MeterEnergy_Period1_B, testResult.MeterEnergy_Period1_C));
@@ -244,41 +247,20 @@ public class AmaliyatViewModel extends AndroidViewModel {
     }
 
     public void startTestOperation(){
+        testStatusMutableLiveData.postValue(MT.TestCommands.StartTest);
+
+        metertester.SendTestCommand(MT.TestCommands.StartTest);
+        lastPaulseCounter = 0;
+        myPaulseCounter = 0;
+        numErrorPulseNum = 0;
+        numErrorConnection = 0;
+        ErrPercAvr = 0;
+        setTimer = false;
+        testResultList = new ArrayList<>();
+
         if(testContorParams.PaulserType){
-            startAutoTest();
-        }else{
-            startManualTest();
+            timerSetIntervalStart(250,1500);
         }
-    }
-
-    public void startAutoTest() {
-        testStatusMutableLiveData.postValue(MT.TestCommands.StartAutoTest);
-
-        metertester.SendTestCommand(MT.TestCommands.StartAutoTest);
-        lastPaulseCounter = 0;
-        myPaulseCounter = 0;
-        numErrorPulseNum = 0;
-        numErrorConnection = 0;
-        ErrPercAvr = 0;
-        setTimer = false;
-        testResultList = new ArrayList<>();
-
-        timerSetIntervalStart(250,1500);
-    }
-
-    public void startManualTest() {
-        testStatusMutableLiveData.postValue(MT.TestCommands.StartAutoTest);
-
-        metertester.SendTestCommand(MT.TestCommands.StartManualTest);
-        lastPaulseCounter = 0;
-        myPaulseCounter = 0;
-        numErrorPulseNum = 0;
-        numErrorConnection = 0;
-        ErrPercAvr = 0;
-        setTimer = false;
-        testResultList = new ArrayList<>();
-
-        readTestResultFromMeterManual();
     }
 
     public void finishTest(){

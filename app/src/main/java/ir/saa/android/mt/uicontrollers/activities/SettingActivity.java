@@ -34,7 +34,6 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DeviceSerial;
-import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
 import ir.saa.android.mt.viewmodels.ModuleViewModel;
@@ -44,6 +43,7 @@ public class SettingActivity extends AppCompatActivity {
 
     EditText edtServerAddress;
     EditText edtCorrectCoeff;
+    Button btnTestConnection;
     Button btnSave;
     ModuleViewModel moduleViewModel;
     Spinner spinner;
@@ -74,28 +74,38 @@ public class SettingActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_settings);
+
+
         deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
         DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
-        if(deviceSerial!=null) {
-
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                this.finish();
-                return;
-
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            Boolean callFromLoginAct = b.getBoolean("CallFromLogin");
+            if(callFromLoginAct) {
+                if (deviceSerial != null) {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                    this.finish();
+                    return;
+                }
+            }
         }
 
 
-        edtServerAddress =(EditText) findViewById(R.id.edtServerAddress);
-        edtCorrectCoeff =(EditText) findViewById(R.id.edtCoeff);
+
+
+        edtServerAddress = findViewById(R.id.edtServerAddress);
+        edtCorrectCoeff = findViewById(R.id.edtCoeff);
+
+        btnTestConnection = findViewById(R.id.btnTestConnection);
 
         btnSave=(AppCompatButton)findViewById(R.id.btnSave);
         //-Fontsize
-        rbtSmall=(RadioButton)findViewById(R.id.rbtSmall);
-        rbtNormal=(RadioButton)findViewById(R.id.rbtNormal);
-        rbtLarge=(RadioButton)findViewById(R.id.rbtLarge);
-        rbtHuge=(RadioButton)findViewById(R.id.rbtHuge);
+        rbtSmall=findViewById(R.id.rbtSmall);
+        rbtNormal=findViewById(R.id.rbtNormal);
+        rbtLarge=findViewById(R.id.rbtLarge);
+        rbtHuge=findViewById(R.id.rbtHuge);
         if(G.getPref(SharePrefEnum.FontSize)!=null) {
             switch (G.getPref(SharePrefEnum.FontSize)) {
                 case "0.85":
@@ -151,6 +161,28 @@ public class SettingActivity extends AppCompatActivity {
         if(G.getPref(SharePrefEnum.CorrectCoeff)!=null) {
             edtCorrectCoeff.setText(G.getPref(SharePrefEnum.CorrectCoeff));
         }
+
+        btnTestConnection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String IP = edtServerAddress.getText().toString();
+                if(IP.contains("//") && IP.contains(":")) {
+                    IP=IP.replace("http://","");
+                    IP = IP.substring(0,IP.indexOf(":"));
+                }
+
+                Toast fancyToast;
+                if(Ping(IP)){
+                    fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ConnectionOK_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                }else{
+                    fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ConnectionFail_msg), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
+                }
+
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
+
+            }
+        });
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,10 +282,11 @@ public class SettingActivity extends AppCompatActivity {
         return cm.getActiveNetworkInfo() != null;
     }
 
-    public boolean isInternetAvailable() {
+    public boolean IsInternetAvailable() {
         final ConnectivityManager connectivityManager = ((ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE));
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
+
     private boolean Ping(String IP){
         System.out.println("executeCommand");
         Runtime runtime = Runtime.getRuntime();

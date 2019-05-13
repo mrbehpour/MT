@@ -10,8 +10,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -123,8 +125,9 @@ public class SendSerialActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                Intent intent=new Intent(SendSerialActivity.this,SettingActivity.class);
+               Bundle b = new Bundle();
+               b.putBoolean("CallFromLogin", true);
                startActivity(intent);
-
             }
         });
 
@@ -234,6 +237,7 @@ public class SendSerialActivity extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private  void checkAndRequestPermissions() {
 
 
