@@ -46,7 +46,7 @@ import ir.saa.android.mt.uicontrollers.fragments.TestFragment;
 
 public class G extends Application {
 
-    public static FragmentManager fragmentManager;
+
     public static Context context;
     public static ActionBar actionBar;
     public static DrawerLayout mDrawerLayout;
@@ -54,6 +54,7 @@ public class G extends Application {
     public static ClientInfo clientInfo;
     public static String MY_VERSION = "" ;
 
+    public static FragmentManager fragmentManager;
     public static Integer currentFragmentNum = null;
     public static Stack<Integer> fragmentNumStack;
 
@@ -92,6 +93,9 @@ public class G extends Application {
     public static String getPref(String prefName,String defultValue){
         return pref.getString(prefName,defultValue);
     }
+    public static String getPref(String prefName){
+        return pref.getString(prefName,null);
+    }
     public static boolean checkPermissions() {
         int permissionState1 = ActivityCompat.checkSelfPermission(context,
                 android.Manifest.permission.ACCESS_FINE_LOCATION);
@@ -102,9 +106,7 @@ public class G extends Application {
         return permissionState1 == PackageManager.PERMISSION_GRANTED && permissionState2 == PackageManager.PERMISSION_GRANTED;
 
     }
-    public static String getPref(String prefName){
-        return pref.getString(prefName,null);
-    }
+
 
     public static void startFragment(int targetFragmentNum, boolean backward, Bundle bundle) {
         //for singleton issue
