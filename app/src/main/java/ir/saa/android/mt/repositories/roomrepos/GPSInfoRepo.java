@@ -54,6 +54,10 @@ public class GPSInfoRepo  {
         gpsInfoDao.insertGPSInfo(gpsInfo);
     }
 
+    public List<GPSInfo> getGPSInfosByClientId(Long clientId){
+        return gpsInfoDao.getGPSInfosByClientId(clientId);
+    }
+
 
     public void updateGPSInfo(GPSInfo gpsInfo) {
         gpsInfoDao.updateGPSInfo(gpsInfo);

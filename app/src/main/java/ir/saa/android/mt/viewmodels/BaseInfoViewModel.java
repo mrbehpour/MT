@@ -408,8 +408,10 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 if(answerGroups.Success) {
                     for (Integer i = 0; i < answerGroups.Data.size(); i++) {
                         if (answerGroups.Data.get(i) != null) {
-                            for (Integer j = 0; j < answerGroups.Data.get(i).AnswerGroupDtl.size(); j++) {
-                                answerGroupDtls.add(answerGroups.Data.get(i).AnswerGroupDtl.get(j));
+                            if(answerGroups.Data.get(i).AnswerGroupDtl!=null) {
+                                for (Integer j = 0; j < answerGroups.Data.get(i).AnswerGroupDtl.size(); j++) {
+                                    answerGroupDtls.add(answerGroups.Data.get(i).AnswerGroupDtl.get(j));
+                                }
                             }
                         }
 
