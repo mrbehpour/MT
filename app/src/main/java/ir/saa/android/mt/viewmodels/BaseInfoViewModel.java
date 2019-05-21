@@ -21,6 +21,7 @@ import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.model.daos.MenuDao;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
 import ir.saa.android.mt.model.entities.AgentAccessList;
 import ir.saa.android.mt.model.entities.AnswerGroup;
@@ -31,6 +32,7 @@ import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.GroupingFormat;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
+import ir.saa.android.mt.model.entities.Menu;
 import ir.saa.android.mt.model.entities.Polomp;
 import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompGroup;
@@ -56,6 +58,7 @@ import ir.saa.android.mt.repositories.roomrepos.CompanyRepo;
 import ir.saa.android.mt.repositories.roomrepos.GroupingFormatRepo;
 import ir.saa.android.mt.repositories.roomrepos.MasterGroupDetailRepo;
 import ir.saa.android.mt.repositories.roomrepos.MasterGroupInfoRepo;
+import ir.saa.android.mt.repositories.roomrepos.MenuRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompColorRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompGroupRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompGroupingFormatRepo;
@@ -98,6 +101,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
     PolompTypeRepo polompTypeRepo=null;
     PolompColorRepo polompColorRepo=null;
     BazdidRepo bazdidRepo=null;
+    MenuRepo menuRepo=null;
 
     //---------------------------------------
 
@@ -164,6 +168,9 @@ public class BaseInfoViewModel extends AndroidViewModel {
             bazdidRepo=new BazdidRepo(application);
         }
 
+        if(menuRepo==null){
+            menuRepo=new MenuRepo(application);
+        }
 
         //---------------------------------------------
         if(UsersProgressPercentLiveData == null)
@@ -403,6 +410,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 DataClass<List<PolompGroupingFormat>> polompGroupingFormats = null;
                 DataClass<List<PolompColor>> polompColors=null;
                 DataClass<List<PolompType>> polompTypes=null;
+                DataClass<List<Menu>> menus;
 
                 answerGroups = retrofitMT.getMtApi().GetAnswerGroups().blockingGet();
                 if(answerGroups.Success) {
@@ -479,11 +487,17 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 if(!polompTypes.Success){
                     messageErrorLiveData.postValue(polompTypes.Message);
                 }
+                menus=retrofitMT.getMtApi().GetAndroidMenu().blockingGet();
+                if(!menus.Success){
+                    messageErrorLiveData.postValue(menus.Message);
+                }
+
+
 
                 Integer totalCount = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() +
                         regions.Data.size() + cities.Data.size() + remarks.Data.size() + groupingFormats.Data.size() +
                         remarkGroups.Data.size() + masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size() +
-                        polompGroupingFormats.Data.size()+polompColors.Data.size()+polompTypes.Data.size();
+                        polompGroupingFormats.Data.size()+polompColors.Data.size()+polompTypes.Data.size()+menus.Data.size();
                 Integer startProgress = 0;
                 for (Integer i = 0; i < answerGroups.Data.size(); i++) {
                     answerGroupRepo.insertAnswerGroup(answerGroups.Data.get(i));
@@ -572,6 +586,16 @@ public class BaseInfoViewModel extends AndroidViewModel {
 
                 for(Integer i = 0; i < polompTypes.Data.size(); i++){
                     polompTypeRepo.insertPolompType(polompTypes.Data.get(i));
+                    baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
+                }
+                startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size() +
+                        cities.Data.size() + remarks.Data.size() + remarkGroups.Data.size() + groupingFormats.Data.size() + masterGroupDetails.Data.size() +
+                        masterGroupDetails.Data.size() + polomps.Data.size() + polompGroups.Data.size()+polompGroupingFormats.Data.size()+
+                        polompColors.Data.size()+polompTypes.Data.size();
+                for (Integer i = 0; i < menus.Data.size(); i++){
+                    menuRepo.deleteMenu(menus.Data.get(i));
+                    menuRepo.insertMenu(menus.Data.get(i));
+
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
                 messageErrorLiveData.postValue((String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg));

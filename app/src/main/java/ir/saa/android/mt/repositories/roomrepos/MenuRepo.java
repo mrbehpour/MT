@@ -24,7 +24,7 @@ public class MenuRepo  {
     }
 
 
-    public int insertMenu(Menu menu) {
+    public long insertMenu(Menu menu) {
         return menuDao.insertMenu(menu);
     }
 

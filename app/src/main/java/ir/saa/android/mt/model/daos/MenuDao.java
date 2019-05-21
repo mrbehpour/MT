@@ -17,7 +17,7 @@ public interface MenuDao {
     LiveData<List<Menu>> getMenus();
 
     @Insert
-    int insertMenu(Menu menu);
+    Long insertMenu(Menu menu);
 
 
     @Delete

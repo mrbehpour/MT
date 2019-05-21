@@ -15,6 +15,7 @@ import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.GroupingFormat;
 import ir.saa.android.mt.model.entities.ImiRegisterInput;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
+import ir.saa.android.mt.model.entities.Menu;
 import ir.saa.android.mt.model.entities.Polomp;
 import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompGroup;
@@ -88,6 +89,9 @@ public interface MTApi {
 
     @GET("GetAgentAccessList")
     Single<DataClass<List<AgentAccessList>>> GetAgentAccessList();
+
+    @GET("GetAndroidMenu")
+    Single<DataClass<List<Menu>>> GetAndroidMenu();
 
     @POST("GetClients")
     Single<DataClass<List<Client>>> GetClients(@Body GetClientInput getClientInput);
