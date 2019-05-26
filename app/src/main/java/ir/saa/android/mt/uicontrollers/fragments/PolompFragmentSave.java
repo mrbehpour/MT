@@ -33,6 +33,7 @@ import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.EditTextFont;
 import ir.saa.android.mt.components.PersianCalendar;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
@@ -40,6 +41,7 @@ import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompDtl;
 import ir.saa.android.mt.model.entities.PolompInfo;
 import ir.saa.android.mt.model.entities.PolompType;
+import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.uicontrollers.pojos.Polomp.PolompParams;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
 import ir.saa.android.mt.viewmodels.PolompViewModel;
@@ -97,6 +99,11 @@ public class PolompFragmentSave extends Fragment {
     HashMap<Integer,Integer> spinnerMapColor = new HashMap<Integer, Integer>();
     HashMap<Integer,Integer> spinnerMapModel = new HashMap<Integer, Integer>();
 
+    HashMap<String,Integer> hashMapForceField=new HashMap<String, Integer>();
+    HashMap<String,String> hashMapFarsiName=new HashMap<String, String>();
+    ArrayList<String> Fields=new ArrayList<String>();
+
+
     PolompInfo polompInfo;
     PolompDtl polompDtl;
     ProgressDialog progressDialog;
@@ -140,6 +147,19 @@ public class PolompFragmentSave extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_polomp_save, container, false);
         locationViewModel=ViewModelProviders.of(this).get(LocationViewModel.class);
         polompViewModel= ViewModelProviders.of(this).get(PolompViewModel.class);
+        //-----------------------addHashmap
+
+            hashMapForceField.put("CurrentPolomp",R.id.spnModelPolompJadid);
+            hashMapForceField.put("PolompColor",R.id.spnRangPolompJadid);
+            hashMapForceField.put("PolompType",R.id.edtJadidShomarePolomp);
+
+            hashMapFarsiName.put("CurrentPolomp",getResources().getString(R.string.PolombColorJadid));
+            hashMapFarsiName.put("PolompColor",getResources().getString(R.string.PolombModelJadid));
+            hashMapFarsiName.put("PolompType",getResources().getString(R.string.PolompNumberJadid));
+
+
+        //-----------------------End
+
         chkNadaradJadid=false;
         chkNadradGhadim=false;
         chkNewNakhana=false;
@@ -150,6 +170,18 @@ public class PolompFragmentSave extends Fragment {
                 polompParams = (PolompParams) bundle.getSerializable(BundleKeysEnum.ClassPolompParams);
             }
         }
+
+        polompViewModel.getSettingByKey("PolompUniqueKeys").observe(getActivity(), new Observer<Setting>() {
+            @Override
+            public void onChanged(@Nullable Setting setting) {
+                String[] settingValue=setting.SettingValue.split(",");
+                for(String str:settingValue){
+                    Fields.add(str);
+                }
+
+
+            }
+        });
 
         spnModelPolompGhadim=rootView.findViewById(R.id.spnModelPolompGhadim);
         spnModelPolompJadid=rootView.findViewById(R.id.spnModelPolompJadid);
@@ -377,6 +409,18 @@ public class PolompFragmentSave extends Fragment {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String MessageField="";
+                if(Fields!=null) {
+                    for (String field : Fields) {
+                        EditTextFont editTextFont=rootView.findViewById(hashMapForceField.get(field.toString()));
+                        Spinner spinner=rootView.findViewById(hashMapForceField.get(field.toString()));
+                        if(spinner.getSelectedItemPosition()==0 || editTextFont.getText().toString().equals("")){
+                            MessageField+=","+hashMapFarsiName.get(field.toString());
+                        }
+                    }
+
+                }
+
                 if(locationViewModel.isGpsEnable()) {
                     if(location==null) {
                         connectToModuleDialog();
@@ -425,6 +469,7 @@ public class PolompFragmentSave extends Fragment {
     }
 
     private void PolompSave() {
+
 
 
         locationViewModel.getLocation(this.getContext());

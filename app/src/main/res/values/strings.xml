@@ -190,6 +190,14 @@
     <string name="RegionTitle">منطقه</string>
     <string name="Unreadable">ناخوانا</string>
 
+
+    <string name="PolompNumberJadid">شماره پلمپ جدید</string>
+    <string name="PolombModelJadid">مدل پلمپ جدید</string>
+    <string name="PolombColorJadid">رنگ پلمپ جدید</string>
+
+
+
+
     <!-- fragment_test -->
     <string name="SaveBarrier">ثبت مانع</string>
     <string name="StartTest">شروع تست</string>

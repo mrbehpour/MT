@@ -18,11 +18,13 @@ import ir.saa.android.mt.model.entities.PolompColor;
 import ir.saa.android.mt.model.entities.PolompDtl;
 import ir.saa.android.mt.model.entities.PolompInfo;
 import ir.saa.android.mt.model.entities.PolompType;
+import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.repositories.roomrepos.PolompColorRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompInfoRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompTypeRepo;
+import ir.saa.android.mt.repositories.roomrepos.SettingRepo;
 import ir.saa.android.mt.uicontrollers.pojos.Polomp.PolompParams;
 import ir.saa.android.mt.uicontrollers.pojos.Polomp.PolompParams;
 
@@ -34,6 +36,7 @@ public class PolompViewModel extends AndroidViewModel {
     PolompTypeRepo polompTypeRepo=null;
     PolompInfoRepo polompInfoRepo=null;
     PolompDtlRepo polompDtlRepo=null;
+    SettingRepo settingRepo=null;
 
     public PolompViewModel(@NonNull Application application) {
         super(application);
@@ -42,6 +45,9 @@ public class PolompViewModel extends AndroidViewModel {
 
         if(polompRepo==null){
             polompRepo=new PolompRepo(application);
+        }
+        if(settingRepo==null){
+            settingRepo=new SettingRepo(application);
         }
         if(polompColorRepo==null){
             polompColorRepo=new PolompColorRepo(application);
@@ -112,6 +118,10 @@ public class PolompViewModel extends AndroidViewModel {
 
     public void updatePolompDtl(PolompDtl polompDtl){
         polompDtlRepo.updatePolompDtl(polompDtl);
+    }
+
+    public LiveData<Setting> getSettingByKey(String settingKey){
+        return settingRepo.getSettingByKey(settingKey);
     }
 
 
