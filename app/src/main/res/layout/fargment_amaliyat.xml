@@ -119,7 +119,7 @@
     <RelativeLayout
         android:id="@+id/rlManualPaulser"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:gravity="center"
         android:orientation="horizontal">
@@ -129,8 +129,8 @@
             android:focusable="true"
             android:clickable="true"
             android:background="@drawable/manual_paulser"
-            android:layout_width="180dp"
-            android:layout_height="180dp" />
+            android:layout_width="220dp"
+            android:layout_height="80dp" />
 
         <TextView
             android:id="@+id/txtManualPaulseNum"
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/imgManualPaulse"
             android:layout_marginLeft="30dp"
             android:layout_centerVertical="true"
             android:text="0"/>

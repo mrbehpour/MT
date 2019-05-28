@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android" >-->
+    <!--<item android:drawable="@drawable/orange_button" android:state_pressed="false"></item>-->
+    <!--<item android:drawable="@drawable/grey_button" android:state_pressed="true"></item>-->
+<!--</selector>-->
+
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:drawable="@drawable/orange_button" android:state_pressed="false"></item>
-    <item android:drawable="@drawable/grey_button" android:state_pressed="true"></item>
+    <item android:drawable="@drawable/green_square_button" android:state_pressed="false"></item>
+    <item android:drawable="@drawable/grey_square_button" android:state_pressed="true"></item>
 </selector>

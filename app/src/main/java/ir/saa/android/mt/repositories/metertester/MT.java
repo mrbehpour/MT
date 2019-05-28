@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.application.Converters;
+import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.repositories.modbus.IModbusCallback;
 import ir.saa.android.mt.repositories.modbus.ITransferLayer;
 import ir.saa.android.mt.repositories.modbus.ModBus;
@@ -238,8 +240,8 @@ public class MT {
                 Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_B)) +
                 Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_C));
 
-        ErrPerc = ph * correctFactor;
-        //ErrPerc = ph * Double.valueOf(G.getPref(SharePrefEnum.CorrectCoeff));
+        //ErrPerc = ph * correctFactor;
+        ErrPerc = ph * Double.valueOf(G.getPref(SharePrefEnum.CorrectCoeff));
 
         double k = ((double) 3600000 * testContorParams.SensorRatio * testContorParams.CTCoeff * testContorParams.RoundNum) / testContorParams.ContorConst;
 
