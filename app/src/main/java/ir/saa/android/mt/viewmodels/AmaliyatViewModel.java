@@ -226,9 +226,9 @@ public class AmaliyatViewModel extends AndroidViewModel {
 
             //myPaulseCounter++;
 
-            testResultMutableLiveData.postValue(String.format("%.2f", ErrPercAvr/myPaulseCounter));
+            if(manualPaulseNum>0) testResultMutableLiveData.postValue(String.format("%.2f", ErrPercAvr/manualPaulseNum));
             //testResultMutableLiveData.postValue(String.format("%.2f,%s_%s_%s", ErrPercAvr/myPaulseCounter, testResult.MeterEnergy_Period1_A, testResult.MeterEnergy_Period1_B, testResult.MeterEnergy_Period1_C));
-            lastPaulseCounter=paulseCounter;
+            //lastPaulseCounter=paulseCounter;
 
         } catch (Exception e) {
             e.printStackTrace();
