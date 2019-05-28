@@ -126,8 +126,9 @@ public class BazdidFragment extends Fragment
                     isTest=client.isTest!=0?true:false;
                     isTariff=client.isTariff!=0?true:false;
                     RowId+=1;
-                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,UniqField ,client.CustId, R.drawable.account,client.SendId
-                            ,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,isTariff,client.FollowUpCode,RowId ));
+                    clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,UniqField ,client.CustId,
+                            R.drawable.account,client.SendId,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,isTariff,
+                            client.FollowUpCode,RowId,client.forcibleMasterGroup ));
                 }
 
                 adapter.clearDataSet();

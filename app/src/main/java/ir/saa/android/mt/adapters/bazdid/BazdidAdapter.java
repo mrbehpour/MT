@@ -76,6 +76,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
             G.clientInfo.FollowUpCode = current.FollowUpCode;
             G.clientInfo.ClientName = current.Name;
             G.clientInfo.Postion = position;
+            G.clientInfo.forcibleMasterGroup=current.forcibleMasterGroup;
             G.setActionbarTitleText(current.Name);
 ;
             G.startFragment(FragmentsEnum.MoshtarakFragment, false, bundle);
