@@ -114,6 +114,7 @@ public class DeviceSerialViewModel extends AndroidViewModel {
                             deviceSerial.isActive=false;
                             deviceSerial.regionId=imiRegisterInput.regionId;
                             deviceSerial.SerialId=imiRegisterInput.handHeldSerial;
+                            deviceSerialRepo.deleteDeviceSerial(deviceSerial);
                             deviceSerialRepo.insertDeviceSerial(deviceSerial);
                             IsRegisterImi.postValue(true);
                         }
@@ -160,6 +161,10 @@ public class DeviceSerialViewModel extends AndroidViewModel {
 
     public DeviceSerial getDeviceSerial(String SerialID){
         return deviceSerialRepo.getDeviceSerialById(SerialID);
+    }
+
+    public LiveData<List<DeviceSerial>> getDeviceSerials(){
+        return deviceSerialRepo.getDeviceSerials();
     }
 
     public LiveData<List<Region>> getRegion(){
