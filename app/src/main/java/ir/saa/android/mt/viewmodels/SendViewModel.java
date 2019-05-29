@@ -46,6 +46,7 @@ import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.repositories.roomrepos.BazdidRepo;
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
+import ir.saa.android.mt.repositories.roomrepos.GPSInfoRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionInfoRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompDtlRepo;
@@ -64,6 +65,7 @@ public class SendViewModel extends AndroidViewModel {
     TestDtlRepo testDtlRepo=null;
     TestInfoRepo testInfoRepo=null;
     ClientRepo clientRepo=null;
+    GPSInfoRepo gpsInfoRepo=null;
    public MutableLiveData<Integer> sendAllDataProgress=new MutableLiveData<>();
     public MutableLiveData<String> messageErrorLiveData=new MutableLiveData<>();
 
@@ -96,6 +98,9 @@ public class SendViewModel extends AndroidViewModel {
         }
         if(clientRepo==null){
             clientRepo=new ClientRepo(application);
+        }
+        if(gpsInfoRepo==null){
+            gpsInfoRepo=new GPSInfoRepo(application);
         }
 
         if(sendAllDataProgress==null){
@@ -151,6 +156,37 @@ public class SendViewModel extends AndroidViewModel {
                         //inspectionInfo.RemarkID=inspectionAllInfos.get(0).RemarkID;
                         inspectionInfo.FollowUpCode=inspectionAllInfos.get(0).FollowUpCode;
                         inspectionInfo.BlockID=null;
+                        List<GPSInfo> gpsInfos= gpsInfoRepo.getGPSInfosByClientId(clientList.get(i).ClientID);
+                        GPSInfo gpsInfo=new GPSInfo();
+                        if(gpsInfos.size()>0){
+                            gpsInfo.Long=gpsInfos.get(0).Long;
+                            gpsInfo.Lat=gpsInfos.get(0).Lat;
+                            gpsInfo.GPSTime=gpsInfos.get(0).GPSTime;
+                            gpsInfo.GPSDate=gpsInfos.get(0).GPSDate;
+                            gpsInfo.SendID=gpsInfos.get(0).SendID;
+                            gpsInfo.FollowUpCode=gpsInfos.get(0).FollowUpCode;
+                            gpsInfo.ClientID=gpsInfos.get(0).ClientID;
+                            gpsInfo.GPSInfoID=gpsInfos.get(0).GPSInfoID;
+                            gpsInfo.InspectionLat=inspectionInfo.Lat;
+                            gpsInfo.InspectionLong=inspectionInfo.Long;
+                            gpsInfo.MeterChangeLat=gpsInfos.get(0).MeterChangeLat;
+                            gpsInfo.MeterChangeLong=gpsInfos.get(0).MeterChangeLong;
+                            gpsInfo.PolompLat=gpsInfos.get(0).PolompLat;
+                            gpsInfo.PolompLong=gpsInfos.get(0).PolompLong;
+                            gpsInfo.RecieveID=gpsInfos.get(0).RecieveID;
+                            gpsInfo.TariffLong=gpsInfos.get(0).TariffLong;
+                            gpsInfo.TariffLat=gpsInfos.get(0).TariffLat;
+                            gpsInfoRepo.updateGPSInfo(gpsInfo);
+                        }else{
+                            gpsInfo.GPSTime=inspectionInfo.InspectionTime;
+                            gpsInfo.GPSDate=inspectionInfo.InspectionDate;
+                            gpsInfo.SendID=inspectionInfo.SendID;
+                            gpsInfo.FollowUpCode=inspectionInfo.FollowUpCode;
+                            gpsInfo.ClientID=inspectionInfo.ClientID;
+                            gpsInfo.InspectionLat=inspectionInfo.Lat;
+                            gpsInfo.InspectionLong=inspectionInfo.Long;
+                            gpsInfoRepo.insertGPSInfo(gpsInfo);
+                        }
                         ClientAllInfo.InspectionInfo =inspectionInfo;
                         ClientAllInfo.InspectionDtls=new ArrayList<>();
                         for (InspectionAllInfo inspectionAllInfo:inspectionAllInfos) {
@@ -181,6 +217,38 @@ public class SendViewModel extends AndroidViewModel {
                         polompInfo.ChangeTime=polompAllInfos.get(LastItem).ChangeTime;
                         polompInfo.ChangeDate=polompAllInfos.get(LastItem).ChangeDate;
                         polompInfo.FollowUpCode=polompAllInfos.get(LastItem).FollowUpCode;
+
+                        List<GPSInfo> gpsInfos= gpsInfoRepo.getGPSInfosByClientId(clientList.get(i).ClientID);
+                        GPSInfo gpsInfo=new GPSInfo();
+                        if(gpsInfos.size()>0){
+                            gpsInfo.Long=gpsInfos.get(0).Long;
+                            gpsInfo.Lat=gpsInfos.get(0).Lat;
+                            gpsInfo.GPSTime=gpsInfos.get(0).GPSTime;
+                            gpsInfo.GPSDate=gpsInfos.get(0).GPSDate;
+                            gpsInfo.SendID=gpsInfos.get(0).SendID;
+                            gpsInfo.FollowUpCode=gpsInfos.get(0).FollowUpCode;
+                            gpsInfo.ClientID=gpsInfos.get(0).ClientID;
+                            gpsInfo.GPSInfoID=gpsInfos.get(0).GPSInfoID;
+                            gpsInfo.InspectionLat=polompInfo.Lat;
+                            gpsInfo.InspectionLong=polompInfo.Long;
+                            gpsInfo.MeterChangeLat=gpsInfos.get(0).MeterChangeLat;
+                            gpsInfo.MeterChangeLong=gpsInfos.get(0).MeterChangeLong;
+                            gpsInfo.PolompLat=gpsInfos.get(0).PolompLat;
+                            gpsInfo.PolompLong=gpsInfos.get(0).PolompLong;
+                            gpsInfo.RecieveID=gpsInfos.get(0).RecieveID;
+                            gpsInfo.TariffLong=gpsInfos.get(0).TariffLong;
+                            gpsInfo.TariffLat=gpsInfos.get(0).TariffLat;
+                            gpsInfoRepo.updateGPSInfo(gpsInfo);
+                        }else{
+                            gpsInfo.GPSTime=polompInfo.ChangeTime;
+                            gpsInfo.GPSDate=polompInfo.ChangeDate;
+                            gpsInfo.SendID=polompInfo.SendID;
+                            gpsInfo.FollowUpCode=polompInfo.FollowUpCode;
+                            gpsInfo.ClientID=polompInfo.ClientID;
+                            gpsInfo.InspectionLat=polompInfo.Lat;
+                            gpsInfo.InspectionLong=polompInfo.Long;
+                            gpsInfoRepo.insertGPSInfo(gpsInfo);
+                        }
                         polompInfo.PolompInfoID=null;
                         ClientAllInfo.PolompInfo=polompInfo;
                         ClientAllInfo.PolompDtls=new ArrayList<>();
