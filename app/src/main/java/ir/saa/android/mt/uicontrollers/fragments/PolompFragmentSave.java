@@ -102,7 +102,8 @@ public class PolompFragmentSave extends Fragment {
     HashMap<String,Integer> hashMapForceField=new HashMap<String, Integer>();
     HashMap<String,String> hashMapFarsiName=new HashMap<String, String>();
     ArrayList<String> Fields=new ArrayList<String>();
-
+    EditTextFont editTextFont;
+    Spinner spinner;
 
     PolompInfo polompInfo;
     PolompDtl polompDtl;
@@ -411,12 +412,30 @@ public class PolompFragmentSave extends Fragment {
             public void onClick(View view) {
                 String MessageField="";
                 if(Fields!=null) {
+
                     for (String field : Fields) {
-                        EditTextFont editTextFont=rootView.findViewById(hashMapForceField.get(field.toString()));
-                        Spinner spinner=rootView.findViewById(hashMapForceField.get(field.toString()));
-                        if(spinner.getSelectedItemPosition()==0 || editTextFont.getText().toString().equals("")){
-                            MessageField+=","+hashMapFarsiName.get(field.toString());
+                        try {
+                             editTextFont = rootView.findViewById(hashMapForceField.get(field.toString()));
+                        }catch(Exception e){
+
                         }
+                        try {
+                             spinner = rootView.findViewById(hashMapForceField.get(field.toString()));
+                        }catch(Exception e){
+
+                        }
+                        if(spinner!=null) {
+                            if (spinner.getSelectedItemPosition() == -1) {
+                                MessageField += "," + hashMapFarsiName.get(field.toString());
+                            }
+                        }
+
+                        if(editTextFont!=null){
+                            if(editTextFont.getText().toString().equals("")){
+                                MessageField+=","+hashMapFarsiName.get(field.toString());
+                            }
+                        }
+
                     }
 
                 }
@@ -428,7 +447,16 @@ public class PolompFragmentSave extends Fragment {
                 }else{
                     location=null;
                 }
-                PolompSave();
+                if(MessageField=="" && location!=null) {
+                    PolompSave();
+                }else{
+                    Toast fancyToast = FancyToast.makeText(getActivity(),  String.format((String) getResources().getText
+                                    (R.string.FillOldAndNewPlombInfoForceField_msg),MessageField.substring(1))
+                            , FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
+                    return;
+                }
             }
         });
 

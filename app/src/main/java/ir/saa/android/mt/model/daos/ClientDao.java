@@ -73,6 +73,7 @@ public interface ClientDao {
             "Client.RoozKar," +
             "Client.mastergroupdtl_id," +
             "Client.RoozKar, " +
+            "Client.forcibleMasterGroup ,"+
             "(select PolompInfoID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1 ) as isPolomp,  "+
             "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID limit 1) as isTest, "+
             "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi, "+
@@ -131,6 +132,7 @@ public interface ClientDao {
             "Client.RoozKar," +
             "Client.mastergroupdtl_id," +
             "Client.RoozKar, " +
+            "Client.forcibleMasterGroup ,"+
             "(select PolompInfoID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1 ) as isPolomp,  "+
             "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID limit 1) as isTest, "+
             "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi, "+
@@ -192,6 +194,7 @@ public interface ClientDao {
             "Client.RoozKar," +
             "Client.mastergroupdtl_id," +
             "Client.RoozKar," +
+            "Client.forcibleMasterGroup ,"+
             "AnswerGroupDtlName as TariffTypeName " +
             "from Client " +
             "INNER JOIN AnswerGroup on AnswerGroup.AnswerGroupID=AnswerGroupDtl.answergroup_id and AnswerGroup.Description='Tariff'"+

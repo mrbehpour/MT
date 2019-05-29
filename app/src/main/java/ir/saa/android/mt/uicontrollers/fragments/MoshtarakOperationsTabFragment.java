@@ -24,6 +24,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.model.entities.Menu;
+import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
 import ir.saa.android.mt.viewmodels.MenuViewModel;
 
@@ -34,6 +35,7 @@ public class MoshtarakOperationsTabFragment extends Fragment
     HashMap<String,Integer> stringHashMapMenu;
     HashMap<Integer,Integer> integerHashMapMenu;
     private Long clientID = null;
+    private Boolean EnableAndroidMenuOrder;
     public MoshtarakOperationsTabFragment() {
         // Required empty public constructor
     }
@@ -47,6 +49,7 @@ public class MoshtarakOperationsTabFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationViewModel= ViewModelProviders.of(this).get(LocationViewModel.class);
+        EnableAndroidMenuOrder=false;
         menuViewModel=ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
     }
 
@@ -64,44 +67,55 @@ public class MoshtarakOperationsTabFragment extends Fragment
 
             }
         }
-        Button btnTest=rootView.findViewById(R.id.btnTest);
-        Button btnPolomp=rootView.findViewById(R.id.btnPolomp);
-        Button btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
-        Button btnReadmeter=rootView.findViewById(R.id.btnReadmeter);
-
-        stringHashMapMenu.put("Test",R.id.btnTest);
-        stringHashMapMenu.put("Polomp",R.id.btnPolomp);
-        stringHashMapMenu.put("Bazresi",R.id.btnBazrasi);
-        stringHashMapMenu.put("Tariff",R.id.btnReadmeter);
-
-        menuViewModel.getMenus().observe(getActivity(), new Observer<List<Menu>>() {
+        menuViewModel.getSettingByKey("EnableAndroidMenuOrder").observe(getActivity(), new Observer<Setting>() {
             @Override
-            public void onChanged(@Nullable List<Menu> menus) {
-                AppCompatButton buttonIndex;
-                for (Menu menuItem:menus) {
-                   integerHashMapMenu.put(menuItem.OrderId,stringHashMapMenu.get(menuItem.KeyName));
+            public void onChanged(@Nullable Setting setting) {
+                if(setting.SettingValue.equals("1")){
+                        menuViewModel.getMenus().observe(getActivity(), new Observer<List<Menu>>() {
+                            @Override
+                            public void onChanged(@Nullable List<Menu> menus) {
+                                AppCompatButton buttonIndex;
+                                for (Menu menuItem : menus) {
+                                    integerHashMapMenu.put(menuItem.OrderId, stringHashMapMenu.get(menuItem.KeyName));
 
-                }
-                for (Integer i=0;i<integerHashMapMenu.size();i++){
-                    buttonIndex=rootView.findViewById(integerHashMapMenu.get(i+1));
-                    RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    p.addRule(RelativeLayout.CENTER_VERTICAL);
-                    p.addRule(RelativeLayout.CENTER_HORIZONTAL);
-                    if(i==0) {
-                        p.addRule(RelativeLayout.BELOW, R.id.lyTop);
-                        buttonIndex.setLayoutParams(p);
+                                }
+                                for (Integer i = 0; i < integerHashMapMenu.size(); i++) {
+                                    buttonIndex = rootView.findViewById(integerHashMapMenu.get(i + 1));
+                                    RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    p.addRule(RelativeLayout.CENTER_VERTICAL);
+                                    p.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                                    p.setMargins(0,20,0,0);
+                                    if (i == 0) {
+                                        p.addRule(RelativeLayout.BELOW, R.id.lyTop);
+                                        buttonIndex.setLayoutParams(p);
 
-                    }else{
-                        p.addRule(RelativeLayout.BELOW,integerHashMapMenu.get(i));
-                        buttonIndex.setLayoutParams(p);
-                    }
-                    buttonIndex.setWidth(350);
-                    if(menus.get(i).CanView==false){
-                        buttonIndex.setVisibility(View.GONE);
-                    }
+                                    } else {
+                                        p.addRule(RelativeLayout.BELOW, integerHashMapMenu.get(i));
+                                        buttonIndex.setLayoutParams(p);
+
+                                    }
+                                    buttonIndex.setWidth(350);
+                                    if (menus.get(i).CanView == false) {
+                                        buttonIndex.setVisibility(View.GONE);
+                                    }
+                                }
+                            }
+                        });
+
+
                 }
             }
         });
+        Button btnTest=rootView.findViewById(R.id.btnTest);
+        Button btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
+        Button btnPolomp=rootView.findViewById(R.id.btnPolomp);
+        Button btnReadmeter=rootView.findViewById(R.id.btnReadmeter);
+
+        stringHashMapMenu.put("Test",R.id.btnTest);
+        stringHashMapMenu.put("Bazresi",R.id.btnBazrasi);
+        stringHashMapMenu.put("Polomp",R.id.btnPolomp);
+        stringHashMapMenu.put("Tariff",R.id.btnReadmeter);
+
 
 
 

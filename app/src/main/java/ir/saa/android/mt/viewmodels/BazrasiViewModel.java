@@ -19,10 +19,12 @@ import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
+import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.RemarkGroupingFormat;
 import ir.saa.android.mt.repositories.roomrepos.AnswerGroupDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionInfoRepo;
+import ir.saa.android.mt.repositories.roomrepos.MasterGroupDetailRepo;
 import ir.saa.android.mt.repositories.roomrepos.RemarkRepo;
 
 public class BazrasiViewModel extends AndroidViewModel {
@@ -32,6 +34,7 @@ public class BazrasiViewModel extends AndroidViewModel {
     private AnswerGroupDtlRepo answerGroupDtlRepo;
     private InspectionInfoRepo inspectionInfoRepo;
     private InspectionDtlRepo inspectionDtlRepo;
+    private MasterGroupDetailRepo masterGroupDetailRepo;
 
     public BazrasiViewModel(@NonNull Application application) {
         super(application);
@@ -50,6 +53,9 @@ public class BazrasiViewModel extends AndroidViewModel {
        if(inspectionDtlRepo==null){
            inspectionDtlRepo=new InspectionDtlRepo(application);
        }
+        if(masterGroupDetailRepo==null){
+            masterGroupDetailRepo=new MasterGroupDetailRepo(application);
+        }
 
 //       inspectionInfoRepo.deleteAll();
 //       inspectionDtlRepo.deleteAll();;
@@ -143,8 +149,7 @@ public class BazrasiViewModel extends AndroidViewModel {
         return answerGroupDtlRepo.getAnswerGroupDtl(Id,answergroupId);
        }
 
-
-      public boolean saveBazrasi(RemarkItem currentItem, Object objectValue, Location location) {
+       public boolean saveBazrasi(RemarkItem currentItem, Object objectValue, Location location) {
 
 
         InspectionWithAnswerGroup inspectionAllInfo = getInspectionAllInfo(G.clientInfo.ClientId, currentItem.Id, currentItem.answerGroupId);
@@ -213,5 +218,11 @@ public class BazrasiViewModel extends AndroidViewModel {
 
     }
 
+        public LiveData<MasterGroupDetail> getMasterGroupDetail(Integer iD){
+            return masterGroupDetailRepo.getMasterGroupDetailById(iD);
+        }
 
+    public LiveData<List<MasterGroupDetail>> getMasterGroupDetail() {
+        return masterGroupDetailRepo.getMasterGroupDetails();
+    }
 }

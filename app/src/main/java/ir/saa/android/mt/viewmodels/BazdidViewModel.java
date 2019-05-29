@@ -39,7 +39,7 @@ public class BazdidViewModel extends AndroidViewModel {
     private PolompDtlRepo polompDtlRepo;
     private TestDtlRepo testDtlRepo;
     private BazdidRepo bazdidRepo;
-    private MasterGroupDetailRepo masterGroupDetailRepo;
+
 
     public BazdidViewModel(@NonNull Application application) {
         super(application);
@@ -54,9 +54,7 @@ public class BazdidViewModel extends AndroidViewModel {
         if(testDtlRepo==null){
             testDtlRepo=new TestDtlRepo(application);
         }
-        if(masterGroupDetailRepo==null){
-            masterGroupDetailRepo=new MasterGroupDetailRepo(application);
-        }
+
         if(inspectionDtlRepo==null){
             inspectionDtlRepo=new InspectionDtlRepo(application);
         }
@@ -152,8 +150,8 @@ public class BazdidViewModel extends AndroidViewModel {
         return bazdidRepo.getReportByRegionId(RegionId);
     }
 
-    public LiveData<MasterGroupDetail> getMasterGroupDetail(Integer iD){
-        return masterGroupDetailRepo.getMasterGroupDetailById(iD);
-    }
+
+
+
 
 }

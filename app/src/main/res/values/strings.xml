@@ -56,6 +56,7 @@
     <string name="SaveOperationSuccess_msg">اطلاعات با موفقیت ثبت شد</string>
     <string name="WaitForRecieveData_msg">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
     <string name="JointsSaveNum_msg">اطلاعات %1$s مشترک از %2$s مشترک در سایت ثبت نشده است</string>
+    <string name="GroupName_msg">گروه بازرسی شما %s می باشد.آیا ادامه می دهید؟</string>
     <string name="ServerError_msg">پیام خطای سرور</string>
     <string name="PleaseEneter_msg">لطفا برای %s مقدار معتبر وارد کنید</string>
     <string name="ConntecInternet_msg">لطفا دستگاه را به اینترنت متصل کنید</string>
@@ -84,6 +85,7 @@
     <string name="Confirm_msg">آیا مایلید ذخیره شود ؟</string>
     <string name="Title_msg">توجه</string>
     <string name="FillOldAndNewPlombInfo_msg">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
+    <string name="FillOldAndNewPlombInfoForceField_msg">لطفا فیلدهای %s را پر کنید</string>
     <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
     <string name="Downloding_msg">Downloading data,Please wait..</string>
     <string name="MeterUnknown_msg">مشخصات کنتور ثبت نشده است</string>
