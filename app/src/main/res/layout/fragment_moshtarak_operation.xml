@@ -52,4 +52,17 @@
         android:textSize="16sp"
         android:text="@string/Readmeter"/>
 
+    <!-- Moshahedat Button-->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnMoshahedat"
+        android:fontFamily="@font/byekan"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:text="@string/Moshahedat"/>
+
+
 </LinearLayout>
