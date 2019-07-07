@@ -9,6 +9,7 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.model.entities.GPSInfo;
 
 import static android.arch.persistence.room.OnConflictStrategy.IGNORE;
@@ -21,6 +22,9 @@ public interface GPSInfoDao {
 
     @Query("Select * from GPSInfo Where GPSInfoID=:Id")
     LiveData<GPSInfo> getGPSInfoById(Integer Id);
+
+    @Query("Select * from GPSInfo where ClientID=:clientId")
+    List<GPSInfo> getGPSInfosByClientId(Long clientId);
 
     @Query("Delete From GPSInfo")
     void deleteAll();

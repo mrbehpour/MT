@@ -38,6 +38,7 @@ import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
+import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.services.GPSTracker;
 import ir.saa.android.mt.services.ILocationCallBack;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
@@ -45,6 +46,7 @@ import ir.saa.android.mt.viewmodels.LocationViewModel;
 
 public class BazrasiFragment extends Fragment  {
 
+    MyCheckList myCheckListForCore;
     BazrasiViewModel bazrasiViewModel;
     BazrasiAdapter adapter;
     CheckBox cbSelectAll;
@@ -55,7 +57,7 @@ public class BazrasiFragment extends Fragment  {
     Context context;
     ProgressDialog progressDialog;
     GPSTracker gpsTracker;
-
+    RecyclerView recyclerView;
     public BazrasiFragment() {
 
     }
@@ -93,7 +95,7 @@ public class BazrasiFragment extends Fragment  {
         this.context=this.getContext();
         bazrasiViewModel = ViewModelProviders.of(this).get(BazrasiViewModel.class);
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
-
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.rvSoal);
         cbSelectAll=rootView.findViewById(R.id.cbSelectAll);
         cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -133,7 +135,8 @@ public class BazrasiFragment extends Fragment  {
                                     }
                                     dialog.clearButtonPanel();
 
-                                    myCheckList.setCheckListOrientation(LinearLayout.VERTICAL)
+                                    myCheckList
+                                            .setCheckListOrientation(LinearLayout.VERTICAL)
                                             .setSelectionMode(MyCheckListMode.SingleSelection)
                                             .setCheckItemsHeight(80);
 
@@ -210,6 +213,82 @@ public class BazrasiFragment extends Fragment  {
             gpsTracker=GPSTracker.getInstance(this.getContext());
         }
 
+        if(G.clientInfo.forcibleMasterGroup && recyclerView.getChildCount()!=0){
+            bazrasiViewModel.getMasterGroupDetail(G.clientInfo.GroupId).observe(getActivity(), new Observer<MasterGroupDetail>() {
+                @Override
+                public void onChanged(@Nullable MasterGroupDetail masterGroupDetail) {
+                    final MyDialog myDialog=new MyDialog(getActivity());
+                    myDialog.clearAllPanel();
+                    myDialog.clearButtonPanel();
+
+                    myDialog.addButton((String) getResources().getText(R.string.No), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            final MyDialog dialogforTypeCore=new MyDialog(getActivity());
+                            dialogforTypeCore.clearButtonPanel();
+                            dialogforTypeCore.clearAllPanel();
+
+
+                            bazrasiViewModel.getMasterGroupDetail().observe(getActivity(), new Observer<List<MasterGroupDetail>>() {
+                                @Override
+                                public void onChanged(@Nullable List<MasterGroupDetail> masterGroupDetails) {
+                                    myCheckListForCore=new MyCheckList(getActivity()
+                                            ,new MyCheckListItem(masterGroupDetails.get(0).ChoiceValue ,masterGroupDetails.get(0).ChoiceID)
+                                            ,new MyCheckListItem( masterGroupDetails.get(1).ChoiceValue ,masterGroupDetails.get(1).ChoiceID));
+                                    for(int i=2;i<masterGroupDetails.size();i++){
+                                        myCheckListForCore.addCheckItem(
+                                                new MyCheckListItem(masterGroupDetails.get(i).ChoiceValue
+                                                ,masterGroupDetails.get(i).ChoiceID));
+                                    }
+                                    myCheckListForCore.setCheckListOrientation(LinearLayout.VERTICAL)
+                                            .setSelectionMode(MyCheckListMode.SingleSelection)
+                                            .setCheckItemsHeight(70);
+                                    dialogforTypeCore.addContentView(myCheckListForCore);
+                                }
+                            });
+                            dialogforTypeCore.show();
+                            dialogforTypeCore.addButton((String) getResources().getText(R.string.Cancel), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialogforTypeCore.dismiss();
+                                }
+                            });
+                            dialogforTypeCore.addButton((String) getResources().getText(R.string.Ok), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ArrayList<Object> objectArrayList=new ArrayList<>();
+                                    objectArrayList = myCheckListForCore.getSelectedItemsValues();
+                                    if(objectArrayList.size()>0) {
+                                        G.clientInfo.GroupId = Integer.valueOf(objectArrayList.get(0).toString());
+                                        setUpRecyclerView(rootView);
+                                        adapter.notifyDataSetChanged();
+                                        dialogforTypeCore.dismiss();
+                                    }
+                                }
+                            });
+
+
+
+
+
+                           myDialog.dismiss();
+                        }
+                    });
+
+                    myDialog.addButton((String) getResources().getText(R.string.Yes), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            myDialog.dismiss();
+                        }
+                    });
+
+                    myDialog.addBodyText(String.format( (String) getResources().getText(R.string.GroupName_msg)
+                            ,masterGroupDetail.ChoiceValue),13).show();
+                   // Toast.makeText(getActivity(),masterGroupDetail.ChoiceValue,Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         gpsTracker.isHasLocation.observe(this, new Observer<Boolean>() {
             @Override
@@ -226,7 +305,7 @@ public class BazrasiFragment extends Fragment  {
 
     public void setUpRecyclerView(View view) {
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvSoal);
+
         recyclerView.setScrollbarFadingEnabled(false);
         recyclerView.setScrollBarSize(50);
         adapter = new BazrasiAdapter(getActivity(), bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue()==null?new ArrayList<>(): bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue());

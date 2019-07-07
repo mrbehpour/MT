@@ -21,6 +21,9 @@ public interface SettingDao {
     @Query("select * from Setting where SettingID =:Id")
     LiveData<Setting> getSettingById(Integer Id);
 
+    @Query("select * from Setting where SettingKey=:settingKey")
+    LiveData<Setting> getSettingByKey(String settingKey);
+
     @Insert(onConflict = IGNORE)
     void insertSetting(Setting setting);
 

@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     android:gravity="center">
+
+
+
+    <LinearLayout
+        android:id="@+id/lyTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal">
+    </LinearLayout>
 
     <!-- Test Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnTest"
-        android:fontFamily="@font/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_below="@+id/lyTop"
+        android:fontFamily="@font/byekan"
+        android:gravity="center"
+        android:text="@string/Test"
+        android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
-        android:textSize="16sp"
-        android:text="@string/Test"/>
+        android:textSize="16sp" />
+
+
 
     <!-- Bazrasi Button-->
     <android.support.v7.widget.AppCompatButton
@@ -24,9 +41,12 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        android:layout_below="@+id/btnTest"
         android:textColor="#ffffff"
         android:textSize="16sp"
+        android:layout_centerHorizontal="true"
         android:text="@string/Remark"/>
+
 
     <!-- Polomp Button-->
     <android.support.v7.widget.AppCompatButton
@@ -36,6 +56,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnBazrasi"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:text="@string/Polomb"/>
@@ -47,9 +69,11 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
+        android:layout_below="@+id/btnPolomp"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:text="@string/Readmeter"/>
 
-</LinearLayout>
+</RelativeLayout>

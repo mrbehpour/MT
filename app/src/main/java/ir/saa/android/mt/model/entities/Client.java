@@ -109,4 +109,6 @@ public class Client  {
 
     public Long FollowUpCode;
 
+    public boolean forcibleMasterGroup;
+
 }

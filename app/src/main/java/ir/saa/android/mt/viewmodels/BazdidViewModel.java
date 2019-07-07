@@ -17,6 +17,7 @@ import ir.saa.android.mt.model.entities.Bazdid;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientWithAction;
 import ir.saa.android.mt.model.entities.InspectionAllInfo;
+import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.Report;
 import ir.saa.android.mt.model.entities.TestAllInfo;
@@ -24,6 +25,7 @@ import ir.saa.android.mt.model.entities.TestDtl;
 import ir.saa.android.mt.repositories.roomrepos.BazdidRepo;
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
+import ir.saa.android.mt.repositories.roomrepos.MasterGroupDetailRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.TestDtlRepo;
 
@@ -38,6 +40,7 @@ public class BazdidViewModel extends AndroidViewModel {
     private TestDtlRepo testDtlRepo;
     private BazdidRepo bazdidRepo;
 
+
     public BazdidViewModel(@NonNull Application application) {
         super(application);
         if(clientRepo==null)
@@ -51,6 +54,7 @@ public class BazdidViewModel extends AndroidViewModel {
         if(testDtlRepo==null){
             testDtlRepo=new TestDtlRepo(application);
         }
+
         if(inspectionDtlRepo==null){
             inspectionDtlRepo=new InspectionDtlRepo(application);
         }
@@ -145,5 +149,9 @@ public class BazdidViewModel extends AndroidViewModel {
     public LiveData<Report> getReportByRegionId(Integer RegionId){
         return bazdidRepo.getReportByRegionId(RegionId);
     }
+
+
+
+
 
 }

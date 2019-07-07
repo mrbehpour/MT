@@ -28,4 +28,20 @@ public class GPSInfo {
     public String Long ;
 
     public String Lat ;
+
+    public String InspectionLat;
+
+    public String InspectionLong;
+
+    public String PolompLat;
+
+    public String PolompLong;
+
+    public String TariffLat;
+
+    public String TariffLong;
+
+    public String MeterChangeLat;
+
+    public String MeterChangeLong;
 }

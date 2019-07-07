@@ -135,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
             DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+
             if(deviceSerial!=null) {
                 if (deviceSerial.isActive == false) {
                     ImiRegisterInput imiRegisterInput = new ImiRegisterInput();

@@ -7,6 +7,7 @@ public class ClientInfo {
     public static Long FollowUpCode;
     public  static  String ClientName;
     public static Integer Postion;
+    public static boolean forcibleMasterGroup;
 
 
 }

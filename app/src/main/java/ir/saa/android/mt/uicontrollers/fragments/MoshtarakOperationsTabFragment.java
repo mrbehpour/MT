@@ -1,27 +1,41 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import java.util.HashMap;
+import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.model.entities.Menu;
+import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
+import ir.saa.android.mt.viewmodels.MenuViewModel;
 
 public class MoshtarakOperationsTabFragment extends Fragment
 {
+    MenuViewModel menuViewModel;
     LocationViewModel locationViewModel=null;
+    HashMap<String,Integer> stringHashMapMenu;
+    HashMap<Integer,Integer> integerHashMapMenu;
     private Long clientID = null;
+    private Boolean EnableAndroidMenuOrder;
     public MoshtarakOperationsTabFragment() {
         // Required empty public constructor
     }
@@ -35,12 +49,15 @@ public class MoshtarakOperationsTabFragment extends Fragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationViewModel= ViewModelProviders.of(this).get(LocationViewModel.class);
+        EnableAndroidMenuOrder=false;
+        menuViewModel=ViewModelProviders.of(getActivity()).get(MenuViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_moshtarak_operation, container, false);
-
+        stringHashMapMenu=new HashMap<String, Integer>();
+        integerHashMapMenu=new HashMap<Integer, Integer>();
         if(clientID==null){
             Bundle bundle = this.getArguments();
             if (bundle != null) {
@@ -50,10 +67,58 @@ public class MoshtarakOperationsTabFragment extends Fragment
 
             }
         }
+        menuViewModel.getSettingByKey("EnableAndroidMenuOrder").observe(getActivity(), new Observer<Setting>() {
+            @Override
+            public void onChanged(@Nullable Setting setting) {
+                if(setting.SettingValue.equals("1")){
+                        menuViewModel.getMenus().observe(getActivity(), new Observer<List<Menu>>() {
+                            @Override
+                            public void onChanged(@Nullable List<Menu> menus) {
+                                AppCompatButton buttonIndex;
+                                for (Menu menuItem : menus) {
+                                    integerHashMapMenu.put(menuItem.OrderId, stringHashMapMenu.get(menuItem.KeyName));
+
+                                }
+                                for (Integer i = 0; i < integerHashMapMenu.size(); i++) {
+                                    buttonIndex = rootView.findViewById(integerHashMapMenu.get(i + 1));
+                                    RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                    p.addRule(RelativeLayout.CENTER_VERTICAL);
+                                    p.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                                    p.setMargins(0,20,0,0);
+                                    if (i == 0) {
+                                        p.addRule(RelativeLayout.BELOW, R.id.lyTop);
+                                        buttonIndex.setLayoutParams(p);
+
+                                    } else {
+                                        p.addRule(RelativeLayout.BELOW, integerHashMapMenu.get(i));
+                                        buttonIndex.setLayoutParams(p);
+
+                                    }
+                                    buttonIndex.setWidth(350);
+                                    if (menus.get(i).CanView == false) {
+                                        buttonIndex.setVisibility(View.GONE);
+                                    }
+                                }
+                            }
+                        });
+
+
+                }
+            }
+        });
         Button btnTest=rootView.findViewById(R.id.btnTest);
-        Button btnPolomp=rootView.findViewById(R.id.btnPolomp);
         Button btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
+        Button btnPolomp=rootView.findViewById(R.id.btnPolomp);
         Button btnReadmeter=rootView.findViewById(R.id.btnReadmeter);
+
+        stringHashMapMenu.put("Test",R.id.btnTest);
+        stringHashMapMenu.put("Bazresi",R.id.btnBazrasi);
+        stringHashMapMenu.put("Polomp",R.id.btnPolomp);
+        stringHashMapMenu.put("Tariff",R.id.btnReadmeter);
+
+
+
+
 
         btnTest.setOnClickListener(view -> {
             locationViewModel.trunOnGps(getContext());

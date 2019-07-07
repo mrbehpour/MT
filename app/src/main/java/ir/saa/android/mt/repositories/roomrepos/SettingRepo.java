@@ -58,4 +58,8 @@ public class SettingRepo  {
     public void deleteSettingById(Integer Id) {
         settingDao.deleteSettingById(Id);
     }
+
+    public LiveData<Setting> getSettingByKey(String settingKey){
+        return settingDao.getSettingByKey(settingKey);
+    }
 }
