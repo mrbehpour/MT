@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment
         laySettings=rootView.findViewById(R.id.laySettings);
         laySanjesh=rootView.findViewById(R.id.laySanjesh);
         tvVersion=rootView.findViewById(R.id.tvVersion);
-        tvVersion.setText(G.MY_VERSION);
+        tvVersion.setText(String.format("%s (%s)", G.MY_VERSION,G.RELEASE_DATE));
         btnExit=rootView.findViewById(R.id.btnExit);
         layBazdid.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,7 +160,7 @@ public class HomeFragment extends Fragment
 
             }
         });
-        showManualTestHelp(rootView);
+        //showManualTestHelp(rootView);
         return rootView;
     }
 
@@ -180,23 +180,23 @@ public class HomeFragment extends Fragment
         super.onResume();
     }
 
-    private void showManualTestHelp(View v){
-        new MaterialTapTargetPrompt.Builder(getActivity())
-                .setTarget(v.findViewById(R.id.ivBazdid))
-                .setPrimaryText("بازدید")
-                .setSecondaryText("جهت ورود به فرم بازدید کلیک کنید")
-                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
-                {
-                    @Override
-                    public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
-                    {
-                        if (state == uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
-                        {
-
-                        }
-                    }
-                })
-                .show();
-    }
+//    private void showManualTestHelp(View v){
+//        new MaterialTapTargetPrompt.Builder(getActivity())
+//                .setTarget(v.findViewById(R.id.ivBazdid))
+//                .setPrimaryText("بازدید")
+//                .setSecondaryText("جهت ورود به فرم بازدید کلیک کنید")
+//                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
+//                {
+//                    @Override
+//                    public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
+//                    {
+//                        if (state == uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.STATE_FOCAL_PRESSED)
+//                        {
+//
+//                        }
+//                    }
+//                })
+//                .show();
+//    }
 
 }

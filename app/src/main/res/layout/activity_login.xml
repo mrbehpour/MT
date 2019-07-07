@@ -48,14 +48,14 @@
 
         <!-- Password Label -->
         <android.support.design.widget.TextInputLayout
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_gravity="center"
             android:textColorHint="@color/grey_1000">
             <EditText android:id="@+id/edtPassword"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:inputType="textPassword"
@@ -70,7 +70,7 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnLogin"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="340dp"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
@@ -80,7 +80,7 @@
             android:text="@string/LogIn"/>
 
             <TextView android:id="@+id/tvHelp"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -104,7 +104,7 @@
 
 
             <TextView android:id="@+id/tvSanjesh"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"

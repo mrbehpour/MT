@@ -53,7 +53,7 @@
             android:id="@+id/tvLablePaired"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -86,7 +86,7 @@
             android:id="@+id/tvLablePairedRead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -106,10 +106,17 @@
             android:layout_gravity="right"
             />
 
+        <!-- Line -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/grey_300"/>
+
         <!-- Reset Button    -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnReset"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="170dp"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
@@ -119,12 +126,12 @@
             android:visibility="gone"
             android:text="@string/Reset"/>
 
-        <!-- Line -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/grey_300"/>
+        <!--&lt;!&ndash; Line &ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:background="@color/grey_300"/>-->
 
         <!-- Server Address -->
         <TextView
@@ -133,7 +140,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="16sp"
             android:text="@string/ServerAddress"/>
 
@@ -147,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:inputType="text"
                 android:maxLines="1"
                 android:text="@string/Http"
@@ -178,7 +185,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="16sp"
             android:visibility="gone"
             android:text="@string/RemarkValidDistance"/>
@@ -191,7 +198,7 @@
             android:digits="0123456789"
             android:inputType="number"
             android:imeOptions="actionDone"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="12sp"
             android:visibility="gone"
             android:textAlignment="center"
@@ -203,7 +210,7 @@
             android:layout_marginRight="16dp"
             android:textColor="@color/grey_500"
             android:visibility="gone"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="12sp"
             android:text="@string/mahdoode_help"/>
 
@@ -214,7 +221,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="16sp"
             android:text="@string/FontSize"/>
         <RadioGroup
@@ -222,14 +229,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="32dp"
             android:layout_marginLeft="32dp"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:orientation="vertical">
             <RadioButton
                 android:id="@+id/rbtSmall"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="rtl"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:textSize="16sp"
                 android:text="@string/Small"/>
             <RadioButton
@@ -237,7 +244,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="rtl"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:textSize="16sp"
                 android:text="@string/Middle"/>
             <RadioButton
@@ -245,7 +252,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="rtl"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:textSize="16sp"
                 android:text="@string/Large"/>
             <RadioButton
@@ -253,7 +260,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layoutDirection="rtl"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:textSize="16sp"
                 android:text="@string/VeryLarge"/>
         </RadioGroup>
@@ -265,34 +272,34 @@
             android:layout_weight="1">
         </LinearLayout>
 
-        <!-- Coeff -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:fontFamily="@font/byekan"
-            android:textSize="16sp"
-            android:visibility="gone"
-            android:text="ضریب"/>
+        <!--&lt;!&ndash; Coeff &ndash;&gt;-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:fontFamily="@fonts/byekan"-->
+            <!--android:textSize="16sp"-->
+            <!--android:visibility="gone"-->
+            <!--android:text="ضریب"/>-->
 
-        <EditText
-            android:id="@+id/edtCoeff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:maxLines="1"
-            android:inputType="numberDecimal"
-            android:fontFamily="@font/byekan"
-            android:textSize="12sp"
-            android:text="48.64864864864865"/>
+        <!--<EditText-->
+            <!--android:id="@+id/edtCoeff"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:layout_marginRight="16dp"-->
+            <!--android:maxLines="1"-->
+            <!--android:inputType="numberDecimal"-->
+            <!--android:fontFamily="@fonts/byekan"-->
+            <!--android:textSize="12sp"-->
+            <!--android:text="48.64864864864865"/>-->
 
         <!-- Save Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnSave"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="16dp"
@@ -300,5 +307,7 @@
             android:textColor="#ffffff"
             android:textSize="16sp"
             android:text="@string/Save"/>
+
+
     </LinearLayout>
 </ScrollView>

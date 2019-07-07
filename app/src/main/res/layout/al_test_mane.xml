@@ -26,7 +26,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="14sp"
             android:layout_gravity="right"
             android:textAlignment="gravity"
@@ -50,7 +50,7 @@
     <!-- Taeed Button -->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnTaeed"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"

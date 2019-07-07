@@ -9,7 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.repositories.metertester.ElectericalParams;
 import ir.saa.android.mt.viewmodels.BaseInfoViewModel;
 
 public class TestFragment extends Fragment

@@ -20,7 +20,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="16dp"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textColor="@color/grey_1000"
             android:gravity="right"
             android:textAlignment="gravity"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="13sp"
             android:text="@string/Address"/>
         <EditText
@@ -47,12 +47,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="12sp"
             android:text="@string/DashSign"/>
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnSave"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:visibility="gone"

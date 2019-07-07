@@ -37,6 +37,12 @@ public interface RelUserDao {
     @Query("select * from RelUser where UserID = :UserID and HandheldPass = :Password ")
     RelUser getUserByUserAndPassword(int UserID,String Password);
 
+    @Query("select * from RelUser where RegionID = :regionId")
+    LiveData<List<RelUser>> getUsersByRegion(int regionId);
+
+    @Query("select Count(*) from RelUser")
+    int getUserCount();
+
     @Query("DELETE FROM RelUser")
     void deleteAll();
 

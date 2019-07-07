@@ -17,6 +17,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class MoshtarakOperationsTabFragment extends Fragment
 {
@@ -50,7 +51,8 @@ public class MoshtarakOperationsTabFragment extends Fragment
 
             }
         }
-        Button btnTest=rootView.findViewById(R.id.btnTest);
+        //Button btnTest=rootView.findViewById(R.id.btnTest);
+        FancyButton btnTest=rootView.findViewById(R.id.btnTest);
         Button btnPolomp=rootView.findViewById(R.id.btnPolomp);
         Button btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
         Button btnReadmeter=rootView.findViewById(R.id.btnReadmeter);

@@ -100,7 +100,7 @@
 
                 <!-- Zarib CT -->
                 <android.support.design.widget.TextInputLayout
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_weight="25"
                     android:layout_height="match_parent"
@@ -110,7 +110,7 @@
                     <EditText android:id="@+id/edtZaribCT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="18sp"
                         android:textColor="@color/grey_900"
                         android:gravity="center"
@@ -123,7 +123,7 @@
                 <!-- Sabete Kontor -->
                 <!--android:inputType="numberDecimal" Ashari-->
                 <android.support.design.widget.TextInputLayout
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_weight="25"
                     android:layout_height="match_parent"
@@ -133,7 +133,7 @@
                     <EditText android:id="@+id/edtSabeteKontor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="18sp"
                         android:textColor="@color/grey_900"
                         android:gravity="center"
@@ -144,7 +144,7 @@
 
                 <!-- Nesbat Kontor -->
                 <android.support.design.widget.TextInputLayout
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_weight="25"
                     android:layout_height="match_parent"
@@ -154,7 +154,7 @@
                     <EditText android:id="@+id/edtNesbatKontor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="18sp"
                         android:textColor="@color/grey_900"
                         android:gravity="center"
@@ -165,7 +165,7 @@
 
                 <!-- Tedad Dor -->
                 <android.support.design.widget.TextInputLayout
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_weight="25"
                     android:layout_height="match_parent"
@@ -175,7 +175,7 @@
                     <EditText android:id="@+id/edtTedadDor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="18sp"
                         android:textColor="@color/grey_900"
                         android:gravity="center"
@@ -195,7 +195,7 @@
                     android:id="@+id/cbSabte99"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textDirection="rtl"
                     android:textAlignment="gravity"
@@ -210,7 +210,7 @@
         <!-- Taeed Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnTaeed"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="16dp"
