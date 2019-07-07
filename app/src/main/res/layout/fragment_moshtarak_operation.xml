@@ -1,63 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     android:gravity="center">
 
-
-
-    <LinearLayout
-        android:id="@+id/lyTop"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:orientation="horizontal">
-    </LinearLayout>
-
     <!-- Test Button-->
-    <android.support.v7.widget.AppCompatButton
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnTest"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_below="@+id/lyTop"
-        android:fontFamily="@font/byekan"
-        android:gravity="center"
+        android:textColor="@color/grey_800"
+        android:textSize="22sp"
         android:text="@string/Test"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
-
-
+        fancy:fb_borderColor="@color/green_800"
+        fancy:fb_borderWidth="2dp"
+        fancy:fb_defaultColor="@color/green_400"
+        fancy:fb_focusColor="@color/green_200"
+        fancy:fb_fontIconResource="&#xf05d;"
+        fancy:fb_fontIconSize="30dp"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="20dp"
+        fancy:fb_text="@string/Test"
+        fancy:fb_textColor="#FFFFFF"/>
 
     <!-- Bazrasi Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnBazrasi"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:layout_below="@+id/btnTest"
         android:textColor="#ffffff"
         android:textSize="16sp"
-        android:layout_centerHorizontal="true"
         android:text="@string/Remark"/>
-
 
     <!-- Polomp Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnPolomp"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnBazrasi"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:text="@string/Polomb"/>
@@ -65,15 +54,26 @@
     <!-- Polomp Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnReadmeter"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center"
-        android:layout_below="@+id/btnPolomp"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:text="@string/Readmeter"/>
 
-</RelativeLayout>
+    <!-- Moshahedat Button-->
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnMoshahedat"
+        android:fontFamily="@font/byekan"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        android:text="@string/Moshahedat"/>
+
+
+</LinearLayout>

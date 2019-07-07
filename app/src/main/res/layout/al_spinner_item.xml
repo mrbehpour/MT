@@ -2,7 +2,7 @@
 
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
-    android:fontFamily="@font/byekan"
+    android:fontFamily="@fonts/byekan"
     android:textColor="@color/grey_900"
     android:singleLine="true"
     android:gravity="center"

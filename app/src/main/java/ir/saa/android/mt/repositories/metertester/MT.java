@@ -21,7 +21,8 @@ public class MT {
     List<RegisterInfo> registerInfoList = new ArrayList<>();
     private final static byte SLAVE_ID=1;
 //    private final static double correctFactor=47.59552;
-    private final static double correctFactor=48.64864864864865;
+//    private final static double correctFactor=48.64864864864865;
+    private final static double correctFactor=26;
     private final static double powerCalCoeff=0.0703125;
     private final static int PowerFreq=50;
     public final static int maxRoundTest=250;
@@ -240,8 +241,8 @@ public class MT {
                 Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_B)) +
                 Math.abs(Double.parseDouble(testResult.MeterEnergy_Period1_C));
 
-        //ErrPerc = ph * correctFactor;
-        ErrPerc = ph * Double.valueOf(G.getPref(SharePrefEnum.CorrectCoeff));
+        ErrPerc = ph * correctFactor;
+        //ErrPerc = ph * Double.valueOf(G.getPref(SharePrefEnum.CorrectCoeff));
 
         double k = ((double) 3600000 * testContorParams.SensorRatio * testContorParams.CTCoeff * testContorParams.RoundNum) / testContorParams.ContorConst;
 

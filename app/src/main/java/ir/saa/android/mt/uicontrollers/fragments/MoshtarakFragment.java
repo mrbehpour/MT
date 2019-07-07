@@ -55,7 +55,7 @@ public class MoshtarakFragment extends Fragment
         mAdapter = new TabsPagerAdapter(getActivity().getSupportFragmentManager(),ClientID);
         viewPager.setAdapter(mAdapter);
 
-        Typeface tfByekan = ResourcesCompat.getFont(getActivity(), R.font.byekan);
+        Typeface tfByekan = Typeface.createFromAsset(G.context.getAssets(), "fonts/byekan.ttf");
         PagerTabStrip strip = viewPager.findViewById(R.id.pagerTabStrip);
         for (int i = 0; i < strip.getChildCount(); i++) {
             View nextChild = strip.getChildAt(i);

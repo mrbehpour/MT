@@ -63,7 +63,6 @@
     <string name="AccessServerError_msg">دسترسی به آدرس امکان پذیر نیست</string>
     <string name="GetRegionFromServer_msg">در حال دریافت داده ها از سرور</string>
     <string name="UsernameOrPassword_msg">نام کاربری یا کلمه عبور اشتباه است</string>
-    <string name="UsernamenotValid_msg">نام کاربری شما در سایت تایید نشده است</string>
     <string name="TapAgainForExit_msg">برای خروج دوبار کلیک کنید</string>
     <string name="Exit_msg"> آیا برای خروج مطمئن هستید ؟ </string>
     <string name="PolombDataNotFound_msg">اطلاعات پلمپ یافت نشد</string>
@@ -91,11 +90,16 @@
     <string name="MeterUnknown_msg">مشخصات کنتور ثبت نشده است</string>
     <string name="ConnectionOK_msg">اتصال با سرور برقرار است</string>
     <string name="ConnectionFail_msg">مشکل در برقراری ارتباط با سرور</string>
+    <string name="ClickToStartManualTes_msg">برای شروع تست کلیک کنید</string>
+    <string name="WaitForIMEIConfirm_msg">درخواست شما در سایت ثبت شد،منتظر تایید مدیر سیستم باشید</string>
+    <string name="NotRegisteredIMEI_msg">شماره سریال دستگاه شما ثبت نشده و مجاز به فعالیت نیست</string>
+    <string name="NotConfirmedIMEI_msg">شماره سریال دستگاه شما هنوز تایید نشده است</string>
+    <string name="ServerAddressNotSaved_msg">آدرس سرور برای دریافت اطلاعات ذخیره نشده است</string>
+    <string name="AnswerGroupEmpty_msg">دسته جواب ها خالی است،لطفا دوباره تنظیمات جداول پایه را دریافت کنید</string>
     <!--*******************-->
 
     <!--TestResultAdapter-->
     <string name="ErrorPercent">درصد خطا</string>
-    <string name="TestDuraion">زمان تست</string>
     <string name="TypeDateTest_TestResultAdapter">میلی ثانیه</string>
 
     <!--Bazdid-->
@@ -180,6 +184,7 @@
     <string name="Readmeter">خواندن کنتور</string>
     <string name="ReadByProb">خواندن با پروب</string>
     <string name="ReadManual">خواندن دستی</string>
+    <string name="Moshahedat">مشاهدات</string>
 
 
     <!-- fragment_polomp_save -->
@@ -242,7 +247,7 @@
     <string name="RoundNum">تعداد دور</string>
     <string name="Sensor">سنسور</string>
     <string name="TestDateTime">تاریخ و ساعت تست</string>
-    <string name="TestDuration">مدت زمان تست</string>
+    <string name="TestDuration">طول مدت تست</string>
     <string name="Title">عنوان</string>
     <string name="Value">مقدار</string>
     <string name="PhaseR">R</string>
@@ -310,6 +315,7 @@
     <string name="Cancel">انصراف</string>
     <string name="Retry">تلاش دوباره</string>
     <string name="Save">ذخیره</string>
+    <string name="confirmRequest">درخواست تایید سریال</string>
 
     <string name="AddressTitle">آدرس</string>
     <string name="CancelTestProcessTitle">توقف تست</string>

@@ -48,9 +48,18 @@ public class LoginViewModel extends AndroidViewModel {
             //111111
         }
     }
-    public LiveData<List<RelUser>> getUsers() {  return reluserRepo.getUsersLiveData();  }
 
+    public int getUsersCount() {
+        return reluserRepo.getUserCount();
+    }
 
+    public LiveData<List<RelUser>> getUsers() {
+        return reluserRepo.getUsersLiveData();
+    }
+
+    public LiveData<List<RelUser>> getUsersByRegion(int regionId) {
+        return reluserRepo.getUserByRegion(regionId);
+    }
 
     public boolean IsLoginValid(int userId,String password){
 //       RelUser user = loginViewModel.getUserByUserIdAndPassword(spinnerMap.get(spinner.getSelectedItemPosition()),edtPassword.getText().toString());

@@ -71,7 +71,7 @@ public class HomeFragment extends Fragment
         laySettings=rootView.findViewById(R.id.laySettings);
         laySanjesh=rootView.findViewById(R.id.laySanjesh);
         tvVersion=rootView.findViewById(R.id.tvVersion);
-        tvVersion.setText(G.MY_VERSION);
+        tvVersion.setText(String.format("%s (%s)", G.MY_VERSION,G.RELEASE_DATE));
         btnExit=rootView.findViewById(R.id.btnExit);
         layBazdid.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,10 +114,10 @@ public class HomeFragment extends Fragment
         laySettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                G.startFragment(FragmentsEnum.SettingFragment,false,null);
-//                Intent intent=new Intent(G.context, SettingActivity.class);
-//                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-//                G.context.startActivity(intent);
+                //G.startFragment(FragmentsEnum.SettingFragment,false,null);
+                Intent intent=new Intent(G.context, SettingActivity.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                G.context.startActivity(intent);
             }
         });
 
@@ -160,7 +160,7 @@ public class HomeFragment extends Fragment
 
             }
         });
-//        showManualTestHelp(rootView);
+        //showManualTestHelp(rootView);
         return rootView;
     }
 

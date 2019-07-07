@@ -97,9 +97,9 @@ public class AmaliyatFragment extends Fragment {
 
     private void showManualTestHelp(View v){
         new MaterialTapTargetPrompt.Builder(getActivity())
-                .setTarget(v.findViewById(R.id.button))
-                .setPrimaryText("شماره سریال دستگاه")
-                .setSecondaryText("جهت نمایش سریال دستگاه حتما باید دسترسی خواندن وضعیت تلفن به برنامه داده شود.")
+                .setTarget(v.findViewById(R.id.imgManualPaulse))
+                .setPrimaryText((String) getResources().getText(R.string.ManualPaulser))
+                .setSecondaryText((String) getResources().getText(R.string.ClickToStartManualTes_msg))
                 .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
                 {
                     @Override
@@ -168,6 +168,7 @@ public class AmaliyatFragment extends Fragment {
                                 tvManualPaulseNum.setText(String.valueOf(manualPaulseNum));
                                 if(paulserType) {
                                     rlManualPaulser.setVisibility(View.VISIBLE);
+                                    showManualTestHelp(rootView);
                                 }else{
                                     rlManualPaulser.setVisibility(View.GONE);
                                 }
@@ -229,6 +230,7 @@ public class AmaliyatFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 tvManualPaulseNum.setText(String.valueOf(manualPaulseNum));
+                tvRoundNum.setText(String.valueOf(manualPaulseNum));
                 amaliyatViewModel.readTestResultFromMeterManual(manualPaulseNum);
 
                 manualPaulseNum++;
@@ -267,13 +269,12 @@ public class AmaliyatFragment extends Fragment {
                     if(location==null) {
                         locationViewModel.getLocation(getContext());
                         connectToModuleDialog();
-
                     }
                 }else {
                     location=null;
                     locationViewModel.trunOnGps(getActivity());
                 }
-                //saveTestResult(testResult);
+                saveTestResult(testResult);
 
 
             }
@@ -288,16 +289,17 @@ public class AmaliyatFragment extends Fragment {
 
                 HideProgressDialog();
                 if(testResultLocation!=null){
-
                     //saveTestResult(testResultLocation);
                 }
             }
         }
         });
 
-        //showManualTestHelp(rootView);
+
         return rootView;
     }
+
+
 
     private void saveTestResult(TestResult testResult) {
         CountSaveTest++;

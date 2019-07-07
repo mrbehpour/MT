@@ -13,7 +13,7 @@ import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientAllInfo;
 import ir.saa.android.mt.model.entities.GetClientInput;
 import ir.saa.android.mt.model.entities.GroupingFormat;
-import ir.saa.android.mt.model.entities.ImiRegisterInput;
+import ir.saa.android.mt.model.entities.IMEI_RegisterInput;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.Menu;
 import ir.saa.android.mt.model.entities.Polomp;
@@ -103,8 +103,8 @@ public interface MTApi {
     Single<List<RecordeSummary>> SaveClientAllInfoAndroid(@Body List<ClientAllInfo> clientinfolList);
 
     @POST("RegisterDeviceImi")
-    Single<DataClass<Integer>> RegisterDeviceImi(@Body ImiRegisterInput imiRegisterInput);
+    Single<DataClass<Integer>> RegisterDeviceIMEI(@Body IMEI_RegisterInput IMEIRegisterInput);
 
     @POST("GetImiConfirmStatus")
-    Single<DataClass<Boolean>> GetImiConfirmStatus(@Body ImiRegisterInput imiRegisterInput);
+    Single<DataClass<Boolean>> GetIMEIConfirmStatus(@Body IMEI_RegisterInput IMEIRegisterInput);
 }

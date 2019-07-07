@@ -34,7 +34,7 @@
     <!-- Start Button -->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnStartUploading"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="16dp"

@@ -34,6 +34,14 @@ public class ReluserRepo  {
         return relUserDao.insertRelusers(relUserList);
     }
 
+    public LiveData<List<RelUser>> getUserByRegion(int regionId){
+        return  relUserDao.getUsersByRegion(regionId);
+    }
+
+    public int getUserCount() {
+        return relUserDao.getUserCount();
+    }
+
     public void insertUsersAsync(List<RelUser> relUserList) {
         Single.fromCallable(new Callable<List<Long>>() {
             @Override
@@ -89,7 +97,9 @@ public class ReluserRepo  {
         return  relUserDao.getUserByUserAndPassword(userId,passWord);
     }
 
-  public  void insertUser(RelUser relUser){
+
+
+    public  void insertUser(RelUser relUser){
         relUserDao.insertReluser(relUser);
     }
 

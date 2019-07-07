@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="right|center_vertical"
+    android:orientation="vertical" >
+
+    <!-- Title -->
+    <LinearLayout
+        android:id="@+id/llDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <!-- left space -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" >
+        </LinearLayout>
+        <!-- title -->
+        <TextView
+            android:id="@+id/txtDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/byekan"
+            android:textSize="22dp"
+            android:text="عنوان دیالوگ"/>
+        <!-- title icon -->
+        <ImageView
+            android:id="@+id/imgIconDialog"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:visibility="gone" />
+        <!-- right space -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" >
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- space line -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_500"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="2dp"
+        android:visibility="visible" >
+    </LinearLayout>
+
+    <!-- Layout Meghdari -->
+    <LinearLayout
+        android:id="@+id/lMeghdari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_300"
+        android:gravity="right|center_vertical"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <!-- body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <!-- text -->
+            <TextView
+                android:id="@+id/tvMeghdari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:fontFamily="@font/byekan"
+                android:textColor="@color/grey_1000"
+                android:textSize="16sp"
+                android:text="مقدار/عبارت مورد نظر را وارد نمایید:"/>
+            <!-- input text -->
+            <ir.saa.android.mt.components.EditTextFont
+                android:id="@+id/etMeghdari"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:fontFamily="@font/byekan"
+                android:gravity="right"
+                android:inputType="text"
+                android:textAlignment="gravity"
+                android:textSize="16sp"
+                android:text="مقدار/عبارت"/>
+        </LinearLayout>
+        <!-- buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnMeghdari_Close"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginRight="4dp"
+                android:gravity="center"
+                android:textColor="@color/ms_white"
+                android:textSize="16sp"
+                android:text="انصراف"/>
+
+            <Button
+                android:id="@+id/btnMeghdari_Save"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="4dp"
+                android:gravity="center"
+                android:textColor="@color/ms_white"
+                android:textSize="16sp"
+                android:text="ثبت"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+    <!-- Layout Taki -->
+    <LinearLayout
+        android:id="@+id/lTakEntekhabi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_300"
+        android:gravity="right|center_vertical"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <!-- body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical">
+            <!-- text -->
+            <TextView
+                android:id="@+id/tvTak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:fontFamily="@font/byekan"
+                android:textColor="@color/grey_1000"
+                android:textSize="16sp"
+                android:text="مقدار/عبارت مورد نظر را انتخاب نمایید:"/>
+            <!-- input -->
+            <RadioGroup
+                android:id="@+id/rgTak"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:layoutDirection="rtl">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="24dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_900"
+                    android:layoutDirection="rtl"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:text="گزینه اول"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="24dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_900"
+                    android:layoutDirection="rtl"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:text="گزینه دوم"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="24dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_900"
+                    android:layoutDirection="rtl"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:text="گزینه سوم"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="24dp"
+                    android:fontFamily="@font/byekan"
+                    android:textSize="16sp"
+                    android:textColor="@color/grey_900"
+                    android:layoutDirection="rtl"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:text="گزینه چهارم"/>
+            </RadioGroup>
+        </LinearLayout>
+        <!-- buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnTak_Close"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginRight="4dp"
+                android:gravity="center"
+                android:textColor="@color/ms_white"
+                android:textSize="16sp"
+                android:text="انصراف"/>
+
+            <Button
+                android:id="@+id/btnTak_Save"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="4dp"
+                android:gravity="center"
+                android:textColor="@color/ms_white"
+                android:textSize="16sp"
+                android:text="ثبت"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+    <!-- Layout Chand -->
+    <LinearLayout
+        android:id="@+id/lChandEntekhabi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_300"
+        android:gravity="right|center_vertical"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <!-- body -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:orientation="vertical">
+            <!-- text -->
+            <TextView
+                android:id="@+id/tvChand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:fontFamily="@font/byekan"
+                android:textColor="@color/grey_1000"
+                android:textSize="16sp"
+                android:text="مقدار/عبارت مورد نظر را انتخاب نمایید:"/>
+            <!-- input -->
+            <CheckBox
+                android:id="@+id/chBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:fontFamily="@font/byekan"
+                android:textSize="16sp"
+                android:textColor="@color/grey_900"
+                android:text="مورد اول"/>
+            <CheckBox
+                android:id="@+id/chBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:fontFamily="@font/byekan"
+                android:textSize="16sp"
+                android:textColor="@color/grey_900"
+                android:text="مورد دوم"/>
+            <CheckBox
+                android:id="@+id/chBox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:fontFamily="@font/byekan"
+                android:textSize="16sp"
+                android:textColor="@color/grey_900"
+                android:text="مورد سوم"/>
+            <CheckBox
+                android:id="@+id/chBox4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:fontFamily="@font/byekan"
+                android:textSize="16sp"
+                android:textColor="@color/grey_900"
+                android:text="مورد چهارم"/>
+        </LinearLayout>
+        <!-- buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnChand_Close"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginRight="4dp"
+                android:gravity="center"
+                android:textColor="@color/ms_white"
+                android:textSize="16sp"
+                android:text="انصراف"/>
+
+            <Button
+                android:id="@+id/btnChand_Save"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="4dp"
+                android:gravity="center"
+                android:textColor="@color/ms_white"
+                android:textSize="16sp"
+                android:text="ثبت"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

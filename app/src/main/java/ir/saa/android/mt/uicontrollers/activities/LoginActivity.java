@@ -1,27 +1,10 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
-import android.Manifest;
-import android.app.Activity;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.databinding.DataBindingUtil;
-import android.databinding.ObservableInt;
-import android.graphics.Color;
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Handler;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.WindowManager;
@@ -30,21 +13,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DeviceSerial;
-import ir.saa.android.mt.model.entities.ImiRegisterInput;
+import ir.saa.android.mt.model.entities.IMEI_RegisterInput;
 import ir.saa.android.mt.model.entities.RelUser;
 
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
@@ -108,80 +88,82 @@ public class LoginActivity extends AppCompatActivity {
 
         spinner.setAdapter(adapter);
 
+
         adapterInit();
 
-        deviceSerialViewModel.IsValidImi.observe(this, new android.arch.lifecycle.Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean){
-                    boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
-                    if (isLoginValid) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.UsernameOrPassword_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                        fancyToast.show();
-                    }
-                }else {
-                    Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.UsernamenotValid_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                    fancyToast.show();
-                }
-            }
-        });
+
 
         findViewById(R.id.btnLogin).setOnClickListener(v -> {
 
-                //Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
-            DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
-
-            if(deviceSerial!=null) {
-                if (deviceSerial.isActive == false) {
-                    ImiRegisterInput imiRegisterInput = new ImiRegisterInput();
-                    imiRegisterInput.regionId = deviceSerial.regionId;
-                    imiRegisterInput.handHeldSerial = deviceSerial.SerialId;
-                    deviceSerialViewModel.confirmImi(imiRegisterInput);
-
-                } else {
-                        boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
-                        if (isLoginValid) {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-
-
-                        } else {
-                            Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.UsernameOrPassword_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-                            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                            fancyToast.show();
-                        }
-                }
-            }else {
-                boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
-                if (isLoginValid) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-
-
-                } else {
-                    Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.UsernameOrPassword_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                    fancyToast.show();
-                }
+            boolean isLoginValid = loginViewModel.IsLoginValid(spinnerMap.get(spinner.getSelectedItemPosition()), edtPassword.getText().toString());
+            if (isLoginValid) {
+                G.setPref(SharePrefEnum.EmpName,spinner.getSelectedItem().toString());
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                this.finish();
+            } else {
+                Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.UsernameOrPassword_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
             }
-
         });
 
-        loginViewModel.getUsers().observe(this, relUsers -> {
+        String regionId = G.getPref(SharePrefEnum.RegionId);
+
+        if(regionId!=null ) {
+            getUserByRegion(Integer.valueOf(regionId));
+        }else{
+            getAllUser();
+        }
+
+    }
+
+    private void getAllUser(){
+
+        if(spinnerMap.size()==0) {
+            loginViewModel.getUsers().observe(this, relUsers -> {
+                spinnerArray.clear();
+                spinnerMap.clear();
+                for (int i = 0; i < relUsers.size(); i++) {
+                    spinnerMap.put(i, relUsers.get(i).UserID);
+                    spinnerArray.add(relUsers.get(i).FirstName + " " + relUsers.get(i).LastName);
+                }
+                adapter.notifyDataSetChanged();
+                setSpinnerLastIndex();
+
+            });
+
+        }
+    }
+
+    private void getUserByRegion(int regionId){
+        loginViewModel.getUsersByRegion(Integer.valueOf(regionId)).observe(this, relUsers -> {
             spinnerArray.clear();
             spinnerMap.clear();
+
+            if( relUsers.size()==0){
+                getAllUser();
+                return;
+            }
+
             for (int i = 0; i < relUsers.size(); i++) {
                 spinnerMap.put(i, relUsers.get(i).UserID);
                 spinnerArray.add(relUsers.get(i).FirstName + " " + relUsers.get(i).LastName);
             }
             adapter.notifyDataSetChanged();
-        });
+            setSpinnerLastIndex();
 
+        });
+    }
+
+    private void setSpinnerLastIndex() {
+        String empName = G.getPref(SharePrefEnum.EmpName);
+        if (empName != null)
+            for (int i = 0; i < spinner.getCount(); i++) {
+                if (spinner.getItemAtPosition(i).equals(empName)) {
+                    spinner.setSelection(i);
+                }
+            }
     }
 
     private void adapterInit() {

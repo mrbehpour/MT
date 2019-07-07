@@ -31,7 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:textSize="16sp"
                 android:gravity="left|center_vertical"
                 android:textAlignment="gravity"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:textSize="16sp"
                 android:gravity="right|center_vertical"
                 android:textAlignment="gravity"
@@ -71,7 +71,7 @@
         <!-- End Test Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnTaeed"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="0.5"
@@ -85,7 +85,7 @@
         <!-- End Test Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnStart"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="0.5"

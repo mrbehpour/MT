@@ -36,7 +36,7 @@
                     android:id="@+id/tvErrPerc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="18sp"
                     android:layout_marginRight="10dp"
                     android:gravity="center"
@@ -49,7 +49,7 @@
                     android:id="@+id/tvErrPercTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="18sp"
                     android:layout_marginRight="16dp"
                     android:gravity="center"
@@ -75,7 +75,7 @@
                     <!--android:id="@+id/tvEnergi"-->
                     <!--android:layout_width="wrap_content"-->
                     <!--android:layout_height="wrap_content"-->
-                    <!--android:fontFamily="@font/byekan"-->
+                    <!--android:fontFamily="@fonts/byekan"-->
                     <!--android:textSize="18sp"-->
                     <!--android:gravity="center"-->
                     <!--android:layout_alignParentLeft="true"-->
@@ -89,7 +89,7 @@
                     android:id="@+id/tvTestRoundNum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="18sp"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
@@ -103,7 +103,7 @@
                     android:id="@+id/tvTestRoundNumTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="18sp"
                     android:layout_marginRight="16dp"
                     android:gravity="center"
@@ -130,15 +130,17 @@
             android:clickable="true"
             android:background="@drawable/manual_paulser"
             android:layout_width="220dp"
-            android:layout_height="80dp" />
+            android:layout_height="110dp" />
 
         <TextView
             android:id="@+id/txtManualPaulseNum"
+            android:background="@drawable/layout_border"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_toLeftOf="@+id/imgManualPaulse"
+            android:layout_marginRight="20sp"
             android:layout_marginLeft="30dp"
             android:layout_centerVertical="true"
             android:text="0"/>
@@ -164,7 +166,7 @@
         <!-- Save Test Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnSaveTestResult"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="0.33"
@@ -180,7 +182,7 @@
         <!-- End Test Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnFinishTest"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="0.33"
@@ -196,7 +198,7 @@
         <!-- End Test Button -->
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnStartTest"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="0.33"

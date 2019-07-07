@@ -52,7 +52,9 @@ public class G extends Application {
     public static DrawerLayout mDrawerLayout;
     public static View fragmentDrawer;
     public static ClientInfo clientInfo;
-    public static String MY_VERSION = "" ;
+
+    public static String MY_VERSION = "1.0.36" ;
+    public static String RELEASE_DATE = "1398-04-03" ;
 
     public static FragmentManager fragmentManager;
     public static Integer currentFragmentNum = null;
@@ -79,7 +81,7 @@ public class G extends Application {
             e.printStackTrace();
         }
         //int versionNumber = pinfo.versionCode;
-        MY_VERSION = pinfo.versionName;
+        //MY_VERSION = pinfo.versionName;
     }
 
     public static void removePref(String prefName){

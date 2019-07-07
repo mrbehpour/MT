@@ -22,7 +22,7 @@
             <!--android:layout_marginLeft="4dp"-->
             <!--android:layout_marginBottom="4dp"-->
             <!--android:textAlignment="center"-->
-            <!--android:fontFamily="@font/byekan"-->
+            <!--android:fontFamily="@fonts/byekan"-->
             <!--android:text="جستجو"/>-->
 
         <android.support.v7.widget.SearchView

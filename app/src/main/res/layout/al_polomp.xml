@@ -7,7 +7,7 @@
     <!-- Polomp Kontor Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnPolompKontor"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
@@ -19,7 +19,7 @@
     <!-- Polomp CT Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnPolompCT"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -31,7 +31,7 @@
     <!-- Polomp Fiyuz Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnPolompFiyuz"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"

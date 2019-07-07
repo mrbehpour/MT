@@ -6,23 +6,12 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
-import com.google.gson.Gson;
-
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
-import io.reactivex.Scheduler;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
-import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DeviceSerial;
-import ir.saa.android.mt.model.entities.ImiRegisterInput;
+import ir.saa.android.mt.model.entities.IMEI_RegisterInput;
 import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.repositories.retrofit.DataClass;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
@@ -33,8 +22,8 @@ public class DeviceSerialViewModel extends AndroidViewModel {
     DeviceSerialRepo deviceSerialRepo=null;
     RegionRepo regionRepo=null;
     RetrofitMT retrofitMT=null;
-    public MutableLiveData<Boolean> IsRegisterImi;
-    public MutableLiveData<Boolean> IsValidImi;
+    public MutableLiveData<Integer> IsRegisterIMEI;
+    public MutableLiveData<Boolean> IsValidIMEI;
     public MutableLiveData<Boolean> IsCompleted;
 
     public DeviceSerialViewModel(@NonNull Application application) {
@@ -50,16 +39,15 @@ public class DeviceSerialViewModel extends AndroidViewModel {
             deviceSerialRepo=new DeviceSerialRepo(application);
        }
 
-       if(IsRegisterImi==null){
-           IsRegisterImi=new MutableLiveData<>();
+       if(IsRegisterIMEI ==null){
+           IsRegisterIMEI =new MutableLiveData<>();
        }
-       if(IsValidImi==null){
-           IsValidImi=new MutableLiveData<>();
+       if(IsValidIMEI ==null){
+           IsValidIMEI =new MutableLiveData<>();
        }
        if(IsCompleted==null){
            IsCompleted=new MutableLiveData<>();
        }
-
 
     }
 
@@ -88,35 +76,35 @@ public class DeviceSerialViewModel extends AndroidViewModel {
                 retrofitMT=RetrofitMT.getInstance();
             }
 
-
-
-
     }
 
-    public void registerImi(ImiRegisterInput imiRegisterInput){
+    public void registerIMEI(IMEI_RegisterInput IMEIRegisterInput){
 //        String add= G.getPref(SharePrefEnum.AddressServer);
 //        Gson gson=new Gson();
 //        String val= gson.toJson(imiRegisterInput);
-        retrofitMT.getMtApi().RegisterDeviceImi(imiRegisterInput)
+        retrofitMT.getMtApi().RegisterDeviceIMEI(IMEIRegisterInput)
                  .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableSingleObserver<DataClass<Integer>>() {
                     @Override
                     public void onSuccess(DataClass<Integer> integerDataClass) {
+
+                        DeviceSerial deviceSerial=new DeviceSerial();
+                        deviceSerial.isActive=false;
+                        deviceSerial.regionId= IMEIRegisterInput.regionId;
+                        deviceSerial.SerialId= IMEIRegisterInput.handHeldSerial;
+                        deviceSerialRepo.insertDeviceSerial(deviceSerial);
+
                         if(integerDataClass.Success && integerDataClass.Data==0){
-                            DeviceSerial deviceSerial=new DeviceSerial();
-                            deviceSerial.isActive=false;
-                            deviceSerial.regionId=imiRegisterInput.regionId;
-                            deviceSerial.SerialId=imiRegisterInput.handHeldSerial;
-                            deviceSerialRepo.insertDeviceSerial(deviceSerial);
-                            IsRegisterImi.postValue(true);
-                        }else if (integerDataClass.Success==false && integerDataClass.Data>0){
-                            DeviceSerial deviceSerial=new DeviceSerial();
-                            deviceSerial.isActive=false;
-                            deviceSerial.regionId=imiRegisterInput.regionId;
-                            deviceSerial.SerialId=imiRegisterInput.handHeldSerial;
-                            deviceSerialRepo.deleteDeviceSerial(deviceSerial);
-                            deviceSerialRepo.insertDeviceSerial(deviceSerial);
-                            IsRegisterImi.postValue(true);
+                            //Save And Wait For Confirm
+                            IsRegisterIMEI.postValue(0);
+                        }else{
+                            if (integerDataClass.Data>0) {
+                                //Save Before
+                                IsRegisterIMEI.postValue(1);
+                            }else{
+                                //Not Saved
+                                IsRegisterIMEI.postValue(2);
+                            }
                         }
 
                     }
@@ -128,8 +116,8 @@ public class DeviceSerialViewModel extends AndroidViewModel {
                 });
     }
 
-    public void confirmImi(ImiRegisterInput imiRegisterInput) {
-        retrofitMT.getMtApi().GetImiConfirmStatus(imiRegisterInput)
+    public void confirmIMEI(IMEI_RegisterInput IMEIRegisterInput) {
+        retrofitMT.getMtApi().GetIMEIConfirmStatus(IMEIRegisterInput)
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableSingleObserver<DataClass<Boolean>>() {
                     @Override
@@ -138,19 +126,19 @@ public class DeviceSerialViewModel extends AndroidViewModel {
 
                             DeviceSerial deviceSerial=new DeviceSerial();
                             deviceSerial.isActive=true;
-                            deviceSerial.SerialId=imiRegisterInput.handHeldSerial;
-                            deviceSerial.regionId=imiRegisterInput.regionId;
+                            deviceSerial.SerialId= IMEIRegisterInput.handHeldSerial;
+                            deviceSerial.regionId= IMEIRegisterInput.regionId;
                             deviceSerialRepo.updateDeviceSerial(deviceSerial);
-                            IsValidImi.postValue(true);
+                            IsValidIMEI.postValue(true);
 
                         }else{
-                            IsValidImi.postValue(false);
+                            IsValidIMEI.postValue(false);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        String a = e.getMessage();
                     }
                 });
 
@@ -161,10 +149,6 @@ public class DeviceSerialViewModel extends AndroidViewModel {
 
     public DeviceSerial getDeviceSerial(String SerialID){
         return deviceSerialRepo.getDeviceSerialById(SerialID);
-    }
-
-    public LiveData<List<DeviceSerial>> getDeviceSerials(){
-        return deviceSerialRepo.getDeviceSerials();
     }
 
     public LiveData<List<Region>> getRegion(){

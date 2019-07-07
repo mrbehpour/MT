@@ -33,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.36"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text=""/>
@@ -45,7 +45,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.32"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="زمان تست"/>
@@ -57,7 +57,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.32"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="درصد خطا"/>
@@ -77,7 +77,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.36"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="ضریب توان C"/>
@@ -89,7 +89,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.32"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="ضریب توان B"/>
@@ -101,7 +101,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.32"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="ضریب توان A"/>
@@ -121,7 +121,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.36"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="ولتاژ فاز C"/>
@@ -133,7 +133,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.32"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="ولتاژ فاز B"/>
@@ -145,7 +145,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.32"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="ولتاژ فاز A"/>
@@ -165,7 +165,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.36"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="جریان فاز C"/>
@@ -177,7 +177,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.32"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="جریان فاز B"/>
@@ -189,7 +189,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="0.32"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="جریان فاز A"/>
@@ -203,7 +203,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_marginRight="8dp"
-            android:fontFamily="@font/byekan"
+            android:fontFamily="@fonts/byekan"
             android:textSize="30sp"
             android:textColor="@color/grey_600"
             android:gravity="center_vertical|center_horizontal"
