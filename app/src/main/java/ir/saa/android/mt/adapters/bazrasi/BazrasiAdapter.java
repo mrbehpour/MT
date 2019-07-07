@@ -146,7 +146,14 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
 
                                 dialog.clearAllPanel();
 
-                                myCheckList =
+                                if(answerGroupDtls.size()==0) {
+                                    Toast fancyToast= FancyToast.makeText((AppCompatActivity)context, (String) G.context.getResources().getText(R.string.AnswerGroupEmpty_msg),FancyToast.LENGTH_SHORT,FancyToast.ERROR,false);
+                                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                    fancyToast.show();
+                                    return;
+                                }
+
+                                    myCheckList =
                                         new MyCheckList(G.context
                                                 , new MyCheckListItem(answerGroupDtls.get(0).AnswerGroupDtlName, answerGroupDtls.get(0).AnswerGroupDtlID),
                                                 new MyCheckListItem(answerGroupDtls.get(1).AnswerGroupDtlName, answerGroupDtls.get(1).AnswerGroupDtlID));
@@ -155,6 +162,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                             answerGroupDtls.get(i).AnswerGroupDtlID));
 
                                 }
+
                                 dialog.clearButtonPanel();
 
                                 myCheckList.setCheckListOrientation(LinearLayout.VERTICAL)

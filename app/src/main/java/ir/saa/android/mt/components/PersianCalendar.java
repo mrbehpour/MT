@@ -304,8 +304,8 @@ public class PersianCalendar {
 		String  second=String.valueOf( c.get(Calendar.SECOND));
 		if(second.length()==1)  second="0"+second;
 
-		return String.format("%s%s%s", hour,minute,second);
-
+		//return String.format("%s%s%s", hour,minute,second);
+		return String.format("%s%s", hour,minute);
 	}
 
 	public static String convertToPersianDateFormat(String DateStr){

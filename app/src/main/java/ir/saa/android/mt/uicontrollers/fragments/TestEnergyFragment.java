@@ -14,9 +14,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.repositories.metertester.ElectericalParams;
 import ir.saa.android.mt.repositories.metertester.EnergiesState;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.TestEnergyViewModel;
@@ -25,6 +28,10 @@ public class TestEnergyFragment extends Fragment
 {
     TestEnergyViewModel testEnergyViewModel = null;
     TestContorParams testContorParams;
+
+    TextView tvVR,tvVS,tvVT;
+    TextView tvIR,tvIS,tvIT;
+    TextView tvPFR,tvPFS,tvPFT;
 
     public TestEnergyFragment() {
     }
@@ -44,12 +51,11 @@ public class TestEnergyFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_test_energy, container, false);
         testEnergyViewModel = ViewModelProviders.of(this).get(TestEnergyViewModel.class);
-
+        initObjects(rootView);
         Bundle args = getArguments();
         if (args != null) {
             testContorParams = (TestContorParams)args.getSerializable(BundleKeysEnum.TestContorParams);
         }
-
 
         LinearLayout llLeft = rootView.findViewById(R.id.llLeft);
         LinearLayout llCenter = rootView.findViewById(R.id.llCenter);
@@ -83,6 +89,15 @@ public class TestEnergyFragment extends Fragment
                 }
         );
 
+        testEnergyViewModel.sanjeshResultMutableLiveData.observe(this, new Observer<List<ElectericalParams>>() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onChanged(@Nullable List<ElectericalParams> sanjeshResult) {
+                        showSanjeshResult(sanjeshResult);
+                    }
+                }
+        );
+
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,9 +116,42 @@ public class TestEnergyFragment extends Fragment
         return rootView;
     }
 
+    private void initObjects(View rootView){
+
+        tvVR = rootView.findViewById(R.id.tvR_V);
+        tvVS = rootView.findViewById(R.id.tvS_V);
+        tvVT = rootView.findViewById(R.id.tvT_V);
+
+        tvIR = rootView.findViewById(R.id.tvR_I);
+        tvIS = rootView.findViewById(R.id.tvS_I);
+        tvIT = rootView.findViewById(R.id.tvT_I);
+
+        tvPFR = rootView.findViewById(R.id.tvR_PF);
+        tvPFS = rootView.findViewById(R.id.tvS_PF);
+        tvPFT = rootView.findViewById(R.id.tvT_PF);
+    }
+
+    private void showSanjeshResult(List<ElectericalParams> sanjeshResult) {
+
+        tvVR.setText(sanjeshResult.get(0).AVRMS);
+        tvIR.setText(sanjeshResult.get(0).AIRMS);
+        tvPFR.setText(sanjeshResult.get(0).ANGLE0);
+
+        tvVS.setText(sanjeshResult.get(1).AVRMS);
+        tvIS.setText(sanjeshResult.get(1).AIRMS);
+        tvPFS.setText(sanjeshResult.get(1).ANGLE0);
+
+        tvVT.setText(sanjeshResult.get(2).AVRMS);
+        tvIT.setText(sanjeshResult.get(2).AIRMS);
+        tvPFT.setText(sanjeshResult.get(2).ANGLE0);
+
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+
 
 }

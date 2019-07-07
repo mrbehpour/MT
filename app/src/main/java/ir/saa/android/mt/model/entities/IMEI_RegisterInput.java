@@ -1,6 +1,6 @@
 package ir.saa.android.mt.model.entities;
 
-public class ImiRegisterInput {
+public class IMEI_RegisterInput {
 
     public String handHeldSerial;
 

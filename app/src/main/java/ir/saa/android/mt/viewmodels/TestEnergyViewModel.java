@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -18,6 +19,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
+import ir.saa.android.mt.repositories.metertester.ElectericalParams;
 import ir.saa.android.mt.repositories.metertester.EnergiesState;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
@@ -28,11 +30,14 @@ public class TestEnergyViewModel extends AndroidViewModel {
     Timer timerCheck;
 
     public MutableLiveData<EnergiesState> energiesStateMutableLiveData;
+    public MutableLiveData<List<ElectericalParams>> sanjeshResultMutableLiveData;
 
     public TestEnergyViewModel(@NonNull Application application) {
         super(application);
         metertester = MT.getInstance();
+
         energiesStateMutableLiveData = new MutableLiveData<>();
+        sanjeshResultMutableLiveData = new MutableLiveData<>();
 
         timerCheckStart(2000);
     }
@@ -48,6 +53,7 @@ public class TestEnergyViewModel extends AndroidViewModel {
             @Override
             public void run() {
                 readEnergiesStateFromMeter();
+                readElectricalParams();
             }
 
         };
@@ -81,6 +87,16 @@ public class TestEnergyViewModel extends AndroidViewModel {
         try {
             energiesState = metertester.ReadEnergiesState();
             energiesStateMutableLiveData.postValue(energiesState);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readElectricalParams(){
+        List<ElectericalParams> sanjeshResult;
+        try {
+            sanjeshResult = metertester.ReadAllElectericalParams();
+            sanjeshResultMutableLiveData.postValue(sanjeshResult);
         } catch (Exception e) {
             e.printStackTrace();
         }

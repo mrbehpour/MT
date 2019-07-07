@@ -2,6 +2,8 @@ package ir.saa.android.mt.uicontrollers.activities;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -42,7 +44,7 @@ import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DeviceSerial;
-import ir.saa.android.mt.model.entities.ImiRegisterInput;
+import ir.saa.android.mt.model.entities.IMEI_RegisterInput;
 import ir.saa.android.mt.model.entities.Region;
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
 
@@ -70,6 +72,20 @@ public class SendSerialActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                loadRegionList();
+                //tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
+
     private void connectToModuleDialog(){
 
         progressDialog=new ProgressDialog(this);
@@ -94,9 +110,7 @@ public class SendSerialActivity extends AppCompatActivity {
     }
 
 
-
-
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
@@ -104,73 +118,74 @@ public class SendSerialActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sendserial);
         if(G.getPref(SharePrefEnum.FontSize)!=null) {
             adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
-
         }
 
-        deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
-        DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+        G.setPref(SharePrefEnum.DeviceId,getDeviceIMEI());
 
-        if(deviceSerial!=null) {
-            if(deviceSerial.isActive) {
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
-                this.finish();
-                return;
-            }
-        }
         checkAndRequestPermissions();
-        laySettings=(LinearLayout)findViewById(R.id.laySettings);
 
-        laySettings.setOnClickListener(new View.OnClickListener() {
+        deviceSerialViewModel = ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
+
+        if(checkSerialNumIsActive()){
+            startLoginActivity();
+            return;
+        }else {
+            Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.NotRegisteredIMEI_msg), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+        }
+
+        initControls();
+        initSpinnerAdapter();
+        loadRegionList();
+
+        deviceSerialViewModel.IsCompleted.observe(this, new Observer<Boolean>() {
             @Override
-            public void onClick(View view) {
-               Intent intent=new Intent(SendSerialActivity.this,SettingActivity.class);
-               Bundle b = new Bundle();
-               b.putBoolean("CallFromLogin", true);
-               startActivity(intent);
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(aBoolean){
+                    HideProgressDialog();
+                }
             }
         });
 
+        deviceSerialViewModel.IsRegisterIMEI.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer registerStatus) {
+                Toast fancyToast;
+                switch (registerStatus){
+                    case 0:
+                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.WaitForIMEIConfirm_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
 
-        if(G.getPref(SharePrefEnum.AddressServer)!=null) {
-            if (isNetworkConnected()) {
-                if (isInternetAvailable()) {
-                    if(Ping(G.getPref(SharePrefEnum.AddressServer).substring(7).split(":")[0])) {
-                        deviceSerialViewModel.getRegionFromServer();
-                        connectToModuleDialog();
+                    case 1:
+                        checkDeviceRegistration();
+                        startLoginActivity();
+                        break;
 
-                    }
+                    case 2:
+                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ConnectionFail_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                        break;
+
+                }
+            }
+        });
+
+        deviceSerialViewModel.IsValidIMEI.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean isValid) {
+                if (isValid) {
+                    G.setPref(SharePrefEnum.RegionId,String.valueOf(spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition())));
+                    startLoginActivity();
                 } else {
-                    //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
-                    Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.AccessServerError_msg), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
+                    Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NotConfirmedIMEI_msg), FancyToast.LENGTH_LONG, FancyToast.WARNING, false);
                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     fancyToast.show();
                 }
-            } else {
-                //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
-                Toast fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.ConntecInternet_msg), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
-                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                fancyToast.show();
-                return;
             }
-        }
-
-
-            deviceSerialViewModel.IsCompleted.observe(this, new Observer<Boolean>() {
-                @Override
-                public void onChanged(@Nullable Boolean aBoolean) {
-                    if(aBoolean){
-                        HideProgressDialog();
-                    }else{
-                        HideProgressDialog();
-                    }
-                }
-            });
-
-
-
-
-        adapterInit();
+        });
 
         deviceSerialViewModel.getRegion().observe(this, new Observer<List<Region>>() {
             @Override
@@ -186,9 +201,57 @@ public class SendSerialActivity extends AppCompatActivity {
         });
 
 
-        G.setPref(SharePrefEnum.DeviceId,getDeviceIMEI());
+//        deviceSerialViewModel.getRegion().observe(this, new Observer<List<Region>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Region> regions) {
+//                spinnerArray.clear();
+//                spinnerMapRegion.clear();
+//                for (int i = 0; i < regions.size(); i++) {
+//                    spinnerArray.add(regions.get(i).RegionName);
+//                    spinnerMapRegion.put(i,regions.get(i).RegionID);
+//                }
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
+
+
+
+
+    }
+
+
+
+    private void initControls(){
+
         tvSanjesh=(TextView)findViewById(R.id.tvSerial);
         tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
+
+
+        laySettings=(LinearLayout)findViewById(R.id.laySettings);
+        laySettings.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(SendSerialActivity.this,SettingActivity.class);
+                intent.putExtra("CallFromSendSerial", true);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        btnConfirm=(Button)findViewById(R.id.btnConfirm);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IMEI_RegisterInput IMEIRegisterInput =new IMEI_RegisterInput();
+                IMEIRegisterInput.handHeldSerial=G.getPref(SharePrefEnum.DeviceId);
+                if(spinnerRegion.getSelectedItemPosition()!=-1) {
+                    IMEIRegisterInput.regionId = Short.valueOf(spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition()).toString());
+                    deviceSerialViewModel.registerIMEI(IMEIRegisterInput);
+                }
+            }
+        });
+
+
 
         spinnerRegion=(Spinner)findViewById(R.id.spnOmoor);
         spinnerArray=new ArrayList<>();
@@ -196,50 +259,75 @@ public class SendSerialActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.al_polomp_save_spinner_dropdown);
         spinnerRegion.setAdapter(adapter);
 
-        deviceSerialViewModel.IsRegisterImi.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean){
-
-                    Intent intent=new Intent(SendSerialActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-//        deviceSerialViewModel.getDeviceSerialLiveData(G.getPref(SharePrefEnum.DeviceId)).observe(this, new Observer<DeviceSerial>() {
-//            @Override
-//            public void onChanged(@Nullable DeviceSerial deviceSerial) {
-//                if(deviceSerial!=null){
-//                    Intent intent=new Intent(SendSerialActivity.this,LoginActivity.class);
-//                    startActivity(intent);
-//                    SendSerialActivity.this.finish();
-//                }
-//
-//            }
-//        });
-
-        btnConfirm=(Button)findViewById(R.id.btnConfirm);
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImiRegisterInput  imiRegisterInput=new ImiRegisterInput();
-                imiRegisterInput.handHeldSerial=G.getPref(SharePrefEnum.DeviceId);
-                if(spinnerRegion.getSelectedItemPosition()!=-1) {
-                    imiRegisterInput.regionId = Short.valueOf(spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition()).toString());
-                    deviceSerialViewModel.registerImi(imiRegisterInput);
-                }
-
-            }
-        });
-
-
     }
 
 
+    // Check IMEI Status Offline
+    private boolean checkSerialNumIsActive(){
+        boolean res=false;
+
+        DeviceSerial deviceSerial = deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+        if (deviceSerial != null) {
+            if (deviceSerial.isActive) {
+                res = true;
+            }
+        }
+
+        return res;
+    }
+
+
+    private String checkSerialStatusOnline(){
+        if(isInternetAvailable()) {
+        }
+        return "";
+    }
+
+    //Fill Spinner Region
+    private void loadRegionList(){
+
+        Toast fancyToast;
+        if(G.getPref(SharePrefEnum.AddressServer)!=null) {
+            if (isNetworkConnected()) {
+                if (isInternetAvailable()) {
+                    if(Ping(G.getPref(SharePrefEnum.AddressServer).substring(7).split(":")[0])) {
+                        deviceSerialViewModel.getRegionFromServer();
+                        connectToModuleDialog();
+                    }
+                } else {
+                    //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessagAccessMessage), Toast.LENGTH_SHORT).show();
+                    fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.ConntecInternet_msg), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
+                }
+            } else {
+                //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
+                fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.AccessServerError_msg), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
+                return;
+            }
+        }else {
+            //Toast.makeText(SendSerialActivity.this, getResources().getText(R.string.MessageConntection), Toast.LENGTH_SHORT).show();
+            fancyToast = FancyToast.makeText(SendSerialActivity.this, (String) getResources().getText(R.string.ServerAddressNotSaved_msg), FancyToast.LENGTH_LONG, FancyToast.INFO, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+            return;
+        }
+    }
+
+    //
+    private void checkDeviceRegistration(){
+        //Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
+        DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+        IMEI_RegisterInput IMEIRegisterInput = new IMEI_RegisterInput();
+        IMEIRegisterInput.regionId = deviceSerial.regionId;
+        IMEIRegisterInput.handHeldSerial = deviceSerial.SerialId;
+        deviceSerialViewModel.confirmIMEI(IMEIRegisterInput);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     private  void checkAndRequestPermissions() {
-
 
         String [] permissions=new String[]{
                 Manifest.permission.ACCESS_NETWORK_STATE,
@@ -266,16 +354,25 @@ public class SendSerialActivity extends AppCompatActivity {
             requestPermissions(listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),MY_PERMISSIONS_REQUEST);
         }
     }
+
+
+
+    private void startLoginActivity(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        this.finish();
+    }
+
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return cm.getActiveNetworkInfo() != null;
     }
 
-    public boolean isInternetAvailable() {
+    private boolean isInternetAvailable() {
         final ConnectivityManager connectivityManager = ((ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE));
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
+
     private boolean Ping(String IP){
         System.out.println("executeCommand");
         Runtime runtime = Runtime.getRuntime();
@@ -302,17 +399,18 @@ public class SendSerialActivity extends AppCompatActivity {
         }
         return false;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
         Log.e("Req Code", "" + requestCode);
 
         switch (requestCode){
             case MY_PERMISSIONS_REQUEST:
-                adapterInit();
+                initSpinnerAdapter();
         }
     }
 
-    private void adapterInit() {
+    private void initSpinnerAdapter() {
         //spinnerArray.clear();
         if (deviceSerialViewModel.getRegion().getValue() != null) {
             for (Region region : deviceSerialViewModel.getRegion().getValue()) {

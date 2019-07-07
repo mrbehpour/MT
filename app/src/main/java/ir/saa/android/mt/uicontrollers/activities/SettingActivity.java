@@ -1,5 +1,6 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -57,7 +58,7 @@ public class SettingActivity extends AppCompatActivity {
     RadioButton rbtHuge;
     RetrofitMT retrofitMT=null;
     DeviceSerialViewModel deviceSerialViewModel=null;
-    int myInt;
+    Boolean callFromLoginAct;
 
     HashMap<String, Integer> spinnerMap = new HashMap<String, Integer>();
     public  void adjustFontScale(Configuration configuration, Float fontSize) {
@@ -80,23 +81,15 @@ public class SettingActivity extends AppCompatActivity {
         DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
         Bundle b = getIntent().getExtras();
+
         if(b != null) {
-            Boolean callFromLoginAct = b.getBoolean("CallFromLogin");
-            if(callFromLoginAct) {
-                if (deviceSerial != null) {
-                    Intent intent = new Intent(this, LoginActivity.class);
-                    startActivity(intent);
-                    this.finish();
-                    return;
-                }
-            }
+            callFromLoginAct = b.getBoolean("CallFromSendSerial");
+        }else{
+            callFromLoginAct = false;
         }
 
-
-
-
         edtServerAddress = findViewById(R.id.edtServerAddress);
-        edtCorrectCoeff = findViewById(R.id.edtCoeff);
+        //edtCorrectCoeff = findViewById(R.id.edtCoeff);
 
         btnTestConnection = findViewById(R.id.btnTestConnection);
 
@@ -159,7 +152,7 @@ public class SettingActivity extends AppCompatActivity {
 
         //-Coeff
         if(G.getPref(SharePrefEnum.CorrectCoeff)!=null) {
-            edtCorrectCoeff.setText(G.getPref(SharePrefEnum.CorrectCoeff));
+            //edtCorrectCoeff.setText(G.getPref(SharePrefEnum.CorrectCoeff));
         }
 
         btnTestConnection.setOnClickListener(new View.OnClickListener() {
@@ -187,8 +180,9 @@ public class SettingActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 G.setPref(SharePrefEnum.AddressServer,edtServerAddress.getText().toString());
-                G.setPref(SharePrefEnum.CorrectCoeff,edtCorrectCoeff.getText().toString());
+                //G.setPref(SharePrefEnum.CorrectCoeff,edtCorrectCoeff.getText().toString());
 
                 if(G.getPref(SharePrefEnum.FontSize)!=null) {
                     adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
@@ -202,18 +196,30 @@ public class SettingActivity extends AppCompatActivity {
                 Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                 fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                 fancyToast.show();
-                Intent intent=new Intent(SettingActivity.this, SendSerialActivity.class);
-                startActivity(intent);
-                SettingActivity.this.finish();
+
+
+                if(callFromLoginAct) {
+                    Intent myIntent = new Intent(SettingActivity.this, SplashScreenActivity.class);
+                    SettingActivity.this.startActivity(myIntent);
+                    finish();
+
+//                    Intent returnIntent = new Intent();
+//                    setResult(Activity.RESULT_OK,returnIntent);
+//                    finish();
+                }else {
+                    SettingActivity.this.finish();
+                }
 
             }
         });
+
         //-BlueTooth
         moduleViewModel = ViewModelProviders.of(this).get(ModuleViewModel.class);
         swBluetooth=(SwitchCompat)findViewById(R.id.swBluetooth);
         //spinnerArray=new ArrayList<>();
         spinner = (Spinner) findViewById(R.id.spnPaired);
         spinnerRead=(Spinner)findViewById(R.id.spnPairedRead);
+
         moduleViewModel.listBluetoothName.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(@Nullable List<String> strings) {
@@ -225,6 +231,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
+
         moduleViewModel.bluetoothIsEnable().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
@@ -246,6 +253,7 @@ public class SettingActivity extends AppCompatActivity {
                 }
             }
         });
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
@@ -260,6 +268,7 @@ public class SettingActivity extends AppCompatActivity {
                 //or this can be also right: selecteditem = level[i];
             }
         });
+
         spinnerRead.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView adapter, View view, int i, long l) {
@@ -316,8 +325,6 @@ public class SettingActivity extends AppCompatActivity {
 
     private void fillPairedDeviceSpinner(List<String> spinnerArray){
 
-
-
         adapter = new ArrayAdapter<>(this, R.layout.al_majol_spinner_item,spinnerArray );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -326,14 +333,15 @@ public class SettingActivity extends AppCompatActivity {
         for(int i=0;i<spinnerArray.size();i++){
             spinnerMap.put(spinnerArray.get(i).toString(),i);
         }
+
         if( G.getPref(SharePrefEnum.ModuleBluetoothName)!=null && spinnerMap.size()!=0) {
             if(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName))!=null) {
                 spinner.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothName)));
             }
-
         }
 
     }
+
     private void fillPairedDeviceSpinnerRead(List<String> spinnerArray){
 
         adapterRead=new ArrayAdapter<>(this, R.layout.al_majol_spinner_item_read,spinnerArray );
@@ -350,4 +358,6 @@ public class SettingActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

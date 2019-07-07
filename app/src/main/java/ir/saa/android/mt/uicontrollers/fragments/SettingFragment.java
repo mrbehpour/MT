@@ -87,7 +87,7 @@ public class SettingFragment extends Fragment {
         }
 
         edtServerAddress = rootView.findViewById(R.id.edtServerAddress);
-        edtCorrectCoeff = rootView.findViewById(R.id.edtCoeff);
+        //edtCorrectCoeff = rootView.findViewById(R.id.edtCoeff);
 
         btnSave=rootView.findViewById(R.id.btnSave);
         //-Fontsize
@@ -282,7 +282,6 @@ public class SettingFragment extends Fragment {
             if(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothNameRead))!=null) {
                 spinnerRead.setSelection(spinnerMap.get(G.getPref(SharePrefEnum.ModuleBluetoothNameRead)));
             }
-
         }
 
     }

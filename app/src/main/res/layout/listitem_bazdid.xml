@@ -36,7 +36,7 @@
                     android:layout_marginRight="4dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:textAlignment="gravity"
@@ -48,7 +48,7 @@
                     android:id="@+id/tvLableName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:text="@string/JointName" />
@@ -68,7 +68,7 @@
                     android:layout_weight="1"
                     android:textAlignment="gravity"
                     android:gravity="right"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_500"
                     android:text="@string/DashSign" />
@@ -77,7 +77,7 @@
                     android:id="@+id/tvUniqueTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_500"
                     android:text="@string/SerialNumber" />
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="gravity"
                     android:gravity="right"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="12sp"
                     android:textColor="@color/grey_500"
                     android:text="@string/DashSign" />
@@ -106,7 +106,7 @@
                     android:id="@+id/tvLableAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="12sp"
                     android:textColor="@color/grey_500"
                     android:text="@string/Address" />
@@ -180,7 +180,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="center_horizontal"
                 android:textAlignment="gravity"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:textSize="16sp"
                 android:textColor="@color/grey_700"
                 android:text="@string/DashSign"/>

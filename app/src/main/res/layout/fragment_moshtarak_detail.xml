@@ -19,7 +19,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvEshterak"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -30,7 +30,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelEshterak"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/Eshterak"
@@ -59,7 +59,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvShenasae"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -70,7 +70,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelShenasae"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/Shenas"
@@ -99,7 +99,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvParvandeh"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -110,7 +110,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelParvandeh"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/Parvande"
@@ -140,7 +140,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvRamz"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -151,7 +151,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelRamz"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/Ramz"
@@ -181,7 +181,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvShomareBadane"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -192,7 +192,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelSomareBadane"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/SerialNumber"
@@ -220,7 +220,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvNoeKontor"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -231,7 +231,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelNoeKontor"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/MeterType"
@@ -259,7 +259,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvAmperazh"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -270,7 +270,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelAmperazh"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/Amp"
@@ -298,7 +298,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvNoeTarefe"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -309,7 +309,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelNoeTarefe"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/TariffType"
@@ -339,7 +339,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvNoeVoltazh"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -350,7 +350,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelNoeVoltazh"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/VoltType"
@@ -378,7 +378,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvGhodrateGharardad"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -389,7 +389,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelGhodrateGharardad"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/ContractPower"
@@ -417,7 +417,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvDimandMojaz"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -428,7 +428,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelDimandMojaz"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/ContarctDimand"
@@ -456,7 +456,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvMotavseteMasraf"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -467,7 +467,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelMotazaseteMasraf"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/UseAvrage"
@@ -495,7 +495,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvMasrafeDoreAkhar"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -506,7 +506,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelMasrafeDoreAkhar"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/LastCycleUsage"
@@ -534,7 +534,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvKWDoreAkhar"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -545,7 +545,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelKWDoreAkhar"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/LastCycleKwatt"
@@ -573,7 +573,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvZaribeKontor"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -584,7 +584,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelZaribeKontor"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/MeterCoeff"
@@ -612,7 +612,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvTedadArghamActive"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -623,7 +623,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelTedadArghamActive"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/ActiveNum"
@@ -651,7 +651,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvTedadArghamReactive"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -662,7 +662,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelTedadArghamReactive"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/ReactiveNum"
@@ -690,7 +690,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvSerialReactive"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -701,7 +701,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelSerialReactive"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/SerialNumberReactive"
@@ -729,7 +729,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvTarikhEnsheab"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -740,7 +740,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelTarikhEnsheab"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/BranchInstallDate"
@@ -768,7 +768,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvTelephone"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -779,7 +779,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelTelephone"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/Tel"
@@ -807,7 +807,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvCodePosti"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -818,7 +818,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelCodePosti"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/PostalCode"
@@ -846,7 +846,7 @@
                 android:layout_height="50dp"
                 android:orientation="horizontal">
                 <TextView android:id="@+id/tvCodeTarefe"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -857,7 +857,7 @@
                     android:textAlignment="gravity"
                     android:textSize="14sp"/>
                 <TextView android:id="@+id/tvLabelCodeTarefe"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/TariffCode"

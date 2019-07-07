@@ -233,8 +233,8 @@ public class SendViewModel extends AndroidViewModel {
                 }
                 
                 if(clientinfolList.size()!=0){
-//                   Gson gson = new Gson();
-//                    String val=gson.toJson(clientinfolList);
+                   Gson gson = new Gson();
+                    String val=gson.toJson(clientinfolList);
                     retrofitMT.getMtApi().SaveClientAllInfoAndroid(clientinfolList)
                             .subscribeOn(Schedulers.io())
                             .subscribeWith(new SingleObserver<List<RecordeSummary>>() {

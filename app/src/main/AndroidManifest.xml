@@ -36,7 +36,8 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".uicontrollers.activities.SettingActivity" />
-        <activity android:name=".uicontrollers.activities.SplashScreenActivity">
+        <activity android:name=".uicontrollers.activities.SplashScreenActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
              <intent-filter>
                  <action android:name="android.intent.action.MAIN" />
                  <category android:name="android.intent.category.LAUNCHER" />

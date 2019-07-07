@@ -60,7 +60,7 @@ public class TestResultAdapter extends RecyclerView.Adapter<TestResultAdapter.My
         try {
             holder.tvRoundNum.setText(String.valueOf(current.RoundNum));
             holder.tvErrPerc.setText(String.format("%s: %s", G.context.getResources().getText(R.string.ErrorPercent), String.format("%.2f", current.ErrPerc)));
-            holder.tvTestTime.setText(String.format("%s: %s %s  ", G.context.getResources().getText(R.string.TestDateTime),
+            holder.tvTestTime.setText(String.format("%s: %s %s  ", G.context.getResources().getText(R.string.TestDuration),
                     String.valueOf(Integer.parseInt(current.Time_Period1) * 100), G.context.getResources().getText(R.string.TypeDateTest_TestResultAdapter)));
             holder.tvPF_A.setText(String.format("%.2f", current.PF_A));
             holder.tvPF_B.setText(String.format("%.2f", current.PF_B));

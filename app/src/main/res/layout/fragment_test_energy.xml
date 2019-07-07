@@ -10,26 +10,218 @@
     <!-- +1 Layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="0sp"
         android:layout_weight="1"
 
         android:gravity="center"
         android:orientation="horizontal">
 
+        <!-- Title Layout -->
+        <LinearLayout
+            android:id="@+id/llTitle"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded"
+            android:orientation="vertical"
+            android:padding="5sp">
+
+            <TextView
+                android:id="@+id/tvTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:fontFamily="@fonts/byekan"
+                android:gravity="center_vertical|center_horizontal"
+                android:textAlignment="gravity"
+                android:textColor="@color/grey_900"
+                android:textSize="32sp" />
+
+            <LinearLayout
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:layout_gravity="center">
+            </LinearLayout>
+
+            <!--Volt Title-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_marginTop="35sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginLeft="5sp"
+                android:background="@drawable/rounded">
+
+                <TextView
+                    android:id="@+id/tvTitle_V"
+                    android:layout_width="0sp"
+                    android:layout_weight="0.35"
+                    android:layout_height="match_parent"
+                    android:text="@string/VoltTitle"
+                    android:gravity="center"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="1sp"
+                    android:layout_height="fill_parent"
+                    android:background="#B1BCBE" />/>
+
+                <LinearLayout
+                    android:layout_width="0sp"
+                    android:layout_weight="0.65"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvMax_V"
+                        android:layout_height="0sp"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="3dp"
+                        android:text="290"
+                        android:textColor="@color/red_400"
+                        android:gravity="center"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvMin_V"
+                        android:layout_height="0sp"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="3dp"
+                        android:text="130"
+                        android:textColor="@color/green_400"
+                        android:gravity="center"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Amp Title-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_margin="5sp"
+                android:background="@drawable/rounded">
+
+                <TextView
+                    android:id="@+id/tvTitle_Amp"
+                    android:layout_width="0sp"
+                    android:layout_weight="0.35"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/AmpTitle"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="1sp"
+                    android:layout_height="fill_parent"
+                    android:background="#B1BCBE" />/>
+
+                <LinearLayout
+                    android:layout_width="0sp"
+                    android:layout_weight="0.65"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvMax_I"
+                        android:layout_height="0sp"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="3dp"
+                        android:text="30"
+                        android:textColor="@color/red_400"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvMin_I"
+                        android:layout_height="0sp"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_marginBottom="3dp"
+                        android:text="1"
+                        android:textColor="@color/green_400"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--PF Title-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_margin="5sp"
+                android:background="@drawable/rounded">
+
+                <TextView
+                    android:id="@+id/tvTitle_PF"
+                    android:layout_width="0sp"
+                    android:layout_weight="0.35"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/PowerFactor"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="1sp"
+                    android:layout_height="fill_parent"
+                    android:background="#B1BCBE" />/>
+
+                <LinearLayout
+                    android:layout_width="0sp"
+                    android:layout_weight="0.65"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvMax_PF"
+                        android:layout_height="0sp"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="3dp"
+                        android:text="10"
+                        android:textColor="@color/red_400"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvMin_PF"
+                        android:layout_height="0sp"
+                        android:layout_weight="0.5"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_marginBottom="3dp"
+                        android:text="3"
+                        android:textColor="@color/green_400"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTitleColor"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_margin="5sp" />
+
+        </LinearLayout>
+
         <!-- R Layout -->
         <LinearLayout
             android:id="@+id/llR"
-            android:layout_width="90dp"
-            android:layout_height="185dp"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
             android:background="@drawable/rounded"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="5sp">
 
             <TextView
                 android:id="@+id/tvRLabel"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="@font/byekan"
+                android:layout_height="50sp"
+                android:fontFamily="@fonts/byekan"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/PhaseR"
                 android:textAlignment="gravity"
@@ -38,15 +230,16 @@
 
             <LinearLayout
                 android:id="@+id/llRight"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:layout_gravity="center"
                 android:background="@drawable/shape_circle">
 
                 <TextView
                     android:id="@+id/tvRight"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="@string/DashSign"
                     android:textAlignment="gravity"
@@ -54,11 +247,38 @@
                     android:textSize="32sp" />
             </LinearLayout>
 
+            <!--Volt R-->
+            <TextView
+                android:id="@+id/tvR_V"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_marginTop="35sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginLeft="5sp"
+                android:textSize="20sp" />
+
+            <!--Amp R-->
+            <TextView
+                android:id="@+id/tvR_I"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_margin="5sp"
+                android:textSize="20sp" />
+
+            <!--PF R-->
+            <TextView
+                android:id="@+id/tvR_PF"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_margin="5sp"
+                android:textSize="20sp"/>
+
             <TextView
                 android:id="@+id/tvRightColor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_height="40sp"
+                android:layout_margin="5sp"
                 android:background="@color/r_phase" />
 
         </LinearLayout>
@@ -66,34 +286,36 @@
         <!-- S Layout -->
         <LinearLayout
             android:id="@+id/llS"
-            android:layout_width="90dp"
-            android:layout_height="185dp"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
             android:background="@drawable/rounded"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="5sp">
 
             <TextView
                 android:id="@+id/tvSLabel"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="@font/byekan"
+                android:layout_height="50sp"
+                android:fontFamily="@fonts/byekan"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/PhaseS"
                 android:textAlignment="gravity"
+                android:layout_gravity="center"
                 android:textColor="@color/grey_900"
                 android:textSize="32sp" />
 
             <LinearLayout
                 android:id="@+id/llCenter"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:layout_gravity="center"
                 android:background="@drawable/shape_circle">
 
                 <TextView
                     android:id="@+id/tvCenter"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="@string/PlusSign"
                     android:textAlignment="gravity"
@@ -101,11 +323,38 @@
                     android:textSize="32sp" />
             </LinearLayout>
 
+            <!--Volt S-->
+            <TextView
+                android:id="@+id/tvS_V"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_marginTop="35sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginLeft="5sp"
+                android:textSize="20sp" />
+
+            <!--Amp S-->
+            <TextView
+                android:id="@+id/tvS_I"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_margin="5sp"
+                android:textSize="20sp" />
+
+            <!--PF S-->
+            <TextView
+                android:id="@+id/tvS_PF"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_margin="5sp"
+                android:textSize="20sp"/>
+
             <TextView
                 android:id="@+id/tvCeneterColor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_height="40sp"
+                android:layout_margin="5sp"
                 android:background="@color/s_phase" />
 
         </LinearLayout>
@@ -113,17 +362,17 @@
         <!-- T Layout -->
         <LinearLayout
             android:id="@+id/llT"
-            android:layout_width="90dp"
-            android:layout_height="185dp"
+            android:layout_width="90sp"
+            android:layout_height="wrap_content"
             android:background="@drawable/rounded"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="5sp">
 
             <TextView
                 android:id="@+id/tvTLabel"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="@font/byekan"
+                android:layout_height="50sp"
+                android:fontFamily="@fonts/byekan"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/PhaseT"
                 android:textAlignment="gravity"
@@ -132,16 +381,16 @@
 
             <LinearLayout
                 android:id="@+id/llLeft"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginRight="16dp"
+                android:layout_width="80sp"
+                android:layout_height="80sp"
+                android:layout_gravity="center"
                 android:background="@drawable/shape_circle">
 
                 <TextView
                     android:id="@+id/tvLeft"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:gravity="center_vertical|center_horizontal"
                     android:text="@string/DashSign"
                     android:textAlignment="gravity"
@@ -149,12 +398,41 @@
                     android:textSize="32sp" />
             </LinearLayout>
 
+            <!--Volt S-->
+            <TextView
+                android:id="@+id/tvT_V"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_marginTop="35sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginRight="5sp"
+                android:layout_marginLeft="5sp"
+                android:textSize="20sp" />
+
+            <!--Amp S-->
+            <TextView
+                android:id="@+id/tvT_I"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_margin="5sp"
+                android:textSize="20sp" />
+
+            <!--PF S-->
+            <TextView
+                android:id="@+id/tvT_PF"
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:layout_margin="5sp"
+                android:textSize="20sp"/>
+
+
             <TextView
                 android:id="@+id/tvLeftColor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_height="40sp"
+                android:layout_margin="5sp"
                 android:background="@color/t_phase" />
+
         </LinearLayout>
 
 
@@ -167,10 +445,10 @@
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnStartTest"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="60sp"
         android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:fontFamily="@font/byekan"
+        android:layout_margin="16sp"
+        android:fontFamily="@fonts/byekan"
         android:text="@string/Ok"
         android:textColor="#ffffff"
         android:textSize="16sp" />

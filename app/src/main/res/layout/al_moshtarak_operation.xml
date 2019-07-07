@@ -7,7 +7,7 @@
     <!-- Test Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnTest"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
@@ -19,7 +19,7 @@
     <!-- Bazrasi Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnBazrasi"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -31,7 +31,7 @@
     <!-- Polomp Button-->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnPolomp"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"

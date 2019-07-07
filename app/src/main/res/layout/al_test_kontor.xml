@@ -38,7 +38,7 @@
                         android:id="@+id/tvReactive"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="14sp"
                         android:gravity="center_vertical|center_horizontal"
                         android:textAlignment="gravity"
@@ -57,7 +57,7 @@
                         android:id="@+id/tvActive"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="14sp"
                         android:gravity="center_vertical|center_horizontal"
                         android:textAlignment="gravity"
@@ -87,7 +87,7 @@
                         android:id="@+id/tv3Faz"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="14sp"
                         android:gravity="center_vertical|center_horizontal"
                         android:textAlignment="gravity"
@@ -106,7 +106,7 @@
                         android:id="@+id/tv1Faz"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="14sp"
                         android:gravity="center_vertical|center_horizontal"
                         android:textAlignment="gravity"
@@ -136,7 +136,7 @@
                         android:id="@+id/tvTest2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="14sp"
                         android:gravity="center_vertical|center_horizontal"
                         android:textAlignment="gravity"
@@ -155,7 +155,7 @@
                         android:id="@+id/tvTest1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/byekan"
+                        android:fontFamily="@fonts/byekan"
                         android:textSize="14sp"
                         android:gravity="center_vertical|center_horizontal"
                         android:textAlignment="gravity"
@@ -178,7 +178,7 @@
 
             <!-- Zarib CT -->
             <android.support.design.widget.TextInputLayout
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -187,7 +187,7 @@
                 <EditText android:id="@+id/edtZaribCT"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:gravity="right"
@@ -197,7 +197,7 @@
 
             <!-- Sabete Kontor -->
             <android.support.design.widget.TextInputLayout
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -206,7 +206,7 @@
                 <EditText android:id="@+id/edtSabeteKontor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:gravity="right"
@@ -215,7 +215,7 @@
 
             <!-- Nesbat Kontor -->
             <android.support.design.widget.TextInputLayout
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -224,7 +224,7 @@
                 <EditText android:id="@+id/edtNesbatKontor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:gravity="right"
@@ -233,7 +233,7 @@
 
             <!-- Tedad Dor -->
             <android.support.design.widget.TextInputLayout
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -242,7 +242,7 @@
                 <EditText android:id="@+id/edtTedadDor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/byekan"
+                    android:fontFamily="@fonts/byekan"
                     android:textSize="14sp"
                     android:textColor="@color/grey_900"
                     android:gravity="right"
@@ -258,7 +258,7 @@
                 android:id="@+id/cbSabte99"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/byekan"
+                android:fontFamily="@fonts/byekan"
                 android:textSize="14sp"
                 android:textDirection="rtl"
                 android:textAlignment="gravity"
@@ -274,7 +274,7 @@
     <!-- Taeed Button -->
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnTaeed"
-        android:fontFamily="@font/byekan"
+        android:fontFamily="@fonts/byekan"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="16dp"
