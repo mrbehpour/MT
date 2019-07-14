@@ -136,6 +136,15 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
                 holder.IconGherat.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
             }
         }
+        if (current.isBazrasi) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.iconMoshahedat.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_on));
+            }
+        }else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.iconMoshahedat.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
+            }
+        }
         if(CountAmliyat==2){
             Bazdid bazdidAsli=new Bazdid();
             bazdidAsli.ClientId=current.Id;
@@ -197,6 +206,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
         ImageView IconPolomp;
         ImageView IconGherat;
         ImageView imgBazdidMoshtarak;
+        ImageView iconMoshahedat;
         Context contextHolder;
 
         public MyViewHolder(View itemView) {
@@ -211,6 +221,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
             IconBazrasi = itemView.findViewById(R.id.iconBazrasi);
             IconPolomp = itemView.findViewById(R.id.iconPolomp);
             IconGherat=itemView.findViewById(R.id.iconGherat);
+            iconMoshahedat=itemView.findViewById(R.id.iconMoshahedat);
             tvRowId=itemView.findViewById(R.id.tvRow);
             contextHolder = itemView.getContext().getApplicationContext();
 

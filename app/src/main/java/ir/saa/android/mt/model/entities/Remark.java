@@ -36,6 +36,7 @@ public class Remark  {
 
     public Integer Precision;
 
+    public Boolean IsForAndroid;
 
     public Integer PropertyTypeID;
 
