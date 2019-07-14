@@ -9,7 +9,7 @@
     <!-- Recycler Layout -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvList"
-        tools:listitem="@layout/al_bazdid_cardview"
+        tools:listitem="@layout/listitem_moshahedat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

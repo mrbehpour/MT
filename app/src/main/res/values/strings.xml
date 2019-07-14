@@ -16,6 +16,7 @@
     <string name="Polomp_G">پلمپ</string>
     <string name="Bazrasi_G">بازرسی</string>
     <string name="Readmeter_G">خواندن کنتور</string>
+    <string name="Moshahedat_G">مشاهدات</string>
     <string name="Sanjesh_G">پارامترهای الکتریکی</string>
 
     <!--Drawer Menu-->
@@ -313,6 +314,7 @@
     <string name="No">خیر</string>
     <string name="Yes">بله</string>
     <string name="Cancel">انصراف</string>
+    <string name="Answer"> جواب : </string>
     <string name="Retry">تلاش دوباره</string>
     <string name="Save">ذخیره</string>
     <string name="confirmRequest">درخواست تایید سریال</string>

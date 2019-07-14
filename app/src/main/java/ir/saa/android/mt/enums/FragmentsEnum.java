@@ -20,4 +20,5 @@ public class FragmentsEnum {
     public static final int DisplayTestFragment=13;
     public static final int SanjeshFragment=14;
     public static final int ReadmeterFragment=15;
+    public static final int MoshahedatFragment=16;
 }

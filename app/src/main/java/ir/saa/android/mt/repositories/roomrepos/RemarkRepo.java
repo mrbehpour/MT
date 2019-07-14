@@ -79,4 +79,8 @@ public class RemarkRepo  {
     public LiveData<List<RemarkGroupingFormat>> getRemarkGroupingFormat(Integer Id, Integer remarkTypeId){
         return remarkDao.getRemarkGroupingFormat(Id,remarkTypeId);
     }
+
+    public LiveData<List<RemarkGroupingFormat>> getRemarkGroupingFormatForMoshahedat(Integer Id, Integer remarkTypeId){
+        return remarkDao.getRemarkGroupingFormatForMoshahedat(Id,remarkTypeId);
+    }
 }

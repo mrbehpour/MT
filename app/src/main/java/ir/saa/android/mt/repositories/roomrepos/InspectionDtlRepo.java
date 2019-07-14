@@ -78,5 +78,9 @@ public class InspectionDtlRepo  {
         return inspectionDtlDao.getInspectionAllInfoWithClientId(ClientId);
     }
 
+    public InspectionWithAnswerGroup getInspectionAllInfoLiveData(Long clientId, Integer remarkId, Integer answerGroupId){
+        return inspectionDtlDao.getInspectionAllInfoLiveData(clientId ,remarkId,answerGroupId);
+    }
+
 
 }

@@ -117,7 +117,7 @@ public class BazrasiFragment extends Fragment  {
                             //InspectionWithAnswerGroup inspectionAllInfo = bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId, 1, 1);
 
                             //if (current.answerGroupId != null) {
-                            bazrasiViewModel.getAnswerGroupDtls(11).observe((AppCompatActivity) getContext(), new Observer<List<AnswerGroupDtl>>() {
+                            bazrasiViewModel.getAnswerGroupDtlsLiveData(11).observe((AppCompatActivity) getContext(), new Observer<List<AnswerGroupDtl>>() {
                                 @Override
                                 public void onChanged(@Nullable List<AnswerGroupDtl> answerGroupDtls) {
 

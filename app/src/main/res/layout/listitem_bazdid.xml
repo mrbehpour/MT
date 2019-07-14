@@ -149,6 +149,14 @@
                     android:layout_marginLeft="4dp"
                     android:src="@drawable/icon_gherat"
                     android:backgroundTint="@color/icon_off" />
+
+                <ImageView
+                    android:id="@+id/iconMoshahedat"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="4dp"
+                    android:src="@drawable/icon_moshahedat"
+                    android:backgroundTint="@color/icon_off" />
             </LinearLayout>
 
             <!-- line -->

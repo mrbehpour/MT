@@ -525,6 +525,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                 }
                 startProgress = answerGroups.Data.size() + answerGroupDtls.size() + propertyTypes.Data.size() + regions.Data.size()+
                         cities.Data.size();
+                remarkRepo.deleteAll();
                 for (Integer i = 0; i < remarks.Data.size(); i++) {
                     remarkRepo.insertRemark(remarks.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));

@@ -7,6 +7,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
@@ -45,6 +46,12 @@ public interface AnswerGroupDtlDao {
     void deleteAnswerGroupDtlById(int Id);
 
     @Query("select * from AnswerGroupDtl where answergroup_id= :answergroupId")
-    LiveData<List<AnswerGroupDtl>> getAnswerGroupDtlByAnswerGroupId(int answergroupId);
+    LiveData<List<AnswerGroupDtl>> getAnswerGroupDtlByAnswerGroupIdLiveData(int answergroupId);
+
+    @Query("select * from AnswerGroupDtl where answergroup_id= :answergroupId")
+    List<AnswerGroupDtl> getAnswerGroupDtlByAnswerGroupId(int answergroupId);
+
+    @Query("select * from AnswerGroupDtl where AnswerGroupDtlID in( :answergroupIds )")
+    List<AnswerGroupDtl> getAnswerGroupDtlByAnswerGroupIds(List<Integer> answergroupIds);
 
 }

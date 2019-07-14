@@ -139,7 +139,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                         current.remarkValue = "-1";
                     }
                     if (current.answerGroupId != null) {
-                        bazrasiViewModel.getAnswerGroupDtls(current.answerGroupId).observe((AppCompatActivity) context, new Observer<List<AnswerGroupDtl>>() {
+                        bazrasiViewModel.getAnswerGroupDtlsLiveData(current.answerGroupId).observe((AppCompatActivity) context, new Observer<List<AnswerGroupDtl>>() {
                             @Override
                             public void onChanged(@Nullable List<AnswerGroupDtl> answerGroupDtls) {
 

@@ -48,10 +48,32 @@ public interface InspectionDtlDao {
     @Query("Select * from InspectionInfo " +
             "inner join InspectionDtl on " +
             "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
-            "Inner Join AnswerGroupDtl on "+
-            "InspectionDtl.RemarkValue=AnswerGroupDtl.AnswerGroupDtlID And  AnswerGroupDtl.answergroup_id=:answerGroupId "+
-            "Where InspectionInfo.ClientID=:clientId and InspectionDtl.RemarkID=:remarkId")
+            "Inner Join Remark on "+
+            "InspectionDtl.RemarkID=Remark.RemarkID  " +
+            "inner join  AnswerGroupDtl on " +
+            " AnswerGroupDtl.answergroup_id=Remark.AnswerGroupID "+
+            "Where AnswerGroupDtl.answergroup_id=:answerGroupId and InspectionInfo.ClientID=:clientId and Remark.RemarkID=:remarkId")
     InspectionWithAnswerGroup getInspectionAllInfo(Long clientId, Integer remarkId, Integer answerGroupId);
+
+    @Query("Select * from InspectionInfo " +
+            "inner join InspectionDtl on " +
+            "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
+            "Inner Join Remark on "+
+            "InspectionDtl.RemarkID=Remark.RemarkID  " +
+            "inner join  AnswerGroupDtl on " +
+            "AnswerGroupDtl.answergroup_id=Remark.AnswerGroupID "+
+            "Where AnswerGroupDtl.answergroup_id=:answerGroupId and InspectionInfo.ClientID=:clientId " +
+            "and Remark.RemarkID=:remarkId and InspectionDtl.RemarkValue in (" +
+            "Select InspectionDtl.RemarkValue from InspectionInfo "  +
+            "inner join InspectionDtl on "+
+            "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
+            "Inner Join Remark on " +
+            "InspectionDtl.RemarkID=Remark.RemarkID  " +
+            "inner join  AnswerGroupDtl on " +
+            " AnswerGroupDtl.answergroup_id=Remark.AnswerGroupID " +
+            "Where AnswerGroupDtl.answergroup_id=:answerGroupId and InspectionInfo.ClientID=:clientId " +
+            "and Remark.RemarkID=:remarkId)")
+    InspectionWithAnswerGroup getInspectionAllInfoLiveData(Long clientId, Integer remarkId, Integer answerGroupId);
 
     @Query("Select * from InspectionInfo " +
             "inner join InspectionDtl on " +

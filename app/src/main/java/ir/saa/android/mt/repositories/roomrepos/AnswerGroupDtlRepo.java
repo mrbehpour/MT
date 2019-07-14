@@ -3,6 +3,7 @@ package ir.saa.android.mt.repositories.roomrepos;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.model.daos.AnswerGroupDtlDao;
@@ -60,11 +61,20 @@ public class AnswerGroupDtlRepo   {
     }
 
 
-    public LiveData<List<AnswerGroupDtl>> getAnswerGroupDtlByAnswerGroupId(int answergroupId) {
+    public LiveData<List<AnswerGroupDtl>> getAnswerGroupDtlByAnswerGroupIdLiveData(int answergroupId) {
+        return answerGroupDtlDao.getAnswerGroupDtlByAnswerGroupIdLiveData(answergroupId);
+    }
+
+    public List<AnswerGroupDtl> getAnswerGroupDtlByAnswerGroupId(int answergroupId){
         return answerGroupDtlDao.getAnswerGroupDtlByAnswerGroupId(answergroupId);
     }
 
     public AnswerGroupDtl getAnswerGroupDtl(int Id,int answergroupId){
         return answerGroupDtlDao.getAnswerGroupDtl(Id,answergroupId);
     }
+
+    public  List<AnswerGroupDtl> getAnswerGroupDtlByAnswerGroupIds(List<Integer> answergroupIds){
+        return answerGroupDtlDao.getAnswerGroupDtlByAnswerGroupIds(answergroupIds);
+    }
+
 }

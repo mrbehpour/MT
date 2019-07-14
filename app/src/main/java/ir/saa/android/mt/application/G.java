@@ -33,6 +33,7 @@ import ir.saa.android.mt.uicontrollers.fragments.BazrasiFragment;
 import ir.saa.android.mt.uicontrollers.fragments.DisplayTestFragment;
 import ir.saa.android.mt.uicontrollers.fragments.HomeFragment;
 import ir.saa.android.mt.uicontrollers.fragments.ModuleFragment;
+import ir.saa.android.mt.uicontrollers.fragments.MoshahedatFragment;
 import ir.saa.android.mt.uicontrollers.fragments.MoshtarakFragment;
 import ir.saa.android.mt.uicontrollers.fragments.PolompFragment;
 import ir.saa.android.mt.uicontrollers.fragments.PolompFragmentSave;
@@ -183,6 +184,12 @@ public class G extends Application {
 //                targetFragment=new TempFragment();
                 setActionbarTitleText((String) context.getResources().getText(R.string.Readmeter_G));
                 break;
+           case FragmentsEnum.MoshahedatFragment:
+               targetFragment=new MoshahedatFragment();
+//                targetFragment=new TempFragment();
+               setActionbarTitleText((String) context.getResources().getText(R.string.Moshahedat_G));
+               break;
+
         }
 
         if(targetFragment!=null){
