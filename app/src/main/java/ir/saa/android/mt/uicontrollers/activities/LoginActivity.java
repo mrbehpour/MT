@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.al_spinner_dropdown_item);
         tvSanjesh = findViewById(R.id.tvSanjesh);
 //        new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.Builder(LoginActivity.this)
-//                .setTarget(findViewById(R.id.tvSanjesh))
+//                .setTarget(findViewById(R.id.tvSerial))
 //                .setPrimaryText("شماره سریال دستگاه")
 //                .setSecondaryText("جهت نمایش سریال دستگاه حتما باید دسترسی خواندن وضعیت تلفن به برنامه داده شود.")
 //                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
@@ -90,8 +90,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         adapterInit();
-
-
 
         findViewById(R.id.btnLogin).setOnClickListener(v -> {
 

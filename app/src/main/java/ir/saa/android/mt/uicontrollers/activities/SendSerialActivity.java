@@ -53,7 +53,7 @@ public class SendSerialActivity extends AppCompatActivity {
     Spinner spinnerRegion;
     List<String> spinnerArray;
     ArrayAdapter<String> adapter;
-    TextView tvSanjesh;
+    TextView tvSerial;
     LinearLayout laySettings;
     Button btnConfirm;
     AppCompatButton btnGetRegion;
@@ -78,7 +78,7 @@ public class SendSerialActivity extends AppCompatActivity {
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
                 loadRegionList();
-                //tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
+                tvSerial.setText(getDeviceIMEI());
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
@@ -99,6 +99,7 @@ public class SendSerialActivity extends AppCompatActivity {
     public void HideProgressDialog(){
         if(progressDialog!=null) progressDialog.dismiss();
     }
+
     public String getDeviceIMEI() {
         String deviceUniqueIdentifier = null;
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -119,8 +120,6 @@ public class SendSerialActivity extends AppCompatActivity {
         if(G.getPref(SharePrefEnum.FontSize)!=null) {
             adjustFontScale(getResources().getConfiguration(), Float.parseFloat(G.getPref(SharePrefEnum.FontSize)));
         }
-
-        G.setPref(SharePrefEnum.DeviceId,getDeviceIMEI());
 
         checkAndRequestPermissions();
 
@@ -151,38 +150,57 @@ public class SendSerialActivity extends AppCompatActivity {
         deviceSerialViewModel.IsRegisterIMEI.observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer registerStatus) {
-                Toast fancyToast;
-                switch (registerStatus){
-                    case 0:
-                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.WaitForIMEIConfirm_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                        fancyToast.show();
+                Toast fancyToast=null;
 
+                switch (registerStatus){
                     case 1:
-                        checkDeviceRegistration();
-                        startLoginActivity();
+                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.WaitForIMEIConfirm_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                         break;
 
                     case 2:
-                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ConnectionFail_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
-                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                        fancyToast.show();
+                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NotValidIMEI_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
                         break;
 
+                    case 3:
+                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.RegionIDNotSend_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                        break;
+
+                    case 4:
+                        checkDeviceRegistration();
+                        //fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.DuplicateIMEI_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                        break;
+                }
+
+                if(fancyToast!=null) {
+                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    fancyToast.show();
                 }
             }
         });
 
-        deviceSerialViewModel.IsValidIMEI.observe(this, new Observer<Boolean>() {
+        deviceSerialViewModel.IsValidIMEI.observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(@Nullable Boolean isValid) {
-                if (isValid) {
-                    G.setPref(SharePrefEnum.RegionId,String.valueOf(spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition())));
-                    startLoginActivity();
-                } else {
-                    Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NotConfirmedIMEI_msg), FancyToast.LENGTH_LONG, FancyToast.WARNING, false);
-                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                    fancyToast.show();
+            public void onChanged(@Nullable Integer registerStatus) {
+                Toast fancyToast;
+                switch (registerStatus){
+                    case 5:
+                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NotRegisteredIMEI_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+
+                    case 6:
+                        G.setPref(SharePrefEnum.RegionId,spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition()).toString());
+                        G.setPref(SharePrefEnum.DeviceId,getDeviceIMEI());
+                        G.setPref(SharePrefEnum.EmpName,spinnerRegion.getSelectedItem().toString());
+                        startLoginActivity();
+                        break;
+
+                    case 7:
+                        fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.NotConfirmedIMEI_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                        break;
+
                 }
             }
         });
@@ -219,12 +237,10 @@ public class SendSerialActivity extends AppCompatActivity {
 
     }
 
-
-
     private void initControls(){
 
-        tvSanjesh=(TextView)findViewById(R.id.tvSerial);
-        tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
+        tvSerial =(TextView)findViewById(R.id.tvSerial);
+        tvSerial.setText(getDeviceIMEI());
 
 
         laySettings=(LinearLayout)findViewById(R.id.laySettings);
@@ -243,7 +259,7 @@ public class SendSerialActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 IMEI_RegisterInput IMEIRegisterInput =new IMEI_RegisterInput();
-                IMEIRegisterInput.handHeldSerial=G.getPref(SharePrefEnum.DeviceId);
+                IMEIRegisterInput.handHeldSerial=getDeviceIMEI();
                 if(spinnerRegion.getSelectedItemPosition()!=-1) {
                     IMEIRegisterInput.regionId = Short.valueOf(spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition()).toString());
                     deviceSerialViewModel.registerIMEI(IMEIRegisterInput);
@@ -266,7 +282,7 @@ public class SendSerialActivity extends AppCompatActivity {
     private boolean checkSerialNumIsActive(){
         boolean res=false;
 
-        DeviceSerial deviceSerial = deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
+        DeviceSerial deviceSerial = deviceSerialViewModel.getDeviceSerial(getDeviceIMEI());
         if (deviceSerial != null) {
             if (deviceSerial.isActive) {
                 res = true;
@@ -318,11 +334,9 @@ public class SendSerialActivity extends AppCompatActivity {
 
     //
     private void checkDeviceRegistration(){
-        //Toast.makeText(LoginActivity.this, getResources().getText(R.string.LoginFail), Toast.LENGTH_SHORT).show();
-        DeviceSerial deviceSerial=deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
         IMEI_RegisterInput IMEIRegisterInput = new IMEI_RegisterInput();
-        IMEIRegisterInput.regionId = deviceSerial.regionId;
-        IMEIRegisterInput.handHeldSerial = deviceSerial.SerialId;
+        IMEIRegisterInput.regionId = Short.valueOf(spinnerMapRegion.get(spinnerRegion.getSelectedItemPosition()).toString());
+        IMEIRegisterInput.handHeldSerial = getDeviceIMEI();
         deviceSerialViewModel.confirmIMEI(IMEIRegisterInput);
     }
 
@@ -406,13 +420,13 @@ public class SendSerialActivity extends AppCompatActivity {
 
         switch (requestCode){
             case MY_PERMISSIONS_REQUEST:
-                initSpinnerAdapter();
         }
     }
 
     private void initSpinnerAdapter() {
         //spinnerArray.clear();
         if (deviceSerialViewModel.getRegion().getValue() != null) {
+            spinnerArray.clear();
             for (Region region : deviceSerialViewModel.getRegion().getValue()) {
                 spinnerArray.add(region.RegionName);
             }

@@ -93,10 +93,17 @@
     <string name="ConnectionFail_msg">مشکل در برقراری ارتباط با سرور</string>
     <string name="ClickToStartManualTes_msg">برای شروع تست کلیک کنید</string>
     <string name="WaitForIMEIConfirm_msg">درخواست شما در سایت ثبت شد،منتظر تایید مدیر سیستم باشید</string>
+    <string name="NotValidIMEI_msg">طول شماره سریال وارد شده معتبر نیست</string>
+    <string name="RegionIDNotSend_msg">کد امور برای ثبت سریال ارسال نشده است</string>
+    <string name="DuplicateIMEI_msg">شماره سریال تکراری می باشد</string>
     <string name="NotRegisteredIMEI_msg">شماره سریال دستگاه شما ثبت نشده و مجاز به فعالیت نیست</string>
     <string name="NotConfirmedIMEI_msg">شماره سریال دستگاه شما هنوز تایید نشده است</string>
     <string name="ServerAddressNotSaved_msg">آدرس سرور برای دریافت اطلاعات ذخیره نشده است</string>
     <string name="AnswerGroupEmpty_msg">دسته جواب ها خالی است،لطفا دوباره تنظیمات جداول پایه را دریافت کنید</string>
+    <string name="LowVolt_msg">ولتاژ یکی از فازها کمتر از حد میباشد</string>
+    <string name="OutRangeVolt_msg">ولتاژ یکی از فازها خارج از بازه مجاز میباشد</string>
+    <string name="OutRangeAmp_msg">آمپراژ یکی از فازها خارج از بازه مجاز میباشد</string>
+    <string name="OutRangePF_msg">ضریب توان یکی از فازها خارج از بازه مجاز میباشد</string>
     <!--*******************-->
 
     <!--TestResultAdapter-->
@@ -251,6 +258,7 @@
     <string name="TestDuration">طول مدت تست</string>
     <string name="Title">عنوان</string>
     <string name="Value">مقدار</string>
+    <string name="Phase">فاز</string>
     <string name="PhaseR">R</string>
     <string name="PhaseS">S</string>
     <string name="PhaseT">T</string>
@@ -261,6 +269,7 @@
     <string name="PowerS">توان ظاهری (VA)</string>
     <string name="PFactCoeff">ضریب قدرت </string>
     <string name="VahedTest">ثانیه</string>
+    <string name="EnergySign">جهت انرژی</string>
 
     <!-- listitem_test_result -->
     <string name="VoltTitle">V</string>

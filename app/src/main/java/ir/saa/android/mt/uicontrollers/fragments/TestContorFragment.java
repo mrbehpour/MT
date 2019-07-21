@@ -30,7 +30,6 @@ import ir.saa.android.mt.viewmodels.TestContorViewModel;
 public class TestContorFragment extends Fragment
 {
     TestContorViewModel testContorViewModel;
-
     TextView edtCTCoeff;
     TextView edtContorConst;
     TextView edtSensorRatio;
@@ -73,6 +72,8 @@ public class TestContorFragment extends Fragment
         switchPaulserType = rootView.findViewById(R.id.switchPaulserType);
 
         setDefaultValue();
+
+        testContorViewModel.CheckClampType();
 
         Button btnTaeed=rootView.findViewById(R.id.btnTaeed);
         btnTaeed.setOnClickListener(view -> {
@@ -161,7 +162,6 @@ public class TestContorFragment extends Fragment
     public void HideProgressDialog(){
         if(ad!=null) ad.dismiss();
     }
-
 
     private boolean validateParams(){
         boolean res=true;

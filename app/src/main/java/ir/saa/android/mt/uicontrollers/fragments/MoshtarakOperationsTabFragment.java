@@ -53,10 +53,10 @@ public class MoshtarakOperationsTabFragment extends Fragment
         }
         //Button btnTest=rootView.findViewById(R.id.btnTest);
         FancyButton btnTest=rootView.findViewById(R.id.btnTest);
-        Button btnPolomp=rootView.findViewById(R.id.btnPolomp);
-        Button btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
-        Button btnReadmeter=rootView.findViewById(R.id.btnReadmeter);
-        Button btnMoshahedat=rootView.findViewById(R.id.btnMoshahedat);
+        FancyButton btnPolomp=rootView.findViewById(R.id.btnPolomp);
+        FancyButton btnBazrasi=rootView.findViewById(R.id.btnBazrasi);
+        FancyButton btnReadmeter=rootView.findViewById(R.id.btnReadmeter);
+        FancyButton btnMoshahedat=rootView.findViewById(R.id.btnMoshahedat);
 
         btnTest.setOnClickListener(view -> {
             locationViewModel.trunOnGps(getContext());

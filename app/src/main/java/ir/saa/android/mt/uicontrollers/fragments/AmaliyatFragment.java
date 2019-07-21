@@ -303,7 +303,7 @@ public class AmaliyatFragment extends Fragment {
 
     private void saveTestResult(TestResult testResult) {
         CountSaveTest++;
-        if (location != null && CountSaveTest==1) {
+        if (location != null) {
 
             GPSInfo gpsInfo = new GPSInfo();
             gpsInfo.ClientID = G.clientInfo.ClientId;
@@ -371,7 +371,7 @@ public class AmaliyatFragment extends Fragment {
             Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
             fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             fancyToast.show();
-//Bastan Form Sabt
+            //Bastan Form Sabt
             G.fragmentNumStack.pop();
             G.startFragment(G.fragmentNumStack.pop(), true, null);
             isLocation=false;

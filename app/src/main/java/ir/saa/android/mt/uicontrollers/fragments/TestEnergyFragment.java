@@ -1,24 +1,39 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
+import android.animation.ArgbEvaluator;
+
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.BundleKeysEnum;
+import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.repositories.metertester.ElectericalParams;
 import ir.saa.android.mt.repositories.metertester.EnergiesState;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
@@ -32,6 +47,7 @@ public class TestEnergyFragment extends Fragment
     TextView tvVR,tvVS,tvVT;
     TextView tvIR,tvIS,tvIT;
     TextView tvPFR,tvPFS,tvPFT;
+    TextView tvMinV,tvMaxV,tvMinI,tvMaxI,tvMinPF,tvMaxPF;
 
     public TestEnergyFragment() {
     }
@@ -64,6 +80,19 @@ public class TestEnergyFragment extends Fragment
         TextView tvCenter = rootView.findViewById(R.id.tvCenter);
         TextView tvRight = rootView.findViewById(R.id.tvRight);
         Button btnStartTest = rootView.findViewById(R.id.btnStartTest);
+
+        tvMinV = rootView.findViewById(R.id.tvMin_V);
+        tvMinV.setText("130");
+        tvMaxV = rootView.findViewById(R.id.tvMax_V);
+        tvMaxV.setText("290");
+        tvMinI = rootView.findViewById(R.id.tvMin_I);
+        tvMinI.setText("0.1");
+        tvMaxI = rootView.findViewById(R.id.tvMax_I);
+        tvMaxI.setText("1100");
+        tvMinPF = rootView.findViewById(R.id.tvMin_PF);
+        tvMinPF.setText("0.05");
+        tvMaxPF = rootView.findViewById(R.id.tvMax_PF);
+
 
         testEnergyViewModel.energiesStateMutableLiveData.observe(this, new Observer<EnergiesState>() {
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -131,6 +160,15 @@ public class TestEnergyFragment extends Fragment
         tvPFT = rootView.findViewById(R.id.tvT_PF);
     }
 
+    private void setRanges(){
+        tvMinV.setText("80");
+        tvMaxV.setText("280");
+        tvMinI.setText("0.1");
+        tvMaxI.setText("1100");
+        tvMinPF.setText("0.05");
+        tvMaxPF.setText("1");
+    }
+
     private void showSanjeshResult(List<ElectericalParams> sanjeshResult) {
 
         tvVR.setText(sanjeshResult.get(0).AVRMS);
@@ -145,7 +183,100 @@ public class TestEnergyFragment extends Fragment
         tvIT.setText(sanjeshResult.get(2).AIRMS);
         tvPFT.setText(sanjeshResult.get(2).ANGLE0);
 
+        checkVoltRange();
+        checkAmpRange();
+        checkPFRange();
     }
+
+    public void checkVoltRange(){
+        try{
+            if (Float.valueOf(tvVR.getText().toString()) < Float.valueOf(tvMinV.getText().toString())) { setAnimation(tvVR,1);  }
+            else if (Float.valueOf(tvVR.getText().toString()) > Float.valueOf(tvMaxV.getText().toString())) { setAnimation(tvVR,2);  }
+            else { setAnimation(tvVR,0);  }
+
+            if (Float.valueOf(tvVS.getText().toString()) < Float.valueOf(tvMinV.getText().toString())) { setAnimation(tvVS,1);  }
+            else if (Float.valueOf(tvVS.getText().toString()) > Float.valueOf(tvMaxV.getText().toString())) { setAnimation(tvVS,2);  }
+            else { setAnimation(tvVS,0);  }
+
+            if (Float.valueOf(tvVT.getText().toString()) < Float.valueOf(tvMinV.getText().toString())) { setAnimation(tvVT,1);  }
+            else if (Float.valueOf(tvVT.getText().toString()) > Float.valueOf(tvMaxV.getText().toString())) { setAnimation(tvVT,2);  }
+            else { setAnimation(tvVT,0);  }
+        }
+        catch (Exception ex){
+            String err = ex.getMessage();
+        }
+    }
+
+    public void checkAmpRange(){
+        try{
+            if (Float.valueOf(tvIR.getText().toString()) < Float.valueOf(tvMinI.getText().toString())) { setAnimation(tvIR,1);  }
+            else if (Float.valueOf(tvIR.getText().toString()) > Float.valueOf(tvMaxI.getText().toString())) { setAnimation(tvIR,2);  }
+            else { setAnimation(tvIR,0);  }
+
+            if (Float.valueOf(tvIS.getText().toString()) < Float.valueOf(tvMinI.getText().toString())) { setAnimation(tvIS,1);  }
+            else if (Float.valueOf(tvIS.getText().toString()) > Float.valueOf(tvMaxI.getText().toString())) { setAnimation(tvIS,2);  }
+            else { setAnimation(tvIS,0);  }
+
+            if (Float.valueOf(tvIT.getText().toString()) < Float.valueOf(tvMinI.getText().toString())) { setAnimation(tvIT,1);  }
+            else if (Float.valueOf(tvIT.getText().toString()) > Float.valueOf(tvMaxI.getText().toString())) { setAnimation(tvIT,2);  }
+            else { setAnimation(tvIT,0);  }
+        }
+        catch (Exception ex){
+            String err = ex.getMessage();
+        }
+    }
+
+    public void checkPFRange(){
+        try{
+            if (Math.abs(Float.valueOf(tvPFR.getText().toString())) < Float.valueOf(tvMinPF.getText().toString())) { setAnimation(tvPFR,1);  }
+            else { setAnimation(tvPFR,0);  }
+//            if (Float.valueOf(tvPFR.getText().toString()) > Float.valueOf(tvMaxPF.getText().toString())) { setAnimation(tvPFR,2);  }
+            if (Math.abs(Float.valueOf(tvPFS.getText().toString())) < Float.valueOf(tvMinPF.getText().toString())) { setAnimation(tvPFS,1);  }
+            else { setAnimation(tvPFS,0);  }
+//            if (Float.valueOf(tvPFS.getText().toString()) > Float.valueOf(tvMaxPF.getText().toString())) { setAnimation(tvPFS,2);  }
+            if (Math.abs(Float.valueOf(tvPFT.getText().toString())) < Float.valueOf(tvMinPF.getText().toString())) { setAnimation(tvPFT,1);  }
+            else { setAnimation(tvPFT,0);  }
+//            if (Float.valueOf(tvPFT.getText().toString()) > Float.valueOf(tvMaxPF.getText().toString())) { setAnimation(tvPFT,2);  }
+        }
+        catch (Exception ex){
+            String err = ex.getMessage();
+        }
+    }
+
+
+    private void setAnimation(TextView selText,int status){
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(500); //You can manage the blinking time with this parameter
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+
+
+        switch (status){
+            case 0:
+                //selText.setTextColor(ContextCompat.getColor(G.context, R.color.red_400));
+                selText.setBackgroundColor(Color.WHITE);
+                selText.clearAnimation();
+                break;
+            case 1:
+                //selText.setTextColor(ContextCompat.getColor(G.context, R.color.red_400));
+                selText.setBackgroundColor(Color.BLUE);
+                selText.startAnimation(anim);
+                break;
+            case 2:
+                selText.setBackgroundColor(Color.RED);
+                selText.startAnimation(anim);
+                break;
+            case 3:
+                selText.setBackgroundColor(Color.YELLOW);
+                selText.startAnimation(anim);
+                break;
+        }
+
+
+    }
+
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

@@ -104,7 +104,7 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
 
         adapterInit();
 
-
+       setSpinnerLastIndex();
 
 
         baseInfoViewModel.getRegion().observe(this, new Observer<List<Region>>() {
@@ -192,6 +192,17 @@ public class DaryaftMoshtarakinActivity extends AppCompatActivity {
         }
 
     }
+
+    private void setSpinnerLastIndex() {
+        String regionName = G.getPref(SharePrefEnum.RegionName);
+        if (regionName != null)
+            for (int i = 0; i < spinnerRegion.getCount(); i++) {
+                if (spinnerRegion.getItemAtPosition(i).equals(regionName)) {
+                    spinnerRegion.setSelection(i);
+                }
+            }
+    }
+
     private void adapterInit() {
         spinnerArray.clear();
         if (baseInfoViewModel.getRegion().getValue() != null) {

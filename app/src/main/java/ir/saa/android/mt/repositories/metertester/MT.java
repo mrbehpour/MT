@@ -93,6 +93,9 @@ public class MT {
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PA,4,6));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PB,31,6));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Enegies_PC,58,6));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.ClampNumber,110,1));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.FirstClampType,119,1));
+        registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.SecondClampType,138,1));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Init_Params,221,8));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Command,230,1));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.Test_Result,222,28));
@@ -183,6 +186,36 @@ public class MT {
         }
         //TODO-parsing
         return energiesStates;
+    }
+
+    public int[] ReadClampType() throws Exception {
+
+        String result="";
+        int[] clampType = new int[3];
+        RegisterInfo ri;
+        try {
+            ri = findRegisterInfo(RegisterInfo.regNames.ClampNumber);
+            result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            clampType[0] = Integer.parseInt(result,16);
+            if(clampType[0]<1 || clampType[0] >2) clampType[0] = 1;
+            Log.d("response paulse",result);
+
+            if(clampType[0]==2){
+                ri = findRegisterInfo(RegisterInfo.regNames.FirstClampType);
+                result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+                clampType[1] = Integer.parseInt(result,16);
+
+                ri = findRegisterInfo(RegisterInfo.regNames.SecondClampType);
+                result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+                clampType[2] = Integer.parseInt(result,16);
+            }
+        } catch (Exception ex) {
+            imtCallback.onConnectionError(ex.getMessage());
+            throw new Exception(ex);
+        }
+        //TODO-parsing
+//        return Integer.parseInt(result);
+        return clampType;
     }
 
     public int ReadPaulseCounter() throws Exception {
