@@ -102,6 +102,7 @@ public class TestEnergyViewModel extends AndroidViewModel {
         }
     }
 
+
     public void confirmEnergies(){
         try{
             if ((energiesStateMutableLiveData.getValue().energy1AState && energiesStateMutableLiveData.getValue().energy2AState && energiesStateMutableLiveData.getValue().energy3AState) ||

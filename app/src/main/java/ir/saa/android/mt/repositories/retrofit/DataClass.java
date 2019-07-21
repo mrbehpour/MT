@@ -11,6 +11,8 @@ public class DataClass<T> {
 
     public String StackTrace;
 
+    public int MessageNumber;
+
     public Boolean Success;
 
 }

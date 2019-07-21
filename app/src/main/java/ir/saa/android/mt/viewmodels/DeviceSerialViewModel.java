@@ -23,7 +23,7 @@ public class DeviceSerialViewModel extends AndroidViewModel {
     RegionRepo regionRepo=null;
     RetrofitMT retrofitMT=null;
     public MutableLiveData<Integer> IsRegisterIMEI;
-    public MutableLiveData<Boolean> IsValidIMEI;
+    public MutableLiveData<Integer> IsValidIMEI;
     public MutableLiveData<Boolean> IsCompleted;
 
     public DeviceSerialViewModel(@NonNull Application application) {
@@ -79,34 +79,14 @@ public class DeviceSerialViewModel extends AndroidViewModel {
     }
 
     public void registerIMEI(IMEI_RegisterInput IMEIRegisterInput){
-//        String add= G.getPref(SharePrefEnum.AddressServer);
-//        Gson gson=new Gson();
-//        String val= gson.toJson(imiRegisterInput);
+
         retrofitMT.getMtApi().RegisterDeviceIMEI(IMEIRegisterInput)
                  .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableSingleObserver<DataClass<Integer>>() {
                     @Override
                     public void onSuccess(DataClass<Integer> integerDataClass) {
-
-                        DeviceSerial deviceSerial=new DeviceSerial();
-                        deviceSerial.isActive=false;
-                        deviceSerial.regionId= IMEIRegisterInput.regionId;
-                        deviceSerial.SerialId= IMEIRegisterInput.handHeldSerial;
-                        deviceSerialRepo.insertDeviceSerial(deviceSerial);
-
-                        if(integerDataClass.Success && integerDataClass.Data==0){
-                            //Save And Wait For Confirm
-                            IsRegisterIMEI.postValue(0);
-                        }else{
-                            if (integerDataClass.Data>0) {
-                                //Save Before
-                                IsRegisterIMEI.postValue(1);
-                            }else{
-                                //Not Saved
-                                IsRegisterIMEI.postValue(2);
-                            }
-                        }
-
+                        if(integerDataClass.MessageNumber==4) {saveDeviceSerialStatus(IMEIRegisterInput,true,true);}
+                        IsRegisterIMEI.postValue(integerDataClass.MessageNumber);
                     }
 
                     @Override
@@ -122,18 +102,10 @@ public class DeviceSerialViewModel extends AndroidViewModel {
                 .subscribeWith(new DisposableSingleObserver<DataClass<Boolean>>() {
                     @Override
                     public void onSuccess(DataClass<Boolean> booleanDataClass) {
-                        if(booleanDataClass.Success && booleanDataClass.Data){
-
-                            DeviceSerial deviceSerial=new DeviceSerial();
-                            deviceSerial.isActive=true;
-                            deviceSerial.SerialId= IMEIRegisterInput.handHeldSerial;
-                            deviceSerial.regionId= IMEIRegisterInput.regionId;
-                            deviceSerialRepo.updateDeviceSerial(deviceSerial);
-                            IsValidIMEI.postValue(true);
-
-                        }else{
-                            IsValidIMEI.postValue(false);
+                        if(booleanDataClass.MessageNumber==6) {
+                            saveDeviceSerialStatus(IMEIRegisterInput,false,true);
                         }
+                        IsValidIMEI.postValue(booleanDataClass.MessageNumber);
                     }
 
                     @Override
@@ -141,8 +113,21 @@ public class DeviceSerialViewModel extends AndroidViewModel {
                         String a = e.getMessage();
                     }
                 });
-
     }
+
+    public void saveDeviceSerialStatus(IMEI_RegisterInput IMEIRegisterInput,Boolean insertOprt,Boolean isActive){
+            DeviceSerial deviceSerial = new DeviceSerial();
+            deviceSerial.SerialId = IMEIRegisterInput.handHeldSerial;
+            deviceSerial.regionId = IMEIRegisterInput.regionId;
+            deviceSerial.isActive = isActive;
+            if(insertOprt){
+                deviceSerialRepo.insertDeviceSerial(deviceSerial);
+            }else {
+                deviceSerialRepo.updateDeviceSerial(deviceSerial);
+            }
+    }
+
+
     public LiveData<DeviceSerial> getDeviceSerialLiveData(String SerialID){
         return deviceSerialRepo.getDeviceSerialByIdLiveData(SerialID);
     }

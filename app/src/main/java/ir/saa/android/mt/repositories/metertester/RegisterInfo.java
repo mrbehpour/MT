@@ -27,5 +27,8 @@ public class RegisterInfo {
         Test_Init_Params,
         Test_Result,
         Paulse_Counter,
+        ClampNumber,
+        FirstClampType,
+        SecondClampType,
     }
 }

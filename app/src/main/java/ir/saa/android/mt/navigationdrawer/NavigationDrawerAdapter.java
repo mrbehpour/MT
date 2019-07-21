@@ -19,6 +19,7 @@ import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
 import ir.saa.android.mt.uicontrollers.activities.MainActivity;
+import ir.saa.android.mt.uicontrollers.activities.ReportActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -59,6 +60,9 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                 if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemBazdid))==0){
                     G.startFragment(FragmentsEnum.BazdidFragment,false,null);
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemReport))==0){
+                    Intent intent=new Intent(G.context, ReportActivity.class);
+                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                    G.context.startActivity(intent);
 
 //                }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItem3))==0){
 //                    G.startFragment(FragmentsEnum.ModuleFragment,false,null);

@@ -23,33 +23,51 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded"
             android:orientation="vertical"
+            android:layout_marginRight="20sp"
             android:padding="5sp">
 
             <TextView
                 android:id="@+id/tvTitleLabel"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
-                android:fontFamily="@fonts/byekan"
+                android:layout_margin="5sp"
+                android:background="@drawable/rounded2"
+                android:fontFamily="@font/byekan"
                 android:gravity="center_vertical|center_horizontal"
                 android:textAlignment="gravity"
-                android:textColor="@color/grey_900"
-                android:textSize="32sp" />
+                android:text="@string/Phase"
+                android:textSize="16sp" />
 
             <LinearLayout
+                android:id="@+id/llSign"
                 android:layout_width="80sp"
                 android:layout_height="80sp"
                 android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/tvSignTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="5sp"
+                    android:background="@drawable/rounded2"
+                    android:fontFamily="@fonts/byekan"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="@string/EnergySign"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/grey_900"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <!--Volt Title-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
-                android:layout_marginTop="35sp"
+                android:layout_height="45sp"
+                android:layout_marginTop="30sp"
                 android:layout_marginBottom="5sp"
                 android:layout_marginRight="5sp"
                 android:layout_marginLeft="5sp"
-                android:background="@drawable/rounded">
+                android:background="@drawable/rounded2">
 
                 <TextView
                     android:id="@+id/tvTitle_V"
@@ -80,7 +98,7 @@
                         android:text="290"
                         android:textColor="@color/red_400"
                         android:gravity="center"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvMin_V"
@@ -91,7 +109,7 @@
                         android:text="130"
                         android:textColor="@color/green_400"
                         android:gravity="center"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -99,9 +117,9 @@
             <!--Amp Title-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="45sp"
                 android:layout_margin="5sp"
-                android:background="@drawable/rounded">
+                android:background="@drawable/rounded2">
 
                 <TextView
                     android:id="@+id/tvTitle_Amp"
@@ -132,7 +150,7 @@
                         android:layout_marginTop="3dp"
                         android:text="30"
                         android:textColor="@color/red_400"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvMin_I"
@@ -143,7 +161,7 @@
                         android:layout_marginBottom="3dp"
                         android:text="1"
                         android:textColor="@color/green_400"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -151,9 +169,9 @@
             <!--PF Title-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="45sp"
                 android:layout_margin="5sp"
-                android:background="@drawable/rounded">
+                android:background="@drawable/rounded2">
 
                 <TextView
                     android:id="@+id/tvTitle_PF"
@@ -184,7 +202,7 @@
                         android:layout_marginTop="3dp"
                         android:text="10"
                         android:textColor="@color/red_400"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvMin_PF"
@@ -195,7 +213,7 @@
                         android:layout_marginBottom="3dp"
                         android:text="3"
                         android:textColor="@color/green_400"
-                        android:textSize="12sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -220,6 +238,7 @@
             <TextView
                 android:id="@+id/tvRLabel"
                 android:layout_width="match_parent"
+                android:layout_margin="5sp"
                 android:layout_height="50sp"
                 android:fontFamily="@fonts/byekan"
                 android:gravity="center_vertical|center_horizontal"
@@ -251,27 +270,33 @@
             <TextView
                 android:id="@+id/tvR_V"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
-                android:layout_marginTop="35sp"
+                android:layout_height="45sp"
+                android:layout_marginTop="30sp"
                 android:layout_marginBottom="5sp"
                 android:layout_marginRight="5sp"
                 android:layout_marginLeft="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp" />
 
             <!--Amp R-->
             <TextView
                 android:id="@+id/tvR_I"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="45sp"
                 android:layout_margin="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp" />
 
             <!--PF R-->
             <TextView
                 android:id="@+id/tvR_PF"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="45sp"
                 android:layout_margin="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp"/>
 
             <TextView
@@ -296,6 +321,7 @@
                 android:id="@+id/tvSLabel"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
+                android:layout_margin="5sp"
                 android:fontFamily="@fonts/byekan"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/PhaseS"
@@ -327,27 +353,33 @@
             <TextView
                 android:id="@+id/tvS_V"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
-                android:layout_marginTop="35sp"
+                android:layout_height="45sp"
+                android:layout_marginTop="30sp"
                 android:layout_marginBottom="5sp"
                 android:layout_marginRight="5sp"
                 android:layout_marginLeft="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp" />
 
             <!--Amp S-->
             <TextView
                 android:id="@+id/tvS_I"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="45sp"
                 android:layout_margin="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp" />
 
             <!--PF S-->
             <TextView
                 android:id="@+id/tvS_PF"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="45sp"
                 android:layout_margin="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp"/>
 
             <TextView
@@ -372,6 +404,7 @@
                 android:id="@+id/tvTLabel"
                 android:layout_width="match_parent"
                 android:layout_height="50sp"
+                android:layout_margin="5sp"
                 android:fontFamily="@fonts/byekan"
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/PhaseT"
@@ -402,29 +435,34 @@
             <TextView
                 android:id="@+id/tvT_V"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
-                android:layout_marginTop="35sp"
+                android:layout_height="45sp"
+                android:layout_marginTop="30sp"
                 android:layout_marginBottom="5sp"
                 android:layout_marginRight="5sp"
                 android:layout_marginLeft="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp" />
 
             <!--Amp S-->
             <TextView
                 android:id="@+id/tvT_I"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="45sp"
                 android:layout_margin="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp" />
 
             <!--PF S-->
             <TextView
                 android:id="@+id/tvT_PF"
                 android:layout_width="match_parent"
-                android:layout_height="35sp"
+                android:layout_height="45sp"
                 android:layout_margin="5sp"
+                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="20sp"/>
-
 
             <TextView
                 android:id="@+id/tvLeftColor"

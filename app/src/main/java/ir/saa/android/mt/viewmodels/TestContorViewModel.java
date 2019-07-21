@@ -68,7 +68,14 @@ public class TestContorViewModel extends AndroidViewModel {
         });
     }
 
-
+    public void CheckClampType(){
+        int[] clampType = new int[3];
+        try {
+            clampType = metertester.ReadClampType();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void initTranseferLayer(){
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
