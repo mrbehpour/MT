@@ -4,7 +4,9 @@ import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,6 +28,7 @@ import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 import ir.saa.android.mt.viewmodels.TestContorViewModel;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class TestContorFragment extends Fragment
 {
@@ -118,7 +121,64 @@ public class TestContorFragment extends Fragment
             }
         );
 
+        testContorViewModel.turnBluetoothOnMutableLiveData.observe(this, new Observer<Boolean>() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onChanged(@Nullable Boolean b) {
+                        if(b){
+                            requestForTurnOnBT();
+                        }
+                    }
+                }
+        );
+        if(G.getPref("DontShowHelpTestMeter","0").equals("0")){
+            showManualTestHelp(rootView);
+        }
         return rootView;
+    }
+
+    private void showManualTestHelp(View v){
+        new MaterialTapTargetPrompt.Builder(getActivity())
+                .setTarget(v.findViewById(R.id.switchTestType))
+                .setPrimaryText((String) getResources().getText(R.string.Help))
+                .setSecondaryText((String) getResources().getText(R.string.SwapForChange_msg))
+                .setPromptStateChangeListener(new uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt.PromptStateChangeListener()
+                {
+                    @Override
+                    public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
+                    {
+                        if (state == MaterialTapTargetPrompt.STATE_DISMISSING)
+                        {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                            builder.setTitle(getResources().getText(R.string.Help));
+                            builder.setMessage(getResources().getText(R.string.DontShowHelp_msg));
+
+                            builder.setPositiveButton(getResources().getText(R.string.PositiveAnswer), new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Do nothing but close the dialog
+                                    G.setPref("DontShowHelpTestMeter","1");
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            builder.setNegativeButton(getResources().getText(R.string.NegativeAnswer), new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+
+                                    dialog.dismiss();
+                                }
+                            });
+
+                            AlertDialog alert = builder.create();
+                            alert.show();
+                        }
+                    }
+                })
+                .show();
     }
 
     private void setDefaultValue(){
@@ -143,6 +203,11 @@ public class TestContorFragment extends Fragment
             edtRoundNum.setText("1");
         }
 
+    }
+
+    public void requestForTurnOnBT(){
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        getActivity().startActivity(enableBtIntent);
     }
 
     private void connectToModuleDialog(){
@@ -211,5 +276,7 @@ public class TestContorFragment extends Fragment
     public void onResume() {
         super.onResume();
     }
+
+
 
 }

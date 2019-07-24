@@ -1,10 +1,15 @@
 package ir.saa.android.mt.uicontrollers.activities;
 
+import android.Manifest;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.WindowManager;
@@ -84,7 +89,10 @@ public class LoginActivity extends AppCompatActivity {
 //                    }
 //                })
 //                .show();
-        tvSanjesh.setText(tvSanjesh.getText()+"\n"+ G.getPref(SharePrefEnum.DeviceId));
+        if(G.getPref(SharePrefEnum.DeviceId)==null) {
+            G.setPref(SharePrefEnum.DeviceId, getDeviceIMEI());
+        }
+        tvSanjesh.setText(G.getPref(SharePrefEnum.DeviceId));
 
         spinner.setAdapter(adapter);
 
@@ -114,6 +122,16 @@ public class LoginActivity extends AppCompatActivity {
             getAllUser();
         }
 
+    }
+
+    public String getDeviceIMEI() {
+        String deviceUniqueIdentifier = null;
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            deviceUniqueIdentifier = telephonyManager.getDeviceId();
+
+        }
+        return deviceUniqueIdentifier;
     }
 
     private void getAllUser(){

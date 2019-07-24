@@ -1,6 +1,7 @@
 package ir.saa.android.mt.viewmodels;
 
 import android.app.Application;
+import android.app.PendingIntent;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.bluetooth.BluetoothAdapter;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -19,6 +21,7 @@ import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class TestContorViewModel extends AndroidViewModel {
     Bluetooth bluetooth;
@@ -26,11 +29,13 @@ public class TestContorViewModel extends AndroidViewModel {
     TestContorParams testContorParams;
 
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
+    public MutableLiveData<Boolean> turnBluetoothOnMutableLiveData;
 
     public TestContorViewModel(@NonNull Application application) {
         super(application);
         metertester = MT.getInstance();
         connectionStateMutableLiveData = new MutableLiveData<>();
+        turnBluetoothOnMutableLiveData = new MutableLiveData<>();
         bluetooth = Bluetooth.getInstance();
         metertester.setTransferLayer(bluetooth);
         metertester.setMTCallback(new IMTCallback() {
@@ -48,10 +53,7 @@ public class TestContorViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
                 connectionStateMutableLiveData.postValue(false);
-                //Toast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), Toast.LENGTH_SHORT).show();
-                Toast fancyToast = FancyToast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect_msg),errMsg), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
-                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                fancyToast.show();
+                checkConnectionError(errMsg);
 
                 Log.d("response","onConnectionError : "+errMsg);
             }
@@ -66,6 +68,25 @@ public class TestContorViewModel extends AndroidViewModel {
 
             }
         });
+    }
+
+    private void checkConnectionError(String errMsg){
+        String showError=errMsg;
+        if(errMsg.equals("Transfer Layer is Disconnected")){
+            showError = String.format("%s:\n%s",errMsg,G.context.getResources().getText(R.string.CheckDeviceIsOn_msg));
+        }else if(errMsg.equals("Can Not Connect To Device! : Bluetooth Is Off Or Permission Is Denided!")){
+            showError = String.format("%s:\n%s",errMsg,G.context.getResources().getText(R.string.TurnBluetoothOn_msg));
+            turnBluetoothOnMutableLiveData.postValue(true);
+        }else if(errMsg.startsWith("length=0")) {
+            showError = "";
+        }
+
+        if(showError!="") {
+            //Toast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, showError, FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+        }
     }
 
     public void CheckClampType(){
@@ -89,4 +110,5 @@ public class TestContorViewModel extends AndroidViewModel {
     protected void onCleared() {
         super.onCleared();
     }
+
 }

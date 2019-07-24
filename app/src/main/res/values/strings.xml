@@ -66,6 +66,7 @@
     <string name="UsernameOrPassword_msg">نام کاربری یا کلمه عبور اشتباه است</string>
     <string name="TapAgainForExit_msg">برای خروج دوبار کلیک کنید</string>
     <string name="Exit_msg"> آیا برای خروج مطمئن هستید ؟ </string>
+    <string name="SwapForChange_msg">برای تغییر دایره سفید رنگ را به چپ یا راست بکشید</string>
     <string name="PolombDataNotFound_msg">اطلاعات پلمپ یافت نشد</string>
     <string name="RemarkDataNotFound_msg">اطلاعات بازرسی یافت نشد</string>
     <string name="TestResultNotExsist_msg">هیچ نتیجه تستی وجود ندارد.</string>
@@ -74,6 +75,7 @@
     <string name="TurnOnGPSSetting_msg">موقعیت یاب دستگاه فعال نمی باشد،آیا مایلید به منو تنظیمات بروید؟</string>
     <string name="GetLocationInProgress_msg">در حال دریافت موقعیت مکانی</string>
     <string name="PleaseWait_msg">لطفا منتظر بمانید...</string>
+    <string name="DontShowHelp_msg">دیگر این راهنما نمایش داده نشود؟</string>
     <string name="ErrorInConnect_msg">خطا در اتصال به دستگاه</string>
     <string name="ClampDirectionError_msg">جهت کلمپ ها یکسان نیست</string>
     <string name="RecieveInProgress_msg">در حال دریافت...</string>
@@ -87,6 +89,8 @@
     <string name="FillOldAndNewPlombInfo_msg">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
     <string name="FillOldAndNewPlombInfoForceField_msg">لطفا فیلدهای %s را پر کنید</string>
     <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
+    <string name="CheckDeviceIsOn_msg">لطفا از روشن بودن ماژول تست کنتور مطمئن شوید</string>
+    <string name="TurnBluetoothOn_msg">لطفا از روشن بودن بلوتوث دستگاه مطمئن شوید</string>
     <string name="Downloding_msg">Downloading data,Please wait..</string>
     <string name="MeterUnknown_msg">مشخصات کنتور ثبت نشده است</string>
     <string name="ConnectionOK_msg">اتصال با سرور برقرار است</string>
@@ -322,7 +326,7 @@
     <string name="Reconnect">اتصال دوباره</string>
     <string name="Ok">تایید</string>
     <string name="No">خیر</string>
-    <string name="Yes">بله</string>
+    <string name="Yes">بلیِ</string>
     <string name="Cancel">انصراف</string>
     <string name="Answer"> جواب : </string>
     <string name="Retry">تلاش دوباره</string>
@@ -346,5 +350,9 @@
     <string name="tedadGheraat">تعداد قرائت:</string>
     <string name="tedadPolomp">تعداد پلمپ:</string>
     <string name="tedadTitle">تعداد</string>
+
+    <string name="PositiveAnswer">بلی</string>
+    <string name="NegativeAnswer">خیر</string>
+    <string name="Help">راهنما</string>
 
 </resources>
