@@ -9,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,9 +23,7 @@ import java.util.Stack;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.components.ClientInfo;
-import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.FragmentsEnum;
-import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.uicontrollers.fragments.AmaliyatFragment;
 import ir.saa.android.mt.uicontrollers.fragments.BazdidFragment;
 import ir.saa.android.mt.uicontrollers.fragments.BazrasiFragment;
@@ -39,11 +36,8 @@ import ir.saa.android.mt.uicontrollers.fragments.PolompFragment;
 import ir.saa.android.mt.uicontrollers.fragments.PolompFragmentSave;
 import ir.saa.android.mt.uicontrollers.fragments.ReadmeterFragment;
 import ir.saa.android.mt.uicontrollers.fragments.SanjeshFragment;
-import ir.saa.android.mt.uicontrollers.fragments.SettingFragment;
-import ir.saa.android.mt.uicontrollers.fragments.TempFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestContorFragment;
 import ir.saa.android.mt.uicontrollers.fragments.TestEnergyFragment;
-import ir.saa.android.mt.uicontrollers.fragments.TestFragment;
 
 public class G extends Application {
 
@@ -131,10 +125,10 @@ public class G extends Application {
                 targetFragment=new HomeFragment();
                 setActionbarTitleText("");
                 break;
-            case FragmentsEnum.SettingFragment:
-                targetFragment=new SettingFragment();
-                setActionbarTitleText((String) context.getResources().getText(R.string.Setting_G));
-                break;
+//            case FragmentsEnum.SettingFragment:
+//                targetFragment=new SettingFragment();
+//                setActionbarTitleText((String) context.getResources().getText(R.string.Setting_G));
+//                break;
             case FragmentsEnum.BazdidFragment:
                 targetFragment=new BazdidFragment();
                 setActionbarTitleText((String) context.getResources().getText(R.string.Bazdid_G));

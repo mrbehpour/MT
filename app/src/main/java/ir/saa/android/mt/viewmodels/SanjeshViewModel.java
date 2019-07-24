@@ -92,7 +92,6 @@ public class SanjeshViewModel extends AndroidViewModel {
         if(numDisconnect>5){
             abortOperationMutableLiveData.postValue(true);
             AbortOperation();
-
         }
     }
 

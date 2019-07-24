@@ -330,7 +330,7 @@ public class Bluetooth implements ITransferLayer {
 
     static final String bt_err_deviceNotPaired="Selected Device Is Not In Paired List!";
     static final String bt_err_bluetoothIsOff="Bluetooth Is Off Or Permission Is Denided!";
-    static final String bt_err_deviceIsNotInit="Selected Device Is Not Init Succesfuly!";
+    static final String bt_err_deviceIsNotInit="Selected Device Is Not Init Successfully!";
     static final String bt_err_noResponse="No Response From Device!";
     static final String bt_err_connectionFailed="Can Not Connect To Device!";
     static final String bt_err_connectionAlreadyOK="Bluetooth Already Connected";
