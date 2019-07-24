@@ -260,7 +260,7 @@ public class BazrasiViewModel extends AndroidViewModel {
 
     }
 
-    public boolean saveBazrasiRemarkShenavar(MoshahedatItem currentItem, Object objectValue, Location location) {
+        public boolean saveBazrasiRemarkShenavar(MoshahedatItem currentItem, Object objectValue, Location location) {
         InspectionWithAnswerGroup inspectionAllInfo = getInspectionAllInfo(G.clientInfo.ClientId, currentItem.Id, currentItem.answerGroupId);
         if (inspectionAllInfo == null) {
             if (objectValue != null) {
@@ -328,9 +328,14 @@ public class BazrasiViewModel extends AndroidViewModel {
 
 
     }
-        public LiveData<MasterGroupDetail> getMasterGroupDetail(Integer iD){
+
+    public LiveData<MasterGroupDetail> getMasterGroupDetail(Integer iD){
             return masterGroupDetailRepo.getMasterGroupDetailById(iD);
         }
+
+      public void updateAnswerGroupDtl(AnswerGroupDtl answerGroupDtl){
+        answerGroupDtlRepo.updateAnswerGroupDtl(answerGroupDtl);
+      }
 
     public LiveData<List<MasterGroupDetail>> getMasterGroupDetail() {
         return masterGroupDetailRepo.getMasterGroupDetails();
@@ -338,5 +343,9 @@ public class BazrasiViewModel extends AndroidViewModel {
 
     public List<AnswerGroupDtl> getAnswerGroupDtlByAnswerGroupIds(List<Integer> answergroupIds){
         return answerGroupDtlRepo.getAnswerGroupDtlByAnswerGroupIds(answergroupIds);
+    }
+
+    public AnswerGroupDtl getAnswerGroupDtl(int Id,int answergroupId){
+        return answerGroupDtlRepo.getAnswerGroupDtl(Id,answergroupId);
     }
 }

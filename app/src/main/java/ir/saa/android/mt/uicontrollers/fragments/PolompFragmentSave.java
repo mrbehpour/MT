@@ -175,9 +175,11 @@ public class PolompFragmentSave extends Fragment {
         polompViewModel.getSettingByKey("PolompUniqueKeys").observe(getActivity(), new Observer<Setting>() {
             @Override
             public void onChanged(@Nullable Setting setting) {
-                String[] settingValue=setting.SettingValue.split(",");
-                for(String str:settingValue){
-                    Fields.add(str);
+                if(setting!=null) {
+                    String[] settingValue = setting.SettingValue.split(",");
+                    for (String str : settingValue) {
+                        Fields.add(str);
+                    }
                 }
 
 
@@ -442,13 +444,18 @@ public class PolompFragmentSave extends Fragment {
 
                 if(locationViewModel.isGpsEnable()) {
                     if(location==null) {
+                        locationViewModel.getLocation(getContext());
                         connectToModuleDialog();
+
                     }
                 }else{
-                    location=null;
+
+                    connectToModuleDialog();
                 }
-                if(MessageField=="" && location!=null) {
-                    PolompSave();
+                if(MessageField.equals("") ) {
+                    if(location!=null) {
+                        PolompSave();
+                    }
                 }else{
                     Toast fancyToast = FancyToast.makeText(getActivity(),  String.format((String) getResources().getText
                                     (R.string.FillOldAndNewPlombInfoForceField_msg),MessageField.substring(1))
@@ -594,8 +601,7 @@ public class PolompFragmentSave extends Fragment {
         //Bastan Form Sabt polomp
         G.startFragment(G.fragmentNumStack.pop(), true, null);
     }else{
-
-
+            connectToModuleDialog();
 
         }
 

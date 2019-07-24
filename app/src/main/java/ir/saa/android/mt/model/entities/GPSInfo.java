@@ -23,7 +23,7 @@ public class GPSInfo {
 
     public int GPSTime ;
 
-    public long FollowUpCode ;
+    public Long FollowUpCode ;
 
     public String Long ;
 

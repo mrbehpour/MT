@@ -503,6 +503,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
                     answerGroupRepo.insertAnswerGroup(answerGroups.Data.get(i));
                     baseinfoProgressPercentLiveData.postValue(getPrecent(startProgress + (i + 1), totalCount));
                 }
+                answerGroupDtlRepo.allDelete();
                 startProgress = answerGroups.Data.size();
                 for (Integer i = 0; i < answerGroupDtls.size(); i++) {
                     answerGroupDtlRepo.insertAnswerGroupdtl(answerGroupDtls.get(i));

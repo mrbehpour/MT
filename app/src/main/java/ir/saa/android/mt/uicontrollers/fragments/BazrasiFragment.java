@@ -124,6 +124,7 @@ public class BazrasiFragment extends Fragment  {
 
                                     dialog.clearAllPanel();
 
+
                                     myCheckList =
                                             new MyCheckList(G.context
                                                     , new MyCheckListItem(answerGroupDtls.get(0).AnswerGroupDtlName, answerGroupDtls.get(0).AnswerGroupDtlID),

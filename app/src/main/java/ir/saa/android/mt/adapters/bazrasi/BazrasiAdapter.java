@@ -113,10 +113,13 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
             }
         });
         holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
-        if (current.remarkValue != "-1") {
-            holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
+        if (current.AnswerCaption != "") {
+            AnswerGroupDtl answerGroupDtl=bazrasiViewModel.getAnswerGroupDtl(Integer.valueOf(current.remarkValue),11);
+            holder.listitemRemarkRoot.setCardBackgroundColor(answerGroupDtl.AnswerGroupDtlColor);
 
         }
+
+
         holder.listitemRemarkRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,7 +142,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                         current.remarkValue = "-1";
                     }
                     if (current.answerGroupId != null) {
-                        bazrasiViewModel.getAnswerGroupDtlsLiveData(current.answerGroupId).observe((AppCompatActivity) context, new Observer<List<AnswerGroupDtl>>() {
+                        bazrasiViewModel.getAnswerGroupDtlsLiveData(current.answerGroupId).observeForever( new Observer<List<AnswerGroupDtl>>() {
                             @Override
                             public void onChanged(@Nullable List<AnswerGroupDtl> answerGroupDtls) {
 
@@ -175,18 +178,13 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                 dialog.addButton(G.context.getResources().getString(R.string.Save), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-
-
-
-                                            objects = myCheckList.getSelectedItemsValues();
-                                            if (myCheckList.getSelectedCheckListItems().size() != 0) {
-                                                current.AnswerCaption = myCheckList.getSelectedCheckListItems().get(0).Text;
-                                            } else {
-                                                current.AnswerCaption = "";
-                                                holder.tvResult.setText(current.AnswerCaption);
-                                            }
-
-
+                                        objects = myCheckList.getSelectedItemsValues();
+                                        if (myCheckList.getSelectedCheckListItems().size() != 0) {
+                                            current.AnswerCaption = myCheckList.getSelectedCheckListItems().get(0).Text;
+                                        } else {
+                                            current.AnswerCaption = "";
+                                            holder.tvResult.setText(current.AnswerCaption);
+                                        }
                                             if (objects.size() == 0) {
                                                 bazrasiViewModel.saveBazrasi(current, null,location);
                                                 holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
@@ -194,11 +192,16 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                             } else {
 
                                                 boolean state=bazrasiViewModel.saveBazrasi(current, objects.get(0),location);
+                                                if(state) {
 
-                                                holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
-                                                holder.tvResult.setText(current.AnswerCaption);
+                                                    holder.tvResult.setText(current.AnswerCaption);
+                                                    AnswerGroupDtl answerGroupDtl=bazrasiViewModel.getAnswerGroupDtl(Integer.valueOf(objects.get(0).toString())
+                                                    ,11);
+                                                    if(answerGroupDtl!=null){
+                                                        current.remarkValue=objects.get(0).toString();
+                                                        holder.listitemRemarkRoot.setCardBackgroundColor(answerGroupDtl.AnswerGroupDtlColor);
+                                                    }
 
-                                                if(state){
                                                     //Toast.makeText((AppCompatActivity)context,G.context.getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
                                                     Toast fancyToast= FancyToast.makeText((AppCompatActivity)context, (String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg),FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false);
                                                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);

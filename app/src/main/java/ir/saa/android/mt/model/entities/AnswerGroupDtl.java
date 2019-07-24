@@ -32,4 +32,6 @@ public class AnswerGroupDtl {
     @SerializedName("Description")
     @Expose
     public String Description ;
+
+    public int AnswerGroupDtlColor;
 }

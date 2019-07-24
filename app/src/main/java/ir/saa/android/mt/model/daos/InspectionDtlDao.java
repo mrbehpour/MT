@@ -49,7 +49,7 @@ public interface InspectionDtlDao {
             "inner join InspectionDtl on " +
             "InspectionInfo.InspectionInfoID=InspectionDtl.InspectionInfoID " +
             "Inner Join Remark on "+
-            "InspectionDtl.RemarkID=Remark.RemarkID  " +
+            "InspectionDtl.RemarkID=Remark.RemarkID and InspectionDtl.RemarkValue=AnswerGroupDtl.AnswerGroupDtlID " +
             "inner join  AnswerGroupDtl on " +
             " AnswerGroupDtl.answergroup_id=Remark.AnswerGroupID "+
             "Where AnswerGroupDtl.answergroup_id=:answerGroupId and InspectionInfo.ClientID=:clientId and Remark.RemarkID=:remarkId")

@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -28,14 +30,19 @@ import android.widget.Toast;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.adapters.answerGroup.AnswerGroupAdapter;
+import ir.saa.android.mt.adapters.answerGroup.AnswerGroupItem;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.DeviceSerial;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
+import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
 import ir.saa.android.mt.viewmodels.ModuleViewModel;
 
@@ -58,7 +65,11 @@ public class SettingActivity extends AppCompatActivity {
     RadioButton rbtHuge;
     RetrofitMT retrofitMT=null;
     DeviceSerialViewModel deviceSerialViewModel=null;
+    BazrasiViewModel bazrasiViewModel = null;
     Boolean callFromLoginAct;
+    RecyclerView recyclerView;
+    AnswerGroupAdapter answerGroupAdapter;
+    List<AnswerGroupItem> answerGroupItems;
 
     HashMap<String, Integer> spinnerMap = new HashMap<String, Integer>();
     public  void adjustFontScale(Configuration configuration, Float fontSize) {
@@ -76,8 +87,14 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_settings);
 
+        recyclerView=(RecyclerView)findViewById(R.id.rvAnswerGroup);
+        answerGroupItems=new ArrayList<>();
+        answerGroupAdapter=new AnswerGroupAdapter(this,answerGroupItems);
+        recyclerView.setAdapter(answerGroupAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         deviceSerialViewModel= ViewModelProviders.of(this).get(DeviceSerialViewModel.class);
+        bazrasiViewModel=ViewModelProviders.of(this).get(BazrasiViewModel.class);
         DeviceSerial deviceSerial=  deviceSerialViewModel.getDeviceSerial(G.getPref(SharePrefEnum.DeviceId));
 
         Bundle b = getIntent().getExtras();
@@ -87,6 +104,22 @@ public class SettingActivity extends AppCompatActivity {
         }else{
             callFromLoginAct = false;
         }
+
+
+        bazrasiViewModel.getAnswerGroupDtlsLiveData(11).observe(this, new Observer<List<AnswerGroupDtl>>() {
+            @Override
+            public void onChanged(@Nullable List<AnswerGroupDtl> answerGroupDtls) {
+                answerGroupItems.clear();
+                for (AnswerGroupDtl answerGroupDtl :answerGroupDtls ){
+                    answerGroupItems.add(new AnswerGroupItem(answerGroupDtl.AnswerGroupDtlID,
+                            answerGroupDtl.AnswerGroupDtlName,answerGroupDtl.AnswerGroupDtlColor));
+                }
+                answerGroupAdapter.clearDataSet();
+                answerGroupAdapter.addAll(answerGroupItems);
+                answerGroupAdapter.notifyDataSetChanged();
+            }
+        });
+
 
         edtServerAddress = findViewById(R.id.edtServerAddress);
         //edtCorrectCoeff = findViewById(R.id.edtCoeff);

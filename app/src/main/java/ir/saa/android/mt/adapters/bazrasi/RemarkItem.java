@@ -11,6 +11,7 @@ public class RemarkItem {
     public String AnswerCaption;
 
 
+
     public RemarkItem(Integer Id,String RemarkName,Integer AnswerGroupId,String RemarkValue,String answerCaption){
         this.Id=Id;
         this.RemarkName=RemarkName;

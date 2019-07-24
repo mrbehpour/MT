@@ -300,6 +300,7 @@
     <string name="ServerAddress">آدرس سرور</string>
     <string name="Http">http://</string>
     <string name="FontSize">سایز فونت:</string>
+    <string name="ResultRemark">تعیین رنگ :</string>
     <string name="Small">کوچک</string>
     <string name="Middle">متوسط</string>
     <string name="Large">بزرگ</string>
