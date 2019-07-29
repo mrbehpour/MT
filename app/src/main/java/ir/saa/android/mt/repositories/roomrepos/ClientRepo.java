@@ -70,7 +70,7 @@ public class ClientRepo {
     }
 
 
-    public LiveData<Client> getClientById(long clientId) {
+    public Client getClientById(long clientId) {
         return clientDao.getClientById(clientId);
     }
 

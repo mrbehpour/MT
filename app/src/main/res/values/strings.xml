@@ -74,6 +74,7 @@
     <string name="TurnOnInternet_msg">لطفا برای موقعیت یابی دقیق تر اینترنت خط دستگاه خود را روشن نمایید.</string>
     <string name="TurnOnGPSSetting_msg">موقعیت یاب دستگاه فعال نمی باشد،آیا مایلید به منو تنظیمات بروید؟</string>
     <string name="GetLocationInProgress_msg">در حال دریافت موقعیت مکانی</string>
+    <string name="GetClientInProgress_msg">در حال جستجو مشترک </string>
     <string name="PleaseWait_msg">لطفا منتظر بمانید...</string>
     <string name="DontShowHelp_msg">دیگر این راهنما نمایش داده نشود؟</string>
     <string name="ErrorInConnect_msg">خطا در اتصال به دستگاه</string>
@@ -87,6 +88,7 @@
     <string name="Confirm_msg">آیا مایلید ذخیره شود ؟</string>
     <string name="Title_msg">توجه</string>
     <string name="FillOldAndNewPlombInfo_msg">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
+    <string name="NoClientFind_msg">مشترکی با این مشخصات یافت نشد</string>
     <string name="FillOldAndNewPlombInfoForceField_msg">لطفا فیلدهای %s را پر کنید</string>
     <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
     <string name="CheckDeviceIsOn_msg">لطفا از روشن بودن ماژول تست کنتور مطمئن شوید</string>
@@ -342,7 +344,8 @@
     <string name="PieTariffTitle">قرائت</string>
     <string name="PieBazrasiTitle">بازرسی</string>
     <string name="PieChartNoData">داده ای برای نمایش وجود ندارد</string>
-
+    <string name="AddClientTitle">مشترک اضافه شده</string>
+    <string name="ClientTitle">مشترکین</string>
 
     <!-- Report -->
     <string name="tedadBazrasi">تعداد بازرسی:</string>
@@ -354,5 +357,7 @@
     <string name="PositiveAnswer">بلی</string>
     <string name="NegativeAnswer">خیر</string>
     <string name="Help">راهنما</string>
+
+
 
 </resources>

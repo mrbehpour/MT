@@ -78,7 +78,15 @@ public class G extends Application {
         //int versionNumber = pinfo.versionCode;
         //MY_VERSION = pinfo.versionName;
     }
+    public static boolean isNetWorkConnection(){
+        ConnectivityManager conMgr =  (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
+        if (netInfo == null){
+            return false;
 
+        }
+        return true;
+    }
     public static void removePref(String prefName){
         prefEditor.remove(prefName);
         prefEditor.commit();

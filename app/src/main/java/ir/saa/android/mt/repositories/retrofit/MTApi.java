@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.reactivex.Single;
 import ir.saa.android.mt.model.entities.AccessAgentAndroid;
+import ir.saa.android.mt.model.entities.AddedClientInput;
 import ir.saa.android.mt.model.entities.AgentAccessList;
 import ir.saa.android.mt.model.entities.AnswerGroup;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
@@ -107,4 +108,7 @@ public interface MTApi {
 
     @POST("GetImiConfirmStatus")
     Single<DataClass<Boolean>> GetIMEIConfirmStatus(@Body IMEI_RegisterInput IMEIRegisterInput);
+
+    @POST("GetClientsForAddedClient")
+    Single<DataClass<List<Client>>> GetClientsForAddedClient(@Body AddedClientInput addedClientInput);
 }

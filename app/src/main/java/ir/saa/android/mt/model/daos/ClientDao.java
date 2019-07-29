@@ -218,7 +218,7 @@ public interface ClientDao {
     void deleteClient(Client client);
 
     @Query("select * from Client where ClientID = :clientId")
-    LiveData<Client> getClientById(long clientId);
+    Client getClientById(long clientId);
 
     @Query("Delete From Client")
     void deleteAll();

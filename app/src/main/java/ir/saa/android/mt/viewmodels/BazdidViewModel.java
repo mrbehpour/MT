@@ -150,6 +150,14 @@ public class BazdidViewModel extends AndroidViewModel {
         return bazdidRepo.getReportByRegionId(RegionId);
     }
 
+    public void insertClient(Client client){
+        clientRepo.insertClient(client);
+    }
+
+    public Client getClientByClientId(Long ClientId){
+        return clientRepo.getClientById(ClientId);
+    }
+
 
 
 

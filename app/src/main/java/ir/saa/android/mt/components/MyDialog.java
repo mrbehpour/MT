@@ -13,6 +13,7 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import ir.saa.android.mt.R;
@@ -85,6 +86,10 @@ public class MyDialog {
 	}
 	public MyDialog addContentXml(int layoutId) {
 	    _llBodyPanel.addView((LinearLayout) View.inflate(_context, layoutId, null));
+		return this;
+	}
+	public MyDialog addContentXmlScorllView(int layoutId) {
+		_llBodyPanel.addView((ScrollView) View.inflate(_context, layoutId, null));
 		return this;
 	}
 	public MyDialog clearButtonPanel() {
