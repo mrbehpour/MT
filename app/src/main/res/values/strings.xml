@@ -55,6 +55,7 @@
     <!--*******************-->
     <!--،Toast Masseage -->
     <string name="SaveOperationSuccess_msg">اطلاعات با موفقیت ثبت شد</string>
+    <string name="ExistJoint_msg">مشترک در بانک وجود دارد</string>
     <string name="WaitForRecieveData_msg">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
     <string name="JointsSaveNum_msg">اطلاعات %1$s مشترک از %2$s مشترک در سایت ثبت نشده است</string>
     <string name="GroupName_msg">گروه بازرسی شما %s می باشد.آیا ادامه می دهید؟</string>

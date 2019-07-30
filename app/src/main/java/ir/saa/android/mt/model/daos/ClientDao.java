@@ -200,8 +200,9 @@ public interface ClientDao {
             "Client.FollowUpCode,"+
             "AnswerGroupDtlName as TariffTypeName " +
             "from Client " +
-            "INNER JOIN AnswerGroup on AnswerGroup.AnswerGroupID=AnswerGroupDtl.answergroup_id and AnswerGroup.Description='Tariff'"+
-            "INNER JOIN AnswerGroupDtl on Client.tarifftype_id=AnswerGroupDtl.Description "+
+            "left JOIN AnswerGroupDtl on Client.tarifftype_id=AnswerGroupDtl.Description "+
+            "left JOIN AnswerGroup on AnswerGroup.AnswerGroupID=AnswerGroupDtl.answergroup_id and AnswerGroup.Description='Tariff'"+
+
              "where ClientID= :clientId"   )
     LiveData<ClientWithTarif> getClientWithTarif(Long clientId);
 

@@ -39,6 +39,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyCheckList;
 import ir.saa.android.mt.components.MyCheckListItem;
 import ir.saa.android.mt.components.MyDialog;
+import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.AddedClientInput;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientWithAction;
@@ -154,9 +155,7 @@ public class BazdidFragment extends Fragment
                                 etRamz = (EditText) myDialog.getDialog().findViewById(R.id.etRamz);
                                 etSerialContor = (EditText) myDialog.getDialog().findViewById(R.id.etSerialContor);
                                 etShenasai = (EditText) myDialog.getDialog().findViewById(R.id.etShenasai);
-                                if (G.isNetWorkConnection()){
-
-
+                                if (G.isNetWorkConnection()) {
                                     addedClientInput.clientPass = etRamz.getText().toString().equals("") ? null : Long.parseLong(etRamz.getText().toString());
                                     addedClientInput.custId = etShenasai.getText().toString();
                                     addedClientInput.fileId = etFileId.getText().toString().equals("") ? null :
@@ -165,10 +164,11 @@ public class BazdidFragment extends Fragment
                                             Long.parseLong(etEshterak.getText().toString());
                                     addedClientInput.meterNumActive = etSerialContor.getText().toString().equals("") ? null :
                                             Long.parseLong(etSerialContor.getText().toString());
-
-                                    Gson gson = new Gson();
-                                    String ddf = gson.toJson(addedClientInput);
-                                    addedClientViewModel.getClientFromServer(addedClientInput);
+                                    Client client = bazdidViewModel.getClientByClientId(addedClientInput.subScript);
+                                    if (client == null){
+//                                    Gson gson = new Gson();
+//                                    String ddf = gson.toJson(addedClientInput);
+                                        addedClientViewModel.getClientFromServer(addedClientInput);
                                     connectToModuleDialog();
                                     addedClientViewModel.ClientListMultiLiveData.observe((LifecycleOwner) getContext(), new Observer<List<Client>>() {
                                         @Override
@@ -178,6 +178,7 @@ public class BazdidFragment extends Fragment
 
                                             if (clients != null) {
                                                 HideProgressDialog();
+                                                myDialogForClient.clearAllPanel();
                                                 myCheckList.removeAllCkeckItems();
                                                 for (Client client : clients) {
                                                     String Caption = String.format("نام : %s", client.Name) + "\n" +
@@ -226,6 +227,12 @@ public class BazdidFragment extends Fragment
                                         }
                                     });
                                 }else{
+                                        Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.ExistJoint_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+                                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                        fancyToast.show();
+                                        myDialog.dismiss();
+                                    }
+                                }else{
                                     Client client=new Client();
                                     client.ClientPass = etRamz.getText().toString().equals("") ? null : Long.parseLong(etRamz.getText().toString());
                                     client.CustId = etShenasai.getText().toString();
@@ -235,7 +242,20 @@ public class BazdidFragment extends Fragment
                                             Long.parseLong(etEshterak.getText().toString());
                                     client.MeterNumActive = etSerialContor.getText().toString().equals("") ? null :
                                             Long.parseLong(etSerialContor.getText().toString());
-                                   client.Name="";
+                                   client.Name= (String) getResources().getText(R.string.AddClientTitle);
+                                   client.ClientID=etEshterak.getText().toString().equals("") ? null :
+                                           Long.parseLong(etEshterak.getText().toString());
+                                   client.RegionID=Integer.valueOf(G.getPref(SharePrefEnum.RegionId));
+
+                                   Client client1=bazdidViewModel.getClientByClientId(client.ClientID);
+
+                                   if(client1==null) {
+                                       bazdidViewModel.insertClient(client);
+                                       Toast fancyToast = FancyToast.makeText(G.context, (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                       fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                       fancyToast.show();
+                                       myDialog.dismiss();
+                                   }
                                 }
                             }
                         })
@@ -259,37 +279,37 @@ public class BazdidFragment extends Fragment
         adapter = new BazdidAdapter(getActivity(), clientItems);
         bazdidViewModel.getClientsWithRegionIdLiveData(Integer.valueOf(G.getPref("RegionID"))).observeForever(new Observer<List<ClientWithAction>>() {
                                                                                                                   @Override
-                                                                                                                  public void onChanged(@Nullable List<ClientWithAction> clients) {
-                                                                                                                      Activity activity = getActivity();
-                                                                                                                      activity = getActivity();
-                                                                                                                      clientItems.clear();
-                                                                                                                      Integer RowId=0;
-                                                                                                                      String UniqField="";
-                                                                                                                      if(activity != null && isAdded()) {
-                                                                                                                          UniqField= (String) getResources().getText(R.string.UniqeField);
-                                                                                                                      }
+                        public void onChanged(@Nullable List<ClientWithAction> clients) {
+                             Activity activity = getActivity();
+                             activity = getActivity();
+                             clientItems.clear();
+                             Integer RowId=0;
+                             String UniqField="";
+                             if(activity != null && isAdded()) {
+                                 UniqField= (String) getResources().getText(R.string.UniqeField);
+                             }
 
-                                                                                                                      for(ClientWithAction client:clients){
+                             for(ClientWithAction client:clients){
 
-                                                                                                                          isBazrasi=client.isBazrasi!=0?true:false;
-                                                                                                                          isPolomp=client.isPolomp!=0?true:false;
-                                                                                                                          isTest=client.isTest!=0?true:false;
-                                                                                                                          isTariff=client.isTariff!=0?true:false;
-                                                                                                                          RowId+=1;
-                                                                                                                          clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,UniqField ,client.CustId,
-                                                                                                                                  R.drawable.account,client.SendId,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,isTariff,
-                                                                                                                                  client.FollowUpCode,RowId,client.forcibleMasterGroup ));
-                                                                                                                      }
+                                       isBazrasi=client.isBazrasi!=0?true:false;
+                                       isPolomp=client.isPolomp!=0?true:false;
+                                       isTest=client.isTest!=0?true:false;
+                                       isTariff=client.isTariff!=0?true:false;
+                                       RowId+=1;
+                                       clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,UniqField ,String.valueOf(client.SubScript),
+                                               R.drawable.account,client.SendId,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,isTariff,
+                                               client.FollowUpCode,RowId,client.forcibleMasterGroup ));
+                                   }
 
-                                                                                                                      adapter.clearDataSet();
-                                                                                                                      adapter.addAll(clientItems);
-                                                                                                                      adapter.notifyDataSetChanged();
+                                   adapter.clearDataSet();
+                                   adapter.addAll(clientItems);
+                                   adapter.notifyDataSetChanged();
 
-                                                                                                                      if(Postion!=null) {
-                                                                                                                          recyclerView.scrollToPosition(Postion);
-                                                                                                                      }
-                                                                                                                  }
-                                                                                                              }
+                                   if(Postion!=null) {
+                                       recyclerView.scrollToPosition(Postion);
+                                   }
+                               }
+                           }
         );
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

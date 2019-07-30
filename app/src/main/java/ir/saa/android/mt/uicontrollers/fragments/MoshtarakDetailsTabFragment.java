@@ -90,13 +90,15 @@ public class MoshtarakDetailsTabFragment extends Fragment
                 public void onChanged(@Nullable ClientWithTarif client) {
                     if(client!=null) {
                         String MeterTypeName="";
-                        switch (client.Faz){
-                            case 1:
-                                MeterTypeName= (String) getResources().getText(R.string.OnePhase);
-                                break;
-                            case 3:
-                                MeterTypeName= (String) getResources().getText(R.string.ThreePhase);
-                                break;
+                        if(client.Faz!=null) {
+                            switch (client.Faz) {
+                                case 1:
+                                    MeterTypeName = (String) getResources().getText(R.string.OnePhase);
+                                    break;
+                                case 3:
+                                    MeterTypeName = (String) getResources().getText(R.string.ThreePhase);
+                                    break;
+                            }
                         }
                         tvShomareBadane.setText(client.MeterNumActive==null?"":client.MeterNumActive.toString());
                         tvNoeKontor.setText(MeterTypeName);

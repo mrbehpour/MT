@@ -185,8 +185,17 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
         } else {
             query = query.toLowerCase();
             for (ClientItem item : clientItemListOrginal) {
-                if (item.Name.toLowerCase().contains(query) || item.Address.toLowerCase().contains(query)
-                        || item.UniqueFieldValue.toLowerCase().contains(query) || item.RowId.toString().contains(query) ) {
+                if(item.Address==null ){
+                    item.Address="";
+                }
+                if(item.Name==null){
+                    item.Name="";
+                }
+                if(item.UniqueFieldValue==null){
+                    item.UniqueFieldValue="";
+                }
+                if (item.Name.contains(query) || item.Address.contains(query)
+                        || item.UniqueFieldValue.contains(query) || item.RowId.toString().contains(query) ) {
                     mDataList.add(item);
                 }
             }
