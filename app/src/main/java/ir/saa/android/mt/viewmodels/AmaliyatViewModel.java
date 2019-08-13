@@ -172,7 +172,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
                 numErrorPulseNum = 0;
             }
 
-            if(paulseCounter>=metertester.maxRoundTest) finishTest();
+            if(paulseCounter>=metertester.maxRoundTest) finishTest(true);
             testRoundNumMutableLiveData.postValue(paulseCounter);
 
             if(paulseCounter>0) {
@@ -263,13 +263,21 @@ public class AmaliyatViewModel extends AndroidViewModel {
         }
     }
 
-    public void finishTest(){
+    public void finishTest(Boolean sendFinishCommand){
+
+        metertester.AbortOperation();
+        if(sendFinishCommand) metertester.SendTestCommand(MT.TestCommands.FinishTest);
         testStatusMutableLiveData.postValue(MT.TestCommands.FinishTest);
 
         timerSetIntervalStop();
         if(handler!=null) handler.removeCallbacksAndMessages(null);
-        metertester.SendTestCommand(MT.TestCommands.FinishTest);
+
         timerCheckStop();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         showResult();
     }
 

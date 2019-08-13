@@ -25,6 +25,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -41,6 +42,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.DeviceSerial;
+import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.retrofit.RetrofitMT;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 import ir.saa.android.mt.viewmodels.DeviceSerialViewModel;
@@ -50,7 +52,7 @@ import ir.saa.android.mt.viewmodels.ModuleViewModel;
 public class SettingActivity extends AppCompatActivity {
 
     EditText edtServerAddress;
-    EditText edtCorrectCoeff;
+    TextView txtCorrectCoeff;
     Button btnTestConnection;
     Button btnSave;
     ModuleViewModel moduleViewModel;
@@ -122,7 +124,7 @@ public class SettingActivity extends AppCompatActivity {
 
 
         edtServerAddress = findViewById(R.id.edtServerAddress);
-        //edtCorrectCoeff = findViewById(R.id.edtCoeff);
+        //txtCorrectCoeff = findViewById(R.id.txtCorrectCoeff);
 
         btnTestConnection = findViewById(R.id.btnTestConnection);
 
@@ -187,6 +189,8 @@ public class SettingActivity extends AppCompatActivity {
         if(G.getPref(SharePrefEnum.CorrectCoeff)!=null) {
             //edtCorrectCoeff.setText(G.getPref(SharePrefEnum.CorrectCoeff));
         }
+
+        //txtCorrectCoeff.setText(String.format("%s : %s", (String) getResources().getText(R.string.CorrectCoeff) ,  String.valueOf(MT.correctFactor)));
 
         btnTestConnection.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -22,6 +22,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.repositories.modbus.ITransferLayer;
 import ir.saa.android.mt.repositories.modbus.ITransferLayerCallback;
 
@@ -170,9 +171,12 @@ public class Bluetooth implements ITransferLayer {
     public boolean isConnected() {
         boolean res=false;
 
-        if(mmSocket!=null){
-            res =  mmSocket.isConnected();
+        if(G.blurtoothOn) {
+            if (mmSocket != null) {
+                res = mmSocket.isConnected();
+            }
         }
+
         return res;
     }
 

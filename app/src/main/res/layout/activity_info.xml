@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".uicontrollers.activities.InfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="50sp"
+        android:background="@drawable/layout_border"
+        android:orientation="vertical">
+
+        PublicInfoTitle
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/tvPublicInfoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/orange_200"
+                android:text="@string/PublicSoftInfo"
+                android:textAlignment="center"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <!--SoftName-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/tvSoftName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <!--Black Line-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_400"
+            >
+        </LinearLayout>
+
+        <!--Producer-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/tvProducer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <!--Black Line-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_400"
+            >
+        </LinearLayout>
+
+        <!--CustomerName-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/tvCustomerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <!--Black Line-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_400"
+            >
+        </LinearLayout>
+
+        <!--Version-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </RelativeLayout>
+        
+        <!--Black Line-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_400"
+            >
+        </LinearLayout>
+
+        <!--ReleaseDate-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/tvReleaseDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        PublicInfoTitle
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/tvProInfoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="@string/ProSoftInfo"
+                android:textAlignment="center"
+                android:background="@color/orange_200"/>
+        </RelativeLayout>
+
+        <!--ReleaseDate-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp">
+
+            <TextView
+                android:id="@+id/tvCorrectCoeff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

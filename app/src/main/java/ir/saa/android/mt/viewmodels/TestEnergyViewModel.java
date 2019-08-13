@@ -30,19 +30,21 @@ public class TestEnergyViewModel extends AndroidViewModel {
     Timer timerCheck;
 
     public MutableLiveData<EnergiesState> energiesStateMutableLiveData;
+    public MutableLiveData<int[]> checkClampMutableLiveData;
     public MutableLiveData<List<ElectericalParams>> sanjeshResultMutableLiveData;
 
     public TestEnergyViewModel(@NonNull Application application) {
         super(application);
         metertester = MT.getInstance();
 
+        checkClampMutableLiveData = new MutableLiveData<>();
         energiesStateMutableLiveData = new MutableLiveData<>();
         sanjeshResultMutableLiveData = new MutableLiveData<>();
 
         timerCheckStart(2000);
     }
 
-    private void timerCheckStart(long prd) {
+    public void timerCheckStart(long prd) {
         if(timerCheck != null) {
             return;
         }
@@ -76,6 +78,16 @@ public class TestEnergyViewModel extends AndroidViewModel {
         try {
             String s =  metertester.SendTestContorParams(testContorParams);
             Log.d("response tcp",s);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void CheckClampType(){
+        int[] clampType = new int[3];
+        try {
+            clampType = metertester.ReadClampType();
+            checkClampMutableLiveData.postValue(clampType);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,6 +127,7 @@ public class TestEnergyViewModel extends AndroidViewModel {
                 bundle.putSerializable(BundleKeysEnum.TestContorParams, testContorParams);
 
                 G.startFragment(FragmentsEnum.AmaliyatFragment, false, bundle);
+
             } else {
                 //toast.makeText(G.context, G.context.getResources().getText(R.string.Arrow_Clamp), Toast.LENGTH_SHORT).show();
                 Toast fancyToast = FancyToast.makeText(G.context, (String) G.context.getResources().getText(R.string.ClampDirectionError_msg), FancyToast.LENGTH_SHORT, FancyToast.WARNING, false);
@@ -126,6 +139,8 @@ public class TestEnergyViewModel extends AndroidViewModel {
 
         }
     }
+
+
 
     @Override
     protected void onCleared() {

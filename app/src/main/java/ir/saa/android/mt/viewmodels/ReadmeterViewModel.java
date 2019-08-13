@@ -6,11 +6,14 @@ import android.arch.lifecycle.MutableLiveData;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -21,6 +24,7 @@ import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
+import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.PersianCalendar;
 import ir.saa.android.mt.enums.SharePrefEnum;
@@ -51,6 +55,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
     public MutableLiveData<MeterUtility.ReadData> readMeterResultMutableLiveData;
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
     public MutableLiveData<Integer> recieveDataMutableLiveData;
+    public MutableLiveData<Boolean> turnBluetoothOnMutableLiveData;
 
     TariffDtlRepo tariffDtlRepo = null;
     TariffInfoRepo tariffInfoRepo = null;
@@ -81,6 +86,8 @@ public class ReadmeterViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
 
+                connectionStateMutableLiveData.postValue(false);
+                checkConnectionError(errMsg);
                 Log.d("response", "onConnectionError : " + errMsg);
                 //DisconnectWithMeter();
             }
@@ -102,6 +109,7 @@ public class ReadmeterViewModel extends AndroidViewModel {
         readMeterMutableLiveData = new MutableLiveData<>();
         readMeterResultMutableLiveData = new MutableLiveData<>();
         connectionStateMutableLiveData = new MutableLiveData<>();
+        turnBluetoothOnMutableLiveData = new MutableLiveData<>();
         recieveDataMutableLiveData = new MutableLiveData<>();
 
         if (tariffDtlRepo == null) {
@@ -117,6 +125,8 @@ public class ReadmeterViewModel extends AndroidViewModel {
             metersObisRepo=new MetersObisRepo(application);
         }
     }
+
+
 
     public void InsertDigitlMetersToDB(){
 
@@ -672,6 +682,25 @@ public class ReadmeterViewModel extends AndroidViewModel {
     public void updateTariffInfo(TariffInfo tariffInfo){
 
         tariffInfoRepo.updateTariffInfo(tariffInfo);
+    }
+
+    private void checkConnectionError(String errMsg){
+        String showError=errMsg;
+        if(errMsg.equals("Transfer Layer is Disconnected")){
+            showError = String.format("%s:\n%s",errMsg,G.context.getResources().getText(R.string.CheckDeviceIsOn_msg));
+        }else if(errMsg.equals("Can Not Connect To Device! : Bluetooth Is Off Or Permission Is Denided!")){
+            showError = String.format("%s:\n%s",errMsg,G.context.getResources().getText(R.string.TurnBluetoothOn_msg));
+            turnBluetoothOnMutableLiveData.postValue(true);
+        }else if(errMsg.startsWith("length=0")) {
+            showError = "";
+        }
+
+        if(showError!="") {
+            //Toast.makeText(G.context, String.format("%s:\n%s",G.context.getResources().getText(R.string.ErrorInConnect),errMsg), Toast.LENGTH_SHORT).show();
+            Toast fancyToast = FancyToast.makeText(G.context, showError, FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
+            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+            fancyToast.show();
+        }
     }
 
     @Override

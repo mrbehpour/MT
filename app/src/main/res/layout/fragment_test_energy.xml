@@ -5,7 +5,69 @@
     android:orientation="vertical"
     android:background="@color/grey_200">
 
+    <LinearLayout
+        android:id="@+id/lyClampType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        android:background="@drawable/rounded"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <RadioGroup
+            android:id="@+id/radioSex"
+            android:gravity="right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:textSize="14sp"
+                android:text="@string/SelectClampType_msg"
+                android:background="@color/orange_100"
+                android:textAlignment="center"/>
+
+            <RadioButton
+                android:id="@+id/radioBtnClamp1"
+                android:layout_margin="10sp"
+                android:textSize="14sp"
+                android:layout_gravity="center|left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/radioBtnClamp2"
+                android:layout_margin="10sp"
+                android:textSize="14sp"
+                android:layout_gravity="center|left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnSetClamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"
+            android:fontFamily="@fonts/byekan"
+            android:text="@string/Ok"
+            android:textColor="#ffffff"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10sp"
+        android:padding="10sp"
+        android:background="@drawable/rounded"
+        android:gravity="center"
+        android:orientation="vertical">
 
     <!-- +1 Layout -->
     <LinearLayout
@@ -487,8 +549,9 @@
         android:layout_gravity="center"
         android:layout_margin="16sp"
         android:fontFamily="@fonts/byekan"
-        android:text="@string/Ok"
+        android:text="@string/StartResult"
         android:textColor="#ffffff"
         android:textSize="16sp" />
+    </LinearLayout>
 
 </LinearLayout>

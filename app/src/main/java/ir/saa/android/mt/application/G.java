@@ -48,8 +48,8 @@ public class G extends Application {
     public static View fragmentDrawer;
     public static ClientInfo clientInfo;
 
-    public static String MY_VERSION = "1.0.39" ;
-    public static String RELEASE_DATE = "1398-04-22" ;
+    public static String MY_VERSION = "1.0.42" ;
+    public static String RELEASE_DATE = "1398-05-02" ;
 
     public static FragmentManager fragmentManager;
     public static Integer currentFragmentNum = null;
@@ -58,6 +58,7 @@ public class G extends Application {
     private static SharedPreferences pref;
     private static SharedPreferences.Editor prefEditor;
     public static HashMap<String,Bundle> bundleHashMap=new HashMap<>();
+    public static Boolean blurtoothOn=true;
 
     @Override
     public void onCreate() {

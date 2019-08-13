@@ -1,15 +1,11 @@
 package ir.saa.android.mt.viewmodels;
 
 import android.app.Application;
-import android.app.PendingIntent;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.MutableLiveData;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -21,12 +17,12 @@ import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
-import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
 public class TestContorViewModel extends AndroidViewModel {
     Bluetooth bluetooth;
     MT metertester;
     TestContorParams testContorParams;
+    Boolean showConnectionError = false;
 
     public MutableLiveData<Boolean> connectionStateMutableLiveData;
     public MutableLiveData<Boolean> turnBluetoothOnMutableLiveData;
@@ -53,7 +49,7 @@ public class TestContorViewModel extends AndroidViewModel {
             @Override
             public void onConnectionError(String errMsg) {
                 connectionStateMutableLiveData.postValue(false);
-                checkConnectionError(errMsg);
+                if(showConnectionError) checkConnectionError(errMsg);
 
                 Log.d("response","onConnectionError : "+errMsg);
             }
@@ -89,20 +85,14 @@ public class TestContorViewModel extends AndroidViewModel {
         }
     }
 
-    public void CheckClampType(){
-        int[] clampType = new int[3];
-        try {
-            clampType = metertester.ReadClampType();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public void initTranseferLayer(){
         String BluetoothDeviceName = G.getPref(SharePrefEnum.ModuleBluetoothName);
         if(BluetoothDeviceName==null) BluetoothDeviceName="";
         if(BluetoothDeviceName.equals("")) connectionStateMutableLiveData.postValue(false);
         bluetooth.disconnnect();
+        showConnectionError=true;
         bluetooth.init(BluetoothDeviceName);
     }
 

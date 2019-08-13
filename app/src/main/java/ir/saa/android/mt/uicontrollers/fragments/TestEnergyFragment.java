@@ -5,8 +5,10 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,8 +23,10 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,10 +48,13 @@ public class TestEnergyFragment extends Fragment
     TestEnergyViewModel testEnergyViewModel = null;
     TestContorParams testContorParams;
 
+    LinearLayout lyClampType;
+    RadioButton radioClamp1,radioClamp2;
     TextView tvVR,tvVS,tvVT;
     TextView tvIR,tvIS,tvIT;
     TextView tvPFR,tvPFS,tvPFT;
     TextView tvMinV,tvMaxV,tvMinI,tvMaxI,tvMinPF,tvMaxPF;
+
 
     public TestEnergyFragment() {
     }
@@ -73,6 +80,11 @@ public class TestEnergyFragment extends Fragment
             testContorParams = (TestContorParams)args.getSerializable(BundleKeysEnum.TestContorParams);
         }
 
+        lyClampType = rootView.findViewById(R.id.lyClampType);
+        radioClamp1 = rootView.findViewById(R.id.radioBtnClamp1);
+        radioClamp2 = rootView.findViewById(R.id.radioBtnClamp2);
+        lyClampType.setVisibility(View.GONE);
+
         LinearLayout llLeft = rootView.findViewById(R.id.llLeft);
         LinearLayout llCenter = rootView.findViewById(R.id.llCenter);
         LinearLayout llRight = rootView.findViewById(R.id.llRight);
@@ -80,6 +92,8 @@ public class TestEnergyFragment extends Fragment
         TextView tvCenter = rootView.findViewById(R.id.tvCenter);
         TextView tvRight = rootView.findViewById(R.id.tvRight);
         Button btnStartTest = rootView.findViewById(R.id.btnStartTest);
+        Button btnSetClamp = rootView.findViewById(R.id.btnSetClamp);
+
 
         tvMinV = rootView.findViewById(R.id.tvMin_V);
         tvMinV.setText("130");
@@ -127,16 +141,43 @@ public class TestEnergyFragment extends Fragment
                 }
         );
 
+        testEnergyViewModel.checkClampMutableLiveData.observe(this, new Observer<int[]>() {
+                    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onChanged(@Nullable int[] clampCheckResult) {
+//                        if(clampCheckResult[0]==2) {
+//                            lyClampType.setVisibility(View.VISIBLE);
+//                            btnStartTest.setEnabled(false);
+//                            selectClampTypeDialog(clampCheckResult);
+//                        }else{
+//                            lyClampType.setVisibility(View.GONE);
+//                            btnStartTest.setEnabled(true);
+//                            testEnergyViewModel.timerCheckStart(2000);
+//                        }
+                    }
+                }
+        );
+
+        //testEnergyViewModel.CheckClampType();
+
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(testContorParams==null) {
-                        Bundle b = G.bundleHashMap.get(BundleKeysEnum.TestContorParams);
-                        testContorParams = (TestContorParams)b.getSerializable(BundleKeysEnum.TestContorParams);
+                    Bundle b = G.bundleHashMap.get(BundleKeysEnum.TestContorParams);
+                    testContorParams = (TestContorParams)b.getSerializable(BundleKeysEnum.TestContorParams);
                 }
 
                 testEnergyViewModel.setTestContorParams(testContorParams);
                 testEnergyViewModel.confirmEnergies();
+            }
+        });
+
+        btnSetClamp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnStartTest.setEnabled(true);
+                testEnergyViewModel.timerCheckStart(2000);
             }
         });
 
@@ -156,6 +197,19 @@ public class TestEnergyFragment extends Fragment
         tvPFR = rootView.findViewById(R.id.tvR_PF);
         tvPFS = rootView.findViewById(R.id.tvS_PF);
         tvPFT = rootView.findViewById(R.id.tvT_PF);
+    }
+
+    private void selectClampTypeDialog(int[] clampType){
+
+        String[] clampTypes =  new String[5];
+        clampTypes[0] = (String) getResources().getText(R.string.ClampType1);
+        clampTypes[1] = (String) getResources().getText(R.string.ClampType2);
+        clampTypes[2] = (String) getResources().getText(R.string.ClampType3);
+        clampTypes[3] = (String) getResources().getText(R.string.ClampType4);
+        clampTypes[4] = (String) getResources().getText(R.string.ClampType5);
+
+        radioClamp1.setText(clampTypes[clampType[1]]);
+        radioClamp2.setText(clampTypes[clampType[2]]);
     }
 
     private void setRanges(){

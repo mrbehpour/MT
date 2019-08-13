@@ -15,6 +15,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,8 +76,6 @@ public class TestContorFragment extends Fragment
         switchPaulserType = rootView.findViewById(R.id.switchPaulserType);
 
         setDefaultValue();
-
-        testContorViewModel.CheckClampType();
 
         Button btnTaeed=rootView.findViewById(R.id.btnTaeed);
         btnTaeed.setOnClickListener(view -> {
@@ -147,34 +146,9 @@ public class TestContorFragment extends Fragment
                     @Override
                     public void onPromptStateChanged(uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt prompt, int state)
                     {
-                        if (state == MaterialTapTargetPrompt.STATE_DISMISSING)
-                        {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
 
-                            builder.setTitle(getResources().getText(R.string.Help));
-                            builder.setMessage(getResources().getText(R.string.DontShowHelp_msg));
-
-                            builder.setPositiveButton(getResources().getText(R.string.PositiveAnswer), new DialogInterface.OnClickListener() {
-
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Do nothing but close the dialog
-                                    G.setPref("DontShowHelpTestMeter","1");
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            builder.setNegativeButton(getResources().getText(R.string.NegativeAnswer), new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-
-                                    dialog.dismiss();
-                                }
-                            });
-
-                            AlertDialog alert = builder.create();
-                            alert.show();
+                            G.setPref("DontShowHelpTestMeter","1");
                         }
                     }
                 })

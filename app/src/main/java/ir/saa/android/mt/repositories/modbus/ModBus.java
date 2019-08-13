@@ -78,11 +78,13 @@ public class ModBus {
         transferLayer.setTransferLayerCallback(new ITransferLayerCallback() {
             @Override
             public void onConnected() {
+
                 modbusCallback.onConnected();
             }
 
             @Override
             public void onDisConnected() {
+
                 modbusCallback.onDisConnected();
                 isModbusRunningKey=false;
             }
