@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -201,6 +203,15 @@ public class ReadmeterFragment extends Fragment {
                     }
                 }
         );
+
+        readmeterViewModel.turnBluetoothOnMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean b) {
+                if(b){
+                    requestForTurnOnBT();
+                }
+            }
+        });
 
         btnSaveProbRead.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -425,6 +436,11 @@ public class ReadmeterFragment extends Fragment {
             }
         };
         ad.show();
+    }
+
+    public void requestForTurnOnBT(){
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        getActivity().startActivity(enableBtIntent);
     }
 
     public void HideProgressDialog(){

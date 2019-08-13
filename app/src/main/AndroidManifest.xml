@@ -8,16 +8,17 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <uses-feature android:name="android.hardware.location.gps" />
 
-    <meta-data android:name="com.google.android.gms.version"
-        android:value="@integer/google_play_services_version"/>
-
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
 
     <application
         android:name=".application.G"
@@ -28,38 +29,46 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/MaterialTheme">
+        <activity android:name=".uicontrollers.activities.InfoActivity"></activity>
         <activity android:name=".uicontrollers.activities.MainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".uicontrollers.activities.SettingActivity" />
-        <activity android:name=".uicontrollers.activities.SplashScreenActivity"
+        <activity
+            android:name=".uicontrollers.activities.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".uicontrollers.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".uicontrollers.activities.DaryaftActivity">
-        </activity>
-        <activity android:name=".uicontrollers.activities.SendActivity">
-        </activity>
-        <activity android:name=".uicontrollers.activities.SendSerialActivity">
-        </activity>
-        <activity android:name=".uicontrollers.activities.DaryaftMoshtarakinActivity">
-        </activity>
-        <activity android:name=".uicontrollers.activities.ReportActivity">
+        <activity android:name=".uicontrollers.activities.DaryaftActivity"></activity>
+        <activity android:name=".uicontrollers.activities.SendActivity"></activity>
+        <activity android:name=".uicontrollers.activities.SendSerialActivity"></activity>
+        <activity android:name=".uicontrollers.activities.DaryaftMoshtarakinActivity"></activity>
+        <activity android:name=".uicontrollers.activities.ReportActivity"></activity>
 
-        </activity>
+        <receiver android:name=".services.bluetoothReciever">
+            <intent-filter>
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.bluetooth.adapter.action.CONNECTION_STATE_CHANGED" />
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

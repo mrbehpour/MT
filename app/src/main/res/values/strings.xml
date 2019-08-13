@@ -5,6 +5,10 @@
     <string name="font_home">fonts/B_Koodak_Bold.ttf</string>
     <string name="font_default">fonts/B_Yekan.ttf</string>
 
+    <string name="SOFT_NAME">نرم افزار تست کنتور بلوتوث</string>
+    <string name="PRODUCER_NAME">شرکت سنجش افزار آسیا</string>
+    <string name="CUSTOMER_NAME">واحد تست</string>
+
     <!--Fragmet Name-->
     <string name="Setting_G">تنظیمات</string>
     <string name="Bazdid_G">بازدید</string>
@@ -18,6 +22,7 @@
     <string name="Readmeter_G">خواندن کنتور</string>
     <string name="Moshahedat_G">مشاهدات</string>
     <string name="Sanjesh_G">پارامترهای الکتریکی</string>
+    <string name="CorrectCoeff">ضریب تصحیح</string>
 
     <!--Drawer Menu-->
     <string name="menuItemBazdid">بازدید</string>
@@ -27,6 +32,7 @@
     <string name="menuItemBaseInfo">دریافت اطلاعات پایه</string>
     <string name="menuItemRecieveJoints">دریافت مشترکین</string>
     <string name="menuItemSendJoints">ارسال</string>
+    <string name="menuItemAbout">درباره نرم افزار</string>
     <string name="menuItemExit">خروج</string>
 
     <!--Month-->
@@ -111,6 +117,7 @@
     <string name="OutRangeVolt_msg">ولتاژ یکی از فازها خارج از بازه مجاز میباشد</string>
     <string name="OutRangeAmp_msg">آمپراژ یکی از فازها خارج از بازه مجاز میباشد</string>
     <string name="OutRangePF_msg">ضریب توان یکی از فازها خارج از بازه مجاز میباشد</string>
+    <string name="SelectClampType_msg">نوع کلمپ را انتخاب کنید</string>
     <!--*******************-->
 
     <!--TestResultAdapter-->
@@ -123,6 +130,7 @@
     <!--DisplayTestFragment-->
     <string name="Test">تست</string>
     <string name="TestResult">نمایش سابقه تست</string>
+    <string name="StartResult">شروع تست</string>
 
     <!--MoshtarakFragment_Tab-->
     <string name="Operation">عملیات</string>
@@ -217,8 +225,12 @@
     <string name="PolombModelJadid">مدل پلمپ جدید</string>
     <string name="PolombColorJadid">رنگ پلمپ جدید</string>
 
-
-
+    <!--ClampType-->
+    <string name="ClampType1">کلمپ 1000 آمپر</string>
+    <string name="ClampType2">کلمپ 500 آمپر</string>
+    <string name="ClampType3">کلمپ 200 آمپر</string>
+    <string name="ClampType4">کلمپ 100 آمپر</string>
+    <string name="ClampType5">کلمپ 40/400 آمپر</string>
 
     <!-- fragment_test -->
     <string name="SaveBarrier">ثبت مانع</string>
@@ -345,6 +357,13 @@
     <string name="PieTariffTitle">قرائت</string>
     <string name="PieBazrasiTitle">بازرسی</string>
     <string name="PieChartNoData">داده ای برای نمایش وجود ندارد</string>
+    <string name="PublicSoftInfo">اطلاعات نرم افزار</string>
+    <string name="ProSoftInfo">اطلاعات تخصصی</string>
+    <string name="SoftName">نام نرم افزار</string>
+    <string name="ProducerName">تولید کننده</string>
+    <string name="CustomerName">نام مشتری</string>
+    <string name="Version">نسخه</string>
+    <string name="ReleaseDate">تاریخ نسخه</string>
     <string name="AddClientTitle">مشترک اضافه شده</string>
     <string name="ClientTitle">مشترکین</string>
 

@@ -68,6 +68,7 @@ public class AmaliyatFragment extends Fragment {
     TestResult testResultLocation;
     int CountSaveTest;
     ProgressDialog progressDialog;
+    boolean waitForLocation=false;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -78,12 +79,12 @@ public class AmaliyatFragment extends Fragment {
 
     private void connectToModuleDialog(){
 
-        progressDialog=new ProgressDialog(getActivity());
+        progressDialog=new ProgressDialog(getContext());
         progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
         progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
         progressDialog.setCancelable(true);
         progressDialog.show();
-
+        waitForLocation=true;
     }
 
     public void HideProgressDialog(){
@@ -144,9 +145,6 @@ public class AmaliyatFragment extends Fragment {
                     @Override
                     public void onChanged(@Nullable String testResult) {
                         tvErrPerc.setText(testResult);
-
-//                        tvErrPerc.setText(testResult.split(",")[0]);
-//                        tvEnergi.setText(testResult.split(",")[1]);
                     }
                 }
         );
@@ -243,7 +241,7 @@ public class AmaliyatFragment extends Fragment {
             public void onClick(View view) {
                 List<TestResult> testResults = new ArrayList<>();
                 setUpRecyclerView(rootView, testResults);
-
+                waitForLocation=false;
                 amaliyatViewModel.setTestContorParams(testContorParams);
                 amaliyatViewModel.startTestOperation();
                 //btnStartTest.setEnabled(false);
@@ -253,7 +251,7 @@ public class AmaliyatFragment extends Fragment {
         btnFinishTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                amaliyatViewModel.finishTest();
+                amaliyatViewModel.finishTest(true);
             }
         });
 
@@ -265,18 +263,15 @@ public class AmaliyatFragment extends Fragment {
                 TestResult testResult = meterTest.prepareTestResultForSave(lastTestResultList);
                 testResult.ErrPerc = Double.parseDouble((String) tvErrPerc.getText());
                 testResultLocation=testResult;
-                if(locationViewModel.isGpsEnable()) {
-                    if(location==null) {
-                        locationViewModel.getLocation(getContext());
-                        connectToModuleDialog();
-                    }
-                }else {
+                if(locationViewModel.isGpsEnable()==false) {
                     location=null;
                     locationViewModel.trunOnGps(getActivity());
+                }else{
+                    connectToModuleDialog();
+                    locationViewModel.getLocation(getActivity());
+                   return;
                 }
-                saveTestResult(testResult);
-
-
+                //saveTestResult(testResult);
             }
         });
 
@@ -289,7 +284,10 @@ public class AmaliyatFragment extends Fragment {
 
                 HideProgressDialog();
                 if(testResultLocation!=null){
-                    //saveTestResult(testResultLocation);
+                    if(waitForLocation){
+                        saveTestResult(testResultLocation);
+                        waitForLocation=false;
+                    }
                 }
             }
         }
@@ -418,7 +416,7 @@ public class AmaliyatFragment extends Fragment {
         myDialog.addButton(getResources().getText(R.string.Ok).toString(), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                amaliyatViewModel.finishTest();
+                amaliyatViewModel.finishTest(false);
                 myDialog.dismiss();
             }
         });
@@ -448,7 +446,7 @@ public class AmaliyatFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        amaliyatViewModel.finishTest();
+        amaliyatViewModel.finishTest(true);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class MT {
     private final static byte SLAVE_ID=1;
 //    private final static double correctFactor=47.59552;
 //    private final static double correctFactor=48.64864864864865;
-    private final static double correctFactor=26;
+    public final static double correctFactor=26;
     private final static double powerCalCoeff=0.0703125;
     private final static int PowerFreq=50;
     public final static int maxRoundTest=250;
@@ -62,6 +62,7 @@ public class MT {
 
             @Override
             public void onConnectionError(String errMsg) {
+
                 imtCallback.onConnectionError(errMsg);
             }
 
@@ -195,18 +196,18 @@ public class MT {
         RegisterInfo ri;
         try {
             ri = findRegisterInfo(RegisterInfo.regNames.ClampNumber);
-            result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+            result = splitRawData(modBus.readHoldingRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
             clampType[0] = Integer.parseInt(result,16);
             if(clampType[0]<1 || clampType[0] >2) clampType[0] = 1;
             Log.d("response paulse",result);
 
             if(clampType[0]==2){
                 ri = findRegisterInfo(RegisterInfo.regNames.FirstClampType);
-                result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+                result = splitRawData(modBus.readHoldingRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
                 clampType[1] = Integer.parseInt(result,16);
 
                 ri = findRegisterInfo(RegisterInfo.regNames.SecondClampType);
-                result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
+                result = splitRawData(modBus.readHoldingRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
                 clampType[2] = Integer.parseInt(result,16);
             }
         } catch (Exception ex) {

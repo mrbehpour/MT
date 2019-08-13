@@ -18,6 +18,7 @@ import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftActivity;
 import ir.saa.android.mt.uicontrollers.activities.DaryaftMoshtarakinActivity;
+import ir.saa.android.mt.uicontrollers.activities.InfoActivity;
 import ir.saa.android.mt.uicontrollers.activities.MainActivity;
 import ir.saa.android.mt.uicontrollers.activities.ReportActivity;
 import ir.saa.android.mt.uicontrollers.activities.SendActivity;
@@ -89,13 +90,15 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
                     intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     G.context.startActivity(intent);
 
+                }
+                else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemAbout))==0){
+
+                    Intent intent=new Intent(G.context, InfoActivity.class);
+                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+                    G.context.startActivity(intent);
+
                 }else if(holder.title.getText().toString().compareTo(G.context.getResources().getString(R.string.menuItemExit))==0){
-//
-////                    ((AppCompatActivity)context).finish();
-////
-////
-////
-////                    System.exit(0);
+
                     if (G.fragmentNumStack.size() > 0) {
                         Integer targetFragmentNum = G.fragmentNumStack.pop();
                         G.startFragment(targetFragmentNum, true, null);
