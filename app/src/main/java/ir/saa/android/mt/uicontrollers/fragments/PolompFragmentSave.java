@@ -387,7 +387,9 @@ public class PolompFragmentSave extends Fragment {
                     if(polompAllInfo.PreviousColorID!=null)
                         spnRangPolompGhadim.setSelection(spinnerMapColor.get(polompAllInfo.PreviousColorID));
                     if(polompAllInfo.PolompTypeID!=null)
-                        spnModelPolompJadid.setSelection(spinnerMapModel.get(polompAllInfo.PolompTypeID));
+                        if(polompAllInfo.PolompTypeID!=null){
+                            spnModelPolompJadid.setSelection(spinnerMapModel.get(polompAllInfo.PolompTypeID));
+                        }
                     if(polompAllInfo.PreviousPolompTypeID!=null)
                         spnModelPolompGhadim.setSelection(spinnerMapModel.get(polompAllInfo.PreviousPolompTypeID));
                     if(polompAllInfo.StatePolomp==0){

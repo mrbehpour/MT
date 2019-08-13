@@ -273,13 +273,14 @@
             android:layout_weight="1">
         </LinearLayout>
         <TextView
+            android:id="@+id/tvSelectColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:fontFamily="@fonts/byekan"
-
+            android:visibility="gone"
             android:textSize="16sp"
             android:text="@string/ResultRemark"/>
         <LinearLayout

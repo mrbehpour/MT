@@ -112,6 +112,7 @@ public class MoshahedatAdapter extends RecyclerView.Adapter<MoshahedatAdapter.My
             holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
 
         }else{
+
             holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
 
         }
@@ -226,6 +227,7 @@ public class MoshahedatAdapter extends RecyclerView.Adapter<MoshahedatAdapter.My
                                             holder.tvResult.setText(myCheckList.getSelectedItemsText().get(0));
                                             holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FFC9CCF1"));
                                             current.remarkValue=objValue.toString();
+                                            current.AnswerCaption=holder.tvResult.getText().toString();
                                         }else{
                                             holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
                                             holder.tvResult.setText("");
@@ -389,7 +391,7 @@ public class MoshahedatAdapter extends RecyclerView.Adapter<MoshahedatAdapter.My
 
         holder.tvId.setText(current.Id.toString());
         holder.tvSoal.setText(current.RemarkName);
-        String RemarkDisplayValue="";
+        String RemarkDisplayValue=holder.tvResult.getText().toString();
         switch (current.PropertyTypeID){
             case 1:
             case 2:
@@ -402,7 +404,7 @@ public class MoshahedatAdapter extends RecyclerView.Adapter<MoshahedatAdapter.My
             case 6:
                 if(current.remarkValue!="-1") {
 
-                    if (current.AnswerCaption != null) {
+                    if (current.AnswerCaption != "") {
                         RemarkDisplayValue = current.AnswerCaption;
                     }
                 }

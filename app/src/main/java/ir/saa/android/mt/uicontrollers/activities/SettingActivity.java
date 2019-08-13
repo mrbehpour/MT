@@ -25,6 +25,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -63,6 +64,7 @@ public class SettingActivity extends AppCompatActivity {
     RadioButton rbtNormal;
     RadioButton rbtLarge;
     RadioButton rbtHuge;
+    TextView tvSelectColor;
     RetrofitMT retrofitMT=null;
     DeviceSerialViewModel deviceSerialViewModel=null;
     BazrasiViewModel bazrasiViewModel = null;
@@ -86,7 +88,7 @@ public class SettingActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_settings);
-
+        tvSelectColor=(TextView)findViewById(R.id.tvSelectColor);
         recyclerView=(RecyclerView)findViewById(R.id.rvAnswerGroup);
         answerGroupItems=new ArrayList<>();
         answerGroupAdapter=new AnswerGroupAdapter(this,answerGroupItems);
@@ -109,14 +111,20 @@ public class SettingActivity extends AppCompatActivity {
         bazrasiViewModel.getAnswerGroupDtlsLiveData(11).observe(this, new Observer<List<AnswerGroupDtl>>() {
             @Override
             public void onChanged(@Nullable List<AnswerGroupDtl> answerGroupDtls) {
-                answerGroupItems.clear();
-                for (AnswerGroupDtl answerGroupDtl :answerGroupDtls ){
-                    answerGroupItems.add(new AnswerGroupItem(answerGroupDtl.AnswerGroupDtlID,
-                            answerGroupDtl.AnswerGroupDtlName,answerGroupDtl.AnswerGroupDtlColor));
+                if(answerGroupDtls.size()!=0) {
+                    tvSelectColor.setVisibility(View.VISIBLE);
+                    answerGroupItems.clear();
+                    for (AnswerGroupDtl answerGroupDtl : answerGroupDtls) {
+                        answerGroupItems.add(new AnswerGroupItem(answerGroupDtl.AnswerGroupDtlID,
+                                answerGroupDtl.AnswerGroupDtlName, answerGroupDtl.AnswerGroupDtlColor));
+                    }
+                    answerGroupAdapter.clearDataSet();
+                    answerGroupAdapter.addAll(answerGroupItems);
+                    answerGroupAdapter.notifyDataSetChanged();
+                }else{
+                    tvSelectColor.setVisibility(View.GONE);
                 }
-                answerGroupAdapter.clearDataSet();
-                answerGroupAdapter.addAll(answerGroupItems);
-                answerGroupAdapter.notifyDataSetChanged();
+
             }
         });
 
