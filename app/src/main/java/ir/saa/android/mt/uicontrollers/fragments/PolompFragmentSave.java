@@ -382,16 +382,27 @@ public class PolompFragmentSave extends Fragment {
                     if(polompAllInfo.CurrentPolomp!=null ){
                         etPolompJadid.setText(polompAllInfo.CurrentPolomp);
                     }
-                    if(polompAllInfo.CurrentColorID!=null)
-                        spnRangPolompJadid.setSelection(spinnerMapColor.get(polompAllInfo.CurrentColorID));
-                    if(polompAllInfo.PreviousColorID!=null)
-                        spnRangPolompGhadim.setSelection(spinnerMapColor.get(polompAllInfo.PreviousColorID));
+                    if(polompAllInfo.CurrentColorID!=null) {
+                        if(spinnerMapColor.get(polompAllInfo.CurrentColorID)!=null) {
+                            spnRangPolompJadid.setSelection(spinnerMapColor.get(polompAllInfo.CurrentColorID));
+                        }
+                    }
+                    if(polompAllInfo.PreviousColorID!=null) {
+                        if(spinnerMapColor.get(polompAllInfo.PreviousColorID)!=null) {
+                            spnRangPolompGhadim.setSelection(spinnerMapColor.get(polompAllInfo.PreviousColorID));
+                        }
+                    }
                     if(polompAllInfo.PolompTypeID!=null)
                         if(polompAllInfo.PolompTypeID!=null){
-                            spnModelPolompJadid.setSelection(spinnerMapModel.get(polompAllInfo.PolompTypeID));
+                            if(spinnerMapModel.get(polompAllInfo.PolompTypeID)!=null) {
+                                spnModelPolompJadid.setSelection(spinnerMapModel.get(polompAllInfo.PolompTypeID));
+                            }
                         }
-                    if(polompAllInfo.PreviousPolompTypeID!=null)
-                        spnModelPolompGhadim.setSelection(spinnerMapModel.get(polompAllInfo.PreviousPolompTypeID));
+                    if(polompAllInfo.PreviousPolompTypeID!=null) {
+                        if(spinnerMapModel.get(polompAllInfo.PreviousPolompTypeID)!=null) {
+                            spnModelPolompGhadim.setSelection(spinnerMapModel.get(polompAllInfo.PreviousPolompTypeID));
+                        }
+                    }
                     if(polompAllInfo.StatePolomp==0){
                         cbOldNakhana.setChecked(false);
                         cbGhadimNadard.setChecked(false);
