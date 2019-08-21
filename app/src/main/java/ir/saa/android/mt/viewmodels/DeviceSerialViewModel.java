@@ -85,7 +85,7 @@ public class DeviceSerialViewModel extends AndroidViewModel {
                 .subscribeWith(new DisposableSingleObserver<DataClass<Integer>>() {
                     @Override
                     public void onSuccess(DataClass<Integer> integerDataClass) {
-                        if(integerDataClass.MessageNumber==4) {saveDeviceSerialStatus(IMEIRegisterInput,true,true);}
+                        if(integerDataClass.MessageNumber==4) {saveDeviceSerialStatus(IMEIRegisterInput,true,false);}
                         IsRegisterIMEI.postValue(integerDataClass.MessageNumber);
                     }
 

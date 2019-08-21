@@ -133,7 +133,7 @@ public class BazdidFragment extends Fragment
         });
 
 
-
+        floatingBtnAdd.setVisibility(View.INVISIBLE);
         floatingBtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

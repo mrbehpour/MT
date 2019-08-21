@@ -48,8 +48,8 @@ public class G extends Application {
     public static View fragmentDrawer;
     public static ClientInfo clientInfo;
 
-    public static String MY_VERSION = "1.0.42" ;
-    public static String RELEASE_DATE = "1398-05-02" ;
+    public static String MY_VERSION = "1.0.45" ;
+    public static String RELEASE_DATE = "1398-05-22" ;
 
     public static FragmentManager fragmentManager;
     public static Integer currentFragmentNum = null;
