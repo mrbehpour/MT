@@ -69,7 +69,7 @@ public class AmaliyatFragment extends Fragment {
     int CountSaveTest;
     ProgressDialog progressDialog;
     boolean waitForLocation=false;
-
+    boolean readyForNewRound =false;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -163,8 +163,10 @@ public class AmaliyatFragment extends Fragment {
                                 tvErrPerc.setText("");
                                 tvRoundNum.setText("");
                                 manualPaulseNum=0;
-                                tvManualPaulseNum.setText(String.valueOf(manualPaulseNum));
+                                tvManualPaulseNum.setText("-");
                                 if(paulserType) {
+                                    readyForNewRound=true;
+                                    //manualPaulseNum=1;
                                     rlManualPaulser.setVisibility(View.VISIBLE);
                                     showManualTestHelp(rootView);
                                 }else{
@@ -217,6 +219,19 @@ public class AmaliyatFragment extends Fragment {
                 }
         );
 
+        amaliyatViewModel.doManualTestMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if(aBoolean) {
+                    tvManualPaulseNum.setText(String.valueOf(manualPaulseNum));
+                    tvRoundNum.setText(String.valueOf(manualPaulseNum));
+                    amaliyatViewModel.readTestResultFromMeterManual(manualPaulseNum);
+
+                    manualPaulseNum++;
+                }
+            }
+        });
+
         amaliyatViewModel.cancelTestProcess.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
@@ -227,11 +242,9 @@ public class AmaliyatFragment extends Fragment {
         imgNewPaulse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tvManualPaulseNum.setText(String.valueOf(manualPaulseNum));
-                tvRoundNum.setText(String.valueOf(manualPaulseNum));
-                amaliyatViewModel.readTestResultFromMeterManual(manualPaulseNum);
-
-                manualPaulseNum++;
+                if(manualPaulseNum<=250) {
+                    amaliyatViewModel.newManualTestCommand();
+                }
             }
         });
 

@@ -122,7 +122,6 @@ public class TestEnergyFragment extends Fragment
                             llLeft.setBackground(G.context.getDrawable(R.drawable.shape_circle_red));
                             llCenter.setBackground(G.context.getDrawable(R.drawable.shape_circle_red));
                             llRight.setBackground(G.context.getDrawable(R.drawable.shape_circle_red));
-
                         }
 
                         tvLeft.setText(energiesState.energy1AState?"+":"-");
@@ -223,17 +222,17 @@ public class TestEnergyFragment extends Fragment
 
     private void showSanjeshResult(List<ElectericalParams> sanjeshResult) {
 
-        tvVR.setText(sanjeshResult.get(0).AVRMS);
-        tvIR.setText(sanjeshResult.get(0).AIRMS);
-        tvPFR.setText(sanjeshResult.get(0).ANGLE0);
+        tvVR.setText(sanjeshResult.get(2).AVRMS);
+        tvIR.setText(sanjeshResult.get(2).AIRMS);
+        tvPFR.setText(sanjeshResult.get(2).ANGLE0);
 
         tvVS.setText(sanjeshResult.get(1).AVRMS);
         tvIS.setText(sanjeshResult.get(1).AIRMS);
         tvPFS.setText(sanjeshResult.get(1).ANGLE0);
 
-        tvVT.setText(sanjeshResult.get(2).AVRMS);
-        tvIT.setText(sanjeshResult.get(2).AIRMS);
-        tvPFT.setText(sanjeshResult.get(2).ANGLE0);
+        tvVT.setText(sanjeshResult.get(0).AVRMS);
+        tvIT.setText(sanjeshResult.get(0).AIRMS);
+        tvPFT.setText(sanjeshResult.get(0).ANGLE0);
 
         checkVoltRange();
         checkAmpRange();

@@ -549,7 +549,7 @@
         android:layout_gravity="center"
         android:layout_margin="16sp"
         android:fontFamily="@fonts/byekan"
-        android:text="@string/StartResult"
+        android:text="@string/EnterTestActivity"
         android:textColor="#ffffff"
         android:textSize="16sp" />
     </LinearLayout>

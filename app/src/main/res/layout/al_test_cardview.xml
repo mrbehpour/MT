@@ -200,12 +200,13 @@
         <!-- Number Layout -->
         <TextView
             android:id="@+id/tvNumber"
-            android:layout_width="50dp"
+            android:layout_width="65sp"
             android:layout_height="match_parent"
             android:layout_marginRight="8dp"
             android:fontFamily="@fonts/byekan"
             android:textSize="30sp"
             android:textColor="@color/grey_600"
+            android:background="@color/green_300"
             android:gravity="center_vertical|center_horizontal"
             android:textAlignment="gravity"
             android:text="1"/>

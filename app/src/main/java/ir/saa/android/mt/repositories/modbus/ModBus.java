@@ -11,6 +11,8 @@ public class ModBus {
 
     private static ModBus _instance;
 
+    private long commandStartTime;
+
     public static ModBus getInstance(){
         synchronized (ModBus.class) {
             if(_instance==null)
@@ -19,7 +21,7 @@ public class ModBus {
         }
     }
     private ModBus(){
-        timerStart(2500);
+        timerStart(500);
     }
 
     private final byte READ_HOLDING_REGISTER_FC =0x03;
@@ -86,7 +88,7 @@ public class ModBus {
             public void onDisConnected() {
 
                 modbusCallback.onDisConnected();
-                isModbusRunningKey=false;
+                setWaitForResponse(false);
             }
 
             @Override
@@ -102,6 +104,7 @@ public class ModBus {
             @Override
             public void onRecieveData(byte[] responseArray) {
                 totalReciveData += Converters.ArrayByte2Hex(responseArray);
+                Log.d("response raw data",totalReciveData);
             }
         });
     }
@@ -148,6 +151,7 @@ public class ModBus {
         }
 
         waitForResponse = !res;
+        //if(res) timerStop();
         return  res;
     }
     //-----------------------
@@ -183,8 +187,7 @@ public class ModBus {
             transferLayer.writeByteArrayToDevice(dataArray);
             Log.d("response read holding",Last_Send_Command);
 
-            waitForResponse=true;
-            isModbusRunningKey=true;
+            setWaitForResponse(true);
 
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
@@ -220,8 +223,7 @@ public class ModBus {
             transferLayer.writeByteArrayToDevice(dataArray);
             Log.d("response read input",Last_Send_Command);
 
-            waitForResponse=true;
-            isModbusRunningKey=true;
+            setWaitForResponse(true);
 
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
@@ -254,8 +256,7 @@ public class ModBus {
             transferLayer.writeByteArrayToDevice(dataArray);
             Log.d("response write single",Last_Send_Command);
 
-            waitForResponse=true;
-            isModbusRunningKey=true;
+            setWaitForResponse(true);
 
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
@@ -290,8 +291,7 @@ public class ModBus {
             transferLayer.writeByteArrayToDevice(dataArray);
             Log.d("response write multi",Last_Send_Command);
 
-            waitForResponse=true;
-            isModbusRunningKey=true;
+            setWaitForResponse(true);
 
             while (isModbusRunningKey) {
                 if (checkResponseStr(totalReciveData)) {
@@ -311,6 +311,8 @@ public class ModBus {
     //--------Methods-----------
     //--------------------------
 
+
+
     //---------Timeout Checker-------
     private Timer timer;
 
@@ -318,17 +320,22 @@ public class ModBus {
 
         @Override
         public void run() {
+
             if(isModbusRunningKey){//
                 if(waitForResponse){
-                    waitForResponse = false;
-                    isModbusRunningKey=false;
-                    Log.d("response","Time Out.");
+                    long elapsedTime = calElapsedTime();
+                    Log.d("response ElapsedTime",String.valueOf(elapsedTime));
+                    if(elapsedTime>2500) {
+                        setWaitForResponse(false);
+                        Log.d("response", "Time Out.");
+                    }
                 }
             }
         }
     };
 
     private void timerStart(long prd) {
+        Log.d("response ModBus Timer"," Start ");
         if(timer != null) {
             return;
         }
@@ -336,8 +343,10 @@ public class ModBus {
         timer.scheduleAtFixedRate(timerTask, prd, prd);
     }
 
-    private void timerStop() {
 
+
+    private void timerStop() {
+        Log.d("response ModBus Timer"," Stop ");
         if(timer!=null){
             timer.cancel();
             timer.purge();
@@ -346,8 +355,18 @@ public class ModBus {
     }
     //-------------------------------
 
-    public void AbortOperation(){
+    private void setWaitForResponse(Boolean status){
+        waitForResponse=status;
+        isModbusRunningKey=status;
+        commandStartTime = System.currentTimeMillis();
+    }
 
+    private long calElapsedTime(){
+        long elapsedTime=0;
+        if(commandStartTime>0){
+            elapsedTime = System.currentTimeMillis()-commandStartTime;
+        }
+        return elapsedTime;
     }
 
     public void Dispose(){

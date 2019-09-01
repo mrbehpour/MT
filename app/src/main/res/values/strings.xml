@@ -104,7 +104,7 @@
     <string name="MeterUnknown_msg">مشخصات کنتور ثبت نشده است</string>
     <string name="ConnectionOK_msg">اتصال با سرور برقرار است</string>
     <string name="ConnectionFail_msg">مشکل در برقراری ارتباط با سرور</string>
-    <string name="ClickToStartManualTes_msg">برای شروع تست کلیک کنید</string>
+    <string name="ClickToStartManualTes_msg">برای آغاز عملیات دور شماری کلیک کنید</string>
     <string name="WaitForIMEIConfirm_msg">درخواست شما در سایت ثبت شد،منتظر تایید مدیر سیستم باشید</string>
     <string name="NotValidIMEI_msg">طول شماره سریال وارد شده معتبر نیست</string>
     <string name="RegionIDNotSend_msg">کد امور برای ثبت سریال ارسال نشده است</string>
@@ -131,6 +131,7 @@
     <string name="Test">تست</string>
     <string name="TestResult">نمایش سابقه تست</string>
     <string name="StartResult">شروع تست</string>
+    <string name="EnterTestActivity">ورود به فرم تست</string>
 
     <!--MoshtarakFragment_Tab-->
     <string name="Operation">عملیات</string>

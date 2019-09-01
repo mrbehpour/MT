@@ -48,6 +48,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     GPSInfoRepo gpsInfoRepo;
 
 //    public MutableLiveData<Boolean> setTimerMutableLiveData;
+    public MutableLiveData<Boolean> doManualTestMutableLiveData;
     public MutableLiveData<String> testResultMutableLiveData;
     public MutableLiveData<Integer> testRoundNumMutableLiveData;
     public MutableLiveData<List<TestResult>> testResultListMutableLiveData;
@@ -107,6 +108,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
         testResultListMutableLiveData = new MutableLiveData<>();
         testStatusMutableLiveData = new MutableLiveData<>();
         cancelTestProcess = new MutableLiveData<>();
+        doManualTestMutableLiveData = new MutableLiveData<>();
     }
 
     public void setTestContorParams(TestContorParams testContorParams){
@@ -214,19 +216,24 @@ public class AmaliyatViewModel extends AndroidViewModel {
         }
     }
 
+    public void newManualTestCommand(){
+        String result = metertester.SendTestCommand(MT.TestCommands.StartManualTest);
+        if(!result.isEmpty()){
+            doManualTestMutableLiveData.postValue(true);
+        }
+    }
+
     public void readTestResultFromMeterManual(int manualPaulseNum){
         try {
-            int paulseCounter = 0;// metertester.ReadPaulseCounter();
-            metertester.SendTestCommand(MT.TestCommands.StartManualTest);
+
             if(manualPaulseNum>0) {
+                //Thread.sleep(50);
                 TestResult testResult = metertester.ReadTestResult(manualPaulseNum, testContorParams);
                 testResultList.add(testResult);
                 ErrPercAvr += testResult.ErrPerc;
             }
 
-            //myPaulseCounter++;
-
-            if(manualPaulseNum>0) testResultMutableLiveData.postValue(String.format("%.2f", ErrPercAvr/manualPaulseNum));
+            if(manualPaulseNum>0) testResultMutableLiveData.postValue(String.format("%.2f", ErrPercAvr/testResultList.size()));
             //testResultMutableLiveData.postValue(String.format("%.2f,%s_%s_%s", ErrPercAvr/myPaulseCounter, testResult.MeterEnergy_Period1_A, testResult.MeterEnergy_Period1_B, testResult.MeterEnergy_Period1_C));
             //lastPaulseCounter=paulseCounter;
 

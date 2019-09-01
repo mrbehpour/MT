@@ -230,18 +230,18 @@
 
         <!-- Number Layout -->
         <LinearLayout
-            android:layout_width="55dp"
+            android:layout_width="65sp"
             android:layout_height="match_parent"
             android:gravity="center">
             <TextView
                 android:id="@+id/tvNumber"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginRight="8dp"
                 android:background="@drawable/custom_rect_testresult"
                 android:fontFamily="@fonts/byekan"
                 android:textSize="18sp"
-                android:textColor="@color/grey_600"
+                android:textColor="@color/green_800"
                 android:gravity="center_vertical|center_horizontal"
                 android:textAlignment="gravity"
                 android:text="99"/>
