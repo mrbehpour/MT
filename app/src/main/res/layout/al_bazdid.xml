@@ -20,6 +20,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            android:layoutDirection="rtl"
             android:textAlignment="center"
             android:fontFamily="@fonts/byekan"
             android:text="جستجو"/>
