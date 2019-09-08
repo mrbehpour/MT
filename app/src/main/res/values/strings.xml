@@ -97,6 +97,7 @@
     <string name="FillOldAndNewPlombInfo_msg">لطفا اطلاعات مربوط به پلمپ قدیم را کامل پر کنید</string>
     <string name="NoClientFind_msg">مشترکی با این مشخصات یافت نشد</string>
     <string name="FillOldAndNewPlombInfoForceField_msg">لطفا فیلدهای %s را پر کنید</string>
+    <string name="FillForceField_msg">لطفا فیلد %s را تکمیل کنید</string>
     <string name="CancelTest_msg">مشکلی در ارتباط با دستگاه پیش آمده است ،آیا عملیات تست متوقف شود؟</string>
     <string name="CheckDeviceIsOn_msg">لطفا از روشن بودن ماژول تست کنتور مطمئن شوید</string>
     <string name="TurnBluetoothOn_msg">لطفا از روشن بودن بلوتوث دستگاه مطمئن شوید</string>
@@ -181,6 +182,8 @@
     <string name="Shenas">شناسایی</string>
     <string name="Parvande">پرونده</string>
     <string name="Ramz">رمز</string>
+    <string name="RamzRayaneh">رمز رایانه</string>
+    <string name="Group">گروه مشترکین</string>
     <string name="SerialNumber">شماره بدنه</string>
     <string name="TariffType">نوع تعرفه</string>
     <string name="VoltType">نوع ولتاژ</string>

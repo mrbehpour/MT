@@ -13,6 +13,7 @@ import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazdid.ClientItem;
+import ir.saa.android.mt.model.entities.AddedClient;
 import ir.saa.android.mt.model.entities.Bazdid;
 import ir.saa.android.mt.model.entities.Client;
 import ir.saa.android.mt.model.entities.ClientWithAction;
@@ -20,18 +21,22 @@ import ir.saa.android.mt.model.entities.InspectionAllInfo;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
 import ir.saa.android.mt.model.entities.PolompAllInfo;
 import ir.saa.android.mt.model.entities.Report;
+import ir.saa.android.mt.model.entities.Setting;
 import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
+import ir.saa.android.mt.repositories.roomrepos.AddedClientRepo;
 import ir.saa.android.mt.repositories.roomrepos.BazdidRepo;
 import ir.saa.android.mt.repositories.roomrepos.ClientRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.MasterGroupDetailRepo;
 import ir.saa.android.mt.repositories.roomrepos.PolompDtlRepo;
+import ir.saa.android.mt.repositories.roomrepos.SettingRepo;
 import ir.saa.android.mt.repositories.roomrepos.TestDtlRepo;
 
 public class BazdidViewModel extends AndroidViewModel {
 
     private ClientRepo clientRepo;
+    private AddedClientRepo addedClientRepo;
     private Boolean isTest;
     private Boolean isBazrasi;
     private Boolean isPolomp;
@@ -39,6 +44,8 @@ public class BazdidViewModel extends AndroidViewModel {
     private PolompDtlRepo polompDtlRepo;
     private TestDtlRepo testDtlRepo;
     private BazdidRepo bazdidRepo;
+    private SettingRepo settingRepo;
+    private MasterGroupDetailRepo masterGroupDetailRepo;
 
 
     public BazdidViewModel(@NonNull Application application) {
@@ -47,6 +54,9 @@ public class BazdidViewModel extends AndroidViewModel {
             clientRepo = new ClientRepo(application);
         if(polompDtlRepo==null){
             polompDtlRepo=new PolompDtlRepo(application);
+        }
+        if(addedClientRepo==null){
+            addedClientRepo=new AddedClientRepo(application);
         }
         if(bazdidRepo==null){
             bazdidRepo=new BazdidRepo(application);
@@ -67,19 +77,13 @@ public class BazdidViewModel extends AndroidViewModel {
         if(isPolomp==null){
             isPolomp=false;
         }
+        if(settingRepo==null){
+            settingRepo=new SettingRepo(application);
+        }
 
-
-//        Client client=new Client();
-//        client.Active1=1;
-//        client.Active2=2;
-//        client.Name="مهدی کاظمی";
-//        client.SubScript=Long.valueOf(102030);
-//        client.ClientID=Long.valueOf(102030);
-//        client.Address="زنجان";
-//        client.SendId=326;
-//        client.MeterNumActive= Long.valueOf(203040);
-//        clientRepo.insertClient(client);
-        //clientRepo.deleteAll();
+        if(masterGroupDetailRepo==null){
+            masterGroupDetailRepo = new MasterGroupDetailRepo(application);
+        }
 
 
     }
@@ -157,9 +161,18 @@ public class BazdidViewModel extends AndroidViewModel {
     public Client getClientByClientId(Long ClientId){
         return clientRepo.getClientById(ClientId);
     }
+    public LiveData<Setting> getSettingByKey(String key){
+        return settingRepo.getSettingByKey(key);
+    }
+
+    public long insertAddedClient(AddedClient addedClient){
+        return addedClientRepo.insertAddedClient(addedClient);
+    }
 
 
-
+    public LiveData<List<MasterGroupDetail>> getMasterGroupDetail(){
+        return masterGroupDetailRepo.getMasterGroupDetails();
+    }
 
 
 }

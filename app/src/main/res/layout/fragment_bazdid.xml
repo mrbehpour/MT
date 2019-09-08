@@ -62,20 +62,19 @@
         android:layout_width="wrap_content"
         android:layout_gravity="right"
         android:layout_height="wrap_content">
+
         <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="8dp"
-            app:elevation="8dp"
             android:id="@+id/floatingBtnAdd"
-            app:rippleColor="#815E64"
+            android:layout_width="wrap_content"
+            android:layout_height="67dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="8dp"
+            android:src="@drawable/add"
+            app:elevation="8dp"
             app:layout_behavior="android.support.design.widget.FloatingActionButton$Behavior"
             app:pressedTranslationZ="@dimen/default_item_horizontal_padd"
-            android:src="@drawable/add"
-            android:layout_gravity="bottom|right"
-            >
-        </android.support.design.widget.FloatingActionButton>
+            app:rippleColor="#815E64"></android.support.design.widget.FloatingActionButton>
     </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

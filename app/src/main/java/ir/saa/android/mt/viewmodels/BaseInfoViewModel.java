@@ -320,7 +320,7 @@ public class BaseInfoViewModel extends AndroidViewModel {
     public void getSettingFromServer(){
 
 
-        retrofitMT.getMtApi().GetSettings()
+        retrofitMT.getMtApi().GetAllSettings()
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableSingleObserver<DataClass<List<Setting>>>() {
                     @Override

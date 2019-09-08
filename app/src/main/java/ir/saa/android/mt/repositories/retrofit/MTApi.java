@@ -94,6 +94,9 @@ public interface MTApi {
     @GET("GetAndroidMenu")
     Single<DataClass<List<Menu>>> GetAndroidMenu();
 
+    @GET("GetAllSettings")
+    Single<DataClass<List<Setting>>> GetAllSettings();
+
     @POST("GetClients")
     Single<DataClass<List<Client>>> GetClients(@Body GetClientInput getClientInput);
 
