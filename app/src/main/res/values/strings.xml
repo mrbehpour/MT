@@ -374,7 +374,7 @@
     <string name="CustomerName">نام مشتری</string>
     <string name="Version">نسخه</string>
     <string name="ReleaseDate">تاریخ نسخه</string>
-    <string name="AddClientTitle">مشترک اضافه شده</string>
+    <string name="AddClientTitle">اضافه نمودن دستی مشترک به لیست مشترکین موجود</string>
     <string name="ClientTitle">مشترکین</string>
 
     <!-- Report -->

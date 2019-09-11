@@ -73,6 +73,10 @@ public class ClientRepo {
     public Client getClientById(long clientId) {
         return clientDao.getClientById(clientId);
     }
+    public  Client getClientByUniq(long subscript,Long fileid,long contornum,String shenas,long clientpass,long param){
+        return clientDao.getClientByUniq(subscript, fileid, contornum, shenas, clientpass, param);
+    }
+
 
     public LiveData<ClientWithTarif> getClientWithTarif(long clientId) {
         return clientDao.getClientWithTarif(clientId);

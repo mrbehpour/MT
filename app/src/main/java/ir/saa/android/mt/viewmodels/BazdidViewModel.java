@@ -161,6 +161,9 @@ public class BazdidViewModel extends AndroidViewModel {
     public Client getClientByClientId(Long ClientId){
         return clientRepo.getClientById(ClientId);
     }
+    public  Client getClientByUniq(long subscript,Long fileid,long contornum,String shenas,long clientpass,long param){
+        return clientRepo.getClientByUniq(subscript, fileid, contornum, shenas, clientpass, param);
+    }
     public LiveData<Setting> getSettingByKey(String key){
         return settingRepo.getSettingByKey(key);
     }
