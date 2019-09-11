@@ -117,8 +117,14 @@
     <string name="OutRangeVolt_msg">ولتاژ یکی از فازها خارج از بازه مجاز میباشد</string>
     <string name="OutRangeAmp_msg">آمپراژ یکی از فازها خارج از بازه مجاز میباشد</string>
     <string name="OutRangePF_msg">ضریب توان یکی از فازها خارج از بازه مجاز میباشد</string>
-    <string name="SelectClampType_msg">نوع کلمپ را انتخاب کنید</string>
+    <string name="SelectClampType_msg"> کلمپ پیش فرض</string>
+    <string name="SelectableClampTypes_msg">کلمپ های قابل انتخاب</string>
+    <string name="CommandTimeout_msg">خطای تایم اوت برای دریافت جواب از دستگاه تست رخ داد</string>
+    <string name="TransferLayout_msg">اتصال با دستگاه قطع شده است</string>
     <!--*******************-->
+
+
+
 
     <!--TestResultAdapter-->
     <string name="ErrorPercent">درصد خطا</string>

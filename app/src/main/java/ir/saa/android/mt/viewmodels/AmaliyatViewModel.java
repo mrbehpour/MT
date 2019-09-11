@@ -39,6 +39,9 @@ public class AmaliyatViewModel extends AndroidViewModel {
     int numErrorPulseNum =0;
     int numErrorConnection =0;
     int myPaulseCounter=0;
+
+
+
     boolean testPause = false;
     List<TestResult> testResultList;
     Timer timer;
@@ -53,7 +56,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     public MutableLiveData<Integer> testRoundNumMutableLiveData;
     public MutableLiveData<List<TestResult>> testResultListMutableLiveData;
     public MutableLiveData<MT.TestCommands> testStatusMutableLiveData;
-    public MutableLiveData<Boolean> cancelTestProcess;
+    public MutableLiveData<Integer> cancelTestProcess;
 
     public AmaliyatViewModel(@NonNull Application application) {
         super(application);
@@ -74,13 +77,8 @@ public class AmaliyatViewModel extends AndroidViewModel {
 
             @Override
             public void onConnectionError(String errMsg) {
-                Log.d("response","onConnectionError : "+errMsg);
-                numErrorConnection++;
-                if(numErrorConnection>10) {
-                    testPause = true;
-                    cancelTestProcess.postValue(true);
-                }
-                //finishTest();
+                Log.d("response","onConnectionError : " + errMsg);
+                handleError(errMsg);
             }
 
             @Override
@@ -111,6 +109,29 @@ public class AmaliyatViewModel extends AndroidViewModel {
         doManualTestMutableLiveData = new MutableLiveData<>();
     }
 
+    public void handleError(String errMsg){
+        if(errMsg.equals("Command Timeout")){
+            if(testContorParams.PaulserType) {
+                timerCheckStop();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            finishTest(true);
+            cancelTestProcess.postValue(2);
+        }
+
+        if(errMsg.equals("Transfer Layer is Disconnected")) {
+            numErrorConnection++;
+            if (numErrorConnection > 10) {
+                testPause = true;
+                cancelTestProcess.postValue(1);
+            }
+        }
+    }
+
     public void setTestContorParams(TestContorParams testContorParams){
         this.testContorParams=testContorParams;
     }
@@ -133,20 +154,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
         timerCheck.schedule(timerCheckTask, 0, prd);
     }
 
-    private void timerCheckRestart(long prd) {
-        timerCheck.cancel();
-        timerCheck.purge();
 
-        TimerTask timerCheckTask = new TimerTask() {
-
-            @Override
-            public void run() {
-                readTestResultFromMeter();
-            }
-
-        };
-        timerCheck.schedule(timerCheckTask, 0, prd);
-    }
 
     private void timerCheckStop() {
         if(timerCheck!=null){
@@ -167,7 +175,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
                 numErrorPulseNum++;
                 if(numErrorPulseNum >100) {
                     testPause=true;
-                    cancelTestProcess.postValue(true);
+                    cancelTestProcess.postValue(1);
                 }
                 Log.d("num_duplicate_paulse", numErrorPulseNum + "");
             }else{
@@ -217,6 +225,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     }
 
     public void newManualTestCommand(){
+
         String result = metertester.SendTestCommand(MT.TestCommands.StartManualTest);
         if(!result.isEmpty()){
             doManualTestMutableLiveData.postValue(true);
@@ -227,7 +236,6 @@ public class AmaliyatViewModel extends AndroidViewModel {
         try {
 
             if(manualPaulseNum>0) {
-                //Thread.sleep(50);
                 TestResult testResult = metertester.ReadTestResult(manualPaulseNum, testContorParams);
                 testResultList.add(testResult);
                 ErrPercAvr += testResult.ErrPerc;

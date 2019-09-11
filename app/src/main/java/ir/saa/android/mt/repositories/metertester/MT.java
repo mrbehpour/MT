@@ -68,6 +68,7 @@ public class MT {
 
             @Override
             public void onReportStatus(String statusMsg) {
+
                 imtCallback.onReportStatus(statusMsg);
             }
         });
@@ -250,7 +251,7 @@ public class MT {
             ri = findRegisterInfo(RegisterInfo.regNames.Test_Result);
             deviceResultNum=resultRound % 20;
             if(deviceResultNum==0) deviceResultNum=20;
-//            Log.d("response round num",resultRound+"");
+            modBus.setCommandTimeOut(500);
             result = modBus.readInputRegister(SLAVE_ID, ri.registerAddress+((deviceResultNum-1)*28), ri.registerLenght);
             Log.d("response test res",result);
         } catch (Exception ex) {
@@ -321,6 +322,7 @@ public class MT {
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress, 1);
                     break;
                 case StartManualTest:
+                    modBus.setCommandTimeOut(100);
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress, 2);
                     break;
                 case FinishTest:

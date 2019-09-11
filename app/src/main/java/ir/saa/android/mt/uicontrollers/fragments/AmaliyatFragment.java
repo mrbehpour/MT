@@ -232,10 +232,19 @@ public class AmaliyatFragment extends Fragment {
             }
         });
 
-        amaliyatViewModel.cancelTestProcess.observe(this, new Observer<Boolean>() {
+        amaliyatViewModel.cancelTestProcess.observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean) finishTestDialog();
+            public void onChanged(@Nullable Integer CancelTestMode) {
+                switch (CancelTestMode){
+                    case 1:
+                        finishTestDialog();
+                        break;
+                    case 2:
+                        Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.CommandTimeout_msg), FancyToast.LENGTH_SHORT, FancyToast.ERROR, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                        break;
+                }
             }
         });
 

@@ -148,7 +148,7 @@ public class SanjeshViewModel extends AndroidViewModel {
 
     public void AbortOperation(){
 
-        metertester.AbortOperation();
+        //metertester.AbortOperation();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {

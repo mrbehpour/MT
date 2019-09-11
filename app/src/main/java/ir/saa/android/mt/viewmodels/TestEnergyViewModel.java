@@ -41,6 +41,7 @@ public class TestEnergyViewModel extends AndroidViewModel {
         energiesStateMutableLiveData = new MutableLiveData<>();
         sanjeshResultMutableLiveData = new MutableLiveData<>();
 
+        //If We Dont Want Check calmp Set
         timerCheckStart(2000);
     }
 

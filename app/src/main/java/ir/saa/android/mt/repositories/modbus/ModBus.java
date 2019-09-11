@@ -1,9 +1,11 @@
 package ir.saa.android.mt.repositories.modbus;
 
+import android.support.annotation.CheckResult;
 import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import android.os.Handler;
 
 import ir.saa.android.mt.application.Converters;
 
@@ -12,16 +14,20 @@ public class ModBus {
     private static ModBus _instance;
 
     private long commandStartTime;
+    private long commandTimeOut=2500;
 
     public static ModBus getInstance(){
         synchronized (ModBus.class) {
             if(_instance==null)
                 _instance = new ModBus();
+
             return _instance;
         }
     }
+
+
     private ModBus(){
-        timerStart(500);
+        //timerStart(2500);
     }
 
     private final byte READ_HOLDING_REGISTER_FC =0x03;
@@ -104,7 +110,8 @@ public class ModBus {
             @Override
             public void onRecieveData(byte[] responseArray) {
                 totalReciveData += Converters.ArrayByte2Hex(responseArray);
-                Log.d("response raw data",totalReciveData);
+                checkResponseStr(totalReciveData);
+                //Log.d("response raw data",totalReciveData);
             }
         });
     }
@@ -151,7 +158,9 @@ public class ModBus {
         }
 
         waitForResponse = !res;
-        //if(res) timerStop();
+        if(res) {
+            Log.d("response ElapsedTime",String.valueOf(calElapsedTime()));
+        }
         return  res;
     }
     //-----------------------
@@ -190,7 +199,9 @@ public class ModBus {
             setWaitForResponse(true);
 
             while (isModbusRunningKey) {
-                if (checkResponseStr(totalReciveData)) {
+                checkElapsedTimeOut();
+                //if (checkResponseStr(totalReciveData)) {
+                if (!waitForResponse) {
                     Log.d("response ans_holding",totalReciveData);
                     result = totalReciveData;
                     break;
@@ -226,7 +237,9 @@ public class ModBus {
             setWaitForResponse(true);
 
             while (isModbusRunningKey) {
-                if (checkResponseStr(totalReciveData)) {
+                checkElapsedTimeOut();
+                //if (checkResponseStr(totalReciveData)) {
+                if (!waitForResponse) {
                     Log.d("response ans_input",totalReciveData);
                     result = totalReciveData;
                     break;
@@ -259,7 +272,9 @@ public class ModBus {
             setWaitForResponse(true);
 
             while (isModbusRunningKey) {
-                if (checkResponseStr(totalReciveData)) {
+                checkElapsedTimeOut();
+                //if (checkResponseStr(totalReciveData)) {
+                if (!waitForResponse) {
                     result = totalReciveData;
                     break;
                 }
@@ -293,8 +308,10 @@ public class ModBus {
 
             setWaitForResponse(true);
 
-            while (isModbusRunningKey) {
-                if (checkResponseStr(totalReciveData)) {
+            while (isModbusRunningKey){
+                checkElapsedTimeOut();
+                //if (checkResponseStr(totalReciveData)) {
+                if (!waitForResponse) {
                     result = totalReciveData;
                     break;
                 }
@@ -311,28 +328,43 @@ public class ModBus {
     //--------Methods-----------
     //--------------------------
 
+    public void setCommandTimeOut(long timeOutValue){
+        commandTimeOut = timeOutValue;
+    }
 
+    private void checkElapsedTimeOut(){
+        long elapsedTime = calElapsedTime();
+
+        if(elapsedTime>commandTimeOut) {
+
+            try {
+                modbusCallback.onConnectionError("Command Timeout");
+                setWaitForResponse(false);
+
+//                            //throw new Exception("Command Timeout");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Log.d("response", "Time Out. " + commandTimeOut);
+        }
+    }
 
     //---------Timeout Checker-------
     private Timer timer;
 
     TimerTask timerTask = new TimerTask() {
-
         @Override
         public void run() {
-
+            Log.d("response TimerTick ",String.valueOf(commandTimeOut));
             if(isModbusRunningKey){//
                 if(waitForResponse){
-                    long elapsedTime = calElapsedTime();
-                    Log.d("response ElapsedTime",String.valueOf(elapsedTime));
-                    if(elapsedTime>2500) {
-                        setWaitForResponse(false);
-                        Log.d("response", "Time Out.");
-                    }
+                    checkElapsedTimeOut();
                 }
             }
         }
     };
+
+
 
     private void timerStart(long prd) {
         Log.d("response ModBus Timer"," Start ");
@@ -342,6 +374,7 @@ public class ModBus {
         timer = new Timer();
         timer.scheduleAtFixedRate(timerTask, prd, prd);
     }
+
 
 
 
@@ -374,6 +407,8 @@ public class ModBus {
         waitForResponse = false;
         isModbusRunningKey = false;
     }
+
+
 
 
 

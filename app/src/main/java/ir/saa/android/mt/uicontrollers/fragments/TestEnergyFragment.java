@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,12 +49,14 @@ public class TestEnergyFragment extends Fragment
     TestEnergyViewModel testEnergyViewModel = null;
     TestContorParams testContorParams;
 
-    LinearLayout lyClampType;
+    LinearLayout lyClampType,lySelectClamp;
     RadioButton radioClamp1,radioClamp2;
+    RadioGroup radioGroup;
     TextView tvVR,tvVS,tvVT;
     TextView tvIR,tvIS,tvIT;
     TextView tvPFR,tvPFS,tvPFT;
     TextView tvMinV,tvMaxV,tvMinI,tvMaxI,tvMinPF,tvMaxPF;
+    TextView tvSelectedClamp;
 
 
     public TestEnergyFragment() {
@@ -81,9 +84,23 @@ public class TestEnergyFragment extends Fragment
         }
 
         lyClampType = rootView.findViewById(R.id.lyClampType);
+        lyClampType.setVisibility(View.GONE);
+
+        lySelectClamp = rootView.findViewById(R.id.lySelectClamp);
+        lySelectClamp.setVisibility(View.GONE);
+
         radioClamp1 = rootView.findViewById(R.id.radioBtnClamp1);
         radioClamp2 = rootView.findViewById(R.id.radioBtnClamp2);
-        lyClampType.setVisibility(View.GONE);
+
+        radioGroup = rootView.findViewById(R.id.radioClampSets);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = group.findViewById(checkedId);
+                tvSelectedClamp.setText(String.format("%s (%s)", getResources().getText(R.string.SelectClampType_msg), radioButton.getText()));
+            }
+        });
 
         LinearLayout llLeft = rootView.findViewById(R.id.llLeft);
         LinearLayout llCenter = rootView.findViewById(R.id.llCenter);
@@ -107,6 +124,7 @@ public class TestEnergyFragment extends Fragment
         tvMinPF.setText("0.05");
         tvMaxPF = rootView.findViewById(R.id.tvMax_PF);
 
+        tvSelectedClamp = rootView.findViewById(R.id.tvSelectedClamp);
 
         testEnergyViewModel.energiesStateMutableLiveData.observe(this, new Observer<EnergiesState>() {
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -144,20 +162,26 @@ public class TestEnergyFragment extends Fragment
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override
                     public void onChanged(@Nullable int[] clampCheckResult) {
-//                        if(clampCheckResult[0]==2) {
-//                            lyClampType.setVisibility(View.VISIBLE);
-//                            btnStartTest.setEnabled(false);
-//                            selectClampTypeDialog(clampCheckResult);
-//                        }else{
-//                            lyClampType.setVisibility(View.GONE);
-//                            btnStartTest.setEnabled(true);
-//                            testEnergyViewModel.timerCheckStart(2000);
-//                        }
+                        if(clampCheckResult[0]==2) {
+                            lySelectClamp.setVisibility(View.VISIBLE);
+                            selectClampTypeDialog(clampCheckResult);
+                        }else{
+                            lySelectClamp.setVisibility(View.GONE);
+                        }
                     }
                 }
         );
 
-        //testEnergyViewModel.CheckClampType();
+//      For Check Number Of Clamp Set
+        testEnergyViewModel.CheckClampType();
+
+        lySelectClamp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lySelectClamp.setVisibility(View.GONE);
+                lyClampType.setVisibility(View.VISIBLE);
+            }
+        });
 
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,7 +200,9 @@ public class TestEnergyFragment extends Fragment
             @Override
             public void onClick(View view) {
                 btnStartTest.setEnabled(true);
-                testEnergyViewModel.timerCheckStart(2000);
+                lySelectClamp.setVisibility(View.VISIBLE);
+                lyClampType.setVisibility(View.GONE);
+
             }
         });
 
@@ -209,6 +235,8 @@ public class TestEnergyFragment extends Fragment
 
         radioClamp1.setText(clampTypes[clampType[1]]);
         radioClamp2.setText(clampTypes[clampType[2]]);
+
+        tvSelectedClamp.setText(String.format("%s (%s)", getResources().getText(R.string.SelectClampType_msg), clampTypes[clampType[1]]));
     }
 
     private void setRanges(){

@@ -6,6 +6,38 @@
     android:background="@color/grey_200">
 
     <LinearLayout
+        android:id="@+id/lySelectClamp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded"
+        android:layout_margin="10sp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="48sp"
+            android:layout_height="48sp"
+            android:layout_margin="4sp"
+            android:padding="4sp"
+            android:src="@drawable/clamp" />
+
+        <View
+            android:layout_width="2sp"
+            android:layout_margin="3sp"
+            android:layout_height="fill_parent"
+            android:background="@color/orange_900" />
+
+        <TextView
+            android:id="@+id/tvSelectedClamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:textSize="14sp"
+            android:textColor="@color/orange_900" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/lyClampType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +47,7 @@
         android:orientation="vertical">
 
         <RadioGroup
-            android:id="@+id/radioSex"
+            android:id="@+id/radioClampSets"
             android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
@@ -25,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 android:textSize="14sp"
-                android:text="@string/SelectClampType_msg"
+                android:text="@string/SelectableClampTypes_msg"
                 android:background="@color/orange_100"
                 android:textAlignment="center"/>
 
@@ -34,6 +66,7 @@
                 android:layout_margin="10sp"
                 android:textSize="14sp"
                 android:layout_gravity="center|left"
+                android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -539,6 +572,7 @@
 
 
     </LinearLayout>
+
 
 
     <!-- Start Test Button -->
