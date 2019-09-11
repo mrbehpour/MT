@@ -124,5 +124,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <LinearLayout
+
+        android:layout_gravity="center_horizontal"
+        android:layoutDirection="rtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:fontFamily="@font/byekan"
+            android:layout_width="wrap_content"
+            android:text="@string/RamzRayaneh"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:fontFamily="@font/byekan"
+            android:id="@+id/etRamzRayaneh"
+            android:textAlignment="center"
+            android:layout_marginRight="29dp"
+            android:inputType="number"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_gravity="center_horizontal"
+        android:layoutDirection="rtl"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:fontFamily="@font/byekan"
+            android:layout_width="wrap_content"
+            android:text="@string/Group"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:fontFamily="@font/byekan"
+            android:id="@+id/spnGroup"
+            android:textAlignment="center"
+            android:layout_marginRight="29dp"
+            android:inputType="number"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>
 </ScrollView>
