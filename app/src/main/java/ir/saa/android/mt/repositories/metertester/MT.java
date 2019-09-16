@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.saa.android.mt.application.Converters;
-import ir.saa.android.mt.application.G;
-import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.repositories.modbus.IModbusCallback;
 import ir.saa.android.mt.repositories.modbus.ITransferLayer;
 import ir.saa.android.mt.repositories.modbus.ModBus;
@@ -87,6 +85,10 @@ public class MT {
         imtCallback = callback;
     }
 
+    public boolean geWaitForResponseStatus(){
+        return modBus.getWaitForResponseStatus();
+    }
+
     private void fillRegisterInfoList(){
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.ElecParams_ALL,0,81));
         registerInfoList.add(new RegisterInfo(RegisterInfo.regNames.ElecParams_PA,0,27));
@@ -148,6 +150,7 @@ public class MT {
         totalReciveData="";
         RegisterInfo ri = findRegisterInfo(RegisterInfo.regNames.ElecParams_ALL);
         try {
+            modBus.setCommandTimeOut(500);
             String result = splitRawData(modBus.readInputRegister(SLAVE_ID, ri.registerAddress, ri.registerLenght));
 
             electericalParams.add(splitElectericalParams(result.substring(0,108)));
@@ -322,7 +325,7 @@ public class MT {
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress, 1);
                     break;
                 case StartManualTest:
-                    modBus.setCommandTimeOut(100);
+                    modBus.setCommandTimeOut(150);
                     result = modBus.writeSingleRegister(SLAVE_ID, ri.registerAddress, 2);
                     break;
                 case FinishTest:

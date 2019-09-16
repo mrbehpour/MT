@@ -120,6 +120,10 @@ public class ModBus {
         modbusCallback = callback;
     }
 
+    public boolean getWaitForResponseStatus(){
+        return waitForResponse;
+    }
+
     //-------check response-------
     private boolean checkResponseStr(String responseStr){
         boolean res=false;
@@ -199,7 +203,11 @@ public class ModBus {
             setWaitForResponse(true);
 
             while (isModbusRunningKey) {
-                checkElapsedTimeOut();
+                //checkElapsedTimeOut();
+                if(calElapsedTime()>commandTimeOut) {
+                    setWaitForResponse(false);
+                    modbusCallback.onConnectionError("Command Timeout");
+                }
                 //if (checkResponseStr(totalReciveData)) {
                 if (!waitForResponse) {
                     Log.d("response ans_holding",totalReciveData);
@@ -237,7 +245,11 @@ public class ModBus {
             setWaitForResponse(true);
 
             while (isModbusRunningKey) {
-                checkElapsedTimeOut();
+                //checkElapsedTimeOut();
+                if(calElapsedTime()>commandTimeOut) {
+                    setWaitForResponse(false);
+                    modbusCallback.onConnectionError("Command Timeout");
+                }
                 //if (checkResponseStr(totalReciveData)) {
                 if (!waitForResponse) {
                     Log.d("response ans_input",totalReciveData);
@@ -272,7 +284,11 @@ public class ModBus {
             setWaitForResponse(true);
 
             while (isModbusRunningKey) {
-                checkElapsedTimeOut();
+                //checkElapsedTimeOut();
+                if(calElapsedTime()>commandTimeOut) {
+                    setWaitForResponse(false);
+                    modbusCallback.onConnectionError("Command Timeout");
+                }
                 //if (checkResponseStr(totalReciveData)) {
                 if (!waitForResponse) {
                     result = totalReciveData;
@@ -309,7 +325,11 @@ public class ModBus {
             setWaitForResponse(true);
 
             while (isModbusRunningKey){
-                checkElapsedTimeOut();
+                //checkElapsedTimeOut();
+                if(calElapsedTime()>commandTimeOut) {
+                    setWaitForResponse(false);
+                    modbusCallback.onConnectionError("Command Timeout");
+                }
                 //if (checkResponseStr(totalReciveData)) {
                 if (!waitForResponse) {
                     result = totalReciveData;
@@ -341,13 +361,13 @@ public class ModBus {
                 modbusCallback.onConnectionError("Command Timeout");
                 setWaitForResponse(false);
 
-//                            //throw new Exception("Command Timeout");
             } catch (Exception e) {
                 e.printStackTrace();
             }
             Log.d("response", "Time Out. " + commandTimeOut);
         }
     }
+
 
     //---------Timeout Checker-------
     private Timer timer;
@@ -391,7 +411,7 @@ public class ModBus {
     private void setWaitForResponse(Boolean status){
         waitForResponse=status;
         isModbusRunningKey=status;
-        commandStartTime = System.currentTimeMillis();
+        if(status) commandStartTime = System.currentTimeMillis();
     }
 
     private long calElapsedTime(){

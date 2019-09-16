@@ -149,8 +149,6 @@ public class AmaliyatFragment extends Fragment {
                 }
         );
 
-
-
         amaliyatViewModel.testStatusMutableLiveData.observe(this, new Observer<MT.TestCommands>() {
                     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
                     @Override

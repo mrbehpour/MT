@@ -50,6 +50,8 @@ public class AmaliyatViewModel extends AndroidViewModel {
     TestDtlRepo testDtlRepo;
     GPSInfoRepo gpsInfoRepo;
 
+    String lastSendCommand;
+
 //    public MutableLiveData<Boolean> setTimerMutableLiveData;
     public MutableLiveData<Boolean> doManualTestMutableLiveData;
     public MutableLiveData<String> testResultMutableLiveData;
@@ -110,17 +112,25 @@ public class AmaliyatViewModel extends AndroidViewModel {
     }
 
     public void handleError(String errMsg){
+
         if(errMsg.equals("Command Timeout")){
+            Log.d("response", lastSendCommand);
             if(testContorParams.PaulserType) {
                 timerCheckStop();
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            finishTest(true);
-            cancelTestProcess.postValue(2);
+
+            if(lastSendCommand.equals("StartManualTest")) {
+                cancelTestProcess.postValue(2);
+                finishTest(true);
+            }
+            if(lastSendCommand.equals("ReadTestResult")) {
+                String a = "1234";
+            }
         }
 
         if(errMsg.equals("Transfer Layer is Disconnected")) {
@@ -225,10 +235,12 @@ public class AmaliyatViewModel extends AndroidViewModel {
     }
 
     public void newManualTestCommand(){
-
-        String result = metertester.SendTestCommand(MT.TestCommands.StartManualTest);
-        if(!result.isEmpty()){
-            doManualTestMutableLiveData.postValue(true);
+        lastSendCommand = "StartManualTest";
+        if(!metertester.geWaitForResponseStatus()) {
+            String result = metertester.SendTestCommand(MT.TestCommands.StartManualTest);
+            if (!result.isEmpty()) {
+                doManualTestMutableLiveData.postValue(true);
+            }
         }
     }
 
@@ -236,6 +248,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
         try {
 
             if(manualPaulseNum>0) {
+                lastSendCommand = "ReadTestResult";
                 TestResult testResult = metertester.ReadTestResult(manualPaulseNum, testContorParams);
                 testResultList.add(testResult);
                 ErrPercAvr += testResult.ErrPerc;

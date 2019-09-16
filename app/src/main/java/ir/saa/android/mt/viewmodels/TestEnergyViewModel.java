@@ -21,6 +21,7 @@ import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.repositories.metertester.ElectericalParams;
 import ir.saa.android.mt.repositories.metertester.EnergiesState;
+import ir.saa.android.mt.repositories.metertester.IMTCallback;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
 
@@ -33,9 +34,39 @@ public class TestEnergyViewModel extends AndroidViewModel {
     public MutableLiveData<int[]> checkClampMutableLiveData;
     public MutableLiveData<List<ElectericalParams>> sanjeshResultMutableLiveData;
 
+    int numErrorConnection = 0;
+
     public TestEnergyViewModel(@NonNull Application application) {
         super(application);
         metertester = MT.getInstance();
+        numErrorConnection=0;
+
+        metertester.setMTCallback(new IMTCallback() {
+            @Override
+            public void onConnected() {
+
+            }
+
+            @Override
+            public void onDisConnected() {
+
+            }
+
+            @Override
+            public void onConnectionError(String errMsg) {
+                handleError(errMsg);
+            }
+
+            @Override
+            public void onReportStatus(String statusMsg) {
+
+            }
+
+            @Override
+            public void onResponseTimeout(int noResponseTime) {
+
+            }
+        });
 
         checkClampMutableLiveData = new MutableLiveData<>();
         energiesStateMutableLiveData = new MutableLiveData<>();
@@ -43,6 +74,17 @@ public class TestEnergyViewModel extends AndroidViewModel {
 
         //If We Dont Want Check calmp Set
         timerCheckStart(2000);
+    }
+
+
+
+    public void handleError(String errMsg){
+        if(errMsg.equals("Command Timeout")){
+            numErrorConnection++;
+            if (numErrorConnection > 10) {
+                timerCheckStop();
+            }
+        }
     }
 
     public void timerCheckStart(long prd) {
@@ -100,6 +142,7 @@ public class TestEnergyViewModel extends AndroidViewModel {
         try {
             energiesState = metertester.ReadEnergiesState();
             energiesStateMutableLiveData.postValue(energiesState);
+            numErrorConnection = 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
