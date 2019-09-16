@@ -528,6 +528,7 @@ public class BazdidFragment extends Fragment
                                     addedClientInput.meterNumActive = etSerialContor.getText().toString().equals("") ? null :
                                             Long.parseLong(etSerialContor.getText().toString());
                                     long clientId=0;
+                                    //مشخص کردن فیلد یونیک
                                     switch(UniqueField) {
                                         case "1":
                                             clientId=etEshterak.getText().toString().equals("") ? null :
@@ -555,6 +556,7 @@ public class BazdidFragment extends Fragment
                                             break;
                                     }
                                     Client client=new Client();
+                                    //چک کردن مشترک بر اساس فیلد یونیک اصلی و یونیک های تعیین شده از سوی سایت
                                     if(clientId ==0){
                                         client=bazdidViewModel.getClientByUniq(SubScript,FileId
                                                 ,ContorNum,CustId, ClientPass,Param5 );

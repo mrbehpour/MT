@@ -222,7 +222,7 @@ public interface ClientDao {
     Client getClientById(long clientId);
 
     @Query("select * from Client " +
-            "where (:subscript=-1 or  ClientID = :subscript) and " +
+            "where (:subscript=-1 or  SubScript = :subscript) and " +
             "(:fileid=-1 or FileID=:fileid) and " +
             "(:contornum=-1 or MeterNumActive=:contornum) and " +
             "(:shenas='-1' or CustId=:shenas) and " +
