@@ -98,6 +98,12 @@ public class BazdidFragment extends Fragment
     List<String> spinnerArrayGroup;
     ArrayAdapter<String> adapterGroup;
     HashMap<Integer,Integer> spinnerMapGroup = new HashMap<Integer, Integer>();
+    long SubScript=-1;
+    long FileId=-1;
+    long ContorNum=-1;
+    String CustId="-1";
+    long ClientPass=-1;
+    long Param5=-1;
 
     public BazdidFragment() {
     }
@@ -367,6 +373,33 @@ public class BazdidFragment extends Fragment
                                         fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                         fancyToast.show();
                                         return;
+                                    }else{
+                                        switch(AddedClientUniqueField1) {
+                                            case "1":
+                                                SubScript=etEshterak.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etEshterak.getText().toString());
+                                                break;
+                                            case "2":
+                                                FileId=etFileId.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etFileId.getText().toString());
+                                                break;
+                                            case "3":
+                                                ContorNum=etSerialContor.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etSerialContor.getText().toString());
+                                                break;
+                                            case "4":
+                                                CustId=etShenasai.getText().toString().equals("") ? "-1" :
+                                                        etShenasai.getText().toString();
+                                                break;
+                                            case "5":
+                                                ClientPass=etRamz.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etRamz.getText().toString());
+                                                break;
+                                            case "6":
+                                                Param5=etRamzRayaneh.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etRamzRayaneh.getText().toString());
+                                                break;
+                                        }
                                     }
                                 }
                                 if(AddedClientUniqueField2.equals("0")==false){
@@ -379,6 +412,33 @@ public class BazdidFragment extends Fragment
                                         fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                         fancyToast.show();
                                         return;
+                                    }else{
+                                        switch(AddedClientUniqueField2) {
+                                            case "1":
+                                                SubScript=etEshterak.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etEshterak.getText().toString());
+                                                break;
+                                            case "2":
+                                                FileId=etFileId.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etFileId.getText().toString());
+                                                break;
+                                            case "3":
+                                                ContorNum=etSerialContor.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etSerialContor.getText().toString());
+                                                break;
+                                            case "4":
+                                                CustId=etShenasai.getText().toString().equals("") ? "-1" :
+                                                        etShenasai.getText().toString();
+                                                break;
+                                            case "5":
+                                                ClientPass=etRamz.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etRamz.getText().toString());
+                                                break;
+                                            case "6":
+                                                Param5=etRamzRayaneh.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etRamzRayaneh.getText().toString());
+                                                break;
+                                        }
                                     }
                                 }
                                 if(AddedClientUniqueField3.equals("0")==false){
@@ -391,6 +451,33 @@ public class BazdidFragment extends Fragment
                                         fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                         fancyToast.show();
                                         return;
+                                    }else {
+                                        switch(AddedClientUniqueField3) {
+                                            case "1":
+                                                SubScript=etEshterak.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etEshterak.getText().toString());
+                                                break;
+                                            case "2":
+                                                FileId=etFileId.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etFileId.getText().toString());
+                                                break;
+                                            case "3":
+                                                ContorNum=etSerialContor.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etSerialContor.getText().toString());
+                                                break;
+                                            case "4":
+                                                CustId=etShenasai.getText().toString().equals("") ? "-1" :
+                                                        etShenasai.getText().toString();
+                                                break;
+                                            case "5":
+                                                ClientPass=etRamz.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etRamz.getText().toString());
+                                                break;
+                                            case "6":
+                                                Param5=etRamzRayaneh.getText().toString().equals("") ? -1 :
+                                                        Long.parseLong(etRamzRayaneh.getText().toString());
+                                                break;
+                                        }
                                     }
                                 }
                                 if(AddedClientForcedField1.equals("0")==false){
@@ -441,33 +528,41 @@ public class BazdidFragment extends Fragment
                                     addedClientInput.meterNumActive = etSerialContor.getText().toString().equals("") ? null :
                                             Long.parseLong(etSerialContor.getText().toString());
                                     long clientId=0;
+                                    //مشخص کردن فیلد یونیک
                                     switch(UniqueField) {
                                         case "1":
                                             clientId=etEshterak.getText().toString().equals("") ? null :
                                                     Long.parseLong(etEshterak.getText().toString());
                                             break;
                                         case "2":
-                                            clientId=etFileId.getText().toString().equals("") ? null :
+                                           clientId=etFileId.getText().toString().equals("") ? 0 :
                                                     Long.parseLong(etFileId.getText().toString());
                                             break;
                                         case "3":
-                                            clientId=etSerialContor.getText().toString().equals("") ? null :
+                                            clientId=etSerialContor.getText().toString().equals("") ? 0 :
                                                     Long.parseLong(etSerialContor.getText().toString());
                                             break;
                                         case "4":
-                                            clientId=etShenasai.getText().toString().equals("") ? null :
+                                            clientId=etShenasai.getText().toString().equals("") ? 0 :
                                                     Long.parseLong(etShenasai.getText().toString());
                                             break;
                                         case "5":
-                                            clientId=etRamz.getText().toString().equals("") ? null :
+                                            clientId=etRamz.getText().toString().equals("") ? 0 :
                                                     Long.parseLong(etRamz.getText().toString());
                                             break;
                                         case "6":
-                                            clientId=etRamzRayaneh.getText().toString().equals("") ? null :
+                                            clientId=etRamzRayaneh.getText().toString().equals("") ? 0 :
                                                     Long.parseLong(etRamzRayaneh.getText().toString());
                                             break;
                                     }
-                                    Client client = bazdidViewModel.getClientByClientId(clientId);
+                                    Client client=new Client();
+                                    //چک کردن مشترک بر اساس فیلد یونیک اصلی و یونیک های تعیین شده از سوی سایت
+                                    if(clientId ==0){
+                                        client=bazdidViewModel.getClientByUniq(SubScript,FileId
+                                                ,ContorNum,CustId, ClientPass,Param5 );
+                                    }else {
+                                        client = bazdidViewModel.getClientByClientId(clientId);
+                                    }
                                     if (client == null){
 //                                    Gson gson = new Gson();
 //                                    String ddf = gson.toJson(addedClientInput);

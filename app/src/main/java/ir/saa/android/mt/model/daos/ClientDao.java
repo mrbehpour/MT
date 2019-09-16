@@ -221,6 +221,15 @@ public interface ClientDao {
     @Query("select * from Client where ClientID = :clientId")
     Client getClientById(long clientId);
 
+    @Query("select * from Client " +
+            "where (:subscript=-1 or  SubScript = :subscript) and " +
+            "(:fileid=-1 or FileID=:fileid) and " +
+            "(:contornum=-1 or MeterNumActive=:contornum) and " +
+            "(:shenas='-1' or CustId=:shenas) and " +
+            "(:clientpass=-1 or ClientPass=:clientpass) and" +
+            "(:param=-1)")
+    Client getClientByUniq(long subscript,Long fileid,long contornum,String shenas,long clientpass,long param);
+
     @Query("Delete From Client")
     void deleteAll();
 
