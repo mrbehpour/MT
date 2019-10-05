@@ -770,7 +770,7 @@ public class BazdidFragment extends Fragment
     public void setUpRecyclerView(View view,Integer Postion) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvBazdidMoshtarakin);
         recyclerView.setScrollbarFadingEnabled(false);
-        recyclerView.setScrollBarSize(50);
+        recyclerView.setScrollBarSize(10);
 
 
         adapter = new BazdidAdapter(getActivity(), clientItems);

@@ -34,6 +34,9 @@ public class TestInfoRepo  {
         testInfoDao.deleteAll();
     }
 
+    public void deleteAllWithOutBlockId(){
+        testInfoDao.deleteAllWithOutBlockId();
+    }
 
     public void deleteTestInfoById(Integer Id) {
         testInfoDao.deleteTestInfoById(Id);

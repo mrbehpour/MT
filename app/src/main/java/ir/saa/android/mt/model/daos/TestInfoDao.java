@@ -28,6 +28,9 @@ public interface TestInfoDao {
     @Query("Delete From TestInfo")
     void deleteAll();
 
+    @Query("Delete From TestInfo where TestInfo.BlockID is null ")
+    void deleteAllWithOutBlockId();
+
     @Query("Delete From TestInfo Where TestInfoID=:Id")
     void deleteTestInfoById(Integer Id);
 

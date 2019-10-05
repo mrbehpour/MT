@@ -70,6 +70,7 @@ public class TestDtlRepo  {
         return testDtlDao.getTestAllInfoWithSendId(ClientId,SendId);
     }
 
+
     public List<TestAllInfo> getTestAllInfoWithClientId(Long ClientId){
         return testDtlDao.getTestAllInfoWithClientId(ClientId);
     }
@@ -79,5 +80,9 @@ public class TestDtlRepo  {
     }
     public List<TestAllInfo> getTestAllInfoWithClientIDLiveData(Long ClientId){
         return testDtlDao.getTestAllInfoWithClientIDForListItem(ClientId);
+    }
+
+    public List<TestAllInfo> getTestAllInfoWithClientIdWithoutBlockId(Long ClientId){
+        return testDtlDao.getTestAllInfoWithClientIdWithoutBlockId(ClientId);
     }
 }

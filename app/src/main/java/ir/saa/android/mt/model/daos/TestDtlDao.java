@@ -50,6 +50,11 @@ public interface TestDtlDao {
 
     @Query("Select * from TestInfo " +
             "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
+            "where TestInfo.ClientID=:ClientId and TestInfo.BlockID is null")
+    List<TestAllInfo> getTestAllInfoWithClientIdWithoutBlockId(Long ClientId);
+
+    @Query("Select * from TestInfo " +
+            "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
             "where TestInfo.ClientID=:ClientId")
     List<TestAllInfo> getTestAllInfoWithClientId(Long ClientId);
 
