@@ -39,7 +39,7 @@ public interface RemarkDao {
             "inner join RemarkGroup " +
             "on RemarkGroup.FldID=GroupingFormat.remarkgroup_id " +
             "Where RemarkGroup.KeyName=:KeyValue")
-    LiveData<List<Remark>> getManehTestAndBazrasi(String KeyValue);
+   List<Remark> getManehTestAndBazrasi(String KeyValue);
 
     @Query("Delete From Remark")
     void deleteAll();

@@ -7,6 +7,7 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
@@ -36,8 +37,10 @@ import ir.saa.android.mt.components.Utilities;
 import ir.saa.android.mt.enums.SharePrefEnum;
 import ir.saa.android.mt.model.entities.DigitalMeters;
 import ir.saa.android.mt.model.entities.TariffAllInfo;
+import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.repositories.meterreader.MeterUtility;
 import ir.saa.android.mt.repositories.meterreader.StatusReport;
+import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
 import ir.saa.android.mt.viewmodels.ReadmeterViewModel;
 
@@ -46,6 +49,7 @@ import static ir.saa.android.mt.repositories.meterreader.MeterUtility.*;
 public class ReadmeterFragment extends Fragment {
 
     ReadmeterViewModel readmeterViewModel = null;
+    AmaliyatViewModel amaliyatViewModel=null;
     AlertDialog ad;
     TextView txtMeterCompany;
     TextView txtMeterType;
@@ -94,6 +98,7 @@ public class ReadmeterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_readmeter, container, false);
         locationViewModel=ViewModelProviders.of(this).get(LocationViewModel.class);
+        amaliyatViewModel=ViewModelProviders.of(this).get(AmaliyatViewModel.class);
         //CountGherat=0;
         readmeterViewModel = ViewModelProviders.of(this).get(ReadmeterViewModel.class);
         txtMeterCompany = rootView.findViewById(R.id.tvMeterCompany);
@@ -410,18 +415,63 @@ public class ReadmeterFragment extends Fragment {
         if(mainReadData==null){
             return;
         }
+        List<TestInfo> testInfos = amaliyatViewModel.getTestInfoWithBlockId(G.clientInfo.ClientId, G.clientInfo.SendId);
+        if (testInfos.size() != 0) {
+            AlertDialog basic_reg;
+            TextView txtDialogTitle;
+            TextView tvMessage;
+            AlertDialog.Builder builder = new  AlertDialog.Builder(getContext());
+            View v = getLayoutInflater().inflate(R.layout.custom_alretdialog, null);
+            builder.setView(v);
+            builder.setCancelable(false);
+            builder.create();
+            basic_reg = builder.show();
+            txtDialogTitle = (TextView) v.findViewById(R.id.txtDialogTitle);
+            tvMessage = (TextView) v.findViewById(R.id.tvMessage);
+            txtDialogTitle.setText(getText(R.string.msg));
+            tvMessage.setText(getText(R.string.msg_Save));
+            Button btnCancel = (Button) v.findViewById(R.id.btnCancel);
+            Button btnRegister = (Button) v.findViewById(R.id.btnRegister);
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    basic_reg.dismiss();
+                    return;
+                }
+            });
+            btnRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for(TestInfo testInfo:testInfos){
+                        amaliyatViewModel.deleteTestInfoById(testInfo.TestInfoID);
+                    }
+                    location = locationViewModel.getLocation(getContext());
 
-        location=locationViewModel.getLocation(this.getContext());
+                    if (readmeterViewModel.saveTraiff(mainReadData, location)) {
+                        Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                    } else {
 
-        if(readmeterViewModel.saveTraiff(mainReadData,location)) {
-            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-        }else{
+                    }
+                    basic_reg.dismiss();
+                    resetUI();
 
+                }
+            });
+        }else {
+            location = locationViewModel.getLocation(this.getContext());
+
+            if (readmeterViewModel.saveTraiff(mainReadData, location)) {
+                Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
+            } else {
+
+            }
+
+            resetUI();
         }
-
-        resetUI();
     }
 
     private void connectToModuleDialog(){

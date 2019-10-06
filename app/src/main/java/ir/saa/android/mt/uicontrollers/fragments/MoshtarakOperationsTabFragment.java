@@ -1,9 +1,12 @@
 package ir.saa.android.mt.uicontrollers.fragments;
 
+import android.app.ProgressDialog;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,10 +59,28 @@ public class MoshtarakOperationsTabFragment extends Fragment
     BazrasiViewModel bazrasiViewModel=null;
     PolompViewModel polompViewModel;
     ReadmeterViewModel readmeterViewModel;
+    Location location;
     TextView tvMessage;
+    ProgressDialog progressDialog;
+    boolean waitForLocation=true;
+    TestInfo testInfo;
+    AlertDialog finalBasic_reg;
+
     Boolean isTest=false,isPolomp=false,isTariff=false,isBazarsi=false,isMoshahedate=false;
 
+    public void HideProgressDialog(){
+        if(progressDialog!=null) progressDialog.dismiss();
+    }
 
+    private void connectToModuleDialog(){
+
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+        waitForLocation=true;
+    }
     private Long clientID = null;
     public MoshtarakOperationsTabFragment() {
         // Required empty public constructor
@@ -128,19 +149,25 @@ public class MoshtarakOperationsTabFragment extends Fragment
                 myCheckList=new MyCheckList(getActivity()
                         ,new MyCheckListItem("مانع 1",1) ,new MyCheckListItem("مانع 2", 2))
                         .setSelectionMode(MyCheckListMode.SingleSelection).setCheckListOrientation(LinearLayout.VERTICAL);
+                List<TestInfo> testInfos=amaliyatViewModel.getTestInfoWithBlockId(G.clientInfo.ClientId,
+                        G.clientInfo.SendId);
+               List<Remark> remarks= bazrasiViewModel.getManehTestAndBazrasi("Block");
 
-                bazrasiViewModel.getManehTestAndBazrasi("Block").observe(getActivity(), new Observer<List<Remark>>() {
-                    @Override
-                    public void onChanged(@Nullable List<Remark> remarks) {
                         myCheckList.removeAllCkeckItems();
                         for(Remark remark:remarks){
                             MyCheckListItem myCheckListItem=new MyCheckListItem(remark.RemarkName, remark.RemarkID);
                             myCheckList.addCheckItem(myCheckListItem);
                         }
-                    }
-                });
+
+
+
 
                 myDialog.addContentView(myCheckList);
+
+                if(testInfos.size()!=0){
+                    myCheckList.setSelectionByValue(testInfos.get(0).BlockID);
+
+                }
 
                 myDialog.addButton((String) getText(R.string.Cancel), new View.OnClickListener() {
                     @Override
@@ -150,9 +177,10 @@ public class MoshtarakOperationsTabFragment extends Fragment
                 }).addButton((String) getText(R.string.Save), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        AlertDialog basic_reg = null;
                         if(myCheckList.getSelectedItemsValues().size()!=0){
                             if(isBazarsi || isPolomp || isTariff || isTest){
-                                AlertDialog basic_reg;
+
                                 TextView txtDialogTitle;
                                 TextView tvMessage;
                                 AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
@@ -164,9 +192,10 @@ public class MoshtarakOperationsTabFragment extends Fragment
                                 txtDialogTitle=(TextView)v.findViewById(R.id.txtDialogTitle);
                                 tvMessage=(TextView)v.findViewById(R.id.tvMessage);
                                 txtDialogTitle.setText(getText(R.string.msg));
-                                tvMessage.setText(getText(R.string.msg_Save));
+                                tvMessage.setText(getText(R.string.msg_Save_Maneh));
                                 Button btnCancel=(Button)v.findViewById(R.id.btnCancel);
                                 Button btnRegister=(Button)v.findViewById(R.id.btnRegister);
+                                finalBasic_reg = basic_reg;
                                 btnRegister.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -187,45 +216,78 @@ public class MoshtarakOperationsTabFragment extends Fragment
                                                     tariffAllInfo.TariffDtlID);
 
                                         }
-                                        TestInfo testInfo = new TestInfo();
-                                        testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
-                                        testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
-                                        testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
-                                        testInfo.SendID = G.clientInfo.SendId;
-                                        testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
-                                        testInfo.ClientID = G.clientInfo.ClientId;
-                                        testInfo.BlockID = Integer.parseInt(myCheckList.getSelectedItemsValues().get(0).toString());
-                                        Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
-
-                                        if (testInfoId != null) {
-                                            Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
-                                            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                            fancyToast.show();
-                                            basic_reg.dismiss();
+                                        if(location==null) {
+                                            if (locationViewModel.isGpsEnable() == false) {
+                                                location = null;
+                                                locationViewModel.trunOnGps(getActivity());
+                                                return;
+                                            } else {
+                                                connectToModuleDialog();
+                                                locationViewModel.getLocation(getActivity());
+                                                return;
+                                            }
                                         }
+                                        if(location!=null) {
+                                            testInfo = new TestInfo();
+                                            testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                                            testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                                            testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                                            testInfo.SendID = G.clientInfo.SendId;
+                                            testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                                            testInfo.ClientID = G.clientInfo.ClientId;
+                                            testInfo.Lat = String.valueOf(location.getLatitude());
+                                            testInfo.Long = String.valueOf(location.getLongitude());
+                                            testInfo.BlockID = Integer.parseInt(myCheckList.getSelectedItemsValues().get(0).toString());
+                                            Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+
+                                            if (testInfoId != null) {
+                                                Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                fancyToast.show();
+                                                finalBasic_reg.dismiss();
+                                            }
+                                        }
+
                                     }
                                 });
                                 btnCancel.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        basic_reg.dismiss();
+                                        finalBasic_reg.dismiss();
                                     }
                                 });
                             }else {
-                                TestInfo testInfo = new TestInfo();
-                                testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
-                                testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
-                                testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
-                                testInfo.SendID = G.clientInfo.SendId;
-                                testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
-                                testInfo.ClientID = G.clientInfo.ClientId;
-                                testInfo.BlockID = Integer.parseInt(myCheckList.getSelectedItemsValues().get(0).toString());
-                                Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
 
-                                if (testInfoId != null) {
-                                    Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
-                                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                    fancyToast.show();
+                                if(location==null) {
+                                    if (locationViewModel.isGpsEnable() == false) {
+                                        location = null;
+                                        locationViewModel.trunOnGps(getActivity());
+                                        return;
+                                    } else {
+                                        connectToModuleDialog();
+                                        locationViewModel.getLocation(getActivity());
+                                        return;
+                                    }
+                                }
+                                if(location!=null) {
+                                    testInfo = new TestInfo();
+                                    testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                                    testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                                    testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                                    testInfo.SendID = G.clientInfo.SendId;
+                                    testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                                    testInfo.ClientID = G.clientInfo.ClientId;
+                                    testInfo.Lat = String.valueOf(location.getLatitude());
+                                    testInfo.Long = String.valueOf(location.getLongitude());
+                                    testInfo.BlockID = Integer.parseInt(myCheckList.getSelectedItemsValues().get(0).toString());
+                                    Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+
+                                    if (testInfoId != null) {
+                                        Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                        fancyToast.show();
+
+                                    }
                                 }
                             }
                         }
@@ -300,6 +362,22 @@ public class MoshtarakOperationsTabFragment extends Fragment
             @Override
             public void onClick(View view) {
                 G.startFragment(FragmentsEnum.MoshahedatFragment,false,null);
+            }
+        });
+        locationViewModel.locationMutableLiveData.observe((LifecycleOwner) getContext(), new Observer<Location>() {
+            @Override
+            public void onChanged(@Nullable Location locationObserve) {
+                if(locationObserve!=null){
+                    location =locationObserve;
+
+                    HideProgressDialog();
+
+                        if(waitForLocation){
+
+                            waitForLocation=false;
+                        }
+
+                }
             }
         });
 

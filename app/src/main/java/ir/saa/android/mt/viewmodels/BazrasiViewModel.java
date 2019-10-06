@@ -65,7 +65,7 @@ public class BazrasiViewModel extends AndroidViewModel {
 //       inspectionInfoRepo.deleteAll();
 //       inspectionDtlRepo.deleteAll();;
        }
-        public LiveData<List<Remark>> getManehTestAndBazrasi(String KeyValue){
+        public List<Remark> getManehTestAndBazrasi(String KeyValue){
             return remarkRepo.getManehTestAndBazrasi(KeyValue);
         }
        public LiveData<List<RemarkItem>> getRemarks(Integer Id){

@@ -506,6 +506,12 @@ public class AmaliyatViewModel extends AndroidViewModel {
         return listMutableLiveData;
     }
 
+    public List<TestInfo> getTestInfoWithBlockId(Long clientId,Integer SendId){
+        return testInfoRepo.getTestInfoWithBlockId(clientId,SendId);
+    }
+    public void deleteTestInfoById(int TestInfoId){
+        testInfoRepo.deleteTestInfoById(TestInfoId);
+    }
     @Override
     protected void onCleared() {
         super.onCleared();

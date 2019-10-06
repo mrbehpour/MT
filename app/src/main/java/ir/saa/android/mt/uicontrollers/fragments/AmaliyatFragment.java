@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -320,79 +321,190 @@ public class AmaliyatFragment extends Fragment {
 
 
     private void saveTestResult(TestResult testResult) {
-        CountSaveTest++;
-        if (location != null) {
+        List<TestInfo> testInfos=amaliyatViewModel.getTestInfoWithBlockId(G.clientInfo.ClientId,G.clientInfo.SendId);
+        if(testInfos.size()!=0){
+            AlertDialog basic_reg;
+            TextView txtDialogTitle;
+            TextView tvMessage;
+            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+            View v = getLayoutInflater().inflate(R.layout.custom_alretdialog, null);
+            builder.setView(v);
+            builder.setCancelable(false);
+            builder.create();
+            basic_reg=builder.show();
+            txtDialogTitle=(TextView)v.findViewById(R.id.txtDialogTitle);
+            tvMessage=(TextView)v.findViewById(R.id.tvMessage);
+            txtDialogTitle.setText(getText(R.string.msg));
+            tvMessage.setText(getText(R.string.msg_Save));
+            Button btnCancel=(Button)v.findViewById(R.id.btnCancel);
+            Button btnRegister=(Button)v.findViewById(R.id.btnRegister);
 
-            GPSInfo gpsInfo = new GPSInfo();
-            gpsInfo.ClientID = G.clientInfo.ClientId;
-            gpsInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
-            gpsInfo.SendID = G.clientInfo.SendId;
-            gpsInfo.GPSDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
-            gpsInfo.GPSTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
-            gpsInfo.Lat = String.valueOf(location.getLatitude());
-            gpsInfo.Long = String.valueOf(location.getLongitude());
-            amaliyatViewModel.insertGpsInfo(gpsInfo);
-            isLocation = true;
-        }else {
-            locationViewModel.trunOnGps(getContext());
-            isLocation=false;
-
-        }
-
-        if (isLocation) {
-            TestInfo testInfo = new TestInfo();
-            testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
-            testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
-            testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
-            testInfo.SendID = G.clientInfo.SendId;
-            testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
-            testInfo.ClientID = G.clientInfo.ClientId;
-            testInfo.ContorTypeID = testContorParams.SinglePhase == true ? 1 : 3;
-            testInfo.TestCount = testContorParams.FisrtTest == true ? 1 : 2;
-            testInfo.TestTypeID = testContorParams.Active == true ? 1 : 2;
-            Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
-            TestDtl testDtl = new TestDtl();
-            testDtl.TestInfoID = Integer.valueOf(testInfoId.toString());
-            TestContorFieldName testContorFieldName = new TestContorFieldName();
-            Field[] fieldsTestcontorParam = TestContorParams.class.getFields();
-            testDtl.ReadTypeID = 1;
-            testDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
-            testDtl.TestID = testContorFieldName.getTestId("testContorParams_RoundNum");
-            testDtl.TestValue = String.valueOf(testContorParams.RoundNum);
-            amaliyatViewModel.insertTestDtl(testDtl);
-            Field[] fieldstestDtl = TestResult.class.getFields();
-
-            TestDtl testDetail = new TestDtl();
-            for (Field field : fieldstestDtl) {
-                Integer testID = testContorFieldName.getTestId(field.getName());
-                if (testID != null) {
-                    testDetail.ReadTypeID = 1;
-                    testDetail.TestInfoID = Integer.valueOf(testInfoId.toString());
-
-                    testDetail.TestID = testID;
-
-                    Object value = null;
-
-                    try {
-                        value = field.get(testResult);
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    if (value != null) {
-                        testDetail.TestValue = value.toString();
-                    }
-                    amaliyatViewModel.insertTestDtl(testDetail);
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    basic_reg.dismiss();
+                    return;
                 }
+            });
+            btnRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for(TestInfo testInfo:testInfos){
+                        amaliyatViewModel.deleteTestInfoById(testInfo.TestInfoID);
+                    }
+                    CountSaveTest++;
+                    if (location != null) {
+
+                        GPSInfo gpsInfo = new GPSInfo();
+                        gpsInfo.ClientID = G.clientInfo.ClientId;
+                        gpsInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
+                        gpsInfo.SendID = G.clientInfo.SendId;
+                        gpsInfo.GPSDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                        gpsInfo.GPSTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                        gpsInfo.Lat = String.valueOf(location.getLatitude());
+                        gpsInfo.Long = String.valueOf(location.getLongitude());
+                        amaliyatViewModel.insertGpsInfo(gpsInfo);
+                        isLocation = true;
+                    } else {
+                        locationViewModel.trunOnGps(getContext());
+                        isLocation = false;
+
+                    }
+
+                    if (isLocation) {
+                        TestInfo testInfo = new TestInfo();
+                        testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                        testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                        testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                        testInfo.SendID = G.clientInfo.SendId;
+                        testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                        testInfo.ClientID = G.clientInfo.ClientId;
+                        testInfo.ContorTypeID = testContorParams.SinglePhase == true ? 1 : 3;
+                        testInfo.TestCount = testContorParams.FisrtTest == true ? 1 : 2;
+                        testInfo.TestTypeID = testContorParams.Active == true ? 1 : 2;
+                        Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+                        TestDtl testDtl = new TestDtl();
+                        testDtl.TestInfoID = Integer.valueOf(testInfoId.toString());
+                        TestContorFieldName testContorFieldName = new TestContorFieldName();
+                        Field[] fieldsTestcontorParam = TestContorParams.class.getFields();
+                        testDtl.ReadTypeID = 1;
+                        testDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
+                        testDtl.TestID = testContorFieldName.getTestId("testContorParams_RoundNum");
+                        testDtl.TestValue = String.valueOf(testContorParams.RoundNum);
+                        amaliyatViewModel.insertTestDtl(testDtl);
+                        Field[] fieldstestDtl = TestResult.class.getFields();
+
+                        TestDtl testDetail = new TestDtl();
+                        for (Field field : fieldstestDtl) {
+                            Integer testID = testContorFieldName.getTestId(field.getName());
+                            if (testID != null) {
+                                testDetail.ReadTypeID = 1;
+                                testDetail.TestInfoID = Integer.valueOf(testInfoId.toString());
+
+                                testDetail.TestID = testID;
+
+                                Object value = null;
+
+                                try {
+                                    value = field.get(testResult);
+                                } catch (IllegalAccessException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                if (value != null) {
+                                    testDetail.TestValue = value.toString();
+                                }
+                                amaliyatViewModel.insertTestDtl(testDetail);
+                            }
+                        }
+                        Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                        //Bastan Form Sabt
+                        G.fragmentNumStack.pop();
+                        G.startFragment(G.fragmentNumStack.pop(), true, null);
+                        isLocation = false;
+                    }
+                }
+            });
+        }else {
+
+
+            CountSaveTest++;
+            if (location != null) {
+
+                GPSInfo gpsInfo = new GPSInfo();
+                gpsInfo.ClientID = G.clientInfo.ClientId;
+                gpsInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
+                gpsInfo.SendID = G.clientInfo.SendId;
+                gpsInfo.GPSDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                gpsInfo.GPSTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                gpsInfo.Lat = String.valueOf(location.getLatitude());
+                gpsInfo.Long = String.valueOf(location.getLongitude());
+                amaliyatViewModel.insertGpsInfo(gpsInfo);
+                isLocation = true;
+            } else {
+                locationViewModel.trunOnGps(getContext());
+                isLocation = false;
+
             }
-            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            //Bastan Form Sabt
-            G.fragmentNumStack.pop();
-            G.startFragment(G.fragmentNumStack.pop(), true, null);
-            isLocation=false;
+
+            if (isLocation) {
+                TestInfo testInfo = new TestInfo();
+                testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                testInfo.SendID = G.clientInfo.SendId;
+                testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                testInfo.ClientID = G.clientInfo.ClientId;
+                testInfo.ContorTypeID = testContorParams.SinglePhase == true ? 1 : 3;
+                testInfo.TestCount = testContorParams.FisrtTest == true ? 1 : 2;
+                testInfo.TestTypeID = testContorParams.Active == true ? 1 : 2;
+                Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+                TestDtl testDtl = new TestDtl();
+                testDtl.TestInfoID = Integer.valueOf(testInfoId.toString());
+                TestContorFieldName testContorFieldName = new TestContorFieldName();
+                Field[] fieldsTestcontorParam = TestContorParams.class.getFields();
+                testDtl.ReadTypeID = 1;
+                testDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
+                testDtl.TestID = testContorFieldName.getTestId("testContorParams_RoundNum");
+                testDtl.TestValue = String.valueOf(testContorParams.RoundNum);
+                amaliyatViewModel.insertTestDtl(testDtl);
+                Field[] fieldstestDtl = TestResult.class.getFields();
+
+                TestDtl testDetail = new TestDtl();
+                for (Field field : fieldstestDtl) {
+                    Integer testID = testContorFieldName.getTestId(field.getName());
+                    if (testID != null) {
+                        testDetail.ReadTypeID = 1;
+                        testDetail.TestInfoID = Integer.valueOf(testInfoId.toString());
+
+                        testDetail.TestID = testID;
+
+                        Object value = null;
+
+                        try {
+                            value = field.get(testResult);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+
+
+                        if (value != null) {
+                            testDetail.TestValue = value.toString();
+                        }
+                        amaliyatViewModel.insertTestDtl(testDetail);
+                    }
+                }
+                Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
+                //Bastan Form Sabt
+                G.fragmentNumStack.pop();
+                G.startFragment(G.fragmentNumStack.pop(), true, null);
+                isLocation = false;
+            }
         }
 
 

@@ -61,13 +61,15 @@
     <!--*******************-->
     <!--،Toast Masseage -->
     <string name="SaveOperationSuccess_msg">اطلاعات با موفقیت ثبت شد</string>
+    <string name="Confilit_msg">در دسته جواب ریمارک های فوق مغایرت وجود دارد</string>
     <string name="ExistJoint_msg">مشترک در بانک وجود دارد</string>
     <string name="WaitForRecieveData_msg">لطفا منتظر باشید برنامه در حال دریافت اطلاعات می باشد</string>
     <string name="JointsSaveNum_msg">اطلاعات %1$s مشترک از %2$s مشترک در سایت ثبت نشده است</string>
     <string name="GroupName_msg">گروه بازرسی شما %s می باشد.آیا ادامه می دهید؟</string>
     <string name="ServerError_msg">پیام خطای سرور</string>
     <string name="msg">پیام</string>
-    <string name="msg_Save">با انتخاب گزینه تایید،تمام عملیات شما پاک می شود.n\ آیا مطمئن هستید؟  </string>
+    <string name="msg_Save_Maneh">با انتخاب گزینه تایید،تمام عملیات ذخیره شده پاک می شود. آیا مطمئن هستید؟  </string>
+    <string name="msg_Save">با انتخاب گزینه تایید،مانع تست وبازرسی پاک می شود. آیا مطمئن هستید؟  </string>
     <string name="PleaseEneter_msg">لطفا برای %s مقدار معتبر وارد کنید</string>
     <string name="ConntecInternet_msg">لطفا دستگاه را به اینترنت متصل کنید</string>
     <string name="AccessServerError_msg">دسترسی به آدرس امکان پذیر نیست</string>
