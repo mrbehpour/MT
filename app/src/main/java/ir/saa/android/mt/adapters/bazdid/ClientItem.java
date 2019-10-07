@@ -12,13 +12,14 @@ public class ClientItem {
     public Boolean isBazrasi;
     public Boolean isPolommp;
     public Boolean isTariff;
+    public Boolean isBlock;
     public Integer GroupId;
     public Integer RowId;
     public Long FollowUpCode;
     public boolean forcibleMasterGroup;
 
     public ClientItem(Long id,String name,String address,String uniqueFieldTitle,String uniqueFieldValue,Integer pic,Integer SendId,
-                      Integer groupID,Boolean isTest,Boolean isPolomp,Boolean isBazrasi,boolean IsTariff,Long followUpCode,Integer rowId,
+                      Integer groupID,Boolean isTest,Boolean isPolomp,Boolean isBazrasi,boolean IsTariff,Boolean isBlock,Long followUpCode,Integer rowId,
                       boolean forcibleMasterGroup){
         this.Id = id;
         this.Name = name;
@@ -31,6 +32,7 @@ public class ClientItem {
         this.isBazrasi=isBazrasi;
         this.isTest=isTest;
         this.isTariff=IsTariff;
+        this.isBlock=isBlock;
         this.isPolommp=isPolomp;
         this.FollowUpCode=followUpCode;
         this.RowId=rowId;

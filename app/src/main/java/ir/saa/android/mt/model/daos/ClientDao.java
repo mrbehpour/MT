@@ -76,7 +76,8 @@ public interface ClientDao {
             "Client.FollowUpCode,"+
             "Client.forcibleMasterGroup ,"+
             "(select PolompInfoID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1 ) as isPolomp,  "+
-            "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID and TestInfo.BlockID=0 limit 1) as isTest, "+
+            "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID and TestInfo.BlockID is null limit 1) as isTest, "+
+            "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID and TestInfo.BlockID is not null limit 1) as isBlock, "+
             "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi, "+
             "(select SendID from TariffInfo where TariffInfo.ClientID=Client.ClientID limit 1) as isTariff "+
             "from Client "
@@ -137,6 +138,7 @@ public interface ClientDao {
             "Client.forcibleMasterGroup ,"+
             "(select PolompInfoID from PolompInfo where PolompInfo.ClientID=Client.ClientID limit 1 ) as isPolomp,  "+
             "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID and TestInfo.BlockID=0 limit 1) as isTest, "+
+            "(select SendID from TestInfo where TestInfo.ClientID=Client.ClientID and TestInfo.BlockID is not null limit 1) as isBlock, "+
             "(select SendID from InspectionInfo where InspectionInfo.ClientID=Client.ClientID limit 1) as isBazrasi, "+
             "(select SendID from TariffInfo where TariffInfo.ClientID=Client.ClientID limit 1) as isTariff "+
             "from Client " +
