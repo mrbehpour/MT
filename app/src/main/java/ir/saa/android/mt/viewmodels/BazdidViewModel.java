@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazdid.ClientItem;
@@ -138,8 +139,10 @@ public class BazdidViewModel extends AndroidViewModel {
     public Boolean getTestValue(Long clientId) {
         List<TestAllInfo> testAllInfos=new ArrayList<>();
         testAllInfos=testDtlRepo.getTestAllInfoWithClientId(clientId);
-        if(testAllInfos.size()!=0){
+        if(testAllInfos.size()!=0 ){
+
             isTest=true;
+
         }else{
             isTest=false;
         }

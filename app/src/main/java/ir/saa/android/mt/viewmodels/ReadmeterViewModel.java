@@ -703,6 +703,11 @@ public class ReadmeterViewModel extends AndroidViewModel {
         }
     }
 
+    public void deleteAllTarif(Integer TarifInfoId,Integer TarifDtlId){
+        tariffInfoRepo.deleteTariffInfoById(TarifInfoId);
+        tariffDtlRepo.deleteTariffDtlById(TarifDtlId);
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();

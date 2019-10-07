@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,8 +34,10 @@ import ir.saa.android.mt.components.MyCheckListMode;
 import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
+import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.services.GPSTracker;
 import ir.saa.android.mt.services.ILocationCallBack;
+import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
 
@@ -46,6 +50,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
     private FragmentActivity activity;
     BazrasiViewModel bazrasiViewModel = null;
     LocationViewModel locationViewModel=null;
+    AmaliyatViewModel amaliyatViewModel=null;
     ArrayList<Object> objects = new ArrayList<>();
     MyCheckList myCheckList;
     Location location;
@@ -62,6 +67,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
         remarkItemListOrginal.addAll(data);
         this.bazrasiViewModel = ViewModelProviders.of((AppCompatActivity) context).get(BazrasiViewModel.class);
         this.locationViewModel=ViewModelProviders.of((AppCompatActivity) context).get(LocationViewModel.class);
+        this.amaliyatViewModel=ViewModelProviders.of((AppCompatActivity)context).get(AmaliyatViewModel.class);
         isLocation=false;
 
     }
@@ -178,32 +184,105 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                 dialog.addButton(G.context.getResources().getString(R.string.Save), new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        objects = myCheckList.getSelectedItemsValues();
-                                        if (myCheckList.getSelectedCheckListItems().size() != 0) {
-                                            current.AnswerCaption = myCheckList.getSelectedCheckListItems().get(0).Text;
-                                        } else {
-                                            current.AnswerCaption = "";
-                                            holder.tvResult.setText(current.AnswerCaption);
+                                        if(myCheckList.getSelectedItemsValues().size()==0){
+                                            return;
                                         }
+                                        List<TestInfo> testInfos = amaliyatViewModel.getTestInfoWithBlockId(G.clientInfo.ClientId, G.clientInfo.SendId);
+                                        if (testInfos.size() != 0) {
+                                            AlertDialog basic_reg;
+                                            TextView txtDialogTitle;
+                                            TextView tvMessage;
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                            LayoutInflater li = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                            View v = li.inflate(R.layout.custom_alretdialog, null);
+                                            builder.setView(v);
+                                            builder.setCancelable(false);
+                                            builder.create();
+                                            basic_reg = builder.show();
+                                            txtDialogTitle = (TextView) v.findViewById(R.id.txtDialogTitle);
+                                            tvMessage = (TextView) v.findViewById(R.id.tvMessage);
+                                            txtDialogTitle.setText(context.getText(R.string.msg));
+                                            tvMessage.setText(context.getText(R.string.msg_Save));
+                                            Button btnCancel = (Button) v.findViewById(R.id.btnCancel);
+                                            Button btnRegister = (Button) v.findViewById(R.id.btnRegister);
+                                            btnCancel.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    basic_reg.dismiss();
+                                                    return;
+                                                }
+
+                                            });
+                                            btnRegister.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    for(TestInfo testInfo:testInfos){
+                                                        amaliyatViewModel.deleteTestInfoById(testInfo.TestInfoID);
+                                                    }
+                                                    objects = myCheckList.getSelectedItemsValues();
+                                                    if (myCheckList.getSelectedCheckListItems().size() != 0) {
+                                                        current.AnswerCaption = myCheckList.getSelectedCheckListItems().get(0).Text;
+                                                    } else {
+                                                        current.AnswerCaption = "";
+                                                        holder.tvResult.setText(current.AnswerCaption);
+                                                    }
+                                                    if (objects.size() == 0) {
+                                                        bazrasiViewModel.saveBazrasi(current, null, location);
+                                                        holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
+
+                                                    } else {
+
+                                                        boolean state = bazrasiViewModel.saveBazrasi(current, objects.get(0), location);
+                                                        if (state) {
+
+                                                            holder.tvResult.setText(current.AnswerCaption);
+                                                            AnswerGroupDtl answerGroupDtl = bazrasiViewModel.getAnswerGroupDtl(Integer.valueOf(objects.get(0).toString())
+                                                                    , 11);
+                                                            if (answerGroupDtl != null) {
+                                                                current.remarkValue = objects.get(0).toString();
+                                                                holder.listitemRemarkRoot.setCardBackgroundColor(answerGroupDtl.AnswerGroupDtlColor);
+                                                            }
+
+                                                            //Toast.makeText((AppCompatActivity)context,G.context.getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
+                                                            Toast fancyToast = FancyToast.makeText((AppCompatActivity) context, (String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                            fancyToast.show();
+
+                                                        }
+
+                                                    }
+                                                    dialog.dismiss();
+                                                    basic_reg.dismiss();
+
+                                                }
+                                            });
+                                        } else {
+                                            objects = myCheckList.getSelectedItemsValues();
+                                            if (myCheckList.getSelectedCheckListItems().size() != 0) {
+                                                current.AnswerCaption = myCheckList.getSelectedCheckListItems().get(0).Text;
+                                            } else {
+                                                current.AnswerCaption = "";
+                                                holder.tvResult.setText(current.AnswerCaption);
+                                            }
                                             if (objects.size() == 0) {
-                                                bazrasiViewModel.saveBazrasi(current, null,location);
+                                                bazrasiViewModel.saveBazrasi(current, null, location);
                                                 holder.listitemRemarkRoot.setCardBackgroundColor(Color.parseColor("#FDFDFD"));
 
                                             } else {
 
-                                                boolean state=bazrasiViewModel.saveBazrasi(current, objects.get(0),location);
-                                                if(state) {
+                                                boolean state = bazrasiViewModel.saveBazrasi(current, objects.get(0), location);
+                                                if (state) {
 
                                                     holder.tvResult.setText(current.AnswerCaption);
-                                                    AnswerGroupDtl answerGroupDtl=bazrasiViewModel.getAnswerGroupDtl(Integer.valueOf(objects.get(0).toString())
-                                                    ,11);
-                                                    if(answerGroupDtl!=null){
-                                                        current.remarkValue=objects.get(0).toString();
+                                                    AnswerGroupDtl answerGroupDtl = bazrasiViewModel.getAnswerGroupDtl(Integer.valueOf(objects.get(0).toString())
+                                                            , 11);
+                                                    if (answerGroupDtl != null) {
+                                                        current.remarkValue = objects.get(0).toString();
                                                         holder.listitemRemarkRoot.setCardBackgroundColor(answerGroupDtl.AnswerGroupDtlColor);
                                                     }
 
                                                     //Toast.makeText((AppCompatActivity)context,G.context.getResources().getText(R.string.MessageSuccess),Toast.LENGTH_SHORT).show();
-                                                    Toast fancyToast= FancyToast.makeText((AppCompatActivity)context, (String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg),FancyToast.LENGTH_SHORT,FancyToast.SUCCESS,false);
+                                                    Toast fancyToast = FancyToast.makeText((AppCompatActivity) context, (String) G.context.getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                                                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                                     fancyToast.show();
 
@@ -213,7 +292,7 @@ public class BazrasiAdapter extends RecyclerView.Adapter<BazrasiAdapter.MyViewHo
                                             dialog.dismiss();
 
 
-
+                                        }
                                     }
                                 });
 

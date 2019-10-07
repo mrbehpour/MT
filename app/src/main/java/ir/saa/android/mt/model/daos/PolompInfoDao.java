@@ -37,6 +37,9 @@ public interface PolompInfoDao {
     @Insert(onConflict = IGNORE)
     Long insertPolompInfo(PolompInfo polompInfo);
 
+    @Query("Delete from PolompInfo Where PolompInfo.ClientID=:ClientId")
+    void deleteByClientId(Long ClientId);
+
     @Update
     void updatePolompInfo(PolompInfo polompInfo);
 

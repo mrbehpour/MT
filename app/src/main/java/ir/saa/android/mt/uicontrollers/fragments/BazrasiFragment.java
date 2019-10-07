@@ -10,6 +10,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,9 +19,11 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -39,8 +42,10 @@ import ir.saa.android.mt.components.MyDialog;
 import ir.saa.android.mt.model.entities.AnswerGroupDtl;
 import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
+import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.services.GPSTracker;
 import ir.saa.android.mt.services.ILocationCallBack;
+import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
 
@@ -51,10 +56,12 @@ public class BazrasiFragment extends Fragment  {
     BazrasiAdapter adapter;
     CheckBox cbSelectAll;
     LocationViewModel locationViewModel=null;
+    AmaliyatViewModel amaliyatViewModel=null;
     ArrayList<Object> objects = new ArrayList<>();
     MyCheckList myCheckList;
     Location location;
     Context context;
+    boolean isLocationsearch=false;
     ProgressDialog progressDialog;
     GPSTracker gpsTracker;
     RecyclerView recyclerView;
@@ -95,6 +102,7 @@ public class BazrasiFragment extends Fragment  {
         this.context=this.getContext();
         bazrasiViewModel = ViewModelProviders.of(this).get(BazrasiViewModel.class);
         locationViewModel = ViewModelProviders.of(this).get(LocationViewModel.class);
+        amaliyatViewModel=ViewModelProviders.of(this).get(AmaliyatViewModel.class);
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rvSoal);
         cbSelectAll=rootView.findViewById(R.id.cbSelectAll);
         cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -102,16 +110,19 @@ public class BazrasiFragment extends Fragment  {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
 
-                    location=locationViewModel.getLocation(getContext());
+                    //location=locationViewModel.getLocation(getContext());
                     if(locationViewModel.isGpsEnable()){
-                        if(location==null){
-                            connectToModuleDialog();
+                        if(location==null) {
+                            if (isLocationsearch==false) {
+                                isLocationsearch = true;
+                                connectToModuleDialog();
+                                locationViewModel.getLocation(getActivity());
+                            }
                         }
-                    }else{
-                        location=null;
                     }
 
-                    if (location != null) {
+                    if (location != null && isLocationsearch==false) {
+                        isLocationsearch=false;
                         if(bazrasiViewModel.isEqualAnswerGroupDtl(G.clientInfo.GroupId)) {
                             final MyDialog dialog = new MyDialog(getContext());
                             //InspectionWithAnswerGroup inspectionAllInfo = bazrasiViewModel.getInspectionAllInfo(G.clientInfo.ClientId, 1, 1);
@@ -147,25 +158,44 @@ public class BazrasiFragment extends Fragment  {
                                     dialog.addButton(G.context.getResources().getString(R.string.Save), new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            objects = myCheckList.getSelectedItemsValues();
-                                            Object objectAnswer;
-                                            if(objects.size()==0){
-                                                objectAnswer=null;
-                                            }else {
-                                                objectAnswer=objects.get(0);
-                                            }
-                                            List<RemarkItem> remarkItems=bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue();
+                                            List<TestInfo> testInfos = amaliyatViewModel.getTestInfoWithBlockId(G.clientInfo.ClientId, G.clientInfo.SendId);
+                                            if (testInfos.size() != 0) {
+                                                AlertDialog basic_reg;
+                                                TextView txtDialogTitle;
+                                                TextView tvMessage;
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                                View v = getLayoutInflater().inflate(R.layout.custom_alretdialog, null);
+                                                builder.setView(v);
+                                                builder.setCancelable(false);
+                                                builder.create();
+                                                basic_reg = builder.show();
+                                                txtDialogTitle = (TextView) v.findViewById(R.id.txtDialogTitle);
+                                                tvMessage = (TextView) v.findViewById(R.id.tvMessage);
+                                                txtDialogTitle.setText(context.getText(R.string.msg));
+                                                tvMessage.setText(context.getText(R.string.msg_Save));
+                                                Button btnCancel = (Button) v.findViewById(R.id.btnCancel);
+                                                Button btnRegister = (Button) v.findViewById(R.id.btnRegister);
+                                            } else {
+                                                objects = myCheckList.getSelectedItemsValues();
+                                                Object objectAnswer;
+                                                if (objects.size() == 0) {
+                                                    objectAnswer = null;
+                                                } else {
+                                                    objectAnswer = objects.get(0);
+                                                }
+                                                List<RemarkItem> remarkItems = bazrasiViewModel.getRemarks(G.clientInfo.GroupId).getValue();
 
-                                            for(RemarkItem renarkItem:remarkItems){
-                                                bazrasiViewModel.saveBazrasi(renarkItem,objectAnswer,location);
+                                                for (RemarkItem renarkItem : remarkItems) {
+                                                    bazrasiViewModel.saveBazrasi(renarkItem, objectAnswer, location);
+                                                }
+                                                if (objectAnswer != null) {
+                                                    //Toast.makeText(getContext(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                                                    Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                    fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                    fancyToast.show();
+                                                }
+                                                dialog.dismiss();
                                             }
-                                            if(objectAnswer!=null) {
-                                                //Toast.makeText(getContext(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
-                                                Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
-                                                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                                                fancyToast.show();
-                                            }
-                                            dialog.dismiss();
                                         }
                                     });
 
@@ -185,7 +215,10 @@ public class BazrasiFragment extends Fragment  {
                             });
                             //}
                         }else{
-
+                            Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.Confilit_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+                            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            fancyToast.show();
+                            return;
                         }
                     }else{
                         cbSelectAll.setChecked(false);
@@ -294,9 +327,14 @@ public class BazrasiFragment extends Fragment  {
         gpsTracker.isHasLocation.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if(aBoolean){
-                    location=gpsTracker.getLocation();
-                    HideProgressDialog();
+                if(aBoolean && isLocationsearch){
+                    location=new Location("");
+                    location.setLatitude(gpsTracker.getLatitude());
+                    location.setLongitude(gpsTracker.getLongitude());
+                    if(location!=null) {
+                        isLocationsearch=false;
+                        HideProgressDialog();
+                    }
                 }
             }
         });

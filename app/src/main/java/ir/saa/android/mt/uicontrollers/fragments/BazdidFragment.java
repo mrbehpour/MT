@@ -63,6 +63,7 @@ public class BazdidFragment extends Fragment
     Boolean isPolomp=false;
     Boolean isBazrasi=false;
     Boolean isTariff=false;
+    Boolean isBlock=false;
     FloatingActionButton floatingBtnAdd;
     MutableLiveData<List<Client>> clientsLiveData;
     MyDialog myDialog;
@@ -167,98 +168,126 @@ public class BazdidFragment extends Fragment
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientForcedField1=setting.SettingValue;
+                        if(setting!=null){
+                            AddedClientForcedField1 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientForcedField2").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientForcedField2=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientForcedField2 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientForcedField3").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientForcedField3=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientForcedField3 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientForcedLength1").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientForcedLength1=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientForcedLength1 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientForcedLength2").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientForcedLength2=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientForcedLength2 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientForcedLength3").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientForcedLength3=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientForcedLength3 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientUniqueField1").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientUniqueField1=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientUniqueField1 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientUniqueField2").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientUniqueField2=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientUniqueField2 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientUniqueField3").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientUniqueField3=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientUniqueField3 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientUniqueLength1").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientUniqueLength1=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientUniqueLength1 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientUniqueLength2").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientUniqueLength2=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientUniqueLength2 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("AddedClientUniqueLength3").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        AddedClientUniqueLength3=setting.SettingValue;
+                        if(setting!=null) {
+                            AddedClientUniqueLength3 = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("UniqeFieldOrder").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        UniqeFieldOrder=setting.SettingValue;
+                        if(setting!=null) {
+                            UniqeFieldOrder = setting.SettingValue;
+                        }
                     }
                 });
         bazdidViewModel.getSettingByKey("UniqueField").
                 observe((LifecycleOwner) getContext(), new Observer<Setting>() {
                     @Override
                     public void onChanged(@Nullable Setting setting) {
-                        UniqueField=setting.SettingValue;
+                        if(setting!=null) {
+                            UniqueField = setting.SettingValue;
+                        }
                     }
                 });
 
@@ -770,8 +799,11 @@ public class BazdidFragment extends Fragment
     public void setUpRecyclerView(View view,Integer Postion) {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvBazdidMoshtarakin);
         recyclerView.setScrollbarFadingEnabled(false);
-        recyclerView.setScrollBarSize(50);
-
+        recyclerView.setScrollBarSize(10);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(20);
+        recyclerView.setDrawingCacheEnabled(true);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
 
         adapter = new BazdidAdapter(getActivity(), clientItems);
         bazdidViewModel.getClientsWithRegionIdLiveData(Integer.valueOf(G.getPref("RegionID"))).observeForever(new Observer<List<ClientWithAction>>() {
@@ -792,9 +824,10 @@ public class BazdidFragment extends Fragment
                                        isPolomp=client.isPolomp!=0?true:false;
                                        isTest=client.isTest!=0?true:false;
                                        isTariff=client.isTariff!=0?true:false;
+                                       isBlock=client.isBlock!=0?true:false;
                                        RowId+=1;
                                        clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,UniqField ,String.valueOf(client.SubScript),
-                                               R.drawable.account,client.SendId,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,isTariff,
+                                               R.drawable.account,client.SendId,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,isTariff,isBlock,
                                                client.FollowUpCode,RowId,client.forcibleMasterGroup ));
                                    }
 

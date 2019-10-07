@@ -26,11 +26,16 @@ public interface PolompDtlDao {
     @Query("Select * from PolompDtl where PolompInfoID=:Id")
     LiveData<List<PolompDtl>> getPolompDtlByPolompInfoId(Integer Id);
 
+
+
     @Query("Delete From PolompDtl")
     void deleteAll();
 
     @Query("Delete From PolompDtl Where PolompDtlID=:Id")
     void deletePolompDtlById(Integer Id);
+
+    @Query("Delete From PolompDtl Where PolompDtl.PolompInfoID=:polompInfoId")
+    void deleteByClientInfoId(Integer polompInfoId);
 
     @Delete
     void deletePolompDtl(PolompDtl polompDtl);

@@ -27,6 +27,7 @@ import java.util.List;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.FontAwesome;
 import ir.saa.android.mt.components.TextViewFont;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
@@ -145,6 +146,15 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
                 holder.iconMoshahedat.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
             }
         }
+        if (current.isBlock) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.iconManehVaBazdid.setTextColor(context.getResources().getColor(R.color.icon_on_Maneh));
+            }
+        }else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.iconManehVaBazdid.setTextColor(context.getResources().getColor(R.color.icon_off));
+            }
+        }
         if(CountAmliyat==2){
             Bazdid bazdidAsli=new Bazdid();
             bazdidAsli.ClientId=current.Id;
@@ -216,6 +226,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
         ImageView IconGherat;
         ImageView imgBazdidMoshtarak;
         ImageView iconMoshahedat;
+        FontAwesome iconManehVaBazdid;
         Context contextHolder;
 
         public MyViewHolder(View itemView) {
@@ -231,6 +242,7 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
             IconPolomp = itemView.findViewById(R.id.iconPolomp);
             IconGherat=itemView.findViewById(R.id.iconGherat);
             iconMoshahedat=itemView.findViewById(R.id.iconMoshahedat);
+            iconManehVaBazdid=itemView.findViewById(R.id.iconManehVaBazdid);
             tvRowId=itemView.findViewById(R.id.tvRow);
             contextHolder = itemView.getContext().getApplicationContext();
 

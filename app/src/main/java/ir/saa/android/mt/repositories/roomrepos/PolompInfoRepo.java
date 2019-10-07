@@ -45,6 +45,10 @@ public class PolompInfoRepo  {
         polompInfoDao.deletePolompInfo(polompInfo);
     }
 
+    public void deleteByClientId(Long ClientId){
+        polompInfoDao.deleteByClientId(ClientId);
+    }
+
 
     public List<Long> insertPolompInfos(List<PolompInfo> polompInfos) {
         return polompInfoDao.insertPolompInfos(polompInfos);

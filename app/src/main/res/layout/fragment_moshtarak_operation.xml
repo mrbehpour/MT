@@ -8,6 +8,31 @@
 
     <!-- Test Button-->
     <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/btnManehTest"
+        android:fontFamily="@fonts/byekan"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        fancy:fb_borderColor="@color/red_600"
+        fancy:fb_borderWidth="2dp"
+        fancy:fb_defaultColor="@color/red_600"
+        fancy:fb_focusColor="@color/red_200"
+        fancy:fb_fontIconResource="&#xf05e;"
+        fancy:fb_fontIconSize="30dp"
+        fancy:fb_iconPosition="left"
+        fancy:fb_radius="20dp"
+        fancy:fb_text="@string/ManehTestContor"
+        fancy:fb_textColor="#FFFFFF"/>
+
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="100dp">
+
+    </LinearLayout>
+    <!-- Test Button-->
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/btnTest"
         android:fontFamily="@fonts/byekan"
         android:layout_width="250dp"
@@ -55,12 +80,12 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_gravity="center"
-        android:textColor="#ffffff"
+        android:textColor="#0A0A0A"
         android:textSize="16sp"
-        fancy:fb_borderColor="@color/red_800"
+        fancy:fb_borderColor="@color/ms_gray"
         fancy:fb_borderWidth="2dp"
-        fancy:fb_defaultColor="@color/red_400"
-        fancy:fb_focusColor="@color/red_200"
+        fancy:fb_defaultColor="@color/ms_gray3"
+        fancy:fb_focusColor="@color/ms_gray2"
         fancy:fb_fontIconResource="&#xf023;"
         fancy:fb_fontIconSize="30dp"
         fancy:fb_iconPosition="left"

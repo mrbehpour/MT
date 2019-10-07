@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -42,7 +44,9 @@ import ir.saa.android.mt.model.entities.PolompDtl;
 import ir.saa.android.mt.model.entities.PolompInfo;
 import ir.saa.android.mt.model.entities.PolompType;
 import ir.saa.android.mt.model.entities.Setting;
+import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.uicontrollers.pojos.Polomp.PolompParams;
+import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
 import ir.saa.android.mt.viewmodels.LocationViewModel;
 import ir.saa.android.mt.viewmodels.PolompViewModel;
 
@@ -50,6 +54,7 @@ public class PolompFragmentSave extends Fragment {
 
     PolompViewModel polompViewModel=null;
     PolompParams polompParams;
+    AmaliyatViewModel amaliyatViewModel;
     LocationViewModel locationViewModel=null;
     Location location;
 
@@ -148,6 +153,7 @@ public class PolompFragmentSave extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_polomp_save, container, false);
         locationViewModel=ViewModelProviders.of(this).get(LocationViewModel.class);
         polompViewModel= ViewModelProviders.of(this).get(PolompViewModel.class);
+        amaliyatViewModel=ViewModelProviders.of(this).get(AmaliyatViewModel.class);
         //-----------------------addHashmap
 
             hashMapForceField.put("CurrentPolomp",R.id.spnModelPolompJadid);
@@ -518,107 +524,239 @@ public class PolompFragmentSave extends Fragment {
 
     private void PolompSave() {
 
+        List<TestInfo> testInfos=amaliyatViewModel.getTestInfoWithBlockId(G.clientInfo.ClientId,G.clientInfo.SendId);
+        if(testInfos.size()!=0){
+            AlertDialog basic_reg;
+            TextView txtDialogTitle;
+            TextView tvMessage;
+            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+            View v = getLayoutInflater().inflate(R.layout.custom_alretdialog, null);
+            builder.setView(v);
+            builder.setCancelable(false);
+            builder.create();
+            basic_reg=builder.show();
+            txtDialogTitle=(TextView)v.findViewById(R.id.txtDialogTitle);
+            tvMessage=(TextView)v.findViewById(R.id.tvMessage);
+            txtDialogTitle.setText(getText(R.string.msg));
+            tvMessage.setText(getText(R.string.msg_Save));
+            Button btnCancel=(Button)v.findViewById(R.id.btnCancel);
+            Button btnRegister=(Button)v.findViewById(R.id.btnRegister);
 
-
-        locationViewModel.getLocation(this.getContext());
-        PolompAllInfo polompAllInfo = polompViewModel.getPolompData(polompParams);
+            btnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    basic_reg.dismiss();
+                    return;
+                }
+            });
+            btnRegister.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for(TestInfo testInfo:testInfos){
+                        amaliyatViewModel.deleteTestInfoById(testInfo.TestInfoID);
+                    }
+                    locationViewModel.getLocation(getContext());
+                    PolompAllInfo polompAllInfo = polompViewModel.getPolompData(polompParams);
 //        spnRangPolompJadid.getSelectedItemPosition() == 0 && etPolompJadid.getText().toString().equals("") &&
 //                spnRangPolompJadid.getSelectedItemPosition() == 0 &&&& !chkNewNakhana && !chkNadaradJadid
-        if ( spnRangPolompGhadim.getSelectedItemPosition() == 0 &&
-                etPolompGhadim.getText().toString().equals("") && spnModelPolompGhadim.getSelectedItemPosition() == 0 &&
-                !chkOldNakhana  && !chkNadradGhadim) {
-            if (polompAllInfo != null) {
-                polompViewModel.deleteAllPolomp(polompAllInfo.PolompInfoID, polompAllInfo.PolompDtlID);
+                    if (spnRangPolompGhadim.getSelectedItemPosition() == 0 &&
+                            etPolompGhadim.getText().toString().equals("") && spnModelPolompGhadim.getSelectedItemPosition() == 0 &&
+                            !chkOldNakhana && !chkNadradGhadim) {
+                        if (polompAllInfo != null) {
+                            polompViewModel.deleteAllPolomp(polompAllInfo.PolompInfoID, polompAllInfo.PolompDtlID);
+                        }
+                        Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.FillOldAndNewPlombInfo_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                        //G.startFragment(G.fragmentNumStack.pop(), true, null);
+                        return;
+                    }
+                    if (location != null) {
+                        if (polompAllInfo == null) {
+
+
+                            polompInfo = new PolompInfo();
+                            polompInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                            polompInfo.ChangeDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                            polompInfo.ChangeTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                            polompInfo.ClientID = polompParams.ClientId;
+                            polompInfo.SendID = G.clientInfo.SendId;
+                            polompInfo.Lat = String.valueOf(location.getLatitude());
+                            polompInfo.Long = String.valueOf(location.getLongitude());
+                            polompInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
+
+                            polompDtl = new PolompDtl();
+
+                            polompDtl.StatePolomp = 0;
+                            if (chkNadradGhadim == true) {
+                                polompDtl.StatePolomp = 1;
+                            }
+                            if (chkOldNakhana == true) {
+                                polompDtl.StatePolomp = 2;
+                            }
+                            polompDtl.ReadTypeID = 1;
+                            polompDtl.CurrentColorID = spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+                            polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
+                            polompDtl.PolompID = polompParams.PolompId;
+                            polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+                            polompDtl.PreviousColorID = chkNadradGhadim.booleanValue() == true ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+                            polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
+                            polompDtl.PreviousPolompTypeID = chkNadradGhadim.booleanValue() == true ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+                            polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
+                            Long polompInfoId = polompViewModel.insertPolompInfo(polompInfo);
+                            polompDtl.PolompInfoID = polompInfoId;
+                            Long polompDtlId = polompViewModel.insertPolompDtl(polompDtl);
+                            if (polompDtlId != null) {
+                                // Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                                Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                fancyToast.show();
+                            }
+                        } else {
+                            polompDtl = new PolompDtl();
+                            polompDtl.StatePolomp = 0;
+
+                            if (chkNadradGhadim == true) {
+                                polompDtl.StatePolomp = 1;
+                            }
+                            if (chkOldNakhana == true) {
+
+                                polompDtl.StatePolomp = 2;
+                            }
+
+                            polompDtl.ReadTypeID = 1;
+                            polompDtl.PolompDtlID = polompAllInfo.PolompDtlID;
+                            polompDtl.PolompInfoID = Long.valueOf(polompAllInfo.PolompInfoID);
+                            polompDtl.CurrentColorID = spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+                            polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
+                            polompDtl.PolompID = polompParams.PolompId;
+                            polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+                            polompDtl.PreviousColorID = chkNadradGhadim.booleanValue() == true ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+                            polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
+                            polompDtl.PreviousPolompTypeID = chkNadradGhadim.booleanValue() == true ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+                            polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
+                            polompViewModel.updatePolompDtl(polompDtl);
+
+
+                            //Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                            //Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                            fancyToast.show();
+
+
+                        }
+                        //Bastan Form Sabt polomp
+                        G.startFragment(G.fragmentNumStack.pop(), true, null);
+                    } else {
+                        connectToModuleDialog();
+
+                    }
+                    basic_reg.dismiss();
+                    return;
+                }
+            });
+        }else {
+
+            locationViewModel.getLocation(this.getContext());
+            PolompAllInfo polompAllInfo = polompViewModel.getPolompData(polompParams);
+//        spnRangPolompJadid.getSelectedItemPosition() == 0 && etPolompJadid.getText().toString().equals("") &&
+//                spnRangPolompJadid.getSelectedItemPosition() == 0 &&&& !chkNewNakhana && !chkNadaradJadid
+            if (spnRangPolompGhadim.getSelectedItemPosition() == 0 &&
+                    etPolompGhadim.getText().toString().equals("") && spnModelPolompGhadim.getSelectedItemPosition() == 0 &&
+                    !chkOldNakhana && !chkNadradGhadim) {
+                if (polompAllInfo != null) {
+                    polompViewModel.deleteAllPolomp(polompAllInfo.PolompInfoID, polompAllInfo.PolompDtlID);
+                }
+                Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.FillOldAndNewPlombInfo_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
+                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                fancyToast.show();
+                //G.startFragment(G.fragmentNumStack.pop(), true, null);
+                return;
             }
-            Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.FillOldAndNewPlombInfo_msg), FancyToast.LENGTH_SHORT, FancyToast.INFO, false);
-            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-            fancyToast.show();
-            //G.startFragment(G.fragmentNumStack.pop(), true, null);
-            return;
-        }
-        if (location != null){
-            if (polompAllInfo == null) {
+            if (location != null) {
+                if (polompAllInfo == null) {
 
 
-                polompInfo = new PolompInfo();
-                polompInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
-                polompInfo.ChangeDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
-                polompInfo.ChangeTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
-                polompInfo.ClientID = polompParams.ClientId;
-                polompInfo.SendID = G.clientInfo.SendId;
-                polompInfo.Lat = String.valueOf(location.getLatitude());
-                polompInfo.Long = String.valueOf(location.getLongitude());
-                polompInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
+                    polompInfo = new PolompInfo();
+                    polompInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                    polompInfo.ChangeDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                    polompInfo.ChangeTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                    polompInfo.ClientID = polompParams.ClientId;
+                    polompInfo.SendID = G.clientInfo.SendId;
+                    polompInfo.Lat = String.valueOf(location.getLatitude());
+                    polompInfo.Long = String.valueOf(location.getLongitude());
+                    polompInfo.FollowUpCode = G.clientInfo.FollowUpCode == null ? 0 : G.clientInfo.FollowUpCode;
 
-                polompDtl = new PolompDtl();
+                    polompDtl = new PolompDtl();
 
-                polompDtl.StatePolomp = 0;
-                if (chkNadradGhadim == true) {
-                    polompDtl.StatePolomp = 1;
-                }
-                if (chkOldNakhana == true) {
-                    polompDtl.StatePolomp = 2;
-                }
-                polompDtl.ReadTypeID = 1;
-                polompDtl.CurrentColorID = spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
-                polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
-                polompDtl.PolompID = polompParams.PolompId;
-                polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-                polompDtl.PreviousColorID = chkNadradGhadim.booleanValue()==true?null: spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
-                polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
-                polompDtl.PreviousPolompTypeID =chkNadradGhadim.booleanValue()==true?null: spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
-                polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
-                Long polompInfoId = polompViewModel.insertPolompInfo(polompInfo);
-                polompDtl.PolompInfoID = polompInfoId;
-                Long polompDtlId = polompViewModel.insertPolompDtl(polompDtl);
-                if (polompDtlId != null) {
-                   // Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                    polompDtl.StatePolomp = 0;
+                    if (chkNadradGhadim == true) {
+                        polompDtl.StatePolomp = 1;
+                    }
+                    if (chkOldNakhana == true) {
+                        polompDtl.StatePolomp = 2;
+                    }
+                    polompDtl.ReadTypeID = 1;
+                    polompDtl.CurrentColorID = spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+                    polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
+                    polompDtl.PolompID = polompParams.PolompId;
+                    polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+                    polompDtl.PreviousColorID = chkNadradGhadim.booleanValue() == true ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+                    polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
+                    polompDtl.PreviousPolompTypeID = chkNadradGhadim.booleanValue() == true ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+                    polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
+                    Long polompInfoId = polompViewModel.insertPolompInfo(polompInfo);
+                    polompDtl.PolompInfoID = polompInfoId;
+                    Long polompDtlId = polompViewModel.insertPolompDtl(polompDtl);
+                    if (polompDtlId != null) {
+                        // Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
+                        Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        fancyToast.show();
+                    }
+                } else {
+                    polompDtl = new PolompDtl();
+                    polompDtl.StatePolomp = 0;
+
+                    if (chkNadradGhadim == true) {
+                        polompDtl.StatePolomp = 1;
+                    }
+                    if (chkOldNakhana == true) {
+
+                        polompDtl.StatePolomp = 2;
+                    }
+
+                    polompDtl.ReadTypeID = 1;
+                    polompDtl.PolompDtlID = polompAllInfo.PolompDtlID;
+                    polompDtl.PolompInfoID = Long.valueOf(polompAllInfo.PolompInfoID);
+                    polompDtl.CurrentColorID = spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
+                    polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
+                    polompDtl.PolompID = polompParams.PolompId;
+                    polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
+                    polompDtl.PreviousColorID = chkNadradGhadim.booleanValue() == true ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
+                    polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
+                    polompDtl.PreviousPolompTypeID = chkNadradGhadim.booleanValue() == true ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
+                    polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
+                    polompViewModel.updatePolompDtl(polompDtl);
+
+
+                    //Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                    //Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
                     Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
                     fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                     fancyToast.show();
+
+
                 }
+                //Bastan Form Sabt polomp
+                G.startFragment(G.fragmentNumStack.pop(), true, null);
             } else {
-                polompDtl = new PolompDtl();
-                polompDtl.StatePolomp = 0;
-
-                if (chkNadradGhadim == true) {
-                    polompDtl.StatePolomp = 1;
-                }
-                if (chkOldNakhana == true) {
-
-                    polompDtl.StatePolomp = 2;
-                }
-
-                polompDtl.ReadTypeID = 1;
-                polompDtl.PolompDtlID = polompAllInfo.PolompDtlID;
-                polompDtl.PolompInfoID = Long.valueOf(polompAllInfo.PolompInfoID);
-                polompDtl.CurrentColorID = spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapColorJadid.get(spnRangPolompJadid.getSelectedItemPosition());
-                polompDtl.CurrentPolomp = etPolompJadid.getText().toString();
-                polompDtl.PolompID = polompParams.PolompId;
-                polompDtl.PolompTypeID = spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition()) == 0 ? null : spinnerMapModelJadid.get(spnModelPolompJadid.getSelectedItemPosition());
-                polompDtl.PreviousColorID =chkNadradGhadim.booleanValue()==true?null: spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapColorGhadim.get(spnRangPolompGhadim.getSelectedItemPosition());
-                polompDtl.PreviousPolomp = etPolompGhadim.getText().toString();
-                polompDtl.PreviousPolompTypeID =chkNadradGhadim.booleanValue()==true?null: spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition()) == 0 ? null : spinnerMapModelGhadim.get(spnModelPolompGhadim.getSelectedItemPosition());
-                polompDtl.AgentID = Integer.valueOf(G.getPref("UserID"));
-                polompViewModel.updatePolompDtl(polompDtl);
-
-
-                //Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.MessageSuccess), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
-                //Toast.makeText(getActivity(), getResources().getText(R.string.MessageSuccess), Toast.LENGTH_SHORT).show();
-                Toast fancyToast = FancyToast.makeText(getActivity(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
-                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-                fancyToast.show();
-
+                connectToModuleDialog();
 
             }
-        //Bastan Form Sabt polomp
-        G.startFragment(G.fragmentNumStack.pop(), true, null);
-    }else{
-            connectToModuleDialog();
 
         }
-
-
 
     }
 

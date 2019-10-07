@@ -102,7 +102,7 @@ public class MyCheckList extends LinearLayout {
 					_llMain.getChildAt(i).setBackgroundColor(_checkedBackgroundColor);
 					((TextView)((LinearLayout) _llMain.getChildAt(i)).getChildAt(0)).setTextColor(_checkedTextColor);
 				}
-			}else if(((MyCheckListItem)_llMain.getChildAt(i).getTag()).Value == value){
+			}else if(((MyCheckListItem)_llMain.getChildAt(i).getTag()).Value.equals( value)){
 				_llMain.getChildAt(i).setBackgroundColor(_checkedBackgroundColor);
 				((TextView)((LinearLayout) _llMain.getChildAt(i)).getChildAt(0)).setTextColor(_checkedTextColor);
 			}
