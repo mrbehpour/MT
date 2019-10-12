@@ -38,4 +38,9 @@
         <item name="android:background">#eeeeee</item>
     </style>
 
+    <style name="mySpinnerItemStyle" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">#FFFFFF</item>
+
+    </style>
+
 </resources>

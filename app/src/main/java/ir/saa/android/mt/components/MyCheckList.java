@@ -34,7 +34,7 @@ public class MyCheckList extends LinearLayout {
 	private int _uncheckedBackgroundColor = Color.parseColor("#eeeeee");
 	private int _checkedTextColor = Color.parseColor("#ffffff");
 	private int _uncheckedTextColor = Color.parseColor("#000000");
-	private int _orientation =LinearLayout.HORIZONTAL;
+	private int _orientation =LinearLayout.VERTICAL;
 	private Typeface tf = Typeface.createFromAsset(G.context.getAssets(), "fonts/byekan.ttf");
 	//private ArrayList<MyCheckListItem> _checkListItemArray;
 	private OnCheckListItemClickListener _onCheckListItemClickListener = null;

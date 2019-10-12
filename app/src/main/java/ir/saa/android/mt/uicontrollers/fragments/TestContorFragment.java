@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,19 +16,37 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.ScrollView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.angads25.toggle.LabeledSwitch;
+import com.github.angads25.toggle.interfaces.OnToggledListener;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ir.saa.android.mt.R;
+import ir.saa.android.mt.adapters.Mane.ManeAdapter;
+import ir.saa.android.mt.adapters.Mane.ManeItem;
 import ir.saa.android.mt.application.G;
+import ir.saa.android.mt.components.MyCheckList;
+import ir.saa.android.mt.components.MyCheckListItem;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
+import ir.saa.android.mt.viewmodels.BazrasiViewModel;
 import ir.saa.android.mt.viewmodels.TestContorViewModel;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
@@ -38,6 +57,17 @@ public class TestContorFragment extends Fragment
     TextView edtContorConst;
     TextView edtSensorRatio;
     TextView edtRoundNum;
+    ArrayAdapter<String> adapter;
+    BazrasiViewModel bazrasiViewModel=null;
+    LinearLayout llManeh;
+    LinearLayout llTexts;
+    LinearLayout llRcyclerView;
+    Spinner spnManehTest;
+    ManeAdapter maneAdapter;
+    List<ManeItem> maneItems;
+    ScrollView svManeh;
+    LinearLayout llsManeh;
+    MyCheckList myCheckList;
 
     com.github.angads25.toggle.LabeledSwitch switchTestType;
     com.github.angads25.toggle.LabeledSwitch switchPhase;
@@ -64,16 +94,176 @@ public class TestContorFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_test_contor, container, false);
         testContorViewModel= ViewModelProviders.of(this).get(TestContorViewModel.class);
+        bazrasiViewModel=ViewModelProviders.of(this).get(BazrasiViewModel.class);
 
         edtCTCoeff = rootView.findViewById(R.id.edtZaribCT);
         edtContorConst = rootView.findViewById(R.id.edtSabeteKontor);
         edtSensorRatio = rootView.findViewById(R.id.edtNesbatKontor);
         edtRoundNum = rootView.findViewById(R.id.edtTedadDor);
+        spnManehTest=rootView.findViewById(R.id.spnManehTest);
+        svManeh=rootView.findViewById(R.id.svManeh);
+        llsManeh=rootView.findViewById(R.id.llsManeh);
+        llManeh=rootView.findViewById(R.id.llManeh);
+        llTexts=rootView.findViewById(R.id.llTexts);
+        llRcyclerView=rootView.findViewById(R.id.llRcyclerView);
+        List<String> spinnerArray=new ArrayList<>();
+        spinnerArray.add((String) getText(R.string.TestAsli));
+        spinnerArray.add((String) getText(R.string.Maneh ));
+
+        adapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_dropdown,spinnerArray );
+
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+        spnManehTest.setAdapter(adapter);
+        maneItems = new ArrayList<>();
+
+
 
         switchTestType = rootView.findViewById(R.id.switchTestType);
         switchPhase = rootView.findViewById(R.id.switchPhase);
         switchTestNum = rootView.findViewById(R.id.switchTestNum);
         switchPaulserType = rootView.findViewById(R.id.switchPaulserType);
+        maneAdapter=new ManeAdapter(getActivity(), maneItems);
+
+//        rvManeh.setAdapter(maneAdapter);
+//        rvManeh.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        switchTestType.setOnToggledListener(new OnToggledListener() {
+            @Override
+            public void onSwitched(LabeledSwitch labeledSwitch, boolean isOn) {
+                String TypeTest="";
+                if(isOn){
+                    TypeTest="ActiveBlock";
+
+                }else{
+                    TypeTest="ReactiveBlock";
+
+                }
+
+                bazrasiViewModel.getManehTestAndBazrasiLiveData(TypeTest).observe(getActivity(), new Observer<List<Remark>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Remark> remarks) {
+//
+                         myCheckList=new MyCheckList(getActivity(),
+                                new MyCheckListItem("مانع 1", 1),
+                                new MyCheckListItem("مانع 2", 2));
+
+                        myCheckList.setOrientation(LinearLayout.VERTICAL);
+                        myCheckList.setCheckedBackgroundColor(getResources().getColor(R.color.orange_500 ));
+                        if(remarks.size()!=0) {
+                            myCheckList.removeAllCkeckItems();
+//                                    final RadioButton[] rb = new RadioButton[remarks.size()];
+//                                    RadioGroup rg = rootView.findViewById(R.id.rgManeh); //create the RadioGroup
+//                                    rg.setLayoutParams(params);
+//                                    rg.setOrientation(RadioGroup.VERTICAL);//or RadioGroup.VERTICAL
+//                                    rg.removeAllViews();
+                            for (int i = 0; i < remarks.size(); i++) {
+//                                        rb[i] = new RadioButton(getActivity());
+//                                        rb[i].setLayoutParams(params);
+//                                        rb[i].setText(remarks.get(i).RemarkName);
+//                                        rb[i].setId(remarks.get(i).RemarkID);
+//                                        rg.addView(rb[i]);
+                                MyCheckListItem myCheckListItem=new MyCheckListItem(remarks.get(i).RemarkName, remarks.get(i).RemarkID);
+                                myCheckList.addCheckItem(myCheckListItem);
+                            }
+
+
+
+                            svManeh.removeAllViews();
+                            svManeh.addView(myCheckList);//
+                            //svManeh.addView(rg);//
+                        }
+                    }
+                });
+                myCheckList.setOnCheckListItemClickListener(new MyCheckList.OnCheckListItemClickListener() {
+                    @Override
+                    public void onCheckListItemClick(MyCheckListItem selectedCheckListItem, Boolean isChecked) {
+
+                    }
+                });
+
+            }
+        });
+
+        spnManehTest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        llTexts.setVisibility(View.VISIBLE);
+                        llManeh.setVisibility(View.VISIBLE);
+                        llRcyclerView.setVisibility(View.GONE);
+                        break;
+                    case 1:
+
+
+                        llTexts.setVisibility(View.GONE);
+                        llManeh.setVisibility(View.GONE);
+                        llRcyclerView.setVisibility(View.VISIBLE);
+                        String TypeTest="";
+                        if(switchTestType.isOn()){
+                            TypeTest="ActiveBlock";
+
+                        }else{
+                            TypeTest="ReactiveBlock";
+
+                        }
+
+                        bazrasiViewModel.getManehTestAndBazrasiLiveData(TypeTest).observe(getActivity(), new Observer<List<Remark>>() {
+                            @Override
+                            public void onChanged(@Nullable List<Remark> remarks) {
+//                                maneAdapter.clearDataSet();
+//                                maneItems.clear();
+//                                for (Remark remark:remarks){
+//                                    maneItems.add(new ManeItem(remark.RemarkID,remark.RemarkName, G.clientInfo.ClientId));
+//                                }
+                                ScrollView.LayoutParams params=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                        ViewGroup.LayoutParams.MATCH_PARENT);
+
+
+
+                                params.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                                 myCheckList=new MyCheckList(getActivity(),
+                                        new MyCheckListItem("مانع 1", 1),
+                                        new MyCheckListItem("مانع 2", 2));
+                                myCheckList.setCheckedBackgroundColor(getResources().getColor(R.color.orange_500 ));
+                                myCheckList.setOrientation(LinearLayout.VERTICAL);
+
+                                if(remarks.size()!=0) {
+                                    myCheckList.removeAllCkeckItems();
+                                  for (int i = 0; i < remarks.size(); i++) {
+
+                                        MyCheckListItem myCheckListItem=new MyCheckListItem(remarks.get(i).RemarkName, remarks.get(i).RemarkID);
+                                        myCheckList.addCheckItem(myCheckListItem);
+                                    }
+
+
+
+                                    svManeh.removeAllViews();
+                                    svManeh.addView(myCheckList);//
+
+
+
+                                }
+                            }
+                        });
+
+                        myCheckList.setOnCheckListItemClickListener(new MyCheckList.OnCheckListItemClickListener() {
+                            @Override
+                            public void onCheckListItemClick(MyCheckListItem selectedCheckListItem, Boolean isChecked) {
+
+                            }
+                        });
+
+                        break;
+                }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         setDefaultValue();
 

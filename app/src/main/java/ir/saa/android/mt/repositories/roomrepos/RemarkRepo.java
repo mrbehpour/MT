@@ -39,6 +39,10 @@ public class RemarkRepo  {
         return remarkDao.getManehTestAndBazrasi(KeyValue);
     }
 
+    public LiveData<List<Remark>> getManehTestAndBazrasiLiveData(String KeyValue){
+       return remarkDao.getManehTestAndBazrasiLiveData(KeyValue);
+    }
+
     public LiveData<List<Remark>> getRemarkByAnswerGroupId(int Id) {
         return getRemarkByAnswerGroupId(Id);
     }

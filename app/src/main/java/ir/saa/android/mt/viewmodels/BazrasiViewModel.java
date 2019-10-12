@@ -68,6 +68,9 @@ public class BazrasiViewModel extends AndroidViewModel {
         public List<Remark> getManehTestAndBazrasi(String KeyValue){
             return remarkRepo.getManehTestAndBazrasi(KeyValue);
         }
+        public LiveData<List<Remark>> getManehTestAndBazrasiLiveData(String KeyValue){
+            return remarkRepo.getManehTestAndBazrasiLiveData(KeyValue);
+        }
        public LiveData<List<RemarkItem>> getRemarks(Integer Id){
 
 //           if(remarkRepo.getRemarkGroupingFormat(Id,3).getValue()!=null){

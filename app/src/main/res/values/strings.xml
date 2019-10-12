@@ -252,6 +252,8 @@
     <string name="StartTest">شروع تست</string>
 
     <!-- fragment_test_contor -->
+    <string name="TestAsli">تست کنتور</string>
+    <string name="Maneh">مانع تست</string>
     <string name="Active">اکتیو</string>
     <string name="Reactive">راکتیو</string>
     <string name="OnePhase">تک فاز</string>
