@@ -55,6 +55,12 @@ public interface TestDtlDao {
 
     @Query("Select * from TestInfo " +
             "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
+            "where TestInfo.ClientID=:ClientId or (TestInfo.BlockID not in ( " +
+            "Select BlockTest.BlockId from BlockTest where BlockTest.ClientId=:ClientId ))")
+    List<TestAllInfo> getTestAllInfoWithClientIdWithoutBlockIdTest(Long ClientId);
+
+    @Query("Select * from TestInfo " +
+            "Inner Join TestDtl on TestDtl.TestInfoID=TestInfo.TestInfoID " +
             "where TestInfo.ClientID=:ClientId")
     List<TestAllInfo> getTestAllInfoWithClientId(Long ClientId);
 

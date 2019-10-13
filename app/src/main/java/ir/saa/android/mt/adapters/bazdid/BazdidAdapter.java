@@ -155,6 +155,17 @@ public class BazdidAdapter extends RecyclerView.Adapter<BazdidAdapter.MyViewHold
                 holder.iconManehVaBazdid.setTextColor(context.getResources().getColor(R.color.icon_off));
             }
         }
+        if (current.isBlockTest) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.IconTest.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_on_Maneh));
+            }
+            CountAmliyat+=1;
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.IconTest.setImageTintList(ContextCompat.getColorStateList(context, R.color.icon_off));
+            }
+        }
+
         if(CountAmliyat==2){
             Bazdid bazdidAsli=new Bazdid();
             bazdidAsli.ClientId=current.Id;

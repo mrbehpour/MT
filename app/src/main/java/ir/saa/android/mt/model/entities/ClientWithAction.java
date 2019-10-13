@@ -106,6 +106,7 @@ public class ClientWithAction {
 
     public int isBlock;
 
+    public int isBlockTest;
     public boolean forcibleMasterGroup;
 
 }

@@ -85,4 +85,9 @@ public class TestDtlRepo  {
     public List<TestAllInfo> getTestAllInfoWithClientIdWithoutBlockId(Long ClientId){
         return testDtlDao.getTestAllInfoWithClientIdWithoutBlockId(ClientId);
     }
+
+    public  List<TestAllInfo> getTestAllInfoWithClientIdWithoutBlockIdTest(Long ClientId){
+        return testDtlDao.getTestAllInfoWithClientIdWithoutBlockIdTest(ClientId);
+    }
+
 }

@@ -2,12 +2,15 @@ package ir.saa.android.mt.uicontrollers.fragments;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -41,12 +44,18 @@ import ir.saa.android.mt.adapters.Mane.ManeItem;
 import ir.saa.android.mt.application.G;
 import ir.saa.android.mt.components.MyCheckList;
 import ir.saa.android.mt.components.MyCheckListItem;
+import ir.saa.android.mt.components.PersianCalendar;
 import ir.saa.android.mt.enums.BundleKeysEnum;
 import ir.saa.android.mt.enums.FragmentsEnum;
 import ir.saa.android.mt.enums.SharePrefEnum;
+import ir.saa.android.mt.model.entities.BlockTest;
 import ir.saa.android.mt.model.entities.Remark;
+import ir.saa.android.mt.model.entities.TestAllInfo;
+import ir.saa.android.mt.model.entities.TestInfo;
 import ir.saa.android.mt.uicontrollers.pojos.TestContor.TestContorParams;
+import ir.saa.android.mt.viewmodels.AmaliyatViewModel;
 import ir.saa.android.mt.viewmodels.BazrasiViewModel;
+import ir.saa.android.mt.viewmodels.LocationViewModel;
 import ir.saa.android.mt.viewmodels.TestContorViewModel;
 import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt;
 
@@ -59,6 +68,7 @@ public class TestContorFragment extends Fragment
     TextView edtRoundNum;
     ArrayAdapter<String> adapter;
     BazrasiViewModel bazrasiViewModel=null;
+    AmaliyatViewModel amaliyatViewModel=null;
     LinearLayout llManeh;
     LinearLayout llTexts;
     LinearLayout llRcyclerView;
@@ -68,6 +78,12 @@ public class TestContorFragment extends Fragment
     ScrollView svManeh;
     LinearLayout llsManeh;
     MyCheckList myCheckList;
+    LocationViewModel locationViewModel;
+    Location location;
+    ProgressDialog progressDialog;
+    boolean waitForLocation=true;
+    boolean isTest;
+    android.support.v7.app.AlertDialog finalBasic_reg;
 
     com.github.angads25.toggle.LabeledSwitch switchTestType;
     com.github.angads25.toggle.LabeledSwitch switchPhase;
@@ -77,8 +93,23 @@ public class TestContorFragment extends Fragment
     AlertDialog ad;
     Bundle bundle;
 
+    public void HideProgressDialogLoction(){
+        if(progressDialog!=null) progressDialog.dismiss();
+    }
+
+    private void connectToModuleDialogLoction(){
+
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.setMessage(getResources().getText(R.string.PleaseWait_msg));
+        progressDialog.setTitle(getResources().getText(R.string.GetLocationInProgress_msg));
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+        waitForLocation=true;
+    }
+
     public TestContorFragment() {
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -95,6 +126,8 @@ public class TestContorFragment extends Fragment
         View rootView = inflater.inflate(R.layout.fragment_test_contor, container, false);
         testContorViewModel= ViewModelProviders.of(this).get(TestContorViewModel.class);
         bazrasiViewModel=ViewModelProviders.of(this).get(BazrasiViewModel.class);
+        amaliyatViewModel=ViewModelProviders.of(this).get(AmaliyatViewModel.class);
+        locationViewModel=ViewModelProviders.of(this).get(LocationViewModel.class);
 
         edtCTCoeff = rootView.findViewById(R.id.edtZaribCT);
         edtContorConst = rootView.findViewById(R.id.edtSabeteKontor);
@@ -116,6 +149,13 @@ public class TestContorFragment extends Fragment
         spnManehTest.setAdapter(adapter);
         maneItems = new ArrayList<>();
 
+        List<TestAllInfo> testAllInfos= amaliyatViewModel.getTestAllInfoWithClientIdWithoutBlockIdTest(G.clientInfo.ClientId);
+
+        if(testAllInfos.size()!=0){
+            isTest=true;
+        }else{
+            isTest=false;
+        }
 
 
         switchTestType = rootView.findViewById(R.id.switchTestType);
@@ -127,9 +167,27 @@ public class TestContorFragment extends Fragment
 //        rvManeh.setAdapter(maneAdapter);
 //        rvManeh.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        locationViewModel.locationMutableLiveData.observe((LifecycleOwner) getContext(), new Observer<Location>() {
+            @Override
+            public void onChanged(@Nullable Location locationObserve) {
+                if(locationObserve!=null){
+                    location =locationObserve;
+
+                    HideProgressDialogLoction();
+
+                    if(waitForLocation){
+
+                        waitForLocation=false;
+                    }
+
+                }
+            }
+        });
+
         switchTestType.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(LabeledSwitch labeledSwitch, boolean isOn) {
+
                 String TypeTest="";
                 if(isOn){
                     TypeTest="ActiveBlock";
@@ -172,14 +230,124 @@ public class TestContorFragment extends Fragment
                             svManeh.addView(myCheckList);//
                             //svManeh.addView(rg);//
                         }
-                    }
-                });
-                myCheckList.setOnCheckListItemClickListener(new MyCheckList.OnCheckListItemClickListener() {
-                    @Override
-                    public void onCheckListItemClick(MyCheckListItem selectedCheckListItem, Boolean isChecked) {
+                        List<TestInfo> testInfos=amaliyatViewModel.getTestInfoWithBlockId(G.clientInfo.ClientId,G.clientInfo.SendId);
+                        if(testInfos.size()!=0){
+                            List<BlockTest> blockTests=amaliyatViewModel.getBlockTestByBlockIdAndClientId(testInfos.get(0).BlockID
+                                    ,G.clientInfo.ClientId );
+                            myCheckList.setSelectionByValue(blockTests.get(0).BlockId);
+                        }
+                        myCheckList.setOnCheckListItemClickListener(new MyCheckList.OnCheckListItemClickListener() {
+                            @Override
+                            public void onCheckListItemClick(MyCheckListItem selectedCheckListItem, Boolean isChecked) {
+                                if(isChecked){
+                                        android.support.v7.app.AlertDialog basic_reg = null;
+                                        if(location==null) {
+                                            if (locationViewModel.isGpsEnable() == false) {
+                                                location = null;
+                                                locationViewModel.trunOnGps(getActivity());
+                                                return;
+                                            } else {
+                                                connectToModuleDialogLoction();
+                                                locationViewModel.getLocation(getActivity());
+                                                return;
+                                            }
+                                        }
+                                        if(isTest){
+                                            TextView txtDialogTitle;
+                                            TextView tvMessage;
+                                            android.support.v7.app.AlertDialog.Builder builder=new android.support.v7.app.AlertDialog.Builder(getActivity());
+                                            View v = getLayoutInflater().inflate(R.layout.custom_alretdialog, null);
+                                            builder.setView(v);
+                                            builder.setCancelable(false);
+                                            builder.create();
+                                            basic_reg=builder.show();
+                                            txtDialogTitle=(TextView)v.findViewById(R.id.txtDialogTitle);
+                                            tvMessage=(TextView)v.findViewById(R.id.tvMessage);
+                                            txtDialogTitle.setText(getText(R.string.msg));
+                                            tvMessage.setText(getText(R.string.msg_Save_Maneh_test));
+                                            Button btnCancel=(Button)v.findViewById(R.id.btnCancel);
+                                            Button btnRegister=(Button)v.findViewById(R.id.btnRegister);
+                                            finalBasic_reg = basic_reg;
+                                            btnRegister.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    for(TestAllInfo testAllInfo:testAllInfos){
+                                                        amaliyatViewModel.deleteAllTestInfo(testAllInfo.TestInfoID
+                                                                , testAllInfo.TestDtlID);
+                                                    }
+                                                    TestInfo testInfo=new TestInfo();
+                                                    BlockTest blockTest=new BlockTest();
+                                                    if(location!=null) {
+                                                        blockTest.BlockId=Integer.parseInt(selectedCheckListItem.Value.toString());
+                                                        blockTest.ClientId=G.clientInfo.ClientId;
+                                                        amaliyatViewModel.insertBlockTest(blockTest);
 
+                                                        testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                                                        testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                                                        testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                                                        testInfo.SendID = G.clientInfo.SendId;
+                                                        testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                                                        testInfo.ClientID = G.clientInfo.ClientId;
+                                                        testInfo.Lat = String.valueOf(location.getLatitude());
+                                                        testInfo.Long = String.valueOf(location.getLongitude());
+                                                        testInfo.BlockID = Integer.parseInt(selectedCheckListItem.Value.toString());
+                                                        Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+
+                                                        if (testInfoId != null) {
+                                                            Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                            fancyToast.show();
+                                                            finalBasic_reg.dismiss();
+                                                            return;
+                                                        }
+                                                    }
+                                                }
+                                            });
+                                            btnCancel.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    finalBasic_reg.dismiss();
+                                                    return;
+                                                }
+                                            });
+
+                                        }else {
+                                            if (location != null) {
+                                                TestInfo testInfo = new TestInfo();
+                                                BlockTest blockTest = new BlockTest();
+                                                if (location != null) {
+                                                    blockTest.BlockId = Integer.parseInt(selectedCheckListItem.Value.toString());
+                                                    blockTest.ClientId = G.clientInfo.ClientId;
+                                                    amaliyatViewModel.insertBlockTest(blockTest);
+
+                                                    testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                                                    testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                                                    testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                                                    testInfo.SendID = G.clientInfo.SendId;
+                                                    testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                                                    testInfo.ClientID = G.clientInfo.ClientId;
+                                                    testInfo.Lat = String.valueOf(location.getLatitude());
+                                                    testInfo.Long = String.valueOf(location.getLongitude());
+                                                    testInfo.BlockID = Integer.parseInt(selectedCheckListItem.Value.toString());
+                                                    Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+
+                                                    if (testInfoId != null) {
+                                                        Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                        fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                        fancyToast.show();
+
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                }
+                            }
+                        });
                     }
+
                 });
+
 
             }
         });
@@ -187,6 +355,7 @@ public class TestContorFragment extends Fragment
         spnManehTest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
                 switch (i){
                     case 0:
                         llTexts.setVisibility(View.VISIBLE);
@@ -244,15 +413,124 @@ public class TestContorFragment extends Fragment
 
 
                                 }
+                                List<TestInfo> testInfos=amaliyatViewModel.getTestInfoWithBlockId(G.clientInfo.ClientId,G.clientInfo.SendId);
+                                if(testInfos.size()!=0){
+                                    List<BlockTest> blockTests=amaliyatViewModel.getBlockTestByBlockIdAndClientId(testInfos.get(0).BlockID
+                                            ,G.clientInfo.ClientId );
+                                    myCheckList.setSelectionByValue(blockTests.get(0).BlockId);
+                                }
+                                myCheckList.setOnCheckListItemClickListener(new MyCheckList.OnCheckListItemClickListener() {
+                                    @Override
+                                    public void onCheckListItemClick(MyCheckListItem selectedCheckListItem, Boolean isChecked) {
+                                        if(isChecked){
+                                            android.support.v7.app.AlertDialog basic_reg = null;
+                                            if(location==null) {
+                                                if (locationViewModel.isGpsEnable() == false) {
+                                                    location = null;
+                                                    locationViewModel.trunOnGps(getActivity());
+                                                    return;
+                                                } else {
+                                                    connectToModuleDialogLoction();
+                                                    locationViewModel.getLocation(getActivity());
+                                                    return;
+                                                }
+                                            }
+                                            if(isTest){
+                                                TextView txtDialogTitle;
+                                                TextView tvMessage;
+                                                android.support.v7.app.AlertDialog.Builder builder=new android.support.v7.app.AlertDialog.Builder(getActivity());
+                                                View v = getLayoutInflater().inflate(R.layout.custom_alretdialog, null);
+                                                builder.setView(v);
+                                                builder.setCancelable(false);
+                                                builder.create();
+                                                basic_reg=builder.show();
+                                                txtDialogTitle=(TextView)v.findViewById(R.id.txtDialogTitle);
+                                                tvMessage=(TextView)v.findViewById(R.id.tvMessage);
+                                                txtDialogTitle.setText(getText(R.string.msg));
+                                                tvMessage.setText(getText(R.string.msg_Save_Maneh_test));
+                                                Button btnCancel=(Button)v.findViewById(R.id.btnCancel);
+                                                Button btnRegister=(Button)v.findViewById(R.id.btnRegister);
+                                                finalBasic_reg = basic_reg;
+                                                btnRegister.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        for(TestAllInfo testAllInfo:testAllInfos){
+                                                            amaliyatViewModel.deleteAllTestInfo(testAllInfo.TestInfoID
+                                                                    , testAllInfo.TestDtlID);
+                                                        }
+                                                        TestInfo testInfo=new TestInfo();
+                                                        BlockTest blockTest=new BlockTest();
+                                                        if(location!=null) {
+                                                            blockTest.BlockId=Integer.parseInt(selectedCheckListItem.Value.toString());
+                                                            blockTest.ClientId=G.clientInfo.ClientId;
+                                                            amaliyatViewModel.insertBlockTest(blockTest);
+
+                                                            testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                                                            testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                                                            testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                                                            testInfo.SendID = G.clientInfo.SendId;
+                                                            testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                                                            testInfo.ClientID = G.clientInfo.ClientId;
+                                                            testInfo.Lat = String.valueOf(location.getLatitude());
+                                                            testInfo.Long = String.valueOf(location.getLongitude());
+                                                            testInfo.BlockID = Integer.parseInt(selectedCheckListItem.Value.toString());
+                                                            Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+
+                                                            if (testInfoId != null) {
+                                                                Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                                fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                                fancyToast.show();
+                                                                finalBasic_reg.dismiss();
+                                                                return;
+                                                            }
+                                                        }
+                                                    }
+                                                });
+                                                btnCancel.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        finalBasic_reg.dismiss();
+                                                        return;
+                                                    }
+                                                });
+
+                                            }else {
+                                                if (location != null) {
+                                                    TestInfo testInfo = new TestInfo();
+                                                    BlockTest blockTest = new BlockTest();
+                                                    if (location != null) {
+                                                        blockTest.BlockId = Integer.parseInt(selectedCheckListItem.Value.toString());
+                                                        blockTest.ClientId = G.clientInfo.ClientId;
+                                                        amaliyatViewModel.insertBlockTest(blockTest);
+
+                                                        testInfo.AgentID = Integer.valueOf(G.getPref("UserID"));
+                                                        testInfo.TestDate = Integer.valueOf(PersianCalendar.getCurrentSimpleShamsiDate());
+                                                        testInfo.TestTime = Integer.valueOf(PersianCalendar.getCurrentSimpleTime());
+                                                        testInfo.SendID = G.clientInfo.SendId;
+                                                        testInfo.FollowUpCode = G.clientInfo.FollowUpCode;
+                                                        testInfo.ClientID = G.clientInfo.ClientId;
+                                                        testInfo.Lat = String.valueOf(location.getLatitude());
+                                                        testInfo.Long = String.valueOf(location.getLongitude());
+                                                        testInfo.BlockID = Integer.parseInt(selectedCheckListItem.Value.toString());
+                                                        Long testInfoId = amaliyatViewModel.insertTestInfo(testInfo);
+
+                                                        if (testInfoId != null) {
+                                                            Toast fancyToast = FancyToast.makeText(getContext(), (String) getResources().getText(R.string.SaveOperationSuccess_msg), FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false);
+                                                            fancyToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                                                            fancyToast.show();
+
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
                             }
                         });
 
-                        myCheckList.setOnCheckListItemClickListener(new MyCheckList.OnCheckListItemClickListener() {
-                            @Override
-                            public void onCheckListItemClick(MyCheckListItem selectedCheckListItem, Boolean isChecked) {
 
-                            }
-                        });
 
                         break;
                 }

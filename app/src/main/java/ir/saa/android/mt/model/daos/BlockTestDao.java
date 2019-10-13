@@ -28,6 +28,15 @@ public interface BlockTestDao {
     @Query("Select * from BlockTest Where BlockTest.ClientId=:clientId ")
     LiveData<List<BlockTest>> getBlockTestByClientIdLiveData(Long clientId);
 
+    @Query("Select * from BlockTest Where BlockTest.BlockId=:blockId ")
+    LiveData<List<BlockTest>> getBlockTestByBlockIdLiveData(int blockId);
+
+    @Query("Select * from BlockTest Where BlockTest.BlockId not in (:blockId) and BlockTest.ClientId=:clientId")
+    List<BlockTest> getBlockTestByBlockId(int blockId,Long clientId);
+
+    @Query("Select * from BlockTest where BlockTest.BlockId=:blockId and BlockTest.ClientId=:ClientId")
+    List<BlockTest> getBlockTestByBlockIdAndClientId(int blockId,Long ClientId);
+
     @Insert(onConflict = IGNORE)
     long insertBlockTest(BlockTest blockTest);
 

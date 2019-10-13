@@ -30,6 +30,7 @@ public interface TestInfoDao {
             "order by TestInfoID Desc")
     List<TestInfo> getTestInfoByClientIdWithBlockId(Long clientId,Integer sendId);
 
+
     @Query("Delete From TestInfo")
     void deleteAll();
 

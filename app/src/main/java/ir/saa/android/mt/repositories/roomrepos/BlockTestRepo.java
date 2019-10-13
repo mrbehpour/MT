@@ -67,4 +67,15 @@ public class BlockTestRepo  {
     public void deleteByClientId(Long clientId) {
         blockTestDao.deleteByClientId(clientId);
     }
+
+    public LiveData<List<BlockTest>> getBlockTestByBlockIdListLiveData(int blockId){
+        return blockTestDao.getBlockTestByBlockIdLiveData(blockId);
+    }
+    public List<BlockTest> getBlockTestByBlockId(int blockId,Long ClientId){
+        return blockTestDao.getBlockTestByBlockId(blockId,ClientId);
+    }
+
+    public List<BlockTest> getBlockTestByBlockIdAndClientId(int blockId,Long ClientId){
+        return blockTestDao.getBlockTestByBlockIdAndClientId(blockId, ClientId);
+    }
 }

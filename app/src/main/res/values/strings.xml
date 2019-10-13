@@ -69,6 +69,7 @@
     <string name="ServerError_msg">پیام خطای سرور</string>
     <string name="msg">پیام</string>
     <string name="msg_Save_Maneh">با انتخاب گزینه تایید،تمام عملیات ذخیره شده پاک می شود. آیا مطمئن هستید؟  </string>
+    <string name="msg_Save_Maneh_test">با انتخاب گزینه تایید،عملیات تست ذخیره شده پاک می شود. آیا مطمئن هستید؟  </string>
     <string name="msg_Save">با انتخاب گزینه تایید،مانع تست وبازرسی پاک می شود. آیا مطمئن هستید؟  </string>
     <string name="PleaseEneter_msg">لطفا برای %s مقدار معتبر وارد کنید</string>
     <string name="ConntecInternet_msg">لطفا دستگاه را به اینترنت متصل کنید</string>

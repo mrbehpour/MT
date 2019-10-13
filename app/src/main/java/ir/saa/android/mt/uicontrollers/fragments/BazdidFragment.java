@@ -64,6 +64,7 @@ public class BazdidFragment extends Fragment
     Boolean isBazrasi=false;
     Boolean isTariff=false;
     Boolean isBlock=false;
+    Boolean isBlockTest=false;
     FloatingActionButton floatingBtnAdd;
     MutableLiveData<List<Client>> clientsLiveData;
     MyDialog myDialog;
@@ -825,9 +826,11 @@ public class BazdidFragment extends Fragment
                                        isTest=client.isTest!=0?true:false;
                                        isTariff=client.isTariff!=0?true:false;
                                        isBlock=client.isBlock!=0?true:false;
+                                       isBlockTest=client.isBlockTest!=0?true:false;
+
                                        RowId+=1;
                                        clientItems.add(new ClientItem(client.ClientID,client.Name,client.Address,UniqField ,String.valueOf(client.SubScript),
-                                               R.drawable.account,client.SendId,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,isTariff,isBlock,
+                                               R.drawable.account,client.SendId,client.MasterGroupDtlID,isTest,isPolomp,isBazrasi,isTariff,isBlock,isBlockTest,
                                                client.FollowUpCode,RowId,client.forcibleMasterGroup ));
                                    }
 
