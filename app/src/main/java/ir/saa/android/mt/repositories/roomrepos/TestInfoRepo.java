@@ -34,6 +34,9 @@ public class TestInfoRepo  {
         testInfoDao.deleteAll();
     }
 
+    public void deleteAllWithOutBlockId(){
+        testInfoDao.deleteAllWithOutBlockId();
+    }
 
     public void deleteTestInfoById(Integer Id) {
         testInfoDao.deleteTestInfoById(Id);
@@ -61,5 +64,9 @@ public class TestInfoRepo  {
 
     public void updateTestInfo(TestInfo testInfo) {
         testInfoDao.updateTestInfo(testInfo);
+    }
+
+    public List<TestInfo> getTestInfoWithBlockId(Long clientId,Integer SendId){
+        return testInfoDao.getTestInfoByClientIdWithBlockId(clientId,SendId);
     }
 }

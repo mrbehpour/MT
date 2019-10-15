@@ -14,6 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ir.saa.android.mt.adapters.testdisplay.TestResultItemDisplay;
+import ir.saa.android.mt.model.entities.BlockTest;
 import ir.saa.android.mt.model.entities.GPSInfo;
 import ir.saa.android.mt.model.entities.TestAllInfo;
 import ir.saa.android.mt.model.entities.TestDtl;
@@ -22,6 +23,7 @@ import ir.saa.android.mt.repositories.bluetooth.Bluetooth;
 import ir.saa.android.mt.repositories.metertester.IMTCallback;
 import ir.saa.android.mt.repositories.metertester.MT;
 import ir.saa.android.mt.repositories.metertester.TestResult;
+import ir.saa.android.mt.repositories.roomrepos.BlockTestRepo;
 import ir.saa.android.mt.repositories.roomrepos.GPSInfoRepo;
 import ir.saa.android.mt.repositories.roomrepos.TestDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.TestInfoRepo;
@@ -48,6 +50,7 @@ public class AmaliyatViewModel extends AndroidViewModel {
     Handler handler=null;
     TestInfoRepo testInfoRepo;
     TestDtlRepo testDtlRepo;
+    BlockTestRepo blockTestRepo;
     GPSInfoRepo gpsInfoRepo;
 
     String lastSendCommand;
@@ -101,6 +104,9 @@ public class AmaliyatViewModel extends AndroidViewModel {
         }
         if(gpsInfoRepo==null){
             gpsInfoRepo=new GPSInfoRepo(application);
+        }
+        if(blockTestRepo==null){
+            blockTestRepo=new BlockTestRepo(application);
         }
 
         testResultMutableLiveData = new MutableLiveData<>();
@@ -361,9 +367,32 @@ public class AmaliyatViewModel extends AndroidViewModel {
     public List<TestAllInfo> getTestAllInfos(Long clientId,Integer sendId){
         return testDtlRepo.getTestAllInfoWithSendId(clientId,sendId);
     }
+
     public TestAllInfo getTestAllInfo(Long clientId,Integer sendId,Integer testId){
         return testDtlRepo.getTestAllInfoWithTestId(clientId,sendId,testId);
     }
+
+    public void deleteTestInfo(){
+        testInfoRepo.deleteAllWithOutBlockId();
+    }
+
+    public void deleteTestdtl(){
+        testDtlRepo.deleteAll();
+    }
+
+    public List<TestAllInfo> getTestAllInfoWithClientIdWithoutBlockId(Long ClientId){
+        return testDtlRepo.getTestAllInfoWithClientIdWithoutBlockId(ClientId);
+    }
+
+    public  List<TestAllInfo> getTestAllInfoWithClientIdWithoutBlockIdTest(Long ClientId){
+        return testDtlRepo.getTestAllInfoWithClientIdWithoutBlockIdTest(ClientId);
+    }
+
+    public void deleteAllTestInfo(int TestInfoId,int TestDtlId){
+        testDtlRepo.deleteTestDtlById(TestDtlId);
+        testInfoRepo.deleteTestInfoById(TestInfoId);
+    }
+
     public LiveData<List<TestResultItemDisplay>> getTestAllInfoWithClientIDLiveData(Long ClientId,Integer sendId){
         TestResultItemDisplay testResultItemDisplay=null;
 
@@ -373,14 +402,16 @@ public class AmaliyatViewModel extends AndroidViewModel {
         List<TestInfo> testInfos=testInfoRepo.getTestInfoWithClientId(ClientId,sendId);
         String DateTimeTest="";
         for (TestInfo testInfo:testInfos) {
-            DateTimeTest= String.valueOf(testInfo.TestDate)+String.format("%04d", Integer.parseInt(String.valueOf(testInfo.TestTime)));;
+            if (testInfo.BlockID == 0){
+                DateTimeTest = String.valueOf(testInfo.TestDate) + String.format("%04d", Integer.parseInt(String.valueOf(testInfo.TestTime)));
+            ;
 
-            List<TestDtl> testDtls=testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID);
+            List<TestDtl> testDtls = testDtlRepo.getTestDtlByTestInfoId(testInfo.TestInfoID);
             testResultItemDisplay = new TestResultItemDisplay();
-            for (TestDtl testDtl:testDtls) {
+            for (TestDtl testDtl : testDtls) {
 
 
-                if(testDtl.TestID!=0) {
+                if (testDtl.TestID != 0) {
                     switch (testContorFieldName.getTestFieldName(testDtl.TestID)) {
                         case "ContorConst":
                             testResultItemDisplay.ContorConst = Integer.valueOf(testDtl.TestValue);
@@ -395,17 +426,17 @@ public class AmaliyatViewModel extends AndroidViewModel {
                             testResultItemDisplay.RoundNumForTest = Integer.valueOf(testDtl.TestValue);
                             break;
                         case "ErrPerc":
-                            testResultItemDisplay.ErrPerc = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.ErrPerc = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
 
                             break;
                         case "PF_A":
-                            testResultItemDisplay.PF_A = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.PF_A = Double.valueOf(String.format("%.3f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "PF_B":
-                            testResultItemDisplay.PF_B = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.PF_B = Double.valueOf(String.format("%.3f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "PF_C":
-                            testResultItemDisplay.PF_C = Double.valueOf(String.format("%.3f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.PF_C = Double.valueOf(String.format("%.3f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "RoundNum":
                             testResultItemDisplay.RoundNum = Integer.valueOf(testDtl.TestValue);
@@ -414,46 +445,49 @@ public class AmaliyatViewModel extends AndroidViewModel {
                             testResultItemDisplay.AIRMS_Period1 = testDtl.TestValue;
                             break;
                         case "BIRMS_Period1":
-                            testResultItemDisplay.BIRMS_Period1 =testDtl.TestValue;
+                            testResultItemDisplay.BIRMS_Period1 = testDtl.TestValue;
                             break;
                         case "Q_A":
-                            testResultItemDisplay.Q_A = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.Q_A = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "Q_B":
-                            testResultItemDisplay.Q_B = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.Q_B = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "Q_C":
-                            testResultItemDisplay.Q_C = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );;
+                            testResultItemDisplay.Q_C = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
+                            ;
                             break;
                         case "Pow_A":
-                            testResultItemDisplay.Pow_A = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.Pow_A = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "Pow_B":
-                            testResultItemDisplay.Pow_B = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.Pow_B = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "Pow_C":
-                            testResultItemDisplay.Pow_C = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );;
+                            testResultItemDisplay.Pow_C = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
+                            ;
                             break;
                         case "S_A":
-                            testResultItemDisplay.S_A = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.S_A = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "S_B":
-                            testResultItemDisplay.S_B = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.S_B = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "S_C":
-                            testResultItemDisplay.S_C = Double.valueOf(String.format("%.2f",Double.parseDouble(testDtl.TestValue)) );
+                            testResultItemDisplay.S_C = Double.valueOf(String.format("%.2f", Double.parseDouble(testDtl.TestValue)));
                             break;
                         case "CIRMS_Period1":
                             testResultItemDisplay.CIRMS_Period1 = testDtl.TestValue;
                             break;
                         case "NIRMS_Period1":
-                            testResultItemDisplay.NIRMS_Period1 = testDtl.TestValue;;
+                            testResultItemDisplay.NIRMS_Period1 = testDtl.TestValue;
+                            ;
                             break;
                         case "AVRMS_Period1":
                             testResultItemDisplay.AVRMS_Period1 = testDtl.TestValue;
                             break;
                         case "BVRMS_Period1":
-                            testResultItemDisplay.BVRMS_Period1 = testDtl.TestValue ;
+                            testResultItemDisplay.BVRMS_Period1 = testDtl.TestValue;
                             break;
                         case "CVRMS_Period1":
                             testResultItemDisplay.CVRMS_Period1 = testDtl.TestValue;
@@ -462,34 +496,61 @@ public class AmaliyatViewModel extends AndroidViewModel {
                             testResultItemDisplay.Period_Period1_A = testDtl.TestValue;
                             break;
                         case "Time_Period1":
-                            testResultItemDisplay.Time_Period1=testDtl.TestValue;
+                            testResultItemDisplay.Time_Period1 = testDtl.TestValue;
                             break;
                     }
                 }
 
 
-
             }
+
             testResultItemDisplay.Active = testInfo.TestTypeID == 1 ? true : false;
             testResultItemDisplay.SinglePhase = testInfo.ContorTypeID == 1 ? true : false;
             testResultItemDisplay.FisrtTest = testInfo.TestCount == 1 ? true : false;
-            testResultItemDisplay.DateTime=String.format("%s/%s/%s %s:%s",DateTimeTest.substring(0,4),DateTimeTest.substring(4,6)
-                    ,DateTimeTest.substring(6,8),DateTimeTest.substring(8,10),DateTimeTest.substring(10,12)) ;
+            testResultItemDisplay.DateTime = String.format("%s/%s/%s %s:%s", DateTimeTest.substring(0, 4), DateTimeTest.substring(4, 6)
+                    , DateTimeTest.substring(6, 8), DateTimeTest.substring(8, 10), DateTimeTest.substring(10, 12));
 
 
             listMutableLiveDataTemp.add(testResultItemDisplay);
 
-
+        }
         }
         listMutableLiveData.postValue(listMutableLiveDataTemp);
         return listMutableLiveData;
     }
 
+    public List<TestInfo> getTestInfoWithBlockId(Long clientId,Integer SendId){
+        return testInfoRepo.getTestInfoWithBlockId(clientId,SendId);
+    }
+
+    public void deleteTestInfoById(int TestInfoId){
+        testInfoRepo.deleteTestInfoById(TestInfoId);
+    }
     @Override
     protected void onCleared() {
         super.onCleared();
         timerSetIntervalStop();
         if(handler!=null) handler.removeCallbacksAndMessages(null);
+    }
+
+    public long insertBlockTest(BlockTest blockTest){
+        return blockTestRepo.insertBlockTest(blockTest);
+    }
+
+    public List<BlockTest> getBlockTestByBlockId(int blockId,Long ClientId){
+        return blockTestRepo.getBlockTestByBlockId(blockId,ClientId);
+    }
+
+    public List<BlockTest> getBlockTestByBlockIdAndClientId(int blockId,Long ClientId){
+        return blockTestRepo.getBlockTestByBlockIdAndClientId(blockId, ClientId);
+    }
+
+    public List<BlockTest> getBlockTestByClientId(Long clientId) {
+        return blockTestRepo.getBlockTestByClientId(clientId);
+    }
+
+    public void deleteByClientId(Long Clientid){
+        blockTestRepo.deleteByClientId(Clientid);
     }
 
 }

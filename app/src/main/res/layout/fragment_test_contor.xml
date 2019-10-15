@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/grey_200">
@@ -26,6 +28,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <Spinner
+                    android:id="@+id/spnManehTest"
+                    android:layout_width="220dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/custom_rectangle_test"
+                    android:textSize="22dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_gravity="center"
+                    />
+
+
+
                 <!-- Active/Reactive Layout -->
                 <com.github.angads25.toggle.LabeledSwitch
                     android:id="@+id/switchTestType"
@@ -39,48 +53,54 @@
                     app:textOff="@string/Reactive"
                     app:colorOn="#f16f13"
                     app:colorBorder="#f16f13"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:id="@+id/llManeh"
+                android:layout_height="wrap_content">
+                            <!-- 1/3 Faz Layout -->
+                            <com.github.angads25.toggle.LabeledSwitch
+                                android:id="@+id/switchPhase"
+                                android:layout_width="220dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:textSize="22sp"
+                                android:layout_gravity="center"
+                                app:on="true"
+                                app:textOn="@string/OnePhase"
+                                app:textOff="@string/ThreePhase"
+                                app:colorOn="#f16f13"
+                                app:colorBorder="#f16f13"/>
 
-                <!-- 1/3 Faz Layout -->
-                <com.github.angads25.toggle.LabeledSwitch
-                    android:id="@+id/switchPhase"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="22sp"
-                    android:layout_gravity="center"
-                    app:on="true"
-                    app:textOn="@string/OnePhase"
-                    app:textOff="@string/ThreePhase"
-                    app:colorOn="#f16f13"
-                    app:colorBorder="#f16f13"/>
+                            <!-- Test 1/2 Layout -->
+                            <com.github.angads25.toggle.LabeledSwitch
+                                android:id="@+id/switchTestNum"
+                                android:layout_width="220dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:textSize="22sp"
+                                android:layout_gravity="center"
+                                app:on="true"
+                                app:textOn="@string/FirstTest"
+                                app:textOff="@string/SecondTest"
+                                app:colorOn="#f16f13"
+                                app:colorBorder="#f16f13"/>
 
-                <!-- Test 1/2 Layout -->
-                <com.github.angads25.toggle.LabeledSwitch
-                    android:id="@+id/switchTestNum"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="22sp"
-                    android:layout_gravity="center"
-                    app:on="true"
-                    app:textOn="@string/FirstTest"
-                    app:textOff="@string/SecondTest"
-                    app:colorOn="#f16f13"
-                    app:colorBorder="#f16f13"/>
-
-                <!-- Paulser Type-->
-                <com.github.angads25.toggle.LabeledSwitch
-                    android:id="@+id/switchPaulserType"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="22sp"
-                    android:layout_gravity="center"
-                    app:on="true"
-                    app:textOn="@string/AutoPaulser"
-                    app:textOff="@string/ManualPaulser"
-                    app:colorOn="#f16f13"
-                    app:colorBorder="#f16f13"/>
+                            <!-- Paulser Type-->
+                            <com.github.angads25.toggle.LabeledSwitch
+                                android:id="@+id/switchPaulserType"
+                                android:layout_width="220dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:textSize="22sp"
+                                android:layout_gravity="center"
+                                app:on="true"
+                                app:textOn="@string/AutoPaulser"
+                                app:textOff="@string/ManualPaulser"
+                                app:colorOn="#f16f13"
+                                app:colorBorder="#f16f13"/>
+            </LinearLayout>
 
             </LinearLayout>
 
@@ -96,8 +116,16 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="8dp"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
 
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/llTexts"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
                 <!-- Zarib CT -->
                 <android.support.design.widget.TextInputLayout
                     android:fontFamily="@fonts/byekan"
@@ -191,28 +219,66 @@
                         android:inputType="number"
                         android:maxLength="3" />
                 </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llRcyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+                    <!--<android.support.v7.widget.RecyclerView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:id="@+id/rvManeh"-->
+                        <!--tools:listitem="@layout/listitem_maneh"-->
+                        <!--android:layout_height="wrap_content">-->
 
+                    <!--</android.support.v7.widget.RecyclerView>-->
+                    <android.support.v7.widget.CardView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/custom_shape"
+                        android:foregroundGravity="center"
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        card_view:cardElevation="2dp"
+                        card_view:cardCornerRadius="5dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:id="@+id/llsManeh"
+                            android:orientation="vertical">
+
+                            <ScrollView
+                                android:id="@+id/svManeh"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                >
+                            </ScrollView>
+
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
             </LinearLayout>
+
 
             <!-- Sabte -99% -->
-            <LinearLayout
+            <CheckBox
+                android:id="@+id/cbSabte99"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="4dp">
-                <CheckBox
-                    android:id="@+id/cbSabte99"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@fonts/byekan"
-                    android:textSize="14sp"
-                    android:textDirection="rtl"
-                    android:textAlignment="gravity"
-                    android:gravity="right|center_vertical"
-                    android:layoutDirection="rtl"
-                    android:text="@string/ErrorPercent99"
-                    android:visibility="gone"/>
-
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:fontFamily="@fonts/byekan"
+                android:textSize="14sp"
+                android:textDirection="rtl"
+                android:textAlignment="gravity"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:text="@string/ErrorPercent99"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <!-- Taeed Button -->

@@ -25,8 +25,17 @@ public interface TestInfoDao {
     @Query("Select * From TestInfo where ClientID=:clientId and SendID=:sendId")
     List<TestInfo> getTestInfoByClientId(Long clientId,Integer sendId);
 
+    @Query("Select * From TestInfo where ClientID=:clientId and SendID=:sendId " +
+            "and TestInfo.BlockID is not null " +
+            "order by TestInfoID Desc")
+    List<TestInfo> getTestInfoByClientIdWithBlockId(Long clientId,Integer sendId);
+
+
     @Query("Delete From TestInfo")
     void deleteAll();
+
+    @Query("Delete From TestInfo where TestInfo.BlockID is null ")
+    void deleteAllWithOutBlockId();
 
     @Query("Delete From TestInfo Where TestInfoID=:Id")
     void deleteTestInfoById(Integer Id);

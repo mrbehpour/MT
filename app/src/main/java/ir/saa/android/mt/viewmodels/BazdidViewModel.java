@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import ir.saa.android.mt.R;
 import ir.saa.android.mt.adapters.bazdid.ClientItem;
@@ -138,8 +139,10 @@ public class BazdidViewModel extends AndroidViewModel {
     public Boolean getTestValue(Long clientId) {
         List<TestAllInfo> testAllInfos=new ArrayList<>();
         testAllInfos=testDtlRepo.getTestAllInfoWithClientId(clientId);
-        if(testAllInfos.size()!=0){
+        if(testAllInfos.size()!=0 ){
+
             isTest=true;
+
         }else{
             isTest=false;
         }
@@ -160,6 +163,9 @@ public class BazdidViewModel extends AndroidViewModel {
 
     public Client getClientByClientId(Long ClientId){
         return clientRepo.getClientById(ClientId);
+    }
+    public  Client getClientByUniq(long subscript,Long fileid,long contornum,String shenas,long clientpass,long param){
+        return clientRepo.getClientByUniq(subscript, fileid, contornum, shenas, clientpass, param);
     }
     public LiveData<Setting> getSettingByKey(String key){
         return settingRepo.getSettingByKey(key);

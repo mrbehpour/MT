@@ -104,6 +104,9 @@ public class ClientWithAction {
 
     public int isTariff;
 
+    public int isBlock;
+
+    public int isBlockTest;
     public boolean forcibleMasterGroup;
 
 }

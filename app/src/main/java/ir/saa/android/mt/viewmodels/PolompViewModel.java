@@ -124,5 +124,12 @@ public class PolompViewModel extends AndroidViewModel {
         return settingRepo.getSettingByKey(settingKey);
     }
 
+    public List<PolompAllInfo> getPolompAllInfoWithClientId(Long clientId){
+        return polompDtlRepo.getPolompAllInfoWithClientId(clientId);
+    }
+    public void deleteByClientId(Long ClientId){
+        polompInfoRepo.deleteByClientId(ClientId);
+    }
+
 
 }

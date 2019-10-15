@@ -33,6 +33,22 @@ public interface RemarkDao {
     @Query("select * from Remark where RemarkTypeID= :Id")
     LiveData<List<Remark>> getRemarkByRemarkTypeId(int Id);
 
+    @Query("Select Remark.* from Remark " +
+            "inner join GroupingFormat " +
+            "on Remark.RemarkID=GroupingFormat.remark_id " +
+            "inner join RemarkGroup " +
+            "on RemarkGroup.FldID=GroupingFormat.remarkgroup_id " +
+            "Where RemarkGroup.KeyName=:KeyValue")
+   List<Remark> getManehTestAndBazrasi(String KeyValue);
+
+    @Query("Select Remark.* from Remark " +
+            "inner join GroupingFormat " +
+            "on Remark.RemarkID=GroupingFormat.remark_id " +
+            "inner join RemarkGroup " +
+            "on RemarkGroup.FldID=GroupingFormat.remarkgroup_id " +
+            "Where RemarkGroup.KeyName=:KeyValue")
+    LiveData<List<Remark>> getManehTestAndBazrasiLiveData(String KeyValue);
+
     @Query("Delete From Remark")
     void deleteAll();
 

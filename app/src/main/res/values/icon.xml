@@ -6,4 +6,5 @@
     <string name="tp_text_icon">"fw"</string>
     <color name="icon_off">@color/grey_400</color>
     <color name="icon_on">@color/green_A300</color>
+    <color name="icon_on_Maneh">@color/red_A300</color>
 </resources>

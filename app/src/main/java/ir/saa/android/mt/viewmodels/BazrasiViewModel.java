@@ -23,6 +23,7 @@ import ir.saa.android.mt.model.entities.InspectionDtl;
 import ir.saa.android.mt.model.entities.InspectionInfo;
 import ir.saa.android.mt.model.entities.InspectionWithAnswerGroup;
 import ir.saa.android.mt.model.entities.MasterGroupDetail;
+import ir.saa.android.mt.model.entities.Remark;
 import ir.saa.android.mt.model.entities.RemarkGroupingFormat;
 import ir.saa.android.mt.repositories.roomrepos.AnswerGroupDtlRepo;
 import ir.saa.android.mt.repositories.roomrepos.InspectionDtlRepo;
@@ -64,7 +65,12 @@ public class BazrasiViewModel extends AndroidViewModel {
 //       inspectionInfoRepo.deleteAll();
 //       inspectionDtlRepo.deleteAll();;
        }
-
+        public List<Remark> getManehTestAndBazrasi(String KeyValue){
+            return remarkRepo.getManehTestAndBazrasi(KeyValue);
+        }
+        public LiveData<List<Remark>> getManehTestAndBazrasiLiveData(String KeyValue){
+            return remarkRepo.getManehTestAndBazrasiLiveData(KeyValue);
+        }
        public LiveData<List<RemarkItem>> getRemarks(Integer Id){
 
 //           if(remarkRepo.getRemarkGroupingFormat(Id,3).getValue()!=null){
@@ -176,7 +182,7 @@ public class BazrasiViewModel extends AndroidViewModel {
        public InspectionWithAnswerGroup getInspectionAllInfo(Long clientId,Integer remarkID,Integer answerGroupId){
         return inspectionDtlRepo.getInspectionAllInfo(clientId,remarkID,answerGroupId);
        }
-       public List<InspectionInfo> getInspectionInfo(Long clientId){
+       public List<InspectionInfo> getInspectionInfoListInfo(Long clientId){
         return inspectionInfoRepo.getInspectionInfoByClientId(clientId);
        }
        public void deleteAll(InspectionInfo inspectionInfo,InspectionDtl inspectionDtl){
@@ -347,5 +353,14 @@ public class BazrasiViewModel extends AndroidViewModel {
 
     public AnswerGroupDtl getAnswerGroupDtl(int Id,int answergroupId){
         return answerGroupDtlRepo.getAnswerGroupDtl(Id,answergroupId);
+    }
+
+    public List<InspectionAllInfo> getInspectionAllInfos(Long ClientId){
+        return inspectionDtlRepo.getInspectionAllInfoWithClientId(ClientId);
+    }
+
+    public void deleteInspectionAllInfo(Integer InspectionInfoId,Integer InspectionDtlId){
+        inspectionInfoRepo.deleteInspectionInfoById(InspectionInfoId);
+        inspectionDtlRepo.deleteInspectionDtlById(InspectionDtlId);
     }
 }

@@ -26,4 +26,6 @@ public class TariffAllInfo {
     public int TariffID ;
 
     public String TariffValue ;
+
+    public int TariffDtlID ;
 }
